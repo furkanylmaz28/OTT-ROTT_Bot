@@ -442,12 +442,13 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_safe, tab_morning, tab_scan, tab_sim, tab_chart, tab_info = st.tabs([
+tab_safe, tab_morning, tab_scan, tab_sim, tab_chart, tab_alt, tab_info = st.tabs([
     "🛡️  Güvenli Mod",
     "🎯  Bugünün Önerileri",
     "📡  Anlık Tarayıcı",
     "💼  Portföy Simülasyonu",
     "📊  Detay Grafik",
+    "🧪  Alternatif Bot Portföyü",
     "📖  Bilgi",
 ])
 
@@ -609,11 +610,6 @@ with tab_morning:
         morning_lev = st.slider("⚖️ Kaldıraç", 1, 25, 5)
 
     pos_size = morning_capital * pct_per_pos / 100
-
-    st.info(f"Her pozisyon: **${pos_size:,.0f}** ({pct_per_pos}%) — "
-            f"max **{max_positions}** pozisyon, **{morning_lev}x** kaldıraç. "
-            f"Toplam max riske atılan: **${pos_size * max_positions:,.0f}** "
-            f"({pct_per_pos * max_positions}%)")
 
     # Per-symbol params var mı?
     import os, json
@@ -1224,6 +1220,185 @@ with tab_chart:
 # ──────────────────────────────────────────────────────────────────
 #  TAB 5: BİLGİ
 # ──────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────
+#  TAB: ALTERNATİF BOT PORTFÖYÜ — Bayesian parametre arama
+# ──────────────────────────────────────────────────────────────────
+with tab_alt:
+    st.subheader("🧪 Alternatif Bot Portföyü — Bayesian Parametre Arama")
+    st.caption("Mevcut sistem dokunulmaz. Bu sekme **deneysel**: optuna ile akıllı parametre araması, sonuçlar ayrı dosyada (`per_symbol_params_bayes.json`).")
+
+    with st.expander("ℹ️ Bayesian arama nedir? Grid'den farkı ne?"):
+        st.markdown("""
+        **Grid search** (mevcut sistem):
+        - Önceden belirlenmiş parametre değerleri × kombinasyonu
+        - Örnek: trend_length ∈ {20, 30, 40} → 3 değer
+        - Sembol başına ~140 kombinasyon
+        - **Sınırlı arama uzayı**: belki en iyi parametre 25'tir ama grid bilmez
+
+        **Bayesian search** (TPE — Tree Parzen Estimator, optuna):
+        - Sürekli aralık: trend_length ∈ [10, 60] herhangi bir tamsayı
+        - İlk 20 trial **rastgele örnek** → uzayı tanı
+        - Sonraki 180 trial **iyi bölgelerde yoğun** → fine-tune
+        - Sembol başına 200 trial × 14 parametre = **akıllı arama**
+        - 3-5x daha iyi parametre bulma olasılığı
+
+        **Aşağıdaki tablo karşılaştırma:**
+        - Grid: mevcut `per_symbol_params.json`
+        - Bayes: yeni `per_symbol_params_bayes.json`
+        """)
+
+    import os, json
+    bayes_path = "per_symbol_params_bayes.json"
+    grid_path = "per_symbol_params.json"
+
+    # Mevcut durumu kontrol et
+    bayes_exists = os.path.exists(bayes_path)
+    if bayes_exists:
+        with open(bayes_path) as f: bayes_data = json.load(f)
+        bayes_done = len(bayes_data)
+    else:
+        bayes_data = {}
+        bayes_done = 0
+
+    with open(grid_path) as f: grid_data = json.load(f)
+
+    # Status bar
+    bcol1, bcol2, bcol3 = st.columns(3)
+    bcol1.metric("Grid sonucu", f"{len(grid_data)} sembol", help="Mevcut çalışan sistem")
+    bcol2.metric("Bayesian sonucu", f"{bayes_done} sembol",
+                  help="Bayesian arama tamamlanan sembol sayısı")
+    if bayes_done > 0:
+        improved = sum(1 for s, r in bayes_data.items()
+                        if r.get("ok") and grid_data.get(s, {}).get("stats", {}).get("return", -999)
+                        < r["stats"]["return"])
+        bcol3.metric("Grid'ten iyi", f"{improved}/{bayes_done}",
+                      help="Bayesian'ın grid'i geçtiği sembol sayısı")
+
+    st.markdown("---")
+
+    # Tetik butonu
+    tcol1, tcol2 = st.columns([2, 1])
+    with tcol1:
+        st.markdown("### 🚀 Bayesian aramayı tetikle")
+        st.caption("**Süre: ~60-90 dakika** (151 sembol × 200 trial). Bot çalışmaz, sadece optimize.")
+    with tcol2:
+        if st.button("⚗️ Bayesian'ı çalıştır", type="primary", use_container_width=True):
+            from datetime import datetime
+            with open("trigger_bayesian.flag", "w") as f:
+                f.write(datetime.now().isoformat())
+            st.success("✓ Tetik gönderildi. Auto-daemon başlatacak. İlerlemeyi `auto_update.log` dosyasında izleyebilirsin.")
+            st.info("Yerel olarak çalıştırmak istersen Git Bash'te:\n```\ncd /c/Users/furka/Desktop/ott_bot\npython bayesian_optimize.py\n```")
+
+    st.markdown("---")
+
+    if bayes_done == 0:
+        st.warning("📭 Henüz Bayesian sonucu yok. Yukarıdaki butona basıp çalıştır.")
+    else:
+        # Karşılaştırma tablosu
+        st.markdown(f"### 📊 Karşılaştırma Tablosu ({bayes_done} sembol)")
+
+        rows = []
+        for sym, bayes_r in bayes_data.items():
+            if not bayes_r.get("ok"):
+                continue
+            grid_r = grid_data.get(sym, {})
+            bs = bayes_r["stats"]
+            gs = grid_r.get("stats", {}) if grid_r.get("ok") else {}
+
+            rows.append({
+                "Sembol": sym,
+                "Kategori": bayes_r.get("category", "?"),
+                "Bayes Rating": bayes_r.get("rating", "?"),
+                "Bayes Ret %": bs["return"] * 100,
+                "Bayes PF": bs["pf"] if bs["pf"] else 999,
+                "Bayes Win %": bs["win_rate"] * 100,
+                "Grid Rating": grid_r.get("rating", "—"),
+                "Grid Ret %": gs.get("return", 0) * 100 if gs else None,
+                "Grid PF": gs.get("pf", 0) if gs and gs.get("pf") else None,
+                "Fark %": (bs["return"] - gs.get("return", 0)) * 100 if gs else None,
+            })
+
+        if rows:
+            df_alt = pd.DataFrame(rows)
+            df_alt = df_alt.sort_values("Bayes Ret %", ascending=False).reset_index(drop=True)
+
+            st.dataframe(
+                df_alt.style.format({
+                    "Bayes Ret %": "{:+.1f}%",
+                    "Bayes PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if v else "-",
+                    "Bayes Win %": "{:.0f}%",
+                    "Grid Ret %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
+                    "Grid PF": lambda v: f"{v:.2f}" if pd.notna(v) else "-",
+                    "Fark %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
+                }).background_gradient(subset=["Fark %"], cmap="RdYlGn", vmin=-30, vmax=30),
+                use_container_width=True, height=500,
+            )
+
+            # Rating dağılımı karşılaştırma
+            st.markdown("### 🏆 Rating dağılımı")
+            rc1, rc2 = st.columns(2)
+            with rc1:
+                st.markdown("**Bayesian sonucu:**")
+                bayes_rt = {}
+                for s, r in bayes_data.items():
+                    if r.get("ok"):
+                        rt = r.get("rating", "?")
+                        bayes_rt[rt] = bayes_rt.get(rt, 0) + 1
+                for rt in ["MÜKEMMEL", "İYİ", "ORTA", "MARJINAL", "VERİ_AZ", "UYUMSUZ"]:
+                    n = bayes_rt.get(rt, 0)
+                    if n > 0:
+                        st.write(f"{rt}: **{n}**")
+            with rc2:
+                st.markdown("**Grid sonucu (referans):**")
+                grid_rt = {}
+                for s, r in grid_data.items():
+                    if r.get("ok"):
+                        rt = r.get("rating", "?")
+                        grid_rt[rt] = grid_rt.get(rt, 0) + 1
+                for rt in ["MÜKEMMEL", "İYİ", "ORTA", "MARJINAL", "VERİ_AZ", "UYUMSUZ"]:
+                    n = grid_rt.get(rt, 0)
+                    if n > 0:
+                        st.write(f"{rt}: **{n}**")
+
+            # Sembol özelinde detay
+            st.markdown("### 🔍 Sembol detayı")
+            sel = st.selectbox("Sembol seç", df_alt["Sembol"].tolist(), key="alt_sym")
+            if sel and sel in bayes_data:
+                bd = bayes_data[sel]
+                gd = grid_data.get(sel, {})
+
+                dc1, dc2 = st.columns(2)
+                with dc1:
+                    st.markdown(f"#### 🧪 Bayesian — {bd.get('rating','?')}")
+                    bsr = bd["stats"]
+                    st.write(f"- Return: **{bsr['return']*100:+.2f}%**")
+                    st.write(f"- PF: **{bsr['pf']:.2f}**" if bsr["pf"] else "- PF: ∞")
+                    st.write(f"- Win Rate: **{bsr['win_rate']*100:.0f}%**")
+                    st.write(f"- Max DD: {bsr['max_dd']*100:.2f}%")
+                    st.write(f"- Trade: {bsr['n_trades']}")
+                    st.write(f"- Trial sayısı: {bd.get('n_trials', '?')}")
+                with dc2:
+                    if gd.get("ok"):
+                        st.markdown(f"#### 📐 Grid — {gd.get('rating','?')}")
+                        gsr = gd["stats"]
+                        st.write(f"- Return: **{gsr['return']*100:+.2f}%**")
+                        st.write(f"- PF: **{gsr['pf']:.2f}**" if gsr.get("pf") else "- PF: ∞")
+                        st.write(f"- Win Rate: **{gsr['win_rate']*100:.0f}%**")
+                        st.write(f"- Max DD: {gsr['max_dd']*100:.2f}%")
+                        st.write(f"- Trade: {gsr['n_trades']}")
+
+                with st.expander("⚙️ Bayesian parametreleri"):
+                    st.json(bd["params"])
+
+            # Test butonu
+            st.markdown("---")
+            st.markdown("### 🎯 Bu parametreleri **canlı kullanmaya hazır mı**?")
+            st.markdown("""
+            Alternatif Bot Portföyü **deneysel**. Mevcut ana sistemi etkilemiyor.
+            Eğer Bayesian sonuçları sürekli daha iyi çıkarsa ileride **ana sistem buraya geçirilebilir**.
+            Şimdilik karşılaştırma ve test için.
+            """)
+
 with tab_info:
     st.subheader("Sistem hakkında")
     st.markdown("""

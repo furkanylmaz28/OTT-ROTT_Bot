@@ -18,6 +18,9 @@ python-dotenv>=1.0.0
 # Numba (indikatör hızlandırma)
 numba>=0.59.0
 
+# Optuna (Bayesian parametre arama — Alternatif Bot Portföyü)
+optuna>=3.6.0
+
 # Görselleştirme (plot_*.py için)
 matplotlib>=3.8.0
 plotly>=5.18.0
