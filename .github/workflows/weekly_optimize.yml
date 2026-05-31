@@ -54,5 +54,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add per_symbol_params.json
-          git diff --staged --quiet || git commit -m "auto: haftalık optimize $(date -u '+%Y-%m-%d')"
-          git push
+          if git diff --staged --quiet; then
+            echo "Değişiklik yok, commit atlandı."
+          else
+            git commit -m "auto: haftalık optimize $(date -u '+%Y-%m-%d')"
+            # Aradan başka push gelmiş olabilir → rebase ile birleştir
+            git pull --rebase origin main
+            git push
+          fi
