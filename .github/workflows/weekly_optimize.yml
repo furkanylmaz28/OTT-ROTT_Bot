@@ -1,12 +1,16 @@
-name: Weekly Optimize
+name: Periodic Optimize
 
 on:
-  # Pazar UTC 23:00 = Türkiye Pazartesi 02:00
-  # Streamlit Cloud Pazartesi sabah yeni veriye sahip olur.
+  # Her 6 saatte bir (UTC: 00:00, 06:00, 12:00, 18:00)
+  # = Türkiye 03:00, 09:00, 15:00, 21:00
   schedule:
-    - cron: "0 23 * * 0"
+    - cron: "0 */6 * * *"
   # Manuel tetiklenebilir (GitHub Actions sekmesinde "Run workflow")
   workflow_dispatch:
+
+# GITHUB_TOKEN'a push yetkisi ver (per_symbol_params.json commit'i için)
+permissions:
+  contents: write
 
 jobs:
   optimize:
