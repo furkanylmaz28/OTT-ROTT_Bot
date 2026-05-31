@@ -772,7 +772,15 @@ with tab_morning:
 #  TAB 1: TARAYICI
 # ──────────────────────────────────────────────────────────────────
 with tab_scan:
-    st.subheader("Anlık Sinyal Tarayıcı (5-dakikalık veri, yfinance)")
+    st.subheader("📡 Anlık Sinyal Tarayıcı")
+    _src_info = []
+    if os.getenv("TV_USERNAME"):
+        _src_info.append(f"TradingView (login: `{os.getenv('TV_USERNAME')}`)")
+    else:
+        _src_info.append("TradingView (anonim mod)")
+    _src_info.append("yfinance fallback")
+    st.caption("Veri kaynağı: " + " · ".join(_src_info) + " — "
+                "**adaptif timeframe**: BIST/NASDAQ → H1, CRYPTO → 30dk.")
 
     with st.expander("ℹ️ Sütunlar ne anlama gelir? (legend)"):
         st.markdown("""
