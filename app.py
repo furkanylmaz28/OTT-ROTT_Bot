@@ -815,7 +815,7 @@ with tab_scan:
 
         > **Filtre kısa-yolu:** "Sadece AKTİF SİNYAL" kutusunu işaretle → sadece **LONG AÇ / SHORT AÇ / ÇIK** sinyalleri kalır.
         """)
-    col1, col2, col3 = st.columns([2, 2, 1])
+    col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
     with col1:
         categories = st.multiselect("Kategoriler",
                                      ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
@@ -823,6 +823,9 @@ with tab_scan:
     with col2:
         only_signals = st.checkbox("Sadece AKTİF SİNYAL (AL/SAT)", value=False)
     with col3:
+        only_top_rated = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ", value=True,
+                                       help="Düşük güvenli sembolleri gizle — terste kalma riski azalır")
+    with col4:
         if st.button("🔄 Şimdi tara", type="primary"):
             st.cache_data.clear()
 
@@ -846,6 +849,8 @@ with tab_scan:
         df_scan = pd.DataFrame(rows)
         if only_signals:
             df_scan = df_scan[df_scan["Durum"].str.contains("AÇ|ÇIK", regex=True)]
+        if only_top_rated:
+            df_scan = df_scan[df_scan["Güven"].str.contains("MÜKEMMEL|İYİ", regex=True)]
 
         # Sıralama: önce yeni sinyaller, sonra çıkışlar, sonra açık tut, sonra bekleyenler
         # — aynı seviyede güven skoruna göre sırala
@@ -1390,7 +1395,93 @@ with tab_alt:
                 with st.expander("⚙️ Bayesian parametreleri"):
                     st.json(bd["params"])
 
-            # Test butonu
+            # ──── Anlık sinyal tarama (Bayesian parametreleriyle)
+            st.markdown("---")
+            st.markdown("### 📡 Bayesian parametreleriyle ANLIK sinyaller (LONG / SHORT)")
+            st.caption("Her sembol kendi Bayesian parametre setini kullanır. Canlı fiyatla **şu anki yön**ü gösterir.")
+
+            if st.button("🔍 Şimdi tara (canlı veri çek)", type="primary",
+                          use_container_width=True, key="bayes_scan_btn"):
+                from data_source import best_interval_for as _bif
+                live_rows = []
+                live_prog = st.progress(0, text="başlatılıyor...")
+                _ok_items = [(s, r) for s, r in bayes_data.items() if r.get("ok")]
+                for idx, (sym, sym_data) in enumerate(_ok_items):
+                    params = sym_data["params"].copy()
+                    params.setdefault("rott_x1", 30)
+                    params.setdefault("rott_x2", 1000)
+                    params.setdefault("rott_percent", 7.0)
+                    try:
+                        df_live = fetch_yf(sym, interval=_bif(sym))
+                        if df_live.empty or len(df_live) < 1500:
+                            live_prog.progress((idx+1)/len(_ok_items))
+                            continue
+                        s_live = sig_full.build_signals_full(
+                            df_live["close"], df_live["high"], df_live["low"], **params)
+                        last_l = s_live.iloc[-1]
+                        cur_l = float(df_live["close"].iloc[-1])
+                        if last_l["cond_buy_long"]:        pos_l = "🟢 LONG AÇ"
+                        elif last_l["cond_buy_short"]:     pos_l = "🔴 SHORT AÇ"
+                        elif last_l["cond_exit_long"]:     pos_l = "🟡 LONG ÇIK"
+                        elif last_l["cond_exit_short"]:    pos_l = "🟡 SHORT ÇIK"
+                        elif last_l["major_up"] and last_l["zone_up"]:  pos_l = "🟢 LONG TUT"
+                        elif last_l["major_dn"] and last_l["zone_dn"]:  pos_l = "🔴 SHORT TUT"
+                        elif last_l["major_up"]:           pos_l = "⏳ LONG bekle"
+                        elif last_l["major_dn"]:           pos_l = "⏳ SHORT bekle"
+                        else:                              pos_l = "❓ Belirsiz"
+                        tott_up_v = float(last_l["tott_up"]) if not pd.isna(last_l["tott_up"]) else None
+                        tott_dn_v = float(last_l["tott_dn"]) if not pd.isna(last_l["tott_dn"]) else None
+                        live_rows.append({
+                            "Sembol": sym,
+                            "Rating": sym_data.get("rating","?"),
+                            "Durum": pos_l,
+                            "Fiyat": cur_l,
+                            "Stop ↑": tott_up_v,
+                            "Stop ↓": tott_dn_v,
+                            "Up %": (tott_up_v/cur_l - 1)*100 if tott_up_v else None,
+                            "Dn %": (tott_dn_v/cur_l - 1)*100 if tott_dn_v else None,
+                            "BT Ret %": sym_data["stats"]["return"]*100,
+                            "BT PF": sym_data["stats"]["pf"] if sym_data["stats"]["pf"] else 999,
+                            "BT Win %": sym_data["stats"]["win_rate"]*100,
+                        })
+                    except Exception:
+                        pass
+                    live_prog.progress((idx+1)/len(_ok_items), text=f"{idx+1}/{len(_ok_items)} {sym}")
+                live_prog.empty()
+
+                if not live_rows:
+                    st.warning("Anlık veri çekilemedi.")
+                else:
+                    df_live_show = pd.DataFrame(live_rows)
+                    order_live = {
+                        "🟢 LONG AÇ": 0, "🔴 SHORT AÇ": 1,
+                        "🟡 LONG ÇIK": 2, "🟡 SHORT ÇIK": 3,
+                        "🟢 LONG TUT": 4, "🔴 SHORT TUT": 5,
+                        "⏳ LONG bekle": 6, "⏳ SHORT bekle": 7, "❓ Belirsiz": 8,
+                    }
+                    df_live_show["_ord"] = df_live_show["Durum"].map(order_live).fillna(9)
+                    df_live_show = df_live_show.sort_values(
+                        ["_ord", "BT Ret %"], ascending=[True, False]
+                    ).drop(columns="_ord").reset_index(drop=True)
+                    fm1, fm2, fm3, fm4 = st.columns(4)
+                    fm1.metric("🟢 LONG AÇ", int((df_live_show["Durum"]=="🟢 LONG AÇ").sum()))
+                    fm2.metric("🔴 SHORT AÇ", int((df_live_show["Durum"]=="🔴 SHORT AÇ").sum()))
+                    fm3.metric("🟡 ÇIK sinyali",
+                                int(df_live_show["Durum"].str.contains("ÇIK", regex=False).sum()))
+                    fm4.metric("Toplam", len(df_live_show))
+                    st.dataframe(
+                        df_live_show.style.format({
+                            "Fiyat": "{:.4f}", "Stop ↑": "{:.4f}", "Stop ↓": "{:.4f}",
+                            "Up %": "{:+.2f}%", "Dn %": "{:+.2f}%",
+                            "BT Ret %": "{:+.1f}%",
+                            "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
+                            "BT Win %": "{:.0f}%",
+                        }).background_gradient(subset=["BT Ret %"], cmap="RdYlGn"),
+                        use_container_width=True, height=500,
+                    )
+                    st.caption("Sıralama: önce **yeni AÇ sinyalleri**, sonra ÇIK, sonra TUT, sonra bekleyenler. "
+                                "Stop ↑/↓ = pozisyon yönüne göre stop-loss seviyesi.")
+
             st.markdown("---")
             st.markdown("### 🎯 Bu parametreleri **canlı kullanmaya hazır mı**?")
             st.markdown("""
