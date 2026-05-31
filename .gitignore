@@ -1,0 +1,63 @@
+# Hassas bilgiler — repo'ya yüklenmez!
+.env
+.env.local
+.env.production
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Geçici/dış veri
+*.log
+auto_update.log
+*.tmp
+
+# MT4 binary dosyaları (ağır + kişisel)
+*.hst
+*.ex4
+*.ex5
+
+# Backtest CSV çıktıları (büyük + auto-generated)
+*_T1.csv
+*_T2.csv
+*_T3.csv
+*_T1_trend.csv
+*_T2_zone.csv
+*_T3_gate.csv
+wfseq_*.csv
+walk_forward_*.csv
+optimize_gold_m15.csv
+portfolio_trades.csv
+scan_result.csv
+scan_intraday.csv
+
+# Plots
+plots/
+plots_optimum/
+plots_wf/
+
+# Streamlit upload klasörü
+.streamlit/uploads/
+
+# Geçici tetik dosyaları
+trigger_optimize.flag
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,165 @@
+================================================================
+  OTT GOLD BOT — MT4 KURULUM ADIMI
+================================================================
+
+1) EA dosyasını MT4 klasörüne kopyala
+   ────────────────────────────────────
+   MT4'ü aç. Üst menüden:
+      File → Open Data Folder
+   Açılan klasörde:
+      MQL4/Experts/
+   Bu klasörün içine kopyala:
+      C:\Users\furka\Desktop\ott_bot\OTT_GOLD_EA.mq4
+
+2) MT4'ü yeniden başlat (veya Navigator → Expert Advisors → Refresh)
+   Sol Navigator panelinde "OTT_GOLD_EA" görünmeli.
+
+3) GOLD M15 grafiğini aç
+   ────────────────────────────────────
+   File → New Chart → GOLD (CFD Metals klasöründe olur)
+   Üst menüden TF olarak M15 seç.
+
+4) EA'yı grafiğe sürükle-bırak (Navigator → OTT_GOLD_EA → GOLD M15)
+   ────────────────────────────────────
+   Açılan pencerede:
+   - "Common" sekmesi:
+       ✓ Allow live trading
+       ✓ Allow DLL imports (gerek yok ama açabilirsin)
+       Magic Number: 770042 (default, başka EA'yla çakışmaz)
+   - "Inputs" sekmesi: parametreler zaten M15 optimum değerleriyle dolu.
+       LotSize'ı hesap büyüklüğüne göre ayarla. (Demo'da 0.10 makul.)
+
+5) Sağ üstte 🙂 simgesi gelirse EA çalışıyor. Eğer ☹ gözüküyorsa:
+       Tools → Options → Expert Advisors:
+         ✓ Allow automated trading
+         ✓ Allow DLL imports (opsiyonel)
+
+6) Test için ÖNCE Strategy Tester'da çalıştır
+   ────────────────────────────────────
+   View → Strategy Tester (Ctrl+R)
+   Expert Advisor : OTT_GOLD_EA
+   Symbol         : GOLD
+   Period         : M15
+   Model          : "Open prices only" (en hızlı ve EA için yeterli — sinyalleri bar açılışında değerlendirir)
+   Use date       : ✓ (örn 2024-01-01 → 2026-05-30)
+   Start
+
+   Beklenen: Python backtest sonucu ile aynı tipte (return ~+100% civarı, drawdown ~10%).
+
+7) Demo hesapta canlı çalıştır
+   ────────────────────────────────────
+   - GCM-Demo hesabıyla bağlan
+   - 1-2 hafta gözlem yap
+   - Trade sinyalleri Python ile uyumlu mu kontrol et:
+       → run_last3m.py "DETAY: GOLD M15" çıktısıyla MT4'teki trade'leri karşılaştır
+   - Demo'da edge görüyorsan canlı hesaba minimum lot ile geç
+
+
+================================================================
+  PARAMETRE DEĞİŞTİRME REHBERİ
+================================================================
+
+GOLD M5'e geçmek istersen — EA Inputs penceresinde:
+   TrendLength    = 40
+   TrendPercent   = 8.0
+   MinorPercent   = 4.0
+   TottPercent    = 1.0
+   TottCoeff      = 0.0004
+   SottPeriodK    = 300
+   SottSmoothK    = 200
+   SottPercent    = 0.2
+   GateLength     = 10
+   GatePercent    = 0.4
+
+ÖNEMLİ — Forex paritelerinde KULLANMA. Sistem GBPUSD'da %-8, EURGBP'da %-22 kaybetti.
+Sadece GOLD'da çalıştır.
+
+
+================================================================
+  PYTHON İLE PARALEL KONTROL
+================================================================
+
+Sistem MT4'te çalışırken Python tarafında da aynı sinyalleri görebilirsin:
+
+  cd C:\Users\furka\Desktop\ott_bot
+  python run_last3m.py
+
+Çıkan trade listesi MT4'teki açılan/kapanan pozisyonlarla aynı saatte olmalı.
+Eğer farklılık varsa:
+  - MT4'ün son fiyatları senkron mu kontrol et (F2 → History Center)
+  - Spread/slippage farkları olabilir, küçük zaman farkları normal
+
+
+================================================================
+  RİSK YÖNETİMİ — MUTLAKA OKU
+================================================================
+
+Backtest sonuçları:
+  GOLD M15: +117.78% (29 ayda), Max DD -9.01%, PF 4.41, Win 62.7%
+  GOLD M5 : +46.53% (11 ayda),  Max DD -9.44%, PF 3.04, Win 60.0%
+
+Bu istatistikler GEÇMİŞ veriyle elde edildi. Gerçek piyasada:
+  - Spread genelde backtestten geniş olur (-%0.5 ila -%2 yıllık etki)
+  - Slippage yüksek volatilitede artar
+  - Walk-forward verimliliği genelde %50-70 (yani gerçek getiri backtestin yarısı kadar)
+
+Sağduyulu beklenti (1 yıl içinde, GOLD M15, kaldıraçsız):
+  +%20 ile +%50 arası getiri, max drawdown %10-15
+
+Kaldıraç:
+  GCM Forex'te GOLD genelde 1:50-1:100 kaldıraç verir.
+  10K lot 1:50 kaldıraçla = $200 marjin / 0.10 lot = $20 marjin
+  Hesabın %1-3'ünden fazla marjin kullanma. Yoksa margin call.
+
+Stop-loss:
+  EA'da OTT'nin kendi stop'u var (zone_dn / lott). Ek olarak:
+    DailyLossLimitPct = 3.0   → günde %3 kayıp olunca o gün durur
+    MaxDrawdownPct    = 15.0  → peak'ten %15 düşüş → TÜM pozisyonlar kapanır + EA durur
+  Bu iki güvenlik katmanı default açık. Demo'da deneyip değerleri ayarlayabilirsin.
+
+================================================================
+  OTOMATİK GÜNCELLEME (auto_daemon.py)
+================================================================
+
+Daemon her gün 02:00'da otomatik olarak tüm sembolleri yeniden optimize eder.
+Bilgisayar açıkken arka planda çalışır.
+
+MANUEL BAŞLATMA:
+   cd C:\Users\furka\Desktop\ott_bot
+   python auto_daemon.py
+   (Pencere açık kalmalı.)
+
+WINDOWS TASK SCHEDULER (sistem açılışında otomatik):
+   1) Start menüsünden "Task Scheduler" aç
+   2) "Create Basic Task..." tıkla
+   3) İsim: "OTT Bot Auto Update"
+   4) Trigger: "When the computer starts"
+   5) Action: "Start a program"
+        Program: pythonw.exe (veya python.exe)
+        Arguments: auto_daemon.py
+        Start in: C:\Users\furka\Desktop\ott_bot
+   6) Finish — artık bilgisayar açıldığında otomatik başlar.
+
+Log dosyası: auto_update.log
+Status JSON : auto_update_status.json (dashboard okuyabilir)
+
+
+================================================================
+  RİSK YÖNETİMİ — EA İÇİNDEKİ EK KORUMA
+================================================================
+
+EA aşağıdaki güvenlik katmanlarına sahip (Inputs'tan değiştirilebilir):
+
+   UseRiskMgmt       = true   → risk yönetimi aktif
+   DailyLossLimitPct = 3.0    → bir günde hesabın %3'ünü kaybedersen o gün yeni trade açmaz
+                                (mevcut pozisyonlar OTT sinyaliyle kapanır)
+   MaxDrawdownPct    = 15.0   → hesap zirvesinden %15 düşersen
+                                TÜM pozisyonlar kapanır ve EA durur (Print log'una bakar)
+
+Bu değerleri kişisel risk toleransına göre ayarla:
+   - Muhafazakar: DailyLossLimit=2, MaxDrawdown=10
+   - Standart   : DailyLossLimit=3, MaxDrawdown=15
+   - Agresif    : DailyLossLimit=5, MaxDrawdown=25
+
+Backtest GOLD M15 max DD -9.01% gösterdi. Gerçek hayatta walk-forward'a göre
+%15'e kadar çıkabilir. Bu yüzden MaxDrawdownPct=15 mantıklı bir tavan.

@@ -1,0 +1,26 @@
+# OTT Bot - Python paket bağımlılıkları
+# Streamlit Cloud + GitHub Actions için
+
+streamlit>=1.40.0
+streamlit-lightweight-charts>=0.7.20
+
+# Veri ve analiz
+pandas>=2.0.0
+numpy>=1.26.0
+yfinance>=0.2.40
+
+# TradingView (login + veri çekme)
+tvdatafeed @ https://github.com/rongardF/tvdatafeed/archive/refs/heads/main.zip
+
+# Env yönetimi
+python-dotenv>=1.0.0
+
+# Numba (indikatör hızlandırma)
+numba>=0.59.0
+
+# Görselleştirme (plot_*.py için)
+matplotlib>=3.8.0
+plotly>=5.18.0
+
+# Network
+websocket-client>=1.7.0

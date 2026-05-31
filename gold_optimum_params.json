@@ -1,0 +1,106 @@
+{
+  "GOLD_M5": {
+    "params": {
+      "trend_length": 40,
+      "trend_percent": 8.0,
+      "minor_percent": 4.0,
+      "tott_percent": 1.0,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 300,
+      "sott_smooth_k": 200,
+      "sott_percent": 0.2,
+      "gate_length": 10,
+      "gate_percent": 0.4,
+      "gate_shift": 0,
+      "rott_x1": 30,
+      "rott_x2": 1000,
+      "rott_percent": 7.0
+    },
+    "stats": {
+      "return": 0.46533233708918686,
+      "pf": 3.0362559421989044,
+      "sharpe": 0.1454803068034774,
+      "max_dd": -0.0944202795983079,
+      "n_trades": 45,
+      "win_rate": 0.6
+    }
+  },
+  "GOLD_M15": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 8.0,
+      "minor_percent": 4.0,
+      "tott_percent": 1.0,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 500,
+      "sott_smooth_k": 200,
+      "sott_percent": 0.2,
+      "gate_length": 28,
+      "gate_percent": 0.4,
+      "gate_shift": 2,
+      "rott_x1": 30,
+      "rott_x2": 1000,
+      "rott_percent": 7.0
+    },
+    "stats": {
+      "return": 1.1777626575187852,
+      "pf": 4.412212622242459,
+      "sharpe": 0.2507828080961994,
+      "max_dd": -0.09006286143782827,
+      "n_trades": 59,
+      "win_rate": 0.6271186440677966
+    }
+  },
+  "GOLD_M30": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 5.0,
+      "minor_percent": 3.0,
+      "tott_percent": 0.6,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 200,
+      "sott_smooth_k": 200,
+      "sott_percent": 0.2,
+      "gate_length": 10,
+      "gate_percent": 0.4,
+      "gate_shift": 0,
+      "rott_x1": 30,
+      "rott_x2": 1000,
+      "rott_percent": 7.0
+    },
+    "stats": {
+      "return": 0.02251765962039287,
+      "pf": 1.7390250149571773,
+      "sharpe": 0.09121416996821845,
+      "max_dd": -0.05361506223887347,
+      "n_trades": 5,
+      "win_rate": 0.4
+    }
+  },
+  "GOLD_M60": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 5.0,
+      "minor_percent": 3.0,
+      "tott_percent": 0.6,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 200,
+      "sott_smooth_k": 200,
+      "sott_percent": 0.2,
+      "gate_length": 10,
+      "gate_percent": 0.4,
+      "gate_shift": 0,
+      "rott_x1": 30,
+      "rott_x2": 1000,
+      "rott_percent": 7.0
+    },
+    "stats": {
+      "return": -0.009549463824489623,
+      "pf": 0.7324082881609834,
+      "sharpe": -0.025909570456860254,
+      "max_dd": -0.07612673428491545,
+      "n_trades": 3,
+      "win_rate": 0.6666666666666666
+    }
+  }
+}

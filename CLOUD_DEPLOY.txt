@@ -1,0 +1,199 @@
+═══════════════════════════════════════════════════════════════════
+  OTT BOT — STREAMLIT CLOUD + GITHUB DEPLOYMENT TALİMATI
+═══════════════════════════════════════════════════════════════════
+
+Hedef: Bot'u bilgisayardan bağımsız, internetten erişilebilir hale getir.
+Sonuç: https://ott-bot-furkan.streamlit.app (örnek URL) — telefonla aç,
+        ev ekranına ekle → app gibi çalışır.
+
+Toplam süre: ~45 dakika
+Ücret: 0 TL
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 1. ADIM — GITHUB HESABI VE GIT KURULUMU                         │
+└─────────────────────────────────────────────────────────────────┘
+
+A) GitHub hesabın yoksa: https://github.com/signup
+   (Ücretsiz, sadece email + kullanıcı adı.)
+
+B) Git Windows kurulu mu kontrol et — PowerShell aç:
+       git --version
+   Eğer 'tanınmıyor' diyorsa: https://git-scm.com/download/win
+   (varsayılan ayarlarla kur)
+
+C) Git'e kimliğini söyle (PowerShell'de):
+       git config --global user.name "Senin Adin"
+       git config --global user.email "senin@email.com"
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 2. ADIM — GITHUB'DA PRIVATE REPO OLUŞTUR                        │
+└─────────────────────────────────────────────────────────────────┘
+
+A) https://github.com/new aç
+B) Doldur:
+       Repository name : ott-bot
+       Description     : OTT Bot Dashboard
+       Visibility      : ☑ Private (sadece sen göreceksin)
+       Add README      : ☐ (Boş bırak)
+       .gitignore      : ☐ (Boş bırak, kendimiz hazırladık)
+C) "Create repository" butonu
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 3. ADIM — KODU REPO'YA YÜKLE                                    │
+└─────────────────────────────────────────────────────────────────┘
+
+PowerShell'de bu komutları sırayla çalıştır
+(her satırdan sonra Enter):
+
+   cd C:\Users\furka\Desktop\ott_bot
+
+   git init
+   git branch -M main
+   git add .
+   git commit -m "ilk commit"
+   git remote add origin https://github.com/KULLANICI_ADIN/ott-bot.git
+   git push -u origin main
+
+(KULLANICI_ADIN yerini kendi GitHub kullanıcı adınla değiştir!)
+
+İlk push'da kullanıcı/şifre/token isteyebilir. GitHub artık şifre kabul
+etmiyor, "Personal Access Token" kullanman gerekir:
+   - GitHub → Settings → Developer settings → Personal access tokens
+   - "Generate new token (classic)" → repo scope'unu seç → token kopyala
+   - Push komutunda şifre yerine token'ı yapıştır
+
+NOT: .env dosyası .gitignore'da, yüklenmez (TradingView şifren güvende).
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 4. ADIM — GITHUB ACTIONS İÇİN SECRETS                           │
+└─────────────────────────────────────────────────────────────────┘
+
+A) Repo'na git: https://github.com/KULLANICI_ADIN/ott-bot
+B) Settings → Secrets and variables → Actions
+C) "New repository secret" — iki secret ekle:
+       Name: TV_USERNAME      Value: furkan_ylmaz28
+       Name: TV_PASSWORD      Value: 626865fyGS**
+
+(Bu bilgiler GitHub Actions'ın haftalık optimize çalıştırırken
+TradingView'a giriş yapması için. Repo private + secrets şifreli.)
+
+D) Test et: Actions sekmesine git → "Weekly Optimize" workflow'unu seç
+   → "Run workflow" → "Run workflow" butonu
+   → ~30 dk sonra başarıyla tamamlanmalı + per_symbol_params.json
+     güncellenmiş olarak push edilmeli.
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 5. ADIM — STREAMLIT CLOUD'A DEPLOY                              │
+└─────────────────────────────────────────────────────────────────┘
+
+A) https://share.streamlit.io açıp GitHub hesabınla giriş yap
+   (ilk girişte GitHub bağlantısı yetkileri verirsin)
+
+B) "New app" butonu
+
+C) Doldur:
+       Repository       : KULLANICI_ADIN/ott-bot
+       Branch           : main
+       Main file path   : app.py
+       App URL          : ott-bot-furkan   (istediğin alt-domain — boştaysa)
+
+D) "Advanced settings" → Python version: 3.11
+
+E) "Secrets" alanına yapıştır (TradingView bilgilerini):
+       TV_USERNAME = "furkan_ylmaz28"
+       TV_PASSWORD = "626865fyGS**"
+
+F) "Deploy!" tıkla. İlk build ~5-8 dakika sürer
+   (pip install + numba derleme).
+
+G) Tamam! URL'in hazır:
+       https://ott-bot-furkan.streamlit.app  (örnek)
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 6. ADIM — UPTIMEROBOT İLE UYANIK TUT                            │
+└─────────────────────────────────────────────────────────────────┘
+
+A) https://uptimerobot.com — ücretsiz hesap aç (50 monitor)
+B) "Add New Monitor":
+       Monitor Type        : HTTP(s)
+       Friendly Name       : OTT Bot
+       URL                 : https://ott-bot-furkan.streamlit.app
+       Monitoring Interval : 5 minutes
+C) Create Monitor.
+
+Bot bundan sonra hiç uyumaz, her 5 dk'da bir ping atılır.
+Eğer bot çökerse email'inle uyarı gelir.
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ 7. ADIM — ANDROID TELEFONA APP GİBİ EKLE (PWA)                  │
+└─────────────────────────────────────────────────────────────────┘
+
+A) Android telefonda Chrome'u aç
+B) URL'ini gir: https://ott-bot-furkan.streamlit.app
+C) Üst sağ köşedeki üç nokta menüsü → "Install app" (veya "Add to Home screen")
+D) "Yükle" — ev ekranında OTT Bot ikonu belirir
+E) İkona tıkla → tam ekran, app gibi açılır
+
+iPhone için:
+A) Safari'de URL'ini aç
+B) Aşağıdaki paylaş ikonu → "Add to Home Screen"
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ ARTIK SİSTEM ŞÖYLE                                              │
+└─────────────────────────────────────────────────────────────────┘
+
+  Pazar UTC 23:00 (Türkiye 02:00):
+     └─ GitHub Actions otomatik tetiklenir
+     └─ 151 sembol yeniden optimize edilir (~30 dk)
+     └─ per_symbol_params.json güncellenir, push edilir
+     └─ Streamlit Cloud yeni veriyi otomatik alır
+
+  Her zaman:
+     └─ Telefonda OTT Bot ikonuna tıklarsın
+     └─ Anlık fiyat verisi TradingView'dan canlı çekilir
+     └─ Güvenli Mod / Sabah Ritüeli / Anlık Tarayıcı senin için hazır
+
+  Hata olursa:
+     └─ UptimeRobot email gönderir
+     └─ Streamlit Cloud dashboard'undan log'ları görebilirsin
+     └─ İhtiyaç olursa GitHub Actions → manuel "Run workflow"
+
+
+┌─────────────────────────────────────────────────────────────────┐
+│ İLERİDE — GOOGLE PLAY STORE'A KOYMAK İSTERSEN                   │
+└─────────────────────────────────────────────────────────────────┘
+
+A) https://pwabuilder.com aç
+B) Streamlit URL'ini yapıştır
+C) "Package for stores" → Android
+D) APK dosyasını indir
+E) Google Play Console hesabı aç ($25 tek seferlik):
+   https://play.google.com/console
+F) APK'yı yükle, açıklama yaz, screenshot ekle
+G) 2-3 gün onay sonrası Play Store'da görünür
+
+(Şimdilik PWA yeterli, sonra istersen bu adımı atarsın.)
+
+
+═══════════════════════════════════════════════════════════════════
+  PROBLEM ÇIKARSA
+═══════════════════════════════════════════════════════════════════
+
+— Git push hatası: GitHub Personal Access Token oluştur (3. adım sonu)
+— Streamlit build başarısız: requirements.txt'i kontrol et,
+                              numba bazen ilk derleme uzun sürer
+— TradingView login hatası: Streamlit Cloud Secrets'ı tekrar gir
+— GitHub Actions başarısız: Actions log'una bak, eksik secret olabilir
+— Telefonda PWA install seçeneği yok: önce Chrome güncelle, sonra
+                              "Add to Home Screen"den manuel ekle
+
+Her aşamada Claude'a sor — adım numarasını söyle, hatayı paylaş,
+çözeriz.

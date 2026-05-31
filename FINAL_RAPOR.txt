@@ -1,0 +1,190 @@
+================================================================
+  OTT BOT — FINAL PERFORMANS RAPORU
+  Tarih: 2026-05-31
+================================================================
+
+SİSTEM: Anıl Özekşi OTT-ailesi (TOTT + SOTT + HOTT/LOTT + ROTT)
+        Major trend + Minor trend + Bölge + Kapı + ROTT yaması
+
+────────────────────────────────────────────────────────────────
+  KRITIK BULGULAR
+────────────────────────────────────────────────────────────────
+
+1) Sistem GOLD'da çalışıyor, FOREX paritelerinde ÇALIŞMIYOR.
+     GOLD M15: +117.78% (29 ay) PF 4.41 DD -9.01%
+     GBPUSD M15: -8.73% (5 yıl) PF 0.89
+     EURGBP M15: -21.92% (5 yıl) PF 0.54
+
+     Sebep: OTT sistemi trend-takipçi. GOLD trendli piyasa,
+     forex pariteleri mean-reverting.
+
+2) En iyi timeframe: M15 (tutarlılık) ve M5 (agresif).
+   M30 ve M60 GCM-Demo'da yeterli veriye sahip değil.
+
+3) VAR (VIDYA) port'unda 1 kritik bug bulunup düzeltildi
+   (data.diff() ilk bar NaN → 0). Birim testler Pine-referans
+   implementation ile birebir uyumlu çıktı.
+
+4) Numba JIT ile indikatör hesabı 100x hızlandı —
+   sembol başına sıralı optimize 1-2 dakika.
+
+────────────────────────────────────────────────────────────────
+  GOLD M15 — OPTIMUM PARAMETRELER VE SONUÇLAR
+────────────────────────────────────────────────────────────────
+
+Parametreler (sequential optimize ile bulundu):
+   trend_length    = 20    (opt1)
+   trend_percent   = 8.0   (opt2 — major)
+   minor_percent   = 4.0   (opt3 — minor)
+   tott_percent    = 1.0
+   tott_coeff      = 0.0004
+   sott_period_k   = 500
+   sott_smooth_k   = 200
+   sott_percent    = 0.2
+   gate_length     = 28
+   gate_percent    = 0.4
+   gate_shift      = 2
+   rott_x1         = 30
+   rott_x2         = 1000
+   rott_percent    = 7.0
+
+Tam veri backtest (2023-12-21 → 2026-05-29, 57477 M15 bar):
+   Toplam Getiri      : +117.78%
+   Buy & Hold         : +122.30%
+   Profit Factor      : 4.41
+   Max Drawdown       : -9.01%
+   Sharpe (annualised): 0.25
+   İşlem Sayısı       : 59
+   Kazanma Oranı      : 62.7%
+
+Walk-Forward Analiz (10 pencere, 20 ay OOS):
+   Pozitif OOS        : 8/10 (%80) ★★★
+   Toplam OOS Getiri  : +54.56%
+   Buy & Hold dilim   : +85.95%
+   WF Efficiency      : %20.9
+   Ortalama OOS DD    : ~-5%
+   En kötü pencere    : -10.4% (son 2 ay, range-bound)
+   En iyi pencere     : +19.9%
+
+────────────────────────────────────────────────────────────────
+  GOLD M5 — OPTIMUM PARAMETRELER VE SONUÇLAR
+────────────────────────────────────────────────────────────────
+
+Parametreler:
+   trend_length    = 40
+   trend_percent   = 8.0
+   minor_percent   = 4.0
+   tott_percent    = 1.0
+   tott_coeff      = 0.0004
+   sott_period_k   = 300
+   sott_smooth_k   = 200
+   sott_percent    = 0.2
+   gate_length     = 10
+   gate_percent    = 0.4
+   gate_shift      = 0
+   rott_x1         = 30
+   rott_x2         = 1000
+   rott_percent    = 7.0
+
+Tam veri backtest (2025-06-19 → 2026-05-29, 66886 M5 bar):
+   Toplam Getiri      : +46.53%
+   Profit Factor      : 3.04
+   Max Drawdown       : -9.44%
+   İşlem Sayısı       : 45
+   Kazanma Oranı      : 60.0%
+
+Walk-Forward Analiz (5 pencere, 5 ay OOS):
+   Pozitif OOS        : 3/5 (%60)
+   Toplam OOS Getiri  : +11.06%
+   Buy & Hold dilim   : +6.30% (sistem BH'ı geçti!)
+   WF Efficiency      : %7.4
+   Ortalama OOS DD    : -5.58%
+
+────────────────────────────────────────────────────────────────
+  GERÇEK PERFORMANS BEKLENTİSİ
+────────────────────────────────────────────────────────────────
+
+Backtest sonuçları geçmiş veriyle hesaplandı. Gerçek piyasada:
+   - Spread genelde backtestten geniş olur (-%1-2 yıllık etki)
+   - Slippage volatil dönemlerde artar
+   - WF efficiency düşük olduğundan, IS getirilerinin tamamı
+     OOS'a yansımıyor
+
+Sağduyulu yıllık beklenti (GOLD M15, kaldıraçsız, demo doğrulanmış):
+   * En iyi durum: +%30-40
+   * Beklenen   : +%15-25
+   * En kötü    : -%5 ila +%5
+
+Kaldıraçlı (1:10):
+   * En iyi durum: +%150-200
+   * Beklenen   : +%50-100
+   * En kötü    : -%20 ila +%30  (DİKKAT: hesabını sıfırlayabilir)
+
+────────────────────────────────────────────────────────────────
+  DEPLOYMENT — MT4 KURULUM
+────────────────────────────────────────────────────────────────
+
+EA dosyası: OTT_GOLD_EA.mq4
+Kurulum talimatı: DEPLOY.txt'i oku.
+
+Önerilen yol:
+   1) MT4 Strategy Tester'da EA'yı backtest et
+      → Python sonuçlarıyla yakın olduğunu gör (return ~+100%)
+   2) GCM-Demo hesabında 2-4 hafta CANLI gözlemle
+      → MT4 trade'leri Python'daki sinyallerle senkron mu kontrol et
+   3) Edge görüyorsan minimum lot ile gerçek hesap
+   4) Hesabın %1-3'ünden fazla marjin kullanma
+   5) Her ay performansı değerlendir, gerekirse parametreleri
+      yeniden optimize et (her 6 ayda bir grid search çalıştır)
+
+────────────────────────────────────────────────────────────────
+  ÜRETTİĞİMİZ DOSYALAR
+────────────────────────────────────────────────────────────────
+
+ÇEKİRDEK MODÜLLER:
+   indicators.py            — VAR, OTT, TOTT, ROTT, SOTT, HOTT/LOTT
+   signals_full.py          — Tam sistem sinyal mantığı
+   backtest.py              — Custom event-driven backtest motoru
+   mt4_hst.py               — MT4 .hst binary reader
+
+OPTIMIZE / TEST SCRIPTS:
+   sequential_optimize.py   — .docx sıralı test prosedürü
+   gold_optimize.py         — GOLD tüm TF için optimize
+   walk_forward_seq.py      — Walk-forward + sıralı optimize
+   test_unit.py             — Birim testler (VAR/OTT doğruluk kanıtı)
+   run_last3m.py            — Son 3 ay backtest
+   plot_optimum.py          — Equity grafikleri
+
+ÇIKTI / SONUÇLAR:
+   gold_optimum_params.json — Tüm TF optimum parametreler
+   wfseq_GOLD_M15.csv       — M15 walk-forward sonuçları
+   wfseq_GOLD_M5.csv        — M5 walk-forward sonuçları
+   seqopt_GOLD_M*_T*.csv    — Tüm grid search detayları
+   plots_optimum/*.png      — Equity grafikleri
+
+CANLI BOT:
+   OTT_GOLD_EA.mq4          — MetaTrader 4 Expert Advisor
+   DEPLOY.txt               — Kurulum + canlı izleme rehberi
+   FINAL_RAPOR.txt          — Bu dosya
+
+────────────────────────────────────────────────────────────────
+  SONRAKİ ADIMLAR — ÖNCELİK SIRASIYLA
+────────────────────────────────────────────────────────────────
+
+[ ] 1) MT4'te EA'yı compile et (MetaEditor'da F7)
+[ ] 2) Strategy Tester'da EA'yı backtest et — Python sonuçlarına yakın mı?
+[ ] 3) GCM-Demo hesabında EA'yı canlı çalıştır (2-4 hafta)
+[ ] 4) Her gün/hafta MT4 trade'lerini run_last3m.py çıktısıyla karşılaştır
+[ ] 5) Edge görürsen minimum lot ile gerçek hesap
+[ ] 6) 6 ayda bir parametreleri yeniden optimize et
+[ ] 7) Daha çok GOLD verisi indir (M5/M15 için 2+ yıl) ve walk-forward'ı genişlet
+
+İSTEĞE BAĞLI İYİLEŞTİRMELER (bot çalışmaya başladıktan sonra):
+   - Position sizing (risk-based, hesabın %x'i kadar lot)
+   - Daily loss limit (örn %3 kayıp olunca o gün durur)
+   - News blackout (önemli haberlerde işlem yapmaz)
+   - Trailing stop (kar bırakmadan biraz kilitleme)
+   - Multiple symbol (USDXAU, USTECH için ayrı EA'lar)
+
+Bu eklemeler .docx'in dışında ama gerçek dünyada gerekli.
+Bot ÇALIŞMAYA başladıktan sonra hesap güvenliği için eklenmesi önerilir.

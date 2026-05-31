@@ -1,0 +1,19 @@
+# Streamlit dashboard ayarları
+
+[server]
+# static/ klasörünü /app/static/* yolundan servis et (PWA manifest ve ikonlar için)
+enableStaticServing = true
+# Streamlit Cloud için
+headless = true
+
+[theme]
+# TradingView tarzı koyu tema
+base = "dark"
+primaryColor = "#2962ff"
+backgroundColor = "#0d1117"
+secondaryBackgroundColor = "#1a1f2e"
+textColor = "#d1d4dc"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
