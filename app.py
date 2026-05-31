@@ -359,8 +359,10 @@ def analyze_intraday(symbol, interval: str | None = None):
         bt_ret = bt_pf = bt_win = None
         bt_n = 0
 
+    from data_source import category_of as _cat
     return {
         "Sembol": symbol,
+        "Kategori": _cat(symbol),
         "Güven": guven_label,
         "_GuvenSkor": guven_score,
         "Durum": pos,
@@ -446,7 +448,7 @@ tab_safe, tab_morning, tab_scan, tab_sim, tab_chart, tab_alt, tab_info = st.tabs
     "🛡️  Güvenli Mod",
     "🎯  Bugünün Önerileri",
     "📡  Anlık Tarayıcı",
-    "💼  Portföy Simülasyonu",
+    "📌  Öneriler",
     "📊  Detay Grafik",
     "🧪  Alternatif Bot Portföyü",
     "📖  Bilgi",
@@ -879,7 +881,7 @@ with tab_scan:
         # Gösterim kolonları (underscore'la başlayanları çıkar)
         show_cols = [c for c in df_scan.columns if not c.startswith("_")]
         # İdeal sıralama
-        col_order = ["Sembol", "Güven", "Durum", "Fiyat",
+        col_order = ["Sembol", "Kategori", "Güven", "Durum", "Fiyat",
                       "Trend OTT", "Tetik ↑", "Up %", "Tetik ↓", "Dn %",
                       "BT Getiri %", "BT PF", "BT Win %", "BT Trade"]
         show_cols = [c for c in col_order if c in show_cols]
@@ -925,68 +927,140 @@ with tab_scan:
 #  TAB 2: PORTFÖY SİMÜLASYONU
 # ──────────────────────────────────────────────────────────────────
 with tab_sim:
-    st.subheader("Portföy Simülasyonu (son N gün, X$ ile)")
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        capital = st.number_input("Sermaye ($)", 100, 1000000, 1000, step=100)
-    with c2:
-        leverage = st.slider("Kaldıraç", 1, 50, 10)
-    with c3:
-        sim_days = st.slider("Süre (gün)", 7, 60, 30)
-    with c4:
-        sim_cats = st.multiselect("Kategoriler", ["NASDAQ","BIST","COMMODITY"],
-                                    default=["NASDAQ","BIST"], key="sim_cats")
+    st.subheader("📌 Anlık Fırsatlar — Bot Önerileri")
+    st.caption("Şu an aktif sinyal veren semboller. Anlık fiyat, stop seviyesi, beklenen hedef ve potansiyel getiri.")
 
-    if st.button("📊 Simüle et", type="primary"):
-        sim_symbols = []
-        if "NASDAQ" in sim_cats: sim_symbols += NASDAQ
-        if "BIST" in sim_cats: sim_symbols += BIST
-        if "COMMODITY" in sim_cats: sim_symbols += COMMODITY
+    with st.expander("ℹ️ Beklenen fiyat nasıl hesaplanıyor?"):
+        st.markdown("""
+        Sistem **trend takipçi** → kesin hedef fiyat yok, sistem çıkış sinyali verene kadar pozisyon tutulur.
 
-        prog = st.progress(0, text="başlıyor")
-        sim_rows = []
-        for i, sym in enumerate(sim_symbols):
-            r = analyze_backtest(sym, days=sim_days, leverage=leverage)
-            if r:
-                # 1000$ baz'dan capital'e ölçekle
-                r["Final"] = r["Final"] / 1000 * (capital / len(sim_symbols))
-                r["Yatırım"] = capital / len(sim_symbols)
-                sim_rows.append(r)
-            prog.progress((i+1)/len(sim_symbols), text=f"{sym}")
-        prog.empty()
+        Tablodaki **Beklenen Hedef** profesyonel R:R 1:2 mantığıyla hesaplanır:
+        - **Risk** = |Anlık Fiyat − Stop Seviyesi|
+        - **Hedef** = Anlık Fiyat ± (2 × Risk)
+        - LONG: hedef yukarıda  ·  SHORT: hedef aşağıda
 
-        if sim_rows:
-            df_sim = pd.DataFrame([{
-                "Sembol": r["Sembol"], "Trade": r["Trade"],
-                "Yatırım $": r["Yatırım"], "Final $": r["Final"],
-                "Getiri %": r["Getiri %"],
-                "Margin Call": "✗" if r["Margin Call"] else "—",
-            } for r in sim_rows])
-            df_sim = df_sim.sort_values("Getiri %", ascending=False)
+        **Backtest Win** sütunu: bu sembolde sistem geçmişte ne sıklıkla kazanmış.
+        Yüksek win + uygun R:R = beklenen kazanç.
 
-            total_invested = df_sim["Yatırım $"].sum()
-            total_final = df_sim["Final $"].sum()
-            total_ret = (total_final/total_invested - 1) * 100
+        **NOT**: Hedef tahminidir, gerçek çıkış sistem sinyaline bağlı.
+        """)
 
-            colA, colB, colC, colD = st.columns(4)
-            colA.metric("Toplam yatırım", f"${total_invested:,.0f}")
-            colB.metric("Final hesap", f"${total_final:,.0f}",
-                        f"{total_ret:+.2f}%")
-            colC.metric("Kazanan / Toplam",
-                        f"{len(df_sim[df_sim['Getiri %']>0])}/{len(df_sim)}")
-            colD.metric("Margin Call",
-                        len(df_sim[df_sim['Margin Call']=='✗']))
+    pc1, pc2 = st.columns([2, 1])
+    with pc1:
+        prop_cats = st.multiselect("Kategoriler",
+                                     ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
+                                     default=["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
+                                     key="prop_cats")
+    with pc2:
+        prop_top_only = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ",
+                                      value=True, key="prop_top_only")
 
-            st.dataframe(
-                df_sim.style.format({
-                    "Yatırım $": "${:.0f}",
-                    "Final $": "${:.0f}",
-                    "Getiri %": "{:+.2f}%",
-                }).background_gradient(subset=["Getiri %"], cmap="RdYlGn"),
-                use_container_width=True, height=550,
-            )
+    if st.button("🔄 Önerileri yenile", type="primary", use_container_width=True):
+        st.cache_data.clear()
 
-            st.session_state["last_sim"] = sim_rows
+    prop_symbols = []
+    if "NASDAQ" in prop_cats: prop_symbols += NASDAQ
+    if "BIST" in prop_cats: prop_symbols += BIST
+    if "COMMODITY" in prop_cats: prop_symbols += COMMODITY
+    if "CRYPTO" in prop_cats: prop_symbols += CRYPTO
+
+    prop_prog = st.progress(0, text=f"0/{len(prop_symbols)}")
+    prop_rows = []
+    for i, sym in enumerate(prop_symbols):
+        r = analyze_intraday(sym)
+        if r:
+            prop_rows.append(r)
+        prop_prog.progress((i+1)/len(prop_symbols), text=f"{i+1}/{len(prop_symbols)} {sym}")
+    prop_prog.empty()
+
+    # Sadece YENİ sinyali olanları al (LONG AÇ veya SHORT AÇ)
+    fresh = []
+    for r in prop_rows:
+        if "LONG AÇ" in r["Durum"] or "SHORT AÇ" in r["Durum"]:
+            # Rating filtre
+            if prop_top_only and not ("MÜKEMMEL" in r["Güven"] or "İYİ" in r["Güven"]):
+                continue
+
+            cur = r["Fiyat"]
+            if "LONG" in r["Durum"]:
+                yon = "🟢 LONG"
+                stop = r["Tetik ↓"]
+                if stop and cur:
+                    risk = cur - stop
+                    target = cur + 2 * risk  # 1:2 R:R
+                    risk_pct = risk / cur * 100
+                    pot_pct = 2 * risk_pct
+                else:
+                    target = risk_pct = pot_pct = None
+            else:
+                yon = "🔴 SHORT"
+                stop = r["Tetik ↑"]
+                if stop and cur:
+                    risk = stop - cur
+                    target = cur - 2 * risk
+                    risk_pct = risk / cur * 100
+                    pot_pct = 2 * risk_pct
+                else:
+                    target = risk_pct = pot_pct = None
+
+            fresh.append({
+                "Sembol": r["Sembol"],
+                "Kategori": r["Kategori"],
+                "Güven": r["Güven"],
+                "Yön": yon,
+                "Anlık Fiyat": cur,
+                "Stop": stop,
+                "Risk %": risk_pct,
+                "Beklenen Hedef": target,
+                "Potansiyel %": pot_pct,
+                "BT Win %": r["BT Win %"],
+                "BT Ret %": r["BT Getiri %"],
+            })
+
+    if not fresh:
+        st.info("📭 Şu anda yeni sinyal yok. Tarama yapıldı, hiçbir sembolde **LONG AÇ** veya **SHORT AÇ** sinyali yok.\n\n"
+                 "Yarın sabah veya birkaç saat sonra tekrar dene.")
+    else:
+        df_prop = pd.DataFrame(fresh)
+        # Güven + potansiyel ile sırala
+        guv_skor = {"🏆 MÜKEMMEL": 5, "⭐ İYİ": 4, "🟢 ORTA": 3,
+                    "🟡 MARJINAL": 2, "⚠️ VERİ_AZ": 1, "❌ UYUMSUZ": 0}
+        df_prop["_sc"] = df_prop["Güven"].map(guv_skor).fillna(0)
+        df_prop = df_prop.sort_values(["_sc", "Potansiyel %"],
+                                        ascending=[False, False]).drop(columns="_sc").reset_index(drop=True)
+
+        # Özet
+        sm1, sm2, sm3 = st.columns(3)
+        sm1.metric("🟢 LONG sinyali", (df_prop["Yön"]=="🟢 LONG").sum())
+        sm2.metric("🔴 SHORT sinyali", (df_prop["Yön"]=="🔴 SHORT").sum())
+        sm3.metric("Toplam fırsat", len(df_prop))
+
+        st.dataframe(
+            df_prop.style.format({
+                "Anlık Fiyat": "{:.4f}",
+                "Stop": "{:.4f}",
+                "Risk %": "{:.2f}%",
+                "Beklenen Hedef": "{:.4f}",
+                "Potansiyel %": "{:+.2f}%",
+                "BT Win %": "{:.0f}%",
+                "BT Ret %": "{:+.1f}%",
+            }).background_gradient(subset=["BT Win %"], cmap="Greens")
+              .background_gradient(subset=["Potansiyel %"], cmap="RdYlGn"),
+            use_container_width=True, height=550,
+        )
+
+        st.markdown("""
+        ### 📋 Nasıl kullanılır?
+
+        **Örnek:** ASELS.IS · 🟢 LONG · Anlık 380 · Stop 372 · Hedef 396
+
+        1. **Long pozisyon aç** broker'da (örn 380 fiyatından alış emri)
+        2. **Stop-loss = Stop sütunu** (372) — bu seviyenin altına inerse OTOMATIK ÇIK
+        3. Fiyat **396'ya yaklaşırsa** (Beklenen Hedef) → kâr al
+        4. Veya **dashboard'daki "🟡 LONG ÇIK" sinyalini** bekle → kapat
+
+        Aynı mantık SHORT için tersi.
+        """)
 
 # ──────────────────────────────────────────────────────────────────
 #  TAB 3: SEMBOL GRAFİK (TradingView-style lightweight-charts)
