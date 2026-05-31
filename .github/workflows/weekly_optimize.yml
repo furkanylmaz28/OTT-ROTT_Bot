@@ -1,10 +1,10 @@
-name: Periodic Optimize
+name: Weekly Optimize
 
 on:
-  # Her 6 saatte bir (UTC: 00:00, 06:00, 12:00, 18:00)
-  # = Türkiye 03:00, 09:00, 15:00, 21:00
+  # Her Pazar UTC 23:00 = Türkiye Pazartesi 02:00
+  # Hafta sonu boyunca piyasalar kapalı, Pazartesi sabah taze parametre.
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 23 * * 0"
   # Manuel tetiklenebilir (GitHub Actions sekmesinde "Run workflow")
   workflow_dispatch:
 
