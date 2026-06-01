@@ -1266,16 +1266,10 @@ with tab_safe:
         ⚠️ Hiçbir sistem %100 garanti vermez. Sıkı stop-loss + lot kontrolü mutlaka.
         """)
 
-    safe_col1, safe_col2, safe_col3 = st.columns([2, 2, 1])
-    with safe_col1:
-        safe_capital = st.number_input("💵 Sermaye ($)",
-                                         100, 10000000, 1000, 100, key="safe_capital")
-    with safe_col2:
-        safe_pct = st.slider("📊 Pozisyon başına %",
-                              2, 25, 10, key="safe_pct",
-                              help="Sermayenin % kaçı bir pozisyona ayrılsın")
-    with safe_col3:
-        safe_lev = st.slider("⚖️ Kaldıraç", 1, 25, 5, key="safe_lev")
+    # Sabit varsayılanlar (UI kaldırıldı — yalnız sinyaller önemli)
+    safe_capital = 1000
+    safe_pct     = 10
+    safe_lev     = 5
 
     if st.button("🛡️ Güvenli sinyalleri çıkar", type="primary", use_container_width=True):
         from safe_mode import get_safe_recommendations
