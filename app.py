@@ -552,22 +552,68 @@ with tab_portfolio:
     # ── YENİ POZİSYON FORMU
     with st.expander("➕ Yeni pozisyon ekle", expanded=False):
         from datetime import datetime as _dt, date as _date
+        all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO))
+
+        # Anlık fiyatı çek (5 dk cache)
+        @st.cache_data(ttl=300, show_spinner=False)
+        def _live_price(sym):
+            try:
+                from data_source import best_interval_for
+                df = fetch_yf(sym, interval=best_interval_for(sym))
+                if not df.empty:
+                    return float(df["close"].iloc[-1])
+            except Exception:
+                pass
+            return None
+
+        # Sembol değiştiğinde Giriş Fiyatı + SL + TP'yi anlık fiyata göre güncelle
+        def _on_sym_change():
+            sym = st.session_state["p_sym"]
+            live = _live_price(sym)
+            if live and live > 0:
+                st.session_state["p_price"] = round(live, 4)
+                # LONG default: SL %5 alt, TP %10 üst — kullanıcı yine de değiştirebilir
+                st.session_state["p_sl"] = round(live * 0.95, 4)
+                st.session_state["p_tp"] = round(live * 1.10, 4)
+
+        # İlk açılışta default sembolün fiyatını çek
+        if "p_sym_initialized" not in st.session_state:
+            initial_sym = all_syms_full[0] if all_syms_full else None
+            if initial_sym:
+                st.session_state["p_sym"] = initial_sym
+                live0 = _live_price(initial_sym)
+                if live0 and live0 > 0:
+                    st.session_state.setdefault("p_price", round(live0, 4))
+                    st.session_state.setdefault("p_sl", round(live0 * 0.95, 4))
+                    st.session_state.setdefault("p_tp", round(live0 * 1.10, 4))
+                else:
+                    st.session_state.setdefault("p_price", 100.0)
+                    st.session_state.setdefault("p_sl", 95.0)
+                    st.session_state.setdefault("p_tp", 110.0)
+            st.session_state["p_sym_initialized"] = True
+
         fp1, fp2, fp3 = st.columns(3)
         with fp1:
-            all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO))
-            new_sym = st.selectbox("Sembol", all_syms_full, key="p_sym")
+            new_sym = st.selectbox("Sembol", all_syms_full, key="p_sym",
+                                     on_change=_on_sym_change,
+                                     help="Sembol seçilince Giriş Fiyatı + SL + TP "
+                                            "anlık piyasa fiyatına göre otomatik dolar.")
             new_yon = st.radio("Yön", ["LONG", "SHORT"], horizontal=True, key="p_yon")
         with fp2:
             new_date = st.date_input("Giriş Tarihi", _date.today(), key="p_date")
-            new_price = st.number_input("Giriş Fiyatı", min_value=0.0, value=100.0,
-                                          step=0.01, format="%.4f", key="p_price")
+            new_price = st.number_input("Giriş Fiyatı", min_value=0.0,
+                                          step=0.01, format="%.4f", key="p_price",
+                                          help="Sembol değişince anlık fiyat otomatik gelir. "
+                                                "Manuel düzenleyebilirsin.")
             new_qty = st.number_input("Miktar (lot/adet)", min_value=0.0, value=1.0,
                                         step=0.01, format="%.4f", key="p_qty")
         with fp3:
-            new_sl = st.number_input("Stop Loss", min_value=0.0, value=95.0,
-                                       step=0.01, format="%.4f", key="p_sl")
-            new_tp = st.number_input("Take Profit", min_value=0.0, value=110.0,
-                                       step=0.01, format="%.4f", key="p_tp")
+            new_sl = st.number_input("Stop Loss", min_value=0.0,
+                                       step=0.01, format="%.4f", key="p_sl",
+                                       help="Default: anlık fiyatın %5 altı (LONG için)")
+            new_tp = st.number_input("Take Profit", min_value=0.0,
+                                       step=0.01, format="%.4f", key="p_tp",
+                                       help="Default: anlık fiyatın %10 üstü (LONG için)")
             new_comm = st.number_input("Komisyon %", min_value=0.0, value=0.05,
                                          step=0.01, format="%.3f", key="p_comm")
         new_notes = st.text_input("Notlar (opsiyonel)", key="p_notes")
