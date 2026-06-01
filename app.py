@@ -300,25 +300,31 @@ BIST = [
 COMMODITY = ["GC=F", "SI=F"]
 
 # GCM Forex'te CFD olarak işlem gören US hisseler (yfinance formatında)
-# Kaynak: gcmforex.com Pay CFD listesi (yaygın olarak işlem gören 50+ hisse)
-# NOT: GCM platformunda '#' öneki ile gösterilir (#AAPL, #MSFT vs.)
-# Eğer eksik/fazla varsa: extract_gcm_symbols.py + MT4 DownloadAllHistoryGCM.mq4 ile doğrula.
-GCM_NASDAQ = {
-    # Tech giants — NASDAQ
-    "AAPL", "MSFT", "AMZN", "GOOG", "GOOGL", "META", "NVDA", "TSLA",
-    # NASDAQ teknoloji
-    "AMD", "INTC", "NFLX", "ADBE", "ORCL", "CSCO", "PYPL", "IBM",
-    # NYSE büyük hisseler
-    "JPM", "BAC", "WFC", "C", "GS", "MS", "V", "MA",
-    "JNJ", "PFE", "MRK", "ABBV", "LLY", "BMY",
-    "WMT", "COST", "KO", "PEP", "MCD", "SBUX", "NKE",
-    "DIS", "T", "VZ", "CMCSA",
-    "BA", "GE", "F", "GM", "CAT", "MMM",
-    "XOM", "CVX",
-    "HD", "PG",
-    # Yüksek volatil / popular
-    "RIOT", "COIN", "PLTR", "GME", "AMC",
-}
+# Kaynak: extract_gcm_symbols.py + gcm_ticker_map.py (MT4 history klasöründen gerçek)
+# 424 GCM sembolünün %99.1'i mapped → 420 ticker
+def _load_gcm_set():
+    """gcm_to_yf_map.json varsa oradan oku, yoksa fallback (50 popüler)."""
+    try:
+        import json
+        with open("gcm_to_yf_map.json", encoding="utf-8") as f:
+            d = json.load(f)
+        return set(d["mapping"].values())
+    except Exception:
+        # Fallback — JSON yoksa
+        return {
+            "AAPL", "MSFT", "AMZN", "GOOG", "GOOGL", "META", "NVDA", "TSLA",
+            "AMD", "INTC", "NFLX", "ADBE", "ORCL", "CSCO", "PYPL", "IBM",
+            "JPM", "BAC", "WFC", "C", "GS", "MS", "V", "MA",
+            "JNJ", "PFE", "MRK", "ABBV", "LLY", "BMY",
+            "WMT", "COST", "KO", "PEP", "MCD", "SBUX", "NKE",
+            "DIS", "T", "VZ", "CMCSA",
+            "BA", "GE", "F", "GM", "CAT", "MMM",
+            "XOM", "CVX", "HD", "PG",
+            "RIOT", "COIN", "PLTR", "GME", "AMC",
+        }
+
+
+GCM_NASDAQ = _load_gcm_set()
 
 CRYPTO = [
     # Top market cap

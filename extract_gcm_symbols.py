@@ -47,35 +47,62 @@ def list_gcm_symbols(server: str = "GCM-Demo") -> dict[str, list[str]]:
 
 
 def categorize_gcm(symbols: list[str]) -> dict[str, list[str]]:
-    """GCM sembollerini kategorize et."""
+    """GCM sembollerini kategorize et.
+
+    GCM kuralı:
+      '#' ile başlayan = CFD hisse (US + EU + UK + Asya borsaları)
+      6 harfli (USD/EUR/GBP/JPY/CHF/AUD/CAD/NZD/TRY): forex paritesi
+      GOLD/SILVER/PLATINUM/COPPER vb: emtia
+      ENDEKS'ler (NASDAQ, S&P, FTSE) — # ile veya .IDX
+      Geri kalan: OTHER
+    """
     cats = {
-        "STOCK_US": [],     # US hisseler (AAPL, NVDA, vb)
-        "STOCK_BIST": [],   # BIST hisseler (eğer GCM'de varsa)
-        "INDEX": [],        # NAS100, US30, SPX vs.
-        "COMMODITY": [],    # GOLD, SILVER, OIL vs.
-        "FOREX": [],        # EURUSD, GBPUSD vs.
-        "CRYPTO": [],       # BTC, ETH (varsa)
+        "STOCK_US": [],         # Bilinen US (NVDA, AAPL, AMD vs)
+        "STOCK_EU_UK": [],      # Avrupa borsa eki (.L, .DE, .PA, .AS vs)
+        "STOCK_OTHER": [],      # Diğer # ile başlayan CFD'ler
+        "INDEX": [],            # NASDAQ, FTSE, NIKKEI, DAX
+        "COMMODITY": [],        # GOLD, SILVER, OIL, COFFEE
+        "FOREX": [],            # 6 harfli pariteler
+        "BOND": [],             # T-NOTES, T-BOND
         "OTHER": [],
     }
+    # Hisse kategorisi için bilinen US ticker'lar (5 karakter veya daha kısa)
+    # Geri kalanlar — #+uzun isim → STOCK_OTHER
+    EU_SUFFIX = (".L", ".DE", ".PA", ".AS", ".MC", ".BR", ".MI")
+    INDEX_KW = ("NASDAQ", "FTSE", "NIKKEI", "DAX", "DJ", "HSI", "VIX",
+                 "S&P", "SPX", "IBEX", "CAC", "RUSS", "DOLLAR_IND")
+    COMM_KW  = ("GOLD", "SILVER", "PLATINUM", "PALLADIUM", "COPPER", "ALUMIN",
+                 "BRENT", "WTI", "OIL", "GAS", "GASOLINE", "HEATING",
+                 "COFFEE", "COCOA", "SUGAR", "CORN", "WHEAT", "COTTON", "SOYBEAN")
+    BOND_KW  = ("T-NOTES", "T-BOND", "BUND")
+
     for sym in symbols:
         s = sym.upper().lstrip("#")
-        # Forex paireri 6 karakter, harf
-        if len(s) == 6 and s.isalpha():
-            cats["FOREX"].append(sym)
-        elif s in {"GOLD", "SILVER", "NGAS", "USOIL", "UKOIL", "XAUUSD", "XAGUSD",
-                    "COPPER", "PLATINUM", "PALLADIUM"}:
-            cats["COMMODITY"].append(sym)
-        elif s in {"NASDAQ100", "SPX500", "US30", "DAX30", "FTSE100", "NIKKEI",
-                    "NAS100", "DJ30", "GER40", "NK225"}:
-            cats["INDEX"].append(sym)
-        elif s.endswith(".IS") or s.endswith("E"):  # BIST genelde .E veya .IS
-            cats["STOCK_BIST"].append(sym)
-        elif "BTC" in s or "ETH" in s or "USDT" in s:
-            cats["CRYPTO"].append(sym)
-        elif len(s) <= 5 and s.isalpha():
-            cats["STOCK_US"].append(sym)
-        else:
-            cats["OTHER"].append(sym)
+
+        # ÖNCE: Forex paritesi (6 harf, tam eşleşme) — diğer keyword kontrollerinden ÖNCE
+        if not sym.startswith("#") and len(s) == 6 and s.isalpha():
+            cats["FOREX"].append(sym); continue
+        # Bonds
+        if any(k in s for k in BOND_KW):
+            cats["BOND"].append(sym); continue
+        # Endeksler — sadece # ile başlayan VEYA tam-keyword eşleşme
+        if sym.startswith("#") and any(k in s for k in INDEX_KW):
+            cats["INDEX"].append(sym); continue
+        # Emtialar — # ile başlamayan emtialar (GOLD, SILVER vs)
+        # # ile başlayan #LASVEGAS, #PACIFICGAS gibi hisseleri yakalamamak için
+        if not sym.startswith("#") and any(k in s for k in COMM_KW):
+            cats["COMMODITY"].append(sym); continue
+        # Hisseler — # ile başlayanlar
+        if sym.startswith("#"):
+            if any(s.endswith(suf) for suf in EU_SUFFIX):
+                cats["STOCK_EU_UK"].append(sym)
+            elif len(s) <= 5 and s.isalpha():
+                cats["STOCK_US"].append(sym)
+            else:
+                cats["STOCK_OTHER"].append(sym)
+            continue
+        # Geri kalan
+        cats["OTHER"].append(sym)
     return cats
 
 
