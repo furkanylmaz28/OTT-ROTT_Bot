@@ -411,6 +411,27 @@ def analyze_intraday(symbol, interval: str | None = None):
         bt_n = 0
 
     from data_source import category_of as _cat
+
+    # ── Tahmini hedef (R:R 1:2) — bot trend takipçi, sabit hedef yok ama
+    #    geleneksel risk-reward formülüyle tahmini bir target hesaplanır.
+    tott_up = float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None
+    tott_dn = float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None
+    hedef = None
+    pot_pct = None
+    # Sinyal LONG yönündeyse hedef yukarıda, SHORT yönündeyse aşağıda
+    if "LONG" in pos and tott_dn:
+        stop = tott_dn
+        risk = cur - stop
+        if risk > 0:
+            hedef = cur + 2 * risk
+            pot_pct = (hedef / cur - 1) * 100
+    elif "SHORT" in pos and tott_up:
+        stop = tott_up
+        risk = stop - cur
+        if risk > 0:
+            hedef = cur - 2 * risk
+            pot_pct = (1 - hedef / cur) * 100
+
     return {
         "Sembol": symbol,
         "Kategori": _cat(symbol),
@@ -419,10 +440,12 @@ def analyze_intraday(symbol, interval: str | None = None):
         "Durum": pos,
         "Fiyat": cur,
         "Trend OTT": float(last["trend_ott"]) if not pd.isna(last["trend_ott"]) else None,
-        "Tetik ↑": float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None,
-        "Tetik ↓": float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None,
-        "Up %": (float(last["tott_up"])/cur - 1)*100 if not pd.isna(last["tott_up"]) else None,
-        "Dn %": (float(last["tott_dn"])/cur - 1)*100 if not pd.isna(last["tott_dn"]) else None,
+        "Tetik ↑": tott_up,
+        "Tetik ↓": tott_dn,
+        "Up %": (tott_up/cur - 1)*100 if tott_up else None,
+        "Dn %": (tott_dn/cur - 1)*100 if tott_dn else None,
+        "Hedef": hedef,
+        "Pot %": pot_pct,
         "BT Getiri %": bt_ret,
         "BT PF": bt_pf,
         "BT Win %": bt_win,
@@ -1563,6 +1586,7 @@ with tab_scan:
         # İdeal sıralama
         col_order = ["Sembol", "Kategori", "Güven", "Durum", "Fiyat",
                       "Trend OTT", "Tetik ↑", "Up %", "Tetik ↓", "Dn %",
+                      "Hedef", "Pot %",
                       "BT Getiri %", "BT PF", "BT Win %", "BT Trade"]
         show_cols = [c for c in col_order if c in show_cols]
 
@@ -1574,6 +1598,8 @@ with tab_scan:
                 "Tetik ↓": "{:.4f}",
                 "Up %": "{:+.2f}%",
                 "Dn %": "{:+.2f}%",
+                "Hedef": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                "Pot %": lambda v: f"{v:+.2f}%" if pd.notna(v) else "-",
                 "BT Getiri %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
                 "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
                 "BT Win %": lambda v: f"{v:.0f}%" if pd.notna(v) else "-",
@@ -1862,6 +1888,23 @@ with tab_chart:
         if r["Tetik ↓"]:
             m5.metric("Tetik ↓", f"{r['Tetik ↓']:.4f}",
                       f"{r['Dn %']:+.2f}%")
+
+        # Hedef + Pot (R:R 1:2)
+        if r.get("Hedef") is not None and r.get("Pot %") is not None:
+            h1, h2, _h3, _h4, _h5 = st.columns(5)
+            h1.metric("🎯 Hedef (R:R 1:2)", f"{r['Hedef']:.4f}",
+                      f"{r['Pot %']:+.2f}%")
+            # Risk-Reward bilgi
+            yon = "LONG" if "LONG" in r["Durum"] else ("SHORT" if "SHORT" in r["Durum"] else None)
+            if yon == "LONG":
+                stop = r["Tetik ↓"]; risk_pct = (r["Fiyat"]/stop - 1)*100 if stop else None
+            elif yon == "SHORT":
+                stop = r["Tetik ↑"]; risk_pct = (stop/r["Fiyat"] - 1)*100 if stop else None
+            else:
+                risk_pct = None
+            if risk_pct is not None:
+                h2.metric("⚠️ Risk", f"{risk_pct:.2f}%",
+                          f"R:R 1:2 → +{2*risk_pct:.2f}% pot.")
 
         # Veriyi lightweight-charts formatına çevir
         def to_unix(idx):
