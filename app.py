@@ -455,7 +455,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-tab_consensus, tab_safe, tab_morning, tab_scan, tab_sim, tab_chart, tab_alt, tab_info = st.tabs([
+(tab_portfolio, tab_consensus, tab_safe, tab_morning, tab_scan,
+ tab_sim, tab_chart, tab_alt, tab_info) = st.tabs([
+    "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "🛡️  Güvenli Mod",
     "🎯  Bugünün Önerileri",
@@ -465,6 +467,293 @@ tab_consensus, tab_safe, tab_morning, tab_scan, tab_sim, tab_chart, tab_alt, tab
     "🧪  Alternatif Bot Portföyü",
     "📖  Bilgi",
 ])
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: PORTFÖYÜM — kişisel pozisyon takibi
+# ──────────────────────────────────────────────────────────────────
+with tab_portfolio:
+    st.subheader("💼 Portföyüm — Açık Pozisyonlarım")
+    st.caption("Alım/satımlarını buraya işle. Bot her seferinde **anlık fiyat + bot sinyali + P&L** hesaplar.")
+
+    PORTFOLIO_FILE = "portfolio.csv"
+    PORT_COLS = ["Sembol", "Yön", "Giriş Tarihi", "Giriş Fiyatı", "Miktar",
+                  "Stop Loss", "Take Profit", "Komisyon %", "Notlar", "Durum",
+                  "Kapanış Tarihi", "Kapanış Fiyatı"]
+
+    # Session state'te tut (Streamlit Cloud'da geçici, lokal'de CSV ile senkron)
+    if "portfolio" not in st.session_state:
+        try:
+            st.session_state.portfolio = pd.read_csv(PORTFOLIO_FILE)
+        except Exception:
+            st.session_state.portfolio = pd.DataFrame(columns=PORT_COLS)
+
+    # ── YENİ POZİSYON FORMU
+    with st.expander("➕ Yeni pozisyon ekle", expanded=False):
+        from datetime import datetime as _dt, date as _date
+        fp1, fp2, fp3 = st.columns(3)
+        with fp1:
+            all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO))
+            new_sym = st.selectbox("Sembol", all_syms_full, key="p_sym")
+            new_yon = st.radio("Yön", ["LONG", "SHORT"], horizontal=True, key="p_yon")
+        with fp2:
+            new_date = st.date_input("Giriş Tarihi", _date.today(), key="p_date")
+            new_price = st.number_input("Giriş Fiyatı", min_value=0.0, value=100.0,
+                                          step=0.01, format="%.4f", key="p_price")
+            new_qty = st.number_input("Miktar (lot/adet)", min_value=0.0, value=1.0,
+                                        step=0.01, format="%.4f", key="p_qty")
+        with fp3:
+            new_sl = st.number_input("Stop Loss", min_value=0.0, value=95.0,
+                                       step=0.01, format="%.4f", key="p_sl")
+            new_tp = st.number_input("Take Profit", min_value=0.0, value=110.0,
+                                       step=0.01, format="%.4f", key="p_tp")
+            new_comm = st.number_input("Komisyon %", min_value=0.0, value=0.05,
+                                         step=0.01, format="%.3f", key="p_comm")
+        new_notes = st.text_input("Notlar (opsiyonel)", key="p_notes")
+
+        if st.button("✓ Pozisyonu ekle", type="primary", key="p_add"):
+            new_row = pd.DataFrame([{
+                "Sembol": new_sym, "Yön": new_yon,
+                "Giriş Tarihi": new_date.isoformat(),
+                "Giriş Fiyatı": new_price, "Miktar": new_qty,
+                "Stop Loss": new_sl, "Take Profit": new_tp,
+                "Komisyon %": new_comm, "Notlar": new_notes,
+                "Durum": "Açık",
+                "Kapanış Tarihi": "", "Kapanış Fiyatı": 0.0,
+            }])
+            st.session_state.portfolio = pd.concat(
+                [st.session_state.portfolio, new_row], ignore_index=True)
+            try:
+                st.session_state.portfolio.to_csv(PORTFOLIO_FILE, index=False)
+            except Exception:
+                pass
+            st.success(f"✓ {new_sym} {new_yon} pozisyonu eklendi")
+            st.rerun()
+
+    # ── CSV İNDİR / YÜKLE
+    fpc1, fpc2, fpc3 = st.columns([1, 1, 2])
+    with fpc1:
+        if len(st.session_state.portfolio) > 0:
+            csv_data = st.session_state.portfolio.to_csv(index=False).encode("utf-8")
+            st.download_button("📥 CSV indir", csv_data,
+                                  file_name="portfolio.csv", mime="text/csv",
+                                  use_container_width=True)
+    with fpc2:
+        up_csv = st.file_uploader("📤 CSV yükle", type="csv",
+                                     key="p_upload", label_visibility="collapsed")
+        if up_csv:
+            try:
+                st.session_state.portfolio = pd.read_csv(up_csv)
+                try:
+                    st.session_state.portfolio.to_csv(PORTFOLIO_FILE, index=False)
+                except Exception:
+                    pass
+                st.success("CSV yüklendi")
+            except Exception as e:
+                st.error(f"Hata: {e}")
+    with fpc3:
+        if st.button("🗑️ Tüm pozisyonları sil", key="p_clear"):
+            st.session_state.portfolio = pd.DataFrame(columns=PORT_COLS)
+            try:
+                pd.DataFrame(columns=PORT_COLS).to_csv(PORTFOLIO_FILE, index=False)
+            except Exception:
+                pass
+            st.rerun()
+
+    st.markdown("---")
+
+    # ── AÇIK POZİSYONLAR + CANLI HESAPLAMA
+    port_df = st.session_state.portfolio.copy()
+    if len(port_df) == 0:
+        st.info("📭 Henüz pozisyon yok. Yukarıdaki **➕ Yeni pozisyon ekle** ile başla.")
+    else:
+        open_df = port_df[port_df["Durum"] == "Açık"].reset_index()  # 'index' = orijinal indeks
+        closed_df = port_df[port_df["Durum"] == "Kapalı"]
+
+        st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_df)})")
+
+        if len(open_df) == 0:
+            st.info("Şu an açık pozisyon yok.")
+        else:
+            # Her açık pozisyon için canlı fiyat + bot sinyali çek
+            from data_source import best_interval_for as _bif2
+            from data_source import category_of as _cat2
+            try:
+                with open("per_symbol_params.json") as _f:
+                    _psy = json.load(_f)
+            except Exception:
+                _psy = {}
+
+            live_rows = []
+            with st.spinner("Canlı fiyatlar çekiliyor..."):
+                for _, row in open_df.iterrows():
+                    sym = row["Sembol"]
+                    try:
+                        df_l = fetch_yf(sym, interval=_bif2(sym))
+                        if df_l.empty:
+                            cur_p = float(row["Giriş Fiyatı"])
+                            bot_sig = "veri yok"
+                        else:
+                            cur_p = float(df_l["close"].iloc[-1])
+                            # Bot sinyali
+                            sd = _psy.get(sym, {})
+                            if sd.get("ok"):
+                                p_ = sd["params"].copy()
+                                p_.setdefault("rott_x1", 30)
+                                p_.setdefault("rott_x2", 1000)
+                                p_.setdefault("rott_percent", 7.0)
+                                s_ = sig_full.build_signals_full(
+                                    df_l["close"], df_l["high"], df_l["low"], **p_)
+                                lst = s_.iloc[-1]
+                                if lst["cond_exit_long"]:        bot_sig = "🟡 LONG ÇIK"
+                                elif lst["cond_exit_short"]:     bot_sig = "🟡 SHORT ÇIK"
+                                elif lst["major_up"] and lst["zone_up"]:  bot_sig = "🟢 LONG TUT"
+                                elif lst["major_dn"] and lst["zone_dn"]:  bot_sig = "🔴 SHORT TUT"
+                                elif lst["major_up"]:            bot_sig = "⏳ LONG bekle"
+                                elif lst["major_dn"]:            bot_sig = "⏳ SHORT bekle"
+                                else:                             bot_sig = "—"
+                            else:
+                                bot_sig = "optimize yok"
+                    except Exception:
+                        cur_p = float(row["Giriş Fiyatı"])
+                        bot_sig = "hata"
+
+                    entry = float(row["Giriş Fiyatı"])
+                    qty = float(row["Miktar"])
+                    comm_pct = float(row["Komisyon %"]) / 100
+                    sl = float(row["Stop Loss"]) if row["Stop Loss"] else 0
+                    tp = float(row["Take Profit"]) if row["Take Profit"] else 0
+
+                    # P&L hesabı
+                    if row["Yön"] == "LONG":
+                        pnl_pct = (cur_p - entry) / entry * 100 - 2 * comm_pct * 100
+                        pnl_usd = (cur_p - entry) * qty - (cur_p + entry) * qty * comm_pct
+                    else:  # SHORT
+                        pnl_pct = (entry - cur_p) / entry * 100 - 2 * comm_pct * 100
+                        pnl_usd = (entry - cur_p) * qty - (cur_p + entry) * qty * comm_pct
+
+                    # Stop / TP'ye yakınlık
+                    sl_dist = ((cur_p - sl) / cur_p * 100) if sl and row["Yön"]=="LONG" else \
+                              ((sl - cur_p) / cur_p * 100) if sl else None
+                    tp_dist = ((tp - cur_p) / cur_p * 100) if tp and row["Yön"]=="LONG" else \
+                              ((cur_p - tp) / cur_p * 100) if tp else None
+
+                    # Uyarı bayrakları
+                    flag = ""
+                    if row["Yön"] == "LONG":
+                        if sl and cur_p <= sl: flag = "⚠️ STOP altında!"
+                        elif tp and cur_p >= tp: flag = "✅ TP'ye ulaştı!"
+                    else:
+                        if sl and cur_p >= sl: flag = "⚠️ STOP üstünde!"
+                        elif tp and cur_p <= tp: flag = "✅ TP'ye ulaştı!"
+
+                    live_rows.append({
+                        "Sembol": sym, "Yön": row["Yön"],
+                        "Giriş": entry, "Anlık": cur_p,
+                        "Miktar": qty,
+                        "PnL %": pnl_pct, "PnL $": pnl_usd,
+                        "SL": sl if sl else None,
+                        "SL %": sl_dist,
+                        "TP": tp if tp else None,
+                        "TP %": tp_dist,
+                        "Bot Sinyali": bot_sig,
+                        "Uyarı": flag,
+                        "_idx": row["index"],   # orijinal df indeksi
+                    })
+
+            df_open = pd.DataFrame(live_rows)
+
+            # ── Özet metric'ler
+            sm1, sm2, sm3, sm4, sm5 = st.columns(5)
+            sm1.metric("Açık pozisyon", len(df_open))
+            sm2.metric("Toplam PnL", f"${df_open['PnL $'].sum():+,.2f}")
+            n_winners = (df_open["PnL $"] > 0).sum()
+            n_losers = (df_open["PnL $"] <= 0).sum()
+            sm3.metric("Kazanan", int(n_winners))
+            sm4.metric("Kaybeden", int(n_losers))
+            n_alerts = (df_open["Uyarı"] != "").sum()
+            sm5.metric("⚠️ Uyarı", int(n_alerts),
+                        help="Stop'a takıldı veya TP'ye ulaştı")
+
+            # ── Tablo
+            show_open = df_open.drop(columns="_idx").copy()
+            st.dataframe(
+                show_open.style.format({
+                    "Giriş": "{:.4f}", "Anlık": "{:.4f}",
+                    "Miktar": "{:.4f}",
+                    "PnL %": "{:+.2f}%", "PnL $": "${:+,.2f}",
+                    "SL": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                    "SL %": lambda v: f"{v:+.2f}%" if pd.notna(v) else "-",
+                    "TP": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                    "TP %": lambda v: f"{v:+.2f}%" if pd.notna(v) else "-",
+                }).background_gradient(subset=["PnL %"], cmap="RdYlGn",
+                                        vmin=-10, vmax=10),
+                use_container_width=True, height=400,
+            )
+
+            # ── POZİSYON KAPATMA
+            st.markdown("### ✂️ Pozisyon kapat")
+            cc_col1, cc_col2 = st.columns([3, 1])
+            with cc_col1:
+                close_labels = [f"{r['Sembol']} {r['Yön']} (giriş {r['Giriş']:.4f}, anlık {r['Anlık']:.4f})"
+                                 for r in live_rows]
+                close_idx = st.selectbox("Kapatılacak pozisyon",
+                                            range(len(close_labels)),
+                                            format_func=lambda i: close_labels[i],
+                                            key="p_close_select")
+            with cc_col2:
+                if st.button("✗ Kapat", key="p_close_btn", use_container_width=True):
+                    orig_idx = live_rows[close_idx]["_idx"]
+                    cur_p_close = live_rows[close_idx]["Anlık"]
+                    st.session_state.portfolio.loc[orig_idx, "Durum"] = "Kapalı"
+                    st.session_state.portfolio.loc[orig_idx, "Kapanış Tarihi"] = _dt.now().date().isoformat()
+                    st.session_state.portfolio.loc[orig_idx, "Kapanış Fiyatı"] = cur_p_close
+                    try:
+                        st.session_state.portfolio.to_csv(PORTFOLIO_FILE, index=False)
+                    except Exception:
+                        pass
+                    st.success(f"✓ Kapatıldı: {live_rows[close_idx]['Sembol']} @ {cur_p_close:.4f}")
+                    st.rerun()
+
+        # ── KAPANMIŞ POZİSYONLAR
+        if len(closed_df) > 0:
+            with st.expander(f"📁 Kapanmış Pozisyonlar ({len(closed_df)})"):
+                # P&L hesabı
+                cl_rows = []
+                for _, row in closed_df.iterrows():
+                    entry = float(row["Giriş Fiyatı"])
+                    exit_p = float(row["Kapanış Fiyatı"])
+                    qty = float(row["Miktar"])
+                    comm_pct = float(row["Komisyon %"]) / 100
+                    if row["Yön"] == "LONG":
+                        pnl_pct = (exit_p - entry) / entry * 100 - 2 * comm_pct * 100
+                        pnl_usd = (exit_p - entry) * qty - (exit_p + entry) * qty * comm_pct
+                    else:
+                        pnl_pct = (entry - exit_p) / entry * 100 - 2 * comm_pct * 100
+                        pnl_usd = (entry - exit_p) * qty - (exit_p + entry) * qty * comm_pct
+                    cl_rows.append({
+                        "Sembol": row["Sembol"], "Yön": row["Yön"],
+                        "Giriş Tarihi": row["Giriş Tarihi"],
+                        "Kapanış Tarihi": row["Kapanış Tarihi"],
+                        "Giriş": entry, "Kapanış": exit_p,
+                        "Miktar": qty,
+                        "PnL %": pnl_pct, "PnL $": pnl_usd,
+                    })
+                df_cl = pd.DataFrame(cl_rows)
+                # Özet
+                tot_pnl = df_cl["PnL $"].sum()
+                n_win = (df_cl["PnL $"] > 0).sum()
+                win_rate = n_win / len(df_cl) * 100 if len(df_cl) else 0
+                cl_sm1, cl_sm2, cl_sm3 = st.columns(3)
+                cl_sm1.metric("Toplam realize PnL", f"${tot_pnl:+,.2f}")
+                cl_sm2.metric("Kazanan", f"{n_win}/{len(df_cl)}")
+                cl_sm3.metric("Win Rate", f"{win_rate:.0f}%")
+                st.dataframe(
+                    df_cl.style.format({
+                        "Giriş":"{:.4f}", "Kapanış":"{:.4f}", "Miktar":"{:.4f}",
+                        "PnL %":"{:+.2f}%", "PnL $":"${:+,.2f}",
+                    }).background_gradient(subset=["PnL %"], cmap="RdYlGn"),
+                    use_container_width=True, height=300,
+                )
 
 # ──────────────────────────────────────────────────────────────────
 #  TAB: KONSENSÜS MOD — FY Bot + Bayes Bot mikslemesi
