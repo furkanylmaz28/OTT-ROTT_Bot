@@ -1,0 +1,100 @@
+name: Scheduled Notify
+
+# notify_scheduled.py — saate göre BIST/NASDAQ konsensüs/morning/scan bildirimleri.
+# Script kendisi şu anki TR saatine göre hangi taramayı yapacağına karar verir.
+# Tüm UTC saatleri (TR-3, DST yok):
+#
+#   TR Saati    UTC         Görev
+#   ---------   ---         --------------------
+#   10:10       07:10       BIST Morning
+#   10:30       07:30       BIST Scan
+#   11:00       08:00       BIST Konsensüs
+#   12:10       09:10       BIST Morning
+#   12:30       09:30       BIST Scan
+#   14:00       11:00       BIST Konsensüs
+#   15:10       12:10       BIST Morning
+#   15:30       12:30       BIST Scan
+#   16:40       13:40       NASDAQ Morning
+#   17:00       14:00       BIST Konsensüs + NASDAQ Scan
+#   17:10       14:10       BIST Morning
+#   17:30       14:30       BIST Scan + NASDAQ Konsensüs
+#   18:40       15:40       NASDAQ Morning
+#   19:00       16:00       NASDAQ Scan
+#   20:30       17:30       NASDAQ Konsensüs
+#   20:40       17:40       NASDAQ Morning
+#   21:00       18:00       NASDAQ Scan
+#   22:00       19:00       NASDAQ Konsensüs
+#   22:40       19:40       NASDAQ Morning
+#   23:00       20:00       NASDAQ Scan
+
+on:
+  schedule:
+    - cron: "10 7 * * *"    # 10:10 TR — BIST Morning
+    - cron: "30 7 * * *"    # 10:30 TR — BIST Scan
+    - cron: "0 8 * * *"     # 11:00 TR — BIST Konsensüs
+    - cron: "10 9 * * *"    # 12:10 TR — BIST Morning
+    - cron: "30 9 * * *"    # 12:30 TR — BIST Scan
+    - cron: "0 11 * * *"    # 14:00 TR — BIST Konsensüs
+    - cron: "10 12 * * *"   # 15:10 TR — BIST Morning
+    - cron: "30 12 * * *"   # 15:30 TR — BIST Scan
+    - cron: "40 13 * * *"   # 16:40 TR — NASDAQ Morning
+    - cron: "0 14 * * *"    # 17:00 TR — BIST Konsensüs + NASDAQ Scan
+    - cron: "10 14 * * *"   # 17:10 TR — BIST Morning
+    - cron: "30 14 * * *"   # 17:30 TR — BIST Scan + NASDAQ Konsensüs
+    - cron: "40 15 * * *"   # 18:40 TR — NASDAQ Morning
+    - cron: "0 16 * * *"    # 19:00 TR — NASDAQ Scan
+    - cron: "30 17 * * *"   # 20:30 TR — NASDAQ Konsensüs
+    - cron: "40 17 * * *"   # 20:40 TR — NASDAQ Morning
+    - cron: "0 18 * * *"    # 21:00 TR — NASDAQ Scan
+    - cron: "0 19 * * *"    # 22:00 TR — NASDAQ Konsensüs
+    - cron: "40 19 * * *"   # 22:40 TR — NASDAQ Morning
+    - cron: "0 20 * * *"    # 23:00 TR — NASDAQ Scan
+  # Manuel tetikleme (test için)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Aynı anda iki çalışma olmasın
+concurrency:
+  group: notify-scheduled
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Repo'yu checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.11 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Secrets'ı .env'e yaz (geçici)
+        env:
+          TV_USERNAME:        ${{ secrets.TV_USERNAME }}
+          TV_PASSWORD:        ${{ secrets.TV_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "TV_USERNAME=$TV_USERNAME"               >  .env
+          echo "TV_PASSWORD=$TV_PASSWORD"               >> .env
+          echo "TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN" >> .env
+          echo "TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID"     >> .env
+
+      - name: Saate göre tarama + Telegram bildirim
+        run: python notify_scheduled.py
+
+      - name: .env'i sil (güvenlik)
+        if: always()
+        run: rm -f .env
