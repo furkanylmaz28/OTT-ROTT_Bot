@@ -1,0 +1,74 @@
+name: Hourly Notify
+
+# Saatte 1 konsensüs taraması yap → yeni sinyal varsa Telegram'a gönder.
+# notify_state.json git'e push edilir → bir sonraki tarama "yeni" tanımını bilir.
+on:
+  # Her saat başında UTC
+  schedule:
+    - cron: "0 * * * *"
+  # Manuel tetikleme (GitHub Actions sekmesinde "Run workflow")
+  workflow_dispatch:
+
+permissions:
+  contents: write   # notify_state.json commit/push için
+
+# Aynı anda iki çalışma olmasın (cron + manual çakışırsa kuyruğa al)
+concurrency:
+  group: notify-hourly
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Repo'yu checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Python 3.11 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Bağımlılıkları kur
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Secrets'ı .env'e yaz (geçici)
+        env:
+          TV_USERNAME:        ${{ secrets.TV_USERNAME }}
+          TV_PASSWORD:        ${{ secrets.TV_PASSWORD }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          echo "TV_USERNAME=$TV_USERNAME"               >  .env
+          echo "TV_PASSWORD=$TV_PASSWORD"               >> .env
+          echo "TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN" >> .env
+          echo "TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID"     >> .env
+
+      - name: Konsensüs taraması + Telegram bildirim
+        run: python notify_daemon_once.py
+
+      - name: .env'i sil (güvenlik)
+        if: always()
+        run: rm -f .env
+
+      - name: notify_state.json'u commit et
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f notify_state.json ]; then
+            git add notify_state.json
+            if git diff --staged --quiet; then
+              echo "State değişmedi, commit atlandı."
+            else
+              git commit -m "auto: notify state $(date -u '+%Y-%m-%d %H:%M')"
+              git pull --rebase origin main
+              git push
+            fi
+          fi
