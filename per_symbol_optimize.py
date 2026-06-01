@@ -99,11 +99,17 @@ def rating(stats):
 
 def evaluate(df, p):
     s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **p)
-    return run_backtest(
+    res = run_backtest(
         df[["open","high","low","close"]],
         s["cond_buy_long"], s["cond_exit_long"],
         s["cond_buy_short"], s["cond_exit_short"],
-    ).stats
+    )
+    # Ortalama trade süresi (bar cinsinden)
+    closed = [t for t in res.trades if t.exit_price is not None]
+    avg_bars = sum(t.bars_held for t in closed) / len(closed) if closed else 0
+    stats = res.stats
+    stats["avg_trade_bars"] = avg_bars
+    return stats
 
 
 def optimize_symbol(symbol):
@@ -162,6 +168,7 @@ def optimize_symbol(symbol):
             "max_dd": final["max_drawdown"],
             "n_trades": final["n_trades"],
             "win_rate": final["win_rate"],
+            "avg_trade_bars": final.get("avg_trade_bars", 0),
         },
     }
 

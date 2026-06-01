@@ -4,6 +4,9 @@
 .env.production
 *.env
 
+# Google Sheets servis hesap anahtarı (asla commit etme)
+gsheets_credentials.json
+
 # Python
 __pycache__/
 *.py[cod]

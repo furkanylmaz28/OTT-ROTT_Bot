@@ -34,6 +34,29 @@ from backtest import run_backtest
 from data_source import fetch as ds_fetch
 
 
+def bars_to_duration(bars: float, interval: str, category: str = "") -> str:
+    """Bar sayısını insan-okunabilir süreye çevir.
+    Hisse/BIST için işgünü 7-8 saat, crypto 7/24."""
+    if not bars or bars <= 0:
+        return "—"
+    # Bar süresi (saat cinsinden)
+    bar_h = {"1m":1/60, "5m":5/60, "15m":0.25, "30m":0.5,
+             "1h":1.0, "4h":4.0, "1d":24.0}.get(interval, 1.0)
+    total_h = bars * bar_h
+    if category == "CRYPTO":
+        # 7/24
+        days = total_h / 24
+        if days < 1: return f"{total_h:.1f} sa"
+        if days < 7: return f"{days:.1f} gün"
+        return f"{days/7:.1f} hafta"
+    # Hisse/Forex — işgünü (7 saat)
+    workdays = total_h / 7
+    if workdays < 1: return f"{total_h:.1f} sa"
+    if workdays < 7: return f"{workdays:.1f} işgünü"
+    if workdays < 30: return f"{workdays/5:.1f} hafta"
+    return f"{workdays/22:.1f} ay"
+
+
 st.set_page_config(
     page_title="OTT Bot Dashboard",
     page_icon="static/favicon.png",
@@ -64,6 +87,12 @@ components.html("""
         const el = parent.document.createElement(tag);
         for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
         head.appendChild(el);
+    }
+    // Service Worker kaydı (PWA + push)
+    if ('serviceWorker' in parent.navigator) {
+        parent.navigator.serviceWorker.register('/app/static/service-worker.js')
+            .then(reg => console.log('[OTT] Service Worker kayıtlı'))
+            .catch(err => console.log('[OTT] SW kayıt hatası:', err));
     }
 })();
 </script>
@@ -540,6 +569,42 @@ with tab_portfolio:
             st.success(f"✓ {new_sym} {new_yon} pozisyonu eklendi")
             st.rerun()
 
+    # ── GOOGLE SHEETS senkron
+    try:
+        from gsheets_storage import is_available as _gs_avail, \
+                                    load_portfolio_sheets as _gs_load, \
+                                    save_portfolio_sheets as _gs_save
+        gs_active = _gs_avail()
+    except Exception:
+        gs_active = False
+        _gs_load = _gs_save = None
+
+    if gs_active:
+        gs_c1, gs_c2, gs_c3 = st.columns([1, 1, 2])
+        with gs_c1:
+            if st.button("☁️ Google Sheets'ten yükle", use_container_width=True):
+                gs_data = _gs_load()
+                if gs_data is not None and len(gs_data) > 0:
+                    st.session_state.portfolio = gs_data
+                    try:
+                        gs_data.to_csv(PORTFOLIO_FILE, index=False)
+                    except Exception:
+                        pass
+                    st.success(f"✓ {len(gs_data)} pozisyon yüklendi")
+                    st.rerun()
+                else:
+                    st.info("Google Sheets'te kayıt yok")
+        with gs_c2:
+            if st.button("☁️ Google Sheets'e kaydet", use_container_width=True):
+                if _gs_save(st.session_state.portfolio):
+                    st.success("✓ Google Sheets'e kaydedildi (kalıcı)")
+                else:
+                    st.error("Kaydetme başarısız")
+        with gs_c3:
+            st.success("🟢 Google Sheets aktif — veri kalıcı")
+    else:
+        st.caption("💡 **Tip:** `gsheets_credentials.json` ekleyerek Google Sheets'le kalıcı kayıt yapabilirsin. Detay: `gsheets_storage.py`")
+
     # ── CSV İNDİR / YÜKLE
     fpc1, fpc2, fpc3 = st.columns([1, 1, 2])
     with fpc1:
@@ -766,6 +831,75 @@ with tab_portfolio:
                     use_container_width=True, height=300,
                 )
 
+                # ── EQUITY CURVE + DRAWDOWN
+                if len(df_cl) >= 2:
+                    st.markdown("### 📊 Equity Curve + Drawdown")
+                    df_curve = df_cl.copy()
+                    df_curve["Kapanış Tarihi"] = pd.to_datetime(df_curve["Kapanış Tarihi"])
+                    df_curve = df_curve.sort_values("Kapanış Tarihi").reset_index(drop=True)
+                    df_curve["Kümülatif PnL $"] = df_curve["PnL $"].cumsum()
+
+                    initial_balance = st.number_input(
+                        "Başlangıç bakiyesi ($)", min_value=0.0, value=1000.0,
+                        step=100.0, key="p_initial_bal",
+                        help="Equity hesabı için başlangıç sermayesi"
+                    )
+                    df_curve["Hesap Bakiyesi"] = initial_balance + df_curve["Kümülatif PnL $"]
+                    df_curve["Peak"] = df_curve["Hesap Bakiyesi"].cummax()
+                    df_curve["Drawdown $"] = df_curve["Hesap Bakiyesi"] - df_curve["Peak"]
+                    df_curve["Drawdown %"] = df_curve["Drawdown $"] / df_curve["Peak"] * 100
+
+                    import plotly.graph_objects as _go
+                    from plotly.subplots import make_subplots as _msp
+                    fig_eq = _msp(
+                        rows=2, cols=1, shared_xaxes=True,
+                        row_heights=[0.65, 0.35],
+                        vertical_spacing=0.08,
+                        subplot_titles=("Hesap Bakiyesi", "Drawdown %"),
+                    )
+                    # Equity
+                    fig_eq.add_trace(_go.Scatter(
+                        x=df_curve["Kapanış Tarihi"],
+                        y=df_curve["Hesap Bakiyesi"],
+                        mode="lines+markers", name="Equity",
+                        line=dict(color="#26a69a", width=2.5),
+                        marker=dict(size=6),
+                    ), row=1, col=1)
+                    fig_eq.add_trace(_go.Scatter(
+                        x=df_curve["Kapanış Tarihi"],
+                        y=df_curve["Peak"],
+                        mode="lines", name="Peak", line=dict(color="#888", dash="dot"),
+                    ), row=1, col=1)
+                    fig_eq.add_hline(y=initial_balance, line_color="#444",
+                                       line_dash="dash", row=1, col=1)
+                    # Drawdown
+                    fig_eq.add_trace(_go.Scatter(
+                        x=df_curve["Kapanış Tarihi"],
+                        y=df_curve["Drawdown %"],
+                        mode="lines", name="DD",
+                        line=dict(color="#ef5350"),
+                        fill="tozeroy", fillcolor="rgba(239,83,80,0.3)",
+                    ), row=2, col=1)
+                    fig_eq.update_layout(
+                        height=550, showlegend=False,
+                        paper_bgcolor="#131722", plot_bgcolor="#131722",
+                        font=dict(color="#d1d4dc"),
+                    )
+                    fig_eq.update_xaxes(gridcolor="#2a2e39")
+                    fig_eq.update_yaxes(gridcolor="#2a2e39")
+                    st.plotly_chart(fig_eq, use_container_width=True)
+
+                    # Metric bar — özet
+                    eq_c1, eq_c2, eq_c3, eq_c4 = st.columns(4)
+                    total_ret = (df_curve["Hesap Bakiyesi"].iloc[-1] / initial_balance - 1) * 100
+                    eq_c1.metric("Toplam Getiri", f"{total_ret:+.2f}%")
+                    eq_c2.metric("Final Bakiye",
+                                  f"${df_curve['Hesap Bakiyesi'].iloc[-1]:,.2f}")
+                    eq_c3.metric("Max DD %",
+                                  f"{df_curve['Drawdown %'].min():.2f}%")
+                    eq_c4.metric("Max DD $",
+                                  f"${df_curve['Drawdown $'].min():,.2f}")
+
 # ──────────────────────────────────────────────────────────────────
 #  TAB: KONSENSÜS MOD — FY Bot + Bayes Bot mikslemesi
 # ──────────────────────────────────────────────────────────────────
@@ -915,6 +1049,7 @@ with tab_consensus:
                     "Hedef": target,
                     "Pot %": pot_pct,
                     "Pozisyon $": pos_size,
+                    "Adet": (pos_size / cur) if pos_size and cur else 0,
                     "Max Risk $": max_risk,
                     "FY Rating": fy_rt,
                     "Bayes Rating": bs_rt,
@@ -946,13 +1081,13 @@ with tab_consensus:
             if len(strong) > 0:
                 st.markdown("### ⭐ KONSENSÜS SİNYALLER (yüksek olasılık)")
                 show_cols_s = ["Sembol","Kategori","GCM","Konsensüs","Fiyat","Stop",
-                                "Risk %","Hedef","Pot %","Pozisyon $","Max Risk $",
+                                "Risk %","Hedef","Pot %","Pozisyon $","Adet","Max Risk $",
                                 "FY Rating","Bayes Rating"]
                 st.dataframe(
                     strong[show_cols_s].style.format({
                         "Fiyat":"{:.4f}", "Stop":"{:.4f}", "Hedef":"{:.4f}",
                         "Risk %":"{:.2f}%", "Pot %":"{:+.2f}%",
-                        "Pozisyon $":"${:.0f}", "Max Risk $":"${:.0f}",
+                        "Pozisyon $":"${:.0f}", "Adet":"{:.4f}", "Max Risk $":"${:.0f}",
                     }).background_gradient(subset=["Pot %"], cmap="RdYlGn"),
                     use_container_width=True, height=300,
                 )

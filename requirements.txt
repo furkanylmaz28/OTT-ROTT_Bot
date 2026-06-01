@@ -21,6 +21,10 @@ numba>=0.59.0
 # Optuna (Bayesian parametre arama — Alternatif Bot Portföyü)
 optuna>=3.6.0
 
+# Google Sheets entegrasyonu (Portföyüm kalıcı kayıt)
+gspread>=6.0.0
+google-auth>=2.30.0
+
 # Görselleştirme (plot_*.py için)
 matplotlib>=3.8.0
 plotly>=5.18.0

@@ -1,0 +1,40 @@
+{
+  "raw": [
+    "#IBM",
+    "#NASDAQ",
+    "#NVDA",
+    "#RIOT",
+    "CADJPY",
+    "CHFJPY",
+    "EURGBP",
+    "EURUSD",
+    "GBPUSD",
+    "GOLD",
+    "USDCHF",
+    "USDJPY"
+  ],
+  "categorized": {
+    "STOCK_US": [
+      "#IBM",
+      "#NVDA",
+      "#RIOT"
+    ],
+    "STOCK_BIST": [],
+    "INDEX": [],
+    "COMMODITY": [
+      "GOLD"
+    ],
+    "FOREX": [
+      "#NASDAQ",
+      "CADJPY",
+      "CHFJPY",
+      "EURGBP",
+      "EURUSD",
+      "GBPUSD",
+      "USDCHF",
+      "USDJPY"
+    ],
+    "CRYPTO": [],
+    "OTHER": []
+  }
+}
