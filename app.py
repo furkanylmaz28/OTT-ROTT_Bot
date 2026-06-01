@@ -552,7 +552,8 @@ with tab_portfolio:
     # ── YENİ POZİSYON FORMU
     with st.expander("➕ Yeni pozisyon ekle", expanded=False):
         from datetime import datetime as _dt, date as _date
-        all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO))
+        # NASDAQ + BIST + COMMODITY + CRYPTO + GCM Forex (416 ticker)
+        all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO + list(GCM_NASDAQ)))
 
         # Sembolün indikatör değerlerini çek (5 dk cache)
         # — TOTT_up + TOTT_dn = senin Pine indikatöründen tetik seviyeleri
