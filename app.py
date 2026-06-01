@@ -759,6 +759,21 @@ with tab_portfolio:
                         if sl and cur_p >= sl: flag = "⚠️ STOP üstünde!"
                         elif tp and cur_p <= tp: flag = "✅ TP'ye ulaştı!"
 
+                    # Bot trail-stop yakınlığı (TOTT karşı tetik) — slider'dan eşik
+                    warn_thr_port = float(st.session_state.get("warn_thr", 0.5))
+                    if sd.get("ok") and not flag:  # SL/TP uyarısı yoksa
+                        try:
+                            if row["Yön"] == "LONG" and not pd.isna(lst["tott_dn"]):
+                                dpct = (cur_p / float(lst["tott_dn"]) - 1) * 100
+                                if 0 < dpct < warn_thr_port:
+                                    flag = f"⚠️ ÇIK YAKIN ({dpct:.2f}%)"
+                            elif row["Yön"] == "SHORT" and not pd.isna(lst["tott_up"]):
+                                dpct = (float(lst["tott_up"]) / cur_p - 1) * 100
+                                if 0 < dpct < warn_thr_port:
+                                    flag = f"⚠️ ÇIK YAKIN ({dpct:.2f}%)"
+                        except Exception:
+                            pass
+
                     live_rows.append({
                         "Sembol": sym, "Yön": row["Yön"],
                         "Giriş": entry, "Anlık": cur_p,
