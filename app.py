@@ -1344,29 +1344,49 @@ with tab_morning:
     status_box = st.container()
     with status_box:
         cu1, cu2, cu3, cu4 = st.columns([2, 2, 2, 1])
-        # per_symbol_params dosyasının son güncellenme zamanı
-        psy_path = "per_symbol_params.json"
+        # Hem Grid hem Bayes optimize verisini topla — en iyi rating'i göster
+        psy_path  = "per_symbol_params.json"
+        bayes_path = "per_symbol_params_bayes.json"
+        psy_data = {}; bayes_data = {}
         if os.path.exists(psy_path):
-            mtime = datetime.fromtimestamp(os.path.getmtime(psy_path))
-            age_min = (datetime.now() - mtime).total_seconds() / 60
-            age_str = f"{age_min:.0f} dk önce" if age_min < 60 else f"{age_min/60:.1f} saat önce"
-            with open(psy_path) as f:
-                psy_data = json.load(f)
-            n_total = len(psy_data)
-            rt_counts = {}
-            for s, r in psy_data.items():
-                if r.get("ok"):
-                    rt_counts[r.get("rating","?")] = rt_counts.get(r.get("rating","?"),0)+1
-            iyi_count = rt_counts.get("MÜKEMMEL",0) + rt_counts.get("İYİ",0) + rt_counts.get("ORTA",0)
-            uyumsuz_count = rt_counts.get("UYUMSUZ", 0)
+            with open(psy_path) as f: psy_data = json.load(f)
+        if os.path.exists(bayes_path):
+            with open(bayes_path) as f: bayes_data = json.load(f)
 
-            cu1.metric("📁 Parametre dosyası", f"{age_str}", help="per_symbol_params.json güncellenme zamanı")
-            cu2.metric("🎯 İşe yarayan sembol", f"{iyi_count}/{n_total}",
-                        help="MÜKEMMEL + İYİ + ORTA rating sayısı")
-            cu3.metric("❌ Uyumsuz", f"{uyumsuz_count}",
-                        help="Sistem bu sembollerde zarar ediyor")
+        # Dosya yaşı (en yeni olanı al)
+        mtimes = [os.path.getmtime(p) for p in (psy_path, bayes_path) if os.path.exists(p)]
+        if mtimes:
+            mtime = datetime.fromtimestamp(max(mtimes))
+            age_min = (datetime.now() - mtime).total_seconds() / 60
+            age_str = f"{age_min:.0f} dk önce" if age_min < 60 else \
+                       (f"{age_min/60:.1f} saat önce" if age_min < 1440 else
+                        f"{age_min/1440:.1f} gün önce")
         else:
-            cu1.warning("Henüz `per_symbol_params.json` yok")
+            age_str = "yok"
+
+        # Her sembol için EN İYİ rating (Grid veya Bayes'ten yüksek olanı)
+        RT_ORDER = {"MÜKEMMEL": 5, "İYİ": 4, "ORTA": 3,
+                     "MARJINAL": 2, "VERİ_AZ": 1, "UYUMSUZ": 0}
+        best_rt = {}
+        for src in (psy_data, bayes_data):
+            for sym, r in src.items():
+                if not r.get("ok"): continue
+                rt = r.get("rating", "?")
+                if rt in RT_ORDER:
+                    if sym not in best_rt or RT_ORDER[rt] > RT_ORDER[best_rt[sym]]:
+                        best_rt[sym] = rt
+
+        n_total      = len(best_rt)
+        iyi_count    = sum(1 for r in best_rt.values()
+                            if r in ("MÜKEMMEL", "İYİ", "ORTA"))
+        uyumsuz_count = sum(1 for r in best_rt.values() if r == "UYUMSUZ")
+
+        cu1.metric("📁 Parametre dosyası", f"{age_str}",
+                    help="Grid + Bayes JSON son güncellenme zamanı")
+        cu2.metric("🎯 İşe yarayan sembol", f"{iyi_count}/{n_total}",
+                    help="MÜKEMMEL + İYİ + ORTA rating sayısı (Grid + Bayes en iyisi)")
+        cu3.metric("❌ Uyumsuz", f"{uyumsuz_count}",
+                    help="Sistem bu sembollerde zarar ediyor")
 
         with cu4:
             if st.button("🔄 Cache temizle", help="Fiyat cache'lerini temizle (anlık veri yenile)"):
@@ -1386,25 +1406,14 @@ with tab_morning:
     st.markdown("---")
 
     st.subheader("🌅 Bugünün Pozisyon Önerileri")
-    st.caption("Sabah ritüeli: sermayeni gir, sistem güçlü sinyalleri filtreler, pozisyon büyüklüklerini hesaplar.")
+    st.caption("Sabah ritüeli: sistem güçlü sinyalleri filtreler, top-5 pozisyon önerir.")
 
-    # Sermaye ayarları
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        morning_capital = st.number_input("💵 Sermaye ($)",
-                                            min_value=100, max_value=10000000,
-                                            value=1000, step=100)
-    with c2:
-        pct_per_pos = st.slider("📊 Pozisyon başına %",
-                                 min_value=2, max_value=25, value=10, step=1,
-                                 help="Sermayenin yüzde kaçı bir pozisyona ayrılsın")
-    with c3:
-        max_positions = st.slider("🎯 Maksimum eşzamanlı pozisyon",
-                                    min_value=1, max_value=15, value=5)
-    with c4:
-        morning_lev = st.slider("⚖️ Kaldıraç", 1, 25, 5)
-
-    pos_size = morning_capital * pct_per_pos / 100
+    # Sabit varsayılanlar (UI kaldırıldı)
+    morning_capital = 1000
+    pct_per_pos     = 10
+    max_positions   = 5
+    morning_lev     = 5
+    pos_size        = morning_capital * pct_per_pos / 100
 
     # Per-symbol params var mı?
     import os, json
