@@ -1054,23 +1054,12 @@ with tab_consensus:
         - Tek bot sinyali → atla veya çok küçük (%2)
         """)
 
-    # Ayarlar
-    cc1, cc2, cc3, cc4 = st.columns(4)
-    with cc1:
-        cons_capital = st.number_input("💵 Sermaye ($)", 100, 10000000, 1000,
-                                          step=100, key="cons_capital")
-    with cc2:
-        cons_pos_pct = st.slider("📊 Pozisyon başına %", 5, 25, 10, key="cons_pos_pct",
-                                    help="Konsensüs sinyallerinde büyük poz")
-    with cc3:
-        cons_lev = st.slider("⚖️ Kaldıraç", 1, 25, 5, key="cons_lev")
-    with cc4:
-        cons_only_gcm = st.checkbox("📍 Sadece GCM Forex", value=False,
-                                       key="cons_only_gcm",
-                                       help="Sadece Türkiye'den erişilebilen NASDAQ CFD'leri")
-
-    # Erken ÇIK uyarı eşiği — sabit %1.0
-    warn_thr_cons = 1.0
+    # Sabit varsayılanlar (UI kaldırıldı — sermaye/poz/kaldıraç/GCM filtresi yok)
+    cons_capital  = 1000      # $ — pozisyon büyüklüğü hesabı için referans
+    cons_pos_pct  = 10        # %
+    cons_lev      = 5         # x
+    cons_only_gcm = False     # tüm semboller dahil
+    warn_thr_cons = 1.0       # ÇIK YAKIN eşiği %
 
     cons_btn_col1, cons_btn_col2 = st.columns([3, 1])
     with cons_btn_col1:
