@@ -554,36 +554,56 @@ with tab_portfolio:
         from datetime import datetime as _dt, date as _date
         all_syms_full = sorted(set(NASDAQ + BIST + COMMODITY + CRYPTO))
 
-        # Anlık fiyatı çek (5 dk cache)
+        # Sembolün indikatör değerlerini çek (5 dk cache)
+        # — TOTT_up + TOTT_dn = senin Pine indikatöründen tetik seviyeleri
+        # — Stop = LONG için TOTT_dn, SHORT için TOTT_up (trail stop)
         @st.cache_data(ttl=300, show_spinner=False)
-        def _live_price(sym):
+        def _sym_levels(sym):
             try:
-                from data_source import best_interval_for
-                df = fetch_yf(sym, interval=best_interval_for(sym))
-                if not df.empty:
-                    return float(df["close"].iloc[-1])
+                r = analyze_intraday(sym)
+                if r:
+                    return {
+                        "price": r["Fiyat"],
+                        "tott_up": r["Tetik ↑"],   # SHORT trail stop
+                        "tott_dn": r["Tetik ↓"],   # LONG trail stop
+                        "trend_ott": r["Trend OTT"],
+                    }
             except Exception:
                 pass
             return None
 
-        # Sembol değiştiğinde Giriş Fiyatı'nı anlık fiyata göre güncelle
-        # (SL/TP'ye dokunma — bunlar sistem indikatöründen çıkmıyor, kullanıcı kendisi girer)
+        # Sembol veya Yön değiştiğinde Giriş Fiyatı + Stop'u indikatörden doldur
         def _on_sym_change():
             sym = st.session_state["p_sym"]
-            live = _live_price(sym)
-            if live and live > 0:
-                st.session_state["p_price"] = round(live, 4)
+            yon = st.session_state.get("p_yon", "LONG")
+            lvl = _sym_levels(sym)
+            if not lvl:
+                return
+            if lvl["price"] and lvl["price"] > 0:
+                st.session_state["p_price"] = round(lvl["price"], 4)
+            # Stop = TOTT karşı tetik (indikatörden — trail stop seviyesi)
+            stop_val = lvl["tott_dn"] if yon == "LONG" else lvl["tott_up"]
+            if stop_val and stop_val > 0:
+                st.session_state["p_sl"] = round(stop_val, 4)
+            # TP yok — sistem trend takipçi, sabit hedef indikatörden çıkmıyor
 
-        # İlk açılışta default sembolün fiyatını çek
+        # İlk açılışta default sembol için fiyat + stop'u indikatörden çek
         if "p_sym_initialized" not in st.session_state:
             initial_sym = all_syms_full[0] if all_syms_full else None
             if initial_sym:
                 st.session_state["p_sym"] = initial_sym
-                live0 = _live_price(initial_sym)
-                st.session_state.setdefault("p_price",
-                                              round(live0, 4) if live0 and live0 > 0 else 0.0)
-                # SL/TP boş başlasın — kullanıcı kendisi girsin
-                st.session_state.setdefault("p_sl", 0.0)
+                st.session_state.setdefault("p_yon", "LONG")
+                lvl0 = _sym_levels(initial_sym)
+                if lvl0:
+                    st.session_state.setdefault("p_price", round(lvl0["price"], 4))
+                    # LONG default → stop = TOTT_dn
+                    sl0 = lvl0["tott_dn"]
+                    st.session_state.setdefault("p_sl",
+                                                  round(sl0, 4) if sl0 and sl0 > 0 else 0.0)
+                else:
+                    st.session_state.setdefault("p_price", 0.0)
+                    st.session_state.setdefault("p_sl", 0.0)
+                # TP boş — indikatörden çıkmıyor, sistem ÇIK sinyalini bekle
                 st.session_state.setdefault("p_tp", 0.0)
             st.session_state["p_sym_initialized"] = True
 
@@ -591,9 +611,11 @@ with tab_portfolio:
         with fp1:
             new_sym = st.selectbox("Sembol", all_syms_full, key="p_sym",
                                      on_change=_on_sym_change,
-                                     help="Sembol seçince Giriş Fiyatı anlık piyasa "
-                                            "fiyatına göre otomatik dolar.")
-            new_yon = st.radio("Yön", ["LONG", "SHORT"], horizontal=True, key="p_yon")
+                                     help="Sembol seçince Giriş Fiyatı (anlık) + "
+                                            "Stop (TOTT karşı tetik) otomatik dolar.")
+            new_yon = st.radio("Yön", ["LONG", "SHORT"], horizontal=True, key="p_yon",
+                                 on_change=_on_sym_change,
+                                 help="LONG → Stop=TOTT_dn  ·  SHORT → Stop=TOTT_up")
         with fp2:
             new_date = st.date_input("Giriş Tarihi", _date.today(), key="p_date")
             new_price = st.number_input("Giriş Fiyatı", min_value=0.0,
