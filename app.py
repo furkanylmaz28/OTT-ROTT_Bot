@@ -270,14 +270,25 @@ BIST = [
 ]
 COMMODITY = ["GC=F", "SI=F"]
 
-# GCM Forex'te CFD olarak işlem gören NASDAQ/US büyük hisseler
-# (en likit ve yaygın olanlar — GCM platformuna göre değişebilir)
+# GCM Forex'te CFD olarak işlem gören US hisseler (yfinance formatında)
+# Kaynak: gcmforex.com Pay CFD listesi (yaygın olarak işlem gören 50+ hisse)
+# NOT: GCM platformunda '#' öneki ile gösterilir (#AAPL, #MSFT vs.)
+# Eğer eksik/fazla varsa: extract_gcm_symbols.py + MT4 DownloadAllHistoryGCM.mq4 ile doğrula.
 GCM_NASDAQ = {
-    "AAPL", "MSFT", "AMZN", "NVDA", "GOOG", "GOOGL", "META", "TSLA",
-    "AMD", "AVGO", "NFLX", "INTC", "CSCO", "ADBE", "ORCL", "QCOM",
-    "COST", "PEP", "AMGN", "GILD", "INTU", "BKNG", "PYPL", "MU",
-    "PANW", "CRWD", "SBUX", "TMUS", "TXN", "AMAT", "LRCX", "KLAC",
-    "CMCSA", "ADI", "MDLZ", "MAR", "MNST", "VRTX", "ISRG",
+    # Tech giants — NASDAQ
+    "AAPL", "MSFT", "AMZN", "GOOG", "GOOGL", "META", "NVDA", "TSLA",
+    # NASDAQ teknoloji
+    "AMD", "INTC", "NFLX", "ADBE", "ORCL", "CSCO", "PYPL", "IBM",
+    # NYSE büyük hisseler
+    "JPM", "BAC", "WFC", "C", "GS", "MS", "V", "MA",
+    "JNJ", "PFE", "MRK", "ABBV", "LLY", "BMY",
+    "WMT", "COST", "KO", "PEP", "MCD", "SBUX", "NKE",
+    "DIS", "T", "VZ", "CMCSA",
+    "BA", "GE", "F", "GM", "CAT", "MMM",
+    "XOM", "CVX",
+    "HD", "PG",
+    # Yüksek volatil / popular
+    "RIOT", "COIN", "PLTR", "GME", "AMC",
 }
 
 CRYPTO = [
