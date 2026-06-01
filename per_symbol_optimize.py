@@ -30,18 +30,27 @@ BIST30 = [
     "TAVHL.IS","TCELL.IS","THYAO.IS","TOASO.IS","TTKOM.IS","TUPRS.IS",
     "VAKBN.IS","VESTL.IS","YKBNK.IS",
 ]
-NASDAQ100 = [
+def _load_gcm_stocks():
+    """GCM Forex'teki hisseleri (US + EU/UK) yfinance ticker olarak çek."""
+    try:
+        with open("gcm_symbols.json", encoding="utf-8") as f:
+            cats = json.load(f).get("categorized", {})
+        with open("gcm_to_yf_map.json", encoding="utf-8") as f:
+            mp = json.load(f)["mapping"]
+        stock_keys = (cats.get("STOCK_US", []) +
+                       cats.get("STOCK_OTHER", []) +
+                       cats.get("STOCK_EU_UK", []))
+        return sorted(set(mp[s] for s in stock_keys if s in mp))
+    except Exception:
+        return None
+
+_gcm_stocks = _load_gcm_stocks()
+NASDAQ100 = _gcm_stocks if _gcm_stocks else [
+    # Fallback — gcm_symbols.json yoksa eski NASDAQ-100
     "AAPL","MSFT","AMZN","NVDA","GOOG","GOOGL","META","AVGO","TSLA","COST",
     "NFLX","AMD","PEP","ADBE","CSCO","TMUS","INTC","INTU","CMCSA","AMGN",
     "QCOM","TXN","HON","BKNG","AMAT","ISRG","GILD","ADP","MU","ADI",
     "MDLZ","SBUX","REGN","VRTX","LRCX","KLAC","PANW","SNPS","PYPL","CDNS",
-    "MELI","MAR","ASML","ABNB","CRWD","ORLY","MNST","FTNT","NXPI","CHTR",
-    "ADSK","KDP","ROP","AEP","PCAR","MRVL","KHC","FAST","ODFL","PAYX",
-    "DDOG","CTSH","EXC","BIIB","AZN","FANG","ROST","IDXX","EA","CSGP",
-    "ZS","GEHC","XEL","DXCM","BKR","ANSS","CTAS","DLTR","TEAM","WDAY",
-    "MRNA","ON","VRSK","CCEP","CDW","GFS","MDB","SIRI","JD","ILMN",
-    "LULU","WBA","ENPH","MTCH","FOXA","FOX","WBD","CEG","TTD","APP",
-    "CSX","LIN","PLTR",
 ]
 CRYPTO30 = [
     "BTC-USD","ETH-USD","BNB-USD","SOL-USD","XRP-USD",
