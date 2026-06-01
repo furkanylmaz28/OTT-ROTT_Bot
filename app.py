@@ -680,13 +680,30 @@ with tab_portfolio:
                                 s_ = sig_full.build_signals_full(
                                     df_l["close"], df_l["high"], df_l["low"], **p_)
                                 lst = s_.iloc[-1]
-                                if lst["cond_exit_long"]:        bot_sig = "🟡 LONG ÇIK"
-                                elif lst["cond_exit_short"]:     bot_sig = "🟡 SHORT ÇIK"
-                                elif lst["major_up"] and lst["zone_up"]:  bot_sig = "🟢 LONG TUT"
-                                elif lst["major_dn"] and lst["zone_dn"]:  bot_sig = "🔴 SHORT TUT"
-                                elif lst["major_up"]:            bot_sig = "⏳ LONG bekle"
-                                elif lst["major_dn"]:            bot_sig = "⏳ SHORT bekle"
-                                else:                             bot_sig = "—"
+                                # Pozisyon yönüne göre bağlamlı sinyal
+                                if row["Yön"] == "LONG":
+                                    # LONG pozisyondaysa → LONG perspektifi
+                                    if lst["cond_exit_long"]:
+                                        bot_sig = "🔴 LONG ÇIK — kapat!"
+                                    elif lst["major_up"] and lst["zone_up"]:
+                                        bot_sig = "🟢 LONG TUT — devam"
+                                    elif lst["major_dn"]:
+                                        bot_sig = "⚠️ Trend AŞAĞIYA döndü"
+                                    elif lst["major_up"]:
+                                        bot_sig = "🟡 LONG zayıf — izle"
+                                    else:
+                                        bot_sig = "❓ belirsiz"
+                                else:  # SHORT
+                                    if lst["cond_exit_short"]:
+                                        bot_sig = "🔴 SHORT ÇIK — kapat!"
+                                    elif lst["major_dn"] and lst["zone_dn"]:
+                                        bot_sig = "🟢 SHORT TUT — devam"
+                                    elif lst["major_up"]:
+                                        bot_sig = "⚠️ Trend YUKARIYA döndü"
+                                    elif lst["major_dn"]:
+                                        bot_sig = "🟡 SHORT zayıf — izle"
+                                    else:
+                                        bot_sig = "❓ belirsiz"
                             else:
                                 bot_sig = "optimize yok"
                     except Exception:
