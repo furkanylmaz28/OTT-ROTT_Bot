@@ -363,8 +363,9 @@ def _load_per_sym():
         return json.load(f)
 
 
-def analyze_intraday(symbol, interval: str | None = None):
-    """interval=None → kategoriye göre otomatik (CRYPTO=30m, diğer=1h)"""
+def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: float = 0.5):
+    """interval=None → kategoriye göre otomatik (CRYPTO=30m, diğer=1h)
+    warn_threshold_pct: 'ÇIK YAKIN' uyarısı eşiği (%) — fiyat trail stop'a bu kadar yakınsa uyar."""
     if interval is None:
         from data_source import best_interval_for
         interval = best_interval_for(symbol)
@@ -387,18 +388,16 @@ def analyze_intraday(symbol, interval: str | None = None):
 
     # ── Erken ÇIK uyarısı: mum kapanışı beklenmeden,
     #    fiyat trail stop'a (karşı TOTT tetiği) yaklaştığında uyar.
-    #    Eşik %0.5 (yarım yüzde). Bot ÇIK sinyalini ancak mum kapanınca üretir,
-    #    bu uyarı manuel "tetikte" çıkma imkânı verir.
-    WARN_THRESHOLD_PCT = 0.5
+    #    warn_threshold_pct parametresinden geçer (dashboard slider ile ayarlanır).
     if "LONG'ta TUT" in pos and not pd.isna(last["tott_dn"]):
         # LONG: trail stop = TOTT_dn (aşağıda). Fiyat ne kadar yakın?
         dist_pct = (cur / float(last["tott_dn"]) - 1) * 100
-        if 0 < dist_pct < WARN_THRESHOLD_PCT:
+        if 0 < dist_pct < warn_threshold_pct:
             pos = f"{pos}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
     elif "SHORT'ta TUT" in pos and not pd.isna(last["tott_up"]):
         # SHORT: trail stop = TOTT_up (yukarıda). Fiyat ne kadar yakın?
         dist_pct = (float(last["tott_up"]) / cur - 1) * 100
-        if 0 < dist_pct < WARN_THRESHOLD_PCT:
+        if 0 < dist_pct < warn_threshold_pct:
             pos = f"{pos}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
 
     # ── Güvenilirlik (per_symbol_params.json'dan)
@@ -983,6 +982,20 @@ with tab_consensus:
                                        key="cons_only_gcm",
                                        help="Sadece Türkiye'den erişilebilen NASDAQ CFD'leri")
 
+    # Erken ÇIK uyarı eşiği — TUT durumundaki sembollerde trail stop yakınlığı
+    warn_thr_cons = st.slider(
+        "⚠️ ÇIK Yakın uyarı eşiği (%) — fiyat TOTT karşı tetiğine bu kadar yaklaşırsa uyar",
+        min_value=0.1, max_value=3.0,
+        value=float(st.session_state.get("warn_thr", 0.5)),
+        step=0.1, format="%.1f%%", key="warn_thr_cons_slider",
+        help="Mum kapanışı beklenmeden manuel çıkış için anlık uyarı. "
+              "Düşük = daha geç (kritik anlarda), yüksek = daha erken (false alarm).",
+    )
+    st.session_state["warn_thr"] = warn_thr_cons
+    st.caption(f"📌 Aktif parametreler — Sermaye: **${cons_capital:,}**  ·  "
+                f"Poz: **%{cons_pos_pct}**  ·  Kaldıraç: **{cons_lev}x**  ·  "
+                f"ÇIK Yakın eşiği: **%{warn_thr_cons:.1f}**")
+
     cons_btn_col1, cons_btn_col2 = st.columns([3, 1])
     with cons_btn_col1:
         st.markdown("### 🚀 Konsensüs taraması")
@@ -1049,6 +1062,12 @@ with tab_consensus:
                 elif "ÇIK" in lg and "ÇIK" in lb and lg == lb:
                     cons_type = "🟡🟡 HEMEN KAPAT"
                     side = "EXIT"; consensus = True
+                elif lg == "LONG_TUT" and lb == "LONG_TUT":
+                    cons_type = "🟢 LONG TUT"
+                    side = "LONG"; consensus = False  # taze sinyal değil
+                elif lg == "SHORT_TUT" and lb == "SHORT_TUT":
+                    cons_type = "🔴 SHORT TUT"
+                    side = "SHORT"; consensus = False
                 elif (lg == "LONG_AÇ") != (lb == "LONG_AÇ") or \
                       (lg == "SHORT_AÇ") != (lb == "SHORT_AÇ"):
                     cons_type = "❌ ÇELİŞKİ — ATLA"
@@ -1062,6 +1081,16 @@ with tab_consensus:
                 # Stop seçimi yöne göre (TOTT karşı tetik = trail stop)
                 stop = tott_dn_v if side == "LONG" else (tott_up_v if side == "SHORT" else None)
                 risk_pct = (abs(cur - stop) / cur * 100) if stop else None
+
+                # ÇIK YAKIN uyarısı — TUT pozisyonlarında trail stop yakınlığı
+                if side == "LONG" and "TUT" in cons_type and tott_dn_v:
+                    dist_pct = (cur / tott_dn_v - 1) * 100
+                    if 0 < dist_pct < warn_thr_cons:
+                        cons_type = f"{cons_type}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
+                elif side == "SHORT" and "TUT" in cons_type and tott_up_v:
+                    dist_pct = (tott_up_v / cur - 1) * 100
+                    if 0 < dist_pct < warn_thr_cons:
+                        cons_type = f"{cons_type}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
 
                 # Pozisyon büyüklüğü — konsensüs varsa daha büyük
                 pos_size = cons_capital * (cons_pos_pct / 100) if consensus and side and side != "EXIT" else 0
@@ -1530,6 +1559,21 @@ with tab_scan:
         if st.button("🔄 Şimdi tara", type="primary"):
             st.cache_data.clear()
 
+    # Erken ÇIK uyarı eşiği — TUT pozisyonlarında trail stop'a yakınlık (%)
+    warn_thr_scan = st.slider(
+        "⚠️ ÇIK Yakın uyarı eşiği — fiyat trail stop'a (TOTT karşı tetik) bu % içine girerse uyar",
+        min_value=0.1, max_value=3.0, value=float(st.session_state.get("warn_thr", 0.5)),
+        step=0.1, format="%.1f%%", key="warn_thr_scan_slider",
+        help="LONG TUT: fiyat TOTT_dn'ye yaklaşırsa ÇIK YAKIN. "
+              "SHORT TUT: fiyat TOTT_up'a yaklaşırsa ÇIK YAKIN. "
+              "Daha düşük eşik = daha geç uyarı (yalnız kritik anlarda), "
+              "daha yüksek eşik = daha erken uyarı (daha fazla yanlış alarm).",
+    )
+    st.session_state["warn_thr"] = warn_thr_scan
+    st.caption(f"📌 Aktif parametre — **ÇIK Yakın eşiği: %{warn_thr_scan:.1f}**  ·  "
+                f"adaptif TF: BIST/NASDAQ=H1, CRYPTO=30dk  ·  "
+                f"Stop = TOTT karşı tetik (trail)")
+
     symbols = []
     if "NASDAQ" in categories: symbols += NASDAQ
     if "BIST" in categories: symbols += BIST
@@ -1539,7 +1583,7 @@ with tab_scan:
     progress = st.progress(0, text=f"0/{len(symbols)}")
     rows = []
     for i, sym in enumerate(symbols):
-        r = analyze_intraday(sym)
+        r = analyze_intraday(sym, warn_threshold_pct=warn_thr_scan)
         if r:
             r2 = {k:v for k,v in r.items() if not k.startswith("_")}
             rows.append(r2)
