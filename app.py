@@ -369,9 +369,10 @@ def _load_per_sym():
         return json.load(f)
 
 
-def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: float = 0.5):
+def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: float = 1.0):
     """interval=None → kategoriye göre otomatik (CRYPTO=30m, diğer=1h)
-    warn_threshold_pct: 'ÇIK YAKIN' uyarısı eşiği (%) — fiyat trail stop'a bu kadar yakınsa uyar."""
+    warn_threshold_pct: 'ÇIK YAKIN' uyarısı eşiği (%) — fiyat trail stop'a bu kadar yakınsa uyar.
+    Sabit %1.0 (slider kaldırıldı)."""
     if interval is None:
         from data_source import best_interval_for
         interval = best_interval_for(symbol)
@@ -765,8 +766,8 @@ with tab_portfolio:
                         if sl and cur_p >= sl: flag = "⚠️ STOP üstünde!"
                         elif tp and cur_p <= tp: flag = "✅ TP'ye ulaştı!"
 
-                    # Bot trail-stop yakınlığı (TOTT karşı tetik) — slider'dan eşik
-                    warn_thr_port = float(st.session_state.get("warn_thr", 0.5))
+                    # Bot trail-stop yakınlığı (TOTT karşı tetik) — sabit %1.0
+                    warn_thr_port = 1.0
                     if sd.get("ok") and not flag:  # SL/TP uyarısı yoksa
                         try:
                             if row["Yön"] == "LONG" and not pd.isna(lst["tott_dn"]):
@@ -1003,19 +1004,8 @@ with tab_consensus:
                                        key="cons_only_gcm",
                                        help="Sadece Türkiye'den erişilebilen NASDAQ CFD'leri")
 
-    # Erken ÇIK uyarı eşiği — TUT durumundaki sembollerde trail stop yakınlığı
-    warn_thr_cons = st.slider(
-        "⚠️ ÇIK Yakın uyarı eşiği (%) — fiyat TOTT karşı tetiğine bu kadar yaklaşırsa uyar",
-        min_value=0.1, max_value=3.0,
-        value=float(st.session_state.get("warn_thr", 0.5)),
-        step=0.1, format="%.1f%%", key="warn_thr_cons_slider",
-        help="Mum kapanışı beklenmeden manuel çıkış için anlık uyarı. "
-              "Düşük = daha geç (kritik anlarda), yüksek = daha erken (false alarm).",
-    )
-    st.session_state["warn_thr"] = warn_thr_cons
-    st.caption(f"📌 Aktif parametreler — Sermaye: **${cons_capital:,}**  ·  "
-                f"Poz: **%{cons_pos_pct}**  ·  Kaldıraç: **{cons_lev}x**  ·  "
-                f"ÇIK Yakın eşiği: **%{warn_thr_cons:.1f}**")
+    # Erken ÇIK uyarı eşiği — sabit %1.0
+    warn_thr_cons = 1.0
 
     cons_btn_col1, cons_btn_col2 = st.columns([3, 1])
     with cons_btn_col1:
@@ -1580,20 +1570,8 @@ with tab_scan:
         if st.button("🔄 Şimdi tara", type="primary"):
             st.cache_data.clear()
 
-    # Erken ÇIK uyarı eşiği — TUT pozisyonlarında trail stop'a yakınlık (%)
-    warn_thr_scan = st.slider(
-        "⚠️ ÇIK Yakın uyarı eşiği — fiyat trail stop'a (TOTT karşı tetik) bu % içine girerse uyar",
-        min_value=0.1, max_value=3.0, value=float(st.session_state.get("warn_thr", 0.5)),
-        step=0.1, format="%.1f%%", key="warn_thr_scan_slider",
-        help="LONG TUT: fiyat TOTT_dn'ye yaklaşırsa ÇIK YAKIN. "
-              "SHORT TUT: fiyat TOTT_up'a yaklaşırsa ÇIK YAKIN. "
-              "Daha düşük eşik = daha geç uyarı (yalnız kritik anlarda), "
-              "daha yüksek eşik = daha erken uyarı (daha fazla yanlış alarm).",
-    )
-    st.session_state["warn_thr"] = warn_thr_scan
-    st.caption(f"📌 Aktif parametre — **ÇIK Yakın eşiği: %{warn_thr_scan:.1f}**  ·  "
-                f"adaptif TF: BIST/NASDAQ=H1, CRYPTO=30dk  ·  "
-                f"Stop = TOTT karşı tetik (trail)")
+    # Erken ÇIK uyarı eşiği — sabit %1.0
+    warn_thr_scan = 1.0
 
     symbols = []
     if "NASDAQ" in categories: symbols += NASDAQ
