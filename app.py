@@ -385,6 +385,22 @@ def analyze_intraday(symbol, interval: str | None = None):
     elif last["major_dn"]:           pos = "⏳ SHORT bekle"
     else:                            pos = "❓ Belirsiz"
 
+    # ── Erken ÇIK uyarısı: mum kapanışı beklenmeden,
+    #    fiyat trail stop'a (karşı TOTT tetiği) yaklaştığında uyar.
+    #    Eşik %0.5 (yarım yüzde). Bot ÇIK sinyalini ancak mum kapanınca üretir,
+    #    bu uyarı manuel "tetikte" çıkma imkânı verir.
+    WARN_THRESHOLD_PCT = 0.5
+    if "LONG'ta TUT" in pos and not pd.isna(last["tott_dn"]):
+        # LONG: trail stop = TOTT_dn (aşağıda). Fiyat ne kadar yakın?
+        dist_pct = (cur / float(last["tott_dn"]) - 1) * 100
+        if 0 < dist_pct < WARN_THRESHOLD_PCT:
+            pos = f"{pos}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
+    elif "SHORT'ta TUT" in pos and not pd.isna(last["tott_up"]):
+        # SHORT: trail stop = TOTT_up (yukarıda). Fiyat ne kadar yakın?
+        dist_pct = (float(last["tott_up"]) / cur - 1) * 100
+        if 0 < dist_pct < WARN_THRESHOLD_PCT:
+            pos = f"{pos}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
+
     # ── Güvenilirlik (per_symbol_params.json'dan)
     psy = _load_per_sym()
     bt = psy.get(symbol)
@@ -411,27 +427,6 @@ def analyze_intraday(symbol, interval: str | None = None):
         bt_n = 0
 
     from data_source import category_of as _cat
-
-    # ── Tahmini hedef (R:R 1:2) — bot trend takipçi, sabit hedef yok ama
-    #    geleneksel risk-reward formülüyle tahmini bir target hesaplanır.
-    tott_up = float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None
-    tott_dn = float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None
-    hedef = None
-    pot_pct = None
-    # Sinyal LONG yönündeyse hedef yukarıda, SHORT yönündeyse aşağıda
-    if "LONG" in pos and tott_dn:
-        stop = tott_dn
-        risk = cur - stop
-        if risk > 0:
-            hedef = cur + 2 * risk
-            pot_pct = (hedef / cur - 1) * 100
-    elif "SHORT" in pos and tott_up:
-        stop = tott_up
-        risk = stop - cur
-        if risk > 0:
-            hedef = cur - 2 * risk
-            pot_pct = (1 - hedef / cur) * 100
-
     return {
         "Sembol": symbol,
         "Kategori": _cat(symbol),
@@ -440,12 +435,10 @@ def analyze_intraday(symbol, interval: str | None = None):
         "Durum": pos,
         "Fiyat": cur,
         "Trend OTT": float(last["trend_ott"]) if not pd.isna(last["trend_ott"]) else None,
-        "Tetik ↑": tott_up,
-        "Tetik ↓": tott_dn,
-        "Up %": (tott_up/cur - 1)*100 if tott_up else None,
-        "Dn %": (tott_dn/cur - 1)*100 if tott_dn else None,
-        "Hedef": hedef,
-        "Pot %": pot_pct,
+        "Tetik ↑": float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None,
+        "Tetik ↓": float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None,
+        "Up %": (float(last["tott_up"])/cur - 1)*100 if not pd.isna(last["tott_up"]) else None,
+        "Dn %": (float(last["tott_dn"])/cur - 1)*100 if not pd.isna(last["tott_dn"]) else None,
         "BT Getiri %": bt_ret,
         "BT PF": bt_pf,
         "BT Win %": bt_win,
@@ -1066,12 +1059,9 @@ with tab_consensus:
 
                 tott_up_v = float(sb.iloc[-1]["tott_up"]) if not pd.isna(sb.iloc[-1]["tott_up"]) else None
                 tott_dn_v = float(sb.iloc[-1]["tott_dn"]) if not pd.isna(sb.iloc[-1]["tott_dn"]) else None
-                # Stop seçimi yöne göre
+                # Stop seçimi yöne göre (TOTT karşı tetik = trail stop)
                 stop = tott_dn_v if side == "LONG" else (tott_up_v if side == "SHORT" else None)
                 risk_pct = (abs(cur - stop) / cur * 100) if stop else None
-                target = (cur + 2*(cur - stop)) if side == "LONG" and stop else \
-                          ((cur - 2*(stop - cur)) if side == "SHORT" and stop else None)
-                pot_pct = 2 * risk_pct if risk_pct else None
 
                 # Pozisyon büyüklüğü — konsensüs varsa daha büyük
                 pos_size = cons_capital * (cons_pos_pct / 100) if consensus and side and side != "EXIT" else 0
@@ -1091,8 +1081,6 @@ with tab_consensus:
                     "Fiyat": cur,
                     "Stop": stop,
                     "Risk %": risk_pct,
-                    "Hedef": target,
-                    "Pot %": pot_pct,
                     "Pozisyon $": pos_size,
                     "Adet": (pos_size / cur) if pos_size and cur else 0,
                     "Max Risk $": max_risk,
@@ -1126,14 +1114,14 @@ with tab_consensus:
             if len(strong) > 0:
                 st.markdown("### ⭐ KONSENSÜS SİNYALLER (yüksek olasılık)")
                 show_cols_s = ["Sembol","Kategori","GCM","Konsensüs","Fiyat","Stop",
-                                "Risk %","Hedef","Pot %","Pozisyon $","Adet","Max Risk $",
+                                "Risk %","Pozisyon $","Adet","Max Risk $",
                                 "FY Rating","Bayes Rating"]
                 st.dataframe(
                     strong[show_cols_s].style.format({
-                        "Fiyat":"{:.4f}", "Stop":"{:.4f}", "Hedef":"{:.4f}",
-                        "Risk %":"{:.2f}%", "Pot %":"{:+.2f}%",
+                        "Fiyat":"{:.4f}", "Stop":"{:.4f}",
+                        "Risk %":"{:.2f}%",
                         "Pozisyon $":"${:.0f}", "Adet":"{:.4f}", "Max Risk $":"${:.0f}",
-                    }).background_gradient(subset=["Pot %"], cmap="RdYlGn"),
+                    }).background_gradient(subset=["Risk %"], cmap="RdYlGn_r"),
                     use_container_width=True, height=300,
                 )
                 # Toplam risk
@@ -1586,7 +1574,6 @@ with tab_scan:
         # İdeal sıralama
         col_order = ["Sembol", "Kategori", "Güven", "Durum", "Fiyat",
                       "Trend OTT", "Tetik ↑", "Up %", "Tetik ↓", "Dn %",
-                      "Hedef", "Pot %",
                       "BT Getiri %", "BT PF", "BT Win %", "BT Trade"]
         show_cols = [c for c in col_order if c in show_cols]
 
@@ -1598,8 +1585,6 @@ with tab_scan:
                 "Tetik ↓": "{:.4f}",
                 "Up %": "{:+.2f}%",
                 "Dn %": "{:+.2f}%",
-                "Hedef": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
-                "Pot %": lambda v: f"{v:+.2f}%" if pd.notna(v) else "-",
                 "BT Getiri %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
                 "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
                 "BT Win %": lambda v: f"{v:.0f}%" if pd.notna(v) else "-",
@@ -1634,21 +1619,21 @@ with tab_scan:
 # ──────────────────────────────────────────────────────────────────
 with tab_sim:
     st.subheader("📌 Anlık Fırsatlar — Bot Önerileri")
-    st.caption("Şu an aktif sinyal veren semboller. Anlık fiyat, stop seviyesi, beklenen hedef ve potansiyel getiri.")
+    st.caption("Şu an AÇ sinyali veren semboller. Stop = TOTT karşı tetik (trailing). Çıkış sistem sinyaline bağlı.")
 
-    with st.expander("ℹ️ Beklenen fiyat nasıl hesaplanıyor?"):
+    with st.expander("ℹ️ Sistem mantığı"):
         st.markdown("""
-        Sistem **trend takipçi** → kesin hedef fiyat yok, sistem çıkış sinyali verene kadar pozisyon tutulur.
+        Bu bot **trend takipçi**: sabit hedef yok, **trail stop** mantığıyla çalışır.
 
-        Tablodaki **Beklenen Hedef** profesyonel R:R 1:2 mantığıyla hesaplanır:
-        - **Risk** = |Anlık Fiyat − Stop Seviyesi|
-        - **Hedef** = Anlık Fiyat ± (2 × Risk)
-        - LONG: hedef yukarıda  ·  SHORT: hedef aşağıda
+        - **Giriş**: TOTT tetik kapısı kırılınca (cond_buy_long/short)
+        - **Stop**: karşı yöndeki TOTT tetiği (her bar kayar — trail)
+        - **Çıkış**: trend ters döndüğünde sistem ÇIK sinyali verir
+          - LONG ÇIK: bölge aşağı (zone_dn) + major aşağı
+          - SHORT ÇIK: bölge yukarı (zone_up) + major yukarı
 
-        **Backtest Win** sütunu: bu sembolde sistem geçmişte ne sıklıkla kazanmış.
-        Yüksek win + uygun R:R = beklenen kazanç.
+        Tablodaki **Stop** seviyesi = TOTT'un anlık değeri. Mum kapanışında güncellenir.
 
-        **NOT**: Hedef tahminidir, gerçek çıkış sistem sinyaline bağlı.
+        **NOT**: Hedef sütunu kaldırıldı — indikatörden çıkmıyor, sistem ÇIK sinyalini bekle.
         """)
 
     pc1, pc2 = st.columns([2, 1])
@@ -1691,23 +1676,11 @@ with tab_sim:
             if "LONG" in r["Durum"]:
                 yon = "🟢 LONG"
                 stop = r["Tetik ↓"]
-                if stop and cur:
-                    risk = cur - stop
-                    target = cur + 2 * risk  # 1:2 R:R
-                    risk_pct = risk / cur * 100
-                    pot_pct = 2 * risk_pct
-                else:
-                    target = risk_pct = pot_pct = None
+                risk_pct = ((cur - stop) / cur * 100) if (stop and cur) else None
             else:
                 yon = "🔴 SHORT"
                 stop = r["Tetik ↑"]
-                if stop and cur:
-                    risk = stop - cur
-                    target = cur - 2 * risk
-                    risk_pct = risk / cur * 100
-                    pot_pct = 2 * risk_pct
-                else:
-                    target = risk_pct = pot_pct = None
+                risk_pct = ((stop - cur) / cur * 100) if (stop and cur) else None
 
             fresh.append({
                 "Sembol": r["Sembol"],
@@ -1717,8 +1690,6 @@ with tab_sim:
                 "Anlık Fiyat": cur,
                 "Stop": stop,
                 "Risk %": risk_pct,
-                "Beklenen Hedef": target,
-                "Potansiyel %": pot_pct,
                 "BT Win %": r["BT Win %"],
                 "BT Ret %": r["BT Getiri %"],
             })
@@ -1728,11 +1699,11 @@ with tab_sim:
                  "Yarın sabah veya birkaç saat sonra tekrar dene.")
     else:
         df_prop = pd.DataFrame(fresh)
-        # Güven + potansiyel ile sırala
+        # Güven + BT Win % ile sırala (R:R 1:2 kaldırıldı, hedef yok)
         guv_skor = {"🏆 MÜKEMMEL": 5, "⭐ İYİ": 4, "🟢 ORTA": 3,
                     "🟡 MARJINAL": 2, "⚠️ VERİ_AZ": 1, "❌ UYUMSUZ": 0}
         df_prop["_sc"] = df_prop["Güven"].map(guv_skor).fillna(0)
-        df_prop = df_prop.sort_values(["_sc", "Potansiyel %"],
+        df_prop = df_prop.sort_values(["_sc", "BT Win %"],
                                         ascending=[False, False]).drop(columns="_sc").reset_index(drop=True)
 
         # Özet
@@ -1746,26 +1717,23 @@ with tab_sim:
                 "Anlık Fiyat": "{:.4f}",
                 "Stop": "{:.4f}",
                 "Risk %": "{:.2f}%",
-                "Beklenen Hedef": "{:.4f}",
-                "Potansiyel %": "{:+.2f}%",
                 "BT Win %": "{:.0f}%",
                 "BT Ret %": "{:+.1f}%",
-            }).background_gradient(subset=["BT Win %"], cmap="Greens")
-              .background_gradient(subset=["Potansiyel %"], cmap="RdYlGn"),
+            }).background_gradient(subset=["BT Win %"], cmap="Greens"),
             use_container_width=True, height=550,
         )
 
         st.markdown("""
         ### 📋 Nasıl kullanılır?
 
-        **Örnek:** ASELS.IS · 🟢 LONG · Anlık 380 · Stop 372 · Hedef 396
+        **Örnek:** ASELS.IS · 🟢 LONG · Anlık 380 · Stop 372
 
         1. **Long pozisyon aç** broker'da (örn 380 fiyatından alış emri)
         2. **Stop-loss = Stop sütunu** (372) — bu seviyenin altına inerse OTOMATIK ÇIK
-        3. Fiyat **396'ya yaklaşırsa** (Beklenen Hedef) → kâr al
-        4. Veya **dashboard'daki "🟡 LONG ÇIK" sinyalini** bekle → kapat
+        3. Pozisyonu **dashboard'daki "🟡 LONG ÇIK" sinyali gelene kadar tut**
+        4. Stop sürekli kayar (trail) — her bar yeniden çekilir, takip et
 
-        Aynı mantık SHORT için tersi.
+        Aynı mantık SHORT için tersi. **Hedef yok**, sistem sinyalini bekle.
         """)
 
 # ──────────────────────────────────────────────────────────────────
@@ -1888,23 +1856,6 @@ with tab_chart:
         if r["Tetik ↓"]:
             m5.metric("Tetik ↓", f"{r['Tetik ↓']:.4f}",
                       f"{r['Dn %']:+.2f}%")
-
-        # Hedef + Pot (R:R 1:2)
-        if r.get("Hedef") is not None and r.get("Pot %") is not None:
-            h1, h2, _h3, _h4, _h5 = st.columns(5)
-            h1.metric("🎯 Hedef (R:R 1:2)", f"{r['Hedef']:.4f}",
-                      f"{r['Pot %']:+.2f}%")
-            # Risk-Reward bilgi
-            yon = "LONG" if "LONG" in r["Durum"] else ("SHORT" if "SHORT" in r["Durum"] else None)
-            if yon == "LONG":
-                stop = r["Tetik ↓"]; risk_pct = (r["Fiyat"]/stop - 1)*100 if stop else None
-            elif yon == "SHORT":
-                stop = r["Tetik ↑"]; risk_pct = (stop/r["Fiyat"] - 1)*100 if stop else None
-            else:
-                risk_pct = None
-            if risk_pct is not None:
-                h2.metric("⚠️ Risk", f"{risk_pct:.2f}%",
-                          f"R:R 1:2 → +{2*risk_pct:.2f}% pot.")
 
         # Veriyi lightweight-charts formatına çevir
         def to_unix(idx):
