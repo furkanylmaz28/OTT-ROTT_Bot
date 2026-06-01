@@ -269,6 +269,17 @@ BIST = [
     "VAKBN.IS","VESTL.IS","YKBNK.IS",
 ]
 COMMODITY = ["GC=F", "SI=F"]
+
+# GCM Forex'te CFD olarak işlem gören NASDAQ/US büyük hisseler
+# (en likit ve yaygın olanlar — GCM platformuna göre değişebilir)
+GCM_NASDAQ = {
+    "AAPL", "MSFT", "AMZN", "NVDA", "GOOG", "GOOGL", "META", "TSLA",
+    "AMD", "AVGO", "NFLX", "INTC", "CSCO", "ADBE", "ORCL", "QCOM",
+    "COST", "PEP", "AMGN", "GILD", "INTU", "BKNG", "PYPL", "MU",
+    "PANW", "CRWD", "SBUX", "TMUS", "TXN", "AMAT", "LRCX", "KLAC",
+    "CMCSA", "ADI", "MDLZ", "MAR", "MNST", "VRTX", "ISRG",
+}
+
 CRYPTO = [
     # Top market cap
     "BTC-USD", "ETH-USD", "BNB-USD", "SOL-USD", "XRP-USD",
@@ -1381,8 +1392,11 @@ with tab_alt:
     if bayes_done == 0:
         st.warning("📭 Henüz Bayesian sonucu yok. Yukarıdaki butona basıp çalıştır.")
     else:
-        # Karşılaştırma tablosu
+        # Filtre — sadece GCM Forex'te işlem görenler
         st.markdown(f"### 📊 Karşılaştırma Tablosu ({bayes_done} sembol)")
+        only_gcm = st.checkbox("📍 Sadece GCM Forex'te işlem görenler (NASDAQ CFD)",
+                                value=False, key="alt_only_gcm",
+                                help=f"GCM Forex'te yaygın işlem gören {len(GCM_NASDAQ)} NASDAQ hissesi listede mevcut")
 
         rows = []
         for sym, bayes_r in bayes_data.items():
@@ -1391,17 +1405,22 @@ with tab_alt:
             grid_r = grid_data.get(sym, {})
             bs = bayes_r["stats"]
             gs = grid_r.get("stats", {}) if grid_r.get("ok") else {}
+            in_gcm = sym in GCM_NASDAQ
+
+            if only_gcm and not in_gcm:
+                continue
 
             rows.append({
                 "Sembol": sym,
                 "Kategori": bayes_r.get("category", "?"),
-                "Bayes Rating": bayes_r.get("rating", "?"),
+                "GCM": "✓" if in_gcm else "",
+                "Bayes Bot": bayes_r.get("rating", "?"),
                 "Bayes Ret %": bs["return"] * 100,
                 "Bayes PF": bs["pf"] if bs["pf"] else 999,
                 "Bayes Win %": bs["win_rate"] * 100,
-                "Grid Rating": grid_r.get("rating", "—"),
-                "Grid Ret %": gs.get("return", 0) * 100 if gs else None,
-                "Grid PF": gs.get("pf", 0) if gs and gs.get("pf") else None,
+                "FY Bot": grid_r.get("rating", "—"),
+                "FY Ret %": gs.get("return", 0) * 100 if gs else None,
+                "FY PF": gs.get("pf", 0) if gs and gs.get("pf") else None,
                 "Fark %": (bs["return"] - gs.get("return", 0)) * 100 if gs else None,
             })
 
@@ -1409,17 +1428,27 @@ with tab_alt:
             df_alt = pd.DataFrame(rows)
             df_alt = df_alt.sort_values("Bayes Ret %", ascending=False).reset_index(drop=True)
 
+            # Üst metrik bar — GCM sayısı vs toplam
+            gcm_count = (df_alt["GCM"] == "✓").sum()
+            mc1, mc2, mc3 = st.columns(3)
+            mc1.metric("Toplam", len(df_alt))
+            mc2.metric("📍 GCM'de var", int(gcm_count))
+            mc3.metric("📍 GCM dışı", len(df_alt) - int(gcm_count))
+
             st.dataframe(
                 df_alt.style.format({
                     "Bayes Ret %": "{:+.1f}%",
                     "Bayes PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if v else "-",
                     "Bayes Win %": "{:.0f}%",
-                    "Grid Ret %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
-                    "Grid PF": lambda v: f"{v:.2f}" if pd.notna(v) else "-",
+                    "FY Ret %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
+                    "FY PF": lambda v: f"{v:.2f}" if pd.notna(v) else "-",
                     "Fark %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
                 }).background_gradient(subset=["Fark %"], cmap="RdYlGn", vmin=-30, vmax=30),
                 use_container_width=True, height=500,
             )
+            st.caption("**FY Bot** = ana sistem (grid search · `per_symbol_params.json`).  "
+                        "**Bayes Bot** = alternatif (TPE arama · `per_symbol_params_bayes.json`). "
+                        "**GCM** = sembol GCM Forex'te CFD olarak işlem görüyor mu.")
 
             # Rating dağılımı karşılaştırma
             st.markdown("### 🏆 Rating dağılımı")
@@ -1482,46 +1511,68 @@ with tab_alt:
             st.markdown("### 📡 Bayesian parametreleriyle ANLIK sinyaller (LONG / SHORT)")
             st.caption("Her sembol kendi Bayesian parametre setini kullanır. Canlı fiyatla **şu anki yön**ü gösterir.")
 
-            if st.button("🔍 Şimdi tara (canlı veri çek)", type="primary",
+            if st.button("🔍 Şimdi tara (FY Bot + Bayes Bot)", type="primary",
                           use_container_width=True, key="bayes_scan_btn"):
                 from data_source import best_interval_for as _bif
+                from data_source import category_of as _cat
                 live_rows = []
                 live_prog = st.progress(0, text="başlatılıyor...")
                 _ok_items = [(s, r) for s, r in bayes_data.items() if r.get("ok")]
+
+                def _signal_label(last_):
+                    if last_["cond_buy_long"]:        return "🟢 LONG AÇ"
+                    if last_["cond_buy_short"]:       return "🔴 SHORT AÇ"
+                    if last_["cond_exit_long"]:       return "🟡 LONG ÇIK"
+                    if last_["cond_exit_short"]:      return "🟡 SHORT ÇIK"
+                    if last_["major_up"] and last_["zone_up"]:  return "🟢 LONG TUT"
+                    if last_["major_dn"] and last_["zone_dn"]:  return "🔴 SHORT TUT"
+                    if last_["major_up"]:              return "⏳ LONG bekle"
+                    if last_["major_dn"]:              return "⏳ SHORT bekle"
+                    return "❓"
+
                 for idx, (sym, sym_data) in enumerate(_ok_items):
-                    params = sym_data["params"].copy()
-                    params.setdefault("rott_x1", 30)
-                    params.setdefault("rott_x2", 1000)
-                    params.setdefault("rott_percent", 7.0)
+                    bayes_params = sym_data["params"].copy()
+                    bayes_params.setdefault("rott_x1", 30)
+                    bayes_params.setdefault("rott_x2", 1000)
+                    bayes_params.setdefault("rott_percent", 7.0)
+                    grid_entry = grid_data.get(sym, {})
+                    grid_params = grid_entry["params"].copy() if grid_entry.get("ok") else None
+                    if grid_params:
+                        grid_params.setdefault("rott_x1", 30)
+                        grid_params.setdefault("rott_x2", 1000)
+                        grid_params.setdefault("rott_percent", 7.0)
                     try:
                         df_live = fetch_yf(sym, interval=_bif(sym))
                         if df_live.empty or len(df_live) < 1500:
                             live_prog.progress((idx+1)/len(_ok_items))
                             continue
-                        s_live = sig_full.build_signals_full(
-                            df_live["close"], df_live["high"], df_live["low"], **params)
-                        last_l = s_live.iloc[-1]
+                        # Bayes Bot sinyali
+                        s_bayes = sig_full.build_signals_full(
+                            df_live["close"], df_live["high"], df_live["low"], **bayes_params)
+                        last_b = s_bayes.iloc[-1]
                         cur_l = float(df_live["close"].iloc[-1])
-                        if last_l["cond_buy_long"]:        pos_l = "🟢 LONG AÇ"
-                        elif last_l["cond_buy_short"]:     pos_l = "🔴 SHORT AÇ"
-                        elif last_l["cond_exit_long"]:     pos_l = "🟡 LONG ÇIK"
-                        elif last_l["cond_exit_short"]:    pos_l = "🟡 SHORT ÇIK"
-                        elif last_l["major_up"] and last_l["zone_up"]:  pos_l = "🟢 LONG TUT"
-                        elif last_l["major_dn"] and last_l["zone_dn"]:  pos_l = "🔴 SHORT TUT"
-                        elif last_l["major_up"]:           pos_l = "⏳ LONG bekle"
-                        elif last_l["major_dn"]:           pos_l = "⏳ SHORT bekle"
-                        else:                              pos_l = "❓ Belirsiz"
-                        tott_up_v = float(last_l["tott_up"]) if not pd.isna(last_l["tott_up"]) else None
-                        tott_dn_v = float(last_l["tott_dn"]) if not pd.isna(last_l["tott_dn"]) else None
+                        bayes_sig = _signal_label(last_b)
+
+                        # FY Bot (grid) sinyali
+                        if grid_params:
+                            s_grid = sig_full.build_signals_full(
+                                df_live["close"], df_live["high"], df_live["low"], **grid_params)
+                            fy_sig = _signal_label(s_grid.iloc[-1])
+                        else:
+                            fy_sig = "—"
+
+                        tott_up_v = float(last_b["tott_up"]) if not pd.isna(last_b["tott_up"]) else None
+                        tott_dn_v = float(last_b["tott_dn"]) if not pd.isna(last_b["tott_dn"]) else None
                         live_rows.append({
                             "Sembol": sym,
+                            "Kategori": _cat(sym),
+                            "GCM": "✓" if sym in GCM_NASDAQ else "",
                             "Rating": sym_data.get("rating","?"),
-                            "Durum": pos_l,
+                            "FY Bot": fy_sig,
+                            "Bayes Bot": bayes_sig,
                             "Fiyat": cur_l,
                             "Stop ↑": tott_up_v,
                             "Stop ↓": tott_dn_v,
-                            "Up %": (tott_up_v/cur_l - 1)*100 if tott_up_v else None,
-                            "Dn %": (tott_dn_v/cur_l - 1)*100 if tott_dn_v else None,
                             "BT Ret %": sym_data["stats"]["return"]*100,
                             "BT PF": sym_data["stats"]["pf"] if sym_data["stats"]["pf"] else 999,
                             "BT Win %": sym_data["stats"]["win_rate"]*100,
@@ -1539,30 +1590,45 @@ with tab_alt:
                         "🟢 LONG AÇ": 0, "🔴 SHORT AÇ": 1,
                         "🟡 LONG ÇIK": 2, "🟡 SHORT ÇIK": 3,
                         "🟢 LONG TUT": 4, "🔴 SHORT TUT": 5,
-                        "⏳ LONG bekle": 6, "⏳ SHORT bekle": 7, "❓ Belirsiz": 8,
+                        "⏳ LONG bekle": 6, "⏳ SHORT bekle": 7, "❓": 8, "—": 9,
                     }
-                    df_live_show["_ord"] = df_live_show["Durum"].map(order_live).fillna(9)
+                    # Bayes durumuna göre sırala
+                    df_live_show["_ord"] = df_live_show["Bayes Bot"].map(order_live).fillna(9)
                     df_live_show = df_live_show.sort_values(
                         ["_ord", "BT Ret %"], ascending=[True, False]
                     ).drop(columns="_ord").reset_index(drop=True)
+
                     fm1, fm2, fm3, fm4 = st.columns(4)
-                    fm1.metric("🟢 LONG AÇ", int((df_live_show["Durum"]=="🟢 LONG AÇ").sum()))
-                    fm2.metric("🔴 SHORT AÇ", int((df_live_show["Durum"]=="🔴 SHORT AÇ").sum()))
-                    fm3.metric("🟡 ÇIK sinyali",
-                                int(df_live_show["Durum"].str.contains("ÇIK", regex=False).sum()))
+                    bayes_long = int((df_live_show["Bayes Bot"]=="🟢 LONG AÇ").sum())
+                    bayes_short = int((df_live_show["Bayes Bot"]=="🔴 SHORT AÇ").sum())
+                    fy_long = int((df_live_show["FY Bot"]=="🟢 LONG AÇ").sum())
+                    fy_short = int((df_live_show["FY Bot"]=="🔴 SHORT AÇ").sum())
+                    fm1.metric("🤖 FY Bot AÇ", fy_long + fy_short,
+                                f"L:{fy_long} · S:{fy_short}")
+                    fm2.metric("🧪 Bayes Bot AÇ", bayes_long + bayes_short,
+                                f"L:{bayes_long} · S:{bayes_short}")
+                    # Konsensüs — iki bot aynı yönü diyenler
+                    consensus = int(((df_live_show["FY Bot"].str.contains("LONG AÇ", regex=False)) &
+                                     (df_live_show["Bayes Bot"].str.contains("LONG AÇ", regex=False))).sum() +
+                                    ((df_live_show["FY Bot"].str.contains("SHORT AÇ", regex=False)) &
+                                     (df_live_show["Bayes Bot"].str.contains("SHORT AÇ", regex=False))).sum())
+                    fm3.metric("🤝 İki bot aynı", consensus,
+                                help="İki bot aynı yönde sinyal verirse en güvenli")
                     fm4.metric("Toplam", len(df_live_show))
+
                     st.dataframe(
                         df_live_show.style.format({
                             "Fiyat": "{:.4f}", "Stop ↑": "{:.4f}", "Stop ↓": "{:.4f}",
-                            "Up %": "{:+.2f}%", "Dn %": "{:+.2f}%",
                             "BT Ret %": "{:+.1f}%",
                             "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
                             "BT Win %": "{:.0f}%",
                         }).background_gradient(subset=["BT Ret %"], cmap="RdYlGn"),
                         use_container_width=True, height=500,
                     )
-                    st.caption("Sıralama: önce **yeni AÇ sinyalleri**, sonra ÇIK, sonra TUT, sonra bekleyenler. "
-                                "Stop ↑/↓ = pozisyon yönüne göre stop-loss seviyesi.")
+                    st.caption(
+                        "**FY Bot** = ana sistem (grid) sinyali · **Bayes Bot** = alternatif sinyal.  "
+                        "**İkisi aynı yöne deyince** en güçlü işaret. "
+                        "**GCM** ✓ = sembol GCM Forex'te CFD olarak işlem görüyor (Türkiye'den erişilebilir).")
 
             st.markdown("---")
             st.markdown("### 🎯 Bu parametreleri **canlı kullanmaya hazır mı**?")
