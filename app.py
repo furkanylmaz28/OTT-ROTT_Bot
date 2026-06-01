@@ -566,15 +566,13 @@ with tab_portfolio:
                 pass
             return None
 
-        # Sembol değiştiğinde Giriş Fiyatı + SL + TP'yi anlık fiyata göre güncelle
+        # Sembol değiştiğinde Giriş Fiyatı'nı anlık fiyata göre güncelle
+        # (SL/TP'ye dokunma — bunlar sistem indikatöründen çıkmıyor, kullanıcı kendisi girer)
         def _on_sym_change():
             sym = st.session_state["p_sym"]
             live = _live_price(sym)
             if live and live > 0:
                 st.session_state["p_price"] = round(live, 4)
-                # LONG default: SL %5 alt, TP %10 üst — kullanıcı yine de değiştirebilir
-                st.session_state["p_sl"] = round(live * 0.95, 4)
-                st.session_state["p_tp"] = round(live * 1.10, 4)
 
         # İlk açılışta default sembolün fiyatını çek
         if "p_sym_initialized" not in st.session_state:
@@ -582,38 +580,36 @@ with tab_portfolio:
             if initial_sym:
                 st.session_state["p_sym"] = initial_sym
                 live0 = _live_price(initial_sym)
-                if live0 and live0 > 0:
-                    st.session_state.setdefault("p_price", round(live0, 4))
-                    st.session_state.setdefault("p_sl", round(live0 * 0.95, 4))
-                    st.session_state.setdefault("p_tp", round(live0 * 1.10, 4))
-                else:
-                    st.session_state.setdefault("p_price", 100.0)
-                    st.session_state.setdefault("p_sl", 95.0)
-                    st.session_state.setdefault("p_tp", 110.0)
+                st.session_state.setdefault("p_price",
+                                              round(live0, 4) if live0 and live0 > 0 else 0.0)
+                # SL/TP boş başlasın — kullanıcı kendisi girsin
+                st.session_state.setdefault("p_sl", 0.0)
+                st.session_state.setdefault("p_tp", 0.0)
             st.session_state["p_sym_initialized"] = True
 
         fp1, fp2, fp3 = st.columns(3)
         with fp1:
             new_sym = st.selectbox("Sembol", all_syms_full, key="p_sym",
                                      on_change=_on_sym_change,
-                                     help="Sembol seçilince Giriş Fiyatı + SL + TP "
-                                            "anlık piyasa fiyatına göre otomatik dolar.")
+                                     help="Sembol seçince Giriş Fiyatı anlık piyasa "
+                                            "fiyatına göre otomatik dolar.")
             new_yon = st.radio("Yön", ["LONG", "SHORT"], horizontal=True, key="p_yon")
         with fp2:
             new_date = st.date_input("Giriş Tarihi", _date.today(), key="p_date")
             new_price = st.number_input("Giriş Fiyatı", min_value=0.0,
                                           step=0.01, format="%.4f", key="p_price",
-                                          help="Sembol değişince anlık fiyat otomatik gelir. "
-                                                "Manuel düzenleyebilirsin.")
+                                          help="Sembol değişince anlık fiyat otomatik gelir.")
             new_qty = st.number_input("Miktar (lot/adet)", min_value=0.0, value=1.0,
                                         step=0.01, format="%.4f", key="p_qty")
         with fp3:
             new_sl = st.number_input("Stop Loss", min_value=0.0,
                                        step=0.01, format="%.4f", key="p_sl",
-                                       help="Default: anlık fiyatın %5 altı (LONG için)")
+                                       help="Broker'a koyacağın koruyucu stop. "
+                                            "Sistem indikatöründen çıkmaz, sen belirle (0 = yok).")
             new_tp = st.number_input("Take Profit", min_value=0.0,
                                        step=0.01, format="%.4f", key="p_tp",
-                                       help="Default: anlık fiyatın %10 üstü (LONG için)")
+                                       help="Sistem trend takipçi, sabit TP yok. "
+                                            "0 bırakırsan sadece bot ÇIK sinyalini bekle.")
             new_comm = st.number_input("Komisyon %", min_value=0.0, value=0.05,
                                          step=0.01, format="%.3f", key="p_comm")
         new_notes = st.text_input("Notlar (opsiyonel)", key="p_notes")
