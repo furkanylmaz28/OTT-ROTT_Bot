@@ -276,18 +276,32 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── Sembol evreni — tam NASDAQ 100 + genişletilmiş BIST
-NASDAQ = [
+# NASDAQ kategorisi = GCM Forex'te işlem gören hisseler (Türkiye'den erişilebilir CFD'ler)
+# Forex/emtia/endeks/bond hariç. STOCK_US + STOCK_OTHER + STOCK_EU_UK birleşimi.
+def _load_gcm_stocks():
+    """gcm_symbols.json + gcm_to_yf_map.json'dan sadece hisseleri çek (yfinance ticker)."""
+    try:
+        import json
+        with open("gcm_symbols.json", encoding="utf-8") as f:
+            cats = json.load(f).get("categorized", {})
+        with open("gcm_to_yf_map.json", encoding="utf-8") as f:
+            mp = json.load(f)["mapping"]
+        stock_keys = (cats.get("STOCK_US", []) +
+                       cats.get("STOCK_OTHER", []) +
+                       cats.get("STOCK_EU_UK", []))
+        tickers = [mp[s] for s in stock_keys if s in mp]
+        return sorted(set(tickers))
+    except Exception:
+        return None
+
+
+_gcm_stocks = _load_gcm_stocks()
+NASDAQ = _gcm_stocks if _gcm_stocks else [
+    # Fallback (gcm_symbols.json yoksa)
     "AAPL","MSFT","AMZN","NVDA","GOOG","GOOGL","META","AVGO","TSLA","COST",
-    "NFLX","AMD","PEP","ADBE","CSCO","TMUS","INTC","INTU","CMCSA","AMGN",
+    "NFLX","AMD","PEP","ADBE","CSCO","INTC","INTU","CMCSA","AMGN",
     "QCOM","TXN","HON","BKNG","AMAT","ISRG","GILD","ADP","MU","ADI",
     "MDLZ","SBUX","REGN","VRTX","LRCX","KLAC","PANW","SNPS","PYPL","CDNS",
-    "MELI","MAR","ASML","ABNB","CRWD","ORLY","MNST","FTNT","NXPI","CHTR",
-    "ADSK","KDP","ROP","AEP","PCAR","MRVL","KHC","FAST","ODFL","PAYX",
-    "DDOG","CTSH","EXC","BIIB","AZN","FANG","ROST","IDXX","EA","CSGP",
-    "ZS","GEHC","XEL","DXCM","BKR","ANSS","CTAS","DLTR","TEAM","WDAY",
-    "MRNA","ON","VRSK","CCEP","CDW","GFS","MDB","SIRI","JD","ILMN",
-    "LULU","WBA","ENPH","MTCH","FOXA","FOX","WBD","CEG","TTD","APP",
-    "QQQ",  # endeks ETF de listede
 ]
 BIST = [
     "AKBNK.IS","ARCLK.IS","ASELS.IS","ASTOR.IS","BIMAS.IS","EKGYO.IS",
