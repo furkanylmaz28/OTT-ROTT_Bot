@@ -599,7 +599,12 @@ with tab_portfolio:
                 if _gs_save(st.session_state.portfolio):
                     st.success("✓ Google Sheets'e kaydedildi (kalıcı)")
                 else:
-                    st.error("Kaydetme başarısız")
+                    try:
+                        from gsheets_storage import get_last_error
+                        err = get_last_error()
+                    except Exception:
+                        err = "bilinmeyen hata"
+                    st.error(f"Kaydetme başarısız: {err}")
         with gs_c3:
             st.success("🟢 Google Sheets aktif — veri kalıcı")
     else:

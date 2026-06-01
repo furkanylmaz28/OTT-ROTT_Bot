@@ -95,21 +95,36 @@ def load_portfolio_sheets() -> pd.DataFrame | None:
         return None
 
 
+_last_error = None
+
+
+def get_last_error() -> str | None:
+    return _last_error
+
+
 def save_portfolio_sheets(df: pd.DataFrame) -> bool:
     """Portföyü Google Sheets'e yaz. True → başarılı."""
+    global _last_error
+    _last_error = None
     sheet = _get_sheet()
     if sheet is None:
+        _last_error = "Bağlantı yok (credentials veya Sheets bulunamadı)"
         return False
     try:
         sheet.clear()
         if len(df) == 0:
             return True
-        # Header + values
         header = list(df.columns)
-        values = df.astype(str).values.tolist()
-        sheet.update([header] + values)
+        values = df.fillna("").astype(str).values.tolist()
+        # gspread 6.x: keyword args zorunlu
+        try:
+            sheet.update(values=[header] + values, range_name="A1")
+        except TypeError:
+            # Eski gspread fallback
+            sheet.update("A1", [header] + values)
         return True
-    except Exception:
+    except Exception as e:
+        _last_error = f"{type(e).__name__}: {str(e)[:300]}"
         return False
 
 
