@@ -33,6 +33,19 @@ import signals_full as sig_full
 from data_source import fetch as ds_fetch, best_interval_for, category_of
 from notifications import send_telegram, is_configured
 
+
+def _load_gcm_set():
+    """GCM Forex MetaTrader'daki hisselerin yfinance ticker seti."""
+    try:
+        with open("gcm_to_yf_map.json", encoding="utf-8") as f:
+            d = json.load(f)
+        return set(d["mapping"].values())
+    except Exception:
+        return set()
+
+
+GCM_TICKERS = _load_gcm_set()
+
 # TR saat dilimi (UTC+3, DST yok)
 TR = timezone(timedelta(hours=3))
 
@@ -92,14 +105,20 @@ def get_best_params(sym, grid, bayes):
 
 
 def filter_symbols_by_category(syms, category):
-    """BIST veya NASDAQ kategorisine göre filtre."""
+    """BIST veya NASDAQ kategorisine göre filtre.
+
+    NASDAQ = sadece GCM Forex MetaTrader'da işlem gören hisseler.
+    (gcm_to_yf_map.json'daki ticker'lar — Türkiye'den GCM ile alıp satılabilir.)
+    """
     out = []
     for s in syms:
-        c = category_of(s)
-        if category == "BIST" and c == "BIST":
-            out.append(s)
-        elif category == "NASDAQ" and c == "NASDAQ":
-            out.append(s)
+        if category == "BIST":
+            if s.upper().endswith(".IS"):
+                out.append(s)
+        elif category == "NASDAQ":
+            # Sadece GCM MetaTrader'da gerçekten olan hisseler
+            if s in GCM_TICKERS:
+                out.append(s)
     return out
 
 
