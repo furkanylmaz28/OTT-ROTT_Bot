@@ -1627,7 +1627,7 @@ with tab_scan:
 
         > **Filtre kısa-yolu:** "Sadece AKTİF SİNYAL" kutusunu işaretle → sadece **LONG AÇ / SHORT AÇ / ÇIK** sinyalleri kalır.
         """)
-    col1, col2, col3, col4 = st.columns([2, 2, 2, 1])
+    col1, col2, col3 = st.columns([2, 2, 2])
     with col1:
         categories = st.multiselect("Kategoriler",
                                      ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
@@ -1637,9 +1637,6 @@ with tab_scan:
     with col3:
         only_top_rated = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ", value=True,
                                        help="Düşük güvenli sembolleri gizle — terste kalma riski azalır")
-    with col4:
-        if st.button("🔄 Şimdi tara", type="primary"):
-            st.cache_data.clear()
 
     # Erken ÇIK uyarı eşiği — sabit %1.0
     warn_thr_scan = 1.0
@@ -1650,6 +1647,22 @@ with tab_scan:
     if "COMMODITY" in categories: symbols += COMMODITY
     if "CRYPTO" in categories: symbols += CRYPTO
 
+    # Tarama tetikleyici — buton ile manuel
+    sc_btn1, sc_btn2 = st.columns([3, 1])
+    with sc_btn1:
+        st.info(f"📊 **{len(symbols)} sembol** taranacak. "
+                f"Süre: ~{max(len(symbols)*2//60, 1)} dakika.")
+    with sc_btn2:
+        run_scan = st.button("🔄 Şimdi tara", type="primary",
+                                use_container_width=True, key="scan_run")
+
+    if not run_scan:
+        st.warning("👆 **🔄 Şimdi tara** butonuna bas. Tarama 1-5 dk sürer.\n\n"
+                    "📲 Otomatik bildirim için Telegram'a bak — "
+                    "BIST 10:30/12:30/15:30/17:30, NASDAQ 17:00/19:00/21:00/23:00 TR.")
+        st.stop()
+
+    st.cache_data.clear()
     progress = st.progress(0, text=f"0/{len(symbols)}")
     rows = []
     for i, sym in enumerate(symbols):
@@ -1760,15 +1773,34 @@ with tab_sim:
         prop_top_only = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ",
                                       value=True, key="prop_top_only")
 
-    if st.button("🔄 Önerileri yenile", type="primary", use_container_width=True):
-        st.cache_data.clear()
-
     prop_symbols = []
     if "NASDAQ" in prop_cats: prop_symbols += NASDAQ
     if "BIST" in prop_cats: prop_symbols += BIST
     if "COMMODITY" in prop_cats: prop_symbols += COMMODITY
     if "CRYPTO" in prop_cats: prop_symbols += CRYPTO
 
+    # Tarama tetikleyici — buton ile manuel başlat
+    pc_btn1, pc_btn2 = st.columns([3, 1])
+    with pc_btn1:
+        st.info(f"📊 **{len(prop_symbols)} sembol** taranacak "
+                f"({len(NASDAQ) if 'NASDAQ' in prop_cats else 0} NASDAQ + "
+                f"{len(BIST) if 'BIST' in prop_cats else 0} BIST + "
+                f"{len(COMMODITY) if 'COMMODITY' in prop_cats else 0} COMMODITY + "
+                f"{len(CRYPTO) if 'CRYPTO' in prop_cats else 0} CRYPTO). "
+                f"Süre: ~{len(prop_symbols)*2//60} dakika.")
+    with pc_btn2:
+        run_prop = st.button("🔄 Önerileri tara", type="primary",
+                                use_container_width=True, key="prop_run")
+
+    if not run_prop:
+        st.warning("👆 Yukarıdaki **🔄 Önerileri tara** butonuna bas. "
+                    "Tarama sembol sayısına bağlı olarak 1-5 dk sürer.\n\n"
+                    "📲 Otomatik bildirim için Telegram'a bak — "
+                    "BIST için 10:10/12:10/15:10/17:10 TR, "
+                    "NASDAQ için 16:40/18:40/20:40/22:40 TR.")
+        st.stop()
+
+    st.cache_data.clear()
     prop_prog = st.progress(0, text=f"0/{len(prop_symbols)}")
     prop_rows = []
     for i, sym in enumerate(prop_symbols):
