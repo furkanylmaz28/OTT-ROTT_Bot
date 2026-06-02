@@ -375,11 +375,23 @@ def fetch_yf(symbol, period="60d", interval="5m", n_bars=5000):
 
 # Per-symbol params cache (uygulama başlangıcında okunur, hızlı erişim)
 @st.cache_data(ttl=60)
+@st.cache_data(ttl=3600, show_spinner=False)
 def _load_per_sym():
+    """Grid (FY) optimize JSON — 1 saat cache."""
     import os, json
     if not os.path.exists("per_symbol_params.json"):
         return {}
     with open("per_symbol_params.json") as f:
+        return json.load(f)
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def _load_bayes_sym():
+    """Bayes optimize JSON — 1 saat cache."""
+    import os, json
+    if not os.path.exists("per_symbol_params_bayes.json"):
+        return {}
+    with open("per_symbol_params_bayes.json") as f:
         return json.load(f)
 
 
@@ -498,13 +510,11 @@ def analyze_backtest(symbol, days=30, leverage=10):
 # ──────────────────────────────────────────────────────────────────
 #  HEADER — Custom design
 # ──────────────────────────────────────────────────────────────────
-# Sistem durumu için hızlı sayım
+# Sistem durumu için hızlı sayım (cache'li yükleme)
 _iyi = 0; _uyumsuz = 0; _total = 0
 try:
-    import os, json
-    if os.path.exists("per_symbol_params.json"):
-        with open("per_symbol_params.json") as _f:
-            _psy = json.load(_f)
+    _psy = _load_per_sym()
+    if _psy:
         _total = len(_psy)
         for _s, _r in _psy.items():
             if _r.get("ok"):
@@ -759,11 +769,7 @@ with tab_portfolio:
             # Her açık pozisyon için canlı fiyat + bot sinyali çek
             from data_source import best_interval_for as _bif2
             from data_source import category_of as _cat2
-            try:
-                with open("per_symbol_params.json") as _f:
-                    _psy = json.load(_f)
-            except Exception:
-                _psy = {}
+            _psy = _load_per_sym() or {}
 
             live_rows = []
             with st.spinner("Canlı fiyatlar çekiliyor..."):
@@ -1088,8 +1094,8 @@ with tab_consensus:
     if not _os.path.exists("per_symbol_params_bayes.json"):
         st.warning("⚠️ Bayes verisi yok. Alternatif Bot Portföyü'nde Bayesian arama çalıştır.")
     elif run_cons:
-        with open("per_symbol_params_bayes.json") as _f: _bayes = _json.load(_f)
-        with open("per_symbol_params.json") as _f: _grid = _json.load(_f)
+        _bayes = _load_bayes_sym()
+        _grid  = _load_per_sym()
         from data_source import best_interval_for as _bif
         from data_source import category_of as _cat
 
@@ -1344,14 +1350,11 @@ with tab_morning:
     status_box = st.container()
     with status_box:
         cu1, cu2, cu3, cu4 = st.columns([2, 2, 2, 1])
-        # Hem Grid hem Bayes optimize verisini topla — en iyi rating'i göster
+        # Hem Grid hem Bayes optimize verisini topla — en iyi rating'i göster (cache'li)
         psy_path  = "per_symbol_params.json"
         bayes_path = "per_symbol_params_bayes.json"
-        psy_data = {}; bayes_data = {}
-        if os.path.exists(psy_path):
-            with open(psy_path) as f: psy_data = json.load(f)
-        if os.path.exists(bayes_path):
-            with open(bayes_path) as f: bayes_data = json.load(f)
+        psy_data   = _load_per_sym()   if os.path.exists(psy_path) else {}
+        bayes_data = _load_bayes_sym() if os.path.exists(bayes_path) else {}
 
         # Dosya yaşı (en yeni olanı al)
         mtimes = [os.path.getmtime(p) for p in (psy_path, bayes_path) if os.path.exists(p)]
@@ -1415,12 +1418,11 @@ with tab_morning:
     morning_lev     = 5
     pos_size        = morning_capital * pct_per_pos / 100
 
-    # Per-symbol params var mı?
-    import os, json
+    # Per-symbol params var mı? (cache'li)
+    import os
     has_per_sym = os.path.exists("per_symbol_params.json")
     if has_per_sym:
-        with open("per_symbol_params.json") as f:
-            per_sym = json.load(f)
+        per_sym = _load_per_sym()
         st.success(f"✓ Sembol bazlı optimum parametreler yüklü "
                    f"({len(per_sym)} sembol). Tarama her sembolün kendi parametresiyle yapılacak.")
     else:
@@ -1909,14 +1911,11 @@ with tab_chart:
         dff = df[df.index >= cutoff]
         sf = s[s.index >= cutoff]
 
-        # ──── Sembol BACKTEST KARTI (per_symbol_params.json'dan)
-        import os, json
+        # ──── Sembol BACKTEST KARTI (cache'li)
         sym_data = None
-        if os.path.exists("per_symbol_params.json"):
-            with open("per_symbol_params.json") as f:
-                psy = json.load(f)
-            if chart_sym in psy and psy[chart_sym].get("ok"):
-                sym_data = psy[chart_sym]
+        psy = _load_per_sym()
+        if psy and chart_sym in psy and psy[chart_sym].get("ok"):
+            sym_data = psy[chart_sym]
 
         if sym_data:
             rt = sym_data.get("rating", "?")
@@ -2154,20 +2153,15 @@ with tab_alt:
         - Bayes: yeni `per_symbol_params_bayes.json`
         """)
 
-    import os, json
+    import os
     bayes_path = "per_symbol_params_bayes.json"
     grid_path = "per_symbol_params.json"
 
-    # Mevcut durumu kontrol et
+    # Mevcut durumu kontrol et (cache'li)
     bayes_exists = os.path.exists(bayes_path)
-    if bayes_exists:
-        with open(bayes_path) as f: bayes_data = json.load(f)
-        bayes_done = len(bayes_data)
-    else:
-        bayes_data = {}
-        bayes_done = 0
-
-    with open(grid_path) as f: grid_data = json.load(f)
+    bayes_data = _load_bayes_sym() if bayes_exists else {}
+    bayes_done = len(bayes_data)
+    grid_data  = _load_per_sym()
 
     # Status bar
     bcol1, bcol2, bcol3 = st.columns(3)
