@@ -1090,13 +1090,17 @@ with tab_consensus:
     cons_only_gcm = False     # tüm semboller dahil
     warn_thr_cons = 1.0       # ÇIK YAKIN eşiği %
 
-    cons_btn_col1, cons_btn_col2 = st.columns([3, 1])
+    st.markdown("### 🚀 Konsensüs taraması")
+    st.caption("İki bot da var olan sembolleri tarayıp konsensüs sinyallerini liste.")
+    cons_btn_col1, cons_btn_col2 = st.columns(2)
     with cons_btn_col1:
-        st.markdown("### 🚀 Konsensüs taraması")
-        st.caption("İki bot da var olan sembolleri tarayıp konsensüs sinyallerini liste.")
+        run_cons_bist = st.button("🇹🇷 BIST Konsensüs", type="primary",
+                                     use_container_width=True, key="cons_bist_btn")
     with cons_btn_col2:
-        run_cons = st.button("🤝 Konsensüs tara", type="primary",
-                                use_container_width=True, key="cons_run_btn")
+        run_cons_nasdaq = st.button("🇺🇸 NASDAQ Konsensüs", type="primary",
+                                       use_container_width=True, key="cons_nasdaq_btn")
+    run_cons = run_cons_bist or run_cons_nasdaq
+    cons_category = "BIST" if run_cons_bist else ("NASDAQ" if run_cons_nasdaq else None)
 
     # Bayes ve Grid dataset'ler
     import os as _os, json as _json
@@ -1111,7 +1115,11 @@ with tab_consensus:
         # Hem grid hem bayes'te olan sembolleri tara
         common_syms = [s for s in _bayes
                         if _bayes[s].get("ok") and _grid.get(s, {}).get("ok")]
-        if cons_only_gcm:
+        # Kategoriye göre filtre (BIST veya NASDAQ butonuna basıldı)
+        if cons_category == "BIST":
+            common_syms = [s for s in common_syms if s.upper().endswith(".IS")]
+        elif cons_category == "NASDAQ":
+            # Sadece GCM Forex MetaTrader'da olan hisseler
             common_syms = [s for s in common_syms if s in GCM_NASDAQ]
 
         cons_prog = st.progress(0, text=f"0/{len(common_syms)}")
@@ -1439,16 +1447,23 @@ with tab_morning:
                    "`per_symbol_optimize.py` çalıştırılınca bu tablo iyileşir.")
         per_sym = {}
 
-    morning_cats = st.multiselect("Kategoriler (NASDAQ + BIST + ...)",
-                                    ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
-                                    default=["NASDAQ", "BIST"], key="morning_cats")
+    # BIST / NASDAQ ayrı butonlar
+    mb1, mb2 = st.columns(2)
+    with mb1:
+        run_morning_bist = st.button(f"🇹🇷 BIST önerileri ({len(BIST)} sembol)",
+                                        type="primary", use_container_width=True,
+                                        key="morning_bist_btn")
+    with mb2:
+        run_morning_nasdaq = st.button(f"🇺🇸 NASDAQ önerileri ({len(NASDAQ)} sembol)",
+                                          type="primary", use_container_width=True,
+                                          key="morning_nasdaq_btn")
+    _run_morning = run_morning_bist or run_morning_nasdaq
 
-    if st.button("🌅 Bugünün önerilerini hazırla", type="primary", use_container_width=True):
-        symbols = []
-        if "NASDAQ" in morning_cats: symbols += NASDAQ
-        if "BIST" in morning_cats: symbols += BIST
-        if "COMMODITY" in morning_cats: symbols += COMMODITY
-        if "CRYPTO" in morning_cats: symbols += CRYPTO
+    if _run_morning:
+        if run_morning_bist:
+            symbols = list(BIST)
+        else:
+            symbols = list(NASDAQ)
 
         prog = st.progress(0, text="taranıyor...")
         candidates = []
@@ -1638,34 +1653,35 @@ with tab_scan:
 
         > **Filtre kısa-yolu:** "Sadece AKTİF SİNYAL" kutusunu işaretle → sadece **LONG AÇ / SHORT AÇ / ÇIK** sinyalleri kalır.
         """)
-    col1, col2, col3 = st.columns([2, 2, 2])
+    col1, col2 = st.columns(2)
     with col1:
-        categories = st.multiselect("Kategoriler",
-                                     ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
-                                     default=["NASDAQ", "BIST", "COMMODITY"])
-    with col2:
         only_signals = st.checkbox("Sadece AKTİF SİNYAL (AL/SAT)", value=False)
-    with col3:
+    with col2:
         only_top_rated = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ", value=True,
                                        help="Düşük güvenli sembolleri gizle — terste kalma riski azalır")
 
     # Erken ÇIK uyarı eşiği — sabit %1.0
     warn_thr_scan = 1.0
 
-    symbols = []
-    if "NASDAQ" in categories: symbols += NASDAQ
-    if "BIST" in categories: symbols += BIST
-    if "COMMODITY" in categories: symbols += COMMODITY
-    if "CRYPTO" in categories: symbols += CRYPTO
-
-    # Tarama tetikleyici — buton ile manuel
-    sc_btn1, sc_btn2 = st.columns([3, 1])
+    # BIST / NASDAQ ayrı butonlar
+    sc_btn1, sc_btn2 = st.columns(2)
     with sc_btn1:
-        st.info(f"📊 **{len(symbols)} sembol** taranacak. "
-                f"Süre: ~{max(len(symbols)*2//60, 1)} dakika.")
+        run_scan_bist = st.button(f"🇹🇷 BIST tara ({len(BIST)} sembol)",
+                                     type="primary", use_container_width=True,
+                                     key="scan_bist_btn")
     with sc_btn2:
-        run_scan = st.button("🔄 Şimdi tara", type="primary",
-                                use_container_width=True, key="scan_run")
+        run_scan_nasdaq = st.button(f"🇺🇸 NASDAQ tara ({len(NASDAQ)} sembol)",
+                                       type="primary", use_container_width=True,
+                                       key="scan_nasdaq_btn")
+    run_scan = run_scan_bist or run_scan_nasdaq
+
+    # Hangi kategori tarandı?
+    if run_scan_bist:
+        symbols = list(BIST)
+    elif run_scan_nasdaq:
+        symbols = list(NASDAQ)
+    else:
+        symbols = []
 
     rows = []
     if not run_scan:
@@ -1773,34 +1789,27 @@ with tab_sim:
         **NOT**: Hedef sütunu kaldırıldı — indikatörden çıkmıyor, sistem ÇIK sinyalini bekle.
         """)
 
-    pc1, pc2 = st.columns([2, 1])
-    with pc1:
-        prop_cats = st.multiselect("Kategoriler",
-                                     ["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
-                                     default=["NASDAQ", "BIST", "COMMODITY", "CRYPTO"],
-                                     key="prop_cats")
-    with pc2:
-        prop_top_only = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ",
-                                      value=True, key="prop_top_only")
+    prop_top_only = st.checkbox("Sadece 🏆 MÜKEMMEL + ⭐ İYİ",
+                                   value=True, key="prop_top_only")
 
-    prop_symbols = []
-    if "NASDAQ" in prop_cats: prop_symbols += NASDAQ
-    if "BIST" in prop_cats: prop_symbols += BIST
-    if "COMMODITY" in prop_cats: prop_symbols += COMMODITY
-    if "CRYPTO" in prop_cats: prop_symbols += CRYPTO
-
-    # Tarama tetikleyici — buton ile manuel başlat
-    pc_btn1, pc_btn2 = st.columns([3, 1])
+    # BIST / NASDAQ ayrı butonlar
+    pc_btn1, pc_btn2 = st.columns(2)
     with pc_btn1:
-        st.info(f"📊 **{len(prop_symbols)} sembol** taranacak "
-                f"({len(NASDAQ) if 'NASDAQ' in prop_cats else 0} NASDAQ + "
-                f"{len(BIST) if 'BIST' in prop_cats else 0} BIST + "
-                f"{len(COMMODITY) if 'COMMODITY' in prop_cats else 0} COMMODITY + "
-                f"{len(CRYPTO) if 'CRYPTO' in prop_cats else 0} CRYPTO). "
-                f"Süre: ~{len(prop_symbols)*2//60} dakika.")
+        run_prop_bist = st.button(f"🇹🇷 BIST öneriler ({len(BIST)} sembol)",
+                                     type="primary", use_container_width=True,
+                                     key="prop_bist_btn")
     with pc_btn2:
-        run_prop = st.button("🔄 Önerileri tara", type="primary",
-                                use_container_width=True, key="prop_run")
+        run_prop_nasdaq = st.button(f"🇺🇸 NASDAQ öneriler ({len(NASDAQ)} sembol)",
+                                       type="primary", use_container_width=True,
+                                       key="prop_nasdaq_btn")
+    run_prop = run_prop_bist or run_prop_nasdaq
+
+    if run_prop_bist:
+        prop_symbols = list(BIST)
+    elif run_prop_nasdaq:
+        prop_symbols = list(NASDAQ)
+    else:
+        prop_symbols = []
 
     if not run_prop:
         st.warning("👆 Yukarıdaki **🔄 Önerileri tara** butonuna bas. "
