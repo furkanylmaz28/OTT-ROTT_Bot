@@ -239,28 +239,47 @@ def format_message(results, mode, category, scan_time):
     if not results:
         return None
     mode_labels = {
-        "konsensus": "Konsensüs Mod",
-        "morning":   "Bugünün Önerileri",
-        "scan":      "Anlık Tarayıcı",
+        "konsensus": "Konsensüs Mod ⭐⭐",
+        "morning":   "Bugünün Önerileri 🌅",
+        "scan":      "Anlık Tarayıcı 📡",
     }
-    title = f"🤖 OTT Bot · <b>{category} {mode_labels[mode]}</b>"
-    lines = [title, f"<i>{scan_time.strftime('%d/%m/%Y %H:%M')} TR · "
-                     f"{len(results)} sinyal</i>", ""]
+    flag = "🇹🇷" if category == "BIST" else "🇺🇸"
+    title = f"{flag} <b>{category} {mode_labels[mode]}</b>"
+    lines = [title,
+             f"<i>{scan_time.strftime('%d/%m/%Y · %H:%M')} TR · "
+             f"<b>{len(results)} sinyal</b></i>",
+             "━━━━━━━━━━━━━━━━━━━━"]
 
-    for r in results:
+    for i, r in enumerate(results, 1):
         emoji_rt = {"MÜKEMMEL": "🏆", "İYİ": "⭐", "ORTA": "🟢"}.get(r["rating"], "•")
-        lines.append(f"{emoji_rt} <b>{r['sym']}</b> · <i>{r['rating']}</i>")
-        lines.append(f"   {r['signal']}")
-        lines.append(f"   💰 Fiyat: <b>{r['price']:.4f}</b>")
+        # Yön emojisi
+        yon_emo = "🟢" if r["yon"] == "LONG" else "🔴" if r["yon"] == "SHORT" else "🟡"
+
+        # Başlık satırı
+        lines.append(f"")
+        lines.append(f"{emoji_rt} <b>{r['sym']}</b>  <code>{r['rating']}</code>")
+        # Sinyal — vurgulu
+        lines.append(f"   {yon_emo} <b>{r['signal'].replace(yon_emo + ' ', '')}</b>")
+
+        # FİYAT + STOP — yan yana, vurgulu (broker'a koyacağı emir bilgisi)
         if r["stop"]:
             stop_pct = (abs(r["price"] - r["stop"]) / r["price"] * 100)
-            lines.append(f"   🛑 Stop:  <b>{r['stop']:.4f}</b>  "
-                          f"({stop_pct:.2f}% uzak · TOTT karşı tetik)")
-        pf_str = "∞" if r["bt_pf"] >= 900 else f"{r['bt_pf']:.2f}"
-        lines.append(f"   📊 BT: Ret {r['bt_ret']:+.1f}% · PF {pf_str} · "
-                      f"Win {r['bt_win']:.0f}% · {int(r['bt_n'])} trade")
-        lines.append("")
+            lines.append(f"   ┌ <b>Giriş:</b> <code>{r['price']:.4f}</code>")
+            lines.append(f"   └ <b>STOP:</b>  <code>{r['stop']:.4f}</code>  "
+                          f"<i>({stop_pct:.2f}% mesafe)</i>")
+        else:
+            lines.append(f"   <b>Fiyat:</b> <code>{r['price']:.4f}</code>")
 
+        # BT istatistik — kompakt
+        pf_str = "∞" if r["bt_pf"] >= 900 else f"{r['bt_pf']:.2f}"
+        lines.append(f"   📊 Win <b>{r['bt_win']:.0f}%</b> · "
+                      f"PF <b>{pf_str}</b> · "
+                      f"Ret {r['bt_ret']:+.1f}% · "
+                      f"{int(r['bt_n'])} trade")
+
+    lines.append("")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append("💡 <i>Broker'da SL emrini yukarıdaki STOP seviyesine koy.</i>")
     lines.append("📱 https://furkanyilmaz.streamlit.app")
     return "\n".join(lines)
 

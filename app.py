@@ -2501,6 +2501,86 @@ with tab_info:
     - Backtest sonuçları geçmişin tekrarı garanti etmez
     """)
 
+    st.markdown("---")
+    st.markdown("### 📊 Sembol Kalite Paneli (Bayes backtest istatistikleri)")
+    st.caption("Bayes optimize sonucu — her sembolün backtest performansı. "
+                "Tablo sıralanabilir, filtreleyebilirsin.")
+
+    _bayes_data = _load_bayes_sym()
+    _grid_data  = _load_per_sym()
+    if not _bayes_data and not _grid_data:
+        st.warning("Optimize verisi yok.")
+    else:
+        # Tüm sembolleri topla, en iyi rating + en iyi PF
+        RT_SCORE = {"MÜKEMMEL": 5, "İYİ": 4, "ORTA": 3,
+                     "MARJINAL": 2, "VERİ_AZ": 1, "UYUMSUZ": 0}
+        from data_source import category_of as _cat_q
+        all_rows = []
+        all_syms = set(list(_bayes_data.keys()) + list(_grid_data.keys()))
+        for sym in all_syms:
+            # Bayes önceliği
+            src = _bayes_data.get(sym) if _bayes_data.get(sym, {}).get("ok") else _grid_data.get(sym)
+            if not src or not src.get("ok"):
+                continue
+            stats = src.get("stats", {})
+            rating = src.get("rating", "?")
+            all_rows.append({
+                "Sembol":   sym,
+                "Kategori": _cat_q(sym),
+                "GCM":      "✓" if sym in GCM_NASDAQ else "",
+                "Rating":   rating,
+                "_RtScore": RT_SCORE.get(rating, 0),
+                "Win %":    (stats.get("win_rate") or 0) * 100,
+                "PF":       (stats.get("pf") or 0),
+                "Getiri %": (stats.get("ret_pct") or 0) * 100,
+                "Trade":    int(stats.get("n_trades") or 0),
+                "Max DD %": (stats.get("max_dd") or 0) * 100,
+            })
+
+        if all_rows:
+            qdf = pd.DataFrame(all_rows)
+            qdf = qdf.sort_values(["_RtScore", "PF"], ascending=[False, False])
+
+            # Filtre satırı
+            qcol1, qcol2, qcol3 = st.columns(3)
+            with qcol1:
+                qcat = st.multiselect("Kategori",
+                                        sorted(qdf["Kategori"].unique()),
+                                        default=["BIST", "NASDAQ"], key="q_cat")
+            with qcol2:
+                qrt  = st.multiselect("Rating",
+                                        ["MÜKEMMEL","İYİ","ORTA","MARJINAL","VERİ_AZ","UYUMSUZ"],
+                                        default=["MÜKEMMEL","İYİ","ORTA"], key="q_rt")
+            with qcol3:
+                qgcm = st.checkbox("Sadece GCM Forex'te olanlar", value=False, key="q_gcm")
+
+            qfiltered = qdf[qdf["Kategori"].isin(qcat) & qdf["Rating"].isin(qrt)]
+            if qgcm:
+                qfiltered = qfiltered[qfiltered["GCM"] == "✓"]
+
+            # Özet metric
+            qm1, qm2, qm3, qm4 = st.columns(4)
+            qm1.metric("Sembol", len(qfiltered))
+            if len(qfiltered) > 0:
+                qm2.metric("Ortalama Win %", f"{qfiltered['Win %'].mean():.0f}%")
+                qm3.metric("Ortalama PF",
+                            f"{qfiltered[qfiltered['PF'] < 900]['PF'].mean():.2f}")
+                qm4.metric("Ortalama Getiri %",
+                            f"{qfiltered['Getiri %'].mean():+.1f}%")
+
+            # Tablo
+            qshow = qfiltered.drop(columns="_RtScore").reset_index(drop=True)
+            st.dataframe(
+                qshow.style.format({
+                    "Win %": "{:.0f}%",
+                    "PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
+                    "Getiri %": "{:+.1f}%",
+                    "Max DD %": "{:.1f}%",
+                }).background_gradient(subset=["Getiri %"], cmap="RdYlGn", vmin=-30, vmax=100)
+                  .background_gradient(subset=["PF"], cmap="Greens", vmin=0, vmax=5),
+                use_container_width=True, height=550,
+            )
+
 # ──────────────────────────────────────────────────────────────────
 #  FOOTER
 # ──────────────────────────────────────────────────────────────────
