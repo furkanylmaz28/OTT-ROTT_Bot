@@ -36,10 +36,19 @@ def _notify_tick():
     try:
         # Tembel import — Streamlit yüklenirken yavaşlatmaz
         import notify_scheduled
-        log.info(f"[scheduler] tick @ {datetime.now(TR):%Y-%m-%d %H:%M} TR")
+        log.info(f"[scheduler] notify tick @ {datetime.now(TR):%Y-%m-%d %H:%M} TR")
         notify_scheduled.main()
     except Exception as e:
-        log.exception(f"[scheduler] HATA: {e}")
+        log.exception(f"[scheduler] notify HATA: {e}")
+
+
+def _bot_polling_tick():
+    """Her 30 saniyede bir çağrılır. Telegram'a gelen mesajları işle."""
+    try:
+        import telegram_bot
+        telegram_bot.poll_once()
+    except Exception as e:
+        log.warning(f"[scheduler] polling HATA: {e}")
 
 
 @st.cache_resource(show_spinner=False)
@@ -53,19 +62,31 @@ def _get_scheduler():
         return None
 
     sched = BackgroundScheduler(timezone="UTC", daemon=True)
-    # Her 10 dakikada bir tetikle (cron formatı): :00, :10, :20, :30, :40, :50
+    # 1) Notify (her 10 dk) — saate göre tarama + Telegram bildirim
     sched.add_job(
         _notify_tick,
         trigger="cron",
         minute="*/10",
         id="ott_notify",
         replace_existing=True,
-        max_instances=1,           # önceki bitmediyse yeni başlatma
-        coalesce=True,             # birikmiş tetikler tek koşusa düşsün
-        misfire_grace_time=300,    # 5 dk gecikme tolere et
+        max_instances=1,
+        coalesce=True,
+        misfire_grace_time=300,
+    )
+    # 2) Bot polling (her 30 sn) — kullanıcının Telegram mesajlarını işle
+    sched.add_job(
+        _bot_polling_tick,
+        trigger="interval",
+        seconds=30,
+        id="ott_bot_polling",
+        replace_existing=True,
+        max_instances=1,
+        coalesce=True,
+        misfire_grace_time=60,
     )
     sched.start()
-    log.info("[scheduler] Background scheduler başladı (her 10 dk tetik)")
+    log.info("[scheduler] Background scheduler başladı "
+             "(notify: 10 dk · bot polling: 30 sn)")
     return sched
 
 
