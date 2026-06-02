@@ -1165,11 +1165,11 @@ with tab_consensus:
                     cons_type = "🟡🟡 HEMEN KAPAT"
                     side = "EXIT"; consensus = True
                 elif lg == "LONG_TUT" and lb == "LONG_TUT":
-                    cons_type = "🟢 LONG TUT"
-                    side = "LONG"; consensus = False  # taze sinyal değil
+                    cons_type = "🟢 LONG TUT (konsensüs)"
+                    side = "LONG"; consensus = True   # iki bot da TUT diyor — konsensüs
                 elif lg == "SHORT_TUT" and lb == "SHORT_TUT":
-                    cons_type = "🔴 SHORT TUT"
-                    side = "SHORT"; consensus = False
+                    cons_type = "🔴 SHORT TUT (konsensüs)"
+                    side = "SHORT"; consensus = True
                 elif (lg == "LONG_AÇ") != (lb == "LONG_AÇ") or \
                       (lg == "SHORT_AÇ") != (lb == "SHORT_AÇ"):
                     cons_type = "❌ ÇELİŞKİ — ATLA"
@@ -1232,15 +1232,18 @@ with tab_consensus:
             strong = df_cons[df_cons["_strong"] == True].drop(columns="_strong").reset_index(drop=True)
             weak   = df_cons[df_cons["_strong"] == False].drop(columns="_strong").reset_index(drop=True)
 
-            # Özet metric'leri
-            sm1, sm2, sm3, sm4 = st.columns(4)
-            sm1.metric("🟢🟢 GÜÇLÜ LONG",
+            # Özet metric'leri — taze AÇ konsensüsler + TUT konsensüsler + çelişki
+            sm1, sm2, sm3, sm4, sm5 = st.columns(5)
+            sm1.metric("🟢🟢 GÜÇLÜ LONG (AÇ)",
                         int((strong["Konsensüs"]=="🟢🟢 GÜÇLÜ LONG").sum()))
-            sm2.metric("🔴🔴 GÜÇLÜ SHORT",
+            sm2.metric("🔴🔴 GÜÇLÜ SHORT (AÇ)",
                         int((strong["Konsensüs"]=="🔴🔴 GÜÇLÜ SHORT").sum()))
             sm3.metric("🟡🟡 HEMEN KAPAT",
                         int((strong["Konsensüs"]=="🟡🟡 HEMEN KAPAT").sum()))
-            sm4.metric("Tartışmalı / Çelişki", len(weak))
+            tut_count = int(strong["Konsensüs"].str.contains("TUT").sum())
+            sm4.metric("🟢🔴 TUT (konsensüs)", tut_count,
+                        help="İki bot da aynı yönde TUT diyor — pozisyon zaten varsa koru")
+            sm5.metric("Tartışmalı / Çelişki", len(weak))
 
             if len(strong) > 0:
                 st.markdown("### ⭐ KONSENSÜS SİNYALLER (yüksek olasılık)")
