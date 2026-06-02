@@ -1658,22 +1658,21 @@ with tab_scan:
         run_scan = st.button("🔄 Şimdi tara", type="primary",
                                 use_container_width=True, key="scan_run")
 
+    rows = []
     if not run_scan:
         st.warning("👆 **🔄 Şimdi tara** butonuna bas. Tarama 1-5 dk sürer.\n\n"
                     "📲 Otomatik bildirim için Telegram'a bak — "
                     "BIST 10:30/12:30/15:30/17:30, NASDAQ 17:00/19:00/21:00/23:00 TR.")
-        st.stop()
-
-    st.cache_data.clear()
-    progress = st.progress(0, text=f"0/{len(symbols)}")
-    rows = []
-    for i, sym in enumerate(symbols):
-        r = analyze_intraday(sym, warn_threshold_pct=warn_thr_scan)
-        if r:
-            r2 = {k:v for k,v in r.items() if not k.startswith("_")}
-            rows.append(r2)
-        progress.progress((i+1)/len(symbols), text=f"{i+1}/{len(symbols)} — {sym}")
-    progress.empty()
+    else:
+        st.cache_data.clear()
+        progress = st.progress(0, text=f"0/{len(symbols)}")
+        for i, sym in enumerate(symbols):
+            r = analyze_intraday(sym, warn_threshold_pct=warn_thr_scan)
+            if r:
+                r2 = {k:v for k,v in r.items() if not k.startswith("_")}
+                rows.append(r2)
+            progress.progress((i+1)/len(symbols), text=f"{i+1}/{len(symbols)} — {sym}")
+        progress.empty()
 
     if rows:
         df_scan = pd.DataFrame(rows)
@@ -1800,20 +1799,22 @@ with tab_sim:
                     "📲 Otomatik bildirim için Telegram'a bak — "
                     "BIST için 10:10/12:10/15:10/17:10 TR, "
                     "NASDAQ için 16:40/18:40/20:40/22:40 TR.")
-        st.stop()
+        prop_rows = []
+    else:
+        st.cache_data.clear()
+        prop_prog = st.progress(0, text=f"0/{len(prop_symbols)}")
+        prop_rows = []
+        for i, sym in enumerate(prop_symbols):
+            r = analyze_intraday(sym)
+            if r:
+                prop_rows.append(r)
+            prop_prog.progress((i+1)/len(prop_symbols), text=f"{i+1}/{len(prop_symbols)} {sym}")
+        prop_prog.empty()
 
-    st.cache_data.clear()
-    prop_prog = st.progress(0, text=f"0/{len(prop_symbols)}")
-    prop_rows = []
-    for i, sym in enumerate(prop_symbols):
-        r = analyze_intraday(sym)
-        if r:
-            prop_rows.append(r)
-        prop_prog.progress((i+1)/len(prop_symbols), text=f"{i+1}/{len(prop_symbols)} {sym}")
-    prop_prog.empty()
-
-    # Sadece YENİ sinyali olanları al (LONG AÇ veya SHORT AÇ)
+    # Sadece YENİ sinyali olanları al (LONG AÇ veya SHORT AÇ) — sadece tarama yapıldıysa
     fresh = []
+    if not run_prop:
+        prop_rows = []
     for r in prop_rows:
         if "LONG AÇ" in r["Durum"] or "SHORT AÇ" in r["Durum"]:
             # Rating filtre
@@ -1842,9 +1843,12 @@ with tab_sim:
                 "BT Ret %": r["BT Getiri %"],
             })
 
-    if not fresh:
+    if run_prop and not fresh:
         st.info("📭 Şu anda yeni sinyal yok. Tarama yapıldı, hiçbir sembolde **LONG AÇ** veya **SHORT AÇ** sinyali yok.\n\n"
                  "Yarın sabah veya birkaç saat sonra tekrar dene.")
+    elif not run_prop:
+        pass  # buton basılmadı, info yukarıda gösterildi
+
     else:
         df_prop = pd.DataFrame(fresh)
         # Güven + BT Win % ile sırala (R:R 1:2 kaldırıldı, hedef yok)
