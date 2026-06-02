@@ -272,11 +272,19 @@ def main():
         print("✗ Telegram yapılandırılmamış, çıkılıyor")
         return
 
-    # Şu anki saate uyan görevleri bul (±2 dakika tolerans —
-    # GitHub Actions cron'u tam dakikada çalışmayabilir)
+    # Şu anki saate uyan görevleri bul.
+    # Cron her 10 dk'da bir çalışıyor → tolerans 5 dk olmalı (10 dk pencere içinde
+    # tarama saati varsa yakala). Hedef saatten ÖNCE 5 dk içinde olmalı —
+    # geçmişe doğru tolerans yok ki aynı tarama tekrar tetiklenmesin.
     matches = []
     for sh, sm, mode, cat in SCHEDULE:
-        if sh == h and abs(sm - m) <= 2:
+        if sh != h:
+            continue
+        # Hedef dakikaya 0-9 dakika içindeyse (içinde 1 cron tetiği vardır)
+        # m hedef sm'den önce: GitHub henüz tetiklemedi, atla
+        # m hedef sm'den 0-9 sonra: tetikle
+        diff = m - sm
+        if 0 <= diff < 10:
             matches.append((mode, cat))
 
     if not matches:

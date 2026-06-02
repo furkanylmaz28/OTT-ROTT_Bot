@@ -28,27 +28,12 @@ name: Scheduled Notify
 #   23:00       20:00       NASDAQ Scan
 
 on:
+  # Tek cron: her 10 dk'da bir tetiklenir, script saatten karar verir.
+  # 22 farklı cron entry yerine bu daha güvenilir (GitHub Actions yoğun
+  # saatlerde spesifik cron'ları atlayabiliyor — */10 ile riski sıfıra indirdik).
+  # Public repo olduğu için runner dakikaları ücretsiz, sınır yok.
   schedule:
-    - cron: "10 7 * * *"    # 10:10 TR — BIST Morning
-    - cron: "30 7 * * *"    # 10:30 TR — BIST Scan
-    - cron: "0 8 * * *"     # 11:00 TR — BIST Konsensüs
-    - cron: "10 9 * * *"    # 12:10 TR — BIST Morning
-    - cron: "30 9 * * *"    # 12:30 TR — BIST Scan
-    - cron: "0 11 * * *"    # 14:00 TR — BIST Konsensüs
-    - cron: "10 12 * * *"   # 15:10 TR — BIST Morning
-    - cron: "30 12 * * *"   # 15:30 TR — BIST Scan
-    - cron: "40 13 * * *"   # 16:40 TR — NASDAQ Morning
-    - cron: "0 14 * * *"    # 17:00 TR — BIST Konsensüs + NASDAQ Scan
-    - cron: "10 14 * * *"   # 17:10 TR — BIST Morning
-    - cron: "30 14 * * *"   # 17:30 TR — BIST Scan + NASDAQ Konsensüs
-    - cron: "40 15 * * *"   # 18:40 TR — NASDAQ Morning
-    - cron: "0 16 * * *"    # 19:00 TR — NASDAQ Scan
-    - cron: "30 17 * * *"   # 20:30 TR — NASDAQ Konsensüs
-    - cron: "40 17 * * *"   # 20:40 TR — NASDAQ Morning
-    - cron: "0 18 * * *"    # 21:00 TR — NASDAQ Scan
-    - cron: "0 19 * * *"    # 22:00 TR — NASDAQ Konsensüs
-    - cron: "40 19 * * *"   # 22:40 TR — NASDAQ Morning
-    - cron: "0 20 * * *"    # 23:00 TR — NASDAQ Scan
+    - cron: "*/10 * * * *"
   # Manuel tetikleme (test için)
   workflow_dispatch:
 
