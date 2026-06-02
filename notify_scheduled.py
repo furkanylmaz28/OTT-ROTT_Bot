@@ -75,6 +75,7 @@ SCHEDULE = [
     (19, 0,  "scan",      "NASDAQ"),
     (21, 0,  "scan",      "NASDAQ"),
     (23, 0,  "scan",      "NASDAQ"),
+    (23, 45, "scan",      "NASDAQ"),   # TEST — saat eşleşmesi 23:50 cron tetiğiyle yakalanır
 ]
 
 # Rating sıralaması — ORTA ve üstü kabul
