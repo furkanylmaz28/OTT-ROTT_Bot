@@ -23,10 +23,19 @@ from streamlit_lightweight_charts import renderLightweightCharts
 # Streamlit Cloud secrets.toml → environment variable yükle
 # (data_source.py .env'in yerine env okuyor; Cloud'da .env yok, secrets var)
 try:
-    for _key in ("TV_USERNAME", "TV_PASSWORD"):
+    for _key in ("TV_USERNAME", "TV_PASSWORD",
+                  "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"):
         if _key in st.secrets:
             os.environ[_key] = str(st.secrets[_key])
 except Exception:
+    pass
+
+# Background scheduler — Telegram bildirim 7/24 (Streamlit Cloud içinde çalışır)
+# UptimeRobot ile app uyumaz, scheduler her 10 dk'da bir notify_scheduled.main() çağırır
+try:
+    from streamlit_scheduler import start_scheduler
+    start_scheduler()
+except Exception as _e:
     pass
 
 import signals_full as sig_full

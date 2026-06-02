@@ -28,13 +28,9 @@ name: Scheduled Notify
 #   23:00       20:00       NASDAQ Scan
 
 on:
-  # Tek cron: her 10 dk'da bir tetiklenir, script saatten karar verir.
-  # 22 farklı cron entry yerine bu daha güvenilir (GitHub Actions yoğun
-  # saatlerde spesifik cron'ları atlayabiliyor — */10 ile riski sıfıra indirdik).
-  # Public repo olduğu için runner dakikaları ücretsiz, sınır yok.
-  schedule:
-    - cron: "*/10 * * * *"
-  # Manuel tetikleme (test için)
+  # GitHub Actions cron schedule sorun yarattı → Streamlit Cloud içinde
+  # APScheduler kullanıyoruz (streamlit_scheduler.py). Bu workflow sadece
+  # manuel test için duruyor. Otomatik cron'u devre dışı bıraktık.
   workflow_dispatch:
 
 permissions:

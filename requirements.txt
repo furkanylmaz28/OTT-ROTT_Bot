@@ -31,3 +31,6 @@ plotly>=5.18.0
 
 # Network
 websocket-client>=1.7.0
+
+# Background scheduler — Telegram bildirim 7/24 (Streamlit Cloud içinde çalışır)
+APScheduler>=3.10.0
