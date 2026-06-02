@@ -75,7 +75,6 @@ SCHEDULE = [
     (19, 0,  "scan",      "NASDAQ"),
     (21, 0,  "scan",      "NASDAQ"),
     (23, 0,  "scan",      "NASDAQ"),
-    (23, 45, "scan",      "NASDAQ"),   # TEST — saat eşleşmesi 23:50 cron tetiğiyle yakalanır
 ]
 
 # Rating sıralaması — ORTA ve üstü kabul
@@ -266,6 +265,59 @@ def format_message(results, mode, category, scan_time):
     return "\n".join(lines)
 
 
+STATE_FILE = "notify_state_scheduled.json"
+SPAM_WINDOW_HOURS = 3   # aynı sembol+sinyal bu kadar saat içinde tekrar gönderilmez
+
+
+def _load_state():
+    """{sym+signal: iso_timestamp} formatı."""
+    import os
+    if not os.path.exists(STATE_FILE):
+        return {}
+    try:
+        with open(STATE_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_state(state):
+    try:
+        with open(STATE_FILE, "w", encoding="utf-8") as f:
+            json.dump(state, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"  State kaydı başarısız: {e}")
+
+
+def _filter_new_signals(results, mode, category, scan_time):
+    """Son 3 saat içinde gönderilen aynı (sembol + sinyal) çiftlerini ele.
+    Yeni sinyaller geri döner + state güncellenir."""
+    from datetime import timedelta
+    state = _load_state()
+    cutoff = scan_time - timedelta(hours=SPAM_WINDOW_HOURS)
+    fresh = []
+    for r in results:
+        # Key: sembol + sinyal yönü/durumu (mode+kat farklı olabilir ama sinyal aynıysa spam)
+        key = f"{r['sym']}|{r['signal']}"
+        last_ts_str = state.get(key)
+        if last_ts_str:
+            try:
+                last_ts = datetime.fromisoformat(last_ts_str)
+                if last_ts > cutoff:
+                    # Son 3 saat içinde gönderilmiş, atla
+                    continue
+            except Exception:
+                pass
+        fresh.append(r)
+        state[key] = scan_time.isoformat()
+    # Eski kayıtları temizle (24 saat öncesi)
+    cleanup_cutoff = scan_time - timedelta(hours=24)
+    state = {k: v for k, v in state.items()
+             if datetime.fromisoformat(v) > cleanup_cutoff}
+    _save_state(state)
+    return fresh
+
+
 def run_task(mode, category, scan_time, grid, bayes):
     """Belirli mode + kategori için tarama + Telegram gönder."""
     print(f"\n▶ {category} {mode} taraması başladı")
@@ -274,11 +326,19 @@ def run_task(mode, category, scan_time, grid, bayes):
     if not results:
         print(f"  Mesaj atlandı (uygun sinyal yok)")
         return
-    msg = format_message(results, mode, category, scan_time)
+
+    # Spam koruması — son 3 saat içinde aynı sinyali gönderme
+    fresh = _filter_new_signals(results, mode, category, scan_time)
+    print(f"  Yeni (son {SPAM_WINDOW_HOURS}sa içinde gönderilmemiş): {len(fresh)}")
+    if not fresh:
+        print(f"  Tüm sinyaller son {SPAM_WINDOW_HOURS} saatte gönderildi, mesaj atlandı")
+        return
+
+    msg = format_message(fresh, mode, category, scan_time)
     if msg:
         ok = send_telegram(msg)
         print(f"  Telegram: {'✓ gönderildi' if ok else '✗ HATA'}")
-        for r in results[:10]:
+        for r in fresh[:10]:
             print(f"    • {r['sym']} {r['signal']} ({r['rating']})")
 
 
