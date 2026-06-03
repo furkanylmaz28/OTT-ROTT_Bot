@@ -2409,13 +2409,33 @@ with tab_alt:
             st.markdown("### 📡 Bayesian parametreleriyle ANLIK sinyaller (LONG / SHORT)")
             st.caption("Her sembol kendi Bayesian parametre setini kullanır. Canlı fiyatla **şu anki yön**ü gösterir.")
 
-            if st.button("🔍 Şimdi tara (FY Bot + Bayes Bot)", type="primary",
-                          use_container_width=True, key="bayes_scan_btn"):
+            # BIST / NASDAQ ayrı butonlar
+            bcol_a, bcol_b = st.columns(2)
+            with bcol_a:
+                run_scan_bist = st.button(
+                    f"🇹🇷 BIST tara ({sum(1 for s in bayes_data if s.endswith('.IS'))} sembol)",
+                    type="primary", use_container_width=True, key="bayes_scan_bist_btn"
+                )
+            with bcol_b:
+                run_scan_nasdaq = st.button(
+                    f"🇺🇸 NASDAQ tara ({sum(1 for s in bayes_data if s in GCM_NASDAQ)} sembol)",
+                    type="primary", use_container_width=True, key="bayes_scan_nasdaq_btn"
+                )
+
+            _scan_cat = "BIST" if run_scan_bist else ("NASDAQ" if run_scan_nasdaq else None)
+
+            if _scan_cat:
                 from data_source import best_interval_for as _bif
                 from data_source import category_of as _cat
                 live_rows = []
                 live_prog = st.progress(0, text="başlatılıyor...")
-                _ok_items = [(s, r) for s, r in bayes_data.items() if r.get("ok")]
+                # Kategori filtresi
+                if _scan_cat == "BIST":
+                    _ok_items = [(s, r) for s, r in bayes_data.items()
+                                  if r.get("ok") and s.endswith(".IS")]
+                else:  # NASDAQ
+                    _ok_items = [(s, r) for s, r in bayes_data.items()
+                                  if r.get("ok") and s in GCM_NASDAQ]
 
                 def _signal_label(last_):
                     if last_["cond_buy_long"]:        return "🟢 LONG AÇ"
