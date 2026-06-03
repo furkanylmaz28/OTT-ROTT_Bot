@@ -218,7 +218,7 @@ def scan_category(category, mode, grid, bayes):
         # Backtest stats (None değerleri 0'a çevir)
         stats = params_info.get("stats", {})
         a["rating"]   = rating
-        a["bt_ret"]   = (stats.get("ret_pct") or 0) * 100  # yüzde
+        a["bt_ret"]   = (stats.get("return") or 0) * 100  # yüzde (JSON key: "return")
         a["bt_pf"]    = stats.get("pf") or 0
         a["bt_win"]   = (stats.get("win_rate") or 0) * 100
         a["bt_n"]     = stats.get("n_trades") or 0

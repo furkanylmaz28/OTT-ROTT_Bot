@@ -234,7 +234,7 @@ def analyze_and_format(sym: str) -> str:
     stats = params_info.get("stats", {})
     win  = (stats.get("win_rate") or 0) * 100
     pf   = stats.get("pf") or 0
-    ret  = (stats.get("ret_pct") or 0) * 100
+    ret  = (stats.get("return") or 0) * 100
     n    = int(stats.get("n_trades") or 0)
     rating = params_info.get("rating", "?")
     rt_emoji = {"MÜKEMMEL": "🏆", "İYİ": "⭐", "ORTA": "🟢",
