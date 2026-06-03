@@ -1,8 +1,8 @@
-name: Quarterly Optimize
+name: Quarterly Optimize (Grid + Bayes)
 
 on:
-  # 3 ayda 1 (her quarter 1. Pazar 23:00 UTC = Pazartesi 02:00 TR)
-  # Mart, Haziran, Eylül, Aralık aylarının 1-7'sindeki Pazar.
+  # 3 ayda 1 — Mart, Haziran, Eylül, Aralık ayının 1-7'sindeki Pazar 23:00 UTC
+  # = Pazartesi 02:00 TR
   # Profesyonel quant standardı: trend takipçi sistemler quarterly reoptimize.
   # Haftalık reoptimize = overfitting (curve-fitting) riski.
   schedule:
@@ -10,14 +10,14 @@ on:
   # Manuel tetiklenebilir (gerektiğinde: GitHub Actions → Run workflow)
   workflow_dispatch:
 
-# GITHUB_TOKEN'a push yetkisi ver (per_symbol_params.json commit'i için)
+# GITHUB_TOKEN'a push yetkisi ver
 permissions:
   contents: write
 
 jobs:
   optimize:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 240   # Grid (~80 dk) + Bayes (~120 dk) = ~3.5 saat
 
     steps:
       - name: Repo'yu checkout
@@ -44,23 +44,44 @@ jobs:
           echo "TV_USERNAME=$TV_USERNAME" > .env
           echo "TV_PASSWORD=$TV_PASSWORD" >> .env
 
-      - name: Tüm sembolleri yeniden optimize et
+      # ── BACKUP ───────────────────────────────────────────────────
+      - name: Eski parametreleri yedekle (rollback için)
+        run: |
+          STAMP=$(date -u '+%Y-%m-%d')
+          mkdir -p backups
+          if [ -f per_symbol_params.json ]; then
+            cp per_symbol_params.json "backups/per_symbol_params_$STAMP.json"
+            echo "✓ Grid yedeklendi: backups/per_symbol_params_$STAMP.json"
+          fi
+          if [ -f per_symbol_params_bayes.json ]; then
+            cp per_symbol_params_bayes.json "backups/per_symbol_params_bayes_$STAMP.json"
+            echo "✓ Bayes yedeklendi: backups/per_symbol_params_bayes_$STAMP.json"
+          fi
+          ls -la backups/
+
+      # ── GRID OPTIMIZE ────────────────────────────────────────────
+      - name: 1) Grid (FY) optimize — tüm semboller
         run: python per_symbol_optimize.py
+
+      # ── BAYES OPTIMIZE ───────────────────────────────────────────
+      - name: 2) Bayes (TPE) optimize — tüm semboller
+        run: python bayesian_optimize.py
 
       - name: .env'i sil (güvenlik)
         if: always()
         run: rm -f .env
 
-      - name: Sonuçları commit et
+      # ── COMMIT ───────────────────────────────────────────────────
+      - name: Sonuçları + yedekleri commit et
         run: |
+          STAMP=$(date -u '+%Y-%m-%d')
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add per_symbol_params.json
+          git add per_symbol_params.json per_symbol_params_bayes.json backups/
           if git diff --staged --quiet; then
             echo "Değişiklik yok, commit atlandı."
           else
-            git commit -m "auto: haftalık optimize $(date -u '+%Y-%m-%d')"
-            # Aradan başka push gelmiş olabilir → rebase ile birleştir
+            git commit -m "auto: quarterly optimize $STAMP (Grid+Bayes, eski parametreler backups/ yedekli)"
             git pull --rebase origin main
             git push
           fi
