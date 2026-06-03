@@ -381,12 +381,15 @@ def main():
     for sh, sm, mode, cat in SCHEDULE:
         if sh != h:
             continue
-        # Hedef dakikaya 0-9 dakika içindeyse (içinde 1 cron tetiği vardır)
-        # m hedef sm'den önce: GitHub henüz tetiklemedi, atla
-        # m hedef sm'den 0-9 sonra: tetikle
         diff = m - sm
         if 0 <= diff < 10:
             matches.append((mode, cat))
+
+    # TEST MODU — env var WORKFLOW_TEST=1 ise şu anki saati ekle
+    if os.getenv("WORKFLOW_TEST") == "1":
+        matches.append(("scan", "BIST"))
+        matches.append(("scan", "NASDAQ"))
+        print(f"  ⚠️ TEST MODU — şu anki saatte BIST + NASDAQ scan zorla tetiklendi")
 
     if not matches:
         print(f"  Bu saatte ({h:02d}:{m:02d}) tarama yok")

@@ -28,10 +28,20 @@ name: Scheduled Notify
 #   23:00       20:00       NASDAQ Scan
 
 on:
-  # GitHub Actions cron schedule sorun yarattı → Streamlit Cloud içinde
-  # APScheduler kullanıyoruz (streamlit_scheduler.py). Bu workflow sadece
-  # manuel test için duruyor. Otomatik cron'u devre dışı bıraktık.
+  # Her 10 dakikada bir tetiklenir. Streamlit Cloud içi scheduler güvenilmez
+  # (free tier background thread'i öldürüyor). GitHub Actions tek güvenilir
+  # otomatik tetikleyici.
+  schedule:
+    - cron: "*/10 * * * *"
+  # Manuel tetikleme (test için)
   workflow_dispatch:
+    inputs:
+      test_mode:
+        description: "Test modu (zorla BIST+NASDAQ tara, saat bakma)"
+        required: false
+        default: "false"
+        type: choice
+        options: ["false", "true"]
 
 permissions:
   contents: read
@@ -74,6 +84,8 @@ jobs:
           echo "TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID"     >> .env
 
       - name: Saate göre tarama + Telegram bildirim
+        env:
+          WORKFLOW_TEST: ${{ inputs.test_mode == 'true' && '1' || '0' }}
         run: python notify_scheduled.py
 
       - name: .env'i sil (güvenlik)
