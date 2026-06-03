@@ -75,6 +75,8 @@ SCHEDULE = [
     (19, 0,  "scan",      "NASDAQ"),
     (21, 0,  "scan",      "NASDAQ"),
     (23, 0,  "scan",      "NASDAQ"),
+    # Gece raporu — sabah hazırlığı için (BIST kapalı, son veriler)
+    (1, 45,  "konsensus", "BIST"),
 ]
 
 # Rating sıralaması — ORTA ve üstü kabul
