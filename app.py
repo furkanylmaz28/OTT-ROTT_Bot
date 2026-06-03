@@ -2531,7 +2531,7 @@ with tab_info:
                 "Rating":   rating,
                 "_RtScore": RT_SCORE.get(rating, 0),
                 "Win %":    (stats.get("win_rate") or 0) * 100,
-                "PF":       (stats.get("pf") or 0),
+                "PF":       (999 if stats.get("pf") is None else stats.get("pf")),
                 "Getiri %": (stats.get("return") or 0) * 100,
                 "Trade":    int(stats.get("n_trades") or 0),
                 "Max DD %": (stats.get("max_dd") or 0) * 100,

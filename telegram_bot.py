@@ -233,7 +233,8 @@ def analyze_and_format(sym: str) -> str:
     # Backtest istatistik
     stats = params_info.get("stats", {})
     win  = (stats.get("win_rate") or 0) * 100
-    pf   = stats.get("pf") or 0
+    _pf  = stats.get("pf")
+    pf   = 999 if _pf is None else _pf   # None = sonsuz (hiç kaybeden trade yok)
     ret  = (stats.get("return") or 0) * 100
     n    = int(stats.get("n_trades") or 0)
     rating = params_info.get("rating", "?")

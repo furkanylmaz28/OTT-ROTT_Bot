@@ -219,7 +219,9 @@ def scan_category(category, mode, grid, bayes):
         stats = params_info.get("stats", {})
         a["rating"]   = rating
         a["bt_ret"]   = (stats.get("return") or 0) * 100  # yüzde (JSON key: "return")
-        a["bt_pf"]    = stats.get("pf") or 0
+        # PF None → JSON'da kayıp yok demek (sonsuz). 999 sentinel ile işaretle.
+        _pf = stats.get("pf")
+        a["bt_pf"]    = 999 if _pf is None else _pf
         a["bt_win"]   = (stats.get("win_rate") or 0) * 100
         a["bt_n"]     = stats.get("n_trades") or 0
         a["params_src"] = src
