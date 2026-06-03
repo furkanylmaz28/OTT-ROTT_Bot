@@ -2245,45 +2245,93 @@ with tab_alt:
         alt_filter = st.session_state.get("alt_filter", "ALL")
         st.caption(f"📌 Aktif filtre: <b>{alt_filter}</b>", unsafe_allow_html=True)
 
-        rows = []
+        # Sinyal hesabı için helper (15 dk cache)
+        @st.cache_data(ttl=900, show_spinner=False)
+        def _get_signal_for(sym, params_tuple):
+            """Tek sembol için son bar sinyali."""
+            try:
+                params = dict(params_tuple)
+                df = fetch_yf(sym, interval=best_interval_for(sym))
+                if df.empty or len(df) < 1500:
+                    return "—"
+                p = params.copy()
+                p.setdefault("rott_x1", 30); p.setdefault("rott_x2", 1000)
+                p.setdefault("rott_percent", 7.0)
+                s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **p)
+                last = s.iloc[-1]
+                if last["cond_buy_long"]:       return "🟢 LONG AÇ"
+                if last["cond_buy_short"]:      return "🔴 SHORT AÇ"
+                if last["cond_exit_long"]:      return "🟡 LONG ÇIK"
+                if last["cond_exit_short"]:     return "🟡 SHORT ÇIK"
+                if last["major_up"] and last["zone_up"]:   return "🟢 LONG TUT"
+                if last["major_dn"] and last["zone_dn"]:   return "🔴 SHORT TUT"
+                if last["major_up"]:            return "⏳ LONG bekle"
+                if last["major_dn"]:            return "⏳ SHORT bekle"
+                return "❓"
+            except Exception:
+                return "—"
+
+        # Filtre uygulanmış sembol listesi
+        filtered_syms = []
         for sym, bayes_r in bayes_data.items():
             if not bayes_r.get("ok"):
                 continue
-            grid_r = grid_data.get(sym, {})
-            bs = bayes_r["stats"]
-            gs = grid_r.get("stats", {}) if grid_r.get("ok") else {}
             in_gcm = sym in GCM_NASDAQ
-
-            # Kategori filtresi uygula
             if alt_filter == "BIST" and not sym.endswith(".IS"):
                 continue
             if alt_filter == "NASDAQ" and not in_gcm:
                 continue
+            filtered_syms.append(sym)
+
+        st.caption(f"⏳ {len(filtered_syms)} sembol için canlı sinyal hesaplanıyor "
+                    f"(~{max(len(filtered_syms)*2//60, 1)} dk, cache: 15 dk)")
+
+        prog = st.progress(0, text=f"0/{len(filtered_syms)}")
+        rows = []
+        for idx, sym in enumerate(filtered_syms):
+            bayes_r = bayes_data[sym]
+            grid_r = grid_data.get(sym, {})
+            bs = bayes_r["stats"]
+            gs = grid_r.get("stats", {}) if grid_r.get("ok") else {}
+
+            # Sinyal hesabı (Bayes ve Grid için)
+            bayes_sig = _get_signal_for(sym, tuple(sorted(bayes_r["params"].items())))
+            fy_sig = _get_signal_for(sym, tuple(sorted(grid_r["params"].items()))) \
+                      if grid_r.get("ok") else "—"
 
             rows.append({
                 "Sembol": sym,
                 "Kategori": bayes_r.get("category", "?"),
-                "GCM": "✓" if in_gcm else "",
                 "Bayes Bot": bayes_r.get("rating", "?"),
+                "Bayes Sinyal": bayes_sig,
                 "Bayes Ret %": bs["return"] * 100,
                 "Bayes PF": bs["pf"] if bs["pf"] else 999,
                 "Bayes Win %": bs["win_rate"] * 100,
                 "FY Bot": grid_r.get("rating", "—"),
+                "FY Sinyal": fy_sig,
                 "FY Ret %": gs.get("return", 0) * 100 if gs else None,
                 "FY PF": gs.get("pf", 0) if gs and gs.get("pf") else None,
                 "Fark %": (bs["return"] - gs.get("return", 0)) * 100 if gs else None,
             })
+            prog.progress((idx+1)/max(len(filtered_syms), 1),
+                          text=f"{idx+1}/{len(filtered_syms)} {sym}")
+        prog.empty()
 
         if rows:
             df_alt = pd.DataFrame(rows)
             df_alt = df_alt.sort_values("Bayes Ret %", ascending=False).reset_index(drop=True)
 
-            # Üst metrik bar — GCM sayısı vs toplam
-            gcm_count = (df_alt["GCM"] == "✓").sum()
-            mc1, mc2, mc3 = st.columns(3)
+            # Üst metrik bar — sinyal dağılımı
+            n_long_ac    = int(df_alt["Bayes Sinyal"].str.contains("LONG AÇ", regex=False).sum())
+            n_short_ac   = int(df_alt["Bayes Sinyal"].str.contains("SHORT AÇ", regex=False).sum())
+            n_long_tut   = int(df_alt["Bayes Sinyal"].str.contains("LONG TUT", regex=False).sum())
+            n_short_tut  = int(df_alt["Bayes Sinyal"].str.contains("SHORT TUT", regex=False).sum())
+            mc1, mc2, mc3, mc4, mc5 = st.columns(5)
             mc1.metric("Toplam", len(df_alt))
-            mc2.metric("📍 GCM'de var", int(gcm_count))
-            mc3.metric("📍 GCM dışı", len(df_alt) - int(gcm_count))
+            mc2.metric("🟢 LONG AÇ", n_long_ac)
+            mc3.metric("🔴 SHORT AÇ", n_short_ac)
+            mc4.metric("🟢 LONG TUT", n_long_tut)
+            mc5.metric("🔴 SHORT TUT", n_short_tut)
 
             st.dataframe(
                 df_alt.style.format({
