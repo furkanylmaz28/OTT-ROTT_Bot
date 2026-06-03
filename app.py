@@ -2220,11 +2220,30 @@ with tab_alt:
     if bayes_done == 0:
         st.warning("📭 Henüz Bayesian sonucu yok. Yukarıdaki butona basıp çalıştır.")
     else:
-        # Filtre — sadece GCM Forex'te işlem görenler
+        # Kategori filtre — BIST / NASDAQ / Hepsi
         st.markdown(f"### 📊 Karşılaştırma Tablosu ({bayes_done} sembol)")
-        only_gcm = st.checkbox("📍 Sadece GCM Forex'te işlem görenler (NASDAQ CFD)",
-                                value=False, key="alt_only_gcm",
-                                help=f"GCM Forex'te yaygın işlem gören {len(GCM_NASDAQ)} NASDAQ hissesi listede mevcut")
+        fcol1, fcol2, fcol3 = st.columns(3)
+        with fcol1:
+            show_bist = st.button(f"🇹🇷 BIST hisseleri ({sum(1 for s in bayes_data if s.endswith('.IS'))})",
+                                    use_container_width=True, key="alt_bist_btn")
+        with fcol2:
+            nasdaq_count = sum(1 for s in bayes_data if s in GCM_NASDAQ)
+            show_nasdaq = st.button(f"🇺🇸 NASDAQ / GCM Forex ({nasdaq_count})",
+                                      use_container_width=True, key="alt_nasdaq_btn")
+        with fcol3:
+            show_all = st.button(f"📋 Hepsi ({bayes_done})",
+                                   use_container_width=True, key="alt_all_btn")
+
+        # Session'da seçimi tut
+        if show_bist:
+            st.session_state["alt_filter"] = "BIST"
+        elif show_nasdaq:
+            st.session_state["alt_filter"] = "NASDAQ"
+        elif show_all:
+            st.session_state["alt_filter"] = "ALL"
+        # Default seçim — sayfa ilk açıldığında
+        alt_filter = st.session_state.get("alt_filter", "ALL")
+        st.caption(f"📌 Aktif filtre: <b>{alt_filter}</b>", unsafe_allow_html=True)
 
         rows = []
         for sym, bayes_r in bayes_data.items():
@@ -2235,7 +2254,10 @@ with tab_alt:
             gs = grid_r.get("stats", {}) if grid_r.get("ok") else {}
             in_gcm = sym in GCM_NASDAQ
 
-            if only_gcm and not in_gcm:
+            # Kategori filtresi uygula
+            if alt_filter == "BIST" and not sym.endswith(".IS"):
+                continue
+            if alt_filter == "NASDAQ" and not in_gcm:
                 continue
 
             rows.append({
