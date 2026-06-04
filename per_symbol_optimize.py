@@ -23,12 +23,23 @@ from data_source import fetch as ds_fetch
 
 
 BIST30 = [
+    # BIST 30 çekirdek
     "AKBNK.IS","ARCLK.IS","ASELS.IS","ASTOR.IS","BIMAS.IS","EKGYO.IS",
     "ENKAI.IS","EREGL.IS","FROTO.IS","GARAN.IS","HALKB.IS","ISCTR.IS",
     "KCHOL.IS","KOZAA.IS","KOZAL.IS","MGROS.IS","ODAS.IS","PETKM.IS",
     "PGSUS.IS","SAHOL.IS","SASA.IS","SISE.IS","SKBNK.IS","SOKM.IS",
     "TAVHL.IS","TCELL.IS","THYAO.IS","TOASO.IS","TTKOM.IS","TUPRS.IS",
     "VAKBN.IS","VESTL.IS","YKBNK.IS",
+    # BIST 100 ek likit isimler
+    "AEFES.IS","AGHOL.IS","AKSA.IS","AKSEN.IS","ALARK.IS","ALBRK.IS",
+    "ALFAS.IS","ASUZU.IS","BERA.IS","BRSAN.IS","BRYAT.IS","CCOLA.IS",
+    "CIMSA.IS","DOAS.IS","DOHOL.IS","ECILC.IS","EGEEN.IS","ENJSA.IS",
+    "GESAN.IS","GUBRF.IS","HEKTS.IS","ISMEN.IS","KARSN.IS","KONTR.IS",
+    "KORDS.IS","KRDMD.IS","MAVI.IS","OYAKC.IS","OTKAR.IS","QUAGR.IS",
+    "SARKY.IS","SELEC.IS","SMRTG.IS","TKFEN.IS","TMSN.IS","TSKB.IS",
+    "TTRAK.IS","TUKAS.IS","ULKER.IS","VESBE.IS","ZOREN.IS","KCAER.IS",
+    "CWENE.IS","REEDR.IS","ENERY.IS","CANTE.IS","KONYA.IS","AGROT.IS",
+    "PEKGY.IS","BINHO.IS",
 ]
 def _load_gcm_stocks():
     """GCM Forex'teki hisseleri (US + EU/UK) yfinance ticker olarak çek."""
