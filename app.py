@@ -551,7 +551,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_portfolio, tab_consensus, tab_safe, tab_morning, tab_scan,
- tab_sim, tab_chart, tab_alt, tab_info) = st.tabs([
+ tab_sim, tab_chart, tab_alt, tab_pure, tab_info) = st.tabs([
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "🛡️  Güvenli Mod",
@@ -560,6 +560,7 @@ st.markdown(f"""
     "📌  Öneriler",
     "📊  Detay Grafik",
     "🧪  Alternatif Bot Portföyü",
+    "📐  Saf İndikatör",
     "📖  Bilgi",
 ])
 
@@ -2555,6 +2556,141 @@ with tab_alt:
             Eğer Bayesian sonuçları sürekli daha iyi çıkarsa ileride **ana sistem buraya geçirilebilir**.
             Şimdilik karşılaştırma ve test için.
             """)
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: SAF İNDİKATÖR — Anıl Özekşi default parametreleriyle
+# ──────────────────────────────────────────────────────────────────
+with tab_pure:
+    st.subheader("📐 Saf İndikatör — Anıl Özekşi default parametreleri")
+    st.caption("Sembol-özel optimize **yok**. Pine kaynak kodundaki default değerler "
+                "tüm sembollerde aynı kullanılır. Senin indikatörünün **saf hâli**.")
+
+    with st.expander("ℹ️ Default parametreler (signals_full.py)"):
+        st.code("""
+trend_length  = 30      # Ana trend OTT uzunluğu
+trend_percent = 7.0     # Ana trend OTT %
+minor_percent = 3.5     # Minör trend %
+tott_percent  = 0.8     # TOTT bölge %
+tott_coeff    = 0.0008  # TOTT katsayı
+sott_period_k = 500     # SOTT periyot
+sott_smooth_k = 200     # SOTT smooth
+sott_percent  = 0.3     # SOTT %
+gate_length   = 20      # HOTT/LOTT (kapı) uzunluk
+gate_percent  = 0.5     # HOTT/LOTT %
+rott_x1       = 30      # ROTT x1
+rott_x2       = 1000    # ROTT x2
+rott_percent  = 7.0     # ROTT %
+        """, language="python")
+        st.info("Bu parametreler Pine kaynak kodundaki **default değerlerdir**. "
+                "Hiç optimize edilmeden, Anıl Özekşi'nin verdiği gibi.")
+
+    pure_top_only = st.checkbox("Sadece AKTİF SİNYAL (AÇ/ÇIK/TUT)", value=True, key="pure_top")
+
+    pcol1, pcol2 = st.columns(2)
+    with pcol1:
+        run_pure_bist = st.button(f"🇹🇷 BIST tara ({len(BIST)} sembol)",
+                                     type="primary", use_container_width=True,
+                                     key="pure_bist_btn")
+    with pcol2:
+        run_pure_nasdaq = st.button(f"🇺🇸 NASDAQ tara ({len(NASDAQ)} sembol)",
+                                       type="primary", use_container_width=True,
+                                       key="pure_nasdaq_btn")
+
+    if run_pure_bist:
+        pure_syms = list(BIST)
+        pure_cat_name = "BIST"
+    elif run_pure_nasdaq:
+        pure_syms = list(NASDAQ)
+        pure_cat_name = "NASDAQ"
+    else:
+        pure_syms = []
+        pure_cat_name = None
+
+    if pure_syms:
+        from data_source import best_interval_for as _pbif
+
+        # Default parametre seti (Anıl Özekşi)
+        PURE_PARAMS = dict(
+            trend_length=30, trend_percent=7.0,
+            minor_percent=3.5,
+            tott_percent=0.8, tott_coeff=0.0008,
+            sott_period_k=500, sott_smooth_k=200, sott_percent=0.3,
+            gate_length=20, gate_percent=0.5, gate_shift=0,
+            rott_x1=30, rott_x2=1000, rott_percent=7.0,
+        )
+
+        pure_prog = st.progress(0, text=f"0/{len(pure_syms)}")
+        pure_rows = []
+        for i, sym in enumerate(pure_syms):
+            try:
+                df_p = fetch_yf(sym, interval=_pbif(sym))
+                if df_p.empty or len(df_p) < 1500:
+                    pure_prog.progress((i+1)/len(pure_syms))
+                    continue
+                s_p = sig_full.build_signals_full(
+                    df_p["close"], df_p["high"], df_p["low"], **PURE_PARAMS)
+                last = s_p.iloc[-1]
+                cur = float(df_p["close"].iloc[-1])
+                if last["cond_buy_long"]:        sig = "🟢 LONG AÇ"
+                elif last["cond_buy_short"]:     sig = "🔴 SHORT AÇ"
+                elif last["cond_exit_long"]:     sig = "🟡 LONG ÇIK"
+                elif last["cond_exit_short"]:    sig = "🟡 SHORT ÇIK"
+                elif last["major_up"] and last["zone_up"]:   sig = "🟢 LONG TUT"
+                elif last["major_dn"] and last["zone_dn"]:   sig = "🔴 SHORT TUT"
+                elif last["major_up"]:           sig = "⏳ LONG bekle"
+                elif last["major_dn"]:           sig = "⏳ SHORT bekle"
+                else:                            sig = "❓ Belirsiz"
+
+                tott_up = float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None
+                tott_dn = float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None
+                stop = tott_dn if "LONG" in sig else (tott_up if "SHORT" in sig else None)
+
+                pure_rows.append({
+                    "Sembol": sym,
+                    "Sinyal": sig,
+                    "Fiyat": cur,
+                    "Stop (TOTT)": stop,
+                    "Trend OTT": float(last["trend_ott"]) if not pd.isna(last["trend_ott"]) else None,
+                    "TOTT ↑": tott_up,
+                    "TOTT ↓": tott_dn,
+                })
+            except Exception:
+                pass
+            pure_prog.progress((i+1)/len(pure_syms), text=f"{i+1}/{len(pure_syms)} {sym}")
+        pure_prog.empty()
+
+        if pure_rows:
+            df_pure = pd.DataFrame(pure_rows)
+            if pure_top_only:
+                df_pure = df_pure[df_pure["Sinyal"].str.contains("AÇ|ÇIK|TUT", regex=True)]
+
+            # Özet
+            m1, m2, m3, m4, m5 = st.columns(5)
+            m1.metric("🟢 LONG AÇ", int((df_pure["Sinyal"]=="🟢 LONG AÇ").sum()))
+            m2.metric("🔴 SHORT AÇ", int((df_pure["Sinyal"]=="🔴 SHORT AÇ").sum()))
+            m3.metric("🟢 LONG TUT", int((df_pure["Sinyal"]=="🟢 LONG TUT").sum()))
+            m4.metric("🔴 SHORT TUT", int((df_pure["Sinyal"]=="🔴 SHORT TUT").sum()))
+            m5.metric("🟡 ÇIK", int(df_pure["Sinyal"].str.contains("ÇIK").sum()))
+
+            st.dataframe(
+                df_pure.style.format({
+                    "Fiyat": "{:.4f}",
+                    "Stop (TOTT)": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                    "Trend OTT": "{:.4f}",
+                    "TOTT ↑": "{:.4f}",
+                    "TOTT ↓": "{:.4f}",
+                }),
+                use_container_width=True, height=550,
+            )
+
+            st.markdown(f"### 📋 {pure_cat_name} taraması — Anıl Özekşi default parametreleriyle")
+            st.caption("Bu sinyaller **sembol-özel optimize değil** — orijinal Pine değerleriyle hesaplandı. "
+                        "Diğer sekmelerdeki Bayes/Grid sinyallerinden **farklı çıkabilir** (parametreler farklı).")
+        else:
+            st.warning("📭 Hiç sinyal yok.")
+    else:
+        st.info("👆 BIST veya NASDAQ butonuna bas, tarama başlasın. 1-5 dk sürer.")
+
 
 with tab_info:
     st.subheader("Sistem hakkında")
