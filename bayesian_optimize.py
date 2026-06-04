@@ -62,7 +62,7 @@ def objective(trial, df):
     """
     # Geniş parametre uzayı
     p = dict(
-        trend_length=trial.suggest_int("trend_length", 28, 33),
+        trend_length=trial.suggest_int("trend_length", 10, 35),
         trend_percent=trial.suggest_float("trend_percent", 3.0, 12.0, step=0.5),
         minor_percent=trial.suggest_float("minor_percent", 2.0, 6.0, step=0.5),
         tott_percent=trial.suggest_float("tott_percent", 0.3, 1.5, step=0.1),

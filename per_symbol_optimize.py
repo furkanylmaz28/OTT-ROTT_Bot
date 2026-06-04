@@ -147,7 +147,7 @@ def optimize_symbol(symbol):
 
     # Aşama 1 — Trend
     best, best_sc = base.copy(), -1e9
-    for tl, tp, mp in product([28,30,33], [5.0,7.0,8.0], [3.0,3.5,4.0]):
+    for tl, tp, mp in product([20,30,35], [5.0,7.0,8.0], [3.0,3.5,4.0]):
         p = {**base, "trend_length": tl, "trend_percent": tp, "minor_percent": mp}
         st = evaluate(df, p); sc = score(st)
         if sc > best_sc: best_sc, best = sc, p.copy()
