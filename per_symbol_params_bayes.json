@@ -2,67 +2,67 @@
   "AKBNK.IS": {
     "symbol": "AKBNK.IS",
     "ok": true,
-    "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "bars": 4339,
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 16,
-      "trend_percent": 4.5,
-      "minor_percent": 3.0,
-      "tott_percent": 1.1,
-      "tott_coeff": 0.0007143612120424217,
-      "sott_period_k": 450,
-      "sott_smooth_k": 50,
-      "sott_percent": 0.5,
-      "gate_length": 32,
-      "gate_percent": 0.8,
+      "trend_length": 13,
+      "trend_percent": 10.0,
+      "minor_percent": 5.0,
+      "tott_percent": 1.0,
+      "tott_coeff": 0.0002782561856246101,
+      "sott_period_k": 200,
+      "sott_smooth_k": 300,
+      "sott_percent": 0.30000000000000004,
+      "gate_length": 20,
+      "gate_percent": 0.6000000000000001,
       "gate_shift": 0,
-      "rott_x1": 50,
-      "rott_x2": 1000,
-      "rott_percent": 8.5
+      "rott_x1": 35,
+      "rott_x2": 900,
+      "rott_percent": 9.5
     },
     "n_trials": 200,
-    "best_score": 0.6486416570265842,
+    "best_score": 0.42570889746999546,
     "stats": {
-      "return": 0.8237645132502158,
-      "pf": 4.726575481054779,
-      "sharpe": 0.430921469814513,
-      "max_dd": -0.1991844452796201,
-      "n_trades": 8,
-      "win_rate": 0.625
+      "return": 0.6078584833690288,
+      "pf": 4.271260412379656,
+      "sharpe": 0.367937242757349,
+      "max_dd": -0.21684744485404617,
+      "n_trades": 5,
+      "win_rate": 0.6
     }
   },
   "ARCLK.IS": {
     "symbol": "ARCLK.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 30,
-      "trend_percent": 11.5,
+      "trend_length": 18,
+      "trend_percent": 7.0,
       "minor_percent": 2.0,
       "tott_percent": 1.5,
-      "tott_coeff": 0.0012024521822630412,
-      "sott_period_k": 200,
-      "sott_smooth_k": 200,
+      "tott_coeff": 0.0006120585800967096,
+      "sott_period_k": 550,
+      "sott_smooth_k": 100,
       "sott_percent": 0.6,
-      "gate_length": 12,
-      "gate_percent": 0.3,
-      "gate_shift": 2,
-      "rott_x1": 30,
-      "rott_x2": 1200,
-      "rott_percent": 8.5
+      "gate_length": 10,
+      "gate_percent": 0.6000000000000001,
+      "gate_shift": 0,
+      "rott_x1": 20,
+      "rott_x2": 1000,
+      "rott_percent": 4.0
     },
     "n_trials": 200,
-    "best_score": 1.1633784599397778,
+    "best_score": 1.049434832097815,
     "stats": {
-      "return": 0.5286347603988502,
+      "return": 0.46961909501082455,
       "pf": null,
-      "sharpe": 0.3390616489757098,
-      "max_dd": -0.18721621494370466,
+      "sharpe": 0.3245835020455696,
+      "max_dd": -0.15143908648984417,
       "n_trades": 5,
       "win_rate": 1.0
     }
@@ -71,66 +71,66 @@
     "symbol": "ASELS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 53,
-      "trend_percent": 9.5,
-      "minor_percent": 2.0,
-      "tott_percent": 0.4,
-      "tott_coeff": 0.0017718193215092166,
-      "sott_period_k": 250,
-      "sott_smooth_k": 50,
-      "sott_percent": 0.1,
-      "gate_length": 8,
-      "gate_percent": 0.6000000000000001,
-      "gate_shift": 2,
-      "rott_x1": 45,
+      "trend_length": 24,
+      "trend_percent": 7.5,
+      "minor_percent": 3.5,
+      "tott_percent": 1.0,
+      "tott_coeff": 0.001753044935673269,
+      "sott_period_k": 200,
+      "sott_smooth_k": 150,
+      "sott_percent": 0.30000000000000004,
+      "gate_length": 20,
+      "gate_percent": 0.8,
+      "gate_shift": 0,
+      "rott_x1": 35,
       "rott_x2": 900,
-      "rott_percent": 5.5
+      "rott_percent": 7.0
     },
     "n_trials": 200,
-    "best_score": 7.520413943615423,
+    "best_score": 7.408106450800109,
     "stats": {
-      "return": 4.022726393077595,
-      "pf": 41.76694054739603,
-      "sharpe": 0.8368030055408073,
-      "max_dd": -0.15547446816504373,
-      "n_trades": 9,
-      "win_rate": 0.8888888888888888
+      "return": 3.3596597544095,
+      "pf": null,
+      "sharpe": 0.8130342772252072,
+      "max_dd": -0.18259649726539307,
+      "n_trades": 8,
+      "win_rate": 1.0
     }
   },
   "ASTOR.IS": {
     "symbol": "ASTOR.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 33,
-      "trend_percent": 6.0,
+      "trend_length": 28,
+      "trend_percent": 10.0,
       "minor_percent": 2.0,
-      "tott_percent": 1.1,
-      "tott_coeff": 0.00024831792651649863,
-      "sott_period_k": 500,
+      "tott_percent": 0.7,
+      "tott_coeff": 0.00026115542697994424,
+      "sott_period_k": 550,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
       "gate_length": 8,
-      "gate_percent": 0.6000000000000001,
-      "gate_shift": 0,
+      "gate_percent": 0.4,
+      "gate_shift": 2,
       "rott_x1": 40,
-      "rott_x2": 900,
-      "rott_percent": 9.5
+      "rott_x2": 1400,
+      "rott_percent": 7.0
     },
     "n_trials": 200,
-    "best_score": 5.576887978857353,
+    "best_score": 3.0650072117469827,
     "stats": {
-      "return": 3.520502037343303,
-      "pf": 18.517082538783665,
-      "sharpe": 0.7766795581345618,
-      "max_dd": -0.17315593460063994,
+      "return": 1.9367159685205837,
+      "pf": 11.629692200941511,
+      "sharpe": 0.59603638079262,
+      "max_dd": -0.17543670825049917,
       "n_trades": 5,
       "win_rate": 0.8
     }
@@ -139,202 +139,202 @@
     "symbol": "BIMAS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 18,
-      "trend_percent": 6.0,
-      "minor_percent": 5.0,
-      "tott_percent": 0.8,
-      "tott_coeff": 0.0006983140555597648,
-      "sott_period_k": 250,
-      "sott_smooth_k": 150,
-      "sott_percent": 0.4,
-      "gate_length": 30,
-      "gate_percent": 0.7,
-      "gate_shift": 2,
-      "rott_x1": 45,
+      "trend_length": 20,
+      "trend_percent": 5.5,
+      "minor_percent": 5.5,
+      "tott_percent": 0.5,
+      "tott_coeff": 0.00030232325434815236,
+      "sott_period_k": 200,
+      "sott_smooth_k": 300,
+      "sott_percent": 0.6,
+      "gate_length": 16,
+      "gate_percent": 0.8,
+      "gate_shift": 0,
+      "rott_x1": 35,
       "rott_x2": 1200,
-      "rott_percent": 9.5
+      "rott_percent": 8.5
     },
     "n_trials": 200,
-    "best_score": 0.4654285710424267,
+    "best_score": 0.5051720507160883,
     "stats": {
-      "return": 0.34852942208211823,
-      "pf": 5.181330252621845,
-      "sharpe": 0.25422668792877084,
-      "max_dd": -0.17167393738454773,
-      "n_trades": 7,
-      "win_rate": 0.8571428571428571
+      "return": 0.2965569992574173,
+      "pf": 10.04452265905794,
+      "sharpe": 0.22514955022836922,
+      "max_dd": -0.1467121464903991,
+      "n_trades": 6,
+      "win_rate": 0.8333333333333334
     }
   },
   "EKGYO.IS": {
     "symbol": "EKGYO.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 23,
-      "trend_percent": 7.5,
+      "trend_length": 10,
+      "trend_percent": 6.5,
       "minor_percent": 6.0,
-      "tott_percent": 1.2,
-      "tott_coeff": 0.0004182672037341728,
-      "sott_period_k": 250,
-      "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 32,
-      "gate_percent": 0.5,
-      "gate_shift": 2,
+      "tott_percent": 0.3,
+      "tott_coeff": 0.001580829098578466,
+      "sott_period_k": 300,
+      "sott_smooth_k": 150,
+      "sott_percent": 0.5,
+      "gate_length": 28,
+      "gate_percent": 0.4,
+      "gate_shift": 0,
       "rott_x1": 20,
-      "rott_x2": 1000,
-      "rott_percent": 7.0
+      "rott_x2": 800,
+      "rott_percent": 6.5
     },
     "n_trials": 200,
-    "best_score": 0.7854928878645856,
+    "best_score": 0.7787571041925234,
     "stats": {
-      "return": 1.0319306061501798,
-      "pf": 5.778574524129326,
-      "sharpe": 0.475721787071417,
-      "max_dd": -0.1794522785446051,
-      "n_trades": 7,
-      "win_rate": 0.5714285714285714
+      "return": 0.9284249129755422,
+      "pf": 6.30528820121774,
+      "sharpe": 0.4417423895656971,
+      "max_dd": -0.2140525710584954,
+      "n_trades": 5,
+      "win_rate": 0.6
     }
   },
   "ENKAI.IS": {
     "symbol": "ENKAI.IS",
     "ok": true,
-    "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "bars": 4339,
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 16,
-      "trend_percent": 9.0,
-      "minor_percent": 3.0,
-      "tott_percent": 0.3,
-      "tott_coeff": 0.00020205416484325316,
-      "sott_period_k": 250,
-      "sott_smooth_k": 50,
-      "sott_percent": 0.6,
-      "gate_length": 32,
+      "trend_length": 23,
+      "trend_percent": 3.5,
+      "minor_percent": 2.0,
+      "tott_percent": 1.5,
+      "tott_coeff": 0.0005200418498129369,
+      "sott_period_k": 350,
+      "sott_smooth_k": 100,
+      "sott_percent": 0.2,
+      "gate_length": 22,
       "gate_percent": 0.6000000000000001,
       "gate_shift": 0,
       "rott_x1": 40,
-      "rott_x2": 1500,
-      "rott_percent": 8.0
+      "rott_x2": 300,
+      "rott_percent": 7.5
     },
     "n_trials": 200,
-    "best_score": 0.457026587330395,
+    "best_score": 0.9035557148930882,
     "stats": {
-      "return": 0.4446410505616274,
-      "pf": 4.821896454210487,
-      "sharpe": 0.28099687409504703,
-      "max_dd": -0.12994040243353588,
-      "n_trades": 11,
-      "win_rate": 0.7272727272727273
+      "return": 0.6504994904265804,
+      "pf": 7.93861536129616,
+      "sharpe": 0.34689577500448426,
+      "max_dd": -0.17001073241095976,
+      "n_trades": 9,
+      "win_rate": 0.7777777777777778
     }
   },
   "EREGL.IS": {
     "symbol": "EREGL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
       "trend_length": 12,
-      "trend_percent": 11.0,
+      "trend_percent": 3.0,
       "minor_percent": 4.0,
-      "tott_percent": 1.2,
-      "tott_coeff": 0.0019110077310955133,
+      "tott_percent": 0.9000000000000001,
+      "tott_coeff": 0.0010801933245151868,
       "sott_period_k": 100,
-      "sott_smooth_k": 150,
-      "sott_percent": 0.4,
-      "gate_length": 30,
-      "gate_percent": 0.8,
+      "sott_smooth_k": 100,
+      "sott_percent": 0.2,
+      "gate_length": 16,
+      "gate_percent": 0.6000000000000001,
       "gate_shift": 2,
-      "rott_x1": 25,
-      "rott_x2": 1400,
+      "rott_x1": 20,
+      "rott_x2": 1500,
       "rott_percent": 10.0
     },
     "n_trials": 200,
-    "best_score": 1.232372856681452,
+    "best_score": 1.3101360117306162,
     "stats": {
-      "return": 0.8266650850816335,
-      "pf": 9.226652529095265,
-      "sharpe": 0.4847092870572754,
-      "max_dd": -0.14442264131029448,
-      "n_trades": 9,
-      "win_rate": 0.7777777777777778
+      "return": 0.8996374762537505,
+      "pf": 11.245801744330853,
+      "sharpe": 0.5112655821503893,
+      "max_dd": -0.14379059675971195,
+      "n_trades": 12,
+      "win_rate": 0.75
     }
   },
   "FROTO.IS": {
     "symbol": "FROTO.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 31,
-      "trend_percent": 3.5,
-      "minor_percent": 6.0,
-      "tott_percent": 0.4,
-      "tott_coeff": 0.0003917764797144052,
-      "sott_period_k": 250,
-      "sott_smooth_k": 200,
-      "sott_percent": 0.5,
-      "gate_length": 28,
-      "gate_percent": 0.7,
-      "gate_shift": 0,
-      "rott_x1": 25,
-      "rott_x2": 1400,
-      "rott_percent": 7.0
+      "trend_length": 32,
+      "trend_percent": 9.5,
+      "minor_percent": 3.5,
+      "tott_percent": 0.9000000000000001,
+      "tott_coeff": 0.0015490032585036126,
+      "sott_period_k": 500,
+      "sott_smooth_k": 100,
+      "sott_percent": 0.30000000000000004,
+      "gate_length": 14,
+      "gate_percent": 0.4,
+      "gate_shift": 2,
+      "rott_x1": 35,
+      "rott_x2": 900,
+      "rott_percent": 10.0
     },
     "n_trials": 200,
-    "best_score": 0.13087619657253458,
+    "best_score": 0.28457484941084304,
     "stats": {
-      "return": 0.23848137423727822,
-      "pf": 2.7044230912999305,
-      "sharpe": 0.20596225419794245,
-      "max_dd": -0.22990232201878136,
-      "n_trades": 5,
-      "win_rate": 0.6
+      "return": 0.37353164014900786,
+      "pf": 3.568566482102037,
+      "sharpe": 0.28449573265594175,
+      "max_dd": -0.17819611587672324,
+      "n_trades": 6,
+      "win_rate": 0.6666666666666666
     }
   },
   "GARAN.IS": {
     "symbol": "GARAN.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 12,
-      "trend_percent": 8.5,
-      "minor_percent": 3.5,
-      "tott_percent": 1.3,
-      "tott_coeff": 0.001387831171181499,
-      "sott_period_k": 550,
-      "sott_smooth_k": 100,
+      "trend_length": 11,
+      "trend_percent": 3.0,
+      "minor_percent": 5.0,
+      "tott_percent": 0.4,
+      "tott_coeff": 0.0003676169886009918,
+      "sott_period_k": 350,
+      "sott_smooth_k": 300,
       "sott_percent": 0.2,
-      "gate_length": 10,
+      "gate_length": 20,
       "gate_percent": 0.5,
-      "gate_shift": 0,
-      "rott_x1": 25,
+      "gate_shift": 2,
+      "rott_x1": 30,
       "rott_x2": 1000,
-      "rott_percent": 5.5
+      "rott_percent": 6.5
     },
     "n_trials": 200,
-    "best_score": 0.4278406119285105,
+    "best_score": 0.23971228106612658,
     "stats": {
-      "return": 0.5610182250825844,
-      "pf": 5.004654194904657,
-      "sharpe": 0.353250481020754,
-      "max_dd": -0.193380402552223,
+      "return": 0.38513457557845276,
+      "pf": 3.3456487811615587,
+      "sharpe": 0.28656133476446716,
+      "max_dd": -0.20349779190349737,
       "n_trades": 5,
       "win_rate": 0.6
     }
@@ -343,7 +343,7 @@
     "symbol": "HALKB.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -377,7 +377,7 @@
     "symbol": "ISCTR.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -411,7 +411,7 @@
     "symbol": "KCHOL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -445,7 +445,7 @@
     "symbol": "KOZAL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -479,7 +479,7 @@
     "symbol": "MGROS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -581,7 +581,7 @@
     "symbol": "PGSUS.IS",
     "ok": true,
     "bars": 4330,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -615,7 +615,7 @@
     "symbol": "SAHOL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -649,7 +649,7 @@
     "symbol": "SASA.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -683,7 +683,7 @@
     "symbol": "SISE.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -717,7 +717,7 @@
     "symbol": "SKBNK.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -751,7 +751,7 @@
     "symbol": "SOKM.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -785,7 +785,7 @@
     "symbol": "TAVHL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -819,7 +819,7 @@
     "symbol": "THYAO.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -853,7 +853,7 @@
     "symbol": "TOASO.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -887,7 +887,7 @@
     "symbol": "TTKOM.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -921,7 +921,7 @@
     "symbol": "TUPRS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -955,7 +955,7 @@
     "symbol": "VAKBN.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -989,7 +989,7 @@
     "symbol": "VESTL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1023,7 +1023,7 @@
     "symbol": "YKBNK.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1057,7 +1057,7 @@
     "symbol": "AAPL",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1091,7 +1091,7 @@
     "symbol": "MSFT",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1125,7 +1125,7 @@
     "symbol": "AMZN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1159,7 +1159,7 @@
     "symbol": "NVDA",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1193,7 +1193,7 @@
     "symbol": "GOOG",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1227,7 +1227,7 @@
     "symbol": "GOOGL",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1261,7 +1261,7 @@
     "symbol": "META",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1295,7 +1295,7 @@
     "symbol": "AVGO",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1329,7 +1329,7 @@
     "symbol": "TSLA",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1363,7 +1363,7 @@
     "symbol": "COST",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1397,7 +1397,7 @@
     "symbol": "NFLX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1499,7 +1499,7 @@
     "symbol": "ADBE",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1533,7 +1533,7 @@
     "symbol": "CSCO",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1567,7 +1567,7 @@
     "symbol": "TMUS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1601,7 +1601,7 @@
     "symbol": "INTC",
     "ok": true,
     "bars": 3483,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1669,7 +1669,7 @@
     "symbol": "CMCSA",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1703,7 +1703,7 @@
     "symbol": "AMGN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1737,7 +1737,7 @@
     "symbol": "QCOM",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1771,7 +1771,7 @@
     "symbol": "TXN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1805,7 +1805,7 @@
     "symbol": "HON",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1839,7 +1839,7 @@
     "symbol": "BKNG",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1873,7 +1873,7 @@
     "symbol": "AMAT",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1907,7 +1907,7 @@
     "symbol": "ISRG",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1941,7 +1941,7 @@
     "symbol": "GILD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1975,7 +1975,7 @@
     "symbol": "ADP",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2043,7 +2043,7 @@
     "symbol": "ADI",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2077,7 +2077,7 @@
     "symbol": "MDLZ",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2111,7 +2111,7 @@
     "symbol": "SBUX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2145,7 +2145,7 @@
     "symbol": "REGN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2213,7 +2213,7 @@
     "symbol": "LRCX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2247,7 +2247,7 @@
     "symbol": "KLAC",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2281,7 +2281,7 @@
     "symbol": "PANW",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2315,7 +2315,7 @@
     "symbol": "SNPS",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2349,7 +2349,7 @@
     "symbol": "PYPL",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2383,7 +2383,7 @@
     "symbol": "CDNS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2417,7 +2417,7 @@
     "symbol": "MELI",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2451,7 +2451,7 @@
     "symbol": "MAR",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2485,7 +2485,7 @@
     "symbol": "ASML",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2519,7 +2519,7 @@
     "symbol": "ABNB",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2553,7 +2553,7 @@
     "symbol": "CRWD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2587,7 +2587,7 @@
     "symbol": "ORLY",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2621,7 +2621,7 @@
     "symbol": "MNST",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2655,7 +2655,7 @@
     "symbol": "FTNT",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2689,7 +2689,7 @@
     "symbol": "NXPI",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2723,7 +2723,7 @@
     "symbol": "CHTR",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2757,7 +2757,7 @@
     "symbol": "ADSK",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2791,7 +2791,7 @@
     "symbol": "KDP",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2859,7 +2859,7 @@
     "symbol": "AEP",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2893,7 +2893,7 @@
     "symbol": "PCAR",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2927,7 +2927,7 @@
     "symbol": "MRVL",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2961,7 +2961,7 @@
     "symbol": "KHC",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2995,7 +2995,7 @@
     "symbol": "FAST",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3029,7 +3029,7 @@
     "symbol": "PAYX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3063,7 +3063,7 @@
     "symbol": "DDOG",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3097,7 +3097,7 @@
     "symbol": "CTSH",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3131,7 +3131,7 @@
     "symbol": "EXC",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3165,7 +3165,7 @@
     "symbol": "BIIB",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3199,7 +3199,7 @@
     "symbol": "AZN",
     "ok": true,
     "bars": 3483,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3267,7 +3267,7 @@
     "symbol": "ROST",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3301,7 +3301,7 @@
     "symbol": "IDXX",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3335,7 +3335,7 @@
     "symbol": "EA",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3471,7 +3471,7 @@
     "symbol": "XEL",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3505,7 +3505,7 @@
     "symbol": "DXCM",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3539,7 +3539,7 @@
     "symbol": "BKR",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3573,7 +3573,7 @@
     "symbol": "CTAS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3607,7 +3607,7 @@
     "symbol": "DLTR",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3641,7 +3641,7 @@
     "symbol": "TEAM",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3675,7 +3675,7 @@
     "symbol": "WDAY",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3777,7 +3777,7 @@
     "symbol": "VRSK",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3811,7 +3811,7 @@
     "symbol": "CCEP",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3845,7 +3845,7 @@
     "symbol": "CDW",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3947,7 +3947,7 @@
     "symbol": "SIRI",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3981,7 +3981,7 @@
     "symbol": "JD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4015,7 +4015,7 @@
     "symbol": "ILMN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4049,7 +4049,7 @@
     "symbol": "LULU",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4117,7 +4117,7 @@
     "symbol": "MTCH",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4151,7 +4151,7 @@
     "symbol": "FOXA",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4185,7 +4185,7 @@
     "symbol": "FOX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4219,7 +4219,7 @@
     "symbol": "WBD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4287,7 +4287,7 @@
     "symbol": "TTD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4355,7 +4355,7 @@
     "symbol": "CSX",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4389,7 +4389,7 @@
     "symbol": "LIN",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4423,7 +4423,7 @@
     "symbol": "PLTR",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4695,7 +4695,7 @@
     "symbol": "TRX-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -4797,7 +4797,7 @@
     "symbol": "BCH-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -4831,7 +4831,7 @@
     "symbol": "UNI-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -4865,7 +4865,7 @@
     "symbol": "ATOM-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -4933,7 +4933,7 @@
     "symbol": "NEAR-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -4967,7 +4967,7 @@
     "symbol": "ALGO-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5069,7 +5069,7 @@
     "symbol": "ARB-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5103,7 +5103,7 @@
     "symbol": "OP-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5137,7 +5137,7 @@
     "symbol": "SUI-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5171,7 +5171,7 @@
     "symbol": "INJ-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5205,7 +5205,7 @@
     "symbol": "IMX-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5239,7 +5239,7 @@
     "symbol": "TIA-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5273,7 +5273,7 @@
     "symbol": "SEI-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "30m",
     "category": "CRYPTO",
     "params": {
@@ -5307,7 +5307,7 @@
     "symbol": "AAL",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5375,7 +5375,7 @@
     "symbol": "ABBV",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5409,7 +5409,7 @@
     "symbol": "ABI.BR",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5443,7 +5443,7 @@
     "symbol": "ABT",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5477,7 +5477,7 @@
     "symbol": "AD.AS",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5511,7 +5511,7 @@
     "symbol": "ADM",
     "ok": true,
     "bars": 3475,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5545,7 +5545,7 @@
     "symbol": "ADS.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5613,7 +5613,7 @@
     "symbol": "AIR.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5647,7 +5647,7 @@
     "symbol": "AJG",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5681,7 +5681,7 @@
     "symbol": "AKAM",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5715,7 +5715,7 @@
     "symbol": "ALV.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5783,7 +5783,7 @@
     "symbol": "ARM",
     "ok": true,
     "bars": 4737,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5817,7 +5817,7 @@
     "symbol": "ASML.AS",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5851,7 +5851,7 @@
     "symbol": "AZN.L",
     "ok": true,
     "bars": 4523,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5885,7 +5885,7 @@
     "symbol": "BA",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5919,7 +5919,7 @@
     "symbol": "BABA",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5953,7 +5953,7 @@
     "symbol": "BAM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5987,7 +5987,7 @@
     "symbol": "BARC.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6021,7 +6021,7 @@
     "symbol": "BATS.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6055,7 +6055,7 @@
     "symbol": "BAYN.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6089,7 +6089,7 @@
     "symbol": "BBVA.MC",
     "ok": true,
     "bars": 4554,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6225,7 +6225,7 @@
     "symbol": "BHP",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6259,7 +6259,7 @@
     "symbol": "BIDU",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6293,7 +6293,7 @@
     "symbol": "BLK",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6395,7 +6395,7 @@
     "symbol": "BN.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6429,7 +6429,7 @@
     "symbol": "BNP.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6463,7 +6463,7 @@
     "symbol": "BNTX",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6497,7 +6497,7 @@
     "symbol": "BP.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6531,7 +6531,7 @@
     "symbol": "BRBY.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6599,7 +6599,7 @@
     "symbol": "BX",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6667,7 +6667,7 @@
     "symbol": "C",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6701,7 +6701,7 @@
     "symbol": "CAG",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6735,7 +6735,7 @@
     "symbol": "CAH",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6769,7 +6769,7 @@
     "symbol": "CAT",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6803,7 +6803,7 @@
     "symbol": "CBK.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6837,7 +6837,7 @@
     "symbol": "CCJ",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6871,7 +6871,7 @@
     "symbol": "CDI.PA",
     "ok": true,
     "bars": 4566,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6939,7 +6939,7 @@
     "symbol": "CHPT",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7007,7 +7007,7 @@
     "symbol": "CMG",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7041,7 +7041,7 @@
     "symbol": "CNC",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7109,7 +7109,7 @@
     "symbol": "CNQ",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7143,7 +7143,7 @@
     "symbol": "COF",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7211,7 +7211,7 @@
     "symbol": "CP",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7245,7 +7245,7 @@
     "symbol": "CPRT",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7279,7 +7279,7 @@
     "symbol": "CRM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7313,7 +7313,7 @@
     "symbol": "CRON",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7381,7 +7381,7 @@
     "symbol": "CVS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7415,7 +7415,7 @@
     "symbol": "CVX",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7483,7 +7483,7 @@
     "symbol": "DASH",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7517,7 +7517,7 @@
     "symbol": "DBK.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7585,7 +7585,7 @@
     "symbol": "DD",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7619,7 +7619,7 @@
     "symbol": "DE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7653,7 +7653,7 @@
     "symbol": "DGE.L",
     "ok": true,
     "bars": 4523,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7687,7 +7687,7 @@
     "symbol": "DHI",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7721,7 +7721,7 @@
     "symbol": "DHL.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7755,7 +7755,7 @@
     "symbol": "DIS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7823,7 +7823,7 @@
     "symbol": "DPZ",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7857,7 +7857,7 @@
     "symbol": "DTE.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7925,7 +7925,7 @@
     "symbol": "EBAY",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7959,7 +7959,7 @@
     "symbol": "EL",
     "ok": true,
     "bars": 3466,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7993,7 +7993,7 @@
     "symbol": "ELV",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8027,7 +8027,7 @@
     "symbol": "ENB",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8061,7 +8061,7 @@
     "symbol": "ENG.MC",
     "ok": true,
     "bars": 4555,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8129,7 +8129,7 @@
     "symbol": "EQIX",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8163,7 +8163,7 @@
     "symbol": "ETSY",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8197,7 +8197,7 @@
     "symbol": "EXPE",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8231,7 +8231,7 @@
     "symbol": "F",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8265,7 +8265,7 @@
     "symbol": "FCX",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8299,7 +8299,7 @@
     "symbol": "FICO",
     "ok": true,
     "bars": 3475,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8435,7 +8435,7 @@
     "symbol": "GE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8503,7 +8503,7 @@
     "symbol": "GIS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8537,7 +8537,7 @@
     "symbol": "GLEN.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8571,7 +8571,7 @@
     "symbol": "GM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8673,7 +8673,7 @@
     "symbol": "GS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8707,7 +8707,7 @@
     "symbol": "GSK.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8741,7 +8741,7 @@
     "symbol": "GWO.TO",
     "ok": true,
     "bars": 3495,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8775,7 +8775,7 @@
     "symbol": "HCA",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8809,7 +8809,7 @@
     "symbol": "HD",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8843,7 +8843,7 @@
     "symbol": "HEIA.AS",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8911,7 +8911,7 @@
     "symbol": "HLT",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8979,7 +8979,7 @@
     "symbol": "HOOD",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9013,7 +9013,7 @@
     "symbol": "HP",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9047,7 +9047,7 @@
     "symbol": "HSBA.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9081,7 +9081,7 @@
     "symbol": "HUM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9115,7 +9115,7 @@
     "symbol": "IBE.MC",
     "ok": true,
     "bars": 4549,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9149,7 +9149,7 @@
     "symbol": "IBM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9183,7 +9183,7 @@
     "symbol": "ICE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9217,7 +9217,7 @@
     "symbol": "IMB.L",
     "ok": true,
     "bars": 4523,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9251,7 +9251,7 @@
     "symbol": "IMBBY",
     "ok": true,
     "bars": 3270,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9285,7 +9285,7 @@
     "symbol": "ITX.MC",
     "ok": true,
     "bars": 4555,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9319,7 +9319,7 @@
     "symbol": "JNJ",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9353,7 +9353,7 @@
     "symbol": "JPM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9387,7 +9387,7 @@
     "symbol": "KKR",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9455,7 +9455,7 @@
     "symbol": "KMI",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9489,7 +9489,7 @@
     "symbol": "KO",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9523,7 +9523,7 @@
     "symbol": "LCID",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9557,7 +9557,7 @@
     "symbol": "LEN",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9591,7 +9591,7 @@
     "symbol": "LHA.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9625,7 +9625,7 @@
     "symbol": "LLY",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9693,7 +9693,7 @@
     "symbol": "LMT",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9727,7 +9727,7 @@
     "symbol": "LVS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9761,7 +9761,7 @@
     "symbol": "MA",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9829,7 +9829,7 @@
     "symbol": "MC.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9897,7 +9897,7 @@
     "symbol": "MCK",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9965,7 +9965,7 @@
     "symbol": "MNDI.L",
     "ok": true,
     "bars": 4513,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9999,7 +9999,7 @@
     "symbol": "MO",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10033,7 +10033,7 @@
     "symbol": "MONC.MI",
     "ok": true,
     "bars": 4525,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10067,7 +10067,7 @@
     "symbol": "MQG.AX",
     "ok": true,
     "bars": 3532,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10101,7 +10101,7 @@
     "symbol": "MRK",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10135,7 +10135,7 @@
     "symbol": "MS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10169,7 +10169,7 @@
     "symbol": "NEE",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10203,7 +10203,7 @@
     "symbol": "NEM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10237,7 +10237,7 @@
     "symbol": "NG.L",
     "ok": true,
     "bars": 4523,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10305,7 +10305,7 @@
     "symbol": "NKE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10339,7 +10339,7 @@
     "symbol": "NOW",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10373,7 +10373,7 @@
     "symbol": "NTDOY",
     "ok": true,
     "bars": 3473,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10441,7 +10441,7 @@
     "symbol": "NVO",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10509,7 +10509,7 @@
     "symbol": "NXT.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10611,7 +10611,7 @@
     "symbol": "ORCL",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10645,7 +10645,7 @@
     "symbol": "PAH3.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10679,7 +10679,7 @@
     "symbol": "PCG",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10781,7 +10781,7 @@
     "symbol": "PGR",
     "ok": true,
     "bars": 3480,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10883,7 +10883,7 @@
     "symbol": "PINS",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -10985,7 +10985,7 @@
     "symbol": "PM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11019,7 +11019,7 @@
     "symbol": "PRX.AS",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11087,7 +11087,7 @@
     "symbol": "QAN.AX",
     "ok": true,
     "bars": 3515,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11121,7 +11121,7 @@
     "symbol": "RACE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11155,7 +11155,7 @@
     "symbol": "RBLX",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11189,7 +11189,7 @@
     "symbol": "RCL",
     "ok": true,
     "bars": 3480,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11257,7 +11257,7 @@
     "symbol": "RI.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11291,7 +11291,7 @@
     "symbol": "RIO.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11393,7 +11393,7 @@
     "symbol": "RL",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11427,7 +11427,7 @@
     "symbol": "RNO.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11495,7 +11495,7 @@
     "symbol": "RTX",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11563,7 +11563,7 @@
     "symbol": "RY",
     "ok": true,
     "bars": 3466,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11597,7 +11597,7 @@
     "symbol": "SAF.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11631,7 +11631,7 @@
     "symbol": "SAN.MC",
     "ok": true,
     "bars": 4555,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11665,7 +11665,7 @@
     "symbol": "SAN.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11699,7 +11699,7 @@
     "symbol": "SAP.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11733,7 +11733,7 @@
     "symbol": "SCHW",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11801,7 +11801,7 @@
     "symbol": "SIE.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11835,7 +11835,7 @@
     "symbol": "SLB",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11869,7 +11869,7 @@
     "symbol": "SLF",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11937,7 +11937,7 @@
     "symbol": "SNAP",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -11971,7 +11971,7 @@
     "symbol": "SNOW",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12107,7 +12107,7 @@
     "symbol": "SPOT",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12141,7 +12141,7 @@
     "symbol": "SRE",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12175,7 +12175,7 @@
     "symbol": "STX",
     "ok": true,
     "bars": 3475,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12209,7 +12209,7 @@
     "symbol": "SU.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12243,7 +12243,7 @@
     "symbol": "SWKS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12311,7 +12311,7 @@
     "symbol": "T",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12345,7 +12345,7 @@
     "symbol": "TD",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12413,7 +12413,7 @@
     "symbol": "TEVA",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12447,7 +12447,7 @@
     "symbol": "TJX",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12481,7 +12481,7 @@
     "symbol": "TLRY",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12549,7 +12549,7 @@
     "symbol": "TMO",
     "ok": true,
     "bars": 3475,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12617,7 +12617,7 @@
     "symbol": "TRI",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12651,7 +12651,7 @@
     "symbol": "TSM",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12685,7 +12685,7 @@
     "symbol": "TTE.PA",
     "ok": true,
     "bars": 4567,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12719,7 +12719,7 @@
     "symbol": "TWLO",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12753,7 +12753,7 @@
     "symbol": "UAL",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12787,7 +12787,7 @@
     "symbol": "UBER",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12889,7 +12889,7 @@
     "symbol": "UNH",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12923,7 +12923,7 @@
     "symbol": "UNP",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -12957,7 +12957,7 @@
     "symbol": "UPS",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13025,7 +13025,7 @@
     "symbol": "V",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13059,7 +13059,7 @@
     "symbol": "VALE",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13127,7 +13127,7 @@
     "symbol": "VOD.L",
     "ok": true,
     "bars": 4523,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13161,7 +13161,7 @@
     "symbol": "VOW3.DE",
     "ok": true,
     "bars": 4535,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13195,7 +13195,7 @@
     "symbol": "VZ",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13229,7 +13229,7 @@
     "symbol": "W",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13263,7 +13263,7 @@
     "symbol": "WB",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13297,7 +13297,7 @@
     "symbol": "WDC",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13331,7 +13331,7 @@
     "symbol": "WELL",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13365,7 +13365,7 @@
     "symbol": "WFC",
     "ok": true,
     "bars": 3476,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13399,7 +13399,7 @@
     "symbol": "WMT",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13433,7 +13433,7 @@
     "symbol": "XOM",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13467,7 +13467,7 @@
     "symbol": "XPEV",
     "ok": true,
     "bars": 3476,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13501,7 +13501,7 @@
     "symbol": "Z",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "İYİ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13569,7 +13569,7 @@
     "symbol": "ZM",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -13603,7 +13603,7 @@
     "symbol": "ZTS",
     "ok": true,
     "bars": 3478,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "MÜKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
