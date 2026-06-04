@@ -178,6 +178,9 @@ def scan_category(category, mode, grid, bayes):
 
     results = []
     for sym in syms:
+        # Grid (FY) UYUMSUZ ise hiç gösterme (kullanıcı talebi)
+        if grid.get(sym, {}).get("ok") and grid[sym].get("rating") == "UYUMSUZ":
+            continue
         # Bayes önceliği
         params_info, src = get_best_params(sym, grid, bayes)
         if not params_info:

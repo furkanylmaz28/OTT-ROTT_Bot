@@ -152,6 +152,16 @@ def analyze_and_format(sym: str) -> str:
         return f"❌ Analiz modülü yüklenemedi: {e}"
 
     # Parametreleri yükle (Bayes önceliği)
+    # Grid (FY) UYUMSUZ kontrolü — kullanıcı talebi: uyumsuz hisse gösterme
+    try:
+        with open("per_symbol_params.json", encoding="utf-8") as f:
+            _g = json.load(f)
+        if _g.get(sym, {}).get("ok") and _g[sym].get("rating") == "UYUMSUZ":
+            return (f"⛔ <b>{sym}</b> — sistem bu hissede ÇALIŞMIYOR (UYUMSUZ).\n"
+                     f"Geçmişte zarar etmiş. Bu hissede işlem önerilmez.")
+    except Exception:
+        pass
+
     params_info = None
     src = None
     try:

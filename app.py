@@ -416,6 +416,20 @@ def _load_bayes_sym():
         return json.load(f)
 
 
+@st.cache_data(ttl=3600, show_spinner=False)
+def _uyumsuz_symbols():
+    """Grid (FY) bot'a göre UYUMSUZ olan semboller — hiçbir yerde gösterilmez.
+    Kullanıcı talebi: sistemin zarar ettiği hisseler gizlensin."""
+    grid = _load_per_sym()
+    return {s for s, v in grid.items()
+            if v.get("ok") and v.get("rating") == "UYUMSUZ"}
+
+
+def _is_uyumsuz(sym):
+    """Sembol Grid'e göre UYUMSUZ mu?"""
+    return sym in _uyumsuz_symbols()
+
+
 def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: float = 1.0):
     """interval=None → kategoriye göre otomatik (CRYPTO=30m, diğer=1h)
     warn_threshold_pct: 'ÇIK YAKIN' uyarısı eşiği (%) — fiyat trail stop'a bu kadar yakınsa uyar.
@@ -1127,7 +1141,8 @@ with tab_consensus:
 
         # Hem grid hem bayes'te olan sembolleri tara
         common_syms = [s for s in _bayes
-                        if _bayes[s].get("ok") and _grid.get(s, {}).get("ok")]
+                        if _bayes[s].get("ok") and _grid.get(s, {}).get("ok")
+                        and _grid[s].get("rating") != "UYUMSUZ"]  # UYUMSUZ gizle
         # Kategoriye göre filtre (BIST veya NASDAQ butonuna basıldı)
         if cons_category == "BIST":
             common_syms = [s for s in common_syms if s.upper().endswith(".IS")]
@@ -1477,9 +1492,9 @@ with tab_morning:
 
     if _run_morning:
         if run_morning_bist:
-            symbols = list(BIST)
+            symbols = [s for s in BIST if not _is_uyumsuz(s)]
         else:
-            symbols = list(NASDAQ)
+            symbols = [s for s in NASDAQ if not _is_uyumsuz(s)]
 
         prog = st.progress(0, text="taranıyor...")
         candidates = []
@@ -1691,11 +1706,11 @@ with tab_scan:
                                        key="scan_nasdaq_btn")
     run_scan = run_scan_bist or run_scan_nasdaq
 
-    # Hangi kategori tarandı?
+    # Hangi kategori tarandı? (UYUMSUZ semboller filtrelenir)
     if run_scan_bist:
-        symbols = list(BIST)
+        symbols = [s for s in BIST if not _is_uyumsuz(s)]
     elif run_scan_nasdaq:
-        symbols = list(NASDAQ)
+        symbols = [s for s in NASDAQ if not _is_uyumsuz(s)]
     else:
         symbols = []
 
@@ -1821,9 +1836,9 @@ with tab_sim:
     run_prop = run_prop_bist or run_prop_nasdaq
 
     if run_prop_bist:
-        prop_symbols = list(BIST)
+        prop_symbols = [s for s in BIST if not _is_uyumsuz(s)]
     elif run_prop_nasdaq:
-        prop_symbols = list(NASDAQ)
+        prop_symbols = [s for s in NASDAQ if not _is_uyumsuz(s)]
     else:
         prop_symbols = []
 
@@ -2284,10 +2299,12 @@ with tab_alt:
             except Exception:
                 return "—"
 
-        # Filtre uygulanmış sembol listesi
+        # Filtre uygulanmış sembol listesi (UYUMSUZ gizlenir)
         filtered_syms = []
         for sym, bayes_r in bayes_data.items():
             if not bayes_r.get("ok"):
+                continue
+            if _is_uyumsuz(sym):   # Grid UYUMSUZ → gösterme
                 continue
             in_gcm = sym in GCM_NASDAQ
             if alt_filter == "BIST" and not sym.endswith(".IS"):
@@ -2609,10 +2626,10 @@ rott_percent  = 7.0     # ROTT %
                                        key="pure_nasdaq_btn")
 
     if run_pure_bist:
-        pure_syms = list(BIST)
+        pure_syms = [s for s in BIST if not _is_uyumsuz(s)]
         pure_cat_name = "BIST"
     elif run_pure_nasdaq:
-        pure_syms = list(NASDAQ)
+        pure_syms = [s for s in NASDAQ if not _is_uyumsuz(s)]
         pure_cat_name = "NASDAQ"
     else:
         pure_syms = []
@@ -2756,6 +2773,8 @@ with tab_info:
         all_rows = []
         all_syms = set(list(_bayes_data.keys()) + list(_grid_data.keys()))
         for sym in all_syms:
+            if _is_uyumsuz(sym):   # Grid UYUMSUZ → gösterme
+                continue
             # Bayes önceliği
             src = _bayes_data.get(sym) if _bayes_data.get(sym, {}).get("ok") else _grid_data.get(sym)
             if not src or not src.get("ok"):
