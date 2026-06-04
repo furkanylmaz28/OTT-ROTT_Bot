@@ -161,8 +161,9 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
     # 2) yfinance fallback
     try:
         import yfinance as yf
-        # interval map: 5m, 15m, 60m gibi
-        yf_int = {"5m":"5m", "15m":"15m", "30m":"30m", "1h":"60m", "4h":"60m", "1d":"1d"}.get(interval, "5m")
+        # yfinance 4h sunmaz → 60m çekip 4 saate resample edilir (yanlış TF bug fix).
+        yf_int = {"5m":"5m", "15m":"15m", "30m":"30m", "1h":"60m",
+                  "4h":"60m", "1d":"1d"}.get(interval, "5m")
         period = "60d" if interval in ("1m","3m","5m","15m","30m") else "2y"
         df = yf.download(symbol, period=period, interval=yf_int,
                           auto_adjust=False, progress=False, threads=False)
@@ -171,7 +172,13 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
             df.columns = [c[0] for c in df.columns]
         df = df.rename(columns=str.lower)
         keep = [c for c in ["open","high","low","close","volume"] if c in df.columns]
-        return df[keep].dropna()
+        df = df[keep].dropna()
+        # 4h istendiyse 60m veriyi 4 saate topla (yoksa 1h veriyi 4h sanardı)
+        if interval == "4h" and not df.empty:
+            agg = {"open":"first","high":"max","low":"min","close":"last","volume":"sum"}
+            agg = {k:v for k,v in agg.items() if k in df.columns}
+            df = df.resample("4h").agg(agg).dropna()
+        return df
     except Exception:
         return pd.DataFrame()
 

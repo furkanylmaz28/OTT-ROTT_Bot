@@ -44,7 +44,7 @@ on:
         options: ["false", "true"]
 
 permissions:
-  contents: read
+  contents: write   # notify_state_scheduled.json commit için (spam koruması persist)
 
 # Aynı anda iki çalışma olmasın
 concurrency:
@@ -91,3 +91,19 @@ jobs:
       - name: .env'i sil (güvenlik)
         if: always()
         run: rm -f .env
+
+      - name: notify_state'i commit et (spam koruması persist)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -f notify_state_scheduled.json ]; then
+            git add notify_state_scheduled.json
+            if git diff --staged --quiet; then
+              echo "State değişmedi."
+            else
+              git commit -m "auto: notify_state $(date -u '+%H:%M')"
+              git pull --rebase origin main || true
+              git push || echo "push başarısız (sonraki koşu tekrar dener)"
+            fi
+          fi

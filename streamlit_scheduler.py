@@ -62,18 +62,11 @@ def _get_scheduler():
         return None
 
     sched = BackgroundScheduler(timezone="UTC", daemon=True)
-    # 1) Notify (her 10 dk) — saate göre tarama + Telegram bildirim
-    sched.add_job(
-        _notify_tick,
-        trigger="cron",
-        minute="*/10",
-        id="ott_notify",
-        replace_existing=True,
-        max_instances=1,
-        coalesce=True,
-        misfire_grace_time=300,
-    )
-    # 2) Bot polling (her 30 sn) — kullanıcının Telegram mesajlarını işle
+    # NOT: Bildirim (notify) job'ı KALDIRILDI — çift mesaj bug fix.
+    # Telegram bildirimleri TEK kaynaktan: GitHub Actions (notify_scheduled.yml).
+    # Burada sadece interaktif bot polling kalır (kullanıcı sembol sorgusu).
+    #
+    # Bot polling (her 30 sn) — kullanıcının Telegram mesajlarını işle
     sched.add_job(
         _bot_polling_tick,
         trigger="interval",
@@ -86,7 +79,7 @@ def _get_scheduler():
     )
     sched.start()
     log.info("[scheduler] Background scheduler başladı "
-             "(notify: 10 dk · bot polling: 30 sn)")
+             "(SADECE bot polling: 30 sn · notify → GitHub Actions)")
     return sched
 
 

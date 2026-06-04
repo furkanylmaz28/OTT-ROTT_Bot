@@ -173,7 +173,8 @@ if __name__ == "__main__":
     recs = get_safe_recommendations()
     print(f"\n🛡️ GÜVENLİ MOD — {len(recs)} sembol uygun\n")
     for r in recs:
+        _stop = r['Stop'] if r['Stop'] else 0.0
         print(f"  {r['Sembol']:<10} {r['Yön']:<6} fiyat={r['Fiyat']:.4f}  "
-              f"stop={r['Stop']:.4f if r['Stop'] else 0}  "
+              f"stop={_stop:.4f}  "
               f"BT={r['BT Getiri %']:+.1f}% PF={r['BT PF']:.2f}  "
               f"win={r['BT Win %']:.0f}%  ({r['Onay']})")
