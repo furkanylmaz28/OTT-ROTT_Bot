@@ -383,8 +383,11 @@ def main():
     for sh, sm, mode, cat in SCHEDULE:
         if sh != h:
             continue
+        # Pipedream 15 dk aralıkla tetikliyor (offset :11,:26,:41,:56).
+        # Hedef saate 0-14 dk içindeki ilk tetik yakalar.
+        # Spam koruması (3 saat) tekrar göndermeyi zaten engelliyor.
         diff = m - sm
-        if 0 <= diff < 10:
+        if 0 <= diff < 15:
             matches.append((mode, cat))
 
     # TEST MODU — env var WORKFLOW_TEST=1 ise şu anki saati ekle
