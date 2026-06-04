@@ -145,7 +145,7 @@ def analyze_one(sym, params):
         p.setdefault("rott_x1", 30); p.setdefault("rott_x2", 1000)
         p.setdefault("rott_percent", 7.0)
         s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **p)
-        last = s.iloc[-1]
+        last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]  # son KAPANMIŞ bar (oluşan mum değil)
         cur = float(df["close"].iloc[-1])
         sig = signal_label(last)
         if sig is None:

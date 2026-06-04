@@ -441,7 +441,9 @@ def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: fl
     if df.empty or len(df) < 1500:
         return None
     s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **PARAMS)
-    last = s.iloc[-1]
+    # Sinyal = son KAPANMIŞ bar (iloc[-2]). iloc[-1] piyasa açıkken oluşan/eksik mum,
+    # backtest kapanmış bar varsayar → tutarlılık için -2. Fiyat ise canlı (-1).
+    last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]
     cur = float(df["close"].iloc[-1])
 
     if last["cond_buy_long"]:        pos = "🟢 LONG AÇ"
@@ -827,7 +829,7 @@ with tab_portfolio:
                                 p_.setdefault("rott_percent", 7.0)
                                 s_ = sig_full.build_signals_full(
                                     df_l["close"], df_l["high"], df_l["low"], **p_)
-                                lst = s_.iloc[-1]
+                                lst = s_.iloc[-2] if len(s_) >= 2 else s_.iloc[-1]  # kapanmış bar
                                 # Pozisyon yönüne göre bağlamlı sinyal
                                 if row["Yön"] == "LONG":
                                     # LONG pozisyondaysa → LONG perspektifi
@@ -1178,8 +1180,10 @@ with tab_consensus:
                     p_.setdefault("rott_percent", 7.0)
                 sg = sig_full.build_signals_full(df_l["close"], df_l["high"], df_l["low"], **gp)
                 sb = sig_full.build_signals_full(df_l["close"], df_l["high"], df_l["low"], **bp)
-                lg = _lbl(sg.iloc[-1])
-                lb = _lbl(sb.iloc[-1])
+                # Son KAPANMIŞ bar (iloc[-2]) — oluşan mum sinyal kaymasını önler
+                _ix = -2 if len(sg) >= 2 else -1
+                lg = _lbl(sg.iloc[_ix])
+                lb = _lbl(sb.iloc[_ix])
                 cur = float(df_l["close"].iloc[-1])
 
                 # Konsensüs türü
@@ -1206,8 +1210,8 @@ with tab_consensus:
                     cons_type = "⏳ tartışmalı / bekle"
                     side = None; consensus = False
 
-                tott_up_v = float(sb.iloc[-1]["tott_up"]) if not pd.isna(sb.iloc[-1]["tott_up"]) else None
-                tott_dn_v = float(sb.iloc[-1]["tott_dn"]) if not pd.isna(sb.iloc[-1]["tott_dn"]) else None
+                tott_up_v = float(sb.iloc[_ix]["tott_up"]) if not pd.isna(sb.iloc[_ix]["tott_up"]) else None
+                tott_dn_v = float(sb.iloc[_ix]["tott_dn"]) if not pd.isna(sb.iloc[_ix]["tott_dn"]) else None
                 # Stop seçimi yöne göre (TOTT karşı tetik = trail stop)
                 stop = tott_dn_v if side == "LONG" else (tott_up_v if side == "SHORT" else None)
                 risk_pct = (abs(cur - stop) / cur * 100) if stop else None
@@ -1521,7 +1525,7 @@ with tab_morning:
                 prog.progress((i+1)/len(symbols))
                 continue
 
-            last = s.iloc[-1]
+            last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]  # kapanmış bar
             cur = float(df["close"].iloc[-1])
 
             # Sinyal var mı?
@@ -2286,7 +2290,7 @@ with tab_alt:
                 p.setdefault("rott_x1", 30); p.setdefault("rott_x2", 1000)
                 p.setdefault("rott_percent", 7.0)
                 s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **p)
-                last = s.iloc[-1]
+                last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]  # kapanmış bar
                 if last["cond_buy_long"]:       return "🟢 LONG AÇ"
                 if last["cond_buy_short"]:      return "🔴 SHORT AÇ"
                 if last["cond_exit_long"]:      return "🟡 LONG ÇIK"
@@ -2497,7 +2501,8 @@ with tab_alt:
                         # Bayes Bot sinyali
                         s_bayes = sig_full.build_signals_full(
                             df_live["close"], df_live["high"], df_live["low"], **bayes_params)
-                        last_b = s_bayes.iloc[-1]
+                        _ixl = -2 if len(s_bayes) >= 2 else -1  # kapanmış bar
+                        last_b = s_bayes.iloc[_ixl]
                         cur_l = float(df_live["close"].iloc[-1])
                         bayes_sig = _signal_label(last_b)
 
@@ -2505,7 +2510,7 @@ with tab_alt:
                         if grid_params:
                             s_grid = sig_full.build_signals_full(
                                 df_live["close"], df_live["high"], df_live["low"], **grid_params)
-                            fy_sig = _signal_label(s_grid.iloc[-1])
+                            fy_sig = _signal_label(s_grid.iloc[_ixl])
                         else:
                             fy_sig = "—"
 
@@ -2658,7 +2663,7 @@ rott_percent  = 7.0     # ROTT %
                     continue
                 s_p = sig_full.build_signals_full(
                     df_p["close"], df_p["high"], df_p["low"], **PURE_PARAMS)
-                last = s_p.iloc[-1]
+                last = s_p.iloc[-2] if len(s_p) >= 2 else s_p.iloc[-1]  # kapanmış bar
                 cur = float(df_p["close"].iloc[-1])
                 if last["cond_buy_long"]:        sig = "🟢 LONG AÇ"
                 elif last["cond_buy_short"]:     sig = "🔴 SHORT AÇ"
