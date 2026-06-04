@@ -92,18 +92,17 @@ jobs:
         if: always()
         run: rm -f .env
 
-      - name: notify_state'i commit et (spam koruması persist)
+      - name: State + canlı performans verisini commit et
         if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if [ -f notify_state_scheduled.json ]; then
-            git add notify_state_scheduled.json
-            if git diff --staged --quiet; then
-              echo "State değişmedi."
-            else
-              git commit -m "auto: notify_state $(date -u '+%H:%M')"
-              git pull --rebase origin main || true
-              git push || echo "push başarısız (sonraki koşu tekrar dener)"
-            fi
+          # notify_state (spam koruması) + forward-validation (canlı trade kaydı)
+          git add notify_state_scheduled.json live_positions.json live_trades.json 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "Değişiklik yok."
+          else
+            git commit -m "auto: state + canlı performans $(date -u '+%H:%M')"
+            git pull --rebase origin main || true
+            git push || echo "push başarısız (sonraki koşu tekrar dener)"
           fi

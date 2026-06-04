@@ -194,6 +194,13 @@ def scan_category(category, mode, grid, bayes):
         if not a:
             continue
 
+        # ── FORWARD-VALIDATION: canlı pozisyon durumunu kaydet (overfit kontrolü)
+        try:
+            import forward_validation as fv
+            fv.record_observation(sym, fv.signal_to_state(a["signal"]), a["price"])
+        except Exception:
+            pass
+
         # Mode'a göre filtre
         if mode == "konsensus":
             # Hem Grid hem Bayes aynı yön AÇ sinyali vermeli

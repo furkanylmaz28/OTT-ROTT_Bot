@@ -579,7 +579,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_portfolio, tab_consensus, tab_safe, tab_morning, tab_scan,
- tab_sim, tab_chart, tab_alt, tab_pure, tab_info) = st.tabs([
+ tab_sim, tab_chart, tab_alt, tab_pure, tab_live, tab_info) = st.tabs([
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "🛡️  Güvenli Mod",
@@ -589,6 +589,7 @@ st.markdown(f"""
     "📊  Detay Grafik",
     "🧪  Alternatif Bot Portföyü",
     "📐  Saf İndikatör",
+    "✅  Canlı Performans",
     "📖  Bilgi",
 ])
 
@@ -2724,6 +2725,100 @@ rott_percent  = 7.0     # ROTT %
             st.warning("📭 Hiç sinyal yok.")
     else:
         st.info("👆 BIST veya NASDAQ butonuna bas, tarama başlasın. 1-5 dk sürer.")
+
+
+with tab_live:
+    st.subheader("✅ Canlı Performans — Forward Validation")
+    st.caption("Backtest rating'i (MÜKEMMEL) geçmişe bakar, overfit olabilir. "
+                "Bu sekme botun **gerçek zamanlı sinyallerinin canlı sonucunu** gösterir. "
+                "Asıl güven göstergesi budur.")
+
+    with st.expander("ℹ️ Bu nasıl çalışır?"):
+        st.markdown("""
+        - Bot her tarama'da (GitHub Actions, saatte birkaç kez) her sembolün **anlık durumunu** kaydeder
+        - LONG AÇ → giriş, LONG ÇIK → çıkış olarak **trade'leri yeniden kurar**
+        - Her sembolün **canlı PF / win rate**'ini biriktirir
+        - **MÜKEMMEL rating yerine** buradaki gerçek sonuca güven
+
+        ⚠️ **Veri birikmesi 2-4 hafta sürer.** Sembol başına ≥5 trade olunca anlamlı olur.
+        Henüz az trade varsa rakamlar güvenilmez — sabırlı ol.
+
+        🎯 **Hedef:** Canlı PF > 1.2-1.5 kalan semboller = gerçekten çalışan sistem.
+        """)
+
+    try:
+        import forward_validation as fv
+        live_all = fv.all_live_stats(last_n=30)
+        open_pos = fv.open_positions()
+    except Exception as e:
+        live_all = {}
+        open_pos = {}
+        st.error(f"Forward-validation modülü yüklenemedi: {e}")
+
+    # Sadece trade'i olan semboller
+    live_rows = []
+    for sym, s in live_all.items():
+        if s["n"] > 0:
+            live_rows.append({
+                "Sembol": sym,
+                "Canlı Trade": s["n"],
+                "Canlı Win %": s["win_rate"],
+                "Canlı PF": s["pf"],
+                "Ort. Trade %": s["avg"],
+                "Toplam %": s["total"],
+            })
+
+    if not live_rows:
+        st.info("📭 Henüz canlı trade verisi yok.\n\n"
+                "Sistem her tarama'da sinyal durumunu kaydediyor. "
+                "İlk anlamlı veriler **birkaç gün–hafta** içinde birikecek. "
+                "GitHub Actions her tetiklendiğinde bu sayfa zenginleşir.")
+    else:
+        df_live = pd.DataFrame(live_rows).sort_values("Canlı PF", ascending=False).reset_index(drop=True)
+
+        # Min trade filtresi
+        fcol1, fcol2 = st.columns(2)
+        with fcol1:
+            min_n = st.slider("Min canlı trade sayısı", 1, 20, 5, key="live_min_n",
+                               help="Bu kadar trade'i olmayan semboller gizlenir (anlamsız)")
+        with fcol2:
+            min_pf = st.slider("Min canlı PF", 0.0, 3.0, 1.2, 0.1, key="live_min_pf",
+                                help="Bu PF'in altındaki semboller gizlenir")
+
+        df_show = df_live[(df_live["Canlı Trade"] >= min_n) & (df_live["Canlı PF"] >= min_pf)]
+
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Takip edilen sembol", len(df_live))
+        m2.metric(f"Filtreyi geçen (PF≥{min_pf})", len(df_show))
+        m3.metric("Açık pozisyon", len(open_pos))
+
+        if len(df_show) > 0:
+            st.markdown(f"### 🏆 Canlı KANITLANMIŞ semboller (PF≥{min_pf}, ≥{min_n} trade)")
+            st.dataframe(
+                df_show.style.format({
+                    "Canlı Win %": "{:.0f}%",
+                    "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
+                    "Ort. Trade %": "{:+.2f}%",
+                    "Toplam %": "{:+.1f}%",
+                }).background_gradient(subset=["Canlı PF"], cmap="Greens", vmin=0, vmax=3),
+                use_container_width=True, height=400,
+            )
+            st.success("Bu semboller **canlıda gerçekten** çalışıyor — backtest'e değil, "
+                        "gerçek sonuca dayanıyor. Trade için en güvenilir liste.")
+        else:
+            st.warning(f"Henüz PF≥{min_pf} + {min_n}+ trade kriterini geçen sembol yok. "
+                        "Veri birikmeye devam ediyor.")
+
+        with st.expander("📋 Tüm takip edilen semboller (ham)"):
+            st.dataframe(
+                df_live.style.format({
+                    "Canlı Win %": "{:.0f}%",
+                    "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
+                    "Ort. Trade %": "{:+.2f}%",
+                    "Toplam %": "{:+.1f}%",
+                }),
+                use_container_width=True, height=400,
+            )
 
 
 with tab_info:
