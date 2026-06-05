@@ -784,11 +784,6 @@
     "entry_price": 20.94,
     "entry_ts": "2026-06-05T01:58:47.817970+03:00"
   },
-  "PEKGY.IS": {
-    "side": "SHORT",
-    "entry_price": 12.6,
-    "entry_ts": "2026-06-05T01:58:49.866374+03:00"
-  },
   "PSGYO.IS": {
     "side": "LONG",
     "entry_price": 3.32,
@@ -924,9 +919,14 @@
     "entry_price": 109.3,
     "entry_ts": "2026-06-05T14:13:15.234743+03:00"
   },
-  "OBAMS.IS": {
+  "GUBRF.IS": {
     "side": "SHORT",
-    "entry_price": 7.49,
-    "entry_ts": "2026-06-05T14:13:28.617004+03:00"
+    "entry_price": 509.5,
+    "entry_ts": "2026-06-05T15:12:47.077845+03:00"
+  },
+  "MPARK.IS": {
+    "side": "SHORT",
+    "entry_price": 444.75,
+    "entry_ts": "2026-06-05T15:13:00.354744+03:00"
   }
 }
