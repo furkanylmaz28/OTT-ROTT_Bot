@@ -809,11 +809,6 @@
     "entry_price": 148.5,
     "entry_ts": "2026-06-05T01:58:39.037809+03:00"
   },
-  "MAGEN.IS": {
-    "side": "SHORT",
-    "entry_price": 56.45,
-    "entry_ts": "2026-06-05T01:58:42.085126+03:00"
-  },
   "MPARK.IS": {
     "side": "SHORT",
     "entry_price": 454.0,
@@ -919,11 +914,6 @@
     "entry_price": 3.03,
     "entry_ts": "2026-06-05T01:59:22.050724+03:00"
   },
-  "EFOR.IS": {
-    "side": "LONG",
-    "entry_price": 12.7,
-    "entry_ts": "2026-06-05T10:12:45.256352+03:00"
-  },
   "EUPWR.IS": {
     "side": "LONG",
     "entry_price": 90.0,
@@ -938,5 +928,10 @@
     "side": "SHORT",
     "entry_price": 7.62,
     "entry_ts": "2026-06-05T10:13:01.698995+03:00"
+  },
+  "KRDMD.IS": {
+    "side": "SHORT",
+    "entry_price": 39.46,
+    "entry_ts": "2026-06-05T10:42:59.683365+03:00"
   }
 }
