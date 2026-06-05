@@ -779,11 +779,6 @@
     "entry_price": 148.5,
     "entry_ts": "2026-06-05T01:58:39.037809+03:00"
   },
-  "MPARK.IS": {
-    "side": "SHORT",
-    "entry_price": 454.0,
-    "entry_ts": "2026-06-05T01:58:44.367497+03:00"
-  },
   "OYAKC.IS": {
     "side": "SHORT",
     "entry_price": 20.94,
@@ -913,5 +908,25 @@
     "side": "SHORT",
     "entry_price": 12.78,
     "entry_ts": "2026-06-05T12:43:17.458117+03:00"
+  },
+  "ASELS.IS": {
+    "side": "SHORT",
+    "entry_price": 364.75,
+    "entry_ts": "2026-06-05T14:12:33.042653+03:00"
+  },
+  "HALKB.IS": {
+    "side": "LONG",
+    "entry_price": 46.02,
+    "entry_ts": "2026-06-05T14:13:07.736064+03:00"
+  },
+  "KLRHO.IS": {
+    "side": "LONG",
+    "entry_price": 109.3,
+    "entry_ts": "2026-06-05T14:13:15.234743+03:00"
+  },
+  "OBAMS.IS": {
+    "side": "SHORT",
+    "entry_price": 7.49,
+    "entry_ts": "2026-06-05T14:13:28.617004+03:00"
   }
 }
