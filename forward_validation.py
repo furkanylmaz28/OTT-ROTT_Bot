@@ -48,59 +48,104 @@ def _save(path, data):
         pass
 
 
-def signal_to_state(signal: str) -> str | None:
-    """Sinyal etiketinden pozisyon durumu çıkar.
-    LONG AÇ/TUT → LONG, SHORT AÇ/TUT → SHORT, ÇIK → FLAT, diğer → None (gözlem yok)."""
+def is_session_open(sym: str, ts: str = None) -> bool:
+    """Sembolün borsası açık mı? (profesyonel trader sadece seansta işlem açar)
+    BIST (.IS): hafta içi 09:30-18:10 TR. NASDAQ/US: hafta içi 16:30-23:00 TR."""
+    dt = datetime.fromisoformat(ts) if ts else datetime.now(TR)
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=TR)
+    dt = dt.astimezone(TR)
+    if dt.weekday() >= 5:   # Cumartesi/Pazar kapalı
+        return False
+    hm = dt.hour * 60 + dt.minute
+    if sym.upper().endswith(".IS"):           # BIST
+        return 9 * 60 + 30 <= hm <= 18 * 60 + 10
+    if sym.upper().endswith("-USD"):          # crypto 7/24
+        return True
+    return 16 * 60 + 30 <= hm <= 23 * 60      # NASDAQ/US (TR saati)
+
+
+def signal_direction(signal: str) -> str:
+    """Sinyalin yön durumu: LONG / SHORT / FLAT."""
     if not signal:
-        return None
+        return "FLAT"
     if "ÇIK" in signal:
         return "FLAT"
     if "LONG" in signal and ("AÇ" in signal or "TUT" in signal):
         return "LONG"
     if "SHORT" in signal and ("AÇ" in signal or "TUT" in signal):
         return "SHORT"
+    return "FLAT"   # BEKLE / belirsiz
+
+
+def is_fresh_entry(signal: str) -> str | None:
+    """TAZE giriş sinyali mi? 'LONG'/'SHORT' döner, değilse None.
+    Profesyonel kural: sadece AÇ'ta gir, TUT'ta GİRME (geç trende atlama)."""
+    if not signal:
+        return None
+    if "LONG" in signal and "AÇ" in signal:
+        return "LONG"
+    if "SHORT" in signal and "AÇ" in signal:
+        return "SHORT"
     return None
 
 
-def record_observation(sym: str, state: str | None, price: float, ts: str = None):
-    """Bir sembolün anlık durumunu işle, durum makinesini güncelle.
-    state: 'LONG' / 'SHORT' / 'FLAT' / None (None → gözlem atlanır)."""
-    if state is None or not price or price <= 0:
+def record_observation(sym: str, signal: str, price: float, ts: str = None,
+                        stop: float = None, on_open=None):
+    """Profesyonel trader durum makinesi.
+      - Açık pozisyon YOKKEN: sadece TAZE AÇ sinyalinde gir (TUT'ta girme)
+      - Açık pozisyon VARKEN: yön ters dönerse/FLAT olursa kapat
+      - Seans kapalıysa hiç işlem yapma (BIST 09:30-18:10)
+    on_open: yeni pozisyon açılınca çağrılacak callback (Telegram için)."""
+    if not signal or not price or price <= 0:
         return
     ts = ts or datetime.now(TR).isoformat()
+    if not is_session_open(sym, ts):
+        return  # seans kapalı → işlem yok (gece raporu pozisyon açmaz)
+
+    direction = signal_direction(signal)   # LONG/SHORT/FLAT
+    fresh = is_fresh_entry(signal)         # LONG/SHORT/None (taze AÇ)
 
     positions = _load(POS_FILE, {})
     trades = _load(TRADES_FILE, [])
+    cur = positions.get(sym)
 
-    cur = positions.get(sym)  # {side, entry_price, entry_ts} veya None
-
-    def _close(side, entry_price, entry_ts):
-        if side == "LONG":
-            pnl = (price - entry_price) / entry_price
-        else:  # SHORT
-            pnl = (entry_price - price) / entry_price
+    def _close(side, ep, ets):
+        pnl = (price - ep) / ep if side == "LONG" else (ep - price) / ep
         trades.append({
             "sym": sym, "side": side,
-            "entry_price": entry_price, "exit_price": price,
-            "entry_ts": entry_ts, "exit_ts": ts,
+            "entry_price": ep, "exit_price": price,
+            "entry_ts": ets, "exit_ts": ts,
             "pnl_pct": round(pnl * 100, 3),
         })
 
+    def _open(side):
+        positions[sym] = {"side": side, "entry_price": price,
+                          "entry_ts": ts, "stop": stop}
+        if on_open:
+            try: on_open(sym, side, price, stop)
+            except Exception: pass
+
     if cur is None:
-        # Açık pozisyon yok
-        if state in ("LONG", "SHORT"):
-            positions[sym] = {"side": state, "entry_price": price, "entry_ts": ts}
+        # Açık yok → SADECE taze AÇ'ta gir
+        if fresh:
+            _open(fresh)
     else:
         side = cur["side"]
-        if state == side:
-            pass  # aynı yön → tut, değişiklik yok
-        elif state == "FLAT":
+        if direction == side:
+            # Aynı yön → tut, stop'u güncelle (trail)
+            if stop is not None:
+                positions[sym]["stop"] = stop
+        elif direction == "FLAT":
+            # ÇIK veya bekle → kapat
             _close(side, cur["entry_price"], cur["entry_ts"])
             del positions[sym]
         else:
-            # Ters yön → flip (kapat + yeni aç)
+            # Ters yön → kapat; taze AÇ ise yeni pozisyon aç (flip)
             _close(side, cur["entry_price"], cur["entry_ts"])
-            positions[sym] = {"side": state, "entry_price": price, "entry_ts": ts}
+            del positions[sym]
+            if fresh:
+                _open(fresh)
 
     _save(POS_FILE, positions)
     _save(TRADES_FILE, trades)

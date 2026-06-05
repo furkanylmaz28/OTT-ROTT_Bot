@@ -180,6 +180,22 @@ def analyze_one(sym, params):
         return None
 
 
+def _fv_telegram_on_open(sym, side, price, stop):
+    """Forward-validation yeni pozisyon açınca Telegram'a bildir (#8)."""
+    flag = "🇹🇷" if sym.upper().endswith(".IS") else "🇺🇸"
+    yon = "🟢 LONG AÇILDI" if side == "LONG" else "🔴 SHORT AÇILDI"
+    lines = [f"{flag} <b>{sym}</b> — {yon}",
+             f"📈 Giriş: <code>{price:.4f}</code>"]
+    if stop:
+        sp = abs(price - stop) / price * 100
+        lines.append(f"🛑 Stop: <code>{stop:.4f}</code> ({sp:.2f}%)")
+    lines.append(f"<i>{datetime.now(TR):%d/%m %H:%M} TR · canlı takip</i>")
+    try:
+        send_telegram("\n".join(lines))
+    except Exception:
+        pass
+
+
 def scan_category(category, mode, grid, bayes):
     """Kategorideki sembolleri tara → mode'a göre filtrele."""
     syms = sorted(set(list(grid.keys()) + list(bayes.keys())))
@@ -203,10 +219,13 @@ def scan_category(category, mode, grid, bayes):
         if not a:
             continue
 
-        # ── FORWARD-VALIDATION: canlı pozisyon durumunu kaydet (overfit kontrolü)
+        # ── FORWARD-VALIDATION: profesyonel trader takibi (sadece taze AÇ, seans içi)
         try:
             import forward_validation as fv
-            fv.record_observation(sym, fv.signal_to_state(a["signal"]), a["price"])
+            fv.record_observation(
+                sym, a["signal"], a["price"], stop=a.get("stop"),
+                on_open=_fv_telegram_on_open,   # yeni pozisyon → Telegram (#8)
+            )
         except Exception:
             pass
 
