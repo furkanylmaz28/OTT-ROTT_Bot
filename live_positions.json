@@ -684,20 +684,10 @@
     "entry_price": 101.1,
     "entry_ts": "2026-06-05T01:57:28.171224+03:00"
   },
-  "ANSGR.IS": {
-    "side": "SHORT",
-    "entry_price": 27.6,
-    "entry_ts": "2026-06-05T01:57:32.293617+03:00"
-  },
   "ARCLK.IS": {
     "side": "SHORT",
     "entry_price": 105.5,
     "entry_ts": "2026-06-05T01:57:34.755237+03:00"
-  },
-  "ASELS.IS": {
-    "side": "SHORT",
-    "entry_price": 362.25,
-    "entry_ts": "2026-06-05T01:57:37.407223+03:00"
   },
   "BIMAS.IS": {
     "side": "SHORT",
@@ -739,11 +729,6 @@
     "entry_price": 108.2,
     "entry_ts": "2026-06-05T01:58:13.835390+03:00"
   },
-  "ENKAI.IS": {
-    "side": "SHORT",
-    "entry_price": 94.95,
-    "entry_ts": "2026-06-05T01:58:16.403814+03:00"
-  },
   "EREGL.IS": {
     "side": "LONG",
     "entry_price": 40.1,
@@ -763,11 +748,6 @@
     "side": "SHORT",
     "entry_price": 205.9,
     "entry_ts": "2026-06-05T01:58:24.538188+03:00"
-  },
-  "GUBRF.IS": {
-    "side": "SHORT",
-    "entry_price": 522.5,
-    "entry_ts": "2026-06-05T01:58:26.343772+03:00"
   },
   "ISMEN.IS": {
     "side": "SHORT",
@@ -903,5 +883,35 @@
     "side": "SHORT",
     "entry_price": 50.85,
     "entry_ts": "2026-06-05T12:13:04.742726+03:00"
+  },
+  "CIMSA.IS": {
+    "side": "SHORT",
+    "entry_price": 50.3,
+    "entry_ts": "2026-06-05T12:42:42.702583+03:00"
+  },
+  "DAPGM.IS": {
+    "side": "LONG",
+    "entry_price": 10.49,
+    "entry_ts": "2026-06-05T12:42:44.817861+03:00"
+  },
+  "EFOR.IS": {
+    "side": "LONG",
+    "entry_price": 12.68,
+    "entry_ts": "2026-06-05T12:42:48.244672+03:00"
+  },
+  "KUYAS.IS": {
+    "side": "SHORT",
+    "entry_price": 75.65,
+    "entry_ts": "2026-06-05T12:43:06.844036+03:00"
+  },
+  "SELEC.IS": {
+    "side": "SHORT",
+    "entry_price": 94.5,
+    "entry_ts": "2026-06-05T12:43:16.809279+03:00"
+  },
+  "SKBNK.IS": {
+    "side": "SHORT",
+    "entry_price": 12.78,
+    "entry_ts": "2026-06-05T12:43:17.458117+03:00"
   }
 }
