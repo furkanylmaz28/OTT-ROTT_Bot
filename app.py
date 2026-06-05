@@ -2751,10 +2751,19 @@ with tab_live:
         open_pos = {}
         st.error(f"Forward-validation modülü yüklenemedi: {e}")
 
-    # Sadece trade'i olan semboller
+    # ── Kategori filtresi (BIST / NASDAQ) — #61
+    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ"],
+                         horizontal=True, key="live_cat")
+    _bist_set = set(BIST)
+    def _in_cat(sym):
+        if live_cat == "🇹🇷 BIST":
+            return sym in _bist_set
+        return sym in GCM_NASDAQ
+
+    # Sadece trade'i olan + seçili kategorideki semboller
     live_rows = []
     for sym, s in live_all.items():
-        if s["n"] > 0:
+        if s["n"] > 0 and _in_cat(sym):
             live_rows.append({
                 "Sembol": sym,
                 "Canlı Trade": s["n"],
@@ -2763,6 +2772,8 @@ with tab_live:
                 "Ort. Trade %": s["avg"],
                 "Toplam %": s["total"],
             })
+    # Açık pozisyonları da kategoriye göre filtrele
+    open_pos = {k: v for k, v in open_pos.items() if _in_cat(k)}
 
     if not live_rows:
         st.info("📭 Henüz canlı trade verisi yok.\n\n"
@@ -2868,19 +2879,55 @@ with tab_live:
                 use_container_width=True, height=500,
             )
 
-        # Açık pozisyonlar detayı
-        with st.expander(f"📂 Açık pozisyonlar ({len(open_pos)}) — henüz kapanmadı"):
-            if open_pos:
-                op_rows = [{
+        # ── AÇIK POZİSYONLAR — bot girdi, işlem DEVAM EDİYOR (anlık P&L)
+        st.markdown("---")
+        st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_pos)}) — bot girdi, devam ediyor")
+        st.caption("Bot bu pozisyonları açtı, henüz kapatmadı. 🛑 Stop = TOTT trail "
+                    "(bot sabit TP koymaz — trend takipçi, ÇIK sinyaline kadar tutar).")
+
+        if not open_pos:
+            st.write("Şu an açık pozisyon yok.")
+        else:
+            calc_live = st.button("💹 Anlık yüzen P&L hesapla (canlı fiyat çek)",
+                                    key="live_floating_btn")
+            op_rows = []
+            for s, v in open_pos.items():
+                row = {
                     "Sembol": s,
                     "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
-                    "Açılış Fiyat": v["entry_price"],
-                    "Açılış Zamanı": v.get("entry_ts", "")[:16].replace("T", " "),
-                } for s, v in open_pos.items()]
-                st.dataframe(pd.DataFrame(op_rows).style.format({"Açılış Fiyat": "{:.4f}"}),
-                              use_container_width=True, height=400)
-            else:
-                st.write("Açık pozisyon yok.")
+                    "Giriş": v["entry_price"],
+                    "Stop (TOTT)": v.get("stop"),
+                    "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
+                }
+                if calc_live:
+                    try:
+                        r = analyze_intraday(s)
+                        cp = r["Fiyat"] if r else None
+                        if cp:
+                            if v["side"] == "LONG":
+                                fpnl = (cp - v["entry_price"]) / v["entry_price"] * 100
+                            else:
+                                fpnl = (v["entry_price"] - cp) / v["entry_price"] * 100
+                            row["Anlık Fiyat"] = cp
+                            row["Yüzen P&L %"] = round(fpnl, 2)
+                    except Exception:
+                        pass
+                op_rows.append(row)
+
+            df_op = pd.DataFrame(op_rows)
+            fmt = {"Giriş": "{:.4f}",
+                   "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-"}
+            if "Anlık Fiyat" in df_op.columns:
+                fmt["Anlık Fiyat"] = lambda x: f"{x:.4f}" if pd.notna(x) else "-"
+                fmt["Yüzen P&L %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
+            styler = df_op.style.format(fmt)
+            if "Yüzen P&L %" in df_op.columns:
+                styler = styler.background_gradient(subset=["Yüzen P&L %"],
+                                                     cmap="RdYlGn", vmin=-5, vmax=5)
+            st.dataframe(styler, use_container_width=True, height=400)
+            if not calc_live:
+                st.caption("👆 Anlık P&L için butona bas (her sembolün canlı fiyatı çekilir, "
+                            f"~{max(len(open_pos)*2//60,1)} dk).")
 
 
 with tab_info:
