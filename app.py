@@ -2816,6 +2816,72 @@ with tab_live:
                 use_container_width=True, height=400,
             )
 
+        # ── İŞLEM DETAYI — botun gerçek al/sat hareketleri
+        st.markdown("---")
+        st.markdown("### 🔍 İşlem Detayı — botun gerçek al/sat hareketleri")
+        st.caption("Bot neyi, ne zaman, hangi fiyattan açtı/kapattı. Her satır bir trade.")
+
+        try:
+            all_trades = fv.get_trades()
+        except Exception:
+            all_trades = []
+
+        if not all_trades:
+            st.info("Henüz kapanmış işlem yok.")
+        else:
+            # Sembol filtresi
+            syms_with_trades = sorted(set(t["sym"] for t in all_trades))
+            sel_sym = st.selectbox(
+                "Sembol seç (hepsi için boş bırak)",
+                ["— Tümü —"] + syms_with_trades, key="live_trade_sym")
+
+            trades_show = all_trades if sel_sym == "— Tümü —" \
+                else [t for t in all_trades if t["sym"] == sel_sym]
+
+            # Detay tablo
+            det_rows = []
+            for t in trades_show:
+                det_rows.append({
+                    "Sembol": t["sym"],
+                    "Yön": "🟢 LONG" if t["side"] == "LONG" else "🔴 SHORT",
+                    "Açılış Fiyat": t["entry_price"],
+                    "Açılış Zamanı": t.get("entry_ts", "")[:16].replace("T", " "),
+                    "Kapanış Fiyat": t["exit_price"],
+                    "Kapanış Zamanı": t.get("exit_ts", "")[:16].replace("T", " "),
+                    "Sonuç %": t["pnl_pct"],
+                })
+            df_det = pd.DataFrame(det_rows)
+
+            # Özet
+            dm1, dm2, dm3 = st.columns(3)
+            dm1.metric("İşlem sayısı", len(df_det))
+            if len(df_det) > 0:
+                dm2.metric("Kazanan", f"{(df_det['Sonuç %'] > 0).sum()}/{len(df_det)}")
+                dm3.metric("Toplam %", f"{df_det['Sonuç %'].sum():+.1f}%")
+
+            st.dataframe(
+                df_det.style.format({
+                    "Açılış Fiyat": "{:.4f}",
+                    "Kapanış Fiyat": "{:.4f}",
+                    "Sonuç %": "{:+.2f}%",
+                }).background_gradient(subset=["Sonuç %"], cmap="RdYlGn", vmin=-5, vmax=5),
+                use_container_width=True, height=500,
+            )
+
+        # Açık pozisyonlar detayı
+        with st.expander(f"📂 Açık pozisyonlar ({len(open_pos)}) — henüz kapanmadı"):
+            if open_pos:
+                op_rows = [{
+                    "Sembol": s,
+                    "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
+                    "Açılış Fiyat": v["entry_price"],
+                    "Açılış Zamanı": v.get("entry_ts", "")[:16].replace("T", " "),
+                } for s, v in open_pos.items()]
+                st.dataframe(pd.DataFrame(op_rows).style.format({"Açılış Fiyat": "{:.4f}"}),
+                              use_container_width=True, height=400)
+            else:
+                st.write("Açık pozisyon yok.")
+
 
 with tab_info:
     st.subheader("Sistem hakkında")

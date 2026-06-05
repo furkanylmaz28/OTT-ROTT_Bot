@@ -140,6 +140,15 @@ def open_positions() -> dict:
     return _load(POS_FILE, {})
 
 
+def get_trades(sym: str = None) -> list:
+    """Kapanmış trade'leri döndür. sym verilirse sadece o sembol.
+    En yeni kapanış üstte."""
+    trades = _load(TRADES_FILE, [])
+    if sym:
+        trades = [t for t in trades if t["sym"] == sym]
+    return sorted(trades, key=lambda t: t.get("exit_ts", ""), reverse=True)
+
+
 if __name__ == "__main__":
     import sys; sys.stdout.reconfigure(encoding="utf-8")
     stats = all_live_stats()
