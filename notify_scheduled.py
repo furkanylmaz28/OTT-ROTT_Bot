@@ -106,19 +106,28 @@ def get_best_params(sym, grid, bayes):
     return None, None
 
 
+def _bist_set():
+    """BIST 45 VIOP listesi (per_symbol_optimize.BIST30)."""
+    try:
+        from per_symbol_optimize import BIST30
+        return set(BIST30)
+    except Exception:
+        return set()
+
+
 def filter_symbols_by_category(syms, category):
     """BIST veya NASDAQ kategorisine göre filtre.
 
+    BIST   = sadece tanımlı 45 VIOP hissesi (JSON'daki eski semboller HARİÇ).
     NASDAQ = sadece GCM Forex MetaTrader'da işlem gören hisseler.
-    (gcm_to_yf_map.json'daki ticker'lar — Türkiye'den GCM ile alıp satılabilir.)
     """
     out = []
+    bset = _bist_set()
     for s in syms:
         if category == "BIST":
-            if s.upper().endswith(".IS"):
+            if s in bset:   # sadece 45 VIOP hissesi
                 out.append(s)
         elif category == "NASDAQ":
-            # Sadece GCM MetaTrader'da gerçekten olan hisseler
             if s in GCM_TICKERS:
                 out.append(s)
     return out

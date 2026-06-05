@@ -1137,9 +1137,10 @@ with tab_consensus:
         common_syms = [s for s in _bayes
                         if _bayes[s].get("ok") and _grid.get(s, {}).get("ok")
                         and _grid[s].get("rating") != "UYUMSUZ"]  # UYUMSUZ gizle
-        # Kategoriye göre filtre (BIST veya NASDAQ butonuna basıldı)
+        # Kategoriye göre filtre — SADECE tanımlı listeler (JSON'daki eski semboller değil)
         if cons_category == "BIST":
-            common_syms = [s for s in common_syms if s.upper().endswith(".IS")]
+            _bist_set = set(BIST)  # 45 VIOP hissesi
+            common_syms = [s for s in common_syms if s in _bist_set]
         elif cons_category == "NASDAQ":
             # Sadece GCM Forex MetaTrader'da olan hisseler
             common_syms = [s for s in common_syms if s in GCM_NASDAQ]
@@ -2295,7 +2296,8 @@ with tab_alt:
             except Exception:
                 return "—"
 
-        # Filtre uygulanmış sembol listesi (UYUMSUZ gizlenir)
+        # Filtre uygulanmış sembol listesi (UYUMSUZ gizlenir, sadece tanımlı listeler)
+        _bist_set = set(BIST)
         filtered_syms = []
         for sym, bayes_r in bayes_data.items():
             if not bayes_r.get("ok"):
@@ -2303,10 +2305,13 @@ with tab_alt:
             if _is_uyumsuz(sym):   # Grid UYUMSUZ → gösterme
                 continue
             in_gcm = sym in GCM_NASDAQ
-            if alt_filter == "BIST" and not sym.endswith(".IS"):
+            if alt_filter == "BIST" and sym not in _bist_set:
                 continue
             if alt_filter == "NASDAQ" and not in_gcm:
                 continue
+            if alt_filter == "ALL" and sym not in _bist_set and not in_gcm \
+               and sym not in set(CRYPTO) and sym not in set(COMMODITY):
+                continue  # tanımlı hiçbir listede değil (JSON artığı)
             filtered_syms.append(sym)
 
         st.caption(f"⏳ {len(filtered_syms)} sembol için canlı sinyal hesaplanıyor "
@@ -2862,8 +2867,12 @@ with tab_info:
                      "MARJINAL": 2, "VERİ_AZ": 1, "UYUMSUZ": 0}
         from data_source import category_of as _cat_q
         all_rows = []
+        # Sadece tanımlı listeler (JSON'daki eski/artık sembolleri gösterme)
+        _defined = set(BIST) | set(GCM_NASDAQ) | set(CRYPTO) | set(COMMODITY)
         all_syms = set(list(_bayes_data.keys()) + list(_grid_data.keys()))
         for sym in all_syms:
+            if sym not in _defined:   # tanımlı listede değil → JSON artığı, atla
+                continue
             if _is_uyumsuz(sym):   # Grid UYUMSUZ → gösterme
                 continue
             # Bayes önceliği
