@@ -158,7 +158,21 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
             except Exception:
                 pass  # Sessizce yfinance'a düş
 
-    # 2) yfinance fallback
+    # 2) yfinance fallback — TradingView başarısız oldu, YEDEK devrede.
+    #    Her kullanımı işaretle (TV ne sıklıkta çöküyor + kötü veri kontrolü).
+    #    yfinance BIST'te gecikmeli/boşluklu → BIST'te bu uyarıyı ciddiye al.
+    _bist = symbol.upper().endswith(".IS")
+    print(f"  ⚠️ [data_source] yfinance YEDEK kullanılıyor → {symbol} "
+          f"({'BIST — gecikmeli/boşluklu olabilir!' if _bist else 'TV çöktü'})")
+    # Yedek kullanımını dosyaya da yaz (sayım/izleme için)
+    try:
+        from datetime import datetime, timezone, timedelta
+        _tr = datetime.now(timezone(timedelta(hours=3))).isoformat()
+        with open("yfinance_fallback.log", "a", encoding="utf-8") as _lf:
+            _lf.write(f"{_tr}\t{symbol}\t{interval}\n")
+    except Exception:
+        pass
+
     try:
         import yfinance as yf
         # yfinance 4h sunmaz → 60m çekip 4 saate resample edilir (yanlış TF bug fix).
