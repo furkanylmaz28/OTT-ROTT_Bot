@@ -918,5 +918,25 @@
     "side": "SHORT",
     "entry_price": 3.03,
     "entry_ts": "2026-06-05T01:59:22.050724+03:00"
+  },
+  "EFOR.IS": {
+    "side": "LONG",
+    "entry_price": 12.7,
+    "entry_ts": "2026-06-05T10:12:45.256352+03:00"
+  },
+  "EUPWR.IS": {
+    "side": "LONG",
+    "entry_price": 90.0,
+    "entry_ts": "2026-06-05T10:12:48.537120+03:00"
+  },
+  "KUYAS.IS": {
+    "side": "SHORT",
+    "entry_price": 76.0,
+    "entry_ts": "2026-06-05T10:12:59.449654+03:00"
+  },
+  "OBAMS.IS": {
+    "side": "SHORT",
+    "entry_price": 7.62,
+    "entry_ts": "2026-06-05T10:13:01.698995+03:00"
   }
 }
