@@ -16,5 +16,68 @@
     "entry_ts": "2026-06-05T01:58:42.085126+03:00",
     "exit_ts": "2026-06-05T10:43:01.675097+03:00",
     "pnl_pct": 9.92
+  },
+  {
+    "sym": "CIMSA.IS",
+    "side": "SHORT",
+    "entry_price": 51.4,
+    "exit_price": 50.45,
+    "entry_ts": "2026-06-05T01:57:49.322841+03:00",
+    "exit_ts": "2026-06-05T12:12:40.392640+03:00",
+    "pnl_pct": 1.848
+  },
+  {
+    "sym": "DAPGM.IS",
+    "side": "LONG",
+    "entry_price": 10.64,
+    "exit_price": 10.51,
+    "entry_ts": "2026-06-05T01:57:57.251554+03:00",
+    "exit_ts": "2026-06-05T12:12:42.298296+03:00",
+    "pnl_pct": -1.222
+  },
+  {
+    "sym": "KUYAS.IS",
+    "side": "SHORT",
+    "entry_price": 76.0,
+    "exit_price": 75.8,
+    "entry_ts": "2026-06-05T10:12:59.449654+03:00",
+    "exit_ts": "2026-06-05T12:13:04.179508+03:00",
+    "pnl_pct": 0.263
+  },
+  {
+    "sym": "OBAMS.IS",
+    "side": "SHORT",
+    "entry_price": 7.62,
+    "exit_price": 7.53,
+    "entry_ts": "2026-06-05T10:13:01.698995+03:00",
+    "exit_ts": "2026-06-05T12:13:07.743894+03:00",
+    "pnl_pct": 1.181
+  },
+  {
+    "sym": "SELEC.IS",
+    "side": "SHORT",
+    "entry_price": 95.9,
+    "exit_price": 94.8,
+    "entry_ts": "2026-06-05T01:58:59.536513+03:00",
+    "exit_ts": "2026-06-05T12:13:13.982248+03:00",
+    "pnl_pct": 1.147
+  },
+  {
+    "sym": "SKBNK.IS",
+    "side": "SHORT",
+    "entry_price": 12.94,
+    "exit_price": 12.77,
+    "entry_ts": "2026-06-05T01:59:01.033638+03:00",
+    "exit_ts": "2026-06-05T12:13:14.559924+03:00",
+    "pnl_pct": 1.314
+  },
+  {
+    "sym": "TUREX.IS",
+    "side": "LONG",
+    "entry_price": 8.56,
+    "exit_price": 8.42,
+    "entry_ts": "2026-06-05T01:59:16.886802+03:00",
+    "exit_ts": "2026-06-05T12:13:24.242015+03:00",
+    "pnl_pct": -1.636
   }
 ]
