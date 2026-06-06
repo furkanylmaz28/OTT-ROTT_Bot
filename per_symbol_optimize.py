@@ -63,6 +63,14 @@ CRYPTO30 = [
     "APT-USD","ARB-USD","OP-USD","SUI-USD","INJ-USD",
     "HBAR-USD","IMX-USD","RNDR-USD","TIA-USD","SEI-USD",
 ]
+# Emtia + Forex (GCM Forex enstrümanları)
+EMTIA_FX = [
+    "GC=F",       # GOLD
+    "SI=F",       # Silver
+    "PA=F",       # Palladium
+    "EURUSD=X",   # EURUSD
+    "GBPUSD=X",   # GBPUSD
+]
 
 
 def fetch(symbol, interval: str | None = None, n_bars: int = 5000):
@@ -186,8 +194,8 @@ def optimize_symbol(symbol):
 
 
 def main():
-    symbols = BIST30 + NASDAQ100 + CRYPTO30
-    print(f"Toplam {len(symbols)} sembol (BIST30 + NASDAQ100 + CRYPTO30) — sembol başına ~15sn → tahmini {len(symbols)*15/60:.0f} dakika")
+    symbols = BIST30 + NASDAQ100 + CRYPTO30 + EMTIA_FX
+    print(f"Toplam {len(symbols)} sembol (BIST + NASDAQ + CRYPTO + EMTIA_FX) — sembol başına ~15sn → tahmini {len(symbols)*15/60:.0f} dakika")
     print()
     results = {}
     t0 = time.time()

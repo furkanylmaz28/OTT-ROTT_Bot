@@ -324,6 +324,10 @@ BIST = [
     "DOAS.IS","CIMSA.IS","ULKER.IS",
 ]
 COMMODITY = ["GC=F", "SI=F"]
+# Emtia + Forex (GCM Forex enstrümanları) — ayrı sekme
+EMTIA_FX = ["GC=F", "SI=F", "PA=F", "EURUSD=X", "GBPUSD=X"]
+EMTIA_FX_ADI = {"GC=F": "GOLD (Altın)", "SI=F": "Silver (Gümüş)",
+                "PA=F": "Palladium", "EURUSD=X": "EUR/USD", "GBPUSD=X": "GBP/USD"}
 
 # GCM Forex'te CFD olarak işlem gören US hisseler (yfinance formatında)
 # Kaynak: extract_gcm_symbols.py + gcm_ticker_map.py (MT4 history klasöründen gerçek)
@@ -570,12 +574,13 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_portfolio, tab_consensus, tab_scan,
- tab_sim, tab_chart, tab_live, tab_info) = st.tabs([
+ tab_sim, tab_chart, tab_emtia, tab_live, tab_info) = st.tabs([
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "📡  Anlık Tarayıcı",
     "📌  Öneriler",
     "📊  Detay Grafik",
+    "🥇  Emtia/Forex",
     "✅  Canlı Performans",
     "📖  Bilgi",
 ])
@@ -1842,6 +1847,72 @@ with tab_chart:
                    f"Mor çizgi: Trend OTT. Yeşil/Kırmızı kesik: TOTT bantları. "
                    f"Yeşil↑/Kırmızı↓ ok: AL/SAT sinyali. Turuncu daire: çıkış. "
                    f"Alt panel: SOTT (mavi K, mor OTT).")
+with tab_emtia:
+    st.subheader("🥇 Emtia / Forex — GCM Forex enstrümanları")
+    st.caption("GOLD · Silver · Palladium · EUR/USD · GBP/USD. "
+                "Metaller trend yapar (sistem çalışır), forex yatay (zayıf sinyal).")
+
+    with st.expander("ℹ️ Beklenti"):
+        st.markdown("""
+        | Sembol | Sistem uyumu |
+        |---|---|
+        | 🥇 GOLD / Silver / Palladium | ✅ Trend takipçi → çalışır (backtest İYİ/MÜKEMMEL) |
+        | 💱 EUR/USD · GBP/USD | ⚠️ Mean-reverting (yatay) → zayıf sinyal, edge düşük |
+
+        Forex majorleri trend yapmaz, OTT trend takipçi → forex'te az/sahte sinyal.
+        Metaller asıl odak. Bunlar **GCM Forex**'te işlem görür (VIOP değil).
+        """)
+
+    if st.button("🔄 Emtia/Forex tara", type="primary", use_container_width=True,
+                  key="emtia_scan"):
+        st.cache_data.clear()
+        em_prog = st.progress(0, text="0/5")
+        em_rows = []
+        for i, sym in enumerate(EMTIA_FX):
+            r = analyze_intraday(sym)
+            if r:
+                cur = r["Fiyat"]
+                durum = r["Durum"]
+                if "LONG" in durum:
+                    stop = r["Tetik ↓"]
+                elif "SHORT" in durum:
+                    stop = r["Tetik ↑"]
+                else:
+                    stop = None
+                em_rows.append({
+                    "Sembol": EMTIA_FX_ADI.get(sym, sym),
+                    "Güven": r["Güven"],
+                    "Durum": durum,
+                    "Fiyat": cur,
+                    "Stop (TOTT)": stop,
+                    "BT Getiri %": r["BT Getiri %"],
+                    "BT PF": r["BT PF"],
+                    "BT Win %": r["BT Win %"],
+                })
+            em_prog.progress((i+1)/len(EMTIA_FX), text=f"{i+1}/5 {sym}")
+        em_prog.empty()
+
+        if em_rows:
+            df_em = pd.DataFrame(em_rows)
+            st.dataframe(
+                df_em.style.format({
+                    "Fiyat": "{:.4f}",
+                    "Stop (TOTT)": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                    "BT Getiri %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
+                    "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
+                    "BT Win %": lambda v: f"{v:.0f}%" if pd.notna(v) else "-",
+                }),
+                use_container_width=True, height=250,
+            )
+            st.caption("⚠️ BT (backtest) rakamları in-sample (iyimser). "
+                        "Forex satırları zayıf — metallere odaklan. "
+                        "Gerçek kanıt için Canlı Performans sekmesini bekle.")
+        else:
+            st.warning("Veri çekilemedi.")
+    else:
+        st.info("👆 **Emtia/Forex tara** butonuna bas. 5 sembol, ~30 sn.")
+
+
 with tab_live:
     st.subheader("✅ Canlı Performans — Forward Validation")
     st.caption("Backtest rating'i (MÜKEMMEL) geçmişe bakar, overfit olabilir. "
