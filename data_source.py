@@ -74,8 +74,8 @@ def best_interval_for(symbol: str) -> str:
     Mantık: 5000 bar civarında **en az 4-6 ay geçmiş** olmalı, **yeterli trade** üretmeli.
     """
     cat = category_of(symbol)
-    # Crypto 7/24: 30dk = ~3.5 ay yeterli, daha aktif trade
-    if cat == "CRYPTO": return "30m"
+    # Crypto 7/24: 4h = büyük trendleri yakalar, 30dk gürültüsü elenir (test sonucu daha iyi)
+    if cat == "CRYPTO": return "4h"
     # BIST: günde 9 saat = az bar/gün, H1 zaten çok geriye gider
     if cat == "BIST": return "1h"
     # Hisse, forex, commodity, index: H1 ideal
