@@ -85,6 +85,20 @@ RT_SCORE = {"MÜKEMMEL": 5, "İYİ": 4, "ORTA": 3,
 MIN_RT = 3   # ORTA ve üstü
 
 
+def market_open_categories(now_tr):
+    """Şu an hangi piyasa(lar) açık? (hafta içi). Dayanıklı fallback için.
+    BIST 10:00-18:00 TR, NASDAQ 16:30-23:00 TR. Hafta sonu kapalı."""
+    if now_tr.weekday() >= 5:
+        return []
+    hm = now_tr.hour * 60 + now_tr.minute
+    out = []
+    if 10 * 60 <= hm <= 18 * 60:            # BIST
+        out.append("BIST")
+    if 16 * 60 + 30 <= hm <= 23 * 60:       # NASDAQ (TR saati)
+        out.append("NASDAQ")
+    return out
+
+
 def load_param_files():
     """Grid + Bayes JSON'larını yükle."""
     grid, bayes = {}, {}
@@ -434,8 +448,25 @@ def main():
         matches.append(("scan", "NASDAQ"))
         print(f"  ⚠️ TEST MODU — şu anki saatte BIST + NASDAQ scan zorla tetiklendi")
 
+    # ── DAYANIKLI FALLBACK ───────────────────────────────────────────
+    # GitHub Actions cron'u (*/10) güvenilmez — günde sadece birkaç kez,
+    # RASTGELE dakikalarda ateşliyor → sabit SCHEDULE saatlerinin 0-15 dk
+    # penceresini sürekli kaçırıyor (gözlemlendi: hiç mesaj gitmedi).
+    # Çözüm: bu tetikte tam saat eşleşmesi YOKSA ve piyasa AÇIKSA, yine de
+    # konsensüs + morning tara. 3 saatlik spam koruması (sym|signal bazlı)
+    # tekrar göndermeyi zaten engelliyor → cron-job.org tam saatte gönderse
+    # bile burada tekrar gitmez.
     if not matches:
-        print(f"  Bu saatte ({h:02d}:{m:02d}) tarama yok")
+        open_cats = market_open_categories(now_tr)
+        for cat in open_cats:
+            matches.append(("konsensus", cat))
+            matches.append(("morning", cat))
+        if matches:
+            print(f"  ⚠️ Tam saat eşleşmesi yok ama piyasa açık ({', '.join(open_cats)}) "
+                  f"→ dayanıklı fallback devrede (spam koruması tekrarı engeller)")
+
+    if not matches:
+        print(f"  Bu saatte ({h:02d}:{m:02d}) tarama yok (piyasa da kapalı)")
         return
 
     print(f"  Eşleşen görev sayısı: {len(matches)}")
