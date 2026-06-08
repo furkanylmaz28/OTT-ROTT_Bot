@@ -2017,6 +2017,25 @@ with tab_live:
                 "Bu sekme botun **gerçek zamanlı sinyallerinin canlı sonucunu** gösterir. "
                 "Asıl güven göstergesi budur.")
 
+    # ── Otomatik yenileme — tıklamadan veriyi tazele
+    _ar1, _ar2 = st.columns([1, 3])
+    with _ar1:
+        auto_refresh = st.toggle("🔄 Otomatik yenile", value=False, key="live_autorefresh",
+                                  help="Açıkken sayfa periyodik kendini yeniler, "
+                                       "sen tıklamadan canlı veri güncellenir.")
+    with _ar2:
+        refresh_sec = st.select_slider("Aralık (sn)", options=[30, 60, 120, 300],
+                                        value=60, key="live_refresh_sec",
+                                        disabled=not auto_refresh)
+    if auto_refresh:
+        try:
+            from streamlit_autorefresh import st_autorefresh
+            st_autorefresh(interval=refresh_sec * 1000, key="live_ar_tick")
+            st.caption(f"⏱️ Her {refresh_sec} sn'de otomatik yenileniyor "
+                        f"(son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}).")
+        except Exception:
+            st.caption("⚠️ Otomatik yenileme bileşeni yüklenemedi (deploy sonrası aktif olur).")
+
     with st.expander("ℹ️ Bu nasıl çalışır?"):
         st.markdown("""
         - Bot her tarama'da (GitHub Actions, saatte birkaç kez) her sembolün **anlık durumunu** kaydeder

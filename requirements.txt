@@ -34,3 +34,6 @@ websocket-client>=1.7.0
 
 # Background scheduler — Telegram bildirim 7/24 (Streamlit Cloud içinde çalışır)
 APScheduler>=3.10.0
+
+# Otomatik sayfa yenileme (Canlı Performans — tıklamadan veri tazeleme)
+streamlit-autorefresh>=1.0.1
