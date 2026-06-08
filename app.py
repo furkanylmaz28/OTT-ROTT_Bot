@@ -2070,11 +2070,60 @@ with tab_live:
     # Açık pozisyonları da kategoriye göre filtrele
     open_pos = {k: v for k, v in open_pos.items() if _in_cat(k)}
 
+    # ── AÇIK POZİSYONLAR — HER ZAMAN göster (kapanmış işlem olmasa da)
+    #    Bot girdi, işlem DEVAM EDİYOR. Telegram'a "açıldı" bildirimi gelen
+    #    pozisyonlar burada görünür (önceden else bloğunda gizliydi → bug).
+    st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_pos)}) — bot girdi, devam ediyor")
+    st.caption("Bot bu pozisyonları açtı, henüz kapatmadı. 🛑 Stop = TOTT trail "
+                "(bot sabit TP koymaz — trend takipçi, ÇIK sinyaline kadar tutar).")
+    if not open_pos:
+        st.write("Şu an bu kategoride açık pozisyon yok.")
+    else:
+        calc_live = st.button("💹 Anlık yüzen P&L hesapla (canlı fiyat çek)",
+                                key="live_floating_btn")
+        op_rows = []
+        for s, v in open_pos.items():
+            row = {
+                "Sembol": s,
+                "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
+                "Giriş": v["entry_price"],
+                "Stop (TOTT)": v.get("stop"),
+                "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
+            }
+            if calc_live:
+                try:
+                    r = analyze_intraday(s)
+                    cp = r["Fiyat"] if r else None
+                    if cp:
+                        if v["side"] == "LONG":
+                            fpnl = (cp - v["entry_price"]) / v["entry_price"] * 100
+                        else:
+                            fpnl = (v["entry_price"] - cp) / v["entry_price"] * 100
+                        row["Anlık Fiyat"] = cp
+                        row["Yüzen P&L %"] = round(fpnl, 2)
+                except Exception:
+                    pass
+            op_rows.append(row)
+        df_op = pd.DataFrame(op_rows)
+        fmt = {"Giriş": "{:.4f}",
+               "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-"}
+        if "Anlık Fiyat" in df_op.columns:
+            fmt["Anlık Fiyat"] = lambda x: f"{x:.4f}" if pd.notna(x) else "-"
+            fmt["Yüzen P&L %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
+        styler = df_op.style.format(fmt)
+        if "Yüzen P&L %" in df_op.columns:
+            styler = styler.background_gradient(subset=["Yüzen P&L %"],
+                                                 cmap="RdYlGn", vmin=-5, vmax=5)
+        st.dataframe(styler, use_container_width=True, height=400)
+        if not calc_live:
+            st.caption("👆 Anlık P&L için butona bas (her sembolün canlı fiyatı çekilir, "
+                        f"~{max(len(open_pos)*2//60,1)} dk).")
+
+    st.markdown("---")
     if not live_rows:
-        st.info("📭 Henüz canlı trade verisi yok.\n\n"
-                "Sistem her tarama'da sinyal durumunu kaydediyor. "
-                "İlk anlamlı veriler **birkaç gün–hafta** içinde birikecek. "
-                "GitHub Actions her tetiklendiğinde bu sayfa zenginleşir.")
+        st.info("📊 Henüz **kapanmış** işlem yok (açık pozisyonlar yukarıda görünür).\n\n"
+                "Kapanmış trade istatistikleri (PF/win rate) ilk pozisyonlar "
+                "kapandıkça **birkaç gün–hafta** içinde birikecek.")
     else:
         df_live = pd.DataFrame(live_rows).sort_values("Canlı PF", ascending=False).reset_index(drop=True)
 
@@ -2173,56 +2222,6 @@ with tab_live:
                 }).background_gradient(subset=["Sonuç %"], cmap="RdYlGn", vmin=-5, vmax=5),
                 use_container_width=True, height=500,
             )
-
-        # ── AÇIK POZİSYONLAR — bot girdi, işlem DEVAM EDİYOR (anlık P&L)
-        st.markdown("---")
-        st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_pos)}) — bot girdi, devam ediyor")
-        st.caption("Bot bu pozisyonları açtı, henüz kapatmadı. 🛑 Stop = TOTT trail "
-                    "(bot sabit TP koymaz — trend takipçi, ÇIK sinyaline kadar tutar).")
-
-        if not open_pos:
-            st.write("Şu an açık pozisyon yok.")
-        else:
-            calc_live = st.button("💹 Anlık yüzen P&L hesapla (canlı fiyat çek)",
-                                    key="live_floating_btn")
-            op_rows = []
-            for s, v in open_pos.items():
-                row = {
-                    "Sembol": s,
-                    "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
-                    "Giriş": v["entry_price"],
-                    "Stop (TOTT)": v.get("stop"),
-                    "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
-                }
-                if calc_live:
-                    try:
-                        r = analyze_intraday(s)
-                        cp = r["Fiyat"] if r else None
-                        if cp:
-                            if v["side"] == "LONG":
-                                fpnl = (cp - v["entry_price"]) / v["entry_price"] * 100
-                            else:
-                                fpnl = (v["entry_price"] - cp) / v["entry_price"] * 100
-                            row["Anlık Fiyat"] = cp
-                            row["Yüzen P&L %"] = round(fpnl, 2)
-                    except Exception:
-                        pass
-                op_rows.append(row)
-
-            df_op = pd.DataFrame(op_rows)
-            fmt = {"Giriş": "{:.4f}",
-                   "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-"}
-            if "Anlık Fiyat" in df_op.columns:
-                fmt["Anlık Fiyat"] = lambda x: f"{x:.4f}" if pd.notna(x) else "-"
-                fmt["Yüzen P&L %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
-            styler = df_op.style.format(fmt)
-            if "Yüzen P&L %" in df_op.columns:
-                styler = styler.background_gradient(subset=["Yüzen P&L %"],
-                                                     cmap="RdYlGn", vmin=-5, vmax=5)
-            st.dataframe(styler, use_container_width=True, height=400)
-            if not calc_live:
-                st.caption("👆 Anlık P&L için butona bas (her sembolün canlı fiyatı çekilir, "
-                            f"~{max(len(open_pos)*2//60,1)} dk).")
 
 
 with tab_info:
