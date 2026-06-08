@@ -177,14 +177,27 @@ def analyze_one(sym, params):
         if sig is None:
             return None
         # Yöne göre stop seviyesi (TOTT karşı tetik)
+        # closed = kapanmış bar (sistem bunu kullanır), forming = oluşan bar (canlı önizleme)
+        forming = s.iloc[-1]
         if "LONG" in sig:
             stop = float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None
+            stop_live = float(forming["tott_dn"]) if not pd.isna(forming["tott_dn"]) else None
             yon = "LONG"
         elif "SHORT" in sig:
             stop = float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None
+            stop_live = float(forming["tott_up"]) if not pd.isna(forming["tott_up"]) else None
             yon = "SHORT"
         else:
-            stop = None; yon = None
+            stop = None; stop_live = None; yon = None
+
+        # Stop yönü: oluşan stop kapanmış stop'a göre sıkışıyor mu? (ratchet)
+        #   LONG: stop yükseliyorsa lehine (sıkışıyor) ; SHORT: stop düşüyorsa lehine
+        stop_trend = None
+        if stop is not None and stop_live is not None:
+            if yon == "LONG":
+                stop_trend = "tighten" if stop_live > stop else ("flat" if stop_live == stop else "loosen")
+            elif yon == "SHORT":
+                stop_trend = "tighten" if stop_live < stop else ("flat" if stop_live == stop else "loosen")
 
         # ── ÇIK YAKIN: açık pozisyon (TUT) trailing stop'a yaklaştı mı?
         #    LONG TUT: fiyat tott_dn'e (aşağı stop) yaklaşırsa
@@ -209,6 +222,8 @@ def analyze_one(sym, params):
             "is_fresh": ("AÇ" in sig or "ÇIK" in sig),  # taze sinyal mi
             "exit_warn": exit_warn,
             "exit_dist": exit_dist,
+            "stop_live": stop_live,     # oluşan-bar canlı stop (bu bar kapanınca kilitlenecek)
+            "stop_trend": stop_trend,   # tighten / flat / loosen
         }
     except Exception:
         return None
@@ -335,6 +350,12 @@ def format_message(results, mode, category, scan_time):
             if r["stop"]:
                 lines.append(f"   🛑 Trailing stop: <code>{r['stop']:.4f}</code>  "
                               f"<b>(yalnız {dist_str} uzakta!)</b>")
+            # Canlı (oluşan-bar) stop — bu bar kapanınca kilitlenecek seviye
+            sl = r.get("stop_live"); strend = r.get("stop_trend")
+            if sl:
+                arrow = {"tighten": "↓ sıkışıyor (lehine)", "loosen": "↑ gevşiyor",
+                         "flat": "= sabit"}.get(strend, "")
+                lines.append(f"   🔮 Oluşan stop: <code>{sl:.4f}</code>  <i>{arrow}</i>")
             lines.append(f"   → Stop yakın. Yönet: ya çık ya SL'yi sıkılaştır.")
         lines.append("")
         lines.append("━━━━━━━━━━━━━━━━━━━━")
