@@ -1,0 +1,9 @@
+{
+  "_note": "yfinance ticker → GCM MT5 sembol adı override. Bot önce burayı bakar, yoksa otomatik eşleştirir (ASML.AS→ASML arar). GCM'de sembol adı farklıysa (örn 'AAPL' yerine '#AAPL' veya 'AAPL.us') buraya elle yaz. GCM MT5'te Market Watch'tan gerçek adları gör.",
+  "_ornek": {
+    "AAPL": "#AAPL",
+    "MSFT": "#MSFT",
+    "ASML.AS": "ASML"
+  },
+  "map": {}
+}
