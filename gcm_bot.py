@@ -97,9 +97,27 @@ def load_symbol_map():
 # ──────────────────────────────────────────────────────────────────
 def mt5_connect():
     import MetaTrader5 as mt5
-    if not mt5.initialize():
-        log(f"❌ MT5 initialize başarısız: {mt5.last_error()}. "
-            f"GCM MT5 terminali açık + login mi?")
+    from dotenv import load_dotenv
+    load_dotenv(".env")
+    # .env'de login bilgisi varsa onunla bağlan (en güvenilir), yoksa açık terminale
+    login = os.getenv("MT5_LOGIN")
+    password = os.getenv("MT5_PASSWORD")
+    server = os.getenv("MT5_SERVER")
+    path = os.getenv("MT5_PATH")   # opsiyonel: terminal64.exe yolu (çoklu kurulumda)
+
+    kwargs = {}
+    if path:
+        kwargs["path"] = path
+    if login and password and server:
+        ok = mt5.initialize(login=int(login), password=password, server=server, **kwargs)
+    else:
+        ok = mt5.initialize(**kwargs)
+
+    if not ok:
+        log(f"❌ MT5 initialize başarısız: {mt5.last_error()}.")
+        log("   Çözüm: (1) GCM MT5 terminali AÇIK + DEMO'ya login olmalı, VEYA")
+        log("   (2) .env'e şunları ekle: MT5_LOGIN=demo_no  MT5_PASSWORD=...  "
+            "MT5_SERVER=GCM-Demo (terminalde Dosya→Hesaba Giriş'teki sunucu adı)")
         return None
     acc = mt5.account_info()
     if acc is None:
