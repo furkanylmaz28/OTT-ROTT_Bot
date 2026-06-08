@@ -2039,18 +2039,21 @@ with tab_live:
         open_pos = {}
         st.error(f"Forward-validation modülü yüklenemedi: {e}")
 
-    # ── Kategori filtresi (BIST / NASDAQ / CRYPTO) — #61 + Crypto
-    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🪙 Crypto"],
+    # ── Kategori filtresi (BIST / NASDAQ / CRYPTO / EMTIA) — #61 + Crypto + Emtia
+    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🪙 Crypto", "🥇 Emtia/Forex"],
                          horizontal=True, key="live_cat")
     _bist_set = set(BIST)
     _crypto_set = set(CRYPTO)
+    _emtia_set = set(EMTIA_FX)
     def _in_cat(sym):
         if live_cat == "🇹🇷 BIST":
             return sym in _bist_set
         elif live_cat == "🇺🇸 NASDAQ":
             return sym in GCM_NASDAQ
-        else:  # Crypto
+        elif live_cat == "🪙 Crypto":
             return sym in _crypto_set
+        else:  # Emtia/Forex
+            return sym in _emtia_set
 
     # Sadece trade'i olan + seçili kategorideki semboller
     live_rows = []

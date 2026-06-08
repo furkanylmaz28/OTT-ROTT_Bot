@@ -90,7 +90,9 @@ EXIT_WARN_PCT = 1.0
 
 def market_open_categories(now_tr):
     """Şu an hangi piyasa(lar) açık? (hafta içi). Dayanıklı fallback için.
-    BIST 10:00-18:00 TR, NASDAQ 16:30-23:00 TR. Hafta sonu kapalı."""
+    BIST 10:00-18:00, NASDAQ 16:30-23:00 TR. CRYPTO/EMTIA hafta içi ~tüm gün.
+    Hafta sonu kapalı (main()'de zaten engellenir; emtia/forex hafta sonu kapalı,
+    crypto 7/24 ama hafta sonu takibi v1'de yok)."""
     if now_tr.weekday() >= 5:
         return []
     hm = now_tr.hour * 60 + now_tr.minute
@@ -99,6 +101,9 @@ def market_open_categories(now_tr):
         out.append("BIST")
     if 16 * 60 + 30 <= hm <= 23 * 60:       # NASDAQ (TR saati)
         out.append("NASDAQ")
+    # Crypto (7/24) ve Emtia/Forex (metaller+forex, hafta içi ~24h) → her zaman aç
+    out.append("CRYPTO")
+    out.append("EMTIA")
     return out
 
 
@@ -132,20 +137,45 @@ def _bist_set():
         return set()
 
 
+def _crypto_set():
+    try:
+        from per_symbol_optimize import CRYPTO30
+        return set(CRYPTO30)
+    except Exception:
+        return set()
+
+
+def _emtia_set():
+    try:
+        from per_symbol_optimize import EMTIA_FX
+        return set(EMTIA_FX)
+    except Exception:
+        return {"GC=F", "SI=F", "PA=F", "EURUSD=X", "GBPUSD=X"}
+
+
 def filter_symbols_by_category(syms, category):
-    """BIST veya NASDAQ kategorisine göre filtre.
+    """Kategoriye göre filtre.
 
     BIST   = sadece tanımlı 45 VIOP hissesi (JSON'daki eski semboller HARİÇ).
     NASDAQ = sadece GCM Forex MetaTrader'da işlem gören hisseler.
+    CRYPTO = -USD coinleri.   EMTIA = metaller + forex (=F / =X).
     """
     out = []
     bset = _bist_set()
+    cset = _crypto_set()
+    eset = _emtia_set()
     for s in syms:
         if category == "BIST":
             if s in bset:   # sadece 45 VIOP hissesi
                 out.append(s)
         elif category == "NASDAQ":
             if s in GCM_TICKERS:
+                out.append(s)
+        elif category == "CRYPTO":
+            if s in cset:
+                out.append(s)
+        elif category == "EMTIA":
+            if s in eset:
                 out.append(s)
     return out
 

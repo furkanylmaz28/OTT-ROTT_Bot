@@ -58,9 +58,12 @@ def is_session_open(sym: str, ts: str = None) -> bool:
     if dt.weekday() >= 5:   # Cumartesi/Pazar kapalı
         return False
     hm = dt.hour * 60 + dt.minute
-    if sym.upper().endswith(".IS"):           # BIST
+    su = sym.upper()
+    if su.endswith(".IS"):                     # BIST
         return 9 * 60 + 30 <= hm <= 18 * 60 + 10
-    if sym.upper().endswith("-USD"):          # crypto 7/24
+    if su.endswith("-USD"):                    # crypto 7/24
+        return True
+    if su.endswith("=F") or su.endswith("=X"): # emtia (metal) + forex → hafta içi ~24h
         return True
     return 16 * 60 + 30 <= hm <= 23 * 60      # NASDAQ/US (TR saati)
 
