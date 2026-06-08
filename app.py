@@ -2111,57 +2111,52 @@ with tab_live:
     if not open_pos:
         st.write("Şu an bu kategoride açık pozisyon yok.")
     else:
-        # Otomatik yenile AÇIKSA → fiyatlar her tikte otomatik + taze (butona gerek yok)
-        calc_live = auto_refresh or st.button(
-            "💹 Anlık yüzen P&L hesapla (canlı fiyat çek)", key="live_floating_btn")
+        # Anlık fiyat HER ZAMAN gösterilir (giriş yanında). live_price 45 sn cache'li
+        # → tekrar render'larda hızlı. "Fiyatı tazele" cache'i temizler.
+        if st.button("🔄 Fiyatı tazele (cache temizle)", key="live_price_refresh"):
+            live_price.clear()
         op_rows = []
-        for s, v in open_pos.items():
-            row = {
-                "Sembol": s,
-                "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
-                "Giriş": v["entry_price"],
-                "Stop (TOTT)": v.get("stop"),
-                "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
-            }
-            if calc_live:
+        with st.spinner(f"{len(open_pos)} pozisyonun anlık fiyatı çekiliyor…"):
+            for s, v in open_pos.items():
+                cp = None
                 try:
                     cp = live_price(s)   # hafif, 45 sn cache → anlık fiyat
-                    if cp:
-                        if v["side"] == "LONG":
-                            fpnl = (cp - v["entry_price"]) / v["entry_price"] * 100
-                        else:
-                            fpnl = (v["entry_price"] - cp) / v["entry_price"] * 100
-                        row["Anlık Fiyat"] = cp
-                        row["Yüzen P&L %"] = round(fpnl, 2)
-                        # Stop'a uzaklık (ÇIK YAKIN takibi)
-                        stp = v.get("stop")
-                        if stp:
-                            if v["side"] == "LONG":
-                                row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
-                            else:
-                                row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
                 except Exception:
                     pass
-            op_rows.append(row)
+                row = {
+                    "Sembol": s,
+                    "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
+                    "Giriş": v["entry_price"],
+                    "Anlık Fiyat": cp,
+                    "Yüzen P&L %": None,
+                    "Stop (TOTT)": v.get("stop"),
+                    "Stop'a %": None,
+                    "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
+                }
+                if cp:
+                    if v["side"] == "LONG":
+                        row["Yüzen P&L %"] = round((cp - v["entry_price"]) / v["entry_price"] * 100, 2)
+                    else:
+                        row["Yüzen P&L %"] = round((v["entry_price"] - cp) / v["entry_price"] * 100, 2)
+                    stp = v.get("stop")
+                    if stp:
+                        if v["side"] == "LONG":
+                            row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
+                        else:
+                            row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
+                op_rows.append(row)
         df_op = pd.DataFrame(op_rows)
-        fmt = {"Giriş": "{:.4f}",
-               "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-"}
-        if "Anlık Fiyat" in df_op.columns:
-            fmt["Anlık Fiyat"] = lambda x: f"{x:.4f}" if pd.notna(x) else "-"
-            fmt["Yüzen P&L %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
-        if "Stop'a %" in df_op.columns:
-            fmt["Stop'a %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
-        styler = df_op.style.format(fmt)
-        if "Yüzen P&L %" in df_op.columns:
-            styler = styler.background_gradient(subset=["Yüzen P&L %"],
-                                                 cmap="RdYlGn", vmin=-5, vmax=5)
+        styler = df_op.style.format({
+            "Giriş": "{:.4f}",
+            "Anlık Fiyat": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
+            "Yüzen P&L %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
+            "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
+            "Stop'a %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
+        }).background_gradient(subset=["Yüzen P&L %"], cmap="RdYlGn", vmin=-5, vmax=5)
         st.dataframe(styler, use_container_width=True, height=400)
-        if not calc_live:
-            st.caption("👆 Anlık P&L için butona bas — veya üstte **🔄 Otomatik yenile**'yi "
-                        "aç, fiyatlar tıklamadan canlı güncellensin.")
-        elif auto_refresh:
-            st.caption(f"💹 Fiyatlar canlı (≤45 sn taze) — "
-                        f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}")
+        st.caption(f"💹 Anlık fiyatlar (≤45 sn taze) — "
+                    f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}. "
+                    "Sürekli akış için üstte **🔄 Otomatik yenile**'yi aç.")
 
     st.markdown("---")
     if not live_rows:
