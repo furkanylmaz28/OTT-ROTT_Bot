@@ -427,6 +427,15 @@ def main():
         print("✗ Telegram yapılandırılmamış, çıkılıyor")
         return
 
+    # ── HAFTA SONU KORUMASI ──────────────────────────────────────────
+    # Cumartesi/Pazar her iki borsa da kapalı → sinyaller bayat (Cuma kapanış)
+    # verisinden gelir. record_observation hafta sonu zaten kayıt açmıyor;
+    # bildirim yolu da yapmamalı (yoksa kullanıcıya yanıltıcı/bayat mesaj gider).
+    # (BIST=.IS ve NASDAQ hisseleri hafta içi işler; crypto bildirimi yok.)
+    if now_tr.weekday() >= 5:
+        print(f"  Hafta sonu ({now_tr.strftime('%A')}) — borsalar kapalı, bildirim yok")
+        return
+
     # Şu anki saate uyan görevleri bul.
     # Cron her 10 dk'da bir çalışıyor → tolerans 5 dk olmalı (10 dk pencere içinde
     # tarama saati varsa yakala). Hedef saatten ÖNCE 5 dk içinde olmalı —
