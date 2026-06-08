@@ -317,6 +317,11 @@ def scan_category(category, mode, grid, bayes):
 
         # Mode'a göre filtre
         if mode == "konsensus":
+            # Konsensüs SADECE taze AÇ içindir. Baz sinyal (Bayes) AÇ değilse,
+            # iki bot birden taze AÇ veremez → pahalı 2× analizi hiç yapma.
+            # (Bu, koşuyu büyük ölçüde hızlandırır: çoğu sembol TUT/bekle.)
+            if "AÇ" not in a["signal"]:
+                continue
             # Hem Grid hem Bayes aynı yön AÇ sinyali vermeli
             if sym not in grid or sym not in bayes:
                 continue
@@ -598,28 +603,16 @@ def main():
         matches.append(("scan", "NASDAQ"))
         print(f"  ⚠️ TEST MODU — şu anki saatte BIST + NASDAQ scan zorla tetiklendi")
 
-    # ── DAYANIKLI FALLBACK ───────────────────────────────────────────
-    # GitHub Actions cron'u (*/10) güvenilmez — günde sadece birkaç kez,
-    # RASTGELE dakikalarda ateşliyor → sabit SCHEDULE saatlerinin 0-15 dk
-    # penceresini sürekli kaçırıyor (gözlemlendi: hiç mesaj gitmedi).
-    # Çözüm: bu tetikte tam saat eşleşmesi YOKSA ve piyasa AÇIKSA, yine de
-    # konsensüs + morning tara. 3 saatlik spam koruması (sym|signal bazlı)
-    # tekrar göndermeyi zaten engelliyor → cron-job.org tam saatte gönderse
-    # bile burada tekrar gitmez.
-    if not matches:
-        open_cats = market_open_categories(now_tr)
-        for cat in open_cats:
-            matches.append(("konsensus", cat))
-            matches.append(("morning", cat))
-        if matches:
-            print(f"  ⚠️ Tam saat eşleşmesi yok ama piyasa açık ({', '.join(open_cats)}) "
-                  f"→ dayanıklı fallback devrede (spam koruması tekrarı engeller)")
-
-    # ── ÇIK YAKIN KONTROLÜ — her tetikte (piyasa açıkken) ────────────
-    # Stop'a yaklaşma zaman-hassas → 15 dk'da bir kontrol edilmeli, sabit
-    # saate bağlı değil. Açık piyasadaki her sembolü tarar, trailing stop'a
-    # %1 yaklaşan TUT pozisyonları için "STOP YAKLAŞIYOR" uyarısı gönderir.
-    # Spam koruması (3 saat) sürekli tekrarı engeller.
+    # ── HER TETİKTE: WARN (= hafif takip + ÇIK YAKIN) ────────────────
+    # cron-job.org artık 15 dk'da bir GÜVENİLİR tetikliyor → planlı SCHEDULE
+    # saatleri (konsensus/morning/scan) zaten yakalanıyor. Eskiden buraya ağır
+    # konsensüs+morning fallback konuyordu; ama konsensüs 3× analiz yapıp koşuyu
+    # 15 dk'yı aştırıyor → koşular birbirini İPTAL ediyor → pozisyonlar (Telegram'a
+    # düştü) commit edilemeden kayboluyordu.
+    # ÇÖZÜM: her tetikte SADECE 'warn' çalışır. warn → scan_category, her sembol
+    # için record_observation çağırır (taze AÇ pozisyon açar + on_open Telegram) VE
+    # stop'a yaklaşanlara uyarı verir. Yani kayıt + ÇIK YAKIN tek hafif geçişte (1×).
+    # Ağır konsensüs/morning yalnız planlı saatlerde (cron güvenilir → yakalanır).
     for cat in market_open_categories(now_tr):
         if ("warn", cat) not in matches:
             matches.append(("warn", cat))
