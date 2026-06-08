@@ -84,6 +84,9 @@ RT_SCORE = {"MÜKEMMEL": 5, "İYİ": 4, "ORTA": 3,
             "MARJINAL": 2, "VERİ_AZ": 1, "UYUMSUZ": 0}
 MIN_RT = 3   # ORTA ve üstü
 
+# ÇIK YAKIN uyarı eşiği (%) — açık pozisyon trailing stop'a bu kadar yaklaşınca uyar
+EXIT_WARN_PCT = 1.0
+
 
 def market_open_categories(now_tr):
     """Şu an hangi piyasa(lar) açık? (hafta içi). Dayanıklı fallback için.
@@ -182,6 +185,21 @@ def analyze_one(sym, params):
             yon = "SHORT"
         else:
             stop = None; yon = None
+
+        # ── ÇIK YAKIN: açık pozisyon (TUT) trailing stop'a yaklaştı mı?
+        #    LONG TUT: fiyat tott_dn'e (aşağı stop) yaklaşırsa
+        #    SHORT TUT: fiyat tott_up'a (yukarı stop) yaklaşırsa
+        #    Stop YEMEDEN önce uyarı (kullanıcı talebi).
+        exit_warn = False
+        exit_dist = None
+        if "TUT" in sig and stop and stop > 0:
+            if yon == "LONG":
+                exit_dist = (cur / stop - 1) * 100      # stop altta, pozitif mesafe
+            elif yon == "SHORT":
+                exit_dist = (stop / cur - 1) * 100      # stop üstte, pozitif mesafe
+            if exit_dist is not None and 0 < exit_dist < EXIT_WARN_PCT:
+                exit_warn = True
+
         return {
             "sym": sym,
             "signal": sig,
@@ -189,6 +207,8 @@ def analyze_one(sym, params):
             "price": cur,
             "stop": stop,
             "is_fresh": ("AÇ" in sig or "ÇIK" in sig),  # taze sinyal mi
+            "exit_warn": exit_warn,
+            "exit_dist": exit_dist,
         }
     except Exception:
         return None
@@ -268,6 +288,10 @@ def scan_category(category, mode, grid, bayes):
         elif mode == "scan":
             # Tüm aktif sinyaller — TUT da dahil, ÇIK dahil
             pass
+        elif mode == "warn":
+            # ÇIK YAKIN — sadece trailing stop'a yaklaşan açık pozisyonlar (TUT)
+            if not a.get("exit_warn"):
+                continue
 
         # Backtest stats (None değerleri 0'a çevir)
         stats = params_info.get("stats", {})
@@ -294,6 +318,30 @@ def format_message(results, mode, category, scan_time):
     """Telegram mesajı oluştur — HTML format."""
     if not results:
         return None
+    # ── ÇIK YAKIN uyarısı — ayrı, vurgulu format (stop yemeden önce)
+    if mode == "warn":
+        flag = "🇹🇷" if category == "BIST" else "🇺🇸"
+        lines = [f"⚠️ {flag} <b>{category} — STOP YAKLAŞIYOR</b>",
+                 f"<i>{scan_time.strftime('%d/%m/%Y · %H:%M')} TR · "
+                 f"{len(results)} pozisyon stop'a yakın</i>",
+                 "━━━━━━━━━━━━━━━━━━━━"]
+        for r in results:
+            yon_emo = "🟢" if r["yon"] == "LONG" else "🔴"
+            dist = r.get("exit_dist")
+            dist_str = f"{dist:.2f}%" if dist is not None else "?"
+            lines.append("")
+            lines.append(f"{yon_emo} <b>{r['sym']}</b> — {r['yon']} pozisyon")
+            lines.append(f"   Fiyat: <code>{r['price']:.4f}</code>")
+            if r["stop"]:
+                lines.append(f"   🛑 Trailing stop: <code>{r['stop']:.4f}</code>  "
+                              f"<b>(yalnız {dist_str} uzakta!)</b>")
+            lines.append(f"   → Stop yakın. Yönet: ya çık ya SL'yi sıkılaştır.")
+        lines.append("")
+        lines.append("━━━━━━━━━━━━━━━━━━━━")
+        lines.append("💡 <i>Fiyat stop'u kırarsa sinyal çıkışa döner. Stop YEMEDEN karar ver.</i>")
+        lines.append("📱 https://furkanyilmaz.streamlit.app")
+        return "\n".join(lines)
+
     mode_labels = {
         "konsensus": "Konsensüs Mod ⭐⭐",
         "morning":   "Bugünün Önerileri 🌅",
@@ -373,7 +421,12 @@ def _filter_new_signals(results, mode, category, scan_time):
     fresh = []
     for r in results:
         # Key: sembol + sinyal yönü/durumu (mode+kat farklı olabilir ama sinyal aynıysa spam)
-        key = f"{r['sym']}|{r['signal']}"
+        # warn modu AYRI anahtar kullanır → normal TUT sinyaliyle çakışmaz
+        # (yoksa scan TUT gönderince warn uyarısı bastırılırdı).
+        if mode == "warn":
+            key = f"{r['sym']}|EXIT_WARN"
+        else:
+            key = f"{r['sym']}|{r['signal']}"
         last_ts_str = state.get(key)
         if last_ts_str:
             try:
@@ -473,6 +526,15 @@ def main():
         if matches:
             print(f"  ⚠️ Tam saat eşleşmesi yok ama piyasa açık ({', '.join(open_cats)}) "
                   f"→ dayanıklı fallback devrede (spam koruması tekrarı engeller)")
+
+    # ── ÇIK YAKIN KONTROLÜ — her tetikte (piyasa açıkken) ────────────
+    # Stop'a yaklaşma zaman-hassas → 15 dk'da bir kontrol edilmeli, sabit
+    # saate bağlı değil. Açık piyasadaki her sembolü tarar, trailing stop'a
+    # %1 yaklaşan TUT pozisyonları için "STOP YAKLAŞIYOR" uyarısı gönderir.
+    # Spam koruması (3 saat) sürekli tekrarı engeller.
+    for cat in market_open_categories(now_tr):
+        if ("warn", cat) not in matches:
+            matches.append(("warn", cat))
 
     if not matches:
         print(f"  Bu saatte ({h:02d}:{m:02d}) tarama yok (piyasa da kapalı)")
