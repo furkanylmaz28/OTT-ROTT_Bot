@@ -389,6 +389,19 @@ def fetch_yf(symbol, period="60d", interval="5m", n_bars=5000):
     return df[keep].dropna()
 
 
+@st.cache_data(ttl=45, show_spinner=False)  # 45 sn — açık pozisyon canlı fiyatı için
+def live_price(symbol):
+    """Sadece son (anlık) fiyat — hafif ve taze (45 sn cache).
+    Açık pozisyon yüzen P&L'i için; tam sinyal hesabı yapmaz."""
+    from data_source import best_interval_for
+    try:
+        df = ds_fetch(symbol, interval=best_interval_for(symbol), n_bars=60)
+        if df.empty: return None
+        return float(df["close"].iloc[-1])
+    except Exception:
+        return None
+
+
 # Per-symbol params cache (uygulama başlangıcında okunur, hızlı erişim)
 @st.cache_data(ttl=60)
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -2098,8 +2111,9 @@ with tab_live:
     if not open_pos:
         st.write("Şu an bu kategoride açık pozisyon yok.")
     else:
-        calc_live = st.button("💹 Anlık yüzen P&L hesapla (canlı fiyat çek)",
-                                key="live_floating_btn")
+        # Otomatik yenile AÇIKSA → fiyatlar her tikte otomatik + taze (butona gerek yok)
+        calc_live = auto_refresh or st.button(
+            "💹 Anlık yüzen P&L hesapla (canlı fiyat çek)", key="live_floating_btn")
         op_rows = []
         for s, v in open_pos.items():
             row = {
@@ -2111,8 +2125,7 @@ with tab_live:
             }
             if calc_live:
                 try:
-                    r = analyze_intraday(s)
-                    cp = r["Fiyat"] if r else None
+                    cp = live_price(s)   # hafif, 45 sn cache → anlık fiyat
                     if cp:
                         if v["side"] == "LONG":
                             fpnl = (cp - v["entry_price"]) / v["entry_price"] * 100
@@ -2120,6 +2133,13 @@ with tab_live:
                             fpnl = (v["entry_price"] - cp) / v["entry_price"] * 100
                         row["Anlık Fiyat"] = cp
                         row["Yüzen P&L %"] = round(fpnl, 2)
+                        # Stop'a uzaklık (ÇIK YAKIN takibi)
+                        stp = v.get("stop")
+                        if stp:
+                            if v["side"] == "LONG":
+                                row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
+                            else:
+                                row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
                 except Exception:
                     pass
             op_rows.append(row)
@@ -2129,14 +2149,19 @@ with tab_live:
         if "Anlık Fiyat" in df_op.columns:
             fmt["Anlık Fiyat"] = lambda x: f"{x:.4f}" if pd.notna(x) else "-"
             fmt["Yüzen P&L %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
+        if "Stop'a %" in df_op.columns:
+            fmt["Stop'a %"] = lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"
         styler = df_op.style.format(fmt)
         if "Yüzen P&L %" in df_op.columns:
             styler = styler.background_gradient(subset=["Yüzen P&L %"],
                                                  cmap="RdYlGn", vmin=-5, vmax=5)
         st.dataframe(styler, use_container_width=True, height=400)
         if not calc_live:
-            st.caption("👆 Anlık P&L için butona bas (her sembolün canlı fiyatı çekilir, "
-                        f"~{max(len(open_pos)*2//60,1)} dk).")
+            st.caption("👆 Anlık P&L için butona bas — veya üstte **🔄 Otomatik yenile**'yi "
+                        "aç, fiyatlar tıklamadan canlı güncellensin.")
+        elif auto_refresh:
+            st.caption(f"💹 Fiyatlar canlı (≤45 sn taze) — "
+                        f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}")
 
     st.markdown("---")
     if not live_rows:
