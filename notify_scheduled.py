@@ -292,6 +292,16 @@ def scan_category(category, mode, grid, bayes):
             grt = grid.get(sym, {}).get("rating") if grid.get(sym, {}).get("ok") else None
             if grt not in ("İYİ", "MÜKEMMEL"):
                 continue
+        # ── MUHAFAZAKÂR KAPI (mold/eşli-kalıp) — ADIM A
+        #    Bayes overfit (76/78 İYİ). Mold dürüst (28/78). Bir sembolü ancak
+        #    muhafazakâr yöntem onaylıyorsa TAKİP ET (overfit yanılsamasına güvenme).
+        #    BIST/CRYPTO/EMTIA → mold-İYİ+ şart; NASDAQ (mold yok) → Grid-İYİ+ fallback.
+        try:
+            import reliability as rel
+            if not rel.is_reliable(sym, grid):
+                continue
+        except Exception:
+            pass
         # Bayes önceliği
         params_info, src = get_best_params(sym, grid, bayes)
         if not params_info:
@@ -535,16 +545,14 @@ def prune_untracked_positions(grid):
     pos = fv.open_positions()
     if not pos:
         return
-    gcm = GCM_TICKERS
+    try:
+        import reliability as rel
+    except Exception:
+        rel = None
     removed = []
     for sym in list(pos.keys()):
-        # NASDAQ (GCM hissesi) ve Grid İYİ+ değilse → yetim, sil
-        if sym in gcm:
-            grt = grid.get(sym, {}).get("rating") if grid.get(sym, {}).get("ok") else None
-            if grt not in ("İYİ", "MÜKEMMEL"):
-                removed.append(sym)
-        # Grid UYUMSUZ olan her şey
-        elif grid.get(sym, {}).get("ok") and grid[sym].get("rating") == "UYUMSUZ":
+        # Muhafazakâr kapıdan geçmeyen (artık takip etmediğimiz) sembol → yetim, sil
+        if rel is not None and not rel.is_reliable(sym, grid):
             removed.append(sym)
     if removed:
         positions = fv._load(fv.POS_FILE, {})
