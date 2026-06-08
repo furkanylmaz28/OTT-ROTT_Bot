@@ -285,6 +285,13 @@ def scan_category(category, mode, grid, bayes):
         # Grid (FY) UYUMSUZ ise hiç gösterme (kullanıcı talebi)
         if grid.get(sym, {}).get("ok") and grid[sym].get("rating") == "UYUMSUZ":
             continue
+        # ── NASDAQ evreni çok büyük (416) → sadece GRID İYİ+ takip et.
+        #    Grid muhafazakâr → konsensüs kalitesi. Tarama hızlanır, koşular
+        #    iptal olmaz, Telegram spam'i azalır. (BIST/Crypto/Emtia küçük → ORTA+ kalır.)
+        if category == "NASDAQ":
+            grt = grid.get(sym, {}).get("rating") if grid.get(sym, {}).get("ok") else None
+            if grt not in ("İYİ", "MÜKEMMEL"):
+                continue
         # Bayes önceliği
         params_info, src = get_best_params(sym, grid, bayes)
         if not params_info:
@@ -497,6 +504,36 @@ def _filter_new_signals(results, mode, category, scan_time):
     return fresh
 
 
+def prune_untracked_positions(grid):
+    """Artık takip etmediğimiz sembollerin açık pozisyonlarını sil (yetim temizliği).
+    NASDAQ: sadece Grid İYİ+ takip edilir; altında kalan NASDAQ pozisyonları
+    bir daha taranmaz → silinmezse sonsuza dek açık kalır."""
+    try:
+        import forward_validation as fv
+    except Exception:
+        return
+    pos = fv.open_positions()
+    if not pos:
+        return
+    gcm = GCM_TICKERS
+    removed = []
+    for sym in list(pos.keys()):
+        # NASDAQ (GCM hissesi) ve Grid İYİ+ değilse → yetim, sil
+        if sym in gcm:
+            grt = grid.get(sym, {}).get("rating") if grid.get(sym, {}).get("ok") else None
+            if grt not in ("İYİ", "MÜKEMMEL"):
+                removed.append(sym)
+        # Grid UYUMSUZ olan her şey
+        elif grid.get(sym, {}).get("ok") and grid[sym].get("rating") == "UYUMSUZ":
+            removed.append(sym)
+    if removed:
+        positions = fv._load(fv.POS_FILE, {})
+        for s in removed:
+            positions.pop(s, None)
+        fv._save(fv.POS_FILE, positions)
+        print(f"  🧹 Yetim pozisyon temizlendi ({len(removed)}): {removed[:10]}")
+
+
 def run_task(mode, category, scan_time, grid, bayes):
     """Belirli mode + kategori için tarama + Telegram gönder."""
     print(f"\n▶ {category} {mode} taraması başladı")
@@ -594,6 +631,15 @@ def main():
     print(f"  Eşleşen görev sayısı: {len(matches)}")
     grid, bayes = load_param_files()
     print(f"  Veri: Grid={len(grid)}, Bayes={len(bayes)}")
+
+    # ── YETİM POZİSYON TEMİZLİĞİ ─────────────────────────────────────
+    # 416-NASDAQ rejiminde açılmış ama artık takip etmediğimiz (Grid İYİ+ değil)
+    # pozisyonlar bir daha taranmaz → asla kapanmaz. Bunları sil (kendiliğinden
+    # düzelir). Sadece güncel takip evreni dışındaki NASDAQ pozisyonları.
+    try:
+        prune_untracked_positions(grid)
+    except Exception as e:
+        print(f"  Prune hatası: {e}")
 
     for mode, cat in matches:
         try:
