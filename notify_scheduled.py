@@ -305,15 +305,30 @@ def scan_category(category, mode, grid, bayes):
         if not a:
             continue
 
+        # ── HABER/OLAY KARANLIĞI — bilanço/makro gününde YENİ pozisyon açma
+        #    (gap stop riski). Çıkış/trail etkilenmez, sadece yeni giriş bloklanır.
+        blackout, blk_reason = False, ""
+        try:
+            import event_filter as ef
+            blackout, blk_reason = ef.is_event_blackout(sym)
+        except Exception:
+            pass
+
         # ── FORWARD-VALIDATION: profesyonel trader takibi (sadece taze AÇ, seans içi)
         try:
             import forward_validation as fv
             fv.record_observation(
                 sym, a["signal"], a["price"], stop=a.get("stop"),
                 on_open=_fv_telegram_on_open,   # yeni pozisyon → Telegram (#8)
+                block_open=blackout,            # blackout → yeni pozisyon açma
             )
         except Exception:
             pass
+
+        # Blackout'ta TAZE AÇ bildirimini de atla (açmıyoruz → bildirmiyoruz).
+        # Çıkış/TUT sinyalleri etkilenmez.
+        if blackout and ("AÇ" in a["signal"]):
+            continue
 
         # Mode'a göre filtre
         if mode == "konsensus":

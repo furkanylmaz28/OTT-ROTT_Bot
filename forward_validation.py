@@ -94,12 +94,14 @@ def is_fresh_entry(signal: str) -> str | None:
 
 
 def record_observation(sym: str, signal: str, price: float, ts: str = None,
-                        stop: float = None, on_open=None):
+                        stop: float = None, on_open=None, block_open=False):
     """Profesyonel trader durum makinesi.
       - Açık pozisyon YOKKEN: sadece TAZE AÇ sinyalinde gir (TUT'ta girme)
       - Açık pozisyon VARKEN: yön ters dönerse/FLAT olursa kapat
       - Seans kapalıysa hiç işlem yapma (BIST 09:30-18:10)
-    on_open: yeni pozisyon açılınca çağrılacak callback (Telegram için)."""
+    on_open: yeni pozisyon açılınca çağrılacak callback (Telegram için).
+    block_open: True ise YENİ pozisyon AÇMAZ (haber/olay karanlığı). Çıkış/trail
+                yine işler — sadece yeni giriş engellenir."""
     if not signal or not price or price <= 0:
         return
     ts = ts or datetime.now(TR).isoformat()
@@ -130,8 +132,8 @@ def record_observation(sym: str, signal: str, price: float, ts: str = None,
             except Exception: pass
 
     if cur is None:
-        # Açık yok → SADECE taze AÇ'ta gir
-        if fresh:
+        # Açık yok → SADECE taze AÇ'ta gir (blackout'ta açma)
+        if fresh and not block_open:
             _open(fresh)
     else:
         side = cur["side"]
@@ -140,14 +142,14 @@ def record_observation(sym: str, signal: str, price: float, ts: str = None,
             if stop is not None:
                 positions[sym]["stop"] = stop
         elif direction == "FLAT":
-            # ÇIK veya bekle → kapat
+            # ÇIK veya bekle → kapat (blackout çıkışı engellemez)
             _close(side, cur["entry_price"], cur["entry_ts"])
             del positions[sym]
         else:
-            # Ters yön → kapat; taze AÇ ise yeni pozisyon aç (flip)
+            # Ters yön → kapat; taze AÇ ise yeni pozisyon aç (flip, blackout'ta açma)
             _close(side, cur["entry_price"], cur["entry_ts"])
             del positions[sym]
-            if fresh:
+            if fresh and not block_open:
                 _open(fresh)
 
     _save(POS_FILE, positions)

@@ -1,0 +1,5 @@
+{
+  "note": "BIST geneli makro olay günleri — bu günlerde YENİ pozisyon açılmaz (çıkış/tut etkilenmez). TÜİK enflasyon günü (her ayın ilk iş günü) OTOMATİK eklenir, buraya yazmana gerek yok. Buraya TCMB PPK (faiz kararı) günlerini ve önemli gördüğün diğer tarihleri ekle. Format: YYYY-MM-DD. TCMB takvimi: tcmb.gov.tr → Para Politikası Kurulu toplantı takvimi.",
+  "dates": [
+  ]
+}
