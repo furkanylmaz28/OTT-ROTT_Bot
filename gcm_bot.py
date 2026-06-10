@@ -169,11 +169,13 @@ def compute_signal(df, params):
     p.setdefault("rott_x1", 30); p.setdefault("rott_x2", 1000); p.setdefault("rott_percent", 7.0)
     s = sig_full.build_signals_full(df["close"], df["high"], df["low"], **p)
     last = s.iloc[-2]   # son KAPANMIŞ bar (oluşan mum değil)
-    if last["cond_buy_long"]:   return "LONG_AC", float(last["tott_dn"])
-    if last["cond_buy_short"]:  return "SHORT_AC", float(last["tott_up"])
+    def _f(v):          # NaN → None (yoksa MT5'e nan stop gider = geçersiz emir)
+        return float(v) if not pd.isna(v) else None
+    if last["cond_buy_long"]:   return "LONG_AC", _f(last["tott_dn"])
+    if last["cond_buy_short"]:  return "SHORT_AC", _f(last["tott_up"])
     if last["cond_exit_long"] or last["cond_exit_short"]:  return "EXIT", None
-    if last["major_up"] and last["zone_up"]:   return "LONG_TUT", float(last["tott_dn"])
-    if last["major_dn"] and last["zone_dn"]:   return "SHORT_TUT", float(last["tott_up"])
+    if last["major_up"] and last["zone_up"]:   return "LONG_TUT", _f(last["tott_dn"])
+    if last["major_dn"] and last["zone_dn"]:   return "SHORT_TUT", _f(last["tott_up"])
     return "FLAT", None
 
 
@@ -204,7 +206,8 @@ def open_order(mt5, symbol, side, sl):
         otype, price = mt5.ORDER_TYPE_SELL, info.bid
     req = {
         "action": mt5.TRADE_ACTION_DEAL, "symbol": symbol, "volume": float(LOT),
-        "type": otype, "price": price, "sl": float(sl) if sl else 0.0,
+        "type": otype, "price": price,
+        "sl": float(sl) if (sl and not pd.isna(sl) and sl > 0) else 0.0,
         "deviation": DEVIATION, "magic": MAGIC, "comment": "ott_bot",
         "type_time": mt5.ORDER_TIME_GTC, "type_filling": mt5.ORDER_FILLING_IOC,
     }
@@ -271,13 +274,16 @@ def cycle(mt5, universe, smap):
         # Açık pozisyon yönetimi
         if pos:
             pside = "LONG" if pos.type == 0 else "SHORT"
-            if sig == "EXIT" or sig == "FLAT" \
+            # ÇIK (cond_exit) veya TERS yön → kapat. FLAT (bekle/belirsiz) → TUT.
+            # Backtest cond_exit'e kadar tutar; FLAT'ta kapatmak erken çıkış =
+            # backtest ile tutarsızlık olurdu (düzeltildi).
+            if sig == "EXIT" \
                or (pside == "LONG" and "SHORT" in sig) \
                or (pside == "SHORT" and "LONG" in sig):
                 log(f"{gcm_sym}: {pside} → çıkış sinyali ({sig}), kapatılıyor")
                 close_position(mt5, pos)
             else:
-                update_sl(mt5, pos, sl)   # trailing
+                update_sl(mt5, pos, sl)   # FLAT veya aynı yön TUT → tut + trailing
         else:
             # Yeni pozisyon — sadece TAZE AÇ + pozisyon limiti
             if sig in ("LONG_AC", "SHORT_AC") and open_count < MAX_POSITIONS:
