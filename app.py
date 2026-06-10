@@ -1243,10 +1243,25 @@ with tab_consensus:
                 fy_rt = _grid[sym].get("rating", "?")
                 bs_rt = _bayes[sym].get("rating", "?")
 
+                # ── OTT+TOTT sıralı teyit (sadece OTT+TOTT, grid params)
+                try:
+                    import ott_tott_confirm as _otc
+                    _rr = _otc.compute(df_l["close"], int(gp["trend_length"]),
+                                        float(gp["trend_percent"]), float(gp.get("tott_coeff", 0.0004)))
+                    _cf = _rr[_rr["confirm"].notna()]
+                    if len(_cf):
+                        _d = _cf["confirm"].iloc[-1]
+                        ot_teyit = (f"🟢 LONG · {_cf.index[-1]:%d/%m}" if _d == "LONG"
+                                    else f"🔴 SHORT · {_cf.index[-1]:%d/%m}")
+                    else:
+                        ot_teyit = "—"
+                except Exception:
+                    ot_teyit = "—"
+
                 cons_rows.append({
                     "Sembol": sym,
                     "Kategori": _cat(sym),
-                    "GCM": "✓" if sym in GCM_NASDAQ else "",
+                    "OTT+TOTT Teyit": ot_teyit,
                     "FY Bot": lg.replace("_", " "),
                     "Bayes Bot": lb.replace("_", " "),
                     "Konsensüs": cons_type,
@@ -1288,7 +1303,7 @@ with tab_consensus:
 
             if len(strong) > 0:
                 st.markdown("### ⭐ KONSENSÜS SİNYALLER (yüksek olasılık)")
-                show_cols_s = ["Sembol","Kategori","GCM","Konsensüs","Fiyat","Stop",
+                show_cols_s = ["Sembol","Kategori","OTT+TOTT Teyit","Konsensüs","Fiyat","Stop",
                                 "Risk %","Pozisyon $","Adet","Max Risk $",
                                 "FY Rating","Bayes Rating"]
                 st.dataframe(
