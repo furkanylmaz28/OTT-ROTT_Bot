@@ -16,6 +16,11 @@ import pandas as pd
 import numpy as np
 import indicators as ind
 
+# Teyit görünümü için sabit coeff — 0.0004 (ana sistem) band oluşturmaz, TOTT≈OTT.
+# 0.01 (≈%1) anlamlı teyit bandı verir (TOTT, OTT'den sonra onaylar). Bu, ANALİZ
+# görünümü içindir; ana sistem (signals_full) kendi optimize coeff'ini kullanır.
+CONFIRM_COEFF = 0.01
+
 
 def compute(close: pd.Series, length: int, percent: float, coeff: float, shift: int = 2):
     """OTT çizgisi + TOTT bandı + sıralı-teyitli sinyalleri döndür."""

@@ -1247,7 +1247,7 @@ with tab_consensus:
                 try:
                     import ott_tott_confirm as _otc
                     _rr = _otc.compute(df_l["close"], int(gp["trend_length"]),
-                                        float(gp["trend_percent"]), float(gp.get("tott_coeff", 0.0004)))
+                                        float(gp["trend_percent"]), _otc.CONFIRM_COEFF)
                     _cf = _rr[_rr["confirm"].notna()]
                     if len(_cf):
                         _d = _cf["confirm"].iloc[-1]
@@ -2063,7 +2063,7 @@ with tab_otttott:
         p = _grid_ot.get(ot_sym, {}).get("params", {})
         L = int(p.get("trend_length", 40))
         P = float(p.get("trend_percent", 7.0))
-        C = float(p.get("tott_coeff", 0.0004))
+        C = otc.CONFIRM_COEFF   # 0.01 — anlamlı teyit bandı (0.0004 band oluşturmaz)
         from data_source import best_interval_for as _bif2
         with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor (H1)..."):
             df_ot = fetch_yf(ot_sym, interval=_bif2(ot_sym))
