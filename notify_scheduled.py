@@ -275,6 +275,19 @@ def _fv_telegram_on_open(sym, side, price, stop):
         pass
 
 
+def _fv_telegram_on_close(sym, side, exit_price, pnl_pct):
+    """HARD STOP tetiklenince Telegram'a bildir."""
+    flag = "🇹🇷" if sym.upper().endswith(".IS") else "🇺🇸"
+    emo = "🟢" if pnl_pct >= 0 else "🔴"
+    lines = [f"{flag} <b>{sym}</b> — 🛑 STOP OLDU ({side})",
+             f"Çıkış: <code>{exit_price:.4f}</code>  {emo} <b>{pnl_pct:+.2f}%</b>",
+             f"<i>{datetime.now(TR):%d/%m %H:%M} TR · hard stop</i>"]
+    try:
+        send_telegram("\n".join(lines))
+    except Exception:
+        pass
+
+
 def scan_category(category, mode, grid, bayes):
     """Kategorideki sembolleri tara → mode'a göre filtrele."""
     syms = sorted(set(list(grid.keys()) + list(bayes.keys())))
@@ -656,6 +669,28 @@ def main():
         prune_untracked_positions(grid)
     except Exception as e:
         print(f"  Prune hatası: {e}")
+
+    # ── HARD STOP KONTROLÜ (her tetikte, sinyalden bağımsız) ──────────
+    # Sistemde fiziki stop yoktu → 'bekle' durumundaki pozisyon stop'un altına/üstüne
+    # kanıyordu. Burada her açık pozisyonun anlık fiyatını çekip, trailing stop'u
+    # kırdıysa stop seviyesinden KAPAT (kaybı sınırla).
+    try:
+        import forward_validation as fv
+        _open = fv.open_positions()
+        if _open:
+            _pm = {}
+            for _s in _open:
+                try:
+                    _df = ds_fetch(_s, interval=best_interval_for(_s), n_bars=60)
+                    if not _df.empty:
+                        _pm[_s] = float(_df["close"].iloc[-1])
+                except Exception:
+                    pass
+            _stopped = fv.enforce_stops(_pm, on_close=_fv_telegram_on_close)
+            if _stopped:
+                print(f"  🛑 Hard stop ile kapanan ({len(_stopped)}): {_stopped}")
+    except Exception as e:
+        print(f"  Hard stop kontrolü hatası: {e}")
 
     for mode, cat in matches:
         try:

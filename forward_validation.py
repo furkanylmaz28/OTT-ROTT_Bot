@@ -156,6 +156,47 @@ def record_observation(sym: str, signal: str, price: float, ts: str = None,
     _save(TRADES_FILE, trades)
 
 
+def enforce_stops(price_map: dict, on_close=None) -> list:
+    """HARD STOP — fiyat trailing stop'u kırdıysa pozisyonu KAPAT (sinyalden bağımsız).
+    Sistemde fiziki stop yoktu → 'bekle' durumunda pozisyon stop'un altına/üstüne
+    kayıp kanıyordu. Bu, her taramada çağrılır; sinyal ne olursa olsun stop'u uygular.
+
+    price_map: {sym: anlık_fiyat}. Kapanış stop SEVİYESİNDEN varsayılır (fiziki SL
+    gerçekçiliği — ara bar boşluğunda fiyat daha da kaymış olsa bile stop'ta dolardı).
+    on_close(sym, side, exit_price, pnl_pct): stop tetiklenince callback (Telegram)."""
+    positions = _load(POS_FILE, {})
+    trades = _load(TRADES_FILE, [])
+    closed = []
+    now = datetime.now(TR).isoformat()
+    for sym, pos in list(positions.items()):
+        price = price_map.get(sym)
+        stop = pos.get("stop")
+        if not price or price <= 0 or not stop or stop <= 0:
+            continue
+        side = pos["side"]
+        hit = (side == "LONG" and price <= stop) or (side == "SHORT" and price >= stop)
+        if not hit:
+            continue
+        ep = pos["entry_price"]
+        exit_price = stop                        # fiziki SL ~stop'ta dolar
+        pnl = (exit_price - ep) / ep if side == "LONG" else (ep - exit_price) / ep
+        trades.append({
+            "sym": sym, "side": side,
+            "entry_price": ep, "exit_price": exit_price,
+            "entry_ts": pos.get("entry_ts"), "exit_ts": now,
+            "pnl_pct": round(pnl * 100, 3), "exit_reason": "hard_stop",
+        })
+        del positions[sym]
+        closed.append(sym)
+        if on_close:
+            try: on_close(sym, side, exit_price, round(pnl * 100, 3))
+            except Exception: pass
+    if closed:
+        _save(POS_FILE, positions)
+        _save(TRADES_FILE, trades)
+    return closed
+
+
 def live_stats(sym: str, last_n: int = 30) -> dict:
     """Bir sembolün CANLI son N trade istatistiği."""
     trades = _load(TRADES_FILE, [])
