@@ -587,7 +587,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_portfolio, tab_consensus, tab_scan,
- tab_sim, tab_chart, tab_emtia, tab_crypto, tab_live, tab_info) = st.tabs([
+ tab_sim, tab_chart, tab_emtia, tab_crypto, tab_otttott, tab_live, tab_info) = st.tabs([
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "📡  Anlık Tarayıcı",
@@ -595,6 +595,7 @@ st.markdown(f"""
     "📊  Detay Grafik",
     "🥇  Emtia/Forex",
     "🪙  Crypto (4h)",
+    "🔗  OTT+TOTT Teyit",
     "✅  Canlı Performans",
     "📖  Bilgi",
 ])
@@ -2022,6 +2023,102 @@ with tab_crypto:
         else:
             st.info(f"👆 **Güvenilir coinleri tara** butonuna bas. "
                     f"{len(reliable)} coin × 4h, ~{len(reliable)*6}sn.")
+
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: OTT + TOTT TEYİT — sıralı teyit (OTT sinyali → peşinde aynı yön TOTT)
+# ──────────────────────────────────────────────────────────────────
+with tab_otttott:
+    st.subheader("🔗 OTT + TOTT Sıralı Teyit")
+    st.caption("Sadece OTT ve TOTT. Kural: OTT bir sinyal verir → **hemen peşindeki "
+                "TOTT AYNI yönde** onaylarsa sinyal geçerli. OTT ters dönerse (long→short) "
+                "araya giren ters TOTT teyidi **sayılmaz**. Aynı formül/timeframe (H1).")
+
+    import ott_tott_confirm as otc
+
+    _allsyms = sorted(set(BIST + list(GCM_NASDAQ) + CRYPTO + COMMODITY + EMTIA_FX))
+    _grid_ot = _load_per_sym()
+    # Varsayılan: güvenilir çekirdekten ASELS
+    _def = "ASELS.IS" if "ASELS.IS" in _allsyms else _allsyms[0]
+    ot_sym = st.selectbox("Sembol", _allsyms, index=_allsyms.index(_def), key="otc_sym")
+
+    if st.button("🔗 OTT+TOTT teyit sinyallerini getir", type="primary",
+                  use_container_width=True, key="otc_btn"):
+        p = _grid_ot.get(ot_sym, {}).get("params", {})
+        L = int(p.get("trend_length", 40))
+        P = float(p.get("trend_percent", 7.0))
+        C = float(p.get("tott_coeff", 0.0004))
+        from data_source import best_interval_for as _bif2
+        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor (H1)..."):
+            df_ot = fetch_yf(ot_sym, interval=_bif2(ot_sym))
+        if df_ot.empty or len(df_ot) < 300:
+            st.warning("Veri çekilemedi.")
+        else:
+            r = otc.compute(df_ot["close"], L, P, C)
+            cs = otc.confirmed_signals(r)
+            cur_price = float(df_ot["close"].iloc[-1])
+
+            # Mevcut durum: son onaylı sinyal + bekleyen (pending) OTT var mı
+            last = cs.iloc[-1] if len(cs) else None
+            # pending: son onaylı sinyalden SONRA gelen son OTT sinyali (henüz TOTT onaylamamış)
+            after = r.loc[cs.index[-1]:] if len(cs) else r
+            pend = None
+            for ts_, row in after.iterrows():
+                if row["ott_long"]: pend = "LONG (TOTT teyidi bekliyor)"
+                elif row["ott_short"]: pend = "SHORT (TOTT teyidi bekliyor)"
+                if row.get("confirm") in ("LONG", "SHORT") and ts_ != (cs.index[-1] if len(cs) else None):
+                    pend = None
+
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Sembol", ot_sym.replace(".IS", ""))
+            if last is not None:
+                emo = "🟢 LONG" if last["yon"] == "LONG" else "🔴 SHORT"
+                m2.metric("Son onaylı sinyal", emo,
+                          f"{last.name:%d/%m %H:%M} @ {last['price']:.2f}")
+            m3.metric("Anlık fiyat", f"{cur_price:.2f}",
+                      f"{(cur_price/last['price']-1)*100:+.1f}%" if last is not None else None)
+
+            if pend:
+                st.info(f"⏳ Bekleyen OTT sinyali: **{pend}** — TOTT aynı yönde onaylarsa geçerli olacak.")
+
+            # ── Grafik: fiyat + OTT + TOTT bandı + onaylı işaretler
+            try:
+                import plotly.graph_objects as go
+                view = r.tail(400)
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(x=view.index, y=view["close"], name="Fiyat",
+                                          line=dict(color="#aaa", width=1)))
+                fig.add_trace(go.Scatter(x=view.index, y=view["ott"], name="OTT",
+                                          line=dict(color="#ab47bc", width=1.5)))
+                fig.add_trace(go.Scatter(x=view.index, y=view["tott_up"], name="TOTT ↑",
+                                          line=dict(color="#26a69a", width=1, dash="dot")))
+                fig.add_trace(go.Scatter(x=view.index, y=view["tott_dn"], name="TOTT ↓",
+                                          line=dict(color="#ef5350", width=1, dash="dot")))
+                cl = view[view["confirm"] == "LONG"]
+                csh = view[view["confirm"] == "SHORT"]
+                fig.add_trace(go.Scatter(x=cl.index, y=cl["close"], name="LONG ✓", mode="markers",
+                                          marker=dict(color="#26a69a", size=11, symbol="triangle-up")))
+                fig.add_trace(go.Scatter(x=csh.index, y=csh["close"], name="SHORT ✓", mode="markers",
+                                          marker=dict(color="#ef5350", size=11, symbol="triangle-down")))
+                fig.update_layout(height=420, margin=dict(l=0, r=0, t=10, b=0),
+                                  legend=dict(orientation="h"), template="plotly_dark")
+                st.plotly_chart(fig, use_container_width=True)
+            except Exception as e:
+                st.caption(f"(grafik çizilemedi: {e})")
+
+            # ── Son onaylı sinyaller tablosu
+            st.markdown(f"### Son onaylı sinyaller ({len(cs)} toplam, parametre: L={L} %={P} coeff={C})")
+            show = cs.tail(20).iloc[::-1].copy()
+            show["Tarih"] = [f"{i:%d/%m/%Y %H:%M}" for i in show.index]
+            show["Yön"] = show["yon"].map({"LONG": "🟢 LONG", "SHORT": "🔴 SHORT"})
+            st.dataframe(
+                show[["Tarih", "Yön", "price"]].rename(columns={"price": "Fiyat"}).style.format({"Fiyat": "{:.2f}"}),
+                use_container_width=True, height=400, hide_index=True)
+            st.caption("⚠️ Bu sekme SADECE OTT+TOTT sıralı teyidini gösterir (SOTT/HOTT/ROTT/rejim YOK). "
+                        "Tam sistem sinyali için Konsensüs/Anlık Tarayıcı sekmeleri.")
+    else:
+        st.info("👆 Sembol seç + butona bas. OTT sinyalini hemen peşinde aynı yön TOTT "
+                "onaylayan barlar işaretlenir (gönderdiğin grafiklerdeki gibi).")
 
 
 with tab_live:
