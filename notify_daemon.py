@@ -61,7 +61,7 @@ def scan_consensus():
             gp.setdefault("rott_x1", 30); gp.setdefault("rott_x2", 1000)
             gp.setdefault("rott_percent", 7.0)
             sg = sig_full.build_signals_full(df["close"], df["high"], df["low"], **gp)
-            fy = _signal_label(sg.iloc[-1])
+            fy = _signal_label(sg.iloc[-2] if len(sg) >= 2 else sg.iloc[-1])  # kapanmış bar
 
             # Bayes varsa çek
             bs_sig = None
@@ -70,7 +70,7 @@ def scan_consensus():
                 bp.setdefault("rott_x1", 30); bp.setdefault("rott_x2", 1000)
                 bp.setdefault("rott_percent", 7.0)
                 sb = sig_full.build_signals_full(df["close"], df["high"], df["low"], **bp)
-                bs_sig = _signal_label(sb.iloc[-1])
+                bs_sig = _signal_label(sb.iloc[-2] if len(sb) >= 2 else sb.iloc[-1])  # kapanmış bar
 
             # Konsensüs türü
             kind = None
