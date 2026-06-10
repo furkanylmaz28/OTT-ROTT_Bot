@@ -117,14 +117,53 @@ def is_macro_blackout(ts: str | None = None, win_days: int = 0) -> bool:
     return False
 
 
+def _last_business_day(y: int, m: int) -> date:
+    import calendar
+    d = date(y, m, calendar.monthrange(y, m)[1])
+    while d.weekday() >= 5:      # Cmt/Paz → geri kaydır
+        d -= timedelta(days=1)
+    return d
+
+
+def viop_expiry(ref: date | None = None) -> date:
+    """Önümüzdeki VIOP vade tarihi = ayın SON İŞ GÜNÜ (tek-hisse vadeli standart).
+    Bu ayın expiry'si geçtiyse gelecek ayınkini döndürür."""
+    ref = ref or _today_tr()
+    exp = _last_business_day(ref.year, ref.month)
+    if ref > exp:                # bu ayın vadesi geçti → gelecek ay
+        ny, nm = (ref.year + (1 if ref.month == 12 else 0),
+                  1 if ref.month == 12 else ref.month + 1)
+        exp = _last_business_day(ny, nm)
+    return exp
+
+
+def is_viop_near_expiry(sym: str, ts: str | None = None, biz_days: int = 5) -> bool:
+    """BIST/.IS (VIOP'ta vadeli işlem) — vadeye son `biz_days` iş günü kala True.
+    Koşacak yeri olmayan pozisyon açma (ay sonu zorla kapanır)."""
+    if not sym.upper().endswith(".IS"):
+        return False
+    d = (datetime.fromisoformat(ts).astimezone(TR).date() if ts else _today_tr())
+    exp = viop_expiry(d)
+    # vadeye kaç İŞ günü kaldı
+    biz = 0; cur = d
+    while cur < exp:
+        cur += timedelta(days=1)
+        if cur.weekday() < 5:
+            biz += 1
+    return 0 <= biz <= biz_days
+
+
 def is_event_blackout(sym: str, ts: str | None = None) -> tuple[bool, str]:
     """Yeni pozisyon açmamalı mıyız? (True, sebep) döner.
-    BIST (.IS): hem bilanço hem makro. Diğer: sadece bilanço."""
+    BIST (.IS): bilanço + makro + VIOP vade-sonu. Diğer: sadece bilanço."""
     su = sym.upper()
     if is_earnings_blackout(sym, ts, win_days=1):
         return True, "bilanço"
-    if su.endswith(".IS") and is_macro_blackout(ts, win_days=0):
-        return True, "makro (TÜİK/TCMB)"
+    if su.endswith(".IS"):
+        if is_macro_blackout(ts, win_days=0):
+            return True, "makro (TÜİK/TCMB)"
+        if is_viop_near_expiry(sym, ts, biz_days=5):
+            return True, "VIOP vade-sonu (roll/koşacak yer yok)"
     return False, ""
 
 
