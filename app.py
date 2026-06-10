@@ -1251,8 +1251,9 @@ with tab_consensus:
                     _cf = _rr[_rr["confirm"].notna()]
                     if len(_cf):
                         _d = _cf["confirm"].iloc[-1]
-                        ot_teyit = (f"🟢 LONG · {_cf.index[-1]:%d/%m}" if _d == "LONG"
-                                    else f"🔴 SHORT · {_cf.index[-1]:%d/%m}")
+                        _p = float(_cf["close"].iloc[-1])
+                        ot_teyit = (f"🟢 LONG · {_cf.index[-1]:%d/%m} · {_p:.2f}" if _d == "LONG"
+                                    else f"🔴 SHORT · {_cf.index[-1]:%d/%m} · {_p:.2f}")
                     else:
                         ot_teyit = "—"
                 except Exception:
