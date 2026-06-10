@@ -438,6 +438,20 @@ def _is_uyumsuz(sym):
     return sym in _uyumsuz_symbols()
 
 
+def _sup_res(df, n=120):
+    """Anlık destek/direnç — son n barın en düşük/en yüksek değeri (faktüel seviye,
+    tahmin değil). Direnç = yakın zirve, Destek = yakın dip."""
+    try:
+        if df is None or df.empty:
+            return None, None
+        w = df.tail(n)
+        lo = float(w["low"].min()) if "low" in w else float(w["close"].min())
+        hi = float(w["high"].max()) if "high" in w else float(w["close"].max())
+        return lo, hi
+    except Exception:
+        return None, None
+
+
 def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: float = 1.0):
     """interval=None → kategoriye göre otomatik (CRYPTO=30m, diğer=1h)
     warn_threshold_pct: 'ÇIK YAKIN' uyarısı eşiği (%) — fiyat trail stop'a bu kadar yakınsa uyar.
@@ -504,6 +518,7 @@ def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: fl
         bt_n = 0
 
     from data_source import category_of as _cat
+    _dest, _diren = _sup_res(df)   # anlık destek/direnç (son 120 bar)
     return {
         "Sembol": symbol,
         "Kategori": _cat(symbol),
@@ -511,6 +526,8 @@ def analyze_intraday(symbol, interval: str | None = None, warn_threshold_pct: fl
         "_GuvenSkor": guven_score,
         "Durum": pos,
         "Fiyat": cur,
+        "Direnç": _diren,
+        "Destek": _dest,
         "Trend OTT": float(last["trend_ott"]) if not pd.isna(last["trend_ott"]) else None,
         "Tetik ↑": float(last["tott_up"]) if not pd.isna(last["tott_up"]) else None,
         "Tetik ↓": float(last["tott_dn"]) if not pd.isna(last["tott_dn"]) else None,
@@ -1259,6 +1276,7 @@ with tab_consensus:
                 except Exception:
                     ot_teyit = "—"
 
+                _cd, _cr = _sup_res(df_l)   # anlık destek/direnç
                 cons_rows.append({
                     "Sembol": sym,
                     "Kategori": _cat(sym),
@@ -1267,6 +1285,8 @@ with tab_consensus:
                     "Bayes Bot": lb.replace("_", " "),
                     "Konsensüs": cons_type,
                     "Fiyat": cur,
+                    "Direnç": _cr,
+                    "Destek": _cd,
                     "Stop": stop,
                     "Risk %": risk_pct,
                     "Pozisyon $": pos_size,
@@ -1304,12 +1324,15 @@ with tab_consensus:
 
             if len(strong) > 0:
                 st.markdown("### ⭐ KONSENSÜS SİNYALLER (yüksek olasılık)")
-                show_cols_s = ["Sembol","Kategori","OTT+TOTT Teyit","Konsensüs","Fiyat","Stop",
+                show_cols_s = ["Sembol","Kategori","OTT+TOTT Teyit","Konsensüs","Fiyat",
+                                "Direnç","Destek","Stop",
                                 "Risk %","Pozisyon $","Adet","Max Risk $",
                                 "FY Rating","Bayes Rating"]
                 st.dataframe(
                     strong[show_cols_s].style.format({
                         "Fiyat":"{:.4f}", "Stop":"{:.4f}",
+                        "Direnç": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                        "Destek": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
                         "Risk %":"{:.2f}%",
                         "Pozisyon $":"${:.0f}", "Adet":"{:.4f}", "Max Risk $":"${:.0f}",
                     }).background_gradient(subset=["Risk %"], cmap="RdYlGn_r"),
@@ -1460,6 +1483,7 @@ with tab_scan:
         show_cols = [c for c in df_scan.columns if not c.startswith("_")]
         # İdeal sıralama
         col_order = ["Sembol", "Kategori", "Güven", "Durum", "Fiyat",
+                      "Direnç", "Destek",
                       "Trend OTT", "Tetik ↑", "Up %", "Tetik ↓", "Dn %",
                       "BT Getiri %", "BT PF", "BT Win %", "BT Trade"]
         show_cols = [c for c in col_order if c in show_cols]
@@ -1467,6 +1491,8 @@ with tab_scan:
         st.dataframe(
             df_scan[show_cols].style.format({
                 "Fiyat": "{:.4f}",
+                "Direnç": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                "Destek": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
                 "Trend OTT": "{:.4f}",
                 "Tetik ↑": "{:.4f}",
                 "Tetik ↓": "{:.4f}",
@@ -1589,6 +1615,8 @@ with tab_sim:
                 "Güven": r["Güven"],
                 "Yön": yon,
                 "Anlık Fiyat": cur,
+                "Direnç": r.get("Direnç"),
+                "Destek": r.get("Destek"),
                 "Stop": stop,
                 "Risk %": risk_pct,
                 "BT Win %": r["BT Win %"],
@@ -1915,6 +1943,8 @@ with tab_emtia:
                     "Güven": r["Güven"],
                     "Durum": durum,
                     "Fiyat": cur,
+                    "Direnç": r.get("Direnç"),
+                    "Destek": r.get("Destek"),
                     "Stop (TOTT)": stop,
                     "BT Getiri %": r["BT Getiri %"],
                     "BT PF": r["BT PF"],
@@ -1928,6 +1958,8 @@ with tab_emtia:
             st.dataframe(
                 df_em.style.format({
                     "Fiyat": "{:.4f}",
+                    "Direnç": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
+                    "Destek": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
                     "Stop (TOTT)": lambda v: f"{v:.4f}" if pd.notna(v) else "-",
                     "BT Getiri %": lambda v: f"{v:+.1f}%" if pd.notna(v) else "-",
                     "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.2f}") if pd.notna(v) else "-",
@@ -2008,6 +2040,8 @@ with tab_crypto:
                         "Güven": r["Güven"],
                         "Durum": durum,
                         "Fiyat": r["Fiyat"],
+                        "Direnç": r.get("Direnç"),
+                        "Destek": r.get("Destek"),
                         "Stop (TOTT)": stop,
                         "BT Getiri %": r["BT Getiri %"],
                         "BT PF": r["BT PF"],
@@ -2025,6 +2059,8 @@ with tab_crypto:
                 st.dataframe(
                     df_cr.style.format({
                         "Fiyat": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
+                        "Direnç": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
+                        "Destek": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
                         "Stop (TOTT)": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
                         "BT Getiri %": lambda v: f"{v:+.0f}%" if pd.notna(v) else "-",
                         "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.1f}") if pd.notna(v) else "-",
