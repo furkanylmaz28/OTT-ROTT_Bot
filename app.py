@@ -2081,41 +2081,28 @@ with tab_otttott:
             if pend:
                 st.info(f"⏳ Bekleyen OTT sinyali: **{pend}** — TOTT aynı yönde onaylarsa geçerli olacak.")
 
-            # ── Grafik: fiyat + OTT + TOTT bandı + onaylı işaretler
-            try:
-                import plotly.graph_objects as go
-                view = r.tail(400)
-                fig = go.Figure()
-                fig.add_trace(go.Scatter(x=view.index, y=view["close"], name="Fiyat",
-                                          line=dict(color="#aaa", width=1)))
-                fig.add_trace(go.Scatter(x=view.index, y=view["ott"], name="OTT",
-                                          line=dict(color="#ab47bc", width=1.5)))
-                fig.add_trace(go.Scatter(x=view.index, y=view["tott_up"], name="TOTT ↑",
-                                          line=dict(color="#26a69a", width=1, dash="dot")))
-                fig.add_trace(go.Scatter(x=view.index, y=view["tott_dn"], name="TOTT ↓",
-                                          line=dict(color="#ef5350", width=1, dash="dot")))
-                cl = view[view["confirm"] == "LONG"]
-                csh = view[view["confirm"] == "SHORT"]
-                fig.add_trace(go.Scatter(x=cl.index, y=cl["close"], name="LONG ✓", mode="markers",
-                                          marker=dict(color="#26a69a", size=11, symbol="triangle-up")))
-                fig.add_trace(go.Scatter(x=csh.index, y=csh["close"], name="SHORT ✓", mode="markers",
-                                          marker=dict(color="#ef5350", size=11, symbol="triangle-down")))
-                fig.update_layout(height=420, margin=dict(l=0, r=0, t=10, b=0),
-                                  legend=dict(orientation="h"), template="plotly_dark")
-                st.plotly_chart(fig, use_container_width=True)
-            except Exception as e:
-                st.caption(f"(grafik çizilemedi: {e})")
-
-            # ── Son onaylı sinyaller tablosu
-            st.markdown(f"### Son onaylı sinyaller ({len(cs)} toplam, parametre: L={L} %={P} coeff={C})")
-            show = cs.tail(20).iloc[::-1].copy()
+            # ── Onaylı sinyaller TABLOSU (grafik yok — kullanıcı tercihi)
+            st.markdown(f"### Onaylı OTT+TOTT sinyalleri ({len(cs)} toplam · L={L} %={P} coeff={C})")
+            prices = cs["price"].tolist()
+            sonuc = []
+            for k in range(len(cs)):
+                nxt = prices[k+1] if k+1 < len(prices) else cur_price   # sonraki sinyal / anlık
+                e = prices[k]; yon = cs["yon"].iloc[k]
+                sonuc.append(round((nxt - e)/e*100 if yon == "LONG" else (e - nxt)/e*100, 1))
+            cs2 = cs.copy(); cs2["sonuc"] = sonuc
+            show = cs2.tail(30).iloc[::-1].copy()
             show["Tarih"] = [f"{i:%d/%m/%Y %H:%M}" for i in show.index]
             show["Yön"] = show["yon"].map({"LONG": "🟢 LONG", "SHORT": "🔴 SHORT"})
             st.dataframe(
-                show[["Tarih", "Yön", "price"]].rename(columns={"price": "Fiyat"}).style.format({"Fiyat": "{:.2f}"}),
-                use_container_width=True, height=400, hide_index=True)
-            st.caption("⚠️ Bu sekme SADECE OTT+TOTT sıralı teyidini gösterir (SOTT/HOTT/ROTT/rejim YOK). "
-                        "Tam sistem sinyali için Konsensüs/Anlık Tarayıcı sekmeleri.")
+                show[["Tarih", "Yön", "price", "sonuc"]].rename(
+                    columns={"price": "Fiyat", "sonuc": "Sonraki sinyale dek %"}).style.format(
+                    {"Fiyat": "{:.2f}", "Sonraki sinyale dek %": "{:+.1f}%"}).background_gradient(
+                    subset=["Sonraki sinyale dek %"], cmap="RdYlGn", vmin=-8, vmax=8),
+                use_container_width=True, height=560, hide_index=True)
+            wins = sum(1 for x in sonuc if x > 0)
+            st.caption(f"📊 {len(cs)} sinyal · kazanan {wins}/{len(cs)} (%{100*wins/max(len(cs),1):.0f}) · "
+                        f"toplam {sum(sonuc):+.0f}%. ⚠️ SADECE OTT+TOTT (SOTT/HOTT/ROTT/rejim YOK) — "
+                        "tam sistem için Konsensüs/Anlık Tarayıcı.")
     else:
         st.info("👆 Sembol seç + butona bas. OTT sinyalini hemen peşinde aynı yön TOTT "
                 "onaylayan barlar işaretlenir (gönderdiğin grafiklerdeki gibi).")
