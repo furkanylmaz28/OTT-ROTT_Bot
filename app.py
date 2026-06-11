@@ -1263,7 +1263,7 @@ with tab_consensus:
                 # ── OTT+TOTT sıralı teyit (sadece OTT+TOTT, grid params)
                 try:
                     import ott_tott_confirm as _otc
-                    _rr = _otc.compute_canonical(df_l["close"])   # TradingView uyumlu
+                    _rr = _otc.compute(df_l["close"], _otc.TV_LENGTH, _otc.TV_PERCENT, _otc.TV_COEFF)
                     _cf = _rr[_rr["confirm"].notna()]
                     if len(_cf):
                         _d = _cf["confirm"].iloc[-1]
@@ -2106,18 +2106,22 @@ with tab_otttott:
                 try:
                     d = fetch_yf(sym, interval=ot_tf)
                     if not d.empty and len(d) > 200:
-                        rr = otc.compute_canonical(d["close"])   # TradingView uyumlu
+                        # SIRALI teyit + Pine param (TradingView uyumlu)
+                        rr = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
                         cfx = rr[rr["confirm"].notna()]
                         if len(cfx):
                             ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]; lpr = float(cfx["close"].iloc[-1])
                             curx = float(d["close"].iloc[-1])
                             pl = (curx/lpr-1)*100 if ld == "LONG" else (lpr/curx-1)*100
+                            # tz-naive ise tz_localize HATA verir → güvenli dönüşüm
+                            _ts = pd.Timestamp(lt)
+                            if _ts.tz is not None:
+                                _ts = _ts.tz_localize(None)
                             scan_rows.append({
                                 "Sembol": sym, "Yön": "🟢 LONG" if ld == "LONG" else "🔴 SHORT",
                                 "Sinyal Fiyatı": lpr, "Anlık": curx,
                                 "Sinyalden %": round(pl, 1),
-                                # Gerçek datetime (tz'siz) → doğru kronolojik sıralama
-                                "Sinyal Tarihi": pd.Timestamp(lt).tz_localize(None),
+                                "Sinyal Tarihi": _ts,
                                 "Yön değişim sayısı": len(cfx),
                             })
                 except Exception:
@@ -2161,11 +2165,12 @@ with tab_otttott:
         if df_ot.empty or len(df_ot) < 300:
             st.warning("Veri çekilemedi.")
         else:
-            # KANONİK TOTT (TradingView Pine birebir: L40/%1/coeff0.001, band-cross)
-            r = otc.compute_canonical(df_ot["close"])
+            # SIRALI teyit (OTT→peşinde TOTT) + Pine VARSAYILAN param (L40/%1/coeff0.001)
+            # → TradingView ile aynı sinyal saati (test edildi: 10/06 16:30).
+            r = otc.compute(df_ot["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
             cs = otc.confirmed_signals(r)
             cur_price = float(df_ot["close"].iloc[-1])
-            cur_dir = r["dir"].iloc[-1]   # o anki yön (son sinyal taşınır)
+            cur_dir = cs["yon"].iloc[-1] if len(cs) else None   # son onaylı yön
 
             last = cs.iloc[-1] if len(cs) else None
             m1, m2, m3 = st.columns(3)
@@ -2176,11 +2181,11 @@ with tab_otttott:
             m3.metric("Anlık fiyat", f"{cur_price:.2f}",
                       f"{(cur_price/last['price']-1)*100:+.1f}%" if last is not None else None)
 
-            st.caption("✅ TradingView uyumlu (kanonik TOTT, Pine: L=40 %=1 coeff=0.001, "
-                        "band kesişimi). Senin TV grafiğinle aynı sinyal saatini verir.")
+            st.caption("✅ Sıralı teyit (OTT sinyali → peşinde TOTT onayı) + Pine param "
+                        "(L=40 %=1 coeff=0.001). TradingView ile aynı sinyal saatini verir.")
 
             # ── Onaylı sinyaller TABLOSU
-            st.markdown(f"### TOTT band-cross sinyalleri ({len(cs)} toplam)")
+            st.markdown(f"### OTT+TOTT sıralı teyit sinyalleri ({len(cs)} toplam)")
             prices = cs["price"].tolist()
             sonuc = []
             for k in range(len(cs)):
