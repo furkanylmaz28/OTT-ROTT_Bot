@@ -2090,6 +2090,58 @@ with tab_otttott:
 
     _allsyms = sorted(set(BIST + list(GCM_NASDAQ) + CRYPTO + COMMODITY + EMTIA_FX))
     _grid_ot = _load_per_sym()
+
+    # ── Timeframe seçici (sadece bu OTT+TOTT görünümü için; ana sistem H1 kalır)
+    ot_tf = st.radio("Zaman dilimi", ["15m", "1h"], horizontal=True, key="otc_tf",
+                      format_func=lambda x: "M15 (15 dk)" if x == "15m" else "H1 (saatlik)")
+
+    # ── TÜM BIST taraması (M15/H1 OTT+TOTT — her hissenin güncel yönü)
+    with st.expander("📋 Tüm BIST OTT+TOTT taraması", expanded=True):
+        if st.button(f"🔄 Tüm BIST'i tara ({ot_tf})", type="primary",
+                      use_container_width=True, key="otc_bist_scan"):
+            st.cache_data.clear()
+            bist_list = [s for s in BIST if not _is_uyumsuz(s)]
+            prog = st.progress(0, text="0")
+            scan_rows = []
+            for i, sym in enumerate(bist_list):
+                pp = _grid_ot.get(sym, {}).get("params", {})
+                Ls = int(pp.get("trend_length", 40)); Ps = float(pp.get("trend_percent", 7.0))
+                try:
+                    d = fetch_yf(sym, interval=ot_tf)
+                    if not d.empty and len(d) > 200:
+                        rr = otc.compute(d["close"], Ls, Ps, otc.CONFIRM_COEFF)
+                        cfx = rr[rr["confirm"].notna()]
+                        if len(cfx):
+                            ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]; lpr = float(cfx["close"].iloc[-1])
+                            curx = float(d["close"].iloc[-1])
+                            pl = (curx/lpr-1)*100 if ld == "LONG" else (lpr/curx-1)*100
+                            scan_rows.append({
+                                "Sembol": sym, "Yön": "🟢 LONG" if ld == "LONG" else "🔴 SHORT",
+                                "Sinyal Fiyatı": lpr, "Anlık": curx,
+                                "Sinyalden %": round(pl, 1),
+                                "Tarih": f"{lt:%d/%m %H:%M}", "Sinyal sayısı": len(cfx),
+                            })
+                except Exception:
+                    pass
+                prog.progress((i+1)/len(bist_list), text=f"{i+1}/{len(bist_list)} {sym}")
+            prog.empty()
+            if scan_rows:
+                df_sc = pd.DataFrame(scan_rows).sort_values("Yön").reset_index(drop=True)
+                nL = (df_sc["Yön"] == "🟢 LONG").sum(); nS = (df_sc["Yön"] == "🔴 SHORT").sum()
+                c1, c2 = st.columns(2)
+                c1.metric("🟢 LONG", int(nL)); c2.metric("🔴 SHORT", int(nS))
+                st.dataframe(
+                    df_sc.style.format({
+                        "Sinyal Fiyatı": "{:.2f}", "Anlık": "{:.2f}",
+                        "Sinyalden %": "{:+.1f}%",
+                    }).background_gradient(subset=["Sinyalden %"], cmap="RdYlGn", vmin=-8, vmax=8),
+                    use_container_width=True, height=520, hide_index=True)
+                st.caption(f"{ot_tf} OTT+TOTT sıralı teyit — her hissenin GÜNCEL yönü. "
+                            "Sadece OTT+TOTT (SOTT/HOTT/ROTT/rejim yok).")
+            else:
+                st.warning("Veri çekilemedi.")
+
+    st.markdown("### 🔍 Tek sembol detayı")
     # Varsayılan: güvenilir çekirdekten ASELS
     _def = "ASELS.IS" if "ASELS.IS" in _allsyms else _allsyms[0]
     ot_sym = st.selectbox("Sembol", _allsyms, index=_allsyms.index(_def), key="otc_sym")
@@ -2100,9 +2152,8 @@ with tab_otttott:
         L = int(p.get("trend_length", 40))
         P = float(p.get("trend_percent", 7.0))
         C = otc.CONFIRM_COEFF   # 0.01 — anlamlı teyit bandı (0.0004 band oluşturmaz)
-        from data_source import best_interval_for as _bif2
-        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor (H1)..."):
-            df_ot = fetch_yf(ot_sym, interval=_bif2(ot_sym))
+        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor ({ot_tf})..."):
+            df_ot = fetch_yf(ot_sym, interval=ot_tf)
         if df_ot.empty or len(df_ot) < 300:
             st.warning("Veri çekilemedi.")
         else:
