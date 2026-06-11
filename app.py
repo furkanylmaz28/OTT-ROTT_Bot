@@ -41,6 +41,7 @@ except Exception as _e:
 import signals_full as sig_full
 from backtest import run_backtest
 from data_source import fetch as ds_fetch
+from data_source import fetch_futures as ds_fetch_futures
 
 
 def bars_to_duration(bars: float, interval: str, category: str = "") -> str:
@@ -1260,16 +1261,22 @@ with tab_consensus:
                 fy_rt = _grid[sym].get("rating", "?")
                 bs_rt = _bayes[sym].get("rating", "?")
 
-                # ── OTT+TOTT sıralı teyit (sadece OTT+TOTT, grid params)
+                # ── OTT+TOTT sıralı teyit. BIST'te FUTURES (işlem yapılan, TradingView ile
+                #    aynı) baz alınır; futures yoksa spot'a düşer.
                 try:
                     import ott_tott_confirm as _otc
-                    _rr = _otc.compute(df_l["close"], _otc.TV_LENGTH, _otc.TV_PERCENT, _otc.TV_COEFF)
+                    _src = df_l   # varsayılan spot
+                    if sym.upper().endswith(".IS"):
+                        _df_fut = ds_fetch_futures(sym, interval="15m")
+                        if _df_fut is not None and not _df_fut.empty and len(_df_fut) > 200:
+                            _src = _df_fut
+                    _rr = _otc.compute(_src["close"], _otc.TV_LENGTH, _otc.TV_PERCENT, _otc.TV_COEFF)
                     _cf = _rr[_rr["confirm"].notna()]
                     if len(_cf):
                         _d = _cf["confirm"].iloc[-1]
                         _p = float(_cf["close"].iloc[-1])
-                        ot_teyit = (f"🟢 LONG · {_cf.index[-1]:%d/%m} · {_p:.2f}" if _d == "LONG"
-                                    else f"🔴 SHORT · {_cf.index[-1]:%d/%m} · {_p:.2f}")
+                        ot_teyit = (f"🟢 LONG · {_cf.index[-1]:%d/%m %H:%M} · {_p:.2f}" if _d == "LONG"
+                                    else f"🔴 SHORT · {_cf.index[-1]:%d/%m %H:%M} · {_p:.2f}")
                     else:
                         ot_teyit = "—"
                 except Exception:
@@ -2102,54 +2109,89 @@ with tab_otttott:
             bist_list = [s for s in BIST if not _is_uyumsuz(s)]
             prog = st.progress(0, text="0")
             scan_rows = []
+            def _last_sig(close):
+                """Sıralı OTT+TOTT son sinyali: (yön, tz'siz tarih, fiyat, toplam sinyal) | None."""
+                rr = otc.compute(close, otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
+                cfx = rr[rr["confirm"].notna()]
+                if not len(cfx):
+                    return None
+                ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]
+                _ts = pd.Timestamp(lt)
+                if _ts.tz is not None:
+                    _ts = _ts.tz_localize(None)
+                return (ld, _ts, float(cfx["close"].iloc[-1]), len(cfx))
+
             for i, sym in enumerate(bist_list):
                 try:
-                    d = fetch_yf(sym, interval=ot_tf)
-                    if not d.empty and len(d) > 200:
-                        # SIRALI teyit + Pine param (TradingView uyumlu)
-                        rr = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
-                        cfx = rr[rr["confirm"].notna()]
-                        if len(cfx):
-                            ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]; lpr = float(cfx["close"].iloc[-1])
-                            curx = float(d["close"].iloc[-1])
-                            pl = (curx/lpr-1)*100 if ld == "LONG" else (lpr/curx-1)*100
-                            # tz-naive ise tz_localize HATA verir → güvenli dönüşüm
-                            _ts = pd.Timestamp(lt)
-                            if _ts.tz is not None:
-                                _ts = _ts.tz_localize(None)
-                            scan_rows.append({
-                                "Sembol": sym, "Yön": "🟢 LONG" if ld == "LONG" else "🔴 SHORT",
-                                "Sinyal Fiyatı": lpr, "Anlık": curx,
-                                "Sinyalden %": round(pl, 1),
-                                "Sinyal Tarihi": _ts,
-                                "Yön değişim sayısı": len(cfx),
-                            })
+                    # FUTURES (işlem yapılan, TradingView ile aynı) — birincil
+                    df_f = ds_fetch_futures(sym, interval=ot_tf)
+                    df_s = fetch_yf(sym, interval=ot_tf)   # SPOT — karşılaştırma
+                    fut = _last_sig(df_f["close"]) if (df_f is not None and not df_f.empty and len(df_f) > 200) else None
+                    spt = _last_sig(df_s["close"]) if (not df_s.empty and len(df_s) > 200) else None
+                    if fut is None and spt is None:
+                        continue
+                    # Anlık fiyat: futures öncelik
+                    curx = float(df_f["close"].iloc[-1]) if (df_f is not None and not df_f.empty) else \
+                           (float(df_s["close"].iloc[-1]) if not df_s.empty else None)
+                    row = {"Sembol": sym}
+                    if fut:
+                        fl, ft, fp, fn = fut
+                        pl = (curx/fp-1)*100 if fl == "LONG" else (fp/curx-1)*100
+                        row.update({
+                            "Futures Yön": "🟢 LONG" if fl == "LONG" else "🔴 SHORT",
+                            "Futures Tarih": ft, "Futures Fiyat": fp,
+                            "Futures Sinyalden %": round(pl, 1) if curx else None,
+                            "Yön değişimi": fn,
+                        })
+                    else:
+                        row.update({"Futures Yön": "—", "Futures Tarih": pd.NaT,
+                                     "Futures Fiyat": None, "Futures Sinyalden %": None, "Yön değişimi": None})
+                    if spt:
+                        sl, st_, sp, sn = spt
+                        row.update({"Spot Yön": "🟢 LONG" if sl == "LONG" else "🔴 SHORT",
+                                     "Spot Tarih": st_})
+                    else:
+                        row.update({"Spot Yön": "—", "Spot Tarih": pd.NaT})
+                    row["Anlık"] = curx
+                    scan_rows.append(row)
                 except Exception:
                     pass
                 prog.progress((i+1)/len(bist_list), text=f"{i+1}/{len(bist_list)} {sym}")
             prog.empty()
             if scan_rows:
-                df_sc = pd.DataFrame(scan_rows).sort_values("Yön").reset_index(drop=True)
-                nL = (df_sc["Yön"] == "🟢 LONG").sum(); nS = (df_sc["Yön"] == "🔴 SHORT").sum()
-                c1, c2 = st.columns(2)
-                c1.metric("🟢 LONG", int(nL)); c2.metric("🔴 SHORT", int(nS))
+                df_sc = pd.DataFrame(scan_rows).sort_values("Futures Yön").reset_index(drop=True)
+                nL = (df_sc["Futures Yön"] == "🟢 LONG").sum()
+                nS = (df_sc["Futures Yön"] == "🔴 SHORT").sum()
+                # Futures vs Spot yön uyuşmazlığı (dikkat çekici)
+                _uy = ((df_sc["Futures Yön"] != df_sc["Spot Yön"]) &
+                        (df_sc["Spot Yön"] != "—") & (df_sc["Futures Yön"] != "—")).sum()
+                c1, c2, c3 = st.columns(3)
+                c1.metric("🟢 Futures LONG", int(nL)); c2.metric("🔴 Futures SHORT", int(nS))
+                c3.metric("⚠️ Fut≠Spot", int(_uy), help="Futures ile spot yönü farklı olan hisse sayısı")
+                df_show = df_sc[["Sembol", "Futures Yön", "Futures Tarih", "Futures Fiyat",
+                                  "Anlık", "Futures Sinyalden %", "Spot Yön", "Spot Tarih",
+                                  "Yön değişimi"]]
                 st.dataframe(
-                    df_sc.style.format({
-                        "Sinyal Fiyatı": "{:.2f}", "Anlık": "{:.2f}",
-                        "Sinyalden %": "{:+.1f}%",
-                    }).background_gradient(subset=["Sinyalden %"], cmap="RdYlGn", vmin=-8, vmax=8),
-                    use_container_width=True, height=520, hide_index=True,
+                    df_show.style.format({
+                        "Futures Fiyat": "{:.2f}", "Anlık": "{:.2f}",
+                        "Futures Sinyalden %": "{:+.1f}%",
+                    }).background_gradient(subset=["Futures Sinyalden %"], cmap="RdYlGn", vmin=-8, vmax=8),
+                    use_container_width=True, height=560, hide_index=True,
                     column_config={
-                        "Sinyal Tarihi": st.column_config.DatetimeColumn(
-                            "Sinyal Tarihi", format="DD/MM HH:mm",
-                            help="OTT+TOTT'un güncel yöne döndüğü an"),
-                        "Yön değişim sayısı": st.column_config.NumberColumn(
+                        "Futures Yön": st.column_config.TextColumn("Futures Yön", help="VIOP futures (işlem yaptığın)"),
+                        "Futures Tarih": st.column_config.DatetimeColumn(
+                            "Futures Tarih", format="DD/MM HH:mm",
+                            help="Futures OTT+TOTT teyit anı (TradingView ile aynı)"),
+                        "Spot Yön": st.column_config.TextColumn("Spot Yön", help="Spot (.IS) — karşılaştırma"),
+                        "Spot Tarih": st.column_config.DatetimeColumn(
+                            "Spot Tarih", format="DD/MM HH:mm", help="Spot teyit anı"),
+                        "Yön değişimi": st.column_config.NumberColumn(
                             "Yön değişimi",
-                            help="Veri penceresinde kaç kez yön değiştirdi. Yüksek=çalkantılı, düşük=trendli"),
+                            help="Futures'ta kaç kez yön değişti. Yüksek=çalkantılı, düşük=trendli"),
                     })
-                st.caption(f"{ot_tf} OTT+TOTT sıralı teyit — her hissenin GÜNCEL yönü. "
-                            "📅 Tarih sütununa tıkla → doğru kronolojik sıralar. "
-                            "Sadece OTT+TOTT (SOTT/HOTT/ROTT/rejim yok).")
+                st.caption(f"{ot_tf} OTT+TOTT sıralı teyit — **Futures = işlem yaptığın, TradingView ile aynı.** "
+                            "Spot karşılaştırma için. 📅 Tarihe tıkla → kronolojik sıra. "
+                            "⚠️ Fut≠Spot olanlarda futures'ı baz al (gerçek işlem orada).")
             else:
                 st.warning("Veri çekilemedi.")
 
@@ -2160,36 +2202,27 @@ with tab_otttott:
 
     if st.button("🔗 OTT+TOTT teyit sinyallerini getir", type="primary",
                   use_container_width=True, key="otc_btn"):
-        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor ({ot_tf}, TradingView uyumlu)..."):
-            df_ot = fetch_yf(ot_sym, interval=ot_tf)
-        if df_ot.empty or len(df_ot) < 300:
-            st.warning("Veri çekilemedi.")
-        else:
-            # SIRALI teyit (OTT→peşinde TOTT) + Pine VARSAYILAN param (L40/%1/coeff0.001)
-            # → TradingView ile aynı sinyal saati (test edildi: 10/06 16:30).
-            r = otc.compute(df_ot["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
-            cs = otc.confirmed_signals(r)
-            cur_price = float(df_ot["close"].iloc[-1])
-            cur_dir = cs["yon"].iloc[-1] if len(cs) else None   # son onaylı yön
 
+        def _otc_render(df_src, baslik, anahtar):
+            """Bir veri kaynağı (futures/spot) için sıralı OTT+TOTT teyit görünümü."""
+            if df_src is None or df_src.empty or len(df_src) < 300:
+                st.warning(f"{baslik}: veri çekilemedi.")
+                return
+            r = otc.compute(df_src["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
+            cs = otc.confirmed_signals(r)
+            cur_price = float(df_src["close"].iloc[-1])
+            cur_dir = cs["yon"].iloc[-1] if len(cs) else None
             last = cs.iloc[-1] if len(cs) else None
             m1, m2, m3 = st.columns(3)
             m1.metric("Güncel yön", "🟢 LONG" if cur_dir == "LONG" else ("🔴 SHORT" if cur_dir == "SHORT" else "—"))
             if last is not None:
-                m2.metric("Son sinyal", f"{last.name:%d/%m %H:%M}",
-                          f"@ {last['price']:.2f}")
+                m2.metric("Son sinyal", f"{last.name:%d/%m %H:%M}", f"@ {last['price']:.2f}")
             m3.metric("Anlık fiyat", f"{cur_price:.2f}",
                       f"{(cur_price/last['price']-1)*100:+.1f}%" if last is not None else None)
-
-            st.caption("✅ Sıralı teyit (OTT sinyali → peşinde TOTT onayı) + Pine param "
-                        "(L=40 %=1 coeff=0.001). TradingView ile aynı sinyal saatini verir.")
-
-            # ── Onaylı sinyaller TABLOSU
-            st.markdown(f"### OTT+TOTT sıralı teyit sinyalleri ({len(cs)} toplam)")
             prices = cs["price"].tolist()
             sonuc = []
             for k in range(len(cs)):
-                nxt = prices[k+1] if k+1 < len(prices) else cur_price   # sonraki sinyal / anlık
+                nxt = prices[k+1] if k+1 < len(prices) else cur_price
                 e = prices[k]; yon = cs["yon"].iloc[k]
                 sonuc.append(round((nxt - e)/e*100 if yon == "LONG" else (e - nxt)/e*100, 1))
             cs2 = cs.copy(); cs2["sonuc"] = sonuc
@@ -2201,14 +2234,34 @@ with tab_otttott:
                     columns={"price": "Fiyat", "sonuc": "Sonraki sinyale dek %"}).style.format(
                     {"Fiyat": "{:.2f}", "Sonraki sinyale dek %": "{:+.1f}%"}).background_gradient(
                     subset=["Sonraki sinyale dek %"], cmap="RdYlGn", vmin=-8, vmax=8),
-                use_container_width=True, height=560, hide_index=True)
+                use_container_width=True, height=420, hide_index=True, key=f"otc_tbl_{anahtar}")
             wins = sum(1 for x in sonuc if x > 0)
-            st.caption(f"📊 {len(cs)} sinyal · kazanan {wins}/{len(cs)} (%{100*wins/max(len(cs),1):.0f}) · "
-                        f"toplam {sum(sonuc):+.0f}%. ⚠️ SADECE OTT+TOTT (SOTT/HOTT/ROTT/rejim YOK) — "
-                        "tam sistem için Konsensüs/Anlık Tarayıcı.")
+            st.caption(f"📊 {len(cs)} sinyal · kazanan {wins}/{len(cs)} "
+                        f"(%{100*wins/max(len(cs),1):.0f}) · toplam {sum(sonuc):+.0f}%")
+
+        _is_bist = ot_sym.upper().endswith(".IS")
+        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor ({ot_tf})..."):
+            df_spot = fetch_yf(ot_sym, interval=ot_tf)
+            df_fut = ds_fetch_futures(ot_sym, interval=ot_tf) if _is_bist else None
+
+        st.caption("✅ Sıralı teyit (OTT sinyali → peşinde TOTT onayı) + Pine param "
+                    "(L=40 %=1 coeff=0.001). ⚠️ SADECE OTT+TOTT (rejim/SOTT/HOTT/ROTT yok).")
+
+        if _is_bist and df_fut is not None and not df_fut.empty:
+            base = ot_sym[:-3]
+            tab_f, tab_s = st.tabs([f"🎯 FUTURES ({base}1!) — işlem yaptığın", f"📈 SPOT ({ot_sym})"])
+            with tab_f:
+                st.info("Bu, TradingView'da gördüğün ve VIOP'ta işlem yaptığın futures kontratı. "
+                        "Grafiğinle birebir aynı sinyal saati.")
+                _otc_render(df_fut, "Futures", "fut")
+            with tab_s:
+                st.caption("Spot fiyat (.IS). Choppy bölgede futures'tan birkaç bar farklı olabilir.")
+                _otc_render(df_spot, "Spot", "spot")
+        else:
+            _otc_render(df_spot, "Spot", "spot")
     else:
-        st.info("👆 Sembol seç + butona bas. OTT sinyalini hemen peşinde aynı yön TOTT "
-                "onaylayan barlar işaretlenir (gönderdiğin grafiklerdeki gibi).")
+        st.info("👆 Sembol seç + butona bas. BIST hisselerinde **Futures** (işlem yaptığın, "
+                "TradingView grafiğinle aynı) ve **Spot** sekmeleri ayrı gösterilir.")
 
 
 with tab_live:

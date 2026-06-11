@@ -45,6 +45,33 @@ def _to_tr_naive(df):
             df.index = idx + shift
     return df
 
+
+def fetch_futures(symbol: str, interval: str = "15m", n_bars: int = 5000):
+    """BIST hissesinin VIOP sürekli futures kontratını çek (SEMBOL1!).
+    Kullanıcı VIOP futures işlemi yapıyor; TradingView'da gördüğü grafik futures.
+    Spot (.IS) ile choppy bölgede birkaç bar fark olabildiğinden, futures grafiğiyle
+    birebir eşleşmesi gereken sinyaller bununla hesaplanır.
+    Futures kontratı yoksa BOŞ DataFrame döner."""
+    s = symbol.upper()
+    if not s.endswith(".IS"):
+        return pd.DataFrame()
+    base = s[:-3]
+    tv = _get_tv()
+    if tv is None:
+        return pd.DataFrame()
+    try:
+        from tvDatafeed import Interval
+        tv_interval = getattr(Interval, _TV_INTERVAL.get(interval, "in_15_minute"))
+        df = tv.get_hist(symbol=f"{base}1!", exchange="BIST",
+                          interval=tv_interval, n_bars=n_bars)
+        if df is None or df.empty:
+            return pd.DataFrame()
+        df = df.rename(columns=str.lower)
+        keep = [c for c in ["open", "high", "low", "close", "volume"] if c in df.columns]
+        return _to_tr_naive(df[keep])
+    except Exception:
+        return pd.DataFrame()
+
 # ── TradingView setup
 _tv_client = None
 _tv_login_attempted = False
