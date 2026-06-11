@@ -41,7 +41,14 @@ except Exception as _e:
 import signals_full as sig_full
 from backtest import run_backtest
 from data_source import fetch as ds_fetch
-from data_source import fetch_futures as ds_fetch_futures
+try:
+    from data_source import fetch_futures as ds_fetch_futures
+except ImportError:
+    # Eski/cache'lenmiş data_source modülüne karşı güvenli düşüş → futures özelliği
+    # devre dışı kalır ama dashboard çökmez (spot çalışmaya devam eder).
+    def ds_fetch_futures(*_a, **_k):
+        import pandas as _pd
+        return _pd.DataFrame()
 
 
 def bars_to_duration(bars: float, interval: str, category: str = "") -> str:
