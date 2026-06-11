@@ -18,8 +18,32 @@ warnings.filterwarnings("ignore")
 
 import pandas as pd
 from dotenv import load_dotenv
+from datetime import datetime, timezone, timedelta
 
 load_dotenv()
+
+_TR = timezone(timedelta(hours=3))   # Türkiye saati (UTC+3)
+
+
+def _to_tr_naive(df):
+    """Bar zaman damgalarını HER ortamda Türkiye saatine (UTC+3) sabitle.
+    Sebep: tvDatafeed naive zaman damgasını SİSTEM saat dilimine göre üretir.
+    Yerelde sistem TR → doğru; Streamlit Cloud UTC → 3 saat geri kalıyordu.
+    Sabit kaydırma → indikatör (OTT/TOTT bar sırası/değeri) etkilenmez, sadece
+    gösterilen/karşılaştırılan saat TradingView ile (TR) uyumlu olur."""
+    if df is None or df.empty:
+        return df
+    idx = df.index
+    if getattr(idx, "tz", None) is not None:
+        # tz-aware (çoğunlukla yfinance) → TR'ye çevir, etiketi düşür
+        df.index = idx.tz_convert(_TR).tz_localize(None)
+    else:
+        # naive (tvDatafeed) = sistem-yerel saat → TR'ye kaydır
+        local_off = datetime.now().astimezone().utcoffset() or timedelta(0)
+        shift = timedelta(hours=3) - local_off   # yerel TR ise 0, cloud UTC ise +3s
+        if shift != timedelta(0):
+            df.index = idx + shift
+    return df
 
 # ── TradingView setup
 _tv_client = None
@@ -154,7 +178,7 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
                     # Multi-exchange ise birden çok exchange dene
                     df = df.rename(columns=str.lower)
                     keep = [c for c in ["open","high","low","close","volume"] if c in df.columns]
-                    return df[keep]
+                    return _to_tr_naive(df[keep])
             except Exception:
                 pass  # Sessizce yfinance'a düş
 
@@ -192,7 +216,7 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
             agg = {"open":"first","high":"max","low":"min","close":"last","volume":"sum"}
             agg = {k:v for k,v in agg.items() if k in df.columns}
             df = df.resample("4h").agg(agg).dropna()
-        return df
+        return _to_tr_naive(df)
     except Exception:
         return pd.DataFrame()
 
