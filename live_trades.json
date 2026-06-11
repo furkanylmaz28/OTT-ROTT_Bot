@@ -77,5 +77,15 @@
     "exit_ts": "2026-06-11T20:32:09.826456+03:00",
     "pnl_pct": 1.358,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "LULU",
+    "side": "SHORT",
+    "entry_price": 117.92,
+    "exit_price": 121.2898959326943,
+    "entry_ts": "2026-06-11T18:33:09.781311+03:00",
+    "exit_ts": "2026-06-11T23:02:07.869304+03:00",
+    "pnl_pct": -2.858,
+    "exit_reason": "hard_stop"
   }
 ]
