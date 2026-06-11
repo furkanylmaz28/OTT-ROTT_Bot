@@ -2119,7 +2119,9 @@ with tab_otttott:
                                 "Sembol": sym, "Yön": "🟢 LONG" if ld == "LONG" else "🔴 SHORT",
                                 "Sinyal Fiyatı": lpr, "Anlık": curx,
                                 "Sinyalden %": round(pl, 1),
-                                "Tarih": f"{lt:%d/%m %H:%M}", "Sinyal sayısı": len(cfx),
+                                # Gerçek datetime (tz'siz) → doğru kronolojik sıralama
+                                "Sinyal Tarihi": pd.Timestamp(lt).tz_localize(None),
+                                "Yön değişim sayısı": len(cfx),
                             })
                 except Exception:
                     pass
@@ -2135,8 +2137,17 @@ with tab_otttott:
                         "Sinyal Fiyatı": "{:.2f}", "Anlık": "{:.2f}",
                         "Sinyalden %": "{:+.1f}%",
                     }).background_gradient(subset=["Sinyalden %"], cmap="RdYlGn", vmin=-8, vmax=8),
-                    use_container_width=True, height=520, hide_index=True)
+                    use_container_width=True, height=520, hide_index=True,
+                    column_config={
+                        "Sinyal Tarihi": st.column_config.DatetimeColumn(
+                            "Sinyal Tarihi", format="DD/MM HH:mm",
+                            help="OTT+TOTT'un güncel yöne döndüğü an"),
+                        "Yön değişim sayısı": st.column_config.NumberColumn(
+                            "Yön değişimi",
+                            help="Veri penceresinde kaç kez yön değiştirdi. Yüksek=çalkantılı, düşük=trendli"),
+                    })
                 st.caption(f"{ot_tf} OTT+TOTT sıralı teyit — her hissenin GÜNCEL yönü. "
+                            "📅 Tarih sütununa tıkla → doğru kronolojik sıralar. "
                             "Sadece OTT+TOTT (SOTT/HOTT/ROTT/rejim yok).")
             else:
                 st.warning("Veri çekilemedi.")
