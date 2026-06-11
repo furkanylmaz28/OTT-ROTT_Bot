@@ -21,6 +21,45 @@ import indicators as ind
 # görünümü içindir; ana sistem (signals_full) kendi optimize coeff'ini kullanır.
 CONFIRM_COEFF = 0.01
 
+# ── TradingView KANONİK TOTT varsayılanları (Kıvanç/Anıl Pine ile birebir) ──────
+# TOTT.pine defaults: length=40, percent=1, coeff=0.001. ASELS M15'te TV ile
+# BİREBİR aynı sinyal saatini verdiği DOĞRULANDI (10/06 16:30).
+TV_LENGTH = 40
+TV_PERCENT = 1.0
+TV_COEFF = 0.001
+
+
+def compute_canonical(close: pd.Series, length: int = TV_LENGTH,
+                       percent: float = TV_PERCENT, coeff: float = TV_COEFF,
+                       shift: int = 2):
+    """KANONİK TOTT — TradingView Pine'ı birebir.
+       BUY  = crossover(MAvg, OTTup[2])   (MAvg üst bandı yukarı keser)
+       SELL = crossunder(MAvg, OTTdn[2])  (MAvg alt bandı aşağı keser)
+    'confirm' sütunu sinyal barlarında BUY→LONG / SELL→SHORT; 'dir' o anki yönü
+    (son sinyal taşınır) verir. TV ile aynı param+mantık → aynı sinyal saati."""
+    o = ind.ott(close, length, percent, shift=shift)
+    t = ind.tott(close, length, percent, coeff, shift=shift)
+    mavg = o["mavg"]
+    up = t["ottup"]; dn = t["ottdn"]
+
+    a_up = (mavg > up).astype(bool)
+    b_dn = (mavg < dn).astype(bool)
+    buy = a_up & ~a_up.shift(1, fill_value=False)     # crossover(MAvg, OTTup)
+    sell = b_dn & ~b_dn.shift(1, fill_value=False)    # crossunder(MAvg, OTTdn)
+
+    sig = pd.Series(index=close.index, dtype=object)
+    sig[buy] = "LONG"; sig[sell] = "SHORT"
+    # O anki yön: son sinyal taşınır (flat zone = önceki yön korunur)
+    dirn = sig.ffill()
+
+    df = pd.DataFrame({
+        "close": close, "mavg": mavg, "ott": o["ott"],
+        "tott_up": up, "tott_dn": dn,
+        "confirm": sig,   # sadece sinyal barlarında LONG/SHORT
+        "dir": dirn,      # taşınan güncel yön
+    }, index=close.index)
+    return df
+
 
 def compute(close: pd.Series, length: int, percent: float, coeff: float, shift: int = 2):
     """OTT çizgisi + TOTT bandı + sıralı-teyitli sinyalleri döndür."""

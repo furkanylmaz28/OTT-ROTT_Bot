@@ -1263,8 +1263,7 @@ with tab_consensus:
                 # ── OTT+TOTT sıralı teyit (sadece OTT+TOTT, grid params)
                 try:
                     import ott_tott_confirm as _otc
-                    _rr = _otc.compute(df_l["close"], int(gp["trend_length"]),
-                                        float(gp["trend_percent"]), _otc.CONFIRM_COEFF)
+                    _rr = _otc.compute_canonical(df_l["close"])   # TradingView uyumlu
                     _cf = _rr[_rr["confirm"].notna()]
                     if len(_cf):
                         _d = _cf["confirm"].iloc[-1]
@@ -2104,12 +2103,10 @@ with tab_otttott:
             prog = st.progress(0, text="0")
             scan_rows = []
             for i, sym in enumerate(bist_list):
-                pp = _grid_ot.get(sym, {}).get("params", {})
-                Ls = int(pp.get("trend_length", 40)); Ps = float(pp.get("trend_percent", 7.0))
                 try:
                     d = fetch_yf(sym, interval=ot_tf)
                     if not d.empty and len(d) > 200:
-                        rr = otc.compute(d["close"], Ls, Ps, otc.CONFIRM_COEFF)
+                        rr = otc.compute_canonical(d["close"])   # TradingView uyumlu
                         cfx = rr[rr["confirm"].notna()]
                         if len(cfx):
                             ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]; lpr = float(cfx["close"].iloc[-1])
@@ -2159,44 +2156,31 @@ with tab_otttott:
 
     if st.button("🔗 OTT+TOTT teyit sinyallerini getir", type="primary",
                   use_container_width=True, key="otc_btn"):
-        p = _grid_ot.get(ot_sym, {}).get("params", {})
-        L = int(p.get("trend_length", 40))
-        P = float(p.get("trend_percent", 7.0))
-        C = otc.CONFIRM_COEFF   # 0.01 — anlamlı teyit bandı (0.0004 band oluşturmaz)
-        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor ({ot_tf})..."):
+        with st.spinner(f"{ot_sym} OTT+TOTT hesaplanıyor ({ot_tf}, TradingView uyumlu)..."):
             df_ot = fetch_yf(ot_sym, interval=ot_tf)
         if df_ot.empty or len(df_ot) < 300:
             st.warning("Veri çekilemedi.")
         else:
-            r = otc.compute(df_ot["close"], L, P, C)
+            # KANONİK TOTT (TradingView Pine birebir: L40/%1/coeff0.001, band-cross)
+            r = otc.compute_canonical(df_ot["close"])
             cs = otc.confirmed_signals(r)
             cur_price = float(df_ot["close"].iloc[-1])
+            cur_dir = r["dir"].iloc[-1]   # o anki yön (son sinyal taşınır)
 
-            # Mevcut durum: son onaylı sinyal + bekleyen (pending) OTT var mı
             last = cs.iloc[-1] if len(cs) else None
-            # pending: son onaylı sinyalden SONRA gelen son OTT sinyali (henüz TOTT onaylamamış)
-            after = r.loc[cs.index[-1]:] if len(cs) else r
-            pend = None
-            for ts_, row in after.iterrows():
-                if row["ott_long"]: pend = "LONG (TOTT teyidi bekliyor)"
-                elif row["ott_short"]: pend = "SHORT (TOTT teyidi bekliyor)"
-                if row.get("confirm") in ("LONG", "SHORT") and ts_ != (cs.index[-1] if len(cs) else None):
-                    pend = None
-
             m1, m2, m3 = st.columns(3)
-            m1.metric("Sembol", ot_sym.replace(".IS", ""))
+            m1.metric("Güncel yön", "🟢 LONG" if cur_dir == "LONG" else ("🔴 SHORT" if cur_dir == "SHORT" else "—"))
             if last is not None:
-                emo = "🟢 LONG" if last["yon"] == "LONG" else "🔴 SHORT"
-                m2.metric("Son onaylı sinyal", emo,
-                          f"{last.name:%d/%m %H:%M} @ {last['price']:.2f}")
+                m2.metric("Son sinyal", f"{last.name:%d/%m %H:%M}",
+                          f"@ {last['price']:.2f}")
             m3.metric("Anlık fiyat", f"{cur_price:.2f}",
                       f"{(cur_price/last['price']-1)*100:+.1f}%" if last is not None else None)
 
-            if pend:
-                st.info(f"⏳ Bekleyen OTT sinyali: **{pend}** — TOTT aynı yönde onaylarsa geçerli olacak.")
+            st.caption("✅ TradingView uyumlu (kanonik TOTT, Pine: L=40 %=1 coeff=0.001, "
+                        "band kesişimi). Senin TV grafiğinle aynı sinyal saatini verir.")
 
-            # ── Onaylı sinyaller TABLOSU (grafik yok — kullanıcı tercihi)
-            st.markdown(f"### Onaylı OTT+TOTT sinyalleri ({len(cs)} toplam · L={L} %={P} coeff={C})")
+            # ── Onaylı sinyaller TABLOSU
+            st.markdown(f"### TOTT band-cross sinyalleri ({len(cs)} toplam)")
             prices = cs["price"].tolist()
             sonuc = []
             for k in range(len(cs)):
