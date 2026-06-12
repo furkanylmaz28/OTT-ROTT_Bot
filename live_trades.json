@@ -137,5 +137,15 @@
     "exit_ts": "2026-06-12T17:46:47.265278+03:00",
     "pnl_pct": -7.687,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "TTD",
+    "side": "SHORT",
+    "entry_price": 19.94,
+    "exit_price": 19.696190210491988,
+    "entry_ts": "2026-06-09T17:33:53.815597+03:00",
+    "exit_ts": "2026-06-12T19:02:24.515454+03:00",
+    "pnl_pct": 1.223,
+    "exit_reason": "hard_stop"
   }
 ]
