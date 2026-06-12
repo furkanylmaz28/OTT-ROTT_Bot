@@ -97,5 +97,15 @@
     "exit_ts": "2026-06-12T10:16:50.707434+03:00",
     "pnl_pct": 0.131,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "VOW3.DE",
+    "side": "SHORT",
+    "entry_price": 85.13999938964844,
+    "exit_price": 87.4802065491213,
+    "entry_ts": "2026-06-11T16:34:42.296726+03:00",
+    "exit_ts": "2026-06-12T10:31:56.506708+03:00",
+    "pnl_pct": -2.749,
+    "exit_reason": "hard_stop"
   }
 ]
