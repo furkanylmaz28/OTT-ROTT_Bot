@@ -127,5 +127,15 @@
     "exit_ts": "2026-06-12T17:32:00.857104+03:00",
     "pnl_pct": 3.769,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "DOGE-USD",
+    "side": "SHORT",
+    "entry_price": 0.0832,
+    "exit_price": 0.0895952572884767,
+    "entry_ts": "2026-06-10T15:01:51.165173+03:00",
+    "exit_ts": "2026-06-12T17:46:47.265278+03:00",
+    "pnl_pct": -7.687,
+    "exit_reason": "hard_stop"
   }
 ]
