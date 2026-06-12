@@ -87,5 +87,15 @@
     "exit_ts": "2026-06-11T23:02:07.869304+03:00",
     "pnl_pct": -2.858,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "ARCLK.IS",
+    "side": "SHORT",
+    "entry_price": 102.9,
+    "exit_price": 102.76469281336496,
+    "entry_ts": "2026-06-09T17:16:03.835819+03:00",
+    "exit_ts": "2026-06-12T10:16:50.707434+03:00",
+    "pnl_pct": 0.131,
+    "exit_reason": "hard_stop"
   }
 ]
