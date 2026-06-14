@@ -147,5 +147,25 @@
     "exit_ts": "2026-06-12T19:02:24.515454+03:00",
     "pnl_pct": 1.223,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "FIL-USD",
+    "side": "SHORT",
+    "entry_price": 0.748,
+    "exit_price": 0.7770606045509083,
+    "entry_ts": "2026-06-09T19:07:02.004752+03:00",
+    "exit_ts": "2026-06-15T00:32:24.750443+03:00",
+    "pnl_pct": -3.885,
+    "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "ETH-USD",
+    "side": "SHORT",
+    "entry_price": 1616.78,
+    "exit_price": 1690.823037139655,
+    "entry_ts": "2026-06-10T15:01:53.406940+03:00",
+    "exit_ts": "2026-06-15T00:32:24.750443+03:00",
+    "pnl_pct": -4.58,
+    "exit_reason": "hard_stop"
   }
 ]
