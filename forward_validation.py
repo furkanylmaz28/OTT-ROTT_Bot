@@ -29,6 +29,11 @@ TR = timezone(timedelta(hours=3))
 POS_FILE = "live_positions.json"
 TRADES_FILE = "live_trades.json"
 
+# Eş zamanlı açık pozisyon ÜST SINIRI. Geçen hafta 8 pozisyon aynı anda açılıp
+# tek haberle (ABD-İran/faiz) hepsi stop yedi → -%19.6. Sınır, bir kötü günün
+# hesabın tamamını değil küçük dilimini almasını sağlar. Tahmin değil risk yönetimi.
+MAX_OPEN_POSITIONS = 3
+
 
 def _load(path, default):
     if not os.path.exists(path):
@@ -132,8 +137,10 @@ def record_observation(sym: str, signal: str, price: float, ts: str = None,
             except Exception: pass
 
     if cur is None:
-        # Açık yok → SADECE taze AÇ'ta gir (blackout'ta açma)
-        if fresh and not block_open:
+        # Açık yok → SADECE taze AÇ'ta gir (blackout'ta açma). EŞ ZAMANLI POZİSYON
+        # SINIRI: zaten MAX_OPEN_POSITIONS kadar açık varsa yeni giriş YOK
+        # (bir kötü gün tüm hesabı değil küçük dilimini alsın).
+        if fresh and not block_open and len(positions) < MAX_OPEN_POSITIONS:
             _open(fresh)
     else:
         side = cur["side"]
