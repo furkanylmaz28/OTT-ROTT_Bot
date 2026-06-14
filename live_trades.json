@@ -167,5 +167,15 @@
     "exit_ts": "2026-06-15T00:32:24.750443+03:00",
     "pnl_pct": -4.58,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "TIA-USD",
+    "side": "SHORT",
+    "entry_price": 0.3083,
+    "exit_price": 0.34907347161280877,
+    "entry_ts": "2026-06-10T23:04:29.780872+03:00",
+    "exit_ts": "2026-06-15T00:47:09.420198+03:00",
+    "pnl_pct": -13.225,
+    "exit_reason": "hard_stop"
   }
 ]
