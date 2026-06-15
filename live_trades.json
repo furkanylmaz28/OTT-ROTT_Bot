@@ -277,5 +277,15 @@
     "exit_ts": "2026-06-15T16:47:08.461003+03:00",
     "pnl_pct": -11.244,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "ROST",
+    "side": "LONG",
+    "entry_price": 237.06,
+    "exit_price": 236.92470413125412,
+    "entry_ts": "2026-06-11T17:34:10.023165+03:00",
+    "exit_ts": "2026-06-15T17:46:55.842530+03:00",
+    "pnl_pct": -0.057,
+    "exit_reason": "hard_stop"
   }
 ]
