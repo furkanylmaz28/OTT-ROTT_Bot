@@ -207,5 +207,15 @@
     "exit_ts": "2026-06-15T14:16:55.443899+03:00",
     "pnl_pct": -10.8,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "VESTL.IS",
+    "side": "SHORT",
+    "entry_price": 24.96,
+    "exit_price": 25.123889197191737,
+    "entry_ts": "2026-06-09T16:16:18.732219+03:00",
+    "exit_ts": "2026-06-15T15:02:27.640614+03:00",
+    "pnl_pct": -0.657,
+    "exit_reason": "hard_stop"
   }
 ]
