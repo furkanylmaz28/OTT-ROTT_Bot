@@ -187,5 +187,15 @@
     "exit_ts": "2026-06-15T04:02:17.920710+03:00",
     "pnl_pct": -4.785,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "PAH3.DE",
+    "side": "SHORT",
+    "entry_price": 30.510000228881836,
+    "exit_price": 31.334281628336566,
+    "entry_ts": "2026-06-10T18:17:29.334912+03:00",
+    "exit_ts": "2026-06-15T10:32:20.060760+03:00",
+    "pnl_pct": -2.702,
+    "exit_reason": "hard_stop"
   }
 ]
