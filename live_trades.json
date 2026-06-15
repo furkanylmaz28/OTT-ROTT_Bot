@@ -177,5 +177,15 @@
     "exit_ts": "2026-06-15T00:47:09.420198+03:00",
     "pnl_pct": -13.225,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "HBAR-USD",
+    "side": "SHORT",
+    "entry_price": 0.07782,
+    "exit_price": 0.0815438933931626,
+    "entry_ts": "2026-06-11T03:02:01.896111+03:00",
+    "exit_ts": "2026-06-15T04:02:17.920710+03:00",
+    "pnl_pct": -4.785,
+    "exit_reason": "hard_stop"
   }
 ]
