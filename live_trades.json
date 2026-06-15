@@ -217,5 +217,15 @@
     "exit_ts": "2026-06-15T15:02:27.640614+03:00",
     "pnl_pct": -0.657,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "APT-USD",
+    "side": "SHORT",
+    "entry_price": 0.645,
+    "exit_price": 0.6957827380477541,
+    "entry_ts": "2026-06-09T07:01:14.458325+03:00",
+    "exit_ts": "2026-06-15T15:47:19.382490+03:00",
+    "pnl_pct": -7.873,
+    "exit_reason": "hard_stop"
   }
 ]
