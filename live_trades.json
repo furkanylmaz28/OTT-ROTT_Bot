@@ -237,5 +237,25 @@
     "exit_ts": "2026-06-15T16:17:00.822304+03:00",
     "pnl_pct": -12.614,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "PYPL",
+    "side": "SHORT",
+    "entry_price": 41.15,
+    "exit_price": 42.17419229054812,
+    "entry_ts": "2026-06-08T17:20:53.911929+03:00",
+    "exit_ts": "2026-06-15T16:31:59.208912+03:00",
+    "pnl_pct": -2.489,
+    "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "DIS",
+    "side": "SHORT",
+    "entry_price": 99.3595962524414,
+    "exit_price": 101.55997425781764,
+    "entry_ts": "2026-06-08T17:50:41.409279+03:00",
+    "exit_ts": "2026-06-15T16:31:59.208912+03:00",
+    "pnl_pct": -2.215,
+    "exit_reason": "hard_stop"
   }
 ]
