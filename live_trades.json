@@ -287,5 +287,15 @@
     "exit_ts": "2026-06-15T17:46:55.842530+03:00",
     "pnl_pct": -0.057,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "MAR",
+    "side": "LONG",
+    "entry_price": 398.77,
+    "exit_price": 391.1113940800377,
+    "entry_ts": "2026-06-09T17:32:45.857386+03:00",
+    "exit_ts": "2026-06-16T16:32:27.243672+03:00",
+    "pnl_pct": -1.921,
+    "exit_reason": "hard_stop"
   }
 ]
