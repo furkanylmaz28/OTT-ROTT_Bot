@@ -297,5 +297,15 @@
     "exit_ts": "2026-06-16T16:32:27.243672+03:00",
     "pnl_pct": -1.921,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "LRCX",
+    "side": "LONG",
+    "entry_price": 347.64,
+    "exit_price": 371.4176096748743,
+    "entry_ts": "2026-06-11T17:33:32.657472+03:00",
+    "exit_ts": "2026-06-16T22:17:10.158141+03:00",
+    "pnl_pct": 6.84,
+    "exit_reason": "hard_stop"
   }
 ]
