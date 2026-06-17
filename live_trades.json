@@ -307,5 +307,15 @@
     "exit_ts": "2026-06-16T22:17:10.158141+03:00",
     "pnl_pct": 6.84,
     "exit_reason": "hard_stop"
+  },
+  {
+    "sym": "WELL",
+    "side": "LONG",
+    "entry_price": 211.8249969482422,
+    "exit_price": 210.38460438367133,
+    "entry_ts": "2026-06-11T17:34:46.447806+03:00",
+    "exit_ts": "2026-06-17T18:32:09.373208+03:00",
+    "pnl_pct": -0.68,
+    "exit_reason": "hard_stop"
   }
 ]
