@@ -88,22 +88,29 @@ MIN_RT = 3   # ORTA ve üstü
 EXIT_WARN_PCT = 1.0
 
 
+# Otomatik takip (pozisyon açan) evreni. Kullanıcı SADECE BIST VIOP futures işlemi
+# yapıyor → NASDAQ/CRYPTO/EMTIA'da kağıt pozisyon açmak hem riski dağıtıyor hem de
+# gerçek edge ölçümünü kirletiyordu (28 alakasız açık pozisyon). Sadece BIST takip
+# edilir; diğer sekmeler dashboard'da manuel görüntüleme için kalır.
+TRACK_CATEGORIES = {"BIST"}
+
+
 def market_open_categories(now_tr):
-    """Şu an hangi piyasa(lar) açık? (hafta içi). Dayanıklı fallback için.
-    BIST 10:00-18:00, NASDAQ 16:30-23:00 TR. CRYPTO/EMTIA hafta içi ~tüm gün.
-    Hafta sonu kapalı (main()'de zaten engellenir; emtia/forex hafta sonu kapalı,
-    crypto 7/24 ama hafta sonu takibi v1'de yok)."""
+    """Şu an hangi takip edilen piyasa(lar) açık? (hafta içi).
+    Sadece TRACK_CATEGORIES içindekiler otomatik pozisyon açar. Kullanıcı yalnız
+    BIST işlem yaptığı için varsayılan {BIST} (10:00-18:00 TR)."""
     if now_tr.weekday() >= 5:
         return []
     hm = now_tr.hour * 60 + now_tr.minute
     out = []
-    if 10 * 60 <= hm <= 18 * 60:            # BIST
+    if "BIST" in TRACK_CATEGORIES and 10 * 60 <= hm <= 18 * 60:
         out.append("BIST")
-    if 16 * 60 + 30 <= hm <= 23 * 60:       # NASDAQ (TR saati)
+    if "NASDAQ" in TRACK_CATEGORIES and 16 * 60 + 30 <= hm <= 23 * 60:
         out.append("NASDAQ")
-    # Crypto (7/24) ve Emtia/Forex (metaller+forex, hafta içi ~24h) → her zaman aç
-    out.append("CRYPTO")
-    out.append("EMTIA")
+    if "CRYPTO" in TRACK_CATEGORIES:
+        out.append("CRYPTO")
+    if "EMTIA" in TRACK_CATEGORIES:
+        out.append("EMTIA")
     return out
 
 
