@@ -612,7 +612,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_portfolio, tab_consensus, tab_scan,
- tab_sim, tab_chart, tab_emtia, tab_crypto, tab_otttott, tab_live, tab_info) = st.tabs([
+ tab_sim, tab_chart, tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "📡  Anlık Tarayıcı",
@@ -621,6 +621,7 @@ st.markdown(f"""
     "🥇  Emtia/Forex",
     "🪙  Crypto (4h)",
     "🔗  OTT+TOTT Teyit",
+    "⚡  Aktif/Scalp (15m)",
     "✅  Canlı Performans",
     "📖  Bilgi",
 ])
@@ -2269,6 +2270,85 @@ with tab_otttott:
     else:
         st.info("👆 Sembol seç + butona bas. BIST hisselerinde **Futures** (işlem yaptığın, "
                 "TradingView grafiğinle aynı) ve **Spot** sekmeleri ayrı gösterilir.")
+
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: AKTİF/SCALP (15m) — kısa parametreli yüksek frekans, OOS-doğrulanmış
+# ──────────────────────────────────────────────────────────────────
+with tab_scalp:
+    st.subheader("⚡ Aktif/Scalp — 15m, sık sinyal")
+    st.caption("Kısa parametreli OTT+TOTT (15m futures). Ana swing sisteminden AYRI bir mod: "
+                "daha sık işlem, daha ince edge. Maliyete duyarlı.")
+    with st.expander("⚠️ Bu sekmeyi kullanmadan önce OKU", expanded=False):
+        st.markdown("""
+        - **Gerçek scalp (5m) DEĞİL** — test 5m'de edge'in öldüğünü gösterdi. Bu 15m, kısa param.
+        - Semboller **train/test (OOS) ayrımıyla** seçildi: parametre verinin %70'inde optimize,
+          %30'unda (görülmemiş) doğrulandı. Sadece OOS'ta edge'i tutanlar burada.
+        - **Edge ince** (PF ~1.2-2). Ana sistemden (PF ~2.8) zayıf ama çok daha sık.
+        - **Maliyet kritik:** %0.05 tek yön varsayımıyla kârlı. Komisyonun yüksekse edge buharlaşır.
+        - **Garanti değil:** 45 sembol × 60 param denendi; OOS geçişlerin bir kısmı şans olabilir.
+          Canlı sonucu izle, körü körüne güvenme. Stop yok — strateji kendi sinyaliyle çıkar.
+        """)
+    try:
+        import json as _json, os as _os
+        _scalp = _json.load(open("per_symbol_scalp_15m.json", encoding="utf-8")) if _os.path.exists("per_symbol_scalp_15m.json") else {}
+    except Exception:
+        _scalp = {}
+
+    if not _scalp:
+        st.warning("Scalp optimize verisi yok. `python optimize_scalp_15m.py` çalıştır.")
+    else:
+        _rate = st.radio("Hangi semboller?", ["Sadece İYİ", "İYİ + ORTA"], horizontal=True, key="scalp_rate")
+        _allow = {"İYİ"} if _rate == "Sadece İYİ" else {"İYİ", "ORTA"}
+        _syms = [s for s, v in _scalp.items() if v.get("rating") in _allow]
+        st.caption(f"{len(_syms)} sembol · OOS-doğrulanmış · 15m futures")
+
+        if st.button(f"⚡ Scalp sinyallerini tara ({len(_syms)} sembol)", type="primary",
+                      use_container_width=True, key="scalp_scan"):
+            st.cache_data.clear()
+            rows = []; prog = st.progress(0, text="0")
+            for i, sym in enumerate(_syms):
+                try:
+                    p = _scalp[sym]["params"]
+                    d = ds_fetch_futures(sym, interval="15m")
+                    if d is not None and not d.empty and len(d) > 200:
+                        rr = otc.compute(d["close"], p["trend_length"], p["trend_percent"], p["tott_coeff"])
+                        cfx = rr[rr["confirm"].notna()]
+                        if len(cfx):
+                            ld = cfx["confirm"].iloc[-1]; lt = cfx.index[-1]; lpr = float(cfx["close"].iloc[-1])
+                            curx = float(d["close"].iloc[-1])
+                            pl = (curx/lpr-1)*100 if ld == "LONG" else (lpr/curx-1)*100
+                            _ts = pd.Timestamp(lt)
+                            if _ts.tz is not None: _ts = _ts.tz_localize(None)
+                            rows.append({
+                                "Sembol": sym, "Yön": "🟢 LONG" if ld == "LONG" else "🔴 SHORT",
+                                "Sinyal Tarihi": _ts, "Sinyal Fiyatı": lpr, "Anlık": curx,
+                                "Sinyalden %": round(pl, 1),
+                                "OOS PF": _scalp[sym]["oos_pf"], "Rating": _scalp[sym]["rating"],
+                                "Param": f"L{p['trend_length']}/%{p['trend_percent']:.0f}/{p['tott_coeff']}",
+                            })
+                except Exception:
+                    pass
+                prog.progress((i+1)/len(_syms), text=f"{i+1}/{len(_syms)} {sym}")
+            prog.empty()
+            if rows:
+                dfx = pd.DataFrame(rows).sort_values(["Yön", "Sinyal Tarihi"], ascending=[True, False]).reset_index(drop=True)
+                nL = (dfx["Yön"] == "🟢 LONG").sum(); nS = (dfx["Yön"] == "🔴 SHORT").sum()
+                c1, c2 = st.columns(2); c1.metric("🟢 LONG", int(nL)); c2.metric("🔴 SHORT", int(nS))
+                st.dataframe(
+                    dfx.style.format({"Sinyal Fiyatı": "{:.2f}", "Anlık": "{:.2f}",
+                                       "Sinyalden %": "{:+.1f}%", "OOS PF": "{:.2f}"})
+                       .background_gradient(subset=["Sinyalden %"], cmap="RdYlGn", vmin=-5, vmax=5),
+                    use_container_width=True, height=560, hide_index=True,
+                    column_config={
+                        "Sinyal Tarihi": st.column_config.DatetimeColumn("Sinyal Tarihi", format="DD/MM HH:mm",
+                            help="15m OTT+TOTT teyit anı (kısa param)"),
+                        "OOS PF": st.column_config.NumberColumn("OOS PF", help="Out-of-sample profit factor (yüksek=güvenilir)"),
+                    })
+                st.caption("⚡ 15m kısa-param OTT+TOTT · semboller OOS-doğrulanmış · maliyet %0.05 varsayımı. "
+                            "📅 Tarihe tıkla → kronolojik. Stop yok; ters sinyalde çık.")
+            else:
+                st.warning("Veri çekilemedi.")
 
 
 with tab_live:

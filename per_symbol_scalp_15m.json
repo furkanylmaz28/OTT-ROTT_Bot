@@ -1,0 +1,587 @@
+{
+  "AKBNK.IS": {
+    "params": {
+      "trend_length": 12,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 2.9,
+    "train_n": 25,
+    "oos_pf": 0.94,
+    "oos_n": 12,
+    "oos_total_pct": -1.5,
+    "rating": "ZAYIF"
+  },
+  "ARCLK.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.1,
+    "train_n": 73,
+    "oos_pf": 0.99,
+    "oos_n": 27,
+    "oos_total_pct": -0.3,
+    "rating": "ZAYIF"
+  },
+  "ASELS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.48,
+    "train_n": 50,
+    "oos_pf": 1.12,
+    "oos_n": 32,
+    "oos_total_pct": 4.3,
+    "rating": "ORTA"
+  },
+  "BIMAS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.22,
+    "train_n": 32,
+    "oos_pf": 0.38,
+    "oos_n": 17,
+    "oos_total_pct": -19.0,
+    "rating": "ZAYIF"
+  },
+  "DOHOL.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.14,
+    "train_n": 25,
+    "oos_pf": 0.47,
+    "oos_n": 23,
+    "oos_total_pct": -22.5,
+    "rating": "ZAYIF"
+  },
+  "ENJSA.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.67,
+    "train_n": 20,
+    "oos_pf": 0.46,
+    "oos_n": 14,
+    "oos_total_pct": -15.3,
+    "rating": "ZAYIF"
+  },
+  "EKGYO.IS": {
+    "params": {
+      "trend_length": 12,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.86,
+    "train_n": 51,
+    "oos_pf": 0.81,
+    "oos_n": 28,
+    "oos_total_pct": -6.9,
+    "rating": "ZAYIF"
+  },
+  "ENKAI.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 0.92,
+    "train_n": 34,
+    "oos_pf": 1.0,
+    "oos_n": 19,
+    "oos_total_pct": 0.1,
+    "rating": "ZAYIF"
+  },
+  "EREGL.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.54,
+    "train_n": 28,
+    "oos_pf": 2.82,
+    "oos_n": 13,
+    "oos_total_pct": 27.8,
+    "rating": "İYİ"
+  },
+  "FROTO.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 2.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.56,
+    "train_n": 32,
+    "oos_pf": 0.99,
+    "oos_n": 19,
+    "oos_total_pct": -0.4,
+    "rating": "ZAYIF"
+  },
+  "GARAN.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.31,
+    "train_n": 67,
+    "oos_pf": 0.66,
+    "oos_n": 29,
+    "oos_total_pct": -10.6,
+    "rating": "ZAYIF"
+  },
+  "GUBRF.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.86,
+    "train_n": 36,
+    "oos_pf": 2.16,
+    "oos_n": 17,
+    "oos_total_pct": 22.9,
+    "rating": "İYİ"
+  },
+  "HALKB.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 3.99,
+    "train_n": 29,
+    "oos_pf": 1.75,
+    "oos_n": 19,
+    "oos_total_pct": 22.0,
+    "rating": "İYİ"
+  },
+  "ISCTR.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 3.09,
+    "train_n": 22,
+    "oos_pf": 0.62,
+    "oos_n": 12,
+    "oos_total_pct": -7.7,
+    "rating": "ZAYIF"
+  },
+  "KCHOL.IS": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.66,
+    "train_n": 16,
+    "oos_pf": 0.6,
+    "oos_n": 6,
+    "oos_total_pct": -4.4,
+    "rating": "ZAYIF"
+  },
+  "KRDMD.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.18,
+    "train_n": 48,
+    "oos_pf": 1.04,
+    "oos_n": 21,
+    "oos_total_pct": 1.0,
+    "rating": "ZAYIF"
+  },
+  "MGROS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.8,
+    "train_n": 26,
+    "oos_pf": 0.72,
+    "oos_n": 13,
+    "oos_total_pct": -5.3,
+    "rating": "ZAYIF"
+  },
+  "OYAKC.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.3,
+    "train_n": 40,
+    "oos_pf": 1.55,
+    "oos_n": 17,
+    "oos_total_pct": 9.7,
+    "rating": "İYİ"
+  },
+  "PETKM.IS": {
+    "params": {
+      "trend_length": 12,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.52,
+    "train_n": 22,
+    "oos_pf": 1.82,
+    "oos_n": 12,
+    "oos_total_pct": 17.3,
+    "rating": "İYİ"
+  },
+  "PGSUS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.25,
+    "train_n": 43,
+    "oos_pf": 0.65,
+    "oos_n": 19,
+    "oos_total_pct": -11.7,
+    "rating": "ZAYIF"
+  },
+  "SAHOL.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.46,
+    "train_n": 67,
+    "oos_pf": 0.62,
+    "oos_n": 35,
+    "oos_total_pct": -14.0,
+    "rating": "ZAYIF"
+  },
+  "SASA.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 3.27,
+    "train_n": 28,
+    "oos_pf": 5.16,
+    "oos_n": 14,
+    "oos_total_pct": 58.4,
+    "rating": "İYİ"
+  },
+  "SISE.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.12,
+    "train_n": 49,
+    "oos_pf": 2.5,
+    "oos_n": 23,
+    "oos_total_pct": 29.1,
+    "rating": "İYİ"
+  },
+  "SOKM.IS": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 2.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.43,
+    "train_n": 18,
+    "oos_pf": 0.53,
+    "oos_n": 11,
+    "oos_total_pct": -10.6,
+    "rating": "ZAYIF"
+  },
+  "TAVHL.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.01
+    },
+    "train_pf": 1.67,
+    "train_n": 16,
+    "oos_pf": 3.46,
+    "oos_n": 5,
+    "oos_total_pct": 17.4,
+    "rating": "ORTA"
+  },
+  "TCELL.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.01
+    },
+    "train_pf": 1.52,
+    "train_n": 16,
+    "oos_pf": 1.07,
+    "oos_n": 13,
+    "oos_total_pct": 1.4,
+    "rating": "ORTA"
+  },
+  "THYAO.IS": {
+    "params": {
+      "trend_length": 12,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.49,
+    "train_n": 49,
+    "oos_pf": 1.03,
+    "oos_n": 23,
+    "oos_total_pct": 0.7,
+    "rating": "ZAYIF"
+  },
+  "TOASO.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.76,
+    "train_n": 17,
+    "oos_pf": 2.05,
+    "oos_n": 8,
+    "oos_total_pct": 5.7,
+    "rating": "İYİ"
+  },
+  "TKFEN.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 2.32,
+    "train_n": 42,
+    "oos_pf": 3.26,
+    "oos_n": 16,
+    "oos_total_pct": 54.2,
+    "rating": "İYİ"
+  },
+  "TSKB.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 2.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 3.09,
+    "train_n": 22,
+    "oos_pf": 0.86,
+    "oos_n": 13,
+    "oos_total_pct": -2.6,
+    "rating": "ZAYIF"
+  },
+  "TTKOM.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.47,
+    "train_n": 39,
+    "oos_pf": 0.94,
+    "oos_n": 21,
+    "oos_total_pct": -1.4,
+    "rating": "ZAYIF"
+  },
+  "TUPRS.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 2.46,
+    "train_n": 22,
+    "oos_pf": 1.27,
+    "oos_n": 9,
+    "oos_total_pct": 2.4,
+    "rating": "ORTA"
+  },
+  "VAKBN.IS": {
+    "params": {
+      "trend_length": 12,
+      "trend_percent": 2.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 2.94,
+    "train_n": 20,
+    "oos_pf": 0.44,
+    "oos_n": 14,
+    "oos_total_pct": -19.7,
+    "rating": "ZAYIF"
+  },
+  "VESTL.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.11,
+    "train_n": 59,
+    "oos_pf": 2.73,
+    "oos_n": 17,
+    "oos_total_pct": 25.0,
+    "rating": "İYİ"
+  },
+  "YKBNK.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.99,
+    "train_n": 33,
+    "oos_pf": 0.81,
+    "oos_n": 14,
+    "oos_total_pct": -5.6,
+    "rating": "ZAYIF"
+  },
+  "AEFES.IS": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.32,
+    "train_n": 20,
+    "oos_pf": 0.56,
+    "oos_n": 17,
+    "oos_total_pct": -12.8,
+    "rating": "ZAYIF"
+  },
+  "HEKTS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.05,
+    "train_n": 57,
+    "oos_pf": 1.33,
+    "oos_n": 39,
+    "oos_total_pct": 21.9,
+    "rating": "İYİ"
+  },
+  "ODAS.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.74,
+    "train_n": 36,
+    "oos_pf": 1.13,
+    "oos_n": 22,
+    "oos_total_pct": 4.7,
+    "rating": "ORTA"
+  },
+  "ASTOR.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 2.09,
+    "train_n": 47,
+    "oos_pf": 2.0,
+    "oos_n": 27,
+    "oos_total_pct": 38.2,
+    "rating": "İYİ"
+  },
+  "AKSEN.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.07,
+    "train_n": 42,
+    "oos_pf": 6.44,
+    "oos_n": 11,
+    "oos_total_pct": 34.2,
+    "rating": "İYİ"
+  },
+  "ALARK.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 1.29,
+    "train_n": 36,
+    "oos_pf": 0.72,
+    "oos_n": 21,
+    "oos_total_pct": -9.4,
+    "rating": "ZAYIF"
+  },
+  "KONTR.IS": {
+    "params": {
+      "trend_length": 20,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.005
+    },
+    "train_pf": 2.37,
+    "train_n": 21,
+    "oos_pf": 4.77,
+    "oos_n": 10,
+    "oos_total_pct": 106.7,
+    "rating": "İYİ"
+  },
+  "DOAS.IS": {
+    "params": {
+      "trend_length": 15,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.11,
+    "train_n": 48,
+    "oos_pf": 0.32,
+    "oos_n": 27,
+    "oos_total_pct": -25.1,
+    "rating": "ZAYIF"
+  },
+  "CIMSA.IS": {
+    "params": {
+      "trend_length": 10,
+      "trend_percent": 1.0,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.54,
+    "train_n": 46,
+    "oos_pf": 1.33,
+    "oos_n": 21,
+    "oos_total_pct": 6.5,
+    "rating": "İYİ"
+  },
+  "ULKER.IS": {
+    "params": {
+      "trend_length": 8,
+      "trend_percent": 0.5,
+      "tott_coeff": 0.001
+    },
+    "train_pf": 1.42,
+    "train_n": 66,
+    "oos_pf": 2.46,
+    "oos_n": 21,
+    "oos_total_pct": 19.3,
+    "rating": "İYİ"
+  }
+}
