@@ -168,24 +168,27 @@ def enforce_stops(price_map: dict, on_close=None) -> list:
     Sistemde fiziki stop yoktu → 'bekle' durumunda pozisyon stop'un altına/üstüne
     kayıp kanıyordu. Bu, her taramada çağrılır; sinyal ne olursa olsun stop'u uygular.
 
-    price_map: {sym: anlık_fiyat}. Kapanış stop SEVİYESİNDEN varsayılır (fiziki SL
-    gerçekçiliği — ara bar boşluğunda fiyat daha da kaymış olsa bile stop'ta dolardı).
+    KAPANIŞ-BAZLI: price_map artık SON KAPANMIŞ BAR'ın kapanışını taşır (intrabar
+    anlık fiyat DEĞİL). Sebep: intrabar dokunmayla kapatmak kazananları gürültüde
+    boğuyordu (backtest +215% → canlı -29%). Strateji bar KAPANIŞINDA banttan dönünce
+    çıkar; biz de öyle yapıyoruz. Çıkış fiyatı = breached kapanış (gerçekçi).
     on_close(sym, side, exit_price, pnl_pct): stop tetiklenince callback (Telegram)."""
     positions = _load(POS_FILE, {})
     trades = _load(TRADES_FILE, [])
     closed = []
     now = datetime.now(TR).isoformat()
     for sym, pos in list(positions.items()):
-        price = price_map.get(sym)
+        price = price_map.get(sym)   # SON KAPANMIŞ BAR kapanışı
         stop = pos.get("stop")
         if not price or price <= 0 or not stop or stop <= 0:
             continue
         side = pos["side"]
+        # KAPANIŞ banttı kırdı mı? (intrabar fitil değil — kapanış)
         hit = (side == "LONG" and price <= stop) or (side == "SHORT" and price >= stop)
         if not hit:
             continue
         ep = pos["entry_price"]
-        exit_price = stop                        # fiziki SL ~stop'ta dolar
+        exit_price = price                       # kapanışta çık (banttan dönen kapanış)
         pnl = (exit_price - ep) / ep if side == "LONG" else (ep - exit_price) / ep
         trades.append({
             "sym": sym, "side": side,

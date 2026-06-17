@@ -677,27 +677,34 @@ def main():
     except Exception as e:
         print(f"  Prune hatası: {e}")
 
-    # ── HARD STOP KONTROLÜ (her tetikte, sinyalden bağımsız) ──────────
-    # Sistemde fiziki stop yoktu → 'bekle' durumundaki pozisyon stop'un altına/üstüne
-    # kanıyordu. Burada her açık pozisyonun anlık fiyatını çekip, trailing stop'u
-    # kırdıysa stop seviyesinden KAPAT (kaybı sınırla).
-    try:
-        import forward_validation as fv
-        _open = fv.open_positions()
-        if _open:
-            _pm = {}
-            for _s in _open:
-                try:
-                    _df = ds_fetch(_s, interval=best_interval_for(_s), n_bars=60)
-                    if not _df.empty:
-                        _pm[_s] = float(_df["close"].iloc[-1])
-                except Exception:
-                    pass
-            _stopped = fv.enforce_stops(_pm, on_close=_fv_telegram_on_close)
-            if _stopped:
-                print(f"  🛑 Hard stop ile kapanan ({len(_stopped)}): {_stopped}")
-    except Exception as e:
-        print(f"  Hard stop kontrolü hatası: {e}")
+    # ── HARD STOP: DEVRE DIŞI ────────────────────────────────────────
+    # KANIT (backtest, 8 BIST futures): trailing hard-stop (intrabar, kapanış-bazlı,
+    # hatta geniş %6 felaket) HER türü edge'i kemiriyor. Stopsuz +242% vs %6 stop
+    # +162% vs intrabar canlıda -29%. Strateji KENDİ sinyaliyle (cond_exit / yön
+    # dönüşü) çıkacak şekilde tasarlı — record_observation bunu zaten uyguluyor.
+    # enforce_stops fonksiyonu duruyor (geri almak için ENABLE_HARD_STOP=True yeter)
+    # ama ARTIK ÇAĞRILMIYOR. "Bleeding" sandığımız şey normal trade-içi düşüştü.
+    ENABLE_HARD_STOP = False
+    if ENABLE_HARD_STOP:
+        try:
+            import forward_validation as fv
+            _open = fv.open_positions()
+            if _open:
+                _pm = {}
+                for _s in _open:
+                    try:
+                        _df = ds_fetch(_s, interval=best_interval_for(_s), n_bars=60)
+                        if len(_df) >= 2:
+                            _pm[_s] = float(_df["close"].iloc[-2])
+                        elif not _df.empty:
+                            _pm[_s] = float(_df["close"].iloc[-1])
+                    except Exception:
+                        pass
+                _stopped = fv.enforce_stops(_pm, on_close=_fv_telegram_on_close)
+                if _stopped:
+                    print(f"  🛑 Hard stop ile kapanan ({len(_stopped)}): {_stopped}")
+        except Exception as e:
+            print(f"  Hard stop kontrolü hatası: {e}")
 
     for mode, cat in matches:
         try:
