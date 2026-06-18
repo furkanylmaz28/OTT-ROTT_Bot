@@ -569,8 +569,16 @@ def prune_untracked_positions(grid):
         import reliability as rel
     except Exception:
         rel = None
+    try:
+        from data_source import category_of
+    except Exception:
+        category_of = None
     removed = []
     for sym in list(pos.keys()):
+        # TAKİP EDİLMEYEN KATEGORİ (BIST-only modda NASDAQ/CRYPTO/EMTIA) → yetim, sil.
+        # Bunlar bir daha taranmaz → kapanmaz + pozisyon limitini boşa doldurur.
+        if category_of is not None and category_of(sym) not in TRACK_CATEGORIES:
+            removed.append(sym); continue
         # Muhafazakâr kapıdan geçmeyen (artık takip etmediğimiz) sembol → yetim, sil
         if rel is not None and not rel.is_reliable(sym, grid):
             removed.append(sym)
