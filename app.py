@@ -767,42 +767,53 @@ with tab_kokpit:
     _chart_opts = _watch if _watch else _def_watch
     if _chart_opts:
         _csym = st.selectbox("Grafik sembolü", _chart_opts, key="kokpit_chart_sym")
+        # Grafik bakmak için en iyi/bedava yer TradingView'in kendisi → tek tık link
+        _tv_full = f"BIST:{_csym[:-3]}1!" if _csym.endswith(".IS") else _csym
+        _tv_url = f"https://tr.tradingview.com/chart/?symbol={_tv_full.replace(':', '%3A')}"
+        st.link_button("🔗 TradingView'da aç (canlı, tam grafik)", _tv_url, use_container_width=True)
+
         _dch = fetch_fut_cached(_csym, _k_tf, 2000)
         if _dch is None or _dch.empty or len(_dch) < 300:
             st.warning("Grafik verisi çekilemedi.")
         else:
             _rch = otc.compute(_dch["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
-            _v = _rch.tail(200); _o = _dch.tail(200)   # son 200 bar (okunur)
+            _v = _rch.tail(200).reset_index(drop=True)
+            _o = _dch.tail(200).reset_index(drop=True)
+            _dts = _dch.tail(200).index   # tarih etiketleri için
+            _x = list(range(len(_o)))     # BİTİŞİK bar (boşluk yok → TradingView gibi)
             import plotly.graph_objects as _go
             fig = _go.Figure()
-            fig.add_trace(_go.Candlestick(x=_o.index, open=_o["open"], high=_o["high"],
+            fig.add_trace(_go.Candlestick(x=_x, open=_o["open"], high=_o["high"],
                 low=_o["low"], close=_o["close"], name="Fiyat",
                 increasing_line_color="#26a69a", decreasing_line_color="#ef5350"))
-            fig.add_trace(_go.Scatter(x=_v.index, y=_v["ott"], name="OTT (çıkış)",
+            fig.add_trace(_go.Scatter(x=_x, y=_v["ott"], name="OTT (çıkış)",
                 line=dict(color="#f5c518", width=1.6)))
-            fig.add_trace(_go.Scatter(x=_v.index, y=_v["tott_up"], name="TOTT üst",
+            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_up"], name="TOTT üst",
                 line=dict(color="#42a5f5", width=1, dash="dot")))
-            fig.add_trace(_go.Scatter(x=_v.index, y=_v["tott_dn"], name="TOTT alt",
+            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_dn"], name="TOTT alt",
                 line=dict(color="#ab47bc", width=1, dash="dot")))
-            # Onaylı sinyaller
             _cf = _v[_v["confirm"].notna()]
-            for _ts, _row in _cf.iterrows():
+            for _i, _row in _cf.iterrows():
                 _lg = _row["confirm"] == "LONG"
-                fig.add_trace(_go.Scatter(x=[_ts], y=[_row["close"]], mode="markers+text",
+                fig.add_trace(_go.Scatter(x=[_i], y=[_row["close"]], mode="markers+text",
                     text=["AL" if _lg else "SAT"], textposition="top center" if _lg else "bottom center",
                     marker=dict(symbol="triangle-up" if _lg else "triangle-down",
                                 size=13, color="#26a69a" if _lg else "#ef5350"),
                     showlegend=False))
+            # X ekseni: birkaç tarih etiketi (bitişik bar üstüne)
+            _step = max(1, len(_x)//8)
+            _tickv = _x[::_step]; _tickt = [f"{_dts[j]:%d/%m %H:%M}" for j in _tickv]
             _ttl = _csym.replace(".IS", "1! (futures)") if _csym.endswith(".IS") else _csym
             fig.update_layout(height=520, title=f"{_ttl} · {_k_tf}",
                 xaxis_rangeslider_visible=False, paper_bgcolor="#131722",
                 plot_bgcolor="#131722", font=dict(color="#d1d4dc"),
                 legend=dict(orientation="h", y=1.02, x=0))
-            fig.update_xaxes(gridcolor="#2a2e39"); fig.update_yaxes(gridcolor="#2a2e39")
+            fig.update_xaxes(gridcolor="#2a2e39", tickvals=_tickv, ticktext=_tickt)
+            fig.update_yaxes(gridcolor="#2a2e39")
             st.plotly_chart(fig, use_container_width=True)
-            st.caption("📈 Bizim veri (tvDatafeed futures) + OTT/TOTT. AL/SAT = sıralı teyit. "
-                        "Sarı çizgi = OTT (çıkış seviyesi). TradingView widget'ı yerine kendi grafiğimiz "
-                        "— BIST'i bedava embed servis etmediği için. Son 200 bar.")
+            st.caption("📈 Bizim veri + OTT/TOTT (AL/SAT = sıralı teyit, sarı = OTT çıkış). "
+                        "Seans boşlukları kaldırıldı (bitişik bar). **Canlı tam grafik için yukarıdaki "
+                        "TradingView linkini kullan** — orası bedava ve en iyisi; biz sinyali gösteririz.")
 
 
 # ──────────────────────────────────────────────────────────────────
