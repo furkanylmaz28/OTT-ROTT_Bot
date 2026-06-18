@@ -732,15 +732,17 @@ with tab_kokpit:
     if not _watch:
         st.info("👆 İzlemek istediğin sembolleri seç (açık pozisyonların otomatik eklenir).")
     else:
-        rows = []
+        rows = []; _errs = []
         prog = st.progress(0, text="0")
         for i, sym in enumerate(_watch):
             try:
                 rr = _kokpit_row(sym, _k_tf)
                 if rr:
                     rows.append(rr)
-            except Exception:
-                pass
+                else:
+                    _errs.append(f"{sym}: veri boş/yetersiz")
+            except Exception as _e:
+                _errs.append(f"{sym}: {type(_e).__name__}: {_e}")
             prog.progress((i+1)/len(_watch), text=f"{i+1}/{len(_watch)} {sym}")
         prog.empty()
         if rows:
@@ -763,7 +765,21 @@ with tab_kokpit:
                         "Çıkış çizgisi = OTT (her bar kayar). LONG'ta fiyat OTT altına KAPANIRSA çıkış teyidi. "
                         "⚠️ Sadece OTT+TOTT — tam sistem için Konsensüs.")
         else:
-            st.warning("Veri çekilemedi (seans kapalıyken son kapanış gösterilir).")
+            st.warning("Veri çekilemedi.")
+            # Kendi kendine teşhis: TV login durumu + ilk gerçek hata
+            import os as _os
+            _tvuser = _os.getenv("TV_USERNAME")
+            try:
+                import data_source as _ds
+                _tv_ok = _ds._get_tv() is not None
+            except Exception:
+                _tv_ok = False
+            st.caption(f"🔎 Teşhis — TV_USERNAME secret: {'✅ var' if _tvuser else '❌ YOK'} · "
+                        f"tvDatafeed bağlantısı: {'✅' if _tv_ok else '❌'}")
+            if _errs:
+                with st.expander("Hata detayları"):
+                    for _e in _errs[:10]:
+                        st.text(_e)
 
     # ── CANLI TradingView grafiği (websocket — kendiliğinden akar, yenileme gerekmez)
     st.markdown("#### 📈 Canlı grafik (TradingView)")
