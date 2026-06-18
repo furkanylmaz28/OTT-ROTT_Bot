@@ -2989,9 +2989,10 @@ with tab_info:
             # Filtre satırı
             qcol1, qcol2, qcol3 = st.columns(3)
             with qcol1:
-                qcat = st.multiselect("Kategori",
-                                        sorted(qdf["Kategori"].unique()),
-                                        default=["BIST", "NASDAQ"], key="q_cat")
+                _catopts = sorted(qdf["Kategori"].unique())
+                qcat = st.multiselect("Kategori", _catopts,
+                                        default=[c for c in ["BIST", "NASDAQ"] if c in _catopts] or _catopts,
+                                        key="q_cat")
             with qcol2:
                 qrt  = st.multiselect("Rating",
                                         ["MÜKEMMEL","İYİ","ORTA","MARJINAL","VERİ_AZ","UYUMSUZ"],

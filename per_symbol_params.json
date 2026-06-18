@@ -5,7 +5,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -38,7 +38,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -71,7 +71,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -104,7 +104,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -137,7 +137,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -170,7 +170,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -203,7 +203,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -236,7 +236,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -269,7 +269,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -302,7 +302,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -335,7 +335,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -368,7 +368,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -401,7 +401,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -434,7 +434,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -467,7 +467,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -500,7 +500,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -533,7 +533,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -566,7 +566,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -599,7 +599,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -632,7 +632,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -665,7 +665,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -698,7 +698,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -731,7 +731,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -764,7 +764,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -797,7 +797,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -830,7 +830,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -863,7 +863,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -896,7 +896,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -929,7 +929,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -962,7 +962,7 @@
     "bars": 5000,
     "rating": "MARJINAL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -995,7 +995,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 7.0,
@@ -1028,7 +1028,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1061,7 +1061,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -1094,7 +1094,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 7.0,
@@ -1127,7 +1127,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1160,7 +1160,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1193,7 +1193,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -1226,7 +1226,7 @@
     "bars": 5000,
     "rating": "VERİ_AZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1259,7 +1259,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1292,7 +1292,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -1325,7 +1325,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 5.0,
@@ -1358,7 +1358,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,
@@ -1391,7 +1391,7 @@
     "bars": 5000,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1424,7 +1424,7 @@
     "bars": 3673,
     "rating": "UYUMSUZ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 5.0,

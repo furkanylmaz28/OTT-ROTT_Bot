@@ -5,7 +5,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 13,
       "trend_percent": 7.5,
@@ -39,7 +39,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 3.5,
@@ -73,7 +73,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 8.5,
@@ -107,7 +107,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 14,
       "trend_percent": 10.0,
@@ -141,7 +141,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 10.5,
@@ -175,7 +175,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 16,
       "trend_percent": 10.0,
@@ -209,7 +209,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 33,
       "trend_percent": 11.5,
@@ -243,7 +243,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 6.5,
@@ -277,7 +277,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 13,
       "trend_percent": 10.5,
@@ -311,7 +311,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 27,
       "trend_percent": 5.0,
@@ -345,7 +345,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 30,
       "trend_percent": 10.0,
@@ -379,7 +379,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 14,
       "trend_percent": 8.0,
@@ -413,7 +413,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 28,
       "trend_percent": 5.5,
@@ -447,7 +447,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 10,
       "trend_percent": 11.5,
@@ -481,7 +481,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 15,
       "trend_percent": 7.0,
@@ -515,7 +515,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 7.5,
@@ -549,7 +549,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 24,
       "trend_percent": 9.5,
@@ -583,7 +583,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 32,
       "trend_percent": 4.0,
@@ -617,7 +617,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 12,
       "trend_percent": 10.0,
@@ -651,7 +651,7 @@
     "bars": 5000,
     "rating": "MARJINAL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 31,
       "trend_percent": 10.5,
@@ -685,7 +685,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 8.0,
@@ -719,7 +719,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 14,
       "trend_percent": 9.5,
@@ -753,7 +753,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 31,
       "trend_percent": 5.0,
@@ -787,7 +787,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 12,
       "trend_percent": 4.5,
@@ -821,7 +821,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 12.0,
@@ -855,7 +855,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 15,
       "trend_percent": 5.0,
@@ -889,7 +889,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 21,
       "trend_percent": 3.0,
@@ -923,7 +923,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 17,
       "trend_percent": 6.5,
@@ -957,7 +957,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 12.0,
@@ -991,7 +991,7 @@
     "bars": 5000,
     "rating": "MARJINAL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 7.0,
@@ -1025,7 +1025,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 15,
       "trend_percent": 6.5,
@@ -1059,7 +1059,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 34,
       "trend_percent": 5.5,
@@ -1093,7 +1093,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
@@ -1127,7 +1127,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 22,
       "trend_percent": 8.0,
@@ -1161,7 +1161,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 25,
       "trend_percent": 4.5,
@@ -1195,7 +1195,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 31,
       "trend_percent": 9.0,
@@ -1229,7 +1229,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 11,
       "trend_percent": 6.0,
@@ -1263,7 +1263,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 18,
       "trend_percent": 10.5,
@@ -1297,7 +1297,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 16,
       "trend_percent": 3.5,
@@ -1331,7 +1331,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 35,
       "trend_percent": 6.0,
@@ -1365,7 +1365,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 23,
       "trend_percent": 11.5,
@@ -1399,7 +1399,7 @@
     "bars": 5000,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 10,
       "trend_percent": 9.0,
@@ -1433,7 +1433,7 @@
     "bars": 5000,
     "rating": "İYİ",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 20,
       "trend_percent": 8.0,
@@ -1467,7 +1467,7 @@
     "bars": 5000,
     "rating": "ORTA",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 14,
       "trend_percent": 4.5,
@@ -1501,7 +1501,7 @@
     "bars": 3673,
     "rating": "MÜKEMMEL",
     "interval": "1h",
-    "category": "BIST_FUTURES",
+    "category": "BIST",
     "params": {
       "trend_length": 13,
       "trend_percent": 4.0,
