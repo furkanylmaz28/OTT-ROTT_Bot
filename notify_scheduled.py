@@ -30,7 +30,17 @@ load_dotenv()
 
 import pandas as pd
 import signals_full as sig_full
-from data_source import fetch as ds_fetch, best_interval_for, category_of
+from data_source import fetch as ds_fetch, best_interval_for, category_of, fetch_futures
+
+
+def _fetch_sig(sym, n_bars=2500):
+    """Sinyal verisi: BIST'te FUTURES (kullanıcı VIOP futures işliyor, params da
+    futures'a optimize), futures yoksa/BIST değilse spot. Tek kaynak → tutarlı."""
+    if sym.upper().endswith(".IS"):
+        d = fetch_futures(sym, interval=best_interval_for(sym), n_bars=n_bars)
+        if d is not None and not d.empty:
+            return d
+    return ds_fetch(sym, interval=best_interval_for(sym), n_bars=n_bars)
 from notifications import send_telegram, is_configured
 
 
@@ -201,7 +211,7 @@ def signal_label(last, side_pref=None):
 def analyze_one(sym, params):
     """Bir sembolün sinyal + fiyat + stop + güven detayını döndür."""
     try:
-        df = ds_fetch(sym, interval=best_interval_for(sym), n_bars=2500)
+        df = _fetch_sig(sym, 2500)   # BIST→futures (params futures'a optimize)
         if df.empty or len(df) < 1500:
             return None
         p = params.copy()
@@ -317,7 +327,7 @@ def check_level_alarms():
             if not stop or stop <= 0 or not side:
                 continue
             try:
-                df = ds_fetch(sym, interval=best_interval_for(sym), n_bars=60)
+                df = _fetch_sig(sym, 60)   # BIST→futures (sinyalle aynı kaynak)
                 if df is None or len(df) < 2:
                     continue
                 close = float(df["close"].iloc[-2])   # son KAPANMIŞ bar
