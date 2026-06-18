@@ -1445,7 +1445,9 @@ with tab_consensus:
 
         for idx, sym in enumerate(common_syms):
             try:
-                df_l = fetch_yf(sym, interval=_bif(sym))
+                # BIST'te FUTURES (işlem yaptığın, Kokpit ile aynı) → fiyat/S-R/sinyal tutarlı
+                df_l = (fetch_fut_cached(sym, _bif(sym), 2000) if sym.upper().endswith(".IS")
+                        else fetch_yf(sym, interval=_bif(sym)))
                 if df_l.empty or len(df_l) < 1500:
                     cons_prog.progress((idx+1)/len(common_syms))
                     continue
