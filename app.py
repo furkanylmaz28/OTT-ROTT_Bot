@@ -1497,8 +1497,9 @@ with tab_consensus:
                     cons_type = "⏳ tartışmalı / bekle"
                     side = None; consensus = False
 
-                tott_up_v = float(sb.iloc[_ix]["tott_up"]) if not pd.isna(sb.iloc[_ix]["tott_up"]) else None
-                tott_dn_v = float(sb.iloc[_ix]["tott_dn"]) if not pd.isna(sb.iloc[_ix]["tott_dn"]) else None
+                # Stop bandı GRID'den (sg) — Kokpit + bot grid params kullanıyor → tutarlı.
+                tott_up_v = float(sg.iloc[_ix]["tott_up"]) if not pd.isna(sg.iloc[_ix]["tott_up"]) else None
+                tott_dn_v = float(sg.iloc[_ix]["tott_dn"]) if not pd.isna(sg.iloc[_ix]["tott_dn"]) else None
                 # Stop seçimi yöne göre (TOTT karşı tetik = trail stop)
                 stop = tott_dn_v if side == "LONG" else (tott_up_v if side == "SHORT" else None)
                 risk_pct = (abs(cur - stop) / cur * 100) if stop else None
