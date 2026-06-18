@@ -634,8 +634,8 @@ st.markdown(f"""
 ])
 # 3 tarama sekmesi tek "Tarayıcı" altında alt-sekme (sadeleştirme). Aşağıdaki
 # `with tab_consensus/tab_scan/tab_sim:` blokları artık burada nested render olur.
-tab_consensus, tab_scan, tab_sim = tab_tarayici.tabs([
-    "🤝  Konsensüs", "📡  Anlık Tarayıcı", "📌  Öneriler",
+tab_consensus, tab_scan, tab_sim, tab_heat = tab_tarayici.tabs([
+    "🤝  Konsensüs", "📡  Anlık Tarayıcı", "📌  Öneriler", "🗺️  Isı Haritası",
 ])
 
 # ──────────────────────────────────────────────────────────────────
@@ -2133,6 +2133,57 @@ if False:  # 📊 Detay Grafik kaldırıldı (sadeleştirme) — Kokpit'te grafi
                    f"Mor çizgi: Trend OTT. Yeşil/Kırmızı kesik: TOTT bantları. "
                    f"Yeşil↑/Kırmızı↓ ok: AL/SAT sinyali. Turuncu daire: çıkış. "
                    f"Alt panel: SOTT (mavi K, mor OTT).")
+
+
+# ── ISI HARİTASI (Tarayıcı alt-sekmesi) — tüm BIST renk renk, % değişim + OTT yönü
+with tab_heat:
+    st.subheader("🗺️ BIST Isı Haritası")
+    st.caption("Tüm tahta tek ekranda: kutu rengi = günlük % değişim (yeşil↑/kırmızı↓), "
+                "etiket = OTT+TOTT yönü (🟢/🔴). Matriks heatmap mantığı, futures verisiyle.")
+    _ht_tf = st.radio("Zaman dilimi", ["1h", "15m"], horizontal=True, key="heat_tf")
+    if st.button("🗺️ Isı haritasını oluştur", type="primary", use_container_width=True, key="heat_btn"):
+        _hl = [s for s in BIST if not _is_uyumsuz(s)]
+        prog = st.progress(0, text="0"); hrows = []
+        for i, sym in enumerate(_hl):
+            try:
+                d = fetch_fut_cached(sym, _ht_tf, 2000)
+                if d is None or d.empty or len(d) < 300:
+                    continue
+                cur = float(d["close"].iloc[-1])
+                # günlük % değişim: bugünün ilk barına göre (seans içi); yoksa son güne göre
+                _today = d[d.index.normalize() == d.index[-1].normalize()]
+                base = float(_today["open"].iloc[0]) if len(_today) else float(d["close"].iloc[-2])
+                chg = (cur / base - 1) * 100 if base else 0.0
+                r = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
+                cs = otc.confirmed_signals(r)
+                yon = cs["yon"].iloc[-1] if len(cs) else None
+                hrows.append({"sym": sym[:-3], "chg": round(chg, 2), "yon": yon, "cur": cur})
+            except Exception:
+                pass
+            prog.progress((i+1)/len(_hl), text=f"{i+1}/{len(_hl)} {sym}")
+        prog.empty()
+        if hrows:
+            import plotly.graph_objects as _go
+            labels = [f"{h['sym']}<br>{h['chg']:+.1f}%<br>{'🟢' if h['yon']=='LONG' else ('🔴' if h['yon']=='SHORT' else '—')}"
+                      for h in hrows]
+            fig = _go.Figure(_go.Treemap(
+                labels=labels, parents=[""]*len(hrows),
+                values=[1]*len(hrows),
+                marker=dict(colors=[h["chg"] for h in hrows], colorscale="RdYlGn",
+                            cmid=0, cmin=-6, cmax=6, line=dict(width=1, color="#131722")),
+                textfont=dict(size=14), hoverinfo="label",
+            ))
+            fig.update_layout(height=600, margin=dict(t=10, l=0, r=0, b=0),
+                paper_bgcolor="#131722", font=dict(color="#fff"))
+            st.plotly_chart(fig, use_container_width=True)
+            nL = sum(1 for h in hrows if h["yon"] == "LONG"); nS = sum(1 for h in hrows if h["yon"] == "SHORT")
+            up = sum(1 for h in hrows if h["chg"] > 0)
+            st.caption(f"{len(hrows)} hisse · 🟢 OTT LONG: {nL} · 🔴 SHORT: {nS} · "
+                        f"günlük artıda: {up}/{len(hrows)}. Renk=% değişim, etiket=OTT+TOTT yönü.")
+        else:
+            st.warning("Veri çekilemedi.")
+
+
 with tab_emtia:
     st.subheader("🥇 Emtia / Forex — GCM Forex enstrümanları")
     st.caption("GOLD · Silver · Palladium · EUR/USD · GBP/USD. "
