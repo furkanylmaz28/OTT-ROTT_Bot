@@ -770,7 +770,8 @@ with tab_kokpit:
     _chart_opts = _watch if _watch else _def_watch
     if _chart_opts:
         _csym = st.selectbox("Grafik sembolü", _chart_opts, key="kokpit_chart_sym")
-        _tv_sym = f"BIST:{_csym[:-3]}1!" if _csym.endswith(".IS") else _csym  # futures
+        # BIST futures (1!) bedava widget'ta yok → SPOT sembol (gecikmeli ama yüklenir)
+        _tv_sym = f"BIST:{_csym[:-3]}" if _csym.endswith(".IS") else _csym
         _tv_int = "15" if _k_tf == "15m" else "60"
         _components.html(f"""
         <div class="tradingview-widget-container" style="height:520px;width:100%">
@@ -783,8 +784,9 @@ with tab_kokpit:
           </script>
         </div>
         """, height=540)
-        st.caption("⚡ Bu grafik TradingView'den **canlı akar** — sayfayı yenilemene gerek yok. "
-                    "Fiyatlar Investing gibi anlık tick-tick güncellenir.")
+        st.caption("📈 TradingView grafiği (spot sembol). ⚠️ BIST gerçek-zamanlı verisi "
+                    "**ücretli** — bedava embed'de fiyatlar **15 dk gecikmeli** gelir (kırmızı ! = gecikme işareti). "
+                    "Bizim hesap/sinyaller ise yukarıdaki tabloda tvDatafeed ile (login'liyse gerçek zamanlı).")
 
 
 # ──────────────────────────────────────────────────────────────────
