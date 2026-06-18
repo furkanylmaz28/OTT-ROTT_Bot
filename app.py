@@ -445,18 +445,27 @@ def _load_bayes_sym():
         return json.load(f)
 
 
+# Kullanıcı talebi: TÜM sekmelerde SADECE Grid rating'i MÜKEMMEL veya İYİ olan
+# semboller gösterilir. ORTA/MARJİNAL/UYUMSUZ/VERİ_AZ gizli.
+_SHOWN_RATINGS = {"MÜKEMMEL", "İYİ"}
+
+
 @st.cache_data(ttl=3600, show_spinner=False)
-def _uyumsuz_symbols():
-    """Grid (FY) bot'a göre UYUMSUZ olan semboller — hiçbir yerde gösterilmez.
-    Kullanıcı talebi: sistemin zarar ettiği hisseler gizlensin."""
+def _shown_symbols():
+    """Grid rating'i MÜKEMMEL/İYİ olan semboller (gösterilecekler)."""
     grid = _load_per_sym()
     return {s for s, v in grid.items()
-            if v.get("ok") and v.get("rating") == "UYUMSUZ"}
+            if v.get("ok") and v.get("rating") in _SHOWN_RATINGS}
+
+
+def _is_shown(sym):
+    """Sembol gösterilsin mi? (sadece MÜKEMMEL/İYİ)."""
+    return sym in _shown_symbols()
 
 
 def _is_uyumsuz(sym):
-    """Sembol Grid'e göre UYUMSUZ mu?"""
-    return sym in _uyumsuz_symbols()
+    """Geriye uyumluluk: artık 'gösterilmeyecek' = MÜKEMMEL/İYİ değil."""
+    return not _is_shown(sym)
 
 
 def _sup_res(df, n=120):
@@ -2522,9 +2531,9 @@ with tab_scalp:
     if not _scalp:
         st.warning("Scalp optimize verisi yok. `python optimize_scalp_15m.py` çalıştır.")
     else:
-        _rate = st.radio("Hangi semboller?", ["Sadece İYİ", "İYİ + ORTA"], horizontal=True, key="scalp_rate")
-        _allow = {"İYİ"} if _rate == "Sadece İYİ" else {"İYİ", "ORTA"}
-        _syms = [s for s, v in _scalp.items() if v.get("rating") in _allow]
+        # Sadece İYİ gösterilir (kullanıcı talebi: MÜKEMMEL/İYİ harici gizli; scalp'te MÜKEMMEL yok)
+        _syms = [s for s, v in _scalp.items() if v.get("rating") == "İYİ"]
+        st.caption("Sadece OOS-doğrulanmış **İYİ** semboller gösterilir.")
         st.caption(f"{len(_syms)} sembol · OOS-doğrulanmış · 15m futures")
 
         if st.button(f"⚡ Scalp sinyallerini tara ({len(_syms)} sembol)", type="primary",
