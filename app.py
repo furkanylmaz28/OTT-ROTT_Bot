@@ -706,13 +706,17 @@ with tab_kokpit:
         s = sig_full.build_signals_full(d["close"], d["high"], d["low"], **p)
         last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]   # son KAPANMIŞ bar
         cur = float(d["close"].iloc[-1])
-        # Yön — botun _lbl mantığıyla aynı (major trend yönü)
-        if bool(last["major_up"]):
-            yon = "LONG"
-        elif bool(last["major_dn"]):
-            yon = "SHORT"
-        else:
-            yon = None
+        # GERÇEK pozisyon — sinyal akışından (backtest mantığı): AÇ→pozisyon, ÇIK→flat.
+        # major_up/dn TEK BAŞINA pozisyon DEĞİL (sadece eğilim/BEKLE) → yanlış SHORT'u önler.
+        bl = s["cond_buy_long"].values; xl = s["cond_exit_long"].values
+        bs = s["cond_buy_short"].values; xs = s["cond_exit_short"].values
+        pos = 0
+        for i in range(len(s) - 1):   # sadece KAPANMIŞ barlar (oluşan bar hariç)
+            if bl[i]: pos = 1
+            elif bs[i]: pos = -1
+            elif pos == 1 and xl[i]: pos = 0
+            elif pos == -1 and xs[i]: pos = 0
+        yon = "LONG" if pos == 1 else ("SHORT" if pos == -1 else None)
         tup = float(last["tott_up"]); tdn = float(last["tott_dn"]); ott = float(last["trend_ott"])
         # Çıkış/stop = botun stopu: LONG→TOTT alt, SHORT→TOTT üst
         cikis = tdn if yon == "LONG" else (tup if yon == "SHORT" else ott)
