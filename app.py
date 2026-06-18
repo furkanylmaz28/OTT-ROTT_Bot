@@ -1451,6 +1451,18 @@ with tab_consensus:
             if last_["major_dn"]:              return "SHORT_BEKLE"
             return "BELIRSIZ"
 
+        def _walk_side(s):
+            """GERÇEK pozisyon (Kokpit ile AYNI yöntem): AÇ→gir, ÇIK→çık. LONG/SHORT/FLAT."""
+            bl = s["cond_buy_long"].values; xl = s["cond_exit_long"].values
+            bs = s["cond_buy_short"].values; xs = s["cond_exit_short"].values
+            pos = 0
+            for i in range(len(s) - 1):   # sadece kapanmış barlar
+                if bl[i]: pos = 1
+                elif bs[i]: pos = -1
+                elif pos == 1 and xl[i]: pos = 0
+                elif pos == -1 and xs[i]: pos = 0
+            return "LONG" if pos == 1 else ("SHORT" if pos == -1 else "FLAT")
+
         for idx, sym in enumerate(common_syms):
             try:
                 # BIST'te FUTURES (işlem yaptığın, Kokpit ile aynı) → fiyat/S-R/sinyal tutarlı
@@ -1469,33 +1481,26 @@ with tab_consensus:
                 sb = sig_full.build_signals_full(df_l["close"], df_l["high"], df_l["low"], **bp)
                 # Son KAPANMIŞ bar (iloc[-2]) — oluşan mum sinyal kaymasını önler
                 _ix = -2 if len(sg) >= 2 else -1
-                lg = _lbl(sg.iloc[_ix])
-                lb = _lbl(sb.iloc[_ix])
                 cur = float(df_l["close"].iloc[-1])
+                # GERÇEK pozisyon (Kokpit ile AYNI yöntem — tutarlılık için kök çözüm)
+                gpos = _walk_side(sg); bpos = _walk_side(sb)
+                _gl = sg.iloc[_ix]; _bl_ = sb.iloc[_ix]
+                gfresh = "LONG" if _gl["cond_buy_long"] else ("SHORT" if _gl["cond_buy_short"] else None)
+                bfresh = "LONG" if _bl_["cond_buy_long"] else ("SHORT" if _bl_["cond_buy_short"] else None)
 
-                # Konsensüs türü
-                if lg == "LONG_AÇ" and lb == "LONG_AÇ":
-                    cons_type = "🟢🟢 GÜÇLÜ LONG"
-                    side = "LONG"; consensus = True
-                elif lg == "SHORT_AÇ" and lb == "SHORT_AÇ":
-                    cons_type = "🔴🔴 GÜÇLÜ SHORT"
-                    side = "SHORT"; consensus = True
-                elif "ÇIK" in lg and "ÇIK" in lb and lg == lb:
-                    cons_type = "🟡🟡 HEMEN KAPAT"
-                    side = "EXIT"; consensus = True
-                elif lg == "LONG_TUT" and lb == "LONG_TUT":
-                    cons_type = "🟢 LONG TUT (konsensüs)"
-                    side = "LONG"; consensus = True   # iki bot da TUT diyor — konsensüs
-                elif lg == "SHORT_TUT" and lb == "SHORT_TUT":
-                    cons_type = "🔴 SHORT TUT (konsensüs)"
-                    side = "SHORT"; consensus = True
-                elif (lg == "LONG_AÇ") != (lb == "LONG_AÇ") or \
-                      (lg == "SHORT_AÇ") != (lb == "SHORT_AÇ"):
-                    cons_type = "❌ ÇELİŞKİ — ATLA"
-                    side = None; consensus = False
+                # Konsensüs türü — GERÇEK pozisyona göre (taze giriş > tutma > yok)
+                if gfresh == "LONG" and bfresh == "LONG":
+                    cons_type = "🟢🟢 GÜÇLÜ LONG (taze giriş)"; side = "LONG"; consensus = True
+                elif gfresh == "SHORT" and bfresh == "SHORT":
+                    cons_type = "🔴🔴 GÜÇLÜ SHORT (taze giriş)"; side = "SHORT"; consensus = True
+                elif gpos == "LONG" and bpos == "LONG":
+                    cons_type = "🟢 LONG (iki bot pozisyonda)"; side = "LONG"; consensus = True
+                elif gpos == "SHORT" and bpos == "SHORT":
+                    cons_type = "🔴 SHORT (iki bot pozisyonda)"; side = "SHORT"; consensus = True
+                elif gpos == "FLAT" and bpos == "FLAT":
+                    cons_type = "⚪ Pozisyon yok"; side = None; consensus = False
                 else:
-                    cons_type = "⏳ tartışmalı / bekle"
-                    side = None; consensus = False
+                    cons_type = "⏳ botlar ayrı düşüyor"; side = None; consensus = False
 
                 # Stop bandı GRID'den (sg) — Kokpit + bot grid params kullanıyor → tutarlı.
                 tott_up_v = float(sg.iloc[_ix]["tott_up"]) if not pd.isna(sg.iloc[_ix]["tott_up"]) else None
@@ -1504,12 +1509,12 @@ with tab_consensus:
                 stop = tott_dn_v if side == "LONG" else (tott_up_v if side == "SHORT" else None)
                 risk_pct = (abs(cur - stop) / cur * 100) if stop else None
 
-                # ÇIK YAKIN uyarısı — TUT pozisyonlarında trail stop yakınlığı
-                if side == "LONG" and "TUT" in cons_type and tott_dn_v:
+                # ÇIK YAKIN uyarısı — açık pozisyonda trail stop yakınlığı
+                if side == "LONG" and tott_dn_v:
                     dist_pct = (cur / tott_dn_v - 1) * 100
                     if 0 < dist_pct < warn_thr_cons:
                         cons_type = f"{cons_type}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
-                elif side == "SHORT" and "TUT" in cons_type and tott_up_v:
+                elif side == "SHORT" and tott_up_v:
                     dist_pct = (tott_up_v / cur - 1) * 100
                     if 0 < dist_pct < warn_thr_cons:
                         cons_type = f"{cons_type}  ⚠️ ÇIK YAKIN ({dist_pct:.2f}%)"
