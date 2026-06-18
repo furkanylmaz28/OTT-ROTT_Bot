@@ -778,44 +778,69 @@ with tab_kokpit:
         if _dch is None or _dch.empty or len(_dch) < 300:
             st.warning("Grafik verisi çekilemedi.")
         else:
+            import numpy as _np
             _rch = otc.compute(_dch["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
             _v = _rch.tail(200).reset_index(drop=True)
             _o = _dch.tail(200).reset_index(drop=True)
-            _dts = _dch.tail(200).index   # tarih etiketleri için
+            _dts = _dch.tail(200).index
             _x = list(range(len(_o)))     # BİTİŞİK bar (boşluk yok → TradingView gibi)
             import plotly.graph_objects as _go
             fig = _go.Figure()
+            _mav = _v["mavg"].values; _ottl = _v["ott"].values
+            _up = _mav >= _ottl   # MAvg OTT üstünde mi (trend yukarı)
+            # ── TOTT BULUTU: MAvg ile OTT arası, yeşil (yukarı) / kırmızı (aşağı)
+            _gtop = _np.where(_up, _mav, _np.nan); _gbot = _np.where(_up, _ottl, _np.nan)
+            _rtop = _np.where(~_up, _ottl, _np.nan); _rbot = _np.where(~_up, _mav, _np.nan)
+            fig.add_trace(_go.Scatter(x=_x, y=_gbot, line=dict(width=0), showlegend=False, hoverinfo="skip"))
+            fig.add_trace(_go.Scatter(x=_x, y=_gtop, fill="tonexty", fillcolor="rgba(38,166,154,0.22)",
+                line=dict(width=0), showlegend=False, hoverinfo="skip"))
+            fig.add_trace(_go.Scatter(x=_x, y=_rbot, line=dict(width=0), showlegend=False, hoverinfo="skip"))
+            fig.add_trace(_go.Scatter(x=_x, y=_rtop, fill="tonexty", fillcolor="rgba(239,83,80,0.20)",
+                line=dict(width=0), showlegend=False, hoverinfo="skip"))
+            # ── Mumlar + çizgiler
             fig.add_trace(_go.Candlestick(x=_x, open=_o["open"], high=_o["high"],
                 low=_o["low"], close=_o["close"], name="Fiyat",
                 increasing_line_color="#26a69a", decreasing_line_color="#ef5350"))
-            fig.add_trace(_go.Scatter(x=_x, y=_v["ott"], name="OTT (çıkış)",
-                line=dict(color="#f5c518", width=1.6)))
+            fig.add_trace(_go.Scatter(x=_x, y=_v["mavg"], name="MAvg",
+                line=dict(color="#26c6da", width=1.5)))   # cyan
+            fig.add_trace(_go.Scatter(x=_x, y=_v["ott"], name="OTT",
+                line=dict(color="#f5a623", width=1.6)))    # turuncu
             fig.add_trace(_go.Scatter(x=_x, y=_v["tott_up"], name="TOTT üst",
-                line=dict(color="#42a5f5", width=1, dash="dot")))
+                line=dict(color="#ab47bc", width=1, dash="dot")))
             fig.add_trace(_go.Scatter(x=_x, y=_v["tott_dn"], name="TOTT alt",
                 line=dict(color="#ab47bc", width=1, dash="dot")))
-            _cf = _v[_v["confirm"].notna()]
-            for _i, _row in _cf.iterrows():
-                _lg = _row["confirm"] == "LONG"
-                fig.add_trace(_go.Scatter(x=[_i], y=[_row["close"]], mode="markers+text",
-                    text=["AL" if _lg else "SAT"], textposition="top center" if _lg else "bottom center",
-                    marker=dict(symbol="triangle-up" if _lg else "triangle-down",
-                                size=13, color="#26a69a" if _lg else "#ef5350"),
-                    showlegend=False))
-            # X ekseni: birkaç tarih etiketi (bitişik bar üstüne)
+            # ── OTT sinyalleri (Long/Short okları) + TOTT sinyalleri (Buy/Sell kutuları)
+            for _i in range(len(_v)):
+                _row = _v.iloc[_i]
+                if _row["ott_long"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["low"].iloc[_i]*0.992], mode="markers+text",
+                        text=["Long"], textposition="bottom center", textfont=dict(size=9, color="#42a5f5"),
+                        marker=dict(symbol="arrow-up", size=12, color="#42a5f5"), showlegend=False, hoverinfo="skip"))
+                if _row["ott_short"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["high"].iloc[_i]*1.008], mode="markers+text",
+                        text=["Short"], textposition="top center", textfont=dict(size=9, color="#d4a"),
+                        marker=dict(symbol="arrow-down", size=12, color="#e040fb"), showlegend=False, hoverinfo="skip"))
+                if _row["tott_long"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["low"].iloc[_i]*0.985], mode="text",
+                        text=["Buy"], textfont=dict(size=10, color="#fff"),
+                        showlegend=False, hoverinfo="skip"))
+                if _row["tott_short"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["high"].iloc[_i]*1.015], mode="text",
+                        text=["Sell"], textfont=dict(size=10, color="#fff"),
+                        showlegend=False, hoverinfo="skip"))
             _step = max(1, len(_x)//8)
             _tickv = _x[::_step]; _tickt = [f"{_dts[j]:%d/%m %H:%M}" for j in _tickv]
             _ttl = _csym.replace(".IS", "1! (futures)") if _csym.endswith(".IS") else _csym
-            fig.update_layout(height=520, title=f"{_ttl} · {_k_tf}",
+            fig.update_layout(height=560, title=f"{_ttl} · {_k_tf}",
                 xaxis_rangeslider_visible=False, paper_bgcolor="#131722",
                 plot_bgcolor="#131722", font=dict(color="#d1d4dc"),
                 legend=dict(orientation="h", y=1.02, x=0))
             fig.update_xaxes(gridcolor="#2a2e39", tickvals=_tickv, ticktext=_tickt)
             fig.update_yaxes(gridcolor="#2a2e39")
             st.plotly_chart(fig, use_container_width=True)
-            st.caption("📈 Bizim veri + OTT/TOTT (AL/SAT = sıralı teyit, sarı = OTT çıkış). "
-                        "Seans boşlukları kaldırıldı (bitişik bar). **Canlı tam grafik için yukarıdaki "
-                        "TradingView linkini kullan** — orası bedava ve en iyisi; biz sinyali gösteririz.")
+            st.caption("📈 TOTT düzeni: yeşil/kırmızı **bulut** (MAvg–OTT arası), cyan=MAvg, "
+                        "turuncu=OTT, mor noktalı=TOTT bandı. **Long/Short okları = OTT sinyali**, "
+                        "**Buy/Sell = TOTT sinyali** (TradingView'daki gibi). Bitişik bar, son 200.")
 
 
 # ──────────────────────────────────────────────────────────────────
