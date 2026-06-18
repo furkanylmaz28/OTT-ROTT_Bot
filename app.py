@@ -796,21 +796,25 @@ with tab_kokpit:
         _tv_url = f"https://tr.tradingview.com/chart/?symbol={_tv_full.replace(':', '%3A')}"
         st.link_button("🔗 TradingView'da aç (canlı, tam grafik)", _tv_url, use_container_width=True)
 
-        _dch = fetch_fut_cached(_csym, _k_tf, 2000)
-        if _dch is None or _dch.empty or len(_dch) < 300:
+        _pp = _kgrid.get(_csym, {}).get("params")
+        _dch = fetch_fut_cached(_csym, _kbif(_csym), 2000) if _pp else None
+        if not _pp:
+            st.warning("Bu sembolün optimize parametresi yok (örn TKFEN).")
+        elif _dch is None or _dch.empty or len(_dch) < 300:
             st.warning("Grafik verisi çekilemedi.")
         else:
             import numpy as _np
-            _rch = otc.compute(_dch["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
-            _v = _rch.tail(200).reset_index(drop=True)
+            _pp = {**_pp}; _pp.setdefault("rott_x1", 30); _pp.setdefault("rott_x2", 1000); _pp.setdefault("rott_percent", 7.0)
+            _sf = sig_full.build_signals_full(_dch["close"], _dch["high"], _dch["low"], **_pp)
+            _v = _sf.tail(200).reset_index(drop=True)
             _o = _dch.tail(200).reset_index(drop=True)
             _dts = _dch.tail(200).index
-            _x = list(range(len(_o)))     # BİTİŞİK bar (boşluk yok → TradingView gibi)
+            _x = list(range(len(_o)))     # BİTİŞİK bar (boşluk yok)
             import plotly.graph_objects as _go
             fig = _go.Figure()
-            _mav = _v["mavg"].values; _ottl = _v["ott"].values
-            _up = _mav >= _ottl   # MAvg OTT üstünde mi (trend yukarı)
-            # ── TOTT BULUTU: MAvg ile OTT arası, yeşil (yukarı) / kırmızı (aşağı)
+            _mav = _v["mavg"].values; _ottl = _v["trend_ott"].values
+            _up = _mav >= _ottl
+            # TOTT bulutu: MAvg–OTT arası, yeşil(yukarı)/kırmızı(aşağı)
             _gtop = _np.where(_up, _mav, _np.nan); _gbot = _np.where(_up, _ottl, _np.nan)
             _rtop = _np.where(~_up, _ottl, _np.nan); _rbot = _np.where(~_up, _mav, _np.nan)
             fig.add_trace(_go.Scatter(x=_x, y=_gbot, line=dict(width=0), showlegend=False, hoverinfo="skip"))
@@ -819,51 +823,41 @@ with tab_kokpit:
             fig.add_trace(_go.Scatter(x=_x, y=_rbot, line=dict(width=0), showlegend=False, hoverinfo="skip"))
             fig.add_trace(_go.Scatter(x=_x, y=_rtop, fill="tonexty", fillcolor="rgba(239,83,80,0.20)",
                 line=dict(width=0), showlegend=False, hoverinfo="skip"))
-            # ── Mumlar + çizgiler
             fig.add_trace(_go.Candlestick(x=_x, open=_o["open"], high=_o["high"],
                 low=_o["low"], close=_o["close"], name="Fiyat",
                 increasing_line_color="#26a69a", decreasing_line_color="#ef5350"))
-            fig.add_trace(_go.Scatter(x=_x, y=_v["mavg"], name="MAvg",
-                line=dict(color="#26c6da", width=1.5)))   # cyan
-            fig.add_trace(_go.Scatter(x=_x, y=_v["ott"], name="OTT",
-                line=dict(color="#f5a623", width=1.6)))    # turuncu
-            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_up"], name="TOTT üst",
-                line=dict(color="#ab47bc", width=1, dash="dot")))
-            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_dn"], name="TOTT alt",
-                line=dict(color="#ab47bc", width=1, dash="dot")))
-            # ── OTT sinyalleri (Long/Short okları) + TOTT sinyalleri (Buy/Sell kutuları)
+            fig.add_trace(_go.Scatter(x=_x, y=_v["mavg"], name="MAvg", line=dict(color="#26c6da", width=1.5)))
+            fig.add_trace(_go.Scatter(x=_x, y=_v["trend_ott"], name="OTT", line=dict(color="#f5a623", width=1.6)))
+            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_up"], name="TOTT üst", line=dict(color="#ab47bc", width=1, dash="dot")))
+            fig.add_trace(_go.Scatter(x=_x, y=_v["tott_dn"], name="TOTT alt", line=dict(color="#ab47bc", width=1, dash="dot")))
+            # GERÇEK sistem sinyalleri: AL/SAT (cond_buy) + ÇIK (cond_exit)
             for _i in range(len(_v)):
                 _row = _v.iloc[_i]
-                if _row["ott_long"]:
-                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["low"].iloc[_i]*0.992], mode="markers+text",
-                        text=["Long"], textposition="bottom center", textfont=dict(size=9, color="#42a5f5"),
-                        marker=dict(symbol="arrow-up", size=12, color="#42a5f5"), showlegend=False, hoverinfo="skip"))
-                if _row["ott_short"]:
-                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["high"].iloc[_i]*1.008], mode="markers+text",
-                        text=["Short"], textposition="top center", textfont=dict(size=9, color="#d4a"),
-                        marker=dict(symbol="arrow-down", size=12, color="#e040fb"), showlegend=False, hoverinfo="skip"))
-                if _row["tott_long"]:
-                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["low"].iloc[_i]*0.985], mode="text",
-                        text=["Buy"], textfont=dict(size=10, color="#fff"),
-                        showlegend=False, hoverinfo="skip"))
-                if _row["tott_short"]:
-                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["high"].iloc[_i]*1.015], mode="text",
-                        text=["Sell"], textfont=dict(size=10, color="#fff"),
+                if _row["cond_buy_long"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["low"].iloc[_i]*0.99], mode="markers+text",
+                        text=["AL"], textposition="bottom center", textfont=dict(size=10, color="#26a69a"),
+                        marker=dict(symbol="triangle-up", size=13, color="#26a69a"), showlegend=False, hoverinfo="skip"))
+                elif _row["cond_buy_short"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["high"].iloc[_i]*1.01], mode="markers+text",
+                        text=["SAT"], textposition="top center", textfont=dict(size=10, color="#ef5350"),
+                        marker=dict(symbol="triangle-down", size=13, color="#ef5350"), showlegend=False, hoverinfo="skip"))
+                elif _row["cond_exit_long"] or _row["cond_exit_short"]:
+                    fig.add_trace(_go.Scatter(x=[_i], y=[_o["close"].iloc[_i]], mode="markers",
+                        marker=dict(symbol="circle-open", size=9, color="#ffa726", line=dict(width=1.5)),
                         showlegend=False, hoverinfo="skip"))
             _step = max(1, len(_x)//8)
             _tickv = _x[::_step]; _tickt = [f"{_dts[j]:%d/%m %H:%M}" for j in _tickv]
             _ttl = _csym.replace(".IS", "1! (futures)") if _csym.endswith(".IS") else _csym
-            fig.update_layout(height=560, title=f"{_ttl} · {_k_tf}",
+            fig.update_layout(height=560, title=f"{_ttl} · {_kbif(_csym)} · TAM SİSTEM",
                 xaxis_rangeslider_visible=False, paper_bgcolor="#131722",
                 plot_bgcolor="#131722", font=dict(color="#d1d4dc"),
                 legend=dict(orientation="h", y=1.02, x=0))
             fig.update_xaxes(gridcolor="#2a2e39", tickvals=_tickv, ticktext=_tickt)
             fig.update_yaxes(gridcolor="#2a2e39")
             st.plotly_chart(fig, use_container_width=True)
-            st.caption("📈 Bu grafik **TradingView referansı** (kanonik Pine OTT+TOTT, L40/%1) — "
-                        "senin TV grafiğinle aynı. ⚠️ Yukarıdaki tablodaki **Çıkış/Stop botun gerçek "
-                        "seviyesidir** (optimize param) ve bu grafikteki OTT'den FARKLI olabilir. "
-                        "Karar için tabloyu baz al; grafik görsel referans.")
+            st.caption("📈 **Tam optimize sistem** (botun gerçek stratejisi, sembole özel param) — "
+                        "tablo ile AYNI sistem. ▲AL ▼SAT (gerçek giriş), ○ çıkış. Sarı=OTT, mor=TOTT bandı. "
+                        "TradingView linki (üstte) sadece görsel; karar bu sistemle.")
 
     # ── EKONOMİK TAKVİM (faiz/enflasyon/önemli olaylar) — haber günü farkındalığı
     with st.expander("📅 Ekonomik Takvim (TR + US + EU)", expanded=False):
