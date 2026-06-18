@@ -648,26 +648,6 @@ with tab_kokpit:
     st.caption("Açık pozisyon ve izleme sembollerinin **güncel OTT+TOTT yönü ve çıkış çizgisi** tek ekranda. "
                 "Seviyeler her barla kayar; burada hep tazesi gösterilir. (BIST → futures, Pine param)")
 
-    # ── TradingView CANLI ticker şeridi (websocket — kendiliğinden tick-tick akar)
-    import streamlit.components.v1 as _components
-    _tv_syms = ",".join([
-        '{"description":"AKBANK","proName":"BIST:AKBNK"}',
-        '{"description":"GARANTİ","proName":"BIST:GARAN"}',
-        '{"description":"İŞ BANK","proName":"BIST:ISCTR"}',
-        '{"description":"ASELSAN","proName":"BIST:ASELS"}',
-        '{"description":"THY","proName":"BIST:THYAO"}',
-        '{"description":"BIST100","proName":"BIST:XU100"}',
-    ])
-    _components.html(f"""
-    <div class="tradingview-widget-container">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript"
-        src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-      {{"symbols":[{_tv_syms}],"showSymbolLogo":true,"colorTheme":"dark",
-        "isTransparent":true,"displayMode":"adaptive","locale":"tr"}}
-      </script>
-    </div>
-    """, height=80)
 
     # Otomatik yenileme
     _kc1, _kc2 = st.columns([1, 3])
@@ -782,28 +762,47 @@ with tab_kokpit:
                     for _e in _errs[:10]:
                         st.text(_e)
 
-    # ── CANLI TradingView grafiği (websocket — kendiliğinden akar, yenileme gerekmez)
-    st.markdown("#### 📈 Canlı grafik (TradingView)")
+    # ── KENDİ grafiğimiz (futures veri + OTT/TOTT bantları + sinyaller) — gerçekten çalışır
+    st.markdown("#### 📈 Grafik (OTT+TOTT)")
     _chart_opts = _watch if _watch else _def_watch
     if _chart_opts:
         _csym = st.selectbox("Grafik sembolü", _chart_opts, key="kokpit_chart_sym")
-        # BIST futures (1!) bedava widget'ta yok → SPOT sembol (gecikmeli ama yüklenir)
-        _tv_sym = f"BIST:{_csym[:-3]}" if _csym.endswith(".IS") else _csym
-        _tv_int = "15" if _k_tf == "15m" else "60"
-        _components.html(f"""
-        <div class="tradingview-widget-container" style="height:520px;width:100%">
-          <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
-          <script type="text/javascript"
-            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-          {{"autosize":true,"symbol":"{_tv_sym}","interval":"{_tv_int}","timezone":"Europe/Istanbul",
-            "theme":"dark","style":"1","locale":"tr","studies":["STD;Supertrend"],
-            "hide_side_toolbar":false,"allow_symbol_change":true}}
-          </script>
-        </div>
-        """, height=540)
-        st.caption("📈 TradingView grafiği (spot sembol). ⚠️ BIST gerçek-zamanlı verisi "
-                    "**ücretli** — bedava embed'de fiyatlar **15 dk gecikmeli** gelir (kırmızı ! = gecikme işareti). "
-                    "Bizim hesap/sinyaller ise yukarıdaki tabloda tvDatafeed ile (login'liyse gerçek zamanlı).")
+        _dch = fetch_fut_cached(_csym, _k_tf, 2000)
+        if _dch is None or _dch.empty or len(_dch) < 300:
+            st.warning("Grafik verisi çekilemedi.")
+        else:
+            _rch = otc.compute(_dch["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
+            _v = _rch.tail(200); _o = _dch.tail(200)   # son 200 bar (okunur)
+            import plotly.graph_objects as _go
+            fig = _go.Figure()
+            fig.add_trace(_go.Candlestick(x=_o.index, open=_o["open"], high=_o["high"],
+                low=_o["low"], close=_o["close"], name="Fiyat",
+                increasing_line_color="#26a69a", decreasing_line_color="#ef5350"))
+            fig.add_trace(_go.Scatter(x=_v.index, y=_v["ott"], name="OTT (çıkış)",
+                line=dict(color="#f5c518", width=1.6)))
+            fig.add_trace(_go.Scatter(x=_v.index, y=_v["tott_up"], name="TOTT üst",
+                line=dict(color="#42a5f5", width=1, dash="dot")))
+            fig.add_trace(_go.Scatter(x=_v.index, y=_v["tott_dn"], name="TOTT alt",
+                line=dict(color="#ab47bc", width=1, dash="dot")))
+            # Onaylı sinyaller
+            _cf = _v[_v["confirm"].notna()]
+            for _ts, _row in _cf.iterrows():
+                _lg = _row["confirm"] == "LONG"
+                fig.add_trace(_go.Scatter(x=[_ts], y=[_row["close"]], mode="markers+text",
+                    text=["AL" if _lg else "SAT"], textposition="top center" if _lg else "bottom center",
+                    marker=dict(symbol="triangle-up" if _lg else "triangle-down",
+                                size=13, color="#26a69a" if _lg else "#ef5350"),
+                    showlegend=False))
+            _ttl = _csym.replace(".IS", "1! (futures)") if _csym.endswith(".IS") else _csym
+            fig.update_layout(height=520, title=f"{_ttl} · {_k_tf}",
+                xaxis_rangeslider_visible=False, paper_bgcolor="#131722",
+                plot_bgcolor="#131722", font=dict(color="#d1d4dc"),
+                legend=dict(orientation="h", y=1.02, x=0))
+            fig.update_xaxes(gridcolor="#2a2e39"); fig.update_yaxes(gridcolor="#2a2e39")
+            st.plotly_chart(fig, use_container_width=True)
+            st.caption("📈 Bizim veri (tvDatafeed futures) + OTT/TOTT. AL/SAT = sıralı teyit. "
+                        "Sarı çizgi = OTT (çıkış seviyesi). TradingView widget'ı yerine kendi grafiğimiz "
+                        "— BIST'i bedava embed servis etmediği için. Son 200 bar.")
 
 
 # ──────────────────────────────────────────────────────────────────
