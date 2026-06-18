@@ -611,8 +611,9 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-(tab_portfolio, tab_consensus, tab_scan,
+(tab_kokpit, tab_portfolio, tab_consensus, tab_scan,
  tab_sim, tab_chart, tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
+    "🎯  Kokpit",
     "💼  Portföyüm",
     "🤝  Konsensüs Mod",
     "📡  Anlık Tarayıcı",
@@ -625,6 +626,112 @@ st.markdown(f"""
     "✅  Canlı Performans",
     "📖  Bilgi",
 ])
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: KOKPİT — açık pozisyon + izleme listesi, canlı yön + çıkış seviyesi
+# ──────────────────────────────────────────────────────────────────
+with tab_kokpit:
+    st.subheader("🎯 Kokpit — Canlı Yön + Çıkış Seviyesi")
+    st.caption("Açık pozisyon ve izleme sembollerinin **güncel OTT+TOTT yönü ve çıkış çizgisi** tek ekranda. "
+                "Seviyeler her barla kayar; burada hep tazesi gösterilir. (BIST → futures, Pine param)")
+
+    # Otomatik yenileme
+    _kc1, _kc2 = st.columns([1, 3])
+    with _kc1:
+        _k_auto = st.toggle("🔄 Otomatik yenile", value=False, key="kokpit_auto")
+    with _kc2:
+        _k_sec = st.select_slider("Aralık (sn)", options=[30, 60, 120, 300], value=60,
+                                   key="kokpit_sec", disabled=not _k_auto)
+    if _k_auto:
+        try:
+            from streamlit_autorefresh import st_autorefresh
+            st_autorefresh(interval=_k_sec * 1000, key="kokpit_tick")
+        except Exception:
+            pass
+
+    _k_tf = st.radio("Zaman dilimi", ["15m", "1h"], horizontal=True, key="kokpit_tf",
+                      help="Çıkış seviyesi bu TF'in OTT/TOTT'undan hesaplanır")
+
+    # İzleme listesi: açık pozisyonlar + kullanıcının seçtikleri
+    try:
+        import forward_validation as _fv
+        _open_syms = list(_fv.open_positions().keys())
+    except Exception:
+        _open_syms = []
+    _bist_opts = [s for s in BIST]
+    _def_watch = [s for s in ["AKBNK.IS", "GARAN.IS", "ASELS.IS", "THYAO.IS"] if s in _bist_opts]
+    _watch = st.multiselect("İzleme listesi", _bist_opts,
+                             default=sorted(set(_def_watch) | set(s for s in _open_syms if s.endswith(".IS"))),
+                             key="kokpit_watch")
+
+    def _kokpit_row(sym, tf):
+        """Sembolün canlı yön + çıkış seviyesi satırı."""
+        d = ds_fetch_futures(sym, interval=tf) if sym.upper().endswith(".IS") else fetch_yf(sym, interval=tf)
+        if d is None or d.empty or len(d) < 300:
+            return None
+        r = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
+        cs = otc.confirmed_signals(r)
+        last = r.iloc[-1]
+        cur = float(d["close"].iloc[-1])
+        yon = cs["yon"].iloc[-1] if len(cs) else None
+        ott = float(last["ott"]); tup = float(last["tott_up"]); tdn = float(last["tott_dn"])
+        # Çıkış çizgisi: LONG → alt taraf (OTT), SHORT → üst taraf (OTT)
+        cikis = ott
+        # mesafe: fiyat çıkış çizgisinden ne kadar uzakta (tampon)
+        if yon == "LONG":
+            tampon = (cur / cikis - 1) * 100
+        elif yon == "SHORT":
+            tampon = (cikis / cur - 1) * 100
+        else:
+            tampon = None
+        son = cs.iloc[-1] if len(cs) else None
+        return {
+            "Sembol": sym.replace(".IS", "1!") if sym.endswith(".IS") else sym,
+            "Yön": "🟢 LONG" if yon == "LONG" else ("🔴 SHORT" if yon == "SHORT" else "—"),
+            "Anlık": cur,
+            "Çıkış (OTT)": cikis,
+            "Tampon %": round(tampon, 1) if tampon is not None else None,
+            "TOTT alt": tdn, "TOTT üst": tup,
+            "Son sinyal": son.name if son is not None else pd.NaT,
+            "Sinyal fiyatı": float(son["price"]) if son is not None else None,
+        }
+
+    if not _watch:
+        st.info("👆 İzlemek istediğin sembolleri seç (açık pozisyonların otomatik eklenir).")
+    else:
+        rows = []
+        prog = st.progress(0, text="0")
+        for i, sym in enumerate(_watch):
+            try:
+                rr = _kokpit_row(sym, _k_tf)
+                if rr:
+                    rows.append(rr)
+            except Exception:
+                pass
+            prog.progress((i+1)/len(_watch), text=f"{i+1}/{len(_watch)} {sym}")
+        prog.empty()
+        if rows:
+            dfk = pd.DataFrame(rows)
+            st.dataframe(
+                dfk.style.format({
+                    "Anlık": "{:.2f}", "Çıkış (OTT)": "{:.2f}", "Tampon %": "{:+.1f}%",
+                    "TOTT alt": "{:.2f}", "TOTT üst": "{:.2f}", "Sinyal fiyatı": "{:.2f}",
+                }).background_gradient(subset=["Tampon %"], cmap="RdYlGn", vmin=-3, vmax=8),
+                use_container_width=True, hide_index=True,
+                column_config={
+                    "Çıkış (OTT)": st.column_config.NumberColumn("Çıkış çizgisi (OTT)",
+                        help="LONG'ta bu seviyenin altına 15m/1h KAPANIŞ = çıkış teyidi"),
+                    "Tampon %": st.column_config.NumberColumn("Tampon %",
+                        help="Fiyatın çıkış çizgisine uzaklığı. Küçük=çıkışa yakın, büyük=rahat"),
+                    "Son sinyal": st.column_config.DatetimeColumn("Son sinyal", format="DD/MM HH:mm"),
+                })
+            now_tr = pd.Timestamp.now(tz="Europe/Istanbul")
+            st.caption(f"⏱️ Son güncelleme: {now_tr:%d/%m %H:%M:%S} TR · {_k_tf} · "
+                        "Çıkış çizgisi = OTT (her bar kayar). LONG'ta fiyat OTT altına KAPANIRSA çıkış teyidi. "
+                        "⚠️ Sadece OTT+TOTT — tam sistem için Konsensüs.")
+        else:
+            st.warning("Veri çekilemedi (seans kapalıyken son kapanış gösterilir).")
+
 
 # ──────────────────────────────────────────────────────────────────
 #  TAB: PORTFÖYÜM — kişisel pozisyon takibi
