@@ -397,6 +397,18 @@ def fetch_yf(symbol, period="60d", interval="5m", n_bars=5000):
     return df[keep].dropna()
 
 
+@st.cache_data(ttl=120, show_spinner=False)
+def fetch_fut_cached(symbol, interval="15m", n_bars=2000):
+    """Önbellekli futures fetch (120 sn). Tarama/Kokpit hızı için: tekrar tarama
+    cache'ten anında gelir. n_bars=2000 → OTT(40)+TOTT için fazlasıyla yeter,
+    5000'den ~2.5x hızlı. BIST değilse spot'a düşer."""
+    if symbol.upper().endswith(".IS"):
+        d = ds_fetch_futures(symbol, interval=interval, n_bars=n_bars)
+        if d is not None and not d.empty:
+            return d
+    return fetch_yf(symbol, interval=interval, n_bars=n_bars)
+
+
 @st.cache_data(ttl=45, show_spinner=False)  # 45 sn — açık pozisyon canlı fiyatı için
 def live_price(symbol):
     """Sadece son (anlık) fiyat — hafif ve taze (45 sn cache).
@@ -635,6 +647,27 @@ with tab_kokpit:
     st.caption("Açık pozisyon ve izleme sembollerinin **güncel OTT+TOTT yönü ve çıkış çizgisi** tek ekranda. "
                 "Seviyeler her barla kayar; burada hep tazesi gösterilir. (BIST → futures, Pine param)")
 
+    # ── TradingView CANLI ticker şeridi (websocket — kendiliğinden tick-tick akar)
+    import streamlit.components.v1 as _components
+    _tv_syms = ",".join([
+        '{"description":"AKBANK","proName":"BIST:AKBNK"}',
+        '{"description":"GARANTİ","proName":"BIST:GARAN"}',
+        '{"description":"İŞ BANK","proName":"BIST:ISCTR"}',
+        '{"description":"ASELSAN","proName":"BIST:ASELS"}',
+        '{"description":"THY","proName":"BIST:THYAO"}',
+        '{"description":"BIST100","proName":"BIST:XU100"}',
+    ])
+    _components.html(f"""
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript"
+        src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {{"symbols":[{_tv_syms}],"showSymbolLogo":true,"colorTheme":"dark",
+        "isTransparent":true,"displayMode":"adaptive","locale":"tr"}}
+      </script>
+    </div>
+    """, height=80)
+
     # Otomatik yenileme
     _kc1, _kc2 = st.columns([1, 3])
     with _kc1:
@@ -666,7 +699,7 @@ with tab_kokpit:
 
     def _kokpit_row(sym, tf):
         """Sembolün canlı yön + çıkış seviyesi satırı."""
-        d = ds_fetch_futures(sym, interval=tf) if sym.upper().endswith(".IS") else fetch_yf(sym, interval=tf)
+        d = fetch_fut_cached(sym, tf, 2000)
         if d is None or d.empty or len(d) < 300:
             return None
         r = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
@@ -731,6 +764,27 @@ with tab_kokpit:
                         "⚠️ Sadece OTT+TOTT — tam sistem için Konsensüs.")
         else:
             st.warning("Veri çekilemedi (seans kapalıyken son kapanış gösterilir).")
+
+    # ── CANLI TradingView grafiği (websocket — kendiliğinden akar, yenileme gerekmez)
+    st.markdown("#### 📈 Canlı grafik (TradingView)")
+    _chart_opts = _watch if _watch else _def_watch
+    if _chart_opts:
+        _csym = st.selectbox("Grafik sembolü", _chart_opts, key="kokpit_chart_sym")
+        _tv_sym = f"BIST:{_csym[:-3]}1!" if _csym.endswith(".IS") else _csym  # futures
+        _tv_int = "15" if _k_tf == "15m" else "60"
+        _components.html(f"""
+        <div class="tradingview-widget-container" style="height:520px;width:100%">
+          <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+          {{"autosize":true,"symbol":"{_tv_sym}","interval":"{_tv_int}","timezone":"Europe/Istanbul",
+            "theme":"dark","style":"1","locale":"tr","studies":["STD;Supertrend"],
+            "hide_side_toolbar":false,"allow_symbol_change":true}}
+          </script>
+        </div>
+        """, height=540)
+        st.caption("⚡ Bu grafik TradingView'den **canlı akar** — sayfayı yenilemene gerek yok. "
+                    "Fiyatlar Investing gibi anlık tick-tick güncellenir.")
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -2218,9 +2272,16 @@ with tab_otttott:
 
     # ── TÜM BIST taraması (M15/H1 OTT+TOTT — her hissenin güncel yönü)
     with st.expander("📋 Tüm BIST OTT+TOTT taraması", expanded=True):
+        _cc1, _cc2 = st.columns(2)
+        with _cc1:
+            _scan_spot = st.checkbox("Spot karşılaştırma da göster (yavaşlatır)", value=False, key="otc_scan_spot")
+        with _cc2:
+            _scan_fresh = st.checkbox("Taze veri (önbelleği temizle)", value=False, key="otc_scan_fresh",
+                                       help="Kapalıyken son 2 dk'lık önbellekten gelir → çok hızlı")
         if st.button(f"🔄 Tüm BIST'i tara ({ot_tf})", type="primary",
                       use_container_width=True, key="otc_bist_scan"):
-            st.cache_data.clear()
+            if _scan_fresh:
+                st.cache_data.clear()
             bist_list = [s for s in BIST if not _is_uyumsuz(s)]
             prog = st.progress(0, text="0")
             scan_rows = []
@@ -2238,11 +2299,11 @@ with tab_otttott:
 
             for i, sym in enumerate(bist_list):
                 try:
-                    # FUTURES (işlem yapılan, TradingView ile aynı) — birincil
-                    df_f = ds_fetch_futures(sym, interval=ot_tf)
-                    df_s = fetch_yf(sym, interval=ot_tf)   # SPOT — karşılaştırma
+                    # FUTURES (işlem yapılan) — birincil, önbellekli + 2000 bar (hızlı)
+                    df_f = fetch_fut_cached(sym, ot_tf, 2000)
+                    df_s = fetch_yf(sym, interval=ot_tf, n_bars=2000) if _scan_spot else None   # SPOT opsiyonel
                     fut = _last_sig(df_f["close"]) if (df_f is not None and not df_f.empty and len(df_f) > 200) else None
-                    spt = _last_sig(df_s["close"]) if (not df_s.empty and len(df_s) > 200) else None
+                    spt = _last_sig(df_s["close"]) if (df_s is not None and not df_s.empty and len(df_s) > 200) else None
                     if fut is None and spt is None:
                         continue
                     # Anlık fiyat: futures öncelik
@@ -2412,12 +2473,11 @@ with tab_scalp:
 
         if st.button(f"⚡ Scalp sinyallerini tara ({len(_syms)} sembol)", type="primary",
                       use_container_width=True, key="scalp_scan"):
-            st.cache_data.clear()
             rows = []; prog = st.progress(0, text="0")
             for i, sym in enumerate(_syms):
                 try:
                     p = _scalp[sym]["params"]
-                    d = ds_fetch_futures(sym, interval="15m")
+                    d = fetch_fut_cached(sym, "15m", 2000)
                     if d is not None and not d.empty and len(d) > 200:
                         rr = otc.compute(d["close"], p["trend_length"], p["trend_percent"], p["tott_coeff"])
                         cfx = rr[rr["confirm"].notna()]
