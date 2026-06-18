@@ -689,36 +689,46 @@ with tab_kokpit:
         except Exception as _e:
             st.error(f"Kaydedilemedi: {_e}")
 
+    _kgrid = _load_per_sym()   # futures-optimize params (botun kullandığı)
+    from data_source import best_interval_for as _kbif
+
     def _kokpit_row(sym, tf):
-        """Sembolün canlı yön + çıkış seviyesi satırı."""
-        d = fetch_fut_cached(sym, tf, 2000)
+        """Canlı yön + çıkış — BOT ile AYNI: full sistem (signals_full) + optimize param.
+        Botun gerçek interval'i (BIST=1h) kullanılır ki dashboard = botun yaptığı."""
+        p = _kgrid.get(sym, {}).get("params")
+        if not p:
+            return None  # optimize param yok (örn TKFEN) → atla
+        d = fetch_fut_cached(sym, _kbif(sym), 2000)
         if d is None or d.empty or len(d) < 300:
             return None
-        r = otc.compute(d["close"], otc.TV_LENGTH, otc.TV_PERCENT, otc.TV_COEFF)
-        cs = otc.confirmed_signals(r)
-        last = r.iloc[-1]
+        p = {**p}
+        p.setdefault("rott_x1", 30); p.setdefault("rott_x2", 1000); p.setdefault("rott_percent", 7.0)
+        s = sig_full.build_signals_full(d["close"], d["high"], d["low"], **p)
+        last = s.iloc[-2] if len(s) >= 2 else s.iloc[-1]   # son KAPANMIŞ bar
         cur = float(d["close"].iloc[-1])
-        yon = cs["yon"].iloc[-1] if len(cs) else None
-        ott = float(last["ott"]); tup = float(last["tott_up"]); tdn = float(last["tott_dn"])
-        # Çıkış çizgisi: LONG → alt taraf (OTT), SHORT → üst taraf (OTT)
-        cikis = ott
-        # mesafe: fiyat çıkış çizgisinden ne kadar uzakta (tampon)
+        # Yön — botun _lbl mantığıyla aynı (major trend yönü)
+        if bool(last["major_up"]):
+            yon = "LONG"
+        elif bool(last["major_dn"]):
+            yon = "SHORT"
+        else:
+            yon = None
+        tup = float(last["tott_up"]); tdn = float(last["tott_dn"]); ott = float(last["trend_ott"])
+        # Çıkış/stop = botun stopu: LONG→TOTT alt, SHORT→TOTT üst
+        cikis = tdn if yon == "LONG" else (tup if yon == "SHORT" else ott)
         if yon == "LONG":
             tampon = (cur / cikis - 1) * 100
         elif yon == "SHORT":
             tampon = (cikis / cur - 1) * 100
         else:
             tampon = None
-        son = cs.iloc[-1] if len(cs) else None
         return {
             "Sembol": sym.replace(".IS", "1!") if sym.endswith(".IS") else sym,
             "Yön": "🟢 LONG" if yon == "LONG" else ("🔴 SHORT" if yon == "SHORT" else "—"),
             "Anlık": cur,
-            "Çıkış (OTT)": cikis,
+            "Çıkış (stop)": cikis,
             "Tampon %": round(tampon, 1) if tampon is not None else None,
-            "TOTT alt": tdn, "TOTT üst": tup,
-            "Son sinyal": son.name if son is not None else pd.NaT,
-            "Sinyal fiyatı": float(son["price"]) if son is not None else None,
+            "TOTT alt": tdn, "TOTT üst": tup, "OTT": ott,
         }
 
     if not _watch:
@@ -741,21 +751,20 @@ with tab_kokpit:
             dfk = pd.DataFrame(rows)
             st.dataframe(
                 dfk.style.format({
-                    "Anlık": "{:.2f}", "Çıkış (OTT)": "{:.2f}", "Tampon %": "{:+.1f}%",
-                    "TOTT alt": "{:.2f}", "TOTT üst": "{:.2f}", "Sinyal fiyatı": "{:.2f}",
+                    "Anlık": "{:.2f}", "Çıkış (stop)": "{:.2f}", "Tampon %": "{:+.1f}%",
+                    "TOTT alt": "{:.2f}", "TOTT üst": "{:.2f}", "OTT": "{:.2f}",
                 }).background_gradient(subset=["Tampon %"], cmap="RdYlGn", vmin=-3, vmax=8),
                 use_container_width=True, hide_index=True,
                 column_config={
-                    "Çıkış (OTT)": st.column_config.NumberColumn("Çıkış çizgisi (OTT)",
-                        help="LONG'ta bu seviyenin altına 15m/1h KAPANIŞ = çıkış teyidi"),
+                    "Çıkış (stop)": st.column_config.NumberColumn("Çıkış / Stop",
+                        help="Botun gerçek stopu: LONG→TOTT alt, SHORT→TOTT üst. Kapanış bunu kırarsa çıkış."),
                     "Tampon %": st.column_config.NumberColumn("Tampon %",
-                        help="Fiyatın çıkış çizgisine uzaklığı. Küçük=çıkışa yakın, büyük=rahat"),
-                    "Son sinyal": st.column_config.DatetimeColumn("Son sinyal", format="DD/MM HH:mm"),
+                        help="Fiyatın stop'a uzaklığı. Küçük=çıkışa yakın, büyük=rahat"),
                 })
             now_tr = pd.Timestamp.now(tz="Europe/Istanbul")
-            st.caption(f"⏱️ Son güncelleme: {now_tr:%d/%m %H:%M:%S} TR · {_k_tf} · "
-                        "Çıkış çizgisi = OTT (her bar kayar). LONG'ta fiyat OTT altına KAPANIRSA çıkış teyidi. "
-                        "⚠️ Sadece OTT+TOTT — tam sistem için Konsensüs.")
+            st.caption(f"⏱️ {now_tr:%d/%m %H:%M:%S} TR · **Tam sistem (bot ile aynı)**, "
+                        f"{_kbif('AKBNK.IS')} · futures + optimize param. Çıkış/stop = botun gerçek seviyesi "
+                        "(Konsensüs 'Stop' ile aynı). Kapanış stop'u kırarsa çıkış.")
         else:
             st.warning("Veri çekilemedi.")
             # Kendi kendine teşhis: TV login durumu + ilk gerçek hata
@@ -847,9 +856,10 @@ with tab_kokpit:
             fig.update_xaxes(gridcolor="#2a2e39", tickvals=_tickv, ticktext=_tickt)
             fig.update_yaxes(gridcolor="#2a2e39")
             st.plotly_chart(fig, use_container_width=True)
-            st.caption("📈 TOTT düzeni: yeşil/kırmızı **bulut** (MAvg–OTT arası), cyan=MAvg, "
-                        "turuncu=OTT, mor noktalı=TOTT bandı. **Long/Short okları = OTT sinyali**, "
-                        "**Buy/Sell = TOTT sinyali** (TradingView'daki gibi). Bitişik bar, son 200.")
+            st.caption("📈 Bu grafik **TradingView referansı** (kanonik Pine OTT+TOTT, L40/%1) — "
+                        "senin TV grafiğinle aynı. ⚠️ Yukarıdaki tablodaki **Çıkış/Stop botun gerçek "
+                        "seviyesidir** (optimize param) ve bu grafikteki OTT'den FARKLI olabilir. "
+                        "Karar için tabloyu baz al; grafik görsel referans.")
 
     # ── EKONOMİK TAKVİM (faiz/enflasyon/önemli olaylar) — haber günü farkındalığı
     with st.expander("📅 Ekonomik Takvim (TR + US + EU)", expanded=False):
