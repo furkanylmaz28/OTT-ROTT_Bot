@@ -295,6 +295,62 @@ def _fv_telegram_on_close(sym, side, exit_price, pnl_pct):
         pass
 
 
+LEVEL_ALARM_LOG = "level_alarm_log.json"
+
+
+def check_level_alarms():
+    """Açık pozisyonlarda OTT çıkış seviyesi SON KAPANIŞTA kırıldıysa Telegram uyar.
+    Pozisyonu KAPATMAZ (doğal sinyal çıkışı geçerli) — sadece erken haber verir.
+    Spam guard: aynı sembol için 3 saatte bir. Hata olursa sessizce geçer (kritik değil)."""
+    try:
+        import forward_validation as fv
+        pos = fv.open_positions()
+        if not pos:
+            return
+        try:
+            log = json.load(open(LEVEL_ALARM_LOG, encoding="utf-8"))
+        except Exception:
+            log = {}
+        now = datetime.now(TR)
+        for sym, p in list(pos.items()):
+            stop = p.get("stop"); side = p.get("side")
+            if not stop or stop <= 0 or not side:
+                continue
+            try:
+                df = ds_fetch(sym, interval=best_interval_for(sym), n_bars=60)
+                if df is None or len(df) < 2:
+                    continue
+                close = float(df["close"].iloc[-2])   # son KAPANMIŞ bar
+            except Exception:
+                continue
+            breached = (side == "LONG" and close < stop) or (side == "SHORT" and close > stop)
+            if not breached:
+                continue
+            last = log.get(sym)
+            if last:
+                try:
+                    if (now - datetime.fromisoformat(last)).total_seconds() < 3 * 3600:
+                        continue
+                except Exception:
+                    pass
+            flag = "🇹🇷" if sym.upper().endswith(".IS") else "🇺🇸"
+            op = "&lt;" if side == "LONG" else "&gt;"
+            msg = (f"{flag} <b>{sym}</b> — ⚠️ OTT ÇIKIŞ SEVİYESİ KIRILDI ({side})\n"
+                   f"Kapanış <code>{close:.4f}</code> {op} OTT <code>{stop:.4f}</code>\n"
+                   f"<i>Çıkış sinyali yaklaştı — değerlendir. {now:%d/%m %H:%M} TR</i>")
+            try:
+                send_telegram(msg)
+                log[sym] = now.isoformat()
+            except Exception:
+                pass
+        try:
+            json.dump(log, open(LEVEL_ALARM_LOG, "w", encoding="utf-8"))
+        except Exception:
+            pass
+    except Exception as e:
+        print(f"  Seviye alarmı hatası: {e}")
+
+
 def scan_category(category, mode, grid, bayes):
     """Kategorideki sembolleri tara → mode'a göre filtrele."""
     syms = sorted(set(list(grid.keys()) + list(bayes.keys())))
@@ -684,6 +740,9 @@ def main():
         prune_untracked_positions(grid)
     except Exception as e:
         print(f"  Prune hatası: {e}")
+
+    # ── SEVİYE ALARMI: açık pozisyonda OTT çıkışı kırıldıysa Telegram (kapatmaz)
+    check_level_alarms()
 
     # ── HARD STOP: DEVRE DIŞI ────────────────────────────────────────
     # KANIT (backtest, 8 BIST futures): trailing hard-stop (intrabar, kapanış-bazlı,
