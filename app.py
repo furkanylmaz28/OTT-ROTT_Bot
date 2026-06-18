@@ -671,10 +671,23 @@ with tab_kokpit:
     except Exception:
         _open_syms = []
     _bist_opts = [s for s in BIST]
-    _def_watch = [s for s in ["AKBNK.IS", "GARAN.IS", "ASELS.IS", "THYAO.IS"] if s in _bist_opts]
-    _watch = st.multiselect("İzleme listesi", _bist_opts,
+    # Kalıcı favoriler — favorites.json'dan yükle (yoksa varsayılan çekirdek)
+    import os as _os2, json as _json2
+    _FAV_FILE = "favorites.json"
+    try:
+        _favs = _json2.load(open(_FAV_FILE, encoding="utf-8")) if _os2.path.exists(_FAV_FILE) else []
+    except Exception:
+        _favs = []
+    _def_watch = _favs if _favs else [s for s in ["AKBNK.IS", "GARAN.IS", "ASELS.IS", "THYAO.IS"] if s in _bist_opts]
+    _watch = st.multiselect("İzleme listesi (favoriler)", _bist_opts,
                              default=sorted(set(_def_watch) | set(s for s in _open_syms if s.endswith(".IS"))),
                              key="kokpit_watch")
+    if st.button("💾 Bu listeyi favori olarak kaydet", key="kokpit_savefav"):
+        try:
+            _json2.dump(_watch, open(_FAV_FILE, "w", encoding="utf-8"), ensure_ascii=False)
+            st.success(f"{len(_watch)} sembol favorilere kaydedildi — bir dahaki açılışta hazır.")
+        except Exception as _e:
+            st.error(f"Kaydedilemedi: {_e}")
 
     def _kokpit_row(sym, tf):
         """Sembolün canlı yön + çıkış seviyesi satırı."""
