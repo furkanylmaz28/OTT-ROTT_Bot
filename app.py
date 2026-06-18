@@ -838,6 +838,22 @@ with tab_kokpit:
                         "turuncu=OTT, mor noktalı=TOTT bandı. **Long/Short okları = OTT sinyali**, "
                         "**Buy/Sell = TOTT sinyali** (TradingView'daki gibi). Bitişik bar, son 200.")
 
+    # ── EKONOMİK TAKVİM (faiz/enflasyon/önemli olaylar) — haber günü farkındalığı
+    with st.expander("📅 Ekonomik Takvim (TR + US + EU)", expanded=False):
+        import streamlit.components.v1 as _comp
+        _comp.html("""
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+          {"colorTheme":"dark","isTransparent":true,"locale":"tr",
+           "countryFilter":"tr,us,eu","importanceFilter":"0,1","width":"100%","height":480}
+          </script>
+        </div>
+        """, height=500)
+        st.caption("⚠️ Yüksek önemli olay (faiz/enflasyon) gününde yeni pozisyon açarken dikkat — "
+                    "gap/şok riski yüksek. Sistem zaten olay gününü bilir ama göz kararı da fayda.")
+
 
 # ──────────────────────────────────────────────────────────────────
 #  TAB: PORTFÖYÜM — kişisel pozisyon takibi
