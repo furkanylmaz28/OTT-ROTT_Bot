@@ -624,20 +624,22 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-(tab_kokpit, tab_portfolio, tab_consensus, tab_scan,
- tab_sim, tab_chart, tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
+(tab_kokpit, tab_portfolio, tab_tarayici,
+ tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
     "💼  Portföyüm",
-    "🤝  Konsensüs Mod",
-    "📡  Anlık Tarayıcı",
-    "📌  Öneriler",
-    "📊  Detay Grafik",
+    "🔎  Tarayıcı",
     "🥇  Emtia/Forex",
     "🪙  Crypto (4h)",
     "🔗  OTT+TOTT Teyit",
     "⚡  Aktif/Scalp (15m)",
     "✅  Canlı Performans",
     "📖  Bilgi",
+])
+# 3 tarama sekmesi tek "Tarayıcı" altında alt-sekme (sadeleştirme). Aşağıdaki
+# `with tab_consensus/tab_scan/tab_sim:` blokları artık burada nested render olur.
+tab_consensus, tab_scan, tab_sim = tab_tarayici.tabs([
+    "🤝  Konsensüs", "📡  Anlık Tarayıcı", "📌  Öneriler",
 ])
 
 # ──────────────────────────────────────────────────────────────────
@@ -1875,7 +1877,7 @@ with tab_sim:
 # ──────────────────────────────────────────────────────────────────
 #  TAB 3: SEMBOL GRAFİK (TradingView-style lightweight-charts)
 # ──────────────────────────────────────────────────────────────────
-with tab_chart:
+if False:  # 📊 Detay Grafik kaldırıldı (sadeleştirme) — Kokpit'te grafik+TV linki var. Kod tarihçe için duruyor.
     st.subheader("📈 Sembol Detay — TradingView Tarzı Grafik")
 
     csym1, csym2, csym3 = st.columns([3, 1, 1])
