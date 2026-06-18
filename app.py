@@ -40,6 +40,7 @@ except Exception as _e:
 
 import signals_full as sig_full
 from backtest import run_backtest
+import ott_tott_confirm as otc   # OTT+TOTT sıralı teyit (Kokpit/scan/scalp ortak kullanır)
 from data_source import fetch as ds_fetch
 try:
     from data_source import fetch_futures as ds_fetch_futures
