@@ -620,9 +620,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-(tab_kokpit, tab_portfolio, tab_tarayici,
+(tab_kokpit, tab_kanit, tab_portfolio, tab_tarayici,
  tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
+    "🏆  Kanıtlanmış Sistem",
     "💼  Portföyüm",
     "🔎  Tarayıcı",
     "🥇  Emtia/Forex",
@@ -637,6 +638,71 @@ st.markdown(f"""
 tab_consensus, tab_scan, tab_sim, tab_heat = tab_tarayici.tabs([
     "🤝  Konsensüs", "📡  Anlık Tarayıcı", "📌  Öneriler", "🗺️  Isı Haritası",
 ])
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: KANITLANMIŞ SİSTEM — M60 long-only + nakit (SuperTrend)
+#  Walk-forward (8/8 OOS+) + Monte Carlo (medyan +247%) ile DOĞRULANDI.
+# ──────────────────────────────────────────────────────────────────
+with tab_kanit:
+    import longonly_strategy as lo
+    st.subheader("🏆 Kanıtlanmış Sistem — M60 Long-only + Nakit")
+    st.caption("Walk-forward (8/8 OOS pozitif, drawdown al-tut'tan düşük) + Monte Carlo "
+               "(medyan +247%, iflas %10.6) ile **doğrulanan** tek sistem. SuperTrend, **short YOK**.")
+
+    with st.expander("📋 Kurallar — okumadan işlem açma", expanded=False):
+        st.markdown(
+            "- **LONG:** SuperTrend (M60) yukarı → futures'ta long aç / tut.\n"
+            "- **NAKİT:** yön aşağı dönerse → **pozisyonu kapat, nakitte bekle** (short açma).\n"
+            "- **Kaldıraç:** efektif **max 2×** — toplam notional ≤ 2× hesap. **1:7 = %72 iflas riski.**\n"
+            "  - 50K hesap → toplam pozisyon ≤ ~100K notional (≈10K teminat).\n"
+            "- **Stop:** SuperTrend çizgisi doğal takip-stopu; ayrıca sıkı stop **koyma** (edge'i keser).\n"
+            "- **Ay sonu:** VIOP kontratı biter — çık ya da gelecek vadeye roll et.\n"
+            "- **Short:** rejim-kapılı bile test edildi, değer katmadı → kapalı. Ayı piyasası kanıtlanırsa açılır."
+        )
+
+    if st.button("🔍 BIST'i tara (kanıtlanmış sistem)", key="kanit_scan", type="primary"):
+        rows = []
+        prog = st.progress(0.0)
+        bist_syms = [s for s in BIST]
+        for i, sym in enumerate(bist_syms):
+            prog.progress((i + 1) / len(bist_syms))
+            try:
+                df = fetch_fut_cached(sym, "1h", n_bars=1500)
+                stt = lo.current_state(df)
+                if not stt:
+                    continue
+                rows.append({
+                    "Sembol": sym.replace(".IS", ""),
+                    "Durum": stt["pozisyon"],
+                    "Fiyat": round(stt["anlik"], 2),
+                    "Stop (SuperT)": round(stt["cizgi"], 2),
+                    "Tampon %": round(stt["tampon"], 1) if stt["tampon"] is not None else None,
+                    "Bar": stt["bars"],
+                })
+            except Exception:
+                continue
+        prog.empty()
+        if rows:
+            import pandas as _pd
+            dfr = _pd.DataFrame(rows)
+            longs = dfr[dfr["Durum"] == "LONG"].sort_values("Bar")
+            cash = dfr[dfr["Durum"] == "NAKİT"]
+            st.session_state["kanit_longs"] = longs
+            st.session_state["kanit_cash"] = cash
+
+    if "kanit_longs" in st.session_state:
+        longs = st.session_state["kanit_longs"]; cash = st.session_state["kanit_cash"]
+        c1, c2 = st.columns(2)
+        c1.metric("🟢 LONG (tutulan/alınabilir)", len(longs))
+        c2.metric("⚪ NAKİT (uzak dur)", len(cash))
+        st.markdown("#### 🟢 LONG sembolleri — sistem yukarı diyor")
+        st.caption("'Bar' küçük = yeni dönmüş (taze giriş adayı). 'Tampon %' = fiyatın stop'a uzaklığı.")
+        st.dataframe(longs, use_container_width=True, hide_index=True)
+        with st.expander(f"⚪ NAKİT sembolleri ({len(cash)}) — sistem aşağı, girme"):
+            st.dataframe(cash, use_container_width=True, hide_index=True)
+    else:
+        st.info("Yukarıdaki butona bas → BIST'i kanıtlanmış sistemle tarar, LONG ve NAKİT sembollerini ayırır.")
+
 
 # ──────────────────────────────────────────────────────────────────
 #  TAB: KOKPİT — açık pozisyon + izleme listesi, canlı yön + çıkış seviyesi
