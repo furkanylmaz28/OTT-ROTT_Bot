@@ -45,20 +45,25 @@ def current_state(df):
     pos = "LONG" if d[ix] > 0 else "NAKİT"
     cur = float(df["close"].iloc[-1])
     stop = float(line[ix])   # SuperTrend çizgisi = long'da takip stopu
-    # kaç bar bu durumda
-    k = 0
-    for j in range(ix, -len(d), -1):
-        if d[j] == d[ix]:
-            k += 1
-        else:
-            break
-    # son dönüş fiyatı
-    donus = None
-    for j in range(ix, 0, -1):
-        if d[j] != d[j-1]:
-            donus = float(df["close"].iloc[j]); break
+    # kaç bardır bu durumda (ix dahil)
+    k = 1
+    while (ix - k) >= -len(d) and d[ix - k] == d[ix]:
+        k += 1
+    # dönüş (sinyal) barı = bu durumun ilk barı
+    flip = ix - (k - 1)
+    donus = None; donus_tarih = None
+    try:
+        donus = float(df["close"].iloc[flip])
+        donus_tarih = df.index[flip]   # TR-naive timestamp (sinyal tarihi)
+    except Exception:
+        pass
+    # tazelik: kaç bar geçmiş → trene geç mi bindik? (M60: ~8-9 bar = 1 işlem günü)
+    if k <= 9:       tazelik = "🟢 TAZE"        # ~1 gün içinde döndü
+    elif k <= 27:    tazelik = "🟡 yeni"        # ~1-3 gün
+    else:            tazelik = "🔴 olgun (geç)"  # 3+ gün, trend olgunlaşmış
     return {
         "pozisyon": pos, "anlik": cur, "cizgi": stop,
         "tampon": (cur / stop - 1) * 100 if pos == "LONG" else None,
-        "bars": k, "donus_fiyat": donus,
+        "bars": k, "donus_fiyat": donus, "donus_tarih": donus_tarih,
+        "tazelik": tazelik,
     }

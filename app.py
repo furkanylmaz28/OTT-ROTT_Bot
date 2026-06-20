@@ -671,10 +671,16 @@ with tab_kanit:
                 stt = lo.current_state(df)
                 if not stt:
                     continue
+                _dt = stt.get("donus_tarih")
                 rows.append({
                     "Sembol": sym.replace(".IS", ""),
                     "Durum": stt["pozisyon"],
+                    "Tazelik": stt.get("tazelik", ""),
+                    "Sinyal Tarihi": _dt.strftime("%d %b %H:%M") if _dt is not None else "-",
+                    "Sinyal Fiyatı": round(stt["donus_fiyat"], 2) if stt.get("donus_fiyat") else None,
                     "Fiyat": round(stt["anlik"], 2),
+                    "Sinyalden %": round((stt["anlik"] / stt["donus_fiyat"] - 1) * 100, 1)
+                                    if stt.get("donus_fiyat") else None,
                     "Stop (SuperT)": round(stt["cizgi"], 2),
                     "Tampon %": round(stt["tampon"], 1) if stt["tampon"] is not None else None,
                     "Bar": stt["bars"],
@@ -695,8 +701,9 @@ with tab_kanit:
         c1, c2 = st.columns(2)
         c1.metric("🟢 LONG (tutulan/alınabilir)", len(longs))
         c2.metric("⚪ NAKİT (uzak dur)", len(cash))
-        st.markdown("#### 🟢 LONG sembolleri — sistem yukarı diyor")
-        st.caption("'Bar' küçük = yeni dönmüş (taze giriş adayı). 'Tampon %' = fiyatın stop'a uzaklığı.")
+        st.markdown("#### 🟢 LONG sembolleri — sistem yukarı diyor (en taze en üstte)")
+        st.caption("🟢 TAZE (~1 gün) = trene yeni bin · 🟡 yeni (1-3 gün) · 🔴 olgun = trene GEÇ kaldın, dikkat. "
+                   "'Sinyalden %' = sinyal gününden bu yana ne kadar kaçırdın (büyükse geç kaldın).")
         st.dataframe(longs, use_container_width=True, hide_index=True)
         with st.expander(f"⚪ NAKİT sembolleri ({len(cash)}) — sistem aşağı, girme"):
             st.dataframe(cash, use_container_width=True, hide_index=True)
