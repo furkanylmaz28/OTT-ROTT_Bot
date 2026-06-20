@@ -11,8 +11,8 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-ST_PERIOD = 14
-ST_MULT = 3.0
+ST_PERIOD = 10       # Kıvanç Pine v4 SuperTrend default (Periods=10)
+ST_MULT = 3.0        # Multiplier=3.0 · src=hl2 · changeATR=true (RMA atr)
 MAX_LEVERAGE = 2.0   # VIOP: toplam notional ≤ 2× hesap (1:7 = iflas)
 
 
