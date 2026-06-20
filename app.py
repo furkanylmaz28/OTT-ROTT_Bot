@@ -2740,10 +2740,10 @@ with tab_scalp:
 
 
 with tab_live:
-    st.subheader("✅ Canlı Performans — Forward Validation")
-    st.caption("Backtest rating'i (MÜKEMMEL) geçmişe bakar, overfit olabilir. "
-                "Bu sekme botun **gerçek zamanlı sinyallerinin canlı sonucunu** gösterir. "
-                "Asıl güven göstergesi budur.")
+    st.subheader("✅ Canlı Performans — Kanıtlanmış Sistem (SuperTrend Long-only)")
+    st.caption("Walk-forward + Monte Carlo'dan geçen **SuperTrend 10/3 long-only** sistemin "
+                "gerçek zamanlı sonucu. Bot her tarama'da BIST'i tarar, LONG açar / nakide çıkar "
+                "(short yok, max 3 pozisyon). Asıl güven göstergesi budur.")
 
     # ── Otomatik yenileme — tıklamadan veriyi tazele
     _ar1, _ar2 = st.columns([1, 3])
@@ -2778,7 +2778,7 @@ with tab_live:
         """)
 
     try:
-        import forward_validation as fv
+        import longonly_live as fv   # KANITLANMIŞ sistem (SuperTrend 10/3 long-only)
         live_all = fv.all_live_stats(last_n=30)
         open_pos = fv.open_positions()
     except Exception as e:

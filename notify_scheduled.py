@@ -699,6 +699,16 @@ def main():
         print(f"  Hafta sonu ({now_tr.strftime('%A')}) — borsalar kapalı, bildirim yok")
         return
 
+    # ── KANITLANMIŞ SİSTEM canlı takibi (SuperTrend 10/3 long-only) ──────
+    #    OTT'den AYRI dosyalarla; "Canlı Performans" sekmesini besler.
+    #    Kendi seans kontrolü var (BIST 09:30-18:10); seans dışı no-op.
+    try:
+        import longonly_live as lol
+        _lo = lol.scan_and_record()
+        print(f"  [long-only] {_lo}")
+    except Exception as _e:
+        print(f"  [long-only] hata: {_e}")
+
     # Şu anki saate uyan görevleri bul.
     # Cron her 10 dk'da bir çalışıyor → tolerans 5 dk olmalı (10 dk pencere içinde
     # tarama saati varsa yakala). Hedef saatten ÖNCE 5 dk içinde olmalı —
