@@ -2840,7 +2840,7 @@ with tab_live:
                     pass
                 row = {
                     "Sembol": s,
-                    "Yön": "🟢 LONG" if v["side"] == "LONG" else "🔴 SHORT",
+                    "Yön": "🟢 LONG" if v.get("side", "LONG") == "LONG" else "🔴 SHORT",
                     "Giriş": v["entry_price"],
                     "Anlık Fiyat": cp,
                     "Yüzen P&L %": None,
@@ -2849,13 +2849,13 @@ with tab_live:
                     "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
                 }
                 if cp:
-                    if v["side"] == "LONG":
+                    if v.get("side", "LONG") == "LONG":
                         row["Yüzen P&L %"] = round((cp - v["entry_price"]) / v["entry_price"] * 100, 2)
                     else:
                         row["Yüzen P&L %"] = round((v["entry_price"] - cp) / v["entry_price"] * 100, 2)
                     stp = v.get("stop")
                     if stp:
-                        if v["side"] == "LONG":
+                        if v.get("side", "LONG") == "LONG":
                             row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
                         else:
                             row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
