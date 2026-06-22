@@ -620,10 +620,11 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-(tab_kokpit, tab_kanit, tab_portfolio, tab_tarayici,
+(tab_kokpit, tab_kanit, tab_grid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
     "🏆  Kanıtlanmış Sistem",
+    "🔲  Grid (Yatay)",
     "💼  Portföyüm",
     "🔎  Tarayıcı",
     "🥇  Emtia/Forex",
@@ -709,6 +710,75 @@ with tab_kanit:
             st.dataframe(cash, use_container_width=True, hide_index=True)
     else:
         st.info("Yukarıdaki butona bas → BIST'i kanıtlanmış sistemle tarar, LONG ve NAKİT sembollerini ayırır.")
+
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: GRID (YATAY) — Kaufman ER ile yatay rejim + grid seviyeleri
+#  Walk-forward (8/8 OOS+) + Monte Carlo (medyan +62%, iflas %4.1) DOĞRULANDI.
+# ──────────────────────────────────────────────────────────────────
+with tab_grid:
+    import grid_strategy as gridmod
+    st.subheader("🔲 Grid Sistemi — Yatay Piyasa")
+    st.caption("Trend sisteminin tamamlayıcısı: **yatay/range** piyasada çalışır. "
+               "Kaufman Efficiency Ratio (ER) ile rejim ölçülür — ER düşükse yatay → grid açık. "
+               "Walk-forward (8/8 OOS+) + Monte Carlo (medyan +62%, iflas %4.1) ile doğrulandı.")
+
+    with st.expander("📋 Kurallar + uyarılar — okumadan kullanma", expanded=False):
+        st.markdown(
+            "- **Yatay tespiti:** ER < 0.30 = piyasa yatay (trend yok) → grid çalışır. ER yüksek → TREND, "
+            "grid KAPALI (o zaman 🏆 SuperTrend sistemi devrede).\n"
+            "- **Grid:** merkez = SMA(20). Altına %2/%4/%6 AL seviyeleri; her birim **+%2'de SAT**.\n"
+            "- **Trend çıkarsa** açık birimleri **kapat** (trend gridi öldürür — en büyük risk bu).\n"
+            "- **🚨 Maliyet hassas:** çok işlem açar. Komisyon+makas+kayma toplam **≤%0.1/yön** olmalı; "
+            "%0.2'de sistem zarara döner. Likit sembol seç.\n"
+            "- **Kaldıraç ≤2×:** birden çok birim açıldığı için risk yığılır; düşük tut.\n"
+            "- **İki sistem birlikte:** trend varsa SuperTrend, yatayda grid → her rejimi kapsa."
+        )
+
+    if st.button("🔍 BIST'i tara (yatay sembolleri bul)", key="grid_scan", type="primary"):
+        rows = []
+        prog = st.progress(0.0)
+        bist_syms = [s for s in BIST]
+        for i, sym in enumerate(bist_syms):
+            prog.progress((i + 1) / len(bist_syms))
+            try:
+                df = fetch_fut_cached(sym, "1h", n_bars=600)
+                stt = gridmod.current_state(df)
+                if not stt:
+                    continue
+                rows.append({
+                    "Sembol": sym.replace(".IS", ""),
+                    "Rejim": "🟦 YATAY" if stt["yatay"] else "📈 trend",
+                    "ER": stt["er"],
+                    "Anlık": round(stt["anlik"], 2),
+                    "Merkez (SMA20)": stt["merkez"],
+                    "AL-1 (-2%)": stt["seviyeler"][0],
+                    "AL-2 (-4%)": stt["seviyeler"][1],
+                    "AL-3 (-6%)": stt["seviyeler"][2],
+                    "Aktif sv.": stt["aktif_seviye"],
+                })
+            except Exception:
+                continue
+        prog.empty()
+        if rows:
+            import pandas as _pd
+            dfr = _pd.DataFrame(rows).sort_values(["Rejim", "ER"])
+            st.session_state["grid_yatay"] = dfr[dfr["Rejim"] == "🟦 YATAY"]
+            st.session_state["grid_trend"] = dfr[dfr["Rejim"] != "🟦 YATAY"]
+
+    if "grid_yatay" in st.session_state:
+        yat = st.session_state["grid_yatay"]; tre = st.session_state["grid_trend"]
+        c1, c2 = st.columns(2)
+        c1.metric("🟦 YATAY (grid uygun)", len(yat))
+        c2.metric("📈 Trend (grid kapalı)", len(tre))
+        st.markdown("#### 🟦 Yatay sembolleri — grid kurulabilir (ER en düşük en üstte)")
+        st.caption("ER ne kadar düşük o kadar yatay/güvenli. Grid AL seviyeleri ve merkez gösteriliyor. "
+                   "Fiyat AL seviyesine inince al, +%2'de sat. Trend başlarsa (ER yükselir) kapat.")
+        st.dataframe(yat, use_container_width=True, hide_index=True)
+        with st.expander(f"📈 Trend sembolleri ({len(tre)}) — grid KAPALI, SuperTrend kullan"):
+            st.dataframe(tre, use_container_width=True, hide_index=True)
+    else:
+        st.info("Butona bas → BIST'i tarar, hangi semboller YATAY (grid uygun) hangileri TREND (grid kapalı) ayırır.")
 
 
 # ──────────────────────────────────────────────────────────────────
