@@ -50,7 +50,7 @@ def is_session_open(ts: datetime = None) -> bool:
 
 
 def record(sym: str, state: str, price: float, stop: float = None,
-           ts: str = None, on_open=None):
+           ts: str = None, on_open=None, on_close=None):
     """Durum makinesi. state ∈ {LONG, FLAT}.
        pozisyon yok + LONG + slot var → AÇ
        pozisyon var + FLAT           → KAPAT (nakit)
@@ -81,6 +81,9 @@ def record(sym: str, state: str, price: float, stop: float = None,
                 "pnl_pct": round(pnl * 100, 3),
             })
             del positions[sym]
+            if on_close:
+                try: on_close(sym, cur["entry_price"], price, round(pnl * 100, 2))
+                except Exception: pass
         elif stop is not None:
             positions[sym]["stop"] = stop
 
@@ -130,7 +133,7 @@ def _bist_symbols():
         return []
 
 
-def scan_and_record(symbols=None, on_open=None) -> dict:
+def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
     """Tüm BIST sembollerini SuperTrend 10/3 ile tara, durumu kaydet.
        Döner: {açılan, kapanan, taranan} özeti."""
     if not is_session_open():
@@ -149,7 +152,8 @@ def scan_and_record(symbols=None, on_open=None) -> dict:
                 continue
             scanned += 1
             state = "LONG" if stt["pozisyon"] == "LONG" else "FLAT"
-            record(sym, state, stt["anlik"], stop=stt.get("cizgi"), on_open=on_open)
+            record(sym, state, stt["anlik"], stop=stt.get("cizgi"),
+                   on_open=on_open, on_close=on_close)
         except Exception:
             continue
     return {"scanned": scanned,

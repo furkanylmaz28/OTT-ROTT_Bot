@@ -704,7 +704,26 @@ def main():
     #    Kendi seans kontrolü var (BIST 09:30-18:10); seans dışı no-op.
     try:
         import longonly_live as lol
-        _lo = lol.scan_and_record()
+
+        def _lo_open(sym, price, stop):
+            lines = [f"🏆 <b>{sym}</b> — 🟢 LONG AÇILDI (Kanıtlanmış Sistem)",
+                     f"📈 Giriş: <code>{price:.4f}</code>"]
+            if stop:
+                lines.append(f"🛑 SuperTrend stop: <code>{stop:.4f}</code> ({abs(price-stop)/price*100:.2f}%)")
+            lines.append(f"<i>{datetime.now(TR):%d/%m %H:%M} TR · max 2× kaldıraç unutma</i>")
+            try: send_telegram("\n".join(lines))
+            except Exception: pass
+
+        def _lo_close(sym, entry, exit_, pnl):
+            emoji = "✅" if pnl >= 0 else "🔻"
+            lines = [f"🏆 <b>{sym}</b> — ⚪ NAKİDE ÇIKILDI {emoji}",
+                     f"Giriş <code>{entry:.4f}</code> → Çıkış <code>{exit_:.4f}</code>",
+                     f"Sonuç: <b>{pnl:+.2f}%</b>",
+                     f"<i>{datetime.now(TR):%d/%m %H:%M} TR · SuperTrend dönüşü</i>"]
+            try: send_telegram("\n".join(lines))
+            except Exception: pass
+
+        _lo = lol.scan_and_record(on_open=_lo_open, on_close=_lo_close)
         print(f"  [long-only] {_lo}")
     except Exception as _e:
         print(f"  [long-only] hata: {_e}")
