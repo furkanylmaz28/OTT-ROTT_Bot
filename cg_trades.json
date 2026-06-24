@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.449,
+    "exit_price": 7.429,
+    "pnl_pct": -0.368,
+    "exit_ts": "2026-06-25T01:31:18.338303+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07607,
+    "exit_price": 0.0759,
+    "pnl_pct": -0.323,
+    "exit_ts": "2026-06-25T01:31:18.338303+03:00",
+    "reason": "trend"
+  }
+]
