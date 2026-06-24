@@ -19,9 +19,12 @@ input double  InpMultiplier      = 3.0;        // SuperTrend çarpanı
 input bool    InpFreshOnly       = true;       // Sadece TAZE dönüşte gir (geç trene binme)
 input double  InpMarginPerPosPct = 33.0;       // Pozisyon başına KULLANILAN teminat (% öz sermaye)
 input int     InpMaxPositions    = 3;          // Aynı anda max açık pozisyon (3×%33≈%99)
+input double  InpMaxTotalMarginPct = 99.0;     // TOPLAM kullanılan teminat tavanı (% öz sermaye) — #9
 input long    InpMagic           = 20260101;   // Sihirli numara
 input int     InpTimerSec        = 10;         // Tarama aralığı (saniye)
 input bool    InpVerbose         = true;       // Log yaz
+input bool    InpVerifyMode      = false;      // DOĞRULAMA: son barların ST değerlerini logla (TradingView ile kıyas)
+input string  InpVerifySymbol    = "";         // Doğrulanacak sembol (boş = ilk/grafik sembolü)
 
 //============================ GLOBAL ===============================
 CTrade        trade;
@@ -64,13 +67,25 @@ int OnInit()
    trade.SetDeviationInPoints(20);
    trade.SetTypeFillingBySymbol(g_symbols[0]);
 
+   // DOĞRULAMA modu: son barların ST değerlerini bas (TradingView ile kıyasla)
+   if(InpVerifyMode)
+   {
+      string vs = (InpVerifySymbol == "") ? g_symbols[0] : InpVerifySymbol;
+      PrintVerify(vs);
+   }
+
    EventSetTimer(MathMax(2, InpTimerSec));
    PrintFormat("OTT SuperTrend Long-Only başladı · %d sembol · TF=%s · ATR(%d)x%.1f · poz başı %%%.0f teminat · maxPoz=%d",
                n, EnumToString(InpTF), InpAtrPeriod, InpMultiplier, InpMarginPerPosPct, InpMaxPositions);
    return INIT_SUCCEEDED;
 }
 
-void OnDeinit(const int reason){ EventKillTimer(); }
+void OnDeinit(const int reason)
+{
+   EventKillTimer();
+   for(int i=0;i<ArraySize(g_atr);i++)          // #3: handle sızıntısını önle
+      if(g_atr[i] != INVALID_HANDLE) IndicatorRelease(g_atr[i]);
+}
 
 void OnTick(){ /* ana mantık OnTimer'da (çoklu sembol için güvenilir) */ }
 
@@ -87,6 +102,8 @@ void OnTimer()
       if(bt == 0) continue;
       if(bt == g_lastBar[i]) continue;   // aynı bar -> bekle
       g_lastBar[i] = bt;                 // yeni bar: bir kez işle
+
+      if(g_atr[i] == INVALID_HANDLE) continue;   // #2: handle yoksa atla
 
       int tLast, tPrev;
       if(!GetSuperTrend(sym, g_atr[i], tLast, tPrev)) continue;
@@ -107,6 +124,9 @@ void OnTimer()
          bool fresh = (tPrev == -1);
          if(InpFreshOnly && !fresh) continue;     // geç trene binme
          if(CountOpen() >= InpMaxPositions) continue;
+         // #6: sembol işleme açık mı (seans/devre kesici)?
+         long tmode = SymbolInfoInteger(sym, SYMBOL_TRADE_MODE);
+         if(tmode == SYMBOL_TRADE_MODE_DISABLED || tmode == SYMBOL_TRADE_MODE_CLOSEONLY) continue;
          double lots = CalcLots(sym);
          if(lots <= 0) continue;
          if(trade.Buy(lots, sym))
@@ -193,6 +213,10 @@ double CalcLots(string sym)
    if(!OrderCalcMargin(ORDER_TYPE_BUY, sym, lots, price, need)) return 0;
    if(need > AccountInfoDouble(ACCOUNT_MARGIN_FREE) * 0.98) return 0;
 
+   // #9: TOPLAM kullanılan teminat tavanı (açık pozisyonlar + bu) — kaldıraç patlamasın
+   if(AccountInfoDouble(ACCOUNT_MARGIN) + need > eq * (InpMaxTotalMarginPct / 100.0))
+      return 0;
+
    // efektif kaldıracı logla (kullanıcı görsün)
    if(InpVerbose)
    {
@@ -201,16 +225,20 @@ double CalcLots(string sym)
       PrintFormat("%s: %.2f lot · teminat %.0f (öz sermayenin %%%.0f) · notional %.0f · ~%.1fx kaldıraç",
                   sym, lots, need, InpMarginPerPosPct, notional, notional/eq);
    }
-   return NormalizeDouble(lots, 2);
+   // #5: lot ondalığını step'ten türet (2'ye zorlama)
+   int vdig = (step >= 1.0) ? 0 : (int)MathRound(-MathLog10(step));
+   return NormalizeDouble(lots, vdig);
 }
 
 //============================ YARDIMCI =============================
+//  Not: PositionGetTicket(i) zaten pozisyonu seçer; yine de #1 için
+//  PositionSelectByTicket ile açıkça seçiyoruz (savunmacı, zararsız).
 bool HasLong(string sym)
 {
    for(int i=PositionsTotal()-1;i>=0;i--)
    {
       ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
+      if(tk == 0 || !PositionSelectByTicket(tk)) continue;
       if(PositionGetString(POSITION_SYMBOL) == sym &&
          PositionGetInteger(POSITION_MAGIC) == InpMagic &&
          PositionGetInteger(POSITION_TYPE)  == POSITION_TYPE_BUY)
@@ -225,7 +253,7 @@ int CountOpen()
    for(int i=PositionsTotal()-1;i>=0;i--)
    {
       ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
+      if(tk == 0 || !PositionSelectByTicket(tk)) continue;
       if(PositionGetInteger(POSITION_MAGIC) == InpMagic) c++;
    }
    return c;
@@ -236,10 +264,57 @@ void ClosePosition(string sym)
    for(int i=PositionsTotal()-1;i>=0;i--)
    {
       ulong tk = PositionGetTicket(i);
-      if(tk == 0) continue;
+      if(tk == 0 || !PositionSelectByTicket(tk)) continue;
       if(PositionGetString(POSITION_SYMBOL) == sym &&
          PositionGetInteger(POSITION_MAGIC) == InpMagic)
-         trade.PositionClose(tk);
+      {
+         if(!trade.PositionClose(tk))               // #7: sonucu kontrol et
+            Print("KAPATILAMADI: ", sym, " tk=", tk, " ret=", trade.ResultRetcode());
+      }
    }
+}
+
+//+------------------------------------------------------------------+
+//| DOĞRULAMA: son 6 kapanan barın ST-çizgi + yön değerini logla     |
+//|  → TradingView'daki SuperTrend(10,3) ile bar bar karşılaştır     |
+//+------------------------------------------------------------------+
+void PrintVerify(string sym)
+{
+   int h = iATR(sym, InpTF, InpAtrPeriod);
+   if(h == INVALID_HANDLE){ Print("DOĞRULAMA: ATR alınamadı -> ", sym); return; }
+   int lb = 320;
+   double atr[]; MqlRates r[];
+   ArraySetAsSeries(atr, false); ArraySetAsSeries(r, false);
+   if(CopyBuffer(h,0,0,lb,atr) < lb || CopyRates(sym,InpTF,0,lb,r) < lb)
+   { Print("DOĞRULAMA: veri yetersiz -> ", sym, " (biraz bekleyip EA'yı tekrar yükle)"); IndicatorRelease(h); return; }
+
+   double line[]; ArrayResize(line, lb);
+   int    trend[]; ArrayResize(trend, lb);
+   double up_prev=0, dn_prev=0; int tr=1;
+   for(int i=0;i<lb;i++)
+   {
+      double hl2 = (r[i].high + r[i].low)/2.0;
+      double up  = hl2 - InpMultiplier*atr[i];
+      double dn  = hl2 + InpMultiplier*atr[i];
+      if(i>0)
+      {
+         double cprev = r[i-1].close;
+         up = (cprev>up_prev)? MathMax(up,up_prev):up;
+         dn = (cprev<dn_prev)? MathMin(dn,dn_prev):dn;
+         if(tr==-1 && r[i].close>dn_prev)     tr=1;
+         else if(tr==1 && r[i].close<up_prev) tr=-1;
+      }
+      up_prev=up; dn_prev=dn; trend[i]=tr; line[i]=(tr>0)?up:dn;
+   }
+   PrintFormat("=== SuperTrend DOĞRULAMA: %s %s — TradingView SuperTrend(10,3) ile kıyasla ===",
+               sym, EnumToString(InpTF));
+   Print("Tarih               Kapanış    ST-çizgi   Yön");
+   for(int i=lb-7;i<=lb-2;i++)   // son 6 KAPANAN bar (lb-1 = oluşan bar)
+      PrintFormat("%s   %s   %s   %s",
+                  TimeToString(r[i].time, TIME_DATE|TIME_MINUTES),
+                  DoubleToString(r[i].close, 2),
+                  DoubleToString(line[i], 2),
+                  (trend[i]>0)?"LONG":"SHORT");
+   IndicatorRelease(h);
 }
 //+------------------------------------------------------------------+
