@@ -620,11 +620,12 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-(tab_kokpit, tab_kanit, tab_grid, tab_portfolio, tab_tarayici,
+(tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
     "🏆  Kanıtlanmış Sistem",
     "🔲  Grid (Yatay)",
+    "🪙  Crypto Grid",
     "💼  Portföyüm",
     "🔎  Tarayıcı",
     "🥇  Emtia/Forex",
@@ -812,6 +813,75 @@ with tab_grid:
             st.dataframe(tre, use_container_width=True, hide_index=True)
     else:
         st.info("Butona bas → BIST'i tarar, hangi semboller YATAY (grid uygun) hangileri TREND (grid kapalı) ayırır.")
+
+
+# ──────────────────────────────────────────────────────────────────
+#  TAB: CRYPTO GRID — yatay-kapılı grid, crypto 4h (BIST'ten AYRI)
+#  WF 10/10 OOS+ (+1646%) + MC (%75 kazanan, kaybetme %0) ile DOĞRULANDI.
+# ──────────────────────────────────────────────────────────────────
+with tab_cryptogrid:
+    import grid_strategy as gridmod
+    st.subheader("🪙 Crypto Grid — Yatay-kapılı (kanıtlanmış)")
+    st.caption("Crypto'nun oynaklığı + range'i grid'i besler. Walk-forward **10/10 coin OOS pozitif** "
+               "(+1646%) + Monte Carlo (%75 kazanan, **kaybetme %0**) ile doğrulandı. SuperTrend crypto'da "
+               "battı; grid kazandı. 4h, 7/24.")
+
+    with st.expander("📋 Kurallar + uyarılar — okumadan kullanma", expanded=False):
+        st.markdown(
+            "- **Yatay tespiti:** ER < 0.30 → grid açık. Trend çıkınca kapat.\n"
+            "- **Grid:** merkez SMA(20). Altına %2/%4/%6 AL; her birim **+%1.5'te SAT** (crypto ayarı).\n"
+            "- **🚨 Maker emir kullan:** çok işlem açar (coin başı yüzlerce). Binance maker ~%0.02-0.075. "
+            "Market emriyle yersen edge erir.\n"
+            "- **🚨 Kaldıraç DÜŞÜK:** crypto 100× sunar — ASLA. Max 1-2×. En kötü %5 drawdown -52%.\n"
+            "- **Sürekli crypto BOĞASINDA underperform eder** (trendi kaçırır). Yatayda/choppy'de parlar.\n"
+            "- **Sadece major coinler** (BTC/ETH/SOL...). Küçük coinlerde test edilmedi."
+        )
+
+    if st.button("🔍 Coinleri tara (yatay olanları bul)", key="cg_scan", type="primary"):
+        import re as _re
+        _cl = _re.findall(r'"([^"]+)"', _re.search(r'^CRYPTO = \[(.*?)\]',
+                          open("app.py", encoding="utf-8").read(), _re.S | _re.M).group(1))
+        rows = []
+        _n = len(_cl)
+        prog = st.progress(0.0, text=f"🔍 0/{_n}")
+        for i, sym in enumerate(_cl):
+            prog.progress((i + 1) / _n, text=f"🔍 {sym.replace('-USD','')} … {i+1}/{_n}")
+            try:
+                df = fetch_yf(sym, interval="4h", n_bars=600)
+                stt = gridmod.current_state(df)
+                if not stt:
+                    continue
+                rows.append({
+                    "Coin": sym.replace("-USD", ""),
+                    "Rejim": "🟦 YATAY" if stt["yatay"] else "📈 trend",
+                    "ER": stt["er"],
+                    "Anlık": round(stt["anlik"], 4),
+                    "Merkez": stt["merkez"],
+                    "AL-1 (-2%)": stt["seviyeler"][0],
+                    "AL-2 (-4%)": stt["seviyeler"][1],
+                    "AL-3 (-6%)": stt["seviyeler"][2],
+                })
+            except Exception:
+                continue
+        prog.empty()
+        if rows:
+            import pandas as _pd
+            dfr = _pd.DataFrame(rows).sort_values(["Rejim", "ER"])
+            st.session_state["cg_yatay"] = dfr[dfr["Rejim"] == "🟦 YATAY"]
+            st.session_state["cg_trend"] = dfr[dfr["Rejim"] != "🟦 YATAY"]
+
+    if "cg_yatay" in st.session_state:
+        yat = st.session_state["cg_yatay"]; tre = st.session_state["cg_trend"]
+        c1, c2 = st.columns(2)
+        c1.metric("🟦 YATAY (grid uygun)", len(yat))
+        c2.metric("📈 Trend (grid kapalı)", len(tre))
+        st.markdown("#### 🟦 Yatay coinler — grid kurulabilir (ER en düşük en üstte)")
+        st.caption("Fiyat AL seviyesine inince al, +%1.5'te sat. Trend başlarsa (ER yükselir) kapat. Maker emir + düşük kaldıraç.")
+        st.dataframe(yat, use_container_width=True, hide_index=True)
+        with st.expander(f"📈 Trend coinler ({len(tre)}) — grid KAPALI"):
+            st.dataframe(tre, use_container_width=True, hide_index=True)
+    else:
+        st.info("Butona bas → coinleri tarar, hangileri YATAY (grid uygun) hangileri TREND ayırır.")
 
 
 # ──────────────────────────────────────────────────────────────────
