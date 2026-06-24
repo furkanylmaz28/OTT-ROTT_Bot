@@ -679,6 +679,11 @@ with tab_kanit:
                 st.warning(f"⚠️ Genişlik zayıflıyor — %{_bp:.0f} bullish. Temkinli ol, az pozisyon.")
             else:
                 st.success(f"✅ Genişlik sağlıklı — %{_bp:.0f} bullish.")
+            _bs = _br.get("bull_syms", [])
+            if _bs:
+                st.success(f"🟢 **BULLISH (long uygun):** {', '.join(_bs)}")
+            else:
+                st.caption("🟢 Bullish sembol yok — hepsi bearish, nakitte kal.")
             if _fb:
                 st.caption(f"🔻 Son ~1 günde bearish'e dönenler: {', '.join(_fb)}")
             st.caption(f"<small>Son tarama: {_br.get('ts','')[:16].replace('T',' ')}</small>", unsafe_allow_html=True)
