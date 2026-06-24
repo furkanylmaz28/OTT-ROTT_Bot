@@ -687,10 +687,12 @@ with tab_kanit:
 
     if st.button("🔍 BIST'i tara (kanıtlanmış sistem)", key="kanit_scan", type="primary"):
         rows = []
-        prog = st.progress(0.0)
         bist_syms = [s for s in BIST]
+        _ntot = len(bist_syms)
+        prog = st.progress(0.0, text=f"🔍 Tarama başlıyor… 0/{_ntot}")
         for i, sym in enumerate(bist_syms):
-            prog.progress((i + 1) / len(bist_syms))
+            prog.progress((i + 1) / _ntot,
+                          text=f"🔍 {sym.replace('.IS','')} taranıyor…  {i+1}/{_ntot} (%{(i+1)*100//_ntot})")
             try:
                 df = fetch_fut_cached(sym, "1h", n_bars=1500)
                 stt = lo.current_state(df)
@@ -761,10 +763,12 @@ with tab_grid:
 
     if st.button("🔍 BIST'i tara (yatay sembolleri bul)", key="grid_scan", type="primary"):
         rows = []
-        prog = st.progress(0.0)
         bist_syms = [s for s in BIST]
+        _ntot = len(bist_syms)
+        prog = st.progress(0.0, text=f"🔍 Tarama başlıyor… 0/{_ntot}")
         for i, sym in enumerate(bist_syms):
-            prog.progress((i + 1) / len(bist_syms))
+            prog.progress((i + 1) / _ntot,
+                          text=f"🔍 {sym.replace('.IS','')} taranıyor…  {i+1}/{_ntot} (%{(i+1)*100//_ntot})")
             try:
                 df = fetch_fut_cached(sym, "1h", n_bars=600)
                 stt = gridmod.current_state(df)
