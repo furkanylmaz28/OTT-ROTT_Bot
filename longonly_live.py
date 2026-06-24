@@ -18,6 +18,15 @@ POS_FILE = "lo_positions.json"
 TRADES_FILE = "lo_trades.json"
 MAX_OPEN = 3
 
+# SADECE walk-forward'ı (H1, 10/3, %0.05 maliyet) GEÇEN 34 sembol işlenir.
+# Geçemeyen 11 (ARCLK,BIMAS,GARAN,OYAKC,SAHOL,TCELL,TSKB,VESTL,DOAS,CIMSA,ULKER)
+# OOS'ta para kaybettirdi → trade edilmez (Davey: sadece doğrulanmışı trade et).
+VALIDATED = [s + ".IS" for s in (
+    "AKBNK ASELS DOHOL ENJSA EKGYO ENKAI EREGL FROTO GUBRF HALKB ISCTR KCHOL "
+    "KRDMD MGROS PETKM PGSUS SASA SISE SOKM TAVHL THYAO TOASO TKFEN TTKOM TUPRS "
+    "VAKBN YKBNK AEFES HEKTS ODAS ASTOR AKSEN ALARK KONTR"
+).split()]
+
 
 def _load(path, default):
     if not os.path.exists(path):
@@ -141,7 +150,7 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
         return {"skipped": "seans kapalı"}
     import longonly_strategy as lo
     from data_source import fetch_futures
-    syms = symbols or _bist_symbols()
+    syms = symbols or VALIDATED   # sadece WF'yi geçen 34 sembol
     before_open = len(open_positions())
     before_trades = len(_load(TRADES_FILE, []))
     scanned = 0
