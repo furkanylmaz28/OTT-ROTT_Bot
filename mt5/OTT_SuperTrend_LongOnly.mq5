@@ -20,6 +20,7 @@ input bool    InpFreshOnly       = true;       // Sadece TAZE dönüşte gir (ge
 input double  InpMarginPerPosPct = 33.0;       // Pozisyon başına KULLANILAN teminat (% öz sermaye)
 input int     InpMaxPositions    = 3;          // Aynı anda max açık pozisyon (3×%33≈%99)
 input double  InpMaxTotalMarginPct = 99.0;     // TOPLAM kullanılan teminat tavanı (% öz sermaye) — #9
+input bool    InpSectorCap       = true;       // #6: aynı sektörden max 1 pozisyon (korelasyon)
 input long    InpMagic           = 20260101;   // Sihirli numara
 input int     InpTimerSec        = 10;         // Tarama aralığı (saniye)
 input bool    InpVerbose         = true;       // Log yaz
@@ -124,7 +125,8 @@ void OnTimer()
          bool fresh = (tPrev == -1);
          if(InpFreshOnly && !fresh) continue;     // geç trene binme
          if(CountOpen() >= InpMaxPositions) continue;
-         // #6: sembol işleme açık mı (seans/devre kesici)?
+         if(InpSectorCap && SameSectorOpen(sym)) continue;   // #6: korelasyon kapısı
+         // sembol işleme açık mı (seans/devre kesici)?
          long tmode = SymbolInfoInteger(sym, SYMBOL_TRADE_MODE);
          if(tmode == SYMBOL_TRADE_MODE_DISABLED || tmode == SYMBOL_TRADE_MODE_CLOSEONLY) continue;
          double lots = CalcLots(sym);
@@ -274,6 +276,48 @@ void ClosePosition(string sym)
             Print("KAPATILAMADI: ", sym, " tk=", tk, " ret=", trade.ResultRetcode());
       }
    }
+}
+
+//============================ #6 SEKTÖR KAPISI =====================
+//  VIOP sembolünden baz isim çıkar: F_GARAN0726 -> GARAN, F_BIMAS0726N1 -> BIMAS
+string BaseName(string s)
+{
+   if(StringSubstr(s,0,2) == "F_") s = StringSubstr(s,2);
+   for(int i=0;i<StringLen(s);i++)
+   {
+      ushort c = StringGetCharacter(s,i);
+      if(c >= '0' && c <= '9') return StringSubstr(s,0,i);
+   }
+   return s;
+}
+
+string SectorOf(string sym)
+{
+   string b = " " + BaseName(sym) + " ";
+   if(StringFind(" AKBNK HALKB ISCTR VAKBN YKBNK GARAN ", b) >= 0) return "banka";
+   if(StringFind(" KCHOL ALARK ENKAI DOHOL SAHOL ", b)       >= 0) return "holding";
+   if(StringFind(" ASELS ASTOR KONTR ", b)                   >= 0) return "savunma";
+   if(StringFind(" EREGL KRDMD ", b)                         >= 0) return "celik";
+   if(StringFind(" PETKM SASA GUBRF HEKTS ", b)              >= 0) return "kimya";
+   if(StringFind(" TUPRS ENJSA ODAS AKSEN ", b)              >= 0) return "enerji";
+   if(StringFind(" THYAO PGSUS TAVHL ", b)                   >= 0) return "ulasim";
+   if(StringFind(" FROTO TOASO DOAS ARCLK ", b)              >= 0) return "oto";
+   if(StringFind(" MGROS SOKM AEFES BIMAS ULKER ", b)        >= 0) return "perakende";
+   return BaseName(sym);   // bilinmeyen → kendi grubu (kısıtlamaz)
+}
+
+bool SameSectorOpen(string sym)
+{
+   string sec = SectorOf(sym);
+   for(int i=PositionsTotal()-1;i>=0;i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk == 0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetInteger(POSITION_MAGIC) == InpMagic &&
+         SectorOf(PositionGetString(POSITION_SYMBOL)) == sec)
+         return true;
+   }
+   return false;
 }
 
 //+------------------------------------------------------------------+
