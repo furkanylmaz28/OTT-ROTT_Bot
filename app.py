@@ -848,11 +848,25 @@ with tab_cryptogrid:
         _m3.metric("Profit Factor", f"{_ov['pf']:.2f}" if _ov["n"] else "-")
         _m4.metric("Toplam %", f"{_ov['total']:+.1f}" if _ov["n"] else "-")
         _nu = sum(len(v) for v in _ou.values())
+        st.markdown(f"##### 📂 Açık grid birimleri ({_nu}) — bot aldı, +%1.5'te satacak")
         if _nu:
-            st.caption(f"📂 Açık grid birimleri: {_nu} — " +
-                       ", ".join(f"{c}({len(v)})" for c, v in _ou.items()))
+            _lvlpct = {0: "-2%", 1: "-4%", 2: "-6%"}
+            _orows = []
+            for _c, _units in _ou.items():
+                for _k, _entry in _units.items():
+                    _orows.append({
+                        "Coin": _c,
+                        "Seviye": f"AL-{int(_k)+1} ({_lvlpct.get(int(_k), '?')})",
+                        "Giriş": round(_entry, 6),
+                        "Satış hedefi (+%1.5)": round(_entry * 1.015, 6),
+                    })
+            import pandas as _pd
+            st.dataframe(_pd.DataFrame(_orows).sort_values("Coin"),
+                         use_container_width=True, hide_index=True)
+        else:
+            st.caption("Şu an açık grid birimi yok (yatay coin çıkınca açılır).")
         if _ov["n"] == 0:
-            st.caption("⏳ Henüz kapanmış grid işlemi yok — cron 7/24 tarıyor, yatay coin çıkınca birikecek.")
+            st.caption("⏳ Henüz kapanmış grid işlemi yok — cron 7/24 tarıyor, +%1.5'e ulaşınca kaydedilir.")
         with st.expander("Son grid işlemleri"):
             _gt = _cgl.get_trades(30)
             if _gt:
