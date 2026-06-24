@@ -621,7 +621,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
- tab_emtia, tab_crypto, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
+ tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
     "🏆  Kanıtlanmış Sistem",
     "🔲  Grid (Yatay)",
@@ -629,7 +629,6 @@ st.markdown(f"""
     "💼  Portföyüm",
     "🔎  Tarayıcı",
     "🥇  Emtia/Forex",
-    "🪙  Crypto (4h)",
     "🔗  OTT+TOTT Teyit",
     "⚡  Aktif/Scalp (15m)",
     "✅  Canlı Performans",
@@ -2579,104 +2578,6 @@ with tab_emtia:
 # ──────────────────────────────────────────────────────────────────
 #  TAB: CRYPTO (4h) — sadece güvenilir / trade edilebilir coinler
 # ──────────────────────────────────────────────────────────────────
-with tab_crypto:
-    st.subheader("🪙 Crypto — 4 saatlik (4h) timeframe")
-    st.caption("Crypto'da 30dk çok gürültülü → **4h** büyük trendleri yakalar. "
-                "Burada **sadece güvenilir (trade edilebilir) coinler** listelenir; "
-                "Grid'e göre UYUMSUZ/zayıf coinler gizlenir.")
-
-    # Güvenilir coin = Grid rating İYİ/MÜKEMMEL/ORTA. Bayes uyumu ayrıca işaretlenir.
-    _grid = _load_per_sym()
-    _bayes = _load_bayes_sym()
-    _GOOD = {"MÜKEMMEL", "İYİ", "ORTA"}
-
-    reliable = []
-    for sym in CRYPTO:
-        g = _grid.get(sym)
-        if not (g and g.get("ok")):
-            continue
-        grt = g.get("rating", "?")
-        if grt not in _GOOD:
-            continue  # UYUMSUZ / MARJINAL / VERİ_AZ → gizle
-        b = _bayes.get(sym)
-        brt = b.get("rating", "?") if (b and b.get("ok")) else "?"
-        # Konsensüs: hem Grid hem Bayes iyi → güçlü; sadece Grid → orta güven
-        consensus = "🤝 Güçlü" if brt in _GOOD else "👍 Grid"
-        reliable.append((sym, grt, brt, consensus))
-
-    if not reliable:
-        st.warning("Henüz güvenilir coin yok. 4h optimize sonuçları yüklenince burada görünecek. "
-                    "(Arka planda 4h optimize çalışıyor olabilir.)")
-    else:
-        st.success(f"**{len(reliable)} güvenilir coin** (Grid İYİ/MÜKEMMEL/ORTA) — "
-                    f"toplam {len(CRYPTO)} coin tarandı, gerisi gizlendi.")
-
-        with st.expander("ℹ️ Neden bunlar?"):
-            st.markdown("""
-            - **🤝 Güçlü** = Grid (FY) **ve** Bayes ikisi de bu coin'i iyi buluyor → konsensüs var.
-            - **👍 Grid** = sadece Grid iyi buluyor (Bayes katılmıyor) → daha temkinli ol.
-            - Timeframe **4h** sabit (crypto 7/24, 30dk gürültüsü elendi).
-            - ⚠️ BT (backtest) rakamları **in-sample** (iyimser). Gerçek kanıt → Canlı Performans.
-            """)
-
-        if st.button("🔄 Güvenilir coinleri tara (4h)", type="primary",
-                      use_container_width=True, key="crypto_scan"):
-            st.cache_data.clear()
-            cr_prog = st.progress(0, text=f"0/{len(reliable)}")
-            cr_rows = []
-            for i, (sym, grt, brt, cons) in enumerate(reliable):
-                r = analyze_intraday(sym)  # interval=None → 4h (best_interval_for)
-                if r:
-                    durum = r["Durum"]
-                    if "LONG" in durum:
-                        stop = r["Tetik ↓"]
-                    elif "SHORT" in durum:
-                        stop = r["Tetik ↑"]
-                    else:
-                        stop = None
-                    cr_rows.append({
-                        "Coin": sym.replace("-USD", ""),
-                        "Konsensüs": cons,
-                        "Güven": r["Güven"],
-                        "Durum": durum,
-                        "Fiyat": r["Fiyat"],
-                        "Direnç": r.get("Direnç"),
-                        "Destek": r.get("Destek"),
-                        "Stop (TOTT)": stop,
-                        "BT Getiri %": r["BT Getiri %"],
-                        "BT PF": r["BT PF"],
-                        "BT Win %": r["BT Win %"],
-                    })
-                cr_prog.progress((i+1)/len(reliable), text=f"{i+1}/{len(reliable)} {sym}")
-            cr_prog.empty()
-
-            if cr_rows:
-                df_cr = pd.DataFrame(cr_rows)
-                # Sinyali olanlar üstte (AÇ > TUT > bekle)
-                _order = {"🟢": 0, "🔴": 0, "🟡": 1}
-                df_cr["_o"] = df_cr["Durum"].str[0].map(lambda c: _order.get(c, 2))
-                df_cr = df_cr.sort_values(["_o", "Konsensüs"]).drop(columns="_o")
-                st.dataframe(
-                    df_cr.style.format({
-                        "Fiyat": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
-                        "Direnç": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
-                        "Destek": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
-                        "Stop (TOTT)": lambda v: f"{v:,.4f}" if pd.notna(v) else "-",
-                        "BT Getiri %": lambda v: f"{v:+.0f}%" if pd.notna(v) else "-",
-                        "BT PF": lambda v: ("∞" if v >= 900 else f"{v:.1f}") if pd.notna(v) else "-",
-                        "BT Win %": lambda v: f"{v:.0f}%" if pd.notna(v) else "-",
-                    }),
-                    use_container_width=True, height=min(60 + 36*len(df_cr), 600),
-                )
-                st.caption("⚠️ 4h sinyaller daha **seyrek** ama daha kaliteli. "
-                            "Mum 4 saatte bir kapanır → sinyaller yavaş ama gürültüsüz.")
-            else:
-                st.warning("Veri çekilemedi.")
-        else:
-            st.info(f"👆 **Güvenilir coinleri tara** butonuna bas. "
-                    f"{len(reliable)} coin × 4h, ~{len(reliable)*6}sn.")
-
-
 # ──────────────────────────────────────────────────────────────────
 #  TAB: OTT + TOTT TEYİT — sıralı teyit (OTT sinyali → peşinde aynı yön TOTT)
 # ──────────────────────────────────────────────────────────────────
@@ -2991,18 +2892,16 @@ with tab_live:
         st.error(f"Forward-validation modülü yüklenemedi: {e}")
 
     # ── Kategori filtresi (BIST / NASDAQ / CRYPTO / EMTIA) — #61 + Crypto + Emtia
-    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🪙 Crypto", "🥇 Emtia/Forex"],
+    # Not: bu tracker BIST-only (34 doğrulanmış). Crypto canlı performansı → Crypto Grid sekmesi.
+    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🥇 Emtia/Forex"],
                          horizontal=True, key="live_cat")
     _bist_set = set(BIST)
-    _crypto_set = set(CRYPTO)
     _emtia_set = set(EMTIA_FX)
     def _in_cat(sym):
         if live_cat == "🇹🇷 BIST":
             return sym in _bist_set
         elif live_cat == "🇺🇸 NASDAQ":
             return sym in GCM_NASDAQ
-        elif live_cat == "🪙 Crypto":
-            return sym in _crypto_set
         else:  # Emtia/Forex
             return sym in _emtia_set
 
