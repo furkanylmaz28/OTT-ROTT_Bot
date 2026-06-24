@@ -27,6 +27,20 @@ VALIDATED = [s + ".IS" for s in (
     "VAKBN YKBNK AEFES HEKTS ODAS ASTOR AKSEN ALARK KONTR"
 ).split()]
 
+# #6 KORELASYON/SEKTÖR KAPISI: aynı sektörden max 1 pozisyon (banka kümesi gibi
+# korelasyonlu çöküşü önler). MTM testi: floating drawdown -35.6% → -30.2%, getiri bedeli yok.
+SECTOR = {"AKBNK":"banka","HALKB":"banka","ISCTR":"banka","VAKBN":"banka","YKBNK":"banka",
+ "KCHOL":"holding","ALARK":"holding","ENKAI":"holding","DOHOL":"holding",
+ "ASELS":"savunma","ASTOR":"savunma","KONTR":"savunma","EREGL":"celik","KRDMD":"celik",
+ "PETKM":"kimya","SASA":"kimya","GUBRF":"kimya","HEKTS":"kimya",
+ "TUPRS":"enerji","ENJSA":"enerji","ODAS":"enerji","AKSEN":"enerji",
+ "THYAO":"ulasim","PGSUS":"ulasim","TAVHL":"ulasim","FROTO":"oto","TOASO":"oto",
+ "MGROS":"perakende","SOKM":"perakende","AEFES":"perakende",
+ "TTKOM":"telekom","SISE":"cam","TKFEN":"insaat","EKGYO":"gyo"}
+
+def _sector(sym):
+    return SECTOR.get(sym.replace(".IS", ""), sym)
+
 
 def _load(path, default):
     if not os.path.exists(path):
@@ -76,7 +90,9 @@ def record(sym: str, state: str, price: float, stop: float = None,
 
     if cur is None:
         # SADECE taze dönüşte gir — olgun trende geç binme (MT5 EA ile tutarlı)
-        if state == "LONG" and fresh and len(positions) < MAX_OPEN:
+        # + #6: aynı sektörden açık pozisyon varsa GİRME (korelasyon riski)
+        same_sector = any(_sector(k) == _sector(sym) for k in positions)
+        if state == "LONG" and fresh and len(positions) < MAX_OPEN and not same_sector:
             positions[sym] = {"entry_price": price, "entry_ts": ts, "stop": stop}
             if on_open:
                 try: on_open(sym, price, stop)
