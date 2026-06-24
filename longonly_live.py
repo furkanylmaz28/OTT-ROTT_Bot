@@ -50,8 +50,8 @@ def is_session_open(ts: datetime = None) -> bool:
 
 
 def record(sym: str, state: str, price: float, stop: float = None,
-           ts: str = None, on_open=None, on_close=None):
-    """Durum makinesi. state ∈ {LONG, FLAT}.
+           ts: str = None, on_open=None, on_close=None, fresh: bool = True):
+    """Durum makinesi. state ∈ {LONG, FLAT}. fresh=TAZE dönüş mü (geç trene binme).
        pozisyon yok + LONG + slot var → AÇ
        pozisyon var + FLAT           → KAPAT (nakit)
        pozisyon var + LONG           → tut, stop güncelle"""
@@ -66,7 +66,8 @@ def record(sym: str, state: str, price: float, stop: float = None,
     cur = positions.get(sym)
 
     if cur is None:
-        if state == "LONG" and len(positions) < MAX_OPEN:
+        # SADECE taze dönüşte gir — olgun trende geç binme (MT5 EA ile tutarlı)
+        if state == "LONG" and fresh and len(positions) < MAX_OPEN:
             positions[sym] = {"entry_price": price, "entry_ts": ts, "stop": stop}
             if on_open:
                 try: on_open(sym, price, stop)
@@ -152,8 +153,10 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
                 continue
             scanned += 1
             state = "LONG" if stt["pozisyon"] == "LONG" else "FLAT"
+            # taze = SuperTrend son ~2 barda LONG'a döndü (olgun trende geç binme)
+            fresh = stt.get("bars", 99) <= 2
             record(sym, state, stt["anlik"], stop=stt.get("cizgi"),
-                   on_open=on_open, on_close=on_close)
+                   on_open=on_open, on_close=on_close, fresh=fresh)
         except Exception:
             continue
     return {"scanned": scanned,
