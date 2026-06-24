@@ -144,27 +144,29 @@ void OnTimer()
 //+------------------------------------------------------------------+
 bool GetSuperTrend(string sym, int atrHandle, int &trendLast, int &trendPrev)
 {
-   int lookback = 320;
+   int lb = 320;
    double atr[]; MqlRates r[];
-   ArraySetAsSeries(atr, false); ArraySetAsSeries(r, false);
+   // as_series=TRUE → index 0 = EN YENİ (tartışmasız MT5 davranışı).
+   ArraySetAsSeries(atr, true); ArraySetAsSeries(r, true);
 
-   if(CopyBuffer(atrHandle, 0, 0, lookback, atr) < lookback) return false;
-   if(CopyRates(sym, InpTF, 0, lookback, r)      < lookback) return false;
+   if(CopyBuffer(atrHandle, 0, 0, lb, atr) < lb) return false;
+   if(CopyRates(sym, InpTF, 0, lb, r)      < lb) return false;
 
-   int trend[]; ArrayResize(trend, lookback);
+   int trend[]; ArrayResize(trend, lb); ArraySetAsSeries(trend, true);
    double up_prev = 0, dn_prev = 0;
    int    tr = 1;
 
-   for(int i=0;i<lookback;i++)
+   // SuperTrend ESKİDEN YENİYE hesaplanır → en eski (lb-1) bardan 0'a doğru.
+   for(int i = lb-1; i >= 0; i--)
    {
       double hl2 = (r[i].high + r[i].low) / 2.0;
       double up  = hl2 - InpMultiplier * atr[i];
       double dn  = hl2 + InpMultiplier * atr[i];
 
-      if(i == 0){ tr = 1; }
+      if(i == lb-1){ tr = 1; }       // en eski bar = başlangıç
       else
       {
-         double cprev = r[i-1].close;
+         double cprev = r[i+1].close;  // kronolojik ÖNCEKİ (daha eski) bar
          up = (cprev > up_prev) ? MathMax(up, up_prev) : up;
          dn = (cprev < dn_prev) ? MathMin(dn, dn_prev) : dn;
          if(tr == -1 && r[i].close > dn_prev)      tr = 1;
@@ -174,9 +176,8 @@ bool GetSuperTrend(string sym, int atrHandle, int &trendLast, int &trendPrev)
       trend[i] = tr;
    }
 
-   // index lookback-1 = oluşan (kapanmamış) bar -> kullanma
-   trendLast = trend[lookback-2];   // son KAPANAN bar
-   trendPrev = trend[lookback-3];   // ondan önceki
+   trendLast = trend[1];   // index 0 = oluşan bar → son KAPANAN = 1
+   trendPrev = trend[2];
    return true;
 }
 
@@ -231,8 +232,9 @@ double CalcLots(string sym)
 }
 
 //============================ YARDIMCI =============================
-//  Not: PositionGetTicket(i) zaten pozisyonu seçer; yine de #1 için
-//  PositionSelectByTicket ile açıkça seçiyoruz (savunmacı, zararsız).
+//  Her pozisyon PositionSelectByTicket ile AÇIKÇA seçilir (#1).
+//  NOT: CountOpen PORTFÖY bazlı sayar (tüm sembollerde max 3). Bu EA çoklu-sembol,
+//  TEK instance çalıştır — birden çok grafikte açma, yoksa sayım çakışır.
 bool HasLong(string sym)
 {
    for(int i=PositionsTotal()-1;i>=0;i--)
@@ -284,21 +286,21 @@ void PrintVerify(string sym)
    if(h == INVALID_HANDLE){ Print("DOĞRULAMA: ATR alınamadı -> ", sym); return; }
    int lb = 320;
    double atr[]; MqlRates r[];
-   ArraySetAsSeries(atr, false); ArraySetAsSeries(r, false);
+   ArraySetAsSeries(atr, true); ArraySetAsSeries(r, true);   // 0 = en yeni (tartışmasız)
    if(CopyBuffer(h,0,0,lb,atr) < lb || CopyRates(sym,InpTF,0,lb,r) < lb)
    { Print("DOĞRULAMA: veri yetersiz -> ", sym, " (biraz bekleyip EA'yı tekrar yükle)"); IndicatorRelease(h); return; }
 
-   double line[]; ArrayResize(line, lb);
-   int    trend[]; ArrayResize(trend, lb);
+   double line[]; ArrayResize(line, lb); ArraySetAsSeries(line, true);
+   int    trend[]; ArrayResize(trend, lb); ArraySetAsSeries(trend, true);
    double up_prev=0, dn_prev=0; int tr=1;
-   for(int i=0;i<lb;i++)
+   for(int i=lb-1;i>=0;i--)                 // eskiden yeniye
    {
       double hl2 = (r[i].high + r[i].low)/2.0;
       double up  = hl2 - InpMultiplier*atr[i];
       double dn  = hl2 + InpMultiplier*atr[i];
-      if(i>0)
+      if(i<lb-1)
       {
-         double cprev = r[i-1].close;
+         double cprev = r[i+1].close;        // kronolojik önceki bar
          up = (cprev>up_prev)? MathMax(up,up_prev):up;
          dn = (cprev<dn_prev)? MathMin(dn,dn_prev):dn;
          if(tr==-1 && r[i].close>dn_prev)     tr=1;
@@ -306,10 +308,10 @@ void PrintVerify(string sym)
       }
       up_prev=up; dn_prev=dn; trend[i]=tr; line[i]=(tr>0)?up:dn;
    }
-   PrintFormat("=== SuperTrend DOĞRULAMA: %s %s — TradingView SuperTrend(10,3) ile kıyasla ===",
+   PrintFormat("=== SuperTrend DOĞRULAMA: %s %s — TradingView SuperTrend(10,3) ile son 50 barı kıyasla ===",
                sym, EnumToString(InpTF));
    Print("Tarih               Kapanış    ST-çizgi   Yön");
-   for(int i=lb-7;i<=lb-2;i++)   // son 6 KAPANAN bar (lb-1 = oluşan bar)
+   for(int i=50;i>=1;i--)   // son 50 KAPANAN bar (index 0 = oluşan bar, atla)
       PrintFormat("%s   %s   %s   %s",
                   TimeToString(r[i].time, TIME_DATE|TIME_MINUTES),
                   DoubleToString(r[i].close, 2),
