@@ -690,6 +690,15 @@ def main():
         print("✗ Telegram yapılandırılmamış, çıkılıyor")
         return
 
+    # ── CRYPTO GRID canlı takibi (7/24 — hafta sonu kapısından ÖNCE) ─────
+    #    Kanıtlanmış grid (WF 10/10). BIST'ten AYRI dosyalar (cg_*.json).
+    try:
+        import crypto_grid_live as cgl
+        _cg = cgl.scan_and_record()
+        print(f"  [crypto-grid] {_cg}")
+    except Exception as _e:
+        print(f"  [crypto-grid] hata: {_e}")
+
     # ── HAFTA SONU KORUMASI ──────────────────────────────────────────
     # Cumartesi/Pazar her iki borsa da kapalı → sinyaller bayat (Cuma kapanış)
     # verisinden gelir. record_observation hafta sonu zaten kayıt açmıyor;

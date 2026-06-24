@@ -98,7 +98,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # notify_state (spam koruması) + forward-validation (OTT) + long-only (kanıtlanmış sistem)
-          git add notify_state_scheduled.json live_positions.json live_trades.json lo_positions.json lo_trades.json lo_breadth.json 2>/dev/null || true
+          git add notify_state_scheduled.json live_positions.json live_trades.json lo_positions.json lo_trades.json lo_breadth.json cg_positions.json cg_trades.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "Değişiklik yok."
           else

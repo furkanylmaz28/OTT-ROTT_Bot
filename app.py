@@ -837,6 +837,37 @@ with tab_cryptogrid:
             "- **Sadece major coinler** (BTC/ETH/SOL...). Küçük coinlerde test edilmedi."
         )
 
+    # ── CANLI PERFORMANS (cron'un kaydettiği grid trade'leri)
+    try:
+        import crypto_grid_live as _cgl
+        _ov = _cgl.overall_stats()
+        _ou = _cgl.open_units()
+        st.markdown("#### 📊 Canlı Performans (grid, 7/24)")
+        _m1, _m2, _m3, _m4 = st.columns(4)
+        _m1.metric("Kapanan işlem", _ov["n"])
+        _m2.metric("Kazanma %", f"{_ov['win_rate']:.0f}" if _ov["n"] else "-")
+        _m3.metric("Profit Factor", f"{_ov['pf']:.2f}" if _ov["n"] else "-")
+        _m4.metric("Toplam %", f"{_ov['total']:+.1f}" if _ov["n"] else "-")
+        _nu = sum(len(v) for v in _ou.values())
+        if _nu:
+            st.caption(f"📂 Açık grid birimleri: {_nu} — " +
+                       ", ".join(f"{c}({len(v)})" for c, v in _ou.items()))
+        if _ov["n"] == 0:
+            st.caption("⏳ Henüz kapanmış grid işlemi yok — cron 7/24 tarıyor, yatay coin çıkınca birikecek.")
+        with st.expander("Son grid işlemleri"):
+            _gt = _cgl.get_trades(30)
+            if _gt:
+                import pandas as _pd
+                st.dataframe(_pd.DataFrame([{
+                    "Coin": t["coin"], "Sonuç %": t["pnl_pct"], "Sebep": t.get("reason", ""),
+                    "Çıkış": t.get("exit_ts", "")[:16].replace("T", " ")} for t in _gt]),
+                    use_container_width=True, hide_index=True)
+            else:
+                st.write("Henüz işlem yok.")
+        st.divider()
+    except Exception:
+        pass
+
     if st.button("🔍 Coinleri tara (yatay olanları bul)", key="cg_scan", type="primary"):
         import re as _re
         _cl = _re.findall(r'"([^"]+)"', _re.search(r'^CRYPTO = \[(.*?)\]',
