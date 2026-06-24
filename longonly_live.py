@@ -16,6 +16,7 @@ from datetime import datetime, timezone, timedelta
 TR = timezone(timedelta(hours=3))
 POS_FILE = "lo_positions.json"
 TRADES_FILE = "lo_trades.json"
+BREADTH_FILE = "lo_breadth.json"
 MAX_OPEN = 3
 
 # SADECE walk-forward'ı (H1, 10/3, %0.05 maliyet) GEÇEN 34 sembol işlenir.
@@ -170,6 +171,7 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
     before_open = len(open_positions())
     before_trades = len(_load(TRADES_FILE, []))
     scanned = 0
+    bull = []; bear = []; fresh_bear = []   # piyasa genişliği
     for sym in syms:
         try:
             d = fetch_futures(sym, "1h", 1500)
@@ -177,6 +179,13 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
             if not stt:
                 continue
             scanned += 1
+            nm = sym.replace(".IS", "")
+            if stt["pozisyon"] == "LONG":
+                bull.append(nm)
+            else:
+                bear.append(nm)
+                if stt.get("bars", 99) <= 9:   # son ~1 günde bearish'e döndü
+                    fresh_bear.append(nm)
             state = "LONG" if stt["pozisyon"] == "LONG" else "FLAT"
             # taze = SuperTrend son ~2 barda LONG'a döndü (olgun trende geç binme)
             fresh = stt.get("bars", 99) <= 2
@@ -184,9 +193,23 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
                    on_open=on_open, on_close=on_close, fresh=fresh)
         except Exception:
             continue
+    tot = len(bull) + len(bear)
+    if tot > 0:
+        _save(BREADTH_FILE, {
+            "ts": datetime.now(TR).isoformat(),
+            "bull": len(bull), "bear": len(bear), "total": tot,
+            "bull_pct": round(100 * len(bull) / tot, 0),
+            "bull_syms": bull, "bear_syms": bear, "fresh_bear": fresh_bear,
+        })
     return {"scanned": scanned,
             "opened": len(open_positions()) - before_open,
-            "closed": len(_load(TRADES_FILE, [])) - before_trades}
+            "closed": len(_load(TRADES_FILE, [])) - before_trades,
+            "bull_pct": round(100 * len(bull) / tot, 0) if tot else None}
+
+
+def market_breadth() -> dict:
+    """Son taramanın piyasa genişliği (Canlı Performans/Kanıtlanmış Sistem tabı)."""
+    return _load(BREADTH_FILE, {})
 
 
 if __name__ == "__main__":

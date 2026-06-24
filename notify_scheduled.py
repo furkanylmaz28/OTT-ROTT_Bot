@@ -723,8 +723,25 @@ def main():
             try: send_telegram("\n".join(lines))
             except Exception: pass
 
+        _old_bp = lol.market_breadth().get("bull_pct", 50)   # tarama öncesi genişlik
         _lo = lol.scan_and_record(on_open=_lo_open, on_close=_lo_close)
         print(f"  [long-only] {_lo}")
+
+        # ── PİYASA GENİŞLİĞİ uyarısı (ayı erken uyarısı — geçişte bir kez)
+        _bp = _lo.get("bull_pct")
+        if _bp is not None:
+            _b = lol.market_breadth()
+            if _bp < 30 and _old_bp >= 30:
+                _fb = _b.get("fresh_bear", [])
+                msg = (f"🚨 <b>PİYASA ZAYIF</b> — sembollerin sadece %{_bp:.0f}'i bullish "
+                       f"({_b.get('bear')}/{_b.get('total')} bearish).\n"
+                       f"Geniş çaplı düşüş başlıyor. <b>Yeni long açma, nakitte kal.</b>")
+                if _fb: msg += f"\n🔻 Bugün dönen: {', '.join(_fb[:10])}"
+                try: send_telegram(msg)
+                except Exception: pass
+            elif _bp >= 50 and _old_bp < 50:
+                try: send_telegram(f"✅ <b>Genişlik toparlandı</b> — %{_bp:.0f} bullish. Piyasa güçleniyor.")
+                except Exception: pass
     except Exception as _e:
         print(f"  [long-only] hata: {_e}")
 

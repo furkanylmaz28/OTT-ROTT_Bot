@@ -661,6 +661,30 @@ with tab_kanit:
             "- **Short:** rejim-kapılı bile test edildi, değer katmadı → kapalı. Ayı piyasası kanıtlanırsa açılır."
         )
 
+    # ── PİYASA GENİŞLİĞİ — ayı erken uyarısı (short'la değil, breadth'le yakala)
+    try:
+        import longonly_live as _ll
+        _br = _ll.market_breadth()
+        if _br:
+            _bp = _br.get("bull_pct", 50)
+            _bc1, _bc2, _bc3 = st.columns(3)
+            _bc1.metric("🟢 Bullish", f"{_br['bull']}/{_br['total']}", f"%{_bp:.0f}")
+            _bc2.metric("🔴 Bearish", f"{_br['bear']}/{_br['total']}", f"%{100-_bp:.0f}")
+            _fb = _br.get("fresh_bear", [])
+            _bc3.metric("🔻 Bugün dönen", len(_fb))
+            if _bp < 30:
+                st.error(f"🚨 PİYASA ZAYIF — sembollerin sadece %{_bp:.0f}'i bullish. "
+                         f"Geniş çaplı düşüş: **yeni long açma, nakitte kal.** Sistem zaten çoğunu kapattı.")
+            elif _bp < 50:
+                st.warning(f"⚠️ Genişlik zayıflıyor — %{_bp:.0f} bullish. Temkinli ol, az pozisyon.")
+            else:
+                st.success(f"✅ Genişlik sağlıklı — %{_bp:.0f} bullish.")
+            if _fb:
+                st.caption(f"🔻 Son ~1 günde bearish'e dönenler: {', '.join(_fb)}")
+            st.caption(f"<small>Son tarama: {_br.get('ts','')[:16].replace('T',' ')}</small>", unsafe_allow_html=True)
+    except Exception:
+        pass
+
     if st.button("🔍 BIST'i tara (kanıtlanmış sistem)", key="kanit_scan", type="primary"):
         rows = []
         prog = st.progress(0.0)

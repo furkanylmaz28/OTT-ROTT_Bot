@@ -1,0 +1,51 @@
+{
+  "ts": "2026-06-25T00:05:51.073902+03:00",
+  "bull": 3,
+  "bear": 31,
+  "total": 34,
+  "bull_pct": 9.0,
+  "bull_syms": [
+    "MGROS",
+    "TOASO",
+    "ALARK"
+  ],
+  "bear_syms": [
+    "AKBNK",
+    "ASELS",
+    "DOHOL",
+    "ENJSA",
+    "EKGYO",
+    "ENKAI",
+    "EREGL",
+    "FROTO",
+    "GUBRF",
+    "HALKB",
+    "ISCTR",
+    "KCHOL",
+    "KRDMD",
+    "PETKM",
+    "PGSUS",
+    "SASA",
+    "SISE",
+    "SOKM",
+    "TAVHL",
+    "THYAO",
+    "TKFEN",
+    "TTKOM",
+    "TUPRS",
+    "VAKBN",
+    "YKBNK",
+    "AEFES",
+    "HEKTS",
+    "ODAS",
+    "ASTOR",
+    "AKSEN",
+    "KONTR"
+  ],
+  "fresh_bear": [
+    "ISCTR",
+    "PETKM",
+    "YKBNK",
+    "ODAS"
+  ]
+}
