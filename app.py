@@ -851,18 +851,30 @@ with tab_cryptogrid:
         st.markdown(f"##### 📂 Açık grid birimleri ({_nu}) — bot aldı, +%1.5'te satacak")
         if _nu:
             _lvlpct = {0: "-2%", 1: "-4%", 2: "-6%"}
+            # her coin için anlık fiyat (45sn cache)
+            _pxmap = {}
+            with st.spinner("Anlık fiyatlar çekiliyor…"):
+                for _c in _ou.keys():
+                    try: _pxmap[_c] = live_price(_c + "-USD")
+                    except Exception: _pxmap[_c] = None
             _orows = []
             for _c, _units in _ou.items():
+                _px = _pxmap.get(_c)
                 for _k, _entry in _units.items():
                     _orows.append({
                         "Coin": _c,
                         "Seviye": f"AL-{int(_k)+1} ({_lvlpct.get(int(_k), '?')})",
                         "Giriş": round(_entry, 6),
+                        "Anlık": round(_px, 6) if _px else None,
+                        "Yüzen %": round((_px / _entry - 1) * 100, 2) if _px else None,
                         "Satış hedefi (+%1.5)": round(_entry * 1.015, 6),
                     })
             import pandas as _pd
-            st.dataframe(_pd.DataFrame(_orows).sort_values("Coin"),
-                         use_container_width=True, hide_index=True)
+            _odf = _pd.DataFrame(_orows).sort_values("Coin")
+            st.dataframe(
+                _odf.style.format({"Yüzen %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-"})
+                    .background_gradient(subset=["Yüzen %"], cmap="RdYlGn", vmin=-3, vmax=3),
+                use_container_width=True, hide_index=True)
         else:
             st.caption("Şu an açık grid birimi yok (yatay coin çıkınca açılır).")
         if _ov["n"] == 0:
