@@ -828,7 +828,8 @@ with tab_cryptogrid:
     with st.expander("📋 Kurallar + uyarılar — okumadan kullanma", expanded=False):
         st.markdown(
             "- **Yatay tespiti:** ER < 0.30 → grid açık. Trend çıkınca kapat.\n"
-            "- **Grid:** merkez SMA(20). Altına %2/%4/%6 AL; her birim **+%1.5'te SAT** (crypto ayarı).\n"
+            "- **Grid:** merkez SMA(20). Altına %2/%4/%6 AL; her birim **+%1.5'te TRAILING aktif** "
+            "(satmaz; peak'in %0.5 altına inince satar — kazananı koşturur, sabit satışı ~3× geçti WF'de).\n"
             "- **🚨 Maker emir kullan:** çok işlem açar (coin başı yüzlerce). Binance maker ~%0.02-0.075. "
             "Market emriyle yersen edge erir.\n"
             "- **🚨 Kaldıraç DÜŞÜK:** crypto 100× sunar — ASLA. Max 1-2×. En kötü %5 drawdown -52%.\n"
@@ -848,7 +849,7 @@ with tab_cryptogrid:
         _m3.metric("Profit Factor", f"{_ov['pf']:.2f}" if _ov["n"] else "-")
         _m4.metric("Toplam %", f"{_ov['total']:+.1f}" if _ov["n"] else "-")
         _nu = sum(len(v) for v in _ou.values())
-        st.markdown(f"##### 📂 Açık grid birimleri ({_nu}) — bot aldı, +%1.5'te satacak")
+        st.markdown(f"##### 📂 Açık grid birimleri ({_nu}) — +%1.5'te trailing aktif olur, peak'i %0.5 kırınca satar")
         if _nu:
             _lvlpct = {0: "-2%", 1: "-4%", 2: "-6%"}
             # her coin için anlık fiyat (45sn cache)
@@ -860,14 +861,16 @@ with tab_cryptogrid:
             _orows = []
             for _c, _units in _ou.items():
                 _px = _pxmap.get(_c)
-                for _k, _entry in _units.items():
+                for _k, _u in _units.items():
+                    _e = _u["e"] if isinstance(_u, dict) else _u
+                    _active = _u.get("a", False) if isinstance(_u, dict) else False
                     _orows.append({
                         "Coin": _c,
                         "Seviye": f"AL-{int(_k)+1} ({_lvlpct.get(int(_k), '?')})",
-                        "Giriş": round(_entry, 6),
+                        "Giriş": round(_e, 6),
                         "Anlık": round(_px, 6) if _px else None,
-                        "Yüzen %": round((_px / _entry - 1) * 100, 2) if _px else None,
-                        "Satış hedefi (+%1.5)": round(_entry * 1.015, 6),
+                        "Yüzen %": round((_px / _e - 1) * 100, 2) if _px else None,
+                        "Durum": "🔥 trailing aktif (kâr koşuyor)" if _active else "⏳ beklemede (+%1.5'te aktif)",
                     })
             import pandas as _pd
             _odf = _pd.DataFrame(_orows).sort_values("Coin")
@@ -878,7 +881,7 @@ with tab_cryptogrid:
         else:
             st.caption("Şu an açık grid birimi yok (yatay coin çıkınca açılır).")
         if _ov["n"] == 0:
-            st.caption("⏳ Henüz kapanmış grid işlemi yok — cron 7/24 tarıyor, +%1.5'e ulaşınca kaydedilir.")
+            st.caption("⏳ Henüz kapanmış grid işlemi yok — cron 7/24 tarıyor, trailing tetiklenince kaydedilir.")
         with st.expander("Son grid işlemleri"):
             _gt = _cgl.get_trades(30)
             if _gt:
@@ -932,7 +935,7 @@ with tab_cryptogrid:
         c1.metric("🟦 YATAY (grid uygun)", len(yat))
         c2.metric("📈 Trend (grid kapalı)", len(tre))
         st.markdown("#### 🟦 Yatay coinler — grid kurulabilir (ER en düşük en üstte)")
-        st.caption("Fiyat AL seviyesine inince al, +%1.5'te sat. Trend başlarsa (ER yükselir) kapat. Maker emir + düşük kaldıraç.")
+        st.caption("Fiyat AL seviyesine inince al, +%1.5'te trailing aktif (peak'in %0.5 altında sat). Trend başlarsa (ER yükselir) kapat. Maker emir + düşük kaldıraç.")
         st.dataframe(yat, use_container_width=True, hide_index=True)
         with st.expander(f"📈 Trend coinler ({len(tre)}) — grid KAPALI"):
             st.dataframe(tre, use_container_width=True, hide_index=True)

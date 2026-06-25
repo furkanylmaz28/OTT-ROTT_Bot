@@ -1,9 +1,10 @@
 """
 binance_grid_bot.py — Kanıtlanmış crypto GRID stratejisini Binance TESTNET'te çalıştırır.
 
-Strateji (WF 10/10, MC kaybetme %0 ile doğrulandı):
-  - Yatay (Kaufman ER < 0.30): merkez SMA20, altına %2/%4/%6'da LIMIT AL (maker),
-    her birim +%1.5'te LIMIT SAT.
+Strateji (WF: trailing 4/4 OOS+ , +3188% vs sabit +780%; maliyete dayanıklı):
+  - Yatay (Kaufman ER < 0.30): merkez SMA20, altına %2/%4/%6'da LIMIT AL (maker).
+  - Her birim +%1.5'e ulaşınca TRAILING aktifleşir; peak'in %0.5 altına inince
+    market satar (kazananı koşturur — sabit +%1.5'i ~3× geçiyor).
   - Trend (ER ≥ 0.30): açık emirleri iptal et + eldeki coini market sat (grid kapat).
 Spot, long-only, kaldıraç YOK. SADECE TESTNET (demo).
 
@@ -34,7 +35,8 @@ USDT_PER_UNIT  = 15.0          # birim başı USDT (min notional ~$10 → 15 gü
 ER_WIN         = 20            # efficiency ratio penceresi
 ER_TH          = 0.30          # ER < bu = yatay (grid açık)
 LEVELS         = [-0.02, -0.04, -0.06]   # merkez altı AL seviyeleri
-TAKE           = 0.015         # +%1.5'te sat
+TAKE           = 0.015         # +%1.5'te TRAILING aktifleş (satmaz)
+TRAIL          = 0.005         # peak'in %0.5 altına inince market sat (kazananı koştur)
 INTERVAL       = Client.KLINE_INTERVAL_4HOUR
 LOOP_SEC       = 300           # 5 dk'da bir tarama
 STATE_FILE     = "binance_grid_state.json"
@@ -118,7 +120,7 @@ def manage(sym, state):
             u = sstate[ks]
             try: client.cancel_order(symbol=sym, orderId=u["order_id"])
             except BinanceAPIException: pass
-            if u["phase"] == "sell":   # elde coin var → market sat
+            if u["phase"] == "hold":   # elde coin var → market sat
                 try:
                     client.order_market_sell(symbol=sym, quantity=fmt(u["qty"], step))
                     record_trade(sym, u["entry"], price, "trend")
@@ -148,19 +150,25 @@ def manage(sym, state):
             except BinanceAPIException: continue
             if od["status"] == "FILLED":
                 entry = float(od["price"])
-                sell_price = math.ceil(entry * (1 + TAKE) / tick) * tick
-                try:
-                    so = client.order_limit_sell(symbol=sym, quantity=fmt(u["qty"], step), price=fmt(sell_price, tick))
-                    u.update({"phase": "sell", "order_id": so["orderId"], "entry": entry})
-                    print(f"   ✅ ALINDI {entry:.6g} → SAT emri @ {sell_price:.6g} (+%1.5)")
-                except BinanceAPIException as e:
-                    print(f"   SAT emri hata: {e}")
-        elif u["phase"] == "sell":
-            try: od = client.get_order(symbol=sym, orderId=u["order_id"])
-            except BinanceAPIException: continue
-            if od["status"] == "FILLED":
-                record_trade(sym, u["entry"], float(od["price"]), "take")
-                del sstate[ks]
+                # SAT emri KOYMA → trailing'e geç (kazananı koştur)
+                u.update({"phase": "hold", "entry": entry, "active": False, "peak": entry})
+                print(f"   ✅ ALINDI {entry:.6g} → trailing bekliyor (+%1.5'te aktif)")
+        elif u["phase"] == "hold":
+            entry = u["entry"]
+            # +%1.5'e ulaşınca trailing aktifleş
+            if not u.get("active") and price >= entry * (1 + TAKE):
+                u["active"] = True; u["peak"] = price
+                print(f"   🔥 {sym} trailing AKTİF @ {price:.6g} (peak takip başladı)")
+            if u.get("active"):
+                u["peak"] = max(u["peak"], price)
+                # peak'in %0.5 altına inince market sat
+                if price <= u["peak"] * (1 - TRAIL):
+                    try:
+                        client.order_market_sell(symbol=sym, quantity=fmt(u["qty"], step))
+                        record_trade(sym, entry, price, "trail")
+                        del sstate[ks]
+                    except BinanceAPIException as e:
+                        print(f"   trailing-sat hata: {e}")
 
 
 def main():

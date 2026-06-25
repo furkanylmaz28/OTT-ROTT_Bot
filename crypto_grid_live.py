@@ -2,12 +2,13 @@
 crypto_grid_live.py — Crypto GRID canlı takibi (kanıtlanmış: WF 10/10, MC kaybetme %0).
 
 BIST/long-only'den AYRI dosyalar. 7/24 (seans kontrolü yok). Grid mantığı:
-  - Yatay (ER<0.30): fiyat AL seviyesine (-2/-4/-6%) inince birim al; +%1.5'te sat.
+  - Yatay (ER<0.30): fiyat AL seviyesine (-2/-4/-6%) inince birim al;
+    +%1.5'te TRAILING aktif, peak'in %0.5 altına inince sat (kazananı koştur).
   - Trend (ER≥0.30): açık birimleri kapat.
 Her coin'de birden çok birim olabilir (3 seviye).
 
 Dosyalar:
-  cg_positions.json — açık grid birimleri {coin: {level_idx: entry_price}}
+  cg_positions.json — açık grid birimleri {coin: {level_idx: {e:entry, a:active, p:peak}}}
   cg_trades.json    — kapanmış birim trade'leri [{coin, entry, exit, pnl_pct, ...}]
 """
 from __future__ import annotations
@@ -18,8 +19,9 @@ TR = timezone(timedelta(hours=3))
 POS_FILE = "cg_positions.json"
 TRADES_FILE = "cg_trades.json"
 LEVELS = [-0.02, -0.04, -0.06]   # merkez (SMA20) altı AL seviyeleri
-TAKE = 0.015                     # +%1.5'te sat (crypto ayarı)
-COST = 0.0005                    # yön başı (maker)
+TAKE = 0.015                     # +%1.5'te TRAILING aktifleş (satmaz, kayan stop başlar)
+TRAIL = 0.005                    # peak'in %0.5 altına inince sat (kazananı koştur)
+COST = 0.0005                    # yön başı
 
 
 def _load(path, default):
@@ -94,7 +96,7 @@ def scan_and_record(on_open=None, on_close=None) -> dict:
 
     def _close(coin, k, entry, exit_price, reason):
         nonlocal closed
-        pnl = (exit_price / entry - 1) - 2 * COST if reason == "trend" else (TAKE - 2 * COST)
+        pnl = (exit_price / entry - 1) - 2 * COST   # trailing/trend: market çıkış
         trades.append({"coin": coin, "level": k, "entry_price": entry,
                        "exit_price": round(exit_price, 6), "pnl_pct": round(pnl * 100, 3),
                        "exit_ts": ts, "reason": reason})
@@ -114,22 +116,27 @@ def scan_and_record(on_open=None, on_close=None) -> dict:
             price = stt["anlik"]
             held = positions.get(coin, {})
             if stt["yatay"]:
-                # 1) kâr al: +%1.5'e ulaşan birimleri sat
+                # 1) TRAILING: +%1.5'te aktifleş, peak'in %0.5 altına inince sat
                 for k in list(held.keys()):
-                    if price >= held[k] * (1 + TAKE):
-                        _close(coin, k, held[k], held[k] * (1 + TAKE), "take")
-                        del held[k]
+                    u = held[k]
+                    if not u.get("a") and price >= u["e"] * (1 + TAKE):
+                        u["a"] = True; u["p"] = price           # trailing aktif
+                    if u.get("a"):
+                        u["p"] = max(u["p"], price)
+                        if price <= u["p"] * (1 - TRAIL):
+                            _close(coin, k, u["e"], price, "trail")
+                            del held[k]
                 # 2) al: fiyat seviyeye indi + o seviye boş
                 for k, lv in enumerate(stt["seviyeler"]):
                     if str(k) not in held and price <= lv:
-                        held[str(k)] = price; opened += 1
+                        held[str(k)] = {"e": price, "a": False, "p": price}; opened += 1
                         if on_open:
                             try: on_open(coin, k + 1, price)
                             except Exception: pass
             else:
                 # trend → açık birimleri kapat
                 for k in list(held.keys()):
-                    _close(coin, k, held[k], price, "trend")
+                    _close(coin, k, held[k]["e"], price, "trend")
                     del held[k]
             if held:
                 positions[coin] = held
