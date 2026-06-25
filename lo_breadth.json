@@ -1,12 +1,16 @@
 {
-  "ts": "2026-06-25T14:16:51.638588+03:00",
-  "bull": 0,
-  "bear": 1,
-  "total": 1,
-  "bull_pct": 0.0,
-  "bull_syms": [],
+  "ts": "2026-06-25T14:31:58.996101+03:00",
+  "bull": 1,
+  "bear": 3,
+  "total": 4,
+  "bull_pct": 25.0,
+  "bull_syms": [
+    "TUPRS"
+  ],
   "bear_syms": [
-    "KONTR"
+    "TKFEN",
+    "TTKOM",
+    "AKSEN"
   ],
   "fresh_bear": []
 }
