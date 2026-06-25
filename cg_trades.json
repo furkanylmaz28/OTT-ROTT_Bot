@@ -322,5 +322,41 @@
     "pnl_pct": -0.494,
     "exit_ts": "2026-06-25T14:16:10.945989+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 61346.0,
+    "exit_price": 61227.79,
+    "pnl_pct": -0.293,
+    "exit_ts": "2026-06-25T15:01:24.458175+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1644.59,
+    "exit_price": 1631.38,
+    "pnl_pct": -0.903,
+    "exit_ts": "2026-06-25T15:01:24.458175+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1499,
+    "exit_price": 0.1475,
+    "pnl_pct": -1.701,
+    "exit_ts": "2026-06-25T15:01:24.458175+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.52,
+    "exit_price": 7.431,
+    "pnl_pct": -1.284,
+    "exit_ts": "2026-06-25T15:01:24.458175+03:00",
+    "reason": "trend"
   }
 ]
