@@ -97,5 +97,41 @@
     "pnl_pct": 1.4,
     "exit_ts": "2026-06-25T08:16:08.265179+03:00",
     "reason": "take"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1620.06,
+    "exit_price": 1644.3609,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:31:16.078907+03:00",
+    "reason": "take"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.407,
+    "exit_price": 7.518105,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:31:16.078907+03:00",
+    "reason": "take"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0892,
+    "exit_price": 0.090538,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:31:16.078907+03:00",
+    "reason": "take"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3705,
+    "exit_price": 0.376057,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:31:16.078907+03:00",
+    "reason": "take"
   }
 ]
