@@ -1,16 +1,15 @@
 {
-  "ts": "2026-06-25T15:32:13.081001+03:00",
-  "bull": 9,
-  "bear": 25,
+  "ts": "2026-06-25T15:47:14.953787+03:00",
+  "bull": 8,
+  "bear": 26,
   "total": 34,
-  "bull_pct": 26.0,
+  "bull_pct": 24.0,
   "bull_syms": [
     "KCHOL",
     "MGROS",
     "PGSUS",
     "TAVHL",
     "THYAO",
-    "TOASO",
     "TKFEN",
     "TUPRS",
     "ALARK"
@@ -32,6 +31,7 @@
     "SASA",
     "SISE",
     "SOKM",
+    "TOASO",
     "TTKOM",
     "VAKBN",
     "YKBNK",
@@ -44,6 +44,7 @@
   ],
   "fresh_bear": [
     "AKBNK",
+    "TOASO",
     "VAKBN"
   ]
 }
