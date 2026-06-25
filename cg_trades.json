@@ -151,5 +151,14 @@
     "pnl_pct": 1.4,
     "exit_ts": "2026-06-25T09:01:22.465453+03:00",
     "reason": "take"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 68.46,
+    "exit_price": 69.4869,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T09:16:11.550395+03:00",
+    "reason": "take"
   }
 ]
