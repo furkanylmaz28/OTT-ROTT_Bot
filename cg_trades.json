@@ -169,5 +169,32 @@
     "pnl_pct": -0.501,
     "exit_ts": "2026-06-25T09:31:06.585497+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 41.8,
+    "exit_price": 41.71,
+    "pnl_pct": -0.315,
+    "exit_ts": "2026-06-25T10:16:10.435314+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.0744,
+    "exit_price": 0.07417,
+    "pnl_pct": -0.409,
+    "exit_ts": "2026-06-25T10:16:10.435314+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.07427,
+    "exit_price": 0.07417,
+    "pnl_pct": -0.235,
+    "exit_ts": "2026-06-25T10:16:10.435314+03:00",
+    "reason": "trend"
   }
 ]
