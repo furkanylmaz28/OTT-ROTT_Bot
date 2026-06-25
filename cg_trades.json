@@ -295,5 +295,23 @@
     "pnl_pct": -0.23,
     "exit_ts": "2026-06-25T12:01:23.907647+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 68.63,
+    "exit_price": 68.459999,
+    "pnl_pct": -0.348,
+    "exit_ts": "2026-06-25T13:31:15.886316+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.0802,
+    "exit_price": 1.0781,
+    "pnl_pct": -0.294,
+    "exit_ts": "2026-06-25T13:31:15.886316+03:00",
+    "reason": "trend"
   }
 ]
