@@ -79,5 +79,23 @@
     "pnl_pct": 1.4,
     "exit_ts": "2026-06-25T08:01:20.968758+03:00",
     "reason": "take"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1476,
+    "exit_price": 0.149814,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:16:08.265179+03:00",
+    "reason": "take"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.746,
+    "exit_price": 0.75719,
+    "pnl_pct": 1.4,
+    "exit_ts": "2026-06-25T08:16:08.265179+03:00",
+    "reason": "take"
   }
 ]
