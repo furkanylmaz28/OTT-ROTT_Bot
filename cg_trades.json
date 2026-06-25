@@ -403,5 +403,50 @@
     "pnl_pct": -0.535,
     "exit_ts": "2026-06-25T18:16:09.508853+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 2.803,
+    "exit_price": 2.859,
+    "pnl_pct": 1.898,
+    "exit_ts": "2026-06-25T19:31:19.388338+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 2.803,
+    "exit_price": 2.859,
+    "pnl_pct": 1.898,
+    "exit_ts": "2026-06-25T19:31:19.388338+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.35249999165534973,
+    "exit_price": 0.3549,
+    "pnl_pct": 0.581,
+    "exit_ts": "2026-06-25T19:31:19.388338+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.35249999165534973,
+    "exit_price": 0.3549,
+    "pnl_pct": 0.581,
+    "exit_ts": "2026-06-25T19:31:19.388338+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.35249999165534973,
+    "exit_price": 0.3549,
+    "pnl_pct": 0.581,
+    "exit_ts": "2026-06-25T19:31:19.388338+03:00",
+    "reason": "trail"
   }
 ]
