@@ -1,11 +1,10 @@
 {
-  "ts": "2026-06-25T13:31:57.785073+03:00",
-  "bull": 10,
-  "bear": 24,
+  "ts": "2026-06-25T13:47:02.774330+03:00",
+  "bull": 9,
+  "bear": 25,
   "total": 34,
-  "bull_pct": 29.0,
+  "bull_pct": 26.0,
   "bull_syms": [
-    "AKBNK",
     "KCHOL",
     "MGROS",
     "PGSUS",
@@ -17,6 +16,7 @@
     "ALARK"
   ],
   "bear_syms": [
+    "AKBNK",
     "ASELS",
     "DOHOL",
     "ENJSA",
@@ -43,6 +43,7 @@
     "KONTR"
   ],
   "fresh_bear": [
+    "AKBNK",
     "PETKM"
   ]
 }
