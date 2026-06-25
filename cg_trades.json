@@ -214,5 +214,59 @@
     "pnl_pct": 1.4,
     "exit_ts": "2026-06-25T10:46:10.262236+03:00",
     "reason": "take"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07729,
+    "exit_price": 0.07734,
+    "pnl_pct": -0.035,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.89,
+    "exit_price": 0.892,
+    "pnl_pct": 0.125,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.662,
+    "exit_price": 1.662,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 1.967,
+    "exit_price": 1.97,
+    "pnl_pct": 0.053,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.0742,
+    "exit_price": 0.07424,
+    "pnl_pct": -0.046,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.0742,
+    "exit_price": 0.07424,
+    "pnl_pct": -0.046,
+    "exit_ts": "2026-06-25T11:01:19.778536+03:00",
+    "reason": "trend"
   }
 ]
