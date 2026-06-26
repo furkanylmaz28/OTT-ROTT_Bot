@@ -970,5 +970,14 @@
     "pnl_pct": -1.067,
     "exit_ts": "2026-06-26T16:01:35.014002+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 40.51,
+    "exit_price": 40.5,
+    "pnl_pct": -0.125,
+    "exit_ts": "2026-06-26T16:16:02.822941+03:00",
+    "reason": "trend"
   }
 ]
