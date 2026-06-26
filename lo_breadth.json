@@ -1,8 +1,8 @@
 {
-  "ts": "2026-06-25T18:02:29.210238+03:00",
+  "ts": "2026-06-26T09:32:18.991512+03:00",
   "bull": 8,
-  "bear": 25,
-  "total": 33,
+  "bear": 26,
+  "total": 34,
   "bull_pct": 24.0,
   "bull_syms": [
     "KCHOL",
@@ -20,6 +20,7 @@
     "DOHOL",
     "ENJSA",
     "EKGYO",
+    "ENKAI",
     "EREGL",
     "FROTO",
     "GUBRF",
