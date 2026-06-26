@@ -628,5 +628,41 @@
     "pnl_pct": 0.971,
     "exit_ts": "2026-06-26T03:31:04.574332+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.729,
+    "exit_price": 0.736,
+    "pnl_pct": 0.86,
+    "exit_ts": "2026-06-26T03:46:06.516778+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.729,
+    "exit_price": 0.736,
+    "pnl_pct": 0.86,
+    "exit_ts": "2026-06-26T03:46:06.516778+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1261,
+    "exit_price": 0.1259,
+    "pnl_pct": -0.259,
+    "exit_ts": "2026-06-26T03:46:06.516778+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1261,
+    "exit_price": 0.1259,
+    "pnl_pct": -0.259,
+    "exit_ts": "2026-06-26T03:46:06.516778+03:00",
+    "reason": "trend"
   }
 ]
