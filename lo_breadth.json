@@ -1,9 +1,9 @@
 {
-  "ts": "2026-06-26T17:02:58.758872+03:00",
+  "ts": "2026-06-26T17:17:16.559484+03:00",
   "bull": 10,
-  "bear": 23,
-  "total": 33,
-  "bull_pct": 30.0,
+  "bear": 24,
+  "total": 34,
+  "bull_pct": 29.0,
   "bull_syms": [
     "ENKAI",
     "EREGL",
@@ -28,6 +28,7 @@
     "ISCTR",
     "KRDMD",
     "MGROS",
+    "PETKM",
     "SASA",
     "SISE",
     "SOKM",
