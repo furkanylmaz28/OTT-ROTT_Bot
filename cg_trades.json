@@ -691,5 +691,14 @@
     "pnl_pct": -1.393,
     "exit_ts": "2026-06-26T05:16:03.769090+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.3429,
+    "exit_price": 0.3469,
+    "pnl_pct": 1.067,
+    "exit_ts": "2026-06-26T06:31:22.317673+03:00",
+    "reason": "trail"
   }
 ]
