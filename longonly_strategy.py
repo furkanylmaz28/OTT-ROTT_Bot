@@ -20,6 +20,7 @@ def supertrend(df, period=ST_PERIOD, mult=ST_MULT):
     """SuperTrend yön dizisi (+1 yukarı / -1 aşağı)."""
     h, l, c = df["high"].values, df["low"].values, df["close"].values
     n = len(c); tr = np.zeros(n)
+    if n: tr[0] = h[0] - l[0]   # ilk bar TR'si (önceki kapanış yok) — EWM tohumu
     for i in range(1, n):
         tr[i] = max(h[i] - l[i], abs(h[i] - c[i-1]), abs(l[i] - c[i-1]))
     atr = pd.Series(tr).ewm(alpha=1/period, adjust=False).mean().values
@@ -61,9 +62,18 @@ def current_state(df):
     if k <= 9:       tazelik = "🟢 TAZE"        # ~1 gün içinde döndü
     elif k <= 27:    tazelik = "🟡 yeni"        # ~1-3 gün
     else:            tazelik = "🔴 olgun (geç)"  # 3+ gün, trend olgunlaşmış
+    # türev raporlama alanları (sinyal mantığını DEĞİŞTİRMEZ)
+    kar = (cur / donus - 1) * 100 if (pos == "LONG" and donus) else None       # trend başından beri getiri
+    risk = (cur - stop) / cur * 100 if pos == "LONG" else None                 # stop'a uzaklık (%)
+    trend_gunu = None
+    try:
+        if donus_tarih is not None:
+            trend_gunu = int((df.index[-1] - donus_tarih).days)               # trend kaç gündür sürüyor
+    except Exception:
+        pass
     return {
         "pozisyon": pos, "anlik": cur, "cizgi": stop,
         "tampon": (cur / stop - 1) * 100 if pos == "LONG" else None,
         "bars": k, "donus_fiyat": donus, "donus_tarih": donus_tarih,
-        "tazelik": tazelik,
+        "tazelik": tazelik, "kar": kar, "risk": risk, "trend_gunu": trend_gunu,
     }
