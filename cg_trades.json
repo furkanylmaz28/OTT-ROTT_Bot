@@ -925,5 +925,50 @@
     "pnl_pct": -0.343,
     "exit_ts": "2026-06-26T14:46:06.176772+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 59558.83,
+    "exit_price": 59203.38,
+    "pnl_pct": -0.697,
+    "exit_ts": "2026-06-26T16:01:35.014002+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.152,
+    "exit_price": 7.127,
+    "pnl_pct": -0.45,
+    "exit_ts": "2026-06-26T16:01:35.014002+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0827,
+    "exit_price": 0.0819,
+    "pnl_pct": -1.067,
+    "exit_ts": "2026-06-26T16:01:35.014002+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "1",
+    "entry_price": 0.0827,
+    "exit_price": 0.0819,
+    "pnl_pct": -1.067,
+    "exit_ts": "2026-06-26T16:01:35.014002+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "2",
+    "entry_price": 0.0827,
+    "exit_price": 0.0819,
+    "pnl_pct": -1.067,
+    "exit_ts": "2026-06-26T16:01:35.014002+03:00",
+    "reason": "trend"
   }
 ]
