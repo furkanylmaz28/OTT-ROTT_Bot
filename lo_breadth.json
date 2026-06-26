@@ -1,14 +1,13 @@
 {
-  "ts": "2026-06-26T12:32:03.885328+03:00",
-  "bull": 11,
-  "bear": 23,
+  "ts": "2026-06-26T12:47:15.323558+03:00",
+  "bull": 10,
+  "bear": 24,
   "total": 34,
-  "bull_pct": 32.0,
+  "bull_pct": 29.0,
   "bull_syms": [
     "ENKAI",
     "EREGL",
     "KCHOL",
-    "MGROS",
     "PGSUS",
     "TAVHL",
     "THYAO",
@@ -28,6 +27,7 @@
     "HALKB",
     "ISCTR",
     "KRDMD",
+    "MGROS",
     "PETKM",
     "SASA",
     "SISE",
@@ -44,6 +44,7 @@
   ],
   "fresh_bear": [
     "AKBNK",
+    "MGROS",
     "TOASO",
     "VAKBN"
   ]
