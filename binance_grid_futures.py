@@ -47,6 +47,15 @@ TRADES_FILE    = "binance_fut_trades.json"
 client = Client(os.getenv("BINANCE_TEST_API_KEY"),
                 os.getenv("BINANCE_TEST_API_SECRET"), testnet=True)
 
+
+def sync_time():
+    """PC saati Binance'ten kayarsa (-1021) imzalı istekler reddedilir — düzelt."""
+    try:
+        srv = client.futures_time()["serverTime"]
+        client.timestamp_offset = srv - int(time.time() * 1000)
+    except Exception:
+        pass
+
 _filters = {}
 _setup_done = set()
 
@@ -219,6 +228,7 @@ def manage(sym, state, unit_margin, risk_ctx):
 def main():
     if not os.getenv("BINANCE_TEST_API_KEY"):
         print("HATA: BINANCE_TEST_API_KEY yok (.env)"); return
+    sync_time()   # PC saati kaymışsa düzelt (-1021 hatasını önler)
     try:
         w = wallet_usdt()
     except BinanceAPIException as e:
@@ -226,6 +236,7 @@ def main():
     print(f"Binance FUTURES TESTNET grid · {len(COINS)} coin · {LEVERAGE}× kaldıraç · cüzdan {w:,.0f} USDT")
     print(f"⚠️ DEMO — sahte para. {LEVERAGE}×'te ~-50% kraş = tasfiye. Ctrl+C ile durdur.\n")
     while True:
+        sync_time()   # her turda saat senkronu (uzun çalışmada drift birikir)
         try: w = wallet_usdt()
         except Exception: pass
         unit_margin = max(MIN_MARGIN, w * MARGIN_PCT)   # BİLEŞİK: cüzdanla büyür
