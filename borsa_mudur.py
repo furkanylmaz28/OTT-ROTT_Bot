@@ -40,6 +40,12 @@ def _stats(trades):
     return {"n": n, "wr": round(100 * len(w) / n, 1), "pf": round(pf, 2), "tot": round(sum(pn), 1)}
 
 
+UNIVERSE = set(("AKBNK ASELS DOHOL ENJSA EKGYO ENKAI EREGL FROTO GUBRF HALKB ISCTR KCHOL "
+                "KRDMD MGROS PETKM PGSUS SASA SISE SOKM TAVHL THYAO TOASO TKFEN TTKOM TUPRS "
+                "VAKBN YKBNK AEFES HEKTS ODAS ASTOR AKSEN ALARK KONTR ARCLK BIMAS GARAN OYAKC "
+                "SAHOL TCELL TSKB VESTL DOAS CIMSA ULKER").split())
+
+
 def gather():
     """Ekip çıktılarını topla."""
     lo_pos = _load("lo_positions.json", {})
@@ -47,18 +53,18 @@ def gather():
     lo_tr = _load("lo_trades.json", [])
     cg_tr = _load("cg_trades.json", [])
     breadth = _load("lo_breadth.json", {})
-    # haberci (savunmacı)
-    news = []
+    news, impact = [], []
     try:
         import borsa_haberci as hb
         watch = set(k.replace(".IS", "") for k in lo_pos) | set(breadth.get("bull_syms", [])[:20])
         news = hb.get_news(hours=24, symbols=watch or None)
+        impact = hb.analyze_impact(hb.get_macro_news(), UNIVERSE)   # dünya/TR haber → 45 hisse etkisi
     except Exception:
-        news = []
+        pass
     return {
         "lo_pos": lo_pos, "cg_pos": cg_pos,
         "lo": _stats(lo_tr), "cg": _stats(cg_tr),
-        "breadth": breadth, "news": news,
+        "breadth": breadth, "news": news, "impact": impact,
     }
 
 
@@ -68,7 +74,7 @@ def signature(g):
     key = (
         sorted(g["lo_pos"].keys()),
         sum(len(v) for v in g["cg_pos"].values()) if isinstance(g["cg_pos"], dict) else 0,
-        g["lo"]["n"], g["cg"]["n"], bp, len(g["news"]),
+        g["lo"]["n"], g["cg"]["n"], bp, len(g["news"]), len(g.get("impact", [])),
     )
     return hashlib.md5(str(key).encode()).hexdigest()[:12]
 
@@ -88,13 +94,25 @@ def build_report(g):
     L.append(f"🤖 *Algo Trader:* BIST {lo_n} açık ({', '.join(k.replace('.IS','') for k in list(g['lo_pos'])[:6]) or '—'}) · Crypto {cg_n} birim")
     # Performans
     L.append(f"📊 *Performans:* BIST PF {g['lo']['pf']} ({g['lo']['n']} işlem) · Crypto PF {g['cg']['pf']} ({g['cg']['tot']:+}%, {g['cg']['n']} işlem)")
-    # Haberci
+    # Haberci — KAP
     if g["news"]:
-        L.append(f"📰 *Haberci:* {len(g['news'])} KAP bildirimi")
-        for n in g["news"][:5]:
-            L.append(f"   • {n['time']} {n['sym']}: {n['title'][:55]}")
-    else:
-        L.append("📰 *Haberci:* yeni KAP bildirimi yok")
+        L.append(f"📰 *KAP:* {len(g['news'])} bildirim")
+        for n in g["news"][:4]:
+            L.append(f"   • {n['time']} {n['sym']}: {n['title'][:50]}")
+    # Haberci — Dünya/TR makro haber → BIST etkisi
+    if g.get("impact"):
+        L.append("🌍 *Dünya/TR Haber → BIST Etkisi:*")
+        for x in g["impact"][:4]:
+            pos = [s for s, y, _ in x["etkiler"] if y == "+"]
+            neg = [s for s, y, _ in x["etkiler"] if y == "-"]
+            amb = [s for s, y, _ in x["etkiler"] if y == "±"]
+            et = ""
+            if pos: et += f"  🟢 {', '.join(pos[:4])}"
+            if neg: et += f"  🔴 {', '.join(neg[:4])}"
+            if amb: et += f"  🟡 {', '.join(amb[:3])}"
+            L.append(f"   • {x['title'][:58]}\n     →{et}")
+    if not g["news"] and not g.get("impact"):
+        L.append("📰 *Haberci:* yeni haber/etki yok")
     # Yargı sayacı
     tot_n = g["lo"]["n"] + g["cg"]["n"]
     pct = min(100, round(100 * tot_n / VERDICT_N))
