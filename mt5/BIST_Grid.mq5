@@ -212,7 +212,7 @@ void TrailShort(string sym)
 void OnTimer()
 {
    int n = ArraySize(g_symbols);
-   int nSide=0, nUp=0, nDown=0, nUpAfford=0, nData=0;     // tanı sayaçları
+   int nSide=0, nUp=0, nDown=0, nUpAfford=0, nSideAfford=0, nSideDip=0, nData=0;  // tanı sayaçları
    for(int s=0; s<n; s++)
    {
       string sym = g_symbols[s];
@@ -231,7 +231,12 @@ void OnTimer()
          double cs0=SymbolInfoDouble(sym,SYMBOL_TRADE_CONTRACT_SIZE);
          double ml0=SymbolInfoDouble(sym,SYMBOL_VOLUME_MIN);
          bool afford=(ask>0 && cs0>0 && ml0*ask*cs0 <= eq0*InpUnitPct/100.0);
-         if(sideways) nSide++;
+         if(sideways)
+         {
+            nSide++;
+            if(afford) nSideAfford++;
+            if(afford && ask <= center*(1.0-g_levels[0]/100.0)) nSideDip++;  // uygun + ilk seviyede (dip)
+         }
          else if(bid>center){ nUp++; if(afford) nUpAfford++; }
          else nDown++;
       }
@@ -304,10 +309,10 @@ void OnTimer()
    {
       lastDiag = TimeCurrent();
       double eq=AccountInfoDouble(ACCOUNT_EQUITY);
-      PrintFormat("TANI: veri %d · 🟦yatay %d · 📈yukarı %d (bütçeye uygun %d) · 📉aşağı %d · açık poz %d · kasa %%%.0f kullanımda",
-                  nData, nSide, nUp, nUpAfford, nDown, PositionsTotal(), TotalNotional()/eq*100.0);
-      if(nSide==0 && nUpAfford==0)
-         Print("→ İşlem yok çünkü: yatay hisse YOK (grid kapalı) + uygun-fiyatlı yukarı-trend YOK (trend-long açamıyor). Ucuz hisse ekle ya da bekle.");
+      PrintFormat("TANI: veri %d · 🟦yatay %d (uygun %d, DİP'te %d) · 📈yukarı %d (uygun %d) · 📉aşağı %d · açık %d · kasa %%%.0f",
+                  nData, nSide, nSideAfford, nSideDip, nUp, nUpAfford, nDown, PositionsTotal(), TotalNotional()/eq*100.0);
+      if(nSideDip==0 && nUpAfford==0)
+         Print("→ İşlem yok: uygun-fiyatlı + dip'teki yatay hisse yok, uygun yukarı-trend yok. (Bütçe uygun azsa → birim %% artır ya da ucuz hisse)");
    }
 }
 //+------------------------------------------------------------------+
