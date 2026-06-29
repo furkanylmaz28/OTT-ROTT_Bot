@@ -109,6 +109,17 @@ jobs:
             echo "Değişiklik yok."
           else
             git commit -m "auto: state + canlı performans $(date -u '+%H:%M')"
-            git pull --rebase origin main || true
-            git push || echo "push başarısız (sonraki koşu tekrar dener)"
+            # ROBUST PUSH: uzaktan ilerlemişse rebase et; DATA çakışmasında cron'unki
+            # (yeni pozisyonlar) kazansın (-X theirs = uygulanan commit). 3 deneme.
+            pushed=0
+            for i in 1 2 3; do
+              git fetch origin main
+              if git rebase -X theirs origin/main; then
+                if git push; then echo "push OK ($i)"; pushed=1; break; fi
+              else
+                git rebase --abort || true
+              fi
+              sleep 4
+            done
+            [ "$pushed" = "1" ] || echo "push başarısız (sonraki koşu tekrar dener)"
           fi
