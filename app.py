@@ -704,9 +704,13 @@ def _fresh_signal_popup():
                 _fresh.append((_sym.replace(".IS", ""), _v))
         except Exception:
             continue
-    # TEST: ?demo=popup ile örnek popup tetikle
-    try: _demo = st.query_params.get("demo") == "popup"
-    except Exception: _demo = False
+    # TEST: buton ya da ?demo=popup ile örnek popup tetikle
+    _demo = bool(st.session_state.get("_demo_popup"))
+    if not _demo:
+        try: _demo = st.query_params.get("demo") == "popup"
+        except Exception:
+            try: _demo = "popup" in st.experimental_get_query_params().get("demo", [])
+            except Exception: _demo = False
     if _demo:
         _fresh = [("DENEME-SISE", {"entry_price": 42.18, "stop": 40.90, "entry_ts": "demo1"}),
                   ("DENEME-AKSEN", {"entry_price": 38.50, "stop": 37.12, "entry_ts": "demo2"})] + _fresh
@@ -726,6 +730,9 @@ def _fresh_signal_popup():
                 f'<div style="display:flex;gap:8px;flex-wrap:wrap;">{_chips}</div></div>',
                 unsafe_allow_html=True)
 
+if st.button("🔔 Popup'ı dene (test)", key="demo_popup_btn"):
+    st.session_state["_demo_popup"] = True
+    st.session_state.pop("_toasted_sig", None)   # toast'ları tekrar tetikle
 _fresh_signal_popup()
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
