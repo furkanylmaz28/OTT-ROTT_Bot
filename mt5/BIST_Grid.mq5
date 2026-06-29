@@ -1,6 +1,7 @@
 //+------------------------------------------------------------------+
 //|                                              BIST_Grid.mq5        |
-//|  KANITLANMIŞ BIST GRID — yatay-kapılı, TRAILING çıkış, long-only  |
+//|  KANITLANMIŞ BIST GRID + TREND — her rejimde aktif, long-only     |
+//|  YATAY (ER<0.30)→grid · YUKARI TREND→long · AŞAĞI TREND→nakit      |
 //|  ÇOKLU SEMBOL: tüm Market Watch'ı tarar (InpScanAll).             |
 //|  Kaufman ER<0.30 = yatay → grid; trend → kapat. Seviye -1/-2/-3%. |
 //|  Birim +%1.5'te trailing aktif, peak'in %0.5 altına inince sat.   |
@@ -8,7 +9,7 @@
 //|     tüm sembollerdeki toplam notional ≤ %80. Kaldıraç YOK. DEMO.  |
 //+------------------------------------------------------------------+
 #property copyright "OTT Bot — QUANT DESK"
-#property version   "2.00"
+#property version   "3.00"
 #property strict
 #include <Trade/Trade.mqh>
 
@@ -24,6 +25,7 @@ input double  InpLevel3Pct        = 3.0;      // 3. AL seviyesi
 input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş
 input double  InpTrailPct         = 0.5;      // peak'in %X altına inince sat
 input double  InpUnitPct          = 5.0;      // Birim başı notional (% öz sermaye) — çok sembolde küçük tut
+input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
 input double  InpSafeReservePct   = 20.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %80
 input long    InpMagic            = 20260103;
 input int     InpTimerSec         = 10;       // Tarama aralığı (sn)
@@ -116,27 +118,29 @@ bool LevelHeld(string sym, int k)
    return false;
 }
 
-int OpenCount(string sym)
+// Yorum öneki: "G" = grid birimi, "T" = trend-long
+bool HasTag(string sym, string prefix)
 {
-   int c=0;
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
-      if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic) c++;
+      if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic)
+         if(StringFind(PositionGetString(POSITION_COMMENT), prefix)==0) return true;
    }
-   return c;
+   return false;
 }
 
-void CloseSym(string sym, string why)
+void CloseTag(string sym, string prefix, string why)
 {
    int closed=0;
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
       if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic)
-         { if(trade.PositionClose(tk)) closed++; }
+         if(StringFind(PositionGetString(POSITION_COMMENT), prefix)==0)
+            { if(trade.PositionClose(tk)) closed++; }
    }
-   if(InpVerbose && closed>0) PrintFormat("Grid kapatıldı (%s): %d birim · %s", sym, closed, why);
+   if(InpVerbose && closed>0) PrintFormat("Kapatıldı (%s %s): %d · %s", sym, prefix, closed, why);
 }
 
 //+------------------------------------------------------------------+
@@ -173,6 +177,7 @@ void TrailSym(string sym)
       ulong tk = PositionGetTicket(i);
       if(tk==0 || !PositionSelectByTicket(tk)) continue;
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
+      if(StringFind(PositionGetString(POSITION_COMMENT),"G")!=0) continue;  // sadece GRID birimleri trail
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
       if((bid-entry)/entry < InpTakePct/100.0) continue;          // +%1.5'e ulaşmadı
       double desiredSL = bid * (1.0 - InpTrailPct/100.0);
@@ -195,16 +200,37 @@ void OnTimer()
       datetime bt = iTime(sym, InpTF, 0);
       if(bt==0) continue;
       bool newbar = (bt != g_lastBar[s]);
+      double bid = SymbolInfoDouble(sym, SYMBOL_BID);
+      double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
 
+      // ════════ TREND (ER ≥ eşik) ════════
       if(!sideways)
       {
-         if(newbar && OpenCount(sym)>0) CloseSym(sym, StringFormat("TREND (ER=%.2f)", er));
+         if(newbar)
+         {
+            if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // grid kapat
+            if(InpTrendLong && ask>0)
+            {
+               bool up = (bid > center);                          // yön: fiyat>SMA = yukarı
+               if(up && !HasTag(sym,"T"))                         // yukarı trend → trend-long aç
+               {
+                  double lots = CalcLots(sym, ask);
+                  if(lots>0 && trade.Buy(lots, sym, ask, 0, 0, "T"))
+                     if(InpVerbose) PrintFormat("TREND-LONG AL: %s @ %.4g · %.2f lot (ER=%.2f yukarı)", sym, ask, lots, er);
+               }
+               else if(!up && HasTag(sym,"T"))                    // aşağı döndü → çık
+                  CloseTag(sym,"T","aşağı trend");
+            }
+            else if(!InpTrendLong && HasTag(sym,"T"))
+               CloseTag(sym,"T","trend-long kapalı");
+         }
          g_lastBar[s] = bt;
          continue;
       }
-      TrailSym(sym);                                              // açık birimleri trailing'le yönet
 
-      double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+      // ════════ YATAY (ER < eşik) → GRID ════════
+      if(HasTag(sym,"T")) CloseTag(sym,"T","yataya döndü");       // trend bitti → trend-long kapat
+      TrailSym(sym);                                              // grid birimlerini trailing'le yönet
       if(ask<=0){ g_lastBar[s]=bt; continue; }
       for(int k=0;k<3;k++)
       {
@@ -212,16 +238,13 @@ void OnTimer()
          if(ask <= lvl && !LevelHeld(sym, k+1))
          {
             double lots = CalcLots(sym, ask);
-            if(lots <= 0) continue;                               // kasa koruması/bütçe doldu
+            if(lots <= 0) continue;                               // kasa koruması: bütçe doldu
             if(trade.Buy(lots, sym, ask, 0, 0, "G"+IntegerToString(k+1)))
-            {
                if(InpVerbose)
                {
                   double eq=AccountInfoDouble(ACCOUNT_EQUITY);
-                  PrintFormat("GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f kullanımda",
-                              sym, k+1, ask, lots, TotalNotional()/eq*100.0);
+                  PrintFormat("GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f", sym, k+1, ask, lots, TotalNotional()/eq*100.0);
                }
-            }
          }
       }
       g_lastBar[s] = bt;
