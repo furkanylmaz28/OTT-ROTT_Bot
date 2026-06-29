@@ -838,6 +838,29 @@ def _live_ticker():
 try: _live_ticker()
 except Exception: pass
 
+
+# ── GLOBAL CANLI MOD — açıkken TÜM sayfa periyodik yenilenir (her tablo: Fiyat/Yüzen/Stop)
+_gc1, _gc2, _gc3 = st.columns([1.2, 1.4, 3])
+with _gc1:
+    _global_auto = st.toggle("🟢 Tümünü canlı tut", value=True, key="global_auto",
+                              help="Açıkken tüm sayfa belirlenen aralıkta yenilenir — "
+                                   "her tablodaki anlık fiyat / yüzen P&L / stop güncellenir.")
+with _gc2:
+    _global_sec = st.select_slider("Aralık", options=[15, 30, 60, 120], value=30,
+                                    format_func=lambda x: f"{x} sn", key="global_sec",
+                                    disabled=not _global_auto)
+with _gc3:
+    if _global_auto:
+        st.caption(f"● Canlı mod açık — sayfa {_global_sec} sn'de bir yenileniyor "
+                   f"({pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}). "
+                   "Okurken rahatsız ederse kapat.")
+if _global_auto:
+    try:
+        from streamlit_autorefresh import st_autorefresh
+        st_autorefresh(interval=_global_sec * 1000, key="global_tick")
+    except Exception:
+        st.caption("⚠️ Otomatik yenileme bileşeni yüklenemedi (deploy sonrası aktif olur).")
+
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
