@@ -249,8 +249,8 @@ double CalcLots(string sym)
    {
       double cs = SymbolInfoDouble(sym, SYMBOL_TRADE_CONTRACT_SIZE);
       double notional = lots * price * cs;
-      PrintFormat("%s: %.2f lot · teminat %.0f (öz sermayenin %%%.0f) · notional %.0f · ~%.1fx kaldıraç",
-                  sym, lots, need, InpMarginPerPosPct, notional, notional/eq);
+      PrintFormat("%s: %.2f lot · teminat %.0f (öz sermayenin %%%.1f) · notional %.0f · ~%.2fx kaldıraç",
+                  sym, lots, need, need/eq*100.0, notional, notional/eq);
    }
    // #5: lot ondalığını step'ten türet (2'ye zorlama)
    int vdig = (step >= 1.0) ? 0 : (int)MathRound(-MathLog10(step));
