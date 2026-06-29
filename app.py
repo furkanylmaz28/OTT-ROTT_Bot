@@ -488,6 +488,17 @@ def live_price(symbol):
         return None
 
 
+@st.cache_data(ttl=12, show_spinner=False)  # 12 sn — akan ticker şeridi için
+def live_price_fast(symbol):
+    from data_source import best_interval_for
+    try:
+        df = ds_fetch(symbol, interval=best_interval_for(symbol), n_bars=30)
+        if df.empty: return None
+        return float(df["close"].iloc[-1])
+    except Exception:
+        return None
+
+
 # Per-symbol params cache (uygulama başlangıcında okunur, hızlı erişim)
 @st.cache_data(ttl=60)
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -770,6 +781,41 @@ if st.button("🔔 Popup'ı dene (test)", key="demo_popup_btn"):
     st.session_state.pop("_sig_ack", None)   # ack'leri sıfırla → modal tekrar açılsın
     st.rerun()
 _fresh_signal_popup()
+
+
+# ── AKAN CANLI TİCKER ŞERİDİ — sayfa yenilenmeden 15 sn'de bir güncellenir (Investing tarzı)
+_TICKER = [("₿ BTC", "BTC-USD"), ("Ξ ETH", "ETH-USD"), ("SOL", "SOL-USD"),
+           ("GARAN", "GARAN.IS"), ("THYAO", "THYAO.IS"), ("ASELS", "ASELS.IS"),
+           ("EREGL", "EREGL.IS"), ("SISE", "SISE.IS")]
+
+@st.fragment(run_every=15)
+def _live_ticker():
+    _prev = st.session_state.setdefault("_tick_prev", {})
+    _cells = ""
+    for _lbl, _sym in _TICKER:
+        try: _p = live_price_fast(_sym)
+        except Exception: _p = None
+        if _p is None: continue
+        _old = _prev.get(_sym)
+        _arrow, _col = "", "#9aa4b2"
+        if _old is not None:
+            if _p > _old: _arrow, _col = "▲", "#2ecc8f"
+            elif _p < _old: _arrow, _col = "▼", "#ff6b81"
+        _prev[_sym] = _p
+        _pf = f"{_p:,.4f}".rstrip("0").rstrip(".") if _p < 100 else f"{_p:,.0f}"
+        _cells += (f'<span style="margin-right:24px;font-size:13px;white-space:nowrap;">'
+                   f'<b style="color:#cfd6e0;">{_lbl}</b> '
+                   f'<span style="color:{_col};font-variant-numeric:tabular-nums;font-weight:600;">{_pf} {_arrow}</span></span>')
+    from datetime import datetime as _dt2
+    st.markdown(
+        f'<div style="background:#10141d;border:1px solid #2a3140;border-radius:10px;'
+        f'padding:9px 16px;margin-bottom:14px;overflow-x:auto;white-space:nowrap;">'
+        f'<span style="color:#2962ff;font-weight:700;font-size:12px;margin-right:18px;">● CANLI</span>'
+        f'{_cells}<span style="color:#56607a;font-size:11px;margin-left:8px;">⏱ {_dt2.now():%H:%M:%S}</span></div>',
+        unsafe_allow_html=True)
+
+try: _live_ticker()
+except Exception: pass
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
