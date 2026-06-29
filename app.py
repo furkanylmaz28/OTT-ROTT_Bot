@@ -342,6 +342,114 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+# ── CİLA v3 — PREMIUM KURUMSAL TEMA (Inter font + derin palet + ince işçilik) ──
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+html, body, [class*="css"], .stApp, .stMarkdown, button, input, select, textarea {
+    font-family: 'Inter', -apple-system, system-ui, sans-serif !important;
+}
+.stApp {
+    background:
+      radial-gradient(1200px 600px at 15% -5%, #15233a55 0%, transparent 55%),
+      radial-gradient(1000px 500px at 95% 0%, #1a2a1f44 0%, transparent 50%),
+      linear-gradient(180deg, #0a0e16 0%, #0d121d 100%) !important;
+}
+.block-container { padding-top: 2.2rem; max-width: 1400px; }
+
+/* Başlık — kurumsal marka bandı */
+.main-header {
+    background: linear-gradient(135deg, #141b2b 0%, #1a2235 60%, #16203a 100%) !important;
+    border: 1px solid #28324a !important;
+    border-radius: 18px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45), inset 0 1px 0 #ffffff08 !important;
+    position: relative; overflow: hidden;
+}
+.main-header::before {
+    content:""; position:absolute; top:0; left:0; right:0; height:3px;
+    background: linear-gradient(90deg, #26a69a, #2962ff, #7c4dff, #26a69a);
+    background-size: 300% 100%; animation: lmflow 8s linear infinite;
+}
+@keyframes lmflow { 0%{background-position:0% 0} 100%{background-position:300% 0} }
+.main-header h1 { font-weight: 900 !important; letter-spacing:-0.5px; font-size: 30px !important; }
+.main-header .badge {
+    background: #ffffff0a !important; border: 1px solid #ffffff14;
+    backdrop-filter: blur(6px); padding: 5px 12px !important;
+}
+
+/* Metric kartları — premium derinlik */
+[data-testid="stMetric"] {
+    border-radius: 14px !important;
+    border: 1px solid #232c40 !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.3), inset 0 1px 0 #ffffff06 !important;
+    padding: 16px 18px !important;
+}
+[data-testid="stMetricValue"] { font-weight: 800 !important; letter-spacing:-0.5px; }
+
+/* Sekmeler — pill, premium */
+.stTabs [data-baseweb="tab-list"] {
+    background: #0f1623 !important; border: 1px solid #1e2840;
+    padding: 6px !important; border-radius: 12px !important; gap: 6px !important;
+}
+.stTabs [data-baseweb="tab"] { font-weight: 600 !important; font-size: 13.5px !important; border-radius: 9px !important; }
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg,#2962ff 0%,#5a4dff 100%) !important;
+    box-shadow: 0 4px 14px rgba(41,98,255,0.45) !important;
+}
+
+/* Butonlar — premium */
+.stButton button {
+    border-radius: 10px !important; font-weight: 700 !important;
+    border: 1px solid #2a3550 !important; letter-spacing:.2px;
+}
+.stButton button[kind="primary"] {
+    background: linear-gradient(135deg,#2962ff 0%,#6a4dff 100%) !important;
+    box-shadow: 0 6px 18px rgba(41,98,255,0.4) !important; border: none !important;
+}
+
+/* Dataframe — kurumsal tablo */
+.stDataFrame { border-radius: 12px !important; border: 1px solid #1e2840 !important; }
+.stDataFrame thead tr th {
+    background: #131b2c !important; color:#94a0b4 !important; font-weight:700 !important;
+    font-size: 11px !important; letter-spacing:.5px; padding: 10px !important;
+}
+.stDataFrame tbody tr:hover td { background: #161f31 !important; }
+
+/* Expander + alert */
+.streamlit-expanderHeader, details summary {
+    background: #111827 !important; border:1px solid #1e2840 !important;
+    border-radius: 10px !important;
+}
+.stAlert { border-radius: 12px !important; }
+
+/* lm-card premium yükseltme */
+.lm-card {
+    border-radius: 16px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4), inset 0 1px 0 #ffffff07 !important;
+    border: 1px solid #28324a !important;
+}
+
+/* Bölüm başlığı yardımcı sınıf */
+.lm-section { display:flex; align-items:center; gap:10px; margin: 4px 0 14px; }
+.lm-section .bar { width:4px; height:22px; border-radius:3px;
+    background: linear-gradient(180deg,#26a69a,#2962ff); }
+.lm-section .t { font-size:18px; font-weight:800; color:#e6e9ef; letter-spacing:-0.3px; }
+
+/* Durum çubuğu */
+.lm-status { display:flex; gap:18px; flex-wrap:wrap; align-items:center;
+    background:#0f1623; border:1px solid #1e2840; border-radius:12px;
+    padding:10px 16px; margin-bottom:14px; font-size:13px; }
+.lm-status .dot { display:inline-block; width:8px; height:8px; border-radius:50%;
+    margin-right:6px; box-shadow:0 0 8px currentColor; }
+.lm-status .on{ color:#2ecc8f; } .lm-status .off{ color:#ff6b81; } .lm-status .warn{ color:#f5b942; }
+
+/* Subheader'lara nefes */
+h3, [data-testid="stHeading"] { letter-spacing:-0.3px; }
+</style>
+""", unsafe_allow_html=True)
+
+
 # ── Görsel yardımcılar (kurumsal kart + rozet) ──
 def lm_pill(text, kind="blue"):
     """Renkli rozet HTML'i döndürür. kind: green/red/amber/blue."""
@@ -357,6 +465,45 @@ def lm_hero(title, stats):
         cells += f'<div class="lm-stat"><div class="v {vc}">{value}</div><div class="l">{label}</div></div>'
     st.markdown(f'<div class="lm-card"><div class="lm-title">{title}</div>'
                 f'<div class="lm-row">{cells}</div></div>', unsafe_allow_html=True)
+
+
+def lm_section(title, icon=""):
+    """Renkli barlı kurumsal bölüm başlığı."""
+    st.markdown(f'<div class="lm-section"><div class="bar"></div>'
+                f'<div class="t">{icon} {title}</div></div>', unsafe_allow_html=True)
+
+
+def lm_status_bar():
+    """Üst kurumsal durum çubuğu: BIST seans, crypto 7/24, son güncelleme, sistem."""
+    import os as _o, json as _j
+    from datetime import datetime as _d
+    now = pd.Timestamp.now(tz="Europe/Istanbul")
+    # BIST seansı (hafta içi 10:00–18:00)
+    bist_open = now.weekday() < 5 and (10 <= now.hour < 18)
+    # son cron güncellemesi
+    try:
+        mt = max((_o.path.getmtime(f) for f in
+                  ["lo_positions.json", "cg_positions.json", "lo_breadth.json"] if _o.path.exists(f)),
+                 default=0)
+        last = _d.fromtimestamp(mt).strftime("%H:%M") if mt else "—"
+    except Exception:
+        last = "—"
+    # açık pozisyon sayıları
+    def _cnt(f):
+        try: return len(_j.load(open(f, encoding="utf-8")))
+        except Exception: return 0
+    bist_n = _cnt("lo_positions.json"); cg_n = sum(len(v) for v in
+        (_j.load(open("cg_positions.json", encoding="utf-8")).values() if _o.path.exists("cg_positions.json") else []))
+    bd = "on" if bist_open else "off"
+    st.markdown(
+        f'<div class="lm-status">'
+        f'<span><span class="dot {bd}">●</span><b>BIST</b> {"AÇIK" if bist_open else "KAPALI"}</span>'
+        f'<span><span class="dot on">●</span><b>Crypto</b> 7/24 AKTİF</span>'
+        f'<span><span class="dot on">●</span><b>Bot</b> çalışıyor (cron)</span>'
+        f'<span>📂 BIST <b>{bist_n}</b> · Crypto <b>{cg_n}</b> açık</span>'
+        f'<span style="color:#56607a;">⏱ son veri {last}</span>'
+        f'<span style="color:#56607a;">{now:%d.%m.%Y %A}</span>'
+        f'</div>', unsafe_allow_html=True)
 
 # ── Sembol evreni — tam NASDAQ 100 + genişletilmiş BIST
 # NASDAQ kategorisi = GCM Forex'te işlem gören hisseler (Türkiye'den erişilebilir CFD'ler)
@@ -836,6 +983,9 @@ def _live_ticker():
         unsafe_allow_html=True)
 
 try: _live_ticker()
+except Exception: pass
+
+try: lm_status_bar()
 except Exception: pass
 
 
