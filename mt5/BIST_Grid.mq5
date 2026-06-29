@@ -24,7 +24,7 @@ input double  InpLevel2Pct        = 2.0;      // 2. AL seviyesi
 input double  InpLevel3Pct        = 3.0;      // 3. AL seviyesi
 input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş
 input double  InpTrailPct         = 0.5;      // peak'in %X altına inince sat
-input double  InpUnitPct          = 5.0;      // Birim başı notional (% öz sermaye) — çok sembolde küçük tut
+input double  InpUnitPct          = 10.0;     // Birim başı = kasanın %X'i ile alabileceği kadar (yetmezse hisseyi atla)
 input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
 input bool    InpAllowShort       = false;    // SHORT (demo): tepeden sat grid + aşağı trend short (BIST drift'i aleyhe — PF düşer)
 input double  InpSafeReservePct   = 20.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %80
@@ -159,12 +159,7 @@ double CalcLots(string sym, double ask)
    double maxl = SymbolInfoDouble(sym, SYMBOL_VOLUME_MAX);
    if(step<=0) step=minl;
    double lots = MathFloor((target/(ask*cs))/step)*step;
-   if(lots < minl)
-   {
-      // %5 birim 1 kontrattan küçük (pahalı VIOP) — kalan bütçe izin veriyorsa min 1 kontrat al
-      if(minl*ask*cs <= budget) lots = minl;
-      else return 0;
-   }
+   if(lots < minl) return 0;   // %10 bütçe 1 kontrata yetmiyor (pahalı hisse) → ATLA (konsantre olma)
    if(lots > maxl) lots = maxl;
    double need=0;
    if(OrderCalcMargin(ORDER_TYPE_BUY, sym, lots, ask, need))
