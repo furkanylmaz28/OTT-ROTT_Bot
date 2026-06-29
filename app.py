@@ -693,7 +693,7 @@ def _fresh_signal_popup():
     try:
         _pos = _j.load(open("lo_positions.json", encoding="utf-8"))
     except Exception:
-        return
+        _pos = {}
     _now = _dt.now(_tz.utc); _fresh = []
     for _sym, _v in _pos.items():
         try:
@@ -704,6 +704,12 @@ def _fresh_signal_popup():
                 _fresh.append((_sym.replace(".IS", ""), _v))
         except Exception:
             continue
+    # TEST: ?demo=popup ile örnek popup tetikle
+    try: _demo = st.query_params.get("demo") == "popup"
+    except Exception: _demo = False
+    if _demo:
+        _fresh = [("DENEME-SISE", {"entry_price": 42.18, "stop": 40.90, "entry_ts": "demo1"}),
+                  ("DENEME-AKSEN", {"entry_price": 38.50, "stop": 37.12, "entry_ts": "demo2"})] + _fresh
     if not _fresh:
         return
     _shown = st.session_state.setdefault("_toasted_sig", set())
