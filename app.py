@@ -998,13 +998,9 @@ try: lm_status_bar()
 except Exception: pass
 
 
-# ── Sessiz global canlı yenileme — UI YOK (toggle amatör duruyordu). Tüm sayfa
-#    sessizce 30 sn'de bir tazelenir; veriler kendiliğinden akar.
-try:
-    from streamlit_autorefresh import st_autorefresh
-    st_autorefresh(interval=30000, key="silent_global_tick")
-except Exception:
-    pass
+# NOT: Global sayfa-yenilemesi KALDIRILDI — uzun BIST taramasını ortasında kesiyordu
+#      (30 sn'de bir rerun → tarama durur). Üstteki akan ticker fragment olduğu için
+#      taramayı kesmez; "canlı" hissi onunla sürüyor. Tablolar etkileşimde tazelenir.
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
