@@ -162,12 +162,12 @@ def main():
             try: mins = (now - datetime.fromisoformat(last_ts)).total_seconds() / 60
             except Exception: pass
         changed = (sig != last_sig)
-        # gönder: (değişiklik var ve ≥20 dk geçti) VEYA (4 saat hayatta sinyali)
-        if (changed and mins >= 20) or mins >= 240:
+        # gönder: DÜZENLİ ~30 dk'da bir VEYA değişiklikte daha hızlı (≥8 dk)
+        if mins >= 28 or (changed and mins >= 8):
             if _send(report):
                 json.dump({"ts": now.isoformat(), "sig": sig}, open(STATE_FILE, "w"))
         else:
-            print(f"[cron: gönderilmedi — değişiklik={changed}, son gönderimden {mins:.0f}dk]")
+            print(f"[cron: gönderilmedi — son gönderimden {mins:.0f}dk (30 dk bekleniyor)]")
         return
     _send(report)
 
