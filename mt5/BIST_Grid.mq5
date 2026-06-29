@@ -9,7 +9,7 @@
 //|     tüm sembollerdeki toplam notional ≤ %80. Kaldıraç YOK. DEMO.  |
 //+------------------------------------------------------------------+
 #property copyright "OTT Bot — QUANT DESK"
-#property version   "3.00"
+#property version   "4.00"
 #property strict
 #include <Trade/Trade.mqh>
 
@@ -26,6 +26,7 @@ input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş
 input double  InpTrailPct         = 0.5;      // peak'in %X altına inince sat
 input double  InpUnitPct          = 5.0;      // Birim başı notional (% öz sermaye) — çok sembolde küçük tut
 input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
+input bool    InpAllowShort       = false;    // SHORT (demo): tepeden sat grid + aşağı trend short (BIST drift'i aleyhe — PF düşer)
 input double  InpSafeReservePct   = 20.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %80
 input long    InpMagic            = 20260103;
 input int     InpTimerSec         = 10;       // Tarama aralığı (sn)
@@ -105,9 +106,9 @@ double TotalNotional()
    return tot;
 }
 
-bool LevelHeld(string sym, int k)
+bool LevelHeld(string sym, string prefix, int k)
 {
-   string tag = "G" + IntegerToString(k);
+   string tag = prefix + IntegerToString(k);
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -187,6 +188,26 @@ void TrailSym(string sym)
    }
 }
 
+// SHORT grid trailing: kâr +%1.5'e ulaşınca SL fiyatın üstüne, fiyat düştükçe aşağı çek
+void TrailShort(string sym)
+{
+   double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk==0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
+      if(StringFind(PositionGetString(POSITION_COMMENT),"S")!=0) continue;  // sadece SHORT grid
+      double entry = PositionGetDouble(POSITION_PRICE_OPEN);
+      if((entry-ask)/entry < InpTakePct/100.0) continue;          // henüz +%1.5 kâr yok
+      double desiredSL = ask * (1.0 + InpTrailPct/100.0);
+      double curSL = PositionGetDouble(POSITION_SL);
+      if(curSL==0 || desiredSL < curSL)                           // short: SL'i AŞAĞI çek
+         trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
+   }
+}
+
 //+------------------------------------------------------------------+
 void OnTimer()
 {
@@ -208,43 +229,58 @@ void OnTimer()
       {
          if(newbar)
          {
-            if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // grid kapat
-            if(InpTrendLong && ask>0)
+            if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // long grid kapat
+            if(HasTag(sym,"S")) CloseTag(sym,"S", StringFormat("TREND (ER=%.2f)", er));  // short grid kapat
+            bool up = (bid > center);                             // yön: fiyat>SMA = yukarı
+            // YUKARI trend → trend-long
+            if(InpTrendLong && ask>0 && up && !HasTag(sym,"T"))
             {
-               bool up = (bid > center);                          // yön: fiyat>SMA = yukarı
-               if(up && !HasTag(sym,"T"))                         // yukarı trend → trend-long aç
-               {
-                  double lots = CalcLots(sym, ask);
-                  if(lots>0 && trade.Buy(lots, sym, ask, 0, 0, "T"))
-                     if(InpVerbose) PrintFormat("TREND-LONG AL: %s @ %.4g · %.2f lot (ER=%.2f yukarı)", sym, ask, lots, er);
-               }
-               else if(!up && HasTag(sym,"T"))                    // aşağı döndü → çık
-                  CloseTag(sym,"T","aşağı trend");
+               double lots = CalcLots(sym, ask);
+               if(lots>0 && trade.Buy(lots, sym, ask, 0, 0, "T"))
+                  if(InpVerbose) PrintFormat("TREND-LONG AL: %s @ %.4g · %.2f lot (ER=%.2f yukarı)", sym, ask, lots, er);
             }
-            else if(!InpTrendLong && HasTag(sym,"T"))
-               CloseTag(sym,"T","trend-long kapalı");
+            if(up && HasTag(sym,"D")) CloseTag(sym,"D","yukarı döndü");   // short kapat
+            // AŞAĞI trend → trend-short (sadece demo/AllowShort)
+            if(InpAllowShort && bid>0 && !up && !HasTag(sym,"D"))
+            {
+               double lots = CalcLots(sym, bid);
+               if(lots>0 && trade.Sell(lots, sym, bid, 0, 0, "D"))
+                  if(InpVerbose) PrintFormat("TREND-SHORT SAT: %s @ %.4g · %.2f lot (ER=%.2f aşağı)", sym, bid, lots, er);
+            }
+            if(!up && HasTag(sym,"T")) CloseTag(sym,"T","aşağı trend"); // long kapat
+            if(!InpTrendLong && HasTag(sym,"T")) CloseTag(sym,"T","trend-long kapalı");
+            if(!InpAllowShort && HasTag(sym,"D")) CloseTag(sym,"D","short kapalı");
          }
          g_lastBar[s] = bt;
          continue;
       }
 
       // ════════ YATAY (ER < eşik) → GRID ════════
-      if(HasTag(sym,"T")) CloseTag(sym,"T","yataya döndü");       // trend bitti → trend-long kapat
-      TrailSym(sym);                                              // grid birimlerini trailing'le yönet
+      if(HasTag(sym,"T")) CloseTag(sym,"T","yataya döndü");       // trend bitti → trend pozisyonları kapat
+      if(HasTag(sym,"D")) CloseTag(sym,"D","yataya döndü");
+      TrailSym(sym); TrailShort(sym);                            // grid birimlerini trailing'le yönet
       if(ask<=0){ g_lastBar[s]=bt; continue; }
       for(int k=0;k<3;k++)
       {
-         double lvl = center * (1.0 - g_levels[k]/100.0);
-         if(ask <= lvl && !LevelHeld(sym, k+1))
+         // LONG grid: merkez altı seviyeye inince al
+         double lvlL = center * (1.0 - g_levels[k]/100.0);
+         if(ask <= lvlL && !LevelHeld(sym, "G", k+1))
          {
             double lots = CalcLots(sym, ask);
-            if(lots <= 0) continue;                               // kasa koruması: bütçe doldu
-            if(trade.Buy(lots, sym, ask, 0, 0, "G"+IntegerToString(k+1)))
-               if(InpVerbose)
-               {
-                  double eq=AccountInfoDouble(ACCOUNT_EQUITY);
-                  PrintFormat("GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f", sym, k+1, ask, lots, TotalNotional()/eq*100.0);
-               }
+            if(lots > 0 && trade.Buy(lots, sym, ask, 0, 0, "G"+IntegerToString(k+1)))
+               if(InpVerbose){ double eq=AccountInfoDouble(ACCOUNT_EQUITY);
+                  PrintFormat("GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f", sym, k+1, ask, lots, TotalNotional()/eq*100.0); }
+         }
+         // SHORT grid: merkez üstü seviyeye çıkınca sat (demo/AllowShort)
+         if(InpAllowShort)
+         {
+            double lvlS = center * (1.0 + g_levels[k]/100.0);
+            if(bid >= lvlS && !LevelHeld(sym, "S", k+1))
+            {
+               double lots = CalcLots(sym, bid);
+               if(lots > 0 && trade.Sell(lots, sym, bid, 0, 0, "S"+IntegerToString(k+1)))
+                  if(InpVerbose) PrintFormat("GRID SAT (short): %s sev%d @ %.4g · %.2f lot", sym, k+1, bid, lots);
+            }
          }
       }
       g_lastBar[s] = bt;
