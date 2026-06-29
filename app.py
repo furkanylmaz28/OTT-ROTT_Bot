@@ -998,27 +998,13 @@ try: lm_status_bar()
 except Exception: pass
 
 
-# ── GLOBAL CANLI MOD — açıkken TÜM sayfa periyodik yenilenir (her tablo: Fiyat/Yüzen/Stop)
-_gc1, _gc2, _gc3 = st.columns([1.2, 1.4, 3])
-with _gc1:
-    _global_auto = st.toggle("🟢 Tümünü canlı tut", value=True, key="global_auto",
-                              help="Açıkken tüm sayfa belirlenen aralıkta yenilenir — "
-                                   "her tablodaki anlık fiyat / yüzen P&L / stop güncellenir.")
-with _gc2:
-    _global_sec = st.select_slider("Aralık", options=[15, 30, 60, 120], value=30,
-                                    format_func=lambda x: f"{x} sn", key="global_sec",
-                                    disabled=not _global_auto)
-with _gc3:
-    if _global_auto:
-        st.caption(f"● Canlı mod açık — sayfa {_global_sec} sn'de bir yenileniyor "
-                   f"({pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}). "
-                   "Okurken rahatsız ederse kapat.")
-if _global_auto:
-    try:
-        from streamlit_autorefresh import st_autorefresh
-        st_autorefresh(interval=_global_sec * 1000, key="global_tick")
-    except Exception:
-        st.caption("⚠️ Otomatik yenileme bileşeni yüklenemedi (deploy sonrası aktif olur).")
+# ── Sessiz global canlı yenileme — UI YOK (toggle amatör duruyordu). Tüm sayfa
+#    sessizce 30 sn'de bir tazelenir; veriler kendiliğinden akar.
+try:
+    from streamlit_autorefresh import st_autorefresh
+    st_autorefresh(interval=30000, key="silent_global_tick")
+except Exception:
+    pass
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
@@ -1354,20 +1340,6 @@ with tab_kokpit:
     st.caption("Açık pozisyon ve izleme sembollerinin **güncel OTT+TOTT yönü ve çıkış çizgisi** tek ekranda. "
                 "Seviyeler her barla kayar; burada hep tazesi gösterilir. (BIST → futures, Pine param)")
 
-
-    # Otomatik yenileme
-    _kc1, _kc2 = st.columns([1, 3])
-    with _kc1:
-        _k_auto = st.toggle("🔄 Otomatik yenile", value=False, key="kokpit_auto")
-    with _kc2:
-        _k_sec = st.select_slider("Aralık (sn)", options=[30, 60, 120, 300], value=60,
-                                   key="kokpit_sec", disabled=not _k_auto)
-    if _k_auto:
-        try:
-            from streamlit_autorefresh import st_autorefresh
-            st_autorefresh(interval=_k_sec * 1000, key="kokpit_tick")
-        except Exception:
-            pass
 
     _k_tf = st.radio("Zaman dilimi", ["15m", "1h"], horizontal=True, key="kokpit_tf",
                       help="Çıkış seviyesi bu TF'in OTT/TOTT'undan hesaplanır")
@@ -3282,24 +3254,6 @@ with tab_live:
                 "gerçek zamanlı sonucu. Bot her tarama'da BIST'i tarar, LONG açar / nakide çıkar "
                 "(short yok, max 6 pozisyon). Asıl güven göstergesi budur.")
 
-    # ── Otomatik yenileme — tıklamadan veriyi tazele
-    _ar1, _ar2 = st.columns([1, 3])
-    with _ar1:
-        auto_refresh = st.toggle("🔄 Otomatik yenile", value=False, key="live_autorefresh",
-                                  help="Açıkken sayfa periyodik kendini yeniler, "
-                                       "sen tıklamadan canlı veri güncellenir.")
-    with _ar2:
-        refresh_sec = st.select_slider("Aralık (sn)", options=[30, 60, 120, 300],
-                                        value=60, key="live_refresh_sec",
-                                        disabled=not auto_refresh)
-    if auto_refresh:
-        try:
-            from streamlit_autorefresh import st_autorefresh
-            st_autorefresh(interval=refresh_sec * 1000, key="live_ar_tick")
-            st.caption(f"⏱️ Her {refresh_sec} sn'de otomatik yenileniyor "
-                        f"(son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}).")
-        except Exception:
-            st.caption("⚠️ Otomatik yenileme bileşeni yüklenemedi (deploy sonrası aktif olur).")
 
     with st.expander("ℹ️ Bu nasıl çalışır?"):
         st.markdown("""
@@ -3417,8 +3371,7 @@ with tab_live:
         }).background_gradient(subset=["Yüzen P&L %"], cmap="RdYlGn", vmin=-5, vmax=5)
         st.dataframe(styler, use_container_width=True, height=400)
         st.caption(f"💹 Anlık fiyatlar (≤45 sn taze) — "
-                    f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S}. "
-                    "Sürekli akış için üstte **🔄 Otomatik yenile**'yi aç.")
+                    f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S} · sayfa sessizce yenilenir.")
 
     st.markdown("---")
     if not live_rows:
