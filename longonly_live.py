@@ -17,7 +17,11 @@ TR = timezone(timedelta(hours=3))
 POS_FILE = "lo_positions.json"
 TRADES_FILE = "lo_trades.json"
 BREADTH_FILE = "lo_breadth.json"
-MAX_OPEN = 3
+try:
+    import risk
+    MAX_OPEN = risk.MAX_POSITIONS   # tek kaynak (risk.py = 6)
+except Exception:
+    MAX_OPEN = 6
 
 # SADECE walk-forward'ı (H1, 10/3, %0.05 maliyet) GEÇEN 34 sembol işlenir.
 # Geçemeyen 11 (ARCLK,BIMAS,GARAN,OYAKC,SAHOL,TCELL,TSKB,VESTL,DOAS,CIMSA,ULKER)

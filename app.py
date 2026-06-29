@@ -290,8 +290,73 @@ st.markdown("""
     #MainMenu { visibility: hidden; }
     footer { visibility: hidden; }
     .stDeployButton { display: none; }
+
+    /* ═══ CİLA v2 — kurumsal görünüm ═══ */
+    /* Metric kartlarına ince üst-accent çizgisi + glow */
+    [data-testid="stMetric"] {
+        position: relative; overflow: hidden;
+        background: linear-gradient(180deg,#1c2230 0%,#171b27 100%) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    [data-testid="stMetric"]::before {
+        content:""; position:absolute; top:0; left:0; right:0; height:2px;
+        background: linear-gradient(90deg,#26a69a,#2962ff);
+        opacity:.8;
+    }
+    [data-testid="stMetric"]:hover { box-shadow: 0 6px 20px rgba(41,98,255,0.18); }
+
+    /* Dataframe — daha yoğun, daha okunaklı */
+    .stDataFrame thead tr th {
+        background: #1f2533 !important;
+        color: #9aa4b2 !important;
+        text-transform: uppercase; font-size: 11px !important; letter-spacing:.4px;
+        border-bottom: 2px solid #2962ff44 !important;
+    }
+    .stDataFrame tbody tr:hover td { background: #1c2230 !important; }
+    .stDataFrame tbody td { font-variant-numeric: tabular-nums; }
+
+    /* Rozet pill'leri */
+    .pill { display:inline-block; padding:3px 10px; border-radius:999px;
+            font-size:12px; font-weight:700; letter-spacing:.2px; }
+    .pill-green { background:#0e3b2e; color:#2ecc8f; border:1px solid #1c6b50; }
+    .pill-red   { background:#3b1620; color:#ff6b81; border:1px solid #6b1c2c; }
+    .pill-amber { background:#3a2f12; color:#f5b942; border:1px solid #6b551c; }
+    .pill-blue  { background:#13294a; color:#5aa9ff; border:1px solid #1c4a6b; }
+
+    /* Kurumsal kart (hero/stat) */
+    .lm-card {
+        background: linear-gradient(160deg,#1a2030 0%,#141822 100%);
+        border:1px solid #2a3140; border-radius:14px; padding:18px 20px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.35); position:relative; overflow:hidden;
+    }
+    .lm-card::after{ content:""; position:absolute; inset:0 0 auto 0; height:3px;
+        background:linear-gradient(90deg,#26a69a,#2962ff,#26a69a); }
+    .lm-card .lm-title{ color:#8b95a5; font-size:12px; text-transform:uppercase;
+        letter-spacing:.6px; margin-bottom:12px; font-weight:600; }
+    .lm-row{ display:flex; gap:26px; flex-wrap:wrap; }
+    .lm-stat{ min-width:90px; }
+    .lm-stat .v{ font-size:24px; font-weight:800; color:#e6e9ef; line-height:1.1; }
+    .lm-stat .l{ font-size:11px; color:#7a8494; text-transform:uppercase; letter-spacing:.4px; }
+    .v-green{ color:#2ecc8f !important; } .v-red{ color:#ff6b81 !important; }
 </style>
 """, unsafe_allow_html=True)
+
+
+# ── Görsel yardımcılar (kurumsal kart + rozet) ──
+def lm_pill(text, kind="blue"):
+    """Renkli rozet HTML'i döndürür. kind: green/red/amber/blue."""
+    return f'<span class="pill pill-{kind}">{text}</span>'
+
+
+def lm_hero(title, stats):
+    """Kurumsal istatistik kartı. stats = [(label, value, color), ...] color: ''/'green'/'red'."""
+    cells = ""
+    for label, value, *rest in stats:
+        color = rest[0] if rest else ""
+        vc = f"v-{color}" if color else ""
+        cells += f'<div class="lm-stat"><div class="v {vc}">{value}</div><div class="l">{label}</div></div>'
+    st.markdown(f'<div class="lm-card"><div class="lm-title">{title}</div>'
+                f'<div class="lm-row">{cells}</div></div>', unsafe_allow_html=True)
 
 # ── Sembol evreni — tam NASDAQ 100 + genişletilmiş BIST
 # NASDAQ kategorisi = GCM Forex'te işlem gören hisseler (Türkiye'den erişilebilir CFD'ler)
@@ -842,13 +907,16 @@ with tab_cryptogrid:
         import crypto_grid_live as _cgl
         _ov = _cgl.overall_stats()
         _ou = _cgl.open_units()
-        st.markdown("#### 📊 Canlı Performans (grid, 7/24)")
-        _m1, _m2, _m3, _m4 = st.columns(4)
-        _m1.metric("Kapanan işlem", _ov["n"])
-        _m2.metric("Kazanma %", f"{_ov['win_rate']:.0f}" if _ov["n"] else "-")
-        _m3.metric("Profit Factor", f"{_ov['pf']:.2f}" if _ov["n"] else "-")
-        _m4.metric("Toplam %", f"{_ov['total']:+.1f}" if _ov["n"] else "-")
         _nu = sum(len(v) for v in _ou.values())
+        _tc = "green" if _ov["total"] > 0 else ("red" if _ov["total"] < 0 else "")
+        lm_hero("📊 Canlı Performans — Crypto Grid (7/24)", [
+            ("Kapanan işlem", _ov["n"]),
+            ("Kazanma", f"%{_ov['win_rate']:.0f}" if _ov["n"] else "-"),
+            ("Profit Factor", f"{_ov['pf']:.2f}" if _ov["n"] else "-"),
+            ("Toplam", f"{_ov['total']:+.1f}%" if _ov["n"] else "-", _tc),
+            ("Açık birim", _nu, "blue" if _nu else ""),
+        ])
+        st.write("")
         st.markdown(f"##### 📂 Açık grid birimleri ({_nu}) — +%1.5'te trailing aktif olur, peak'i %0.5 kırınca satar")
         if _nu:
             _lvlpct = {0: "-2%", 1: "-4%", 2: "-6%"}
@@ -2877,7 +2945,7 @@ with tab_live:
     st.subheader("✅ Canlı Performans — Kanıtlanmış Sistem (SuperTrend Long-only)")
     st.caption("Walk-forward + Monte Carlo'dan geçen **SuperTrend 10/3 long-only** sistemin "
                 "gerçek zamanlı sonucu. Bot her tarama'da BIST'i tarar, LONG açar / nakide çıkar "
-                "(short yok, max 3 pozisyon). Asıl güven göstergesi budur.")
+                "(short yok, max 6 pozisyon). Asıl güven göstergesi budur.")
 
     # ── Otomatik yenileme — tıklamadan veriyi tazele
     _ar1, _ar2 = st.columns([1, 3])
@@ -2948,6 +3016,18 @@ with tab_live:
             })
     # Açık pozisyonları da kategoriye göre filtrele
     open_pos = {k: v for k, v in open_pos.items() if _in_cat(k)}
+
+    # ── HERO KART — kategori canlı özeti
+    _an = sum(r["Canlı Trade"] for r in live_rows)
+    _atot = sum(r["Toplam %"] for r in live_rows)
+    _awin = (100 * sum(r["Canlı Trade"] * r["Canlı Win %"] / 100 for r in live_rows) / _an) if _an else 0
+    lm_hero(f"📊 Canlı Özet — {live_cat}", [
+        ("Kapanan işlem", _an),
+        ("Kazanma", f"%{_awin:.0f}" if _an else "-"),
+        ("Toplam", f"{_atot:+.1f}%" if _an else "-", "green" if _atot > 0 else ("red" if _atot < 0 else "")),
+        ("Açık pozisyon", len(open_pos)),
+    ])
+    st.write("")
 
     # ── AÇIK POZİSYONLAR — HER ZAMAN göster (kapanmış işlem olmasa da)
     #    Bot girdi, işlem DEVAM EDİYOR. Telegram'a "açıldı" bildirimi gelen
