@@ -2,7 +2,8 @@
 //|                                  OTT_SuperTrend_LongOnly.mq5      |
 //|   Kanıtlanmış sistem: SuperTrend 10/3 (H1) · LONG-ONLY + NAKİT    |
 //|   Short YOK · max 2x kaldıraç · max 3 pozisyon · BIST VIOP        |
-//|   Walk-forward + Monte Carlo ile doğrulandı. SADECE DEMO için.    |
+//|   + günlük/haftalık zarar freni · taze pencere ≤9 bar (risk.py ile|
+//|   uyumlu). Walk-forward + Monte Carlo doğrulamalı. SADECE DEMO.   |
 //+------------------------------------------------------------------+
 #property copyright "OTT Bot"
 #property version   "1.00"
@@ -17,6 +18,9 @@ input ENUM_TIMEFRAMES InpTF      = PERIOD_H1;  // Zaman dilimi (sistem H1 ile do
 input int     InpAtrPeriod      = 10;          // SuperTrend ATR periyodu (Kıvanç default)
 input double  InpMultiplier      = 3.0;        // SuperTrend çarpanı
 input bool    InpFreshOnly       = true;       // Sadece TAZE dönüşte gir (geç trene binme)
+input int     InpFreshBars       = 9;          // TAZE penceresi: dönüşten sonra max kaç bar içinde gir (≤9 ≈ 1 gün; çevrimdışı kaçırılanı yakalar)
+input double  InpDailyLossPct    = 2.0;        // 🛑 Günlük zarar freni: -%X'te yeni pozisyon AÇMA (çıkışlar devam)
+input double  InpWeeklyLossPct   = 5.0;        // 🛑 Haftalık zarar freni: -%X'te yeni pozisyon AÇMA
 input double  InpMarginPerPosPct = 33.0;       // Pozisyon başına KULLANILAN teminat (% öz sermaye)
 input int     InpMaxPositions    = 3;          // Aynı anda max açık pozisyon (3×%33≈%99)
 input double  InpMaxTotalMarginPct = 99.0;     // TOPLAM kullanılan teminat tavanı (% öz sermaye) — #9
@@ -32,6 +36,9 @@ CTrade        trade;
 string        g_symbols[];
 datetime      g_lastBar[];
 int           g_atr[];
+// zarar freni durumu
+double        g_dayStartEq = 0, g_weekStartEq = 0;
+int           g_dayYday = -1,   g_weekNo = -1;
 
 //+------------------------------------------------------------------+
 int OnInit()
@@ -95,6 +102,7 @@ void OnTick(){ /* ana mantık OnTimer'da (çoklu sembol için güvenilir) */ }
 //+------------------------------------------------------------------+
 void OnTimer()
 {
+   bool halted = RiskHalted();   // günlük/haftalık zarar freni (yeni pozisyonu durdurur, çıkışı değil)
    int n = ArraySize(g_symbols);
    for(int i=0;i<n;i++)
    {
@@ -106,8 +114,8 @@ void OnTimer()
 
       if(g_atr[i] == INVALID_HANDLE) continue;   // #2: handle yoksa atla
 
-      int tLast, tPrev;
-      if(!GetSuperTrend(sym, g_atr[i], tLast, tPrev)) continue;
+      int tLast, tPrev, tBars;
+      if(!GetSuperTrend(sym, g_atr[i], tLast, tPrev, tBars)) continue;
 
       bool haveLong = HasLong(sym);
 
@@ -122,8 +130,9 @@ void OnTimer()
       // GİRİŞ: trend yukarı, pozisyon yok, slot+teminat uygun
       if(!haveLong && tLast == 1)
       {
-         bool fresh = (tPrev == -1);
-         if(InpFreshOnly && !fresh) continue;     // geç trene binme
+         if(halted) continue;                     // 🛑 zarar freni: yeni pozisyon yok
+         bool fresh = (tBars <= InpFreshBars);    // dönüşten sonra ≤N bar (geç trene binme + çevrimdışı kaçırılanı yakala)
+         if(InpFreshOnly && !fresh) continue;
          if(CountOpen() >= InpMaxPositions) continue;
          if(InpSectorCap && SameSectorOpen(sym)) continue;   // #6: korelasyon kapısı
          // sembol işleme açık mı (seans/devre kesici)?
@@ -144,7 +153,7 @@ void OnTimer()
 //|  up=src-mult*atr (ratchet max), dn=src+mult*atr (ratchet min)    |
 //|  trend: -1&close>dn1 ->1 ; 1&close<up1 ->-1                       |
 //+------------------------------------------------------------------+
-bool GetSuperTrend(string sym, int atrHandle, int &trendLast, int &trendPrev)
+bool GetSuperTrend(string sym, int atrHandle, int &trendLast, int &trendPrev, int &barsInTrend)
 {
    int lb = 320;
    double atr[]; MqlRates r[];
@@ -180,6 +189,10 @@ bool GetSuperTrend(string sym, int atrHandle, int &trendLast, int &trendPrev)
 
    trendLast = trend[1];   // index 0 = oluşan bar → son KAPANAN = 1
    trendPrev = trend[2];
+   // kaç bardır bu yönde (son kapanan bar=1'den geriye, aynı yön sürdükçe say)
+   int cnt = 0;
+   for(int j=1; j<lb && trend[j]==trendLast; j++) cnt++;
+   barsInTrend = cnt;
    return true;
 }
 
@@ -231,6 +244,26 @@ double CalcLots(string sym)
    // #5: lot ondalığını step'ten türet (2'ye zorlama)
    int vdig = (step >= 1.0) ? 0 : (int)MathRound(-MathLog10(step));
    return NormalizeDouble(lots, vdig);
+}
+
+//+------------------------------------------------------------------+
+//| Zarar freni: günlük -%X ya da haftalık -%Y aşılınca YENİ pozisyon |
+//|  açma (çıkışlar devam eder). Gün/hafta başı equity'yi referans alır.|
+//+------------------------------------------------------------------+
+bool RiskHalted()
+{
+   double eq = AccountInfoDouble(ACCOUNT_EQUITY);
+   MqlDateTime dt; TimeToStruct(TimeCurrent(), dt);
+   if(dt.day_of_year != g_dayYday){ g_dayYday = dt.day_of_year; g_dayStartEq = eq; }   // yeni gün
+   int wk = dt.day_of_year / 7;
+   if(wk != g_weekNo){ g_weekNo = wk; g_weekStartEq = eq; }                            // yeni hafta
+   double dayDD  = (g_dayStartEq  > 0) ? (eq - g_dayStartEq)  / g_dayStartEq  * 100.0 : 0;
+   double weekDD = (g_weekStartEq > 0) ? (eq - g_weekStartEq) / g_weekStartEq * 100.0 : 0;
+   if(InpDailyLossPct > 0 && dayDD <= -InpDailyLossPct)
+   { if(InpVerbose) PrintFormat("🛑 GÜNLÜK zarar freni %.1f%% (≤ -%.1f%%) — yeni pozisyon YOK", dayDD, InpDailyLossPct); return true; }
+   if(InpWeeklyLossPct > 0 && weekDD <= -InpWeeklyLossPct)
+   { if(InpVerbose) PrintFormat("🛑 HAFTALIK zarar freni %.1f%% (≤ -%.1f%%) — yeni pozisyon YOK", weekDD, InpWeeklyLossPct); return true; }
+   return false;
 }
 
 //============================ YARDIMCI =============================
