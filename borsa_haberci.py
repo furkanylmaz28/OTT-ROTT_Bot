@@ -117,10 +117,11 @@ def analyze_impact(headlines, universe=None):
                 for code, yon, sebep in impacts:
                     if down and yon in ("+", "-"):     # düşüş → etkiyi ters çevir
                         yon = "-" if yon == "+" else "+"
-                    for sym in _expand(code, universe) or ([code] if code in ("PIYASA",) else []):
-                        hits.setdefault(sym, (yon, sebep))
                     if code == "PIYASA":
-                        hits.setdefault("PİYASA", (impacts[0][1], impacts[0][2]))
+                        hits.setdefault("PİYASA (genel)", (yon, sebep))
+                    else:
+                        for sym in _expand(code, universe):
+                            hits.setdefault(sym, (yon, sebep))
         if hits:
             res.append({"title": title, "bolge": h.get("bolge", ""),
                         "etkiler": [(s, y, sb) for s, (y, sb) in list(hits.items())[:6]]})

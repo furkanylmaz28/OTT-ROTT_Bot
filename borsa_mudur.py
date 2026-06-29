@@ -113,6 +113,17 @@ def build_report(g):
             L.append(f"   • {x['title'][:58]}\n     →{et}")
     if not g["news"] and not g.get("impact"):
         L.append("📰 *Haberci:* yeni haber/etki yok")
+    # 🎯 BIST Öneri — kanıtlanmış sistemin (SuperTrend long-only) sinyali. SHORT YOK.
+    bull = g["breadth"].get("bull_syms", [])
+    posset = {k.replace(".IS", "") for k in g["lo_pos"]}
+    aday = [s for s in bull if s not in posset]
+    fbear = g["breadth"].get("fresh_bear", [])
+    if bull or aday or fbear:
+        L.append("🎯 *BIST Öneri* (Algo Trader · long-only):")
+        if posset: L.append(f"   📂 Pozisyonda LONG: {', '.join(sorted(posset)[:8])}")
+        if aday:   L.append(f"   ✨ LONG aday (sinyal var, girilmemiş): {', '.join(aday[:8])}")
+        if fbear:  L.append(f"   ⚪ NAKİT'e dön / kaçın: {', '.join(fbear[:8])}")
+        L.append("   ⛔ Short YOK — BIST'te short yapısal kaybettirir (kanıtlı); çıkış=nakit")
     # Yargı sayacı
     tot_n = g["lo"]["n"] + g["cg"]["n"]
     pct = min(100, round(100 * tot_n / VERDICT_N))
