@@ -3653,12 +3653,13 @@ with tab_info:
 from datetime import datetime as _dt
 st.markdown(f"""
 <div class="footer-bar">
-    <span style="color:#888;">OTT Bot Dashboard</span>
+    <span style="font-weight:800;background:linear-gradient(90deg,#26a69a,#2962ff);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;">QUANT DESK</span>
     <span style="margin:0 12px; color:#444;">•</span>
-    <span style="color:#26a69a;">●</span> Auto-update aktif
+    <span style="color:#2ecc8f;">●</span> Walk-forward + Monte Carlo doğrulamalı
     <span style="margin:0 12px; color:#444;">•</span>
     <span style="color:#888;">{_dt.now().strftime("%Y-%m-%d %H:%M")}</span>
     <span style="margin:0 12px; color:#444;">•</span>
-    <span style="color:#666;">OTT-family · Python port · Streamlit</span>
+    <span style="color:#666;">7/24 otomasyon · risk yönetimi · disiplin > umut</span>
 </div>
 """, unsafe_allow_html=True)
