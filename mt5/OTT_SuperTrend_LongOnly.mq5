@@ -1,7 +1,7 @@
 //+------------------------------------------------------------------+
 //|                                  OTT_SuperTrend_LongOnly.mq5      |
 //|   Kanıtlanmış sistem: SuperTrend 10/3 (H1) · LONG-ONLY + NAKİT    |
-//|   Short YOK · max 2x kaldıraç · max 3 pozisyon · BIST VIOP        |
+//|   Short YOK · notional ≤2x KOD GARANTİLİ · max 3 pozisyon · VIOP  |
 //|   + günlük/haftalık zarar freni · taze pencere ≤9 bar (risk.py ile|
 //|   uyumlu). Walk-forward + Monte Carlo doğrulamalı. SADECE DEMO.   |
 //+------------------------------------------------------------------+
@@ -24,6 +24,7 @@ input double  InpWeeklyLossPct   = 5.0;        // 🛑 Haftalık zarar freni: -%
 input double  InpMarginPerPosPct = 33.0;       // Pozisyon başına KULLANILAN teminat (% öz sermaye)
 input int     InpMaxPositions    = 3;          // Aynı anda max açık pozisyon (3×%33≈%99)
 input double  InpMaxTotalMarginPct = 99.0;     // TOPLAM kullanılan teminat tavanı (% öz sermaye) — #9
+input double  InpMaxNotionalMult   = 2.0;      // 🔴 KALDIRAÇ TAVANI: toplam notional ≤ öz sermaye × bu (1:7=iflas, ≤2 kal)
 input bool    InpSectorCap       = true;       // #6: aynı sektörden max 1 pozisyon (korelasyon)
 input long    InpMagic           = 20260101;   // Sihirli numara
 input int     InpTimerSec        = 10;         // Tarama aralığı (saniye)
@@ -218,7 +219,17 @@ double CalcLots(string sym)
    double maxl = SymbolInfoDouble(sym, SYMBOL_VOLUME_MAX);
    if(step <= 0) step = minl;
 
-   double lots = target_margin / margin1;          // %33 teminata denk lot
+   double lots = target_margin / margin1;          // teminat hedefine denk lot
+
+   // 🔴 KALDIRAÇ TAVANI (kod garantisi): pozisyon başına notional ≤ eq×mult / maxPoz
+   //    → maxPoz pozisyon dolsa bile toplam notional ≤ eq×InpMaxNotionalMult (≤2x).
+   double cs0 = SymbolInfoDouble(sym, SYMBOL_TRADE_CONTRACT_SIZE);
+   if(cs0 > 0 && price > 0 && InpMaxNotionalMult > 0)
+   {
+      double perPosNotional = eq * InpMaxNotionalMult / MathMax(1, InpMaxPositions);
+      double lotsNotCap = perPosNotional / (price * cs0);
+      if(lots > lotsNotCap) lots = lotsNotCap;      // notional tavanına kıs
+   }
    lots = MathFloor(lots / step) * step;
 
    if(lots < minl) return 0;                        // min lot %33'ü aşıyor → girme
