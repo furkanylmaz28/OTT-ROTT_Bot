@@ -728,15 +728,35 @@ def _collect_fresh_signals():
 
 
 def _render_signal_cards(fresh):
+    from datetime import datetime as _dt3
     for _nm, _v in fresh:
         _e = _v.get("entry_price"); _s = _v.get("stop")
+        # sinyal tarih/saati
+        try:
+            _tarih = _dt3.fromisoformat(_v.get("entry_ts", "")).strftime("%d.%m.%Y %H:%M")
+        except Exception:
+            _tarih = "—"
+        # anlık fiyat + yüzen %
+        _cur = None
+        try: _cur = live_price(_nm + ".IS")
+        except Exception: _cur = None
+        _curtxt = f"{_cur:,.4g}" if _cur else "—"
+        _yuztxt = "—"
+        if _cur and _e:
+            try:
+                _y = (_cur / float(_e) - 1) * 100
+                _yuztxt = f'<span class="{"v-green" if _y >= 0 else "v-red"}">{_y:+.2f}%</span>'
+            except Exception:
+                pass
         st.markdown(
             f'<div class="lm-card" style="margin-bottom:12px;border-color:#1c6b50;">'
             f'<div style="font-size:20px;font-weight:800;color:#2ecc8f;">⚡ {_nm} · LONG</div>'
+            f'<div style="color:#7a8494;font-size:12px;margin-top:2px;">🕐 Sinyal: {_tarih}</div>'
             f'<div class="lm-row" style="margin-top:10px;">'
             f'<div class="lm-stat"><div class="v">{_e}</div><div class="l">Giriş</div></div>'
+            f'<div class="lm-stat"><div class="v">{_curtxt}</div><div class="l">Anlık Fiyat</div></div>'
+            f'<div class="lm-stat"><div class="v">{_yuztxt}</div><div class="l">Yüzen P&L</div></div>'
             f'<div class="lm-stat"><div class="v v-red">{_s}</div><div class="l">🛑 Stop (TOTT)</div></div>'
-            f'<div class="lm-stat"><div class="v v-green">SuperTrend</div><div class="l">Sinyal</div></div>'
             f'</div></div>', unsafe_allow_html=True)
 
 
