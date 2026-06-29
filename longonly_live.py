@@ -191,8 +191,9 @@ def scan_and_record(symbols=None, on_open=None, on_close=None) -> dict:
                 if stt.get("bars", 99) <= 9:   # son ~1 günde bearish'e döndü
                     fresh_bear.append(nm)
             state = "LONG" if stt["pozisyon"] == "LONG" else "FLAT"
-            # taze = SuperTrend son ~2 barda LONG'a döndü (olgun trende geç binme)
-            fresh = stt.get("bars", 99) <= 2
+            # taze = SuperTrend son ~1 günde LONG'a döndü ("🟢 TAZE" etiketiyle hizalı,
+            # bars≤9). Eskiden ≤2 idi → ekranda TAZE görünen sinyal bota düşmüyordu.
+            fresh = stt.get("bars", 99) <= 9
             record(sym, state, stt["anlik"], stop=stt.get("cizgi"),
                    on_open=on_open, on_close=on_close, fresh=fresh)
         except Exception:

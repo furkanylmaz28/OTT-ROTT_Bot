@@ -685,6 +685,43 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+
+# ── Yeni taze sinyal POPUP'ı (son 18 saatte bot LONG açtıysa toast + banner) ──
+def _fresh_signal_popup():
+    import json as _j
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    try:
+        _pos = _j.load(open("lo_positions.json", encoding="utf-8"))
+    except Exception:
+        return
+    _now = _dt.now(_tz.utc); _fresh = []
+    for _sym, _v in _pos.items():
+        try:
+            _d = _dt.fromisoformat(_v.get("entry_ts", ""))
+            if _d.tzinfo is None:
+                _d = _d.replace(tzinfo=_tz(_td(hours=3)))
+            if (_now - _d.astimezone(_tz.utc)).total_seconds() / 3600 <= 18:
+                _fresh.append((_sym.replace(".IS", ""), _v))
+        except Exception:
+            continue
+    if not _fresh:
+        return
+    _shown = st.session_state.setdefault("_toasted_sig", set())
+    for _nm, _v in _fresh:
+        _k = f"{_nm}:{_v.get('entry_ts','')}"
+        if _k not in _shown:
+            try: st.toast(f"🟢 YENİ SİNYAL: {_nm} LONG @ {_v.get('entry_price')}", icon="🔔")
+            except Exception: pass
+            _shown.add(_k)
+    _chips = " ".join(lm_pill(f"🟢 {_nm} @ {_v.get('entry_price')} · 🛑{_v.get('stop')}", "green")
+                      for _nm, _v in _fresh)
+    st.markdown(f'<div class="lm-card" style="margin-bottom:14px;">'
+                f'<div class="lm-title">🔔 Yeni Taze Sinyaller (son 18 saat) — bot LONG açtı</div>'
+                f'<div style="display:flex;gap:8px;flex-wrap:wrap;">{_chips}</div></div>',
+                unsafe_allow_html=True)
+
+_fresh_signal_popup()
+
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
  tab_emtia, tab_otttott, tab_scalp, tab_live, tab_info) = st.tabs([
     "🎯  Kokpit",
