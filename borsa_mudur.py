@@ -1,0 +1,147 @@
+"""
+borsa_mudur.py — "Borsa Müdürü" ajanı. Ekibin (Algo Trader + Grafik Takipçisi +
+Haberci) çıktılarını TEK rapora toplar ve Telegram'a gönderir. KARAR VERMEZ —
+istihbaratı sentezler, kararı insana bırakır.
+
+Akıllı kadans: cron her 10 dk çağırır; müdür sadece KAYDA DEĞER bir şey değişince
+(yeni işlem/sinyal/haber/breadth) rapor atar (≥20 dk arayla). Ayrıca 4 saatte bir
+"hayatta" sinyali. Böylece günde 48 spam yerine sadece önemli güncellemeler gelir.
+
+Kullanım:
+    python borsa_mudur.py          # rapor üret + (değişiklik varsa) gönder
+    python borsa_mudur.py --dry    # sadece ekrana
+    python borsa_mudur.py --force  # değişiklik olmasa da gönder
+    python borsa_mudur.py --cron   # cron modu (akıllı kadans + state)
+"""
+from __future__ import annotations
+import sys, os, json, hashlib
+from datetime import datetime, timezone, timedelta
+try: sys.stdout.reconfigure(encoding="utf-8")
+except Exception: pass
+
+TR = timezone(timedelta(hours=3))
+STATE_FILE = "borsa_mudur_state.json"
+VERDICT_N = 100
+
+
+def _load(path, default):
+    try:
+        with open(path, encoding="utf-8") as f: return json.load(f)
+    except Exception: return default
+
+
+def _stats(trades):
+    pn = [t.get("pnl_pct", 0) for t in trades] if isinstance(trades, list) else []
+    n = len(pn)
+    if not n: return {"n": 0, "wr": 0, "pf": 0, "tot": 0}
+    w = [p for p in pn if p > 0]; l = [p for p in pn if p <= 0]
+    gw, gl = sum(w), abs(sum(l))
+    pf = (gw / gl) if gl > 0 else (999 if gw > 0 else 0)
+    return {"n": n, "wr": round(100 * len(w) / n, 1), "pf": round(pf, 2), "tot": round(sum(pn), 1)}
+
+
+def gather():
+    """Ekip çıktılarını topla."""
+    lo_pos = _load("lo_positions.json", {})
+    cg_pos = _load("cg_positions.json", {})
+    lo_tr = _load("lo_trades.json", [])
+    cg_tr = _load("cg_trades.json", [])
+    breadth = _load("lo_breadth.json", {})
+    # haberci (savunmacı)
+    news = []
+    try:
+        import borsa_haberci as hb
+        watch = set(k.replace(".IS", "") for k in lo_pos) | set(breadth.get("bull_syms", [])[:20])
+        news = hb.get_news(hours=24, symbols=watch or None)
+    except Exception:
+        news = []
+    return {
+        "lo_pos": lo_pos, "cg_pos": cg_pos,
+        "lo": _stats(lo_tr), "cg": _stats(cg_tr),
+        "breadth": breadth, "news": news,
+    }
+
+
+def signature(g):
+    """Değişiklik tespiti için durum imzası (yeni işlem/poz/haber/breadth)."""
+    bp = round(g["breadth"].get("bull_pct", -1) / 10)   # 10'luk kova
+    key = (
+        sorted(g["lo_pos"].keys()),
+        sum(len(v) for v in g["cg_pos"].values()) if isinstance(g["cg_pos"], dict) else 0,
+        g["lo"]["n"], g["cg"]["n"], bp, len(g["news"]),
+    )
+    return hashlib.md5(str(key).encode()).hexdigest()[:12]
+
+
+def build_report(g):
+    now = datetime.now(TR)
+    L = [f"🧑‍💼 *BORSA MÜDÜRÜ* — {now:%d.%m %H:%M}", ""]
+    # Piyasa (Grafik Takipçisi + breadth)
+    bp = g["breadth"].get("bull_pct")
+    if bp is not None:
+        mood = "🟢 güçlü" if bp >= 50 else ("🟡 nötr" if bp >= 35 else "🔴 ZAYIF")
+        L.append(f"🌡️ *Piyasa:* bull %{bp:.0f} {mood}")
+        fb = g["breadth"].get("fresh_bear", [])
+        if fb: L.append(f"   ⚠️ taze ayıya dönen: {', '.join(fb[:6])}")
+    # Algo Trader (açık pozisyonlar)
+    lo_n = len(g["lo_pos"]); cg_n = sum(len(v) for v in g["cg_pos"].values()) if isinstance(g["cg_pos"], dict) else 0
+    L.append(f"🤖 *Algo Trader:* BIST {lo_n} açık ({', '.join(k.replace('.IS','') for k in list(g['lo_pos'])[:6]) or '—'}) · Crypto {cg_n} birim")
+    # Performans
+    L.append(f"📊 *Performans:* BIST PF {g['lo']['pf']} ({g['lo']['n']} işlem) · Crypto PF {g['cg']['pf']} ({g['cg']['tot']:+}%, {g['cg']['n']} işlem)")
+    # Haberci
+    if g["news"]:
+        L.append(f"📰 *Haberci:* {len(g['news'])} KAP bildirimi")
+        for n in g["news"][:5]:
+            L.append(f"   • {n['time']} {n['sym']}: {n['title'][:55]}")
+    else:
+        L.append("📰 *Haberci:* yeni KAP bildirimi yok")
+    # Yargı sayacı
+    tot_n = g["lo"]["n"] + g["cg"]["n"]
+    pct = min(100, round(100 * tot_n / VERDICT_N))
+    L.append(f"🎯 *Yargı:* {tot_n}/{VERDICT_N} (%{pct}) — {'✅ yeterli' if tot_n>=VERDICT_N else f'{VERDICT_N-tot_n} işlem daha'}")
+    L.append("")
+    L.append("_Müdür istihbarat sentezler; kararı SEN verirsin._")
+    return "\n".join(L)
+
+
+def _send(msg):
+    try:
+        from notifications import send_telegram
+        ok = send_telegram(msg)
+        print("[Telegram:", "gönderildi ✅" if ok else "gönderilemedi ❌", "]")
+        return ok
+    except Exception as e:
+        print(f"[Telegram hata: {e}]"); return False
+
+
+def main():
+    g = gather()
+    report = build_report(g)
+    print(report)
+    if "--dry" in sys.argv:
+        print("\n[--dry]"); return
+    if "--force" in sys.argv:
+        _send(report); return
+    if "--cron" in sys.argv:
+        now = datetime.now(TR)
+        st = _load(STATE_FILE, {})
+        sig = signature(g)
+        last_ts = st.get("ts"); last_sig = st.get("sig")
+        # son gönderimden bu yana dakika
+        mins = 999
+        if last_ts:
+            try: mins = (now - datetime.fromisoformat(last_ts)).total_seconds() / 60
+            except Exception: pass
+        changed = (sig != last_sig)
+        # gönder: (değişiklik var ve ≥20 dk geçti) VEYA (4 saat hayatta sinyali)
+        if (changed and mins >= 20) or mins >= 240:
+            if _send(report):
+                json.dump({"ts": now.isoformat(), "sig": sig}, open(STATE_FILE, "w"))
+        else:
+            print(f"[cron: gönderilmedi — değişiklik={changed}, son gönderimden {mins:.0f}dk]")
+        return
+    _send(report)
+
+
+if __name__ == "__main__":
+    main()
