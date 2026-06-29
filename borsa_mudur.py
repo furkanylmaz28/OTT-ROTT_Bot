@@ -162,10 +162,15 @@ def main():
             try: mins = (now - datetime.fromisoformat(last_ts)).total_seconds() / 60
             except Exception: pass
         changed = (sig != last_sig)
-        # gönder: DÜZENLİ ~30 dk'da bir VEYA değişiklikte daha hızlı (≥8 dk)
-        if mins >= 28 or (changed and mins >= 8):
+        # SADECE TR 09:30–18:30 arası raporla (BIST seansı); dışında sus
+        nowmin = now.hour * 60 + now.minute
+        in_window = (9 * 60 + 30) <= nowmin <= (18 * 60 + 30)
+        # gönder: pencere içinde + DÜZENLİ ~30 dk VEYA değişiklikte ≥8 dk
+        if in_window and (mins >= 28 or (changed and mins >= 8)):
             if _send(report):
                 json.dump({"ts": now.isoformat(), "sig": sig}, open(STATE_FILE, "w"))
+        elif not in_window:
+            print(f"[cron: pencere dışı (TR {now:%H:%M}) — 09:30-18:30 arası raporlar]")
         else:
             print(f"[cron: gönderilmedi — son gönderimden {mins:.0f}dk (30 dk bekleniyor)]")
         return
