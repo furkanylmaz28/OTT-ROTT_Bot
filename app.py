@@ -829,16 +829,25 @@ except Exception:
     pass
 
 st.markdown(f"""
-<div class="main-header">
-    <h1>📊 OTT Bot Dashboard</h1>
-    <div class="subtitle">
-        <b>OTT-ailesi</b> · TOTT + SOTT + HOTT/LOTT + ROTT
+<div class="main-header" style="padding:26px 30px;">
+    <div style="display:flex;align-items:center;gap:16px;">
+        <div style="width:54px;height:54px;border-radius:14px;flex:0 0 auto;
+            background:linear-gradient(135deg,#26a69a,#2962ff);display:flex;
+            align-items:center;justify-content:center;font-size:28px;
+            box-shadow:0 6px 18px rgba(41,98,255,0.45);">📈</div>
+        <div>
+            <h1 style="margin:0;">QUANT DESK <span style="font-weight:400;color:#5a6b8c;font-size:18px;">· Algo Trading Suite</span></h1>
+            <div class="subtitle" style="margin-top:2px;">
+                Kanıtlanmış sistemler — <b style="color:#26a69a;">SuperTrend Long-only</b> · <b style="color:#2962ff;">Crypto Grid</b> · Walk-forward + Monte Carlo doğrulamalı
+            </div>
+        </div>
     </div>
-    <div style="margin-top:14px;">
-        <span class="badge">📡 {_total} sembol</span>
-        <span class="badge" style="background:#26a69a22;color:#26a69a;">★ {_iyi} işe yarayan</span>
-        <span class="badge" style="background:#ef535022;color:#ef5350;">✗ {_uyumsuz} uyumsuz</span>
-        <span class="badge" style="background:#2962ff22;color:#2962ff;">🤖 Auto-update AÇIK</span>
+    <div style="margin-top:16px;">
+        <span class="badge">📡 {_total} sembol izleniyor</span>
+        <span class="badge" style="background:#26a69a18;color:#2ecc8f;">★ {_iyi} doğrulanmış</span>
+        <span class="badge" style="background:#ef535018;color:#ff6b81;">✗ {_uyumsuz} elendi</span>
+        <span class="badge" style="background:#2962ff18;color:#5aa9ff;">🤖 7/24 otomasyon</span>
+        <span class="badge" style="background:#7c4dff18;color:#a98bff;">🛡️ risk yönetimi aktif</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
