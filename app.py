@@ -773,7 +773,7 @@ if hasattr(st, "dialog"):
         st.caption("Bot yeni LONG açtı — inceleyip pozisyon kararını ver.")
         _render_signal_cards(fresh)
         if st.button("KAPAT / ANLADIM ✅", type="primary", use_container_width=True, key="sig_ack_btn"):
-            _ack_signals(fresh); st.rerun()
+            st.rerun()   # zaten okundu işaretlendi; bu sadece kapatır
 
 
 def _fresh_signal_popup():
@@ -784,17 +784,18 @@ def _fresh_signal_popup():
     pending = [(n, v) for n, v in fresh if f"{n}:{v.get('entry_ts','')}" not in ack]
     if not pending:
         return
+    # GÖSTERİLDİĞİ ANDA okundu say → X ile kapatsan da, başka yere dokunsan da
+    # tekrar AÇILMAZ (Kokpit'e hisse ekle/çıkar her rerun'da açılma bug'ı çözüldü).
+    _ack_signals(pending)
     if hasattr(st, "dialog"):
-        _signal_modal(pending)            # ekranı kaplayan modal — kapatana kadar durur
-    else:                                 # eski Streamlit → kalıcı banner kart
+        _signal_modal(pending)            # ekranı kaplayan modal
+    else:                                 # eski Streamlit → banner kart
         _chips = " ".join(lm_pill(f"🟢 {n} @ {v.get('entry_price')} · 🛑{v.get('stop')}", "green")
                           for n, v in pending)
         st.markdown(f'<div class="lm-card" style="margin-bottom:14px;border-color:#1c6b50;">'
                     f'<div class="lm-title">🔔 YENİ SİNYAL TESPİT EDİLDİ — bot LONG açtı</div>'
                     f'<div style="display:flex;gap:8px;flex-wrap:wrap;">{_chips}</div></div>',
                     unsafe_allow_html=True)
-        if st.button("KAPAT / ANLADIM ✅", key="sig_ack_btn2"):
-            _ack_signals(pending); st.rerun()
 
 if st.button("🔔 Popup'ı dene (test)", key="demo_popup_btn"):
     st.session_state["_demo_popup"] = True
