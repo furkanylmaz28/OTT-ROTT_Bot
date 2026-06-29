@@ -22,8 +22,10 @@ input double  InpER_Th            = 0.30;     // ER < bu = YATAY (grid açık)
 input double  InpLevel1Pct        = 1.0;      // 1. AL seviyesi: SMA20 -% (BIST sıkı)
 input double  InpLevel2Pct        = 2.0;      // 2. AL seviyesi
 input double  InpLevel3Pct        = 3.0;      // 3. AL seviyesi
-input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş
-input double  InpTrailPct         = 0.5;      // peak'in %X altına inince sat
+input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş (grid)
+input double  InpTrailPct         = 0.5;      // GRID: peak'in %X altına inince sat (sıkı, scalp)
+input double  InpTrendTrailPct    = 3.0;      // TREND-LONG: peak'in %X altı (GENİŞ → kazananı koştur, sabit TP yok)
+input double  InpCommPct          = 0.10;     // Gidiş-dönüş komisyon % — trailing eşiğine eklenir (net kâr korunur)
 input double  InpUnitPct          = 10.0;     // Birim başı = kasanın %X'i ile alabileceği kadar (yetmezse hisseyi atla)
 input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
 input bool    InpAllowShort       = false;    // SHORT (demo): tepeden sat grid + aşağı trend short (BIST drift'i aleyhe — PF düşer)
@@ -180,7 +182,7 @@ void TrailSym(string sym)
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
       if(StringFind(PositionGetString(POSITION_COMMENT),"G")!=0) continue;  // sadece GRID birimleri trail
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-      if((bid-entry)/entry < InpTakePct/100.0) continue;          // +%1.5'e ulaşmadı
+      if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.5 NET (komisyon dahil)
       double desiredSL = bid * (1.0 - InpTrailPct/100.0);
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL > curSL)
@@ -204,6 +206,26 @@ void TrailShort(string sym)
       double desiredSL = ask * (1.0 + InpTrailPct/100.0);
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL < curSL)                           // short: SL'i AŞAĞI çek
+         trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
+   }
+}
+
+// TREND-LONG trailing: kâr +%1.5 net olunca GENİŞ trail (peak'in %3 altı) → kazananı koştur, sabit TP yok
+void TrailTrend(string sym)
+{
+   double bid = SymbolInfoDouble(sym, SYMBOL_BID);
+   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk==0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
+      if(PositionGetString(POSITION_COMMENT)!="T") continue;       // sadece trend-long
+      double entry = PositionGetDouble(POSITION_PRICE_OPEN);
+      if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.5 net olmadan SL koyma
+      double desiredSL = bid * (1.0 - InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun)
+      double curSL = PositionGetDouble(POSITION_SL);
+      if(curSL==0 || desiredSL > curSL)                            // sadece YUKARI çek
          trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
    }
 }
@@ -245,6 +267,7 @@ void OnTimer()
       // ════════ TREND (ER ≥ eşik) ════════
       if(!sideways)
       {
+         TrailTrend(sym);                                          // her tarama: trend-long'u GENİŞ trailing'le koru
          if(newbar)
          {
             if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // long grid kapat
