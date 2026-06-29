@@ -686,8 +686,8 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 
-# ── Yeni taze sinyal POPUP'ı (son 18 saatte bot LONG açtıysa toast + banner) ──
-def _fresh_signal_popup():
+# ── Yeni taze sinyal POPUP'ı — EKRANI KAPLAYAN MODAL (kullanıcı kapatana kadar durur) ──
+def _collect_fresh_signals():
     import json as _j
     from datetime import datetime as _dt, timezone as _tz, timedelta as _td
     try:
@@ -704,7 +704,6 @@ def _fresh_signal_popup():
                 _fresh.append((_sym.replace(".IS", ""), _v))
         except Exception:
             continue
-    # TEST: buton ya da ?demo=popup ile örnek popup tetikle
     _demo = bool(st.session_state.get("_demo_popup"))
     if not _demo:
         try: _demo = st.query_params.get("demo") == "popup"
@@ -714,25 +713,62 @@ def _fresh_signal_popup():
     if _demo:
         _fresh = [("DENEME-SISE", {"entry_price": 42.18, "stop": 40.90, "entry_ts": "demo1"}),
                   ("DENEME-AKSEN", {"entry_price": 38.50, "stop": 37.12, "entry_ts": "demo2"})] + _fresh
-    if not _fresh:
+    return _fresh
+
+
+def _render_signal_cards(fresh):
+    for _nm, _v in fresh:
+        _e = _v.get("entry_price"); _s = _v.get("stop")
+        st.markdown(
+            f'<div class="lm-card" style="margin-bottom:12px;border-color:#1c6b50;">'
+            f'<div style="font-size:20px;font-weight:800;color:#2ecc8f;">⚡ {_nm} · LONG</div>'
+            f'<div class="lm-row" style="margin-top:10px;">'
+            f'<div class="lm-stat"><div class="v">{_e}</div><div class="l">Giriş</div></div>'
+            f'<div class="lm-stat"><div class="v v-red">{_s}</div><div class="l">🛑 Stop (TOTT)</div></div>'
+            f'<div class="lm-stat"><div class="v v-green">SuperTrend</div><div class="l">Sinyal</div></div>'
+            f'</div></div>', unsafe_allow_html=True)
+
+
+def _ack_signals(fresh):
+    _ack = st.session_state.setdefault("_sig_ack", set())
+    for _nm, _v in fresh:
+        _ack.add(f"{_nm}:{_v.get('entry_ts','')}")
+    st.session_state.pop("_demo_popup", None)
+
+
+if hasattr(st, "dialog"):
+    @st.dialog("🔔 YENİ SİNYAL TESPİT EDİLDİ")
+    def _signal_modal(fresh):
+        st.caption("Bot yeni LONG açtı — inceleyip pozisyon kararını ver.")
+        _render_signal_cards(fresh)
+        if st.button("KAPAT / ANLADIM ✅", type="primary", use_container_width=True, key="sig_ack_btn"):
+            _ack_signals(fresh); st.rerun()
+
+
+def _fresh_signal_popup():
+    fresh = _collect_fresh_signals()
+    if not fresh:
         return
-    _shown = st.session_state.setdefault("_toasted_sig", set())
-    for _nm, _v in _fresh:
-        _k = f"{_nm}:{_v.get('entry_ts','')}"
-        if _k not in _shown:
-            try: st.toast(f"🟢 YENİ SİNYAL: {_nm} LONG @ {_v.get('entry_price')}", icon="🔔")
-            except Exception: pass
-            _shown.add(_k)
-    _chips = " ".join(lm_pill(f"🟢 {_nm} @ {_v.get('entry_price')} · 🛑{_v.get('stop')}", "green")
-                      for _nm, _v in _fresh)
-    st.markdown(f'<div class="lm-card" style="margin-bottom:14px;">'
-                f'<div class="lm-title">🔔 Yeni Taze Sinyaller (son 18 saat) — bot LONG açtı</div>'
-                f'<div style="display:flex;gap:8px;flex-wrap:wrap;">{_chips}</div></div>',
-                unsafe_allow_html=True)
+    ack = st.session_state.setdefault("_sig_ack", set())
+    pending = [(n, v) for n, v in fresh if f"{n}:{v.get('entry_ts','')}" not in ack]
+    if not pending:
+        return
+    if hasattr(st, "dialog"):
+        _signal_modal(pending)            # ekranı kaplayan modal — kapatana kadar durur
+    else:                                 # eski Streamlit → kalıcı banner kart
+        _chips = " ".join(lm_pill(f"🟢 {n} @ {v.get('entry_price')} · 🛑{v.get('stop')}", "green")
+                          for n, v in pending)
+        st.markdown(f'<div class="lm-card" style="margin-bottom:14px;border-color:#1c6b50;">'
+                    f'<div class="lm-title">🔔 YENİ SİNYAL TESPİT EDİLDİ — bot LONG açtı</div>'
+                    f'<div style="display:flex;gap:8px;flex-wrap:wrap;">{_chips}</div></div>',
+                    unsafe_allow_html=True)
+        if st.button("KAPAT / ANLADIM ✅", key="sig_ack_btn2"):
+            _ack_signals(pending); st.rerun()
 
 if st.button("🔔 Popup'ı dene (test)", key="demo_popup_btn"):
     st.session_state["_demo_popup"] = True
-    st.session_state.pop("_toasted_sig", None)   # toast'ları tekrar tetikle
+    st.session_state.pop("_sig_ack", None)   # ack'leri sıfırla → modal tekrar açılsın
+    st.rerun()
 _fresh_signal_popup()
 
 (tab_kokpit, tab_kanit, tab_grid, tab_cryptogrid, tab_portfolio, tab_tarayici,
