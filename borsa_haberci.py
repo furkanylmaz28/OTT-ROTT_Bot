@@ -96,16 +96,27 @@ def get_macro_news(limit=40):
     return out[:limit]
 
 
+_DOWN = ["düş", "geriled", "azal", "fall", "drop", "sank", "declin", "lower", "slump",
+         "tumble", "kayıp", "zayıfla", "cut", "gevşed", "ucuzla", "eridi", "çöktü"]
+
+
+def _is_down(low):
+    return any(w in low for w in _DOWN)
+
+
 def analyze_impact(headlines, universe=None):
     """Başlıkları tara, etkilenen hisseleri yön+sebep ile döndür.
-    [{"title","bolge","etkiler":[(hisse,yön,sebep)]}]. Sadece eşleşenler."""
+    Yön düzeltmesi: başlık düşüş bildiriyorsa +/− ters çevrilir (± aynı kalır)."""
     res = []
     for h in headlines:
         title = h["title"]; low = title.lower()
+        down = _is_down(low)
         hits = {}
         for keys, impacts in IMPACT_RULES:
             if any(k in low for k in keys):
                 for code, yon, sebep in impacts:
+                    if down and yon in ("+", "-"):     # düşüş → etkiyi ters çevir
+                        yon = "-" if yon == "+" else "+"
                     for sym in _expand(code, universe) or ([code] if code in ("PIYASA",) else []):
                         hits.setdefault(sym, (yon, sebep))
                     if code == "PIYASA":
