@@ -212,17 +212,29 @@ void TrailShort(string sym)
 void OnTimer()
 {
    int n = ArraySize(g_symbols);
+   int nSide=0, nUp=0, nDown=0, nUpAfford=0, nData=0;     // tanı sayaçları
    for(int s=0; s<n; s++)
    {
       string sym = g_symbols[s];
       double er, center;
       if(!GetRegime(sym, er, center)) continue;
+      nData++;
       bool sideways = (er < InpER_Th);
       datetime bt = iTime(sym, InpTF, 0);
       if(bt==0) continue;
       bool newbar = (bt != g_lastBar[s]);
       double bid = SymbolInfoDouble(sym, SYMBOL_BID);
       double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+      // ── tanı: rejim + bütçe uygunluğu say
+      {
+         double eq0=AccountInfoDouble(ACCOUNT_EQUITY);
+         double cs0=SymbolInfoDouble(sym,SYMBOL_TRADE_CONTRACT_SIZE);
+         double ml0=SymbolInfoDouble(sym,SYMBOL_VOLUME_MIN);
+         bool afford=(ask>0 && cs0>0 && ml0*ask*cs0 <= eq0*InpUnitPct/100.0);
+         if(sideways) nSide++;
+         else if(bid>center){ nUp++; if(afford) nUpAfford++; }
+         else nDown++;
+      }
 
       // ════════ TREND (ER ≥ eşik) ════════
       if(!sideways)
@@ -285,6 +297,17 @@ void OnTimer()
       }
       g_lastBar[s] = bt;
       Sleep(5);
+   }
+   // ── TANI ÖZETİ (30 sn'de bir) — neden işlem açıldı/açılmadı
+   static datetime lastDiag = 0;
+   if(TimeCurrent() - lastDiag >= 30)
+   {
+      lastDiag = TimeCurrent();
+      double eq=AccountInfoDouble(ACCOUNT_EQUITY);
+      PrintFormat("TANI: veri %d · 🟦yatay %d · 📈yukarı %d (bütçeye uygun %d) · 📉aşağı %d · açık poz %d · kasa %%%.0f kullanımda",
+                  nData, nSide, nUp, nUpAfford, nDown, PositionsTotal(), TotalNotional()/eq*100.0);
+      if(nSide==0 && nUpAfford==0)
+         Print("→ İşlem yok çünkü: yatay hisse YOK (grid kapalı) + uygun-fiyatlı yukarı-trend YOK (trend-long açamıyor). Ucuz hisse ekle ya da bekle.");
    }
 }
 //+------------------------------------------------------------------+
