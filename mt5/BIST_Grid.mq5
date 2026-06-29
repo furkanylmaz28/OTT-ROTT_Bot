@@ -116,15 +116,27 @@ bool LevelHeld(string sym, int k)
    return false;
 }
 
+int OpenCount(string sym)
+{
+   int c=0;
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic) c++;
+   }
+   return c;
+}
+
 void CloseSym(string sym, string why)
 {
+   int closed=0;
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
       if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic)
-         trade.PositionClose(tk);
+         { if(trade.PositionClose(tk)) closed++; }
    }
-   if(InpVerbose) Print("Grid kapatıldı (", sym, "): ", why);
+   if(InpVerbose && closed>0) PrintFormat("Grid kapatıldı (%s): %d birim · %s", sym, closed, why);
 }
 
 //+------------------------------------------------------------------+
@@ -186,7 +198,7 @@ void OnTimer()
 
       if(!sideways)
       {
-         if(newbar) CloseSym(sym, StringFormat("TREND (ER=%.2f)", er));
+         if(newbar && OpenCount(sym)>0) CloseSym(sym, StringFormat("TREND (ER=%.2f)", er));
          g_lastBar[s] = bt;
          continue;
       }
