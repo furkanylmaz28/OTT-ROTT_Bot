@@ -159,7 +159,12 @@ double CalcLots(string sym, double ask)
    double maxl = SymbolInfoDouble(sym, SYMBOL_VOLUME_MAX);
    if(step<=0) step=minl;
    double lots = MathFloor((target/(ask*cs))/step)*step;
-   if(lots < minl) return 0;
+   if(lots < minl)
+   {
+      // %5 birim 1 kontrattan küçük (pahalı VIOP) — kalan bütçe izin veriyorsa min 1 kontrat al
+      if(minl*ask*cs <= budget) lots = minl;
+      else return 0;
+   }
    if(lots > maxl) lots = maxl;
    double need=0;
    if(OrderCalcMargin(ORDER_TYPE_BUY, sym, lots, ask, need))
