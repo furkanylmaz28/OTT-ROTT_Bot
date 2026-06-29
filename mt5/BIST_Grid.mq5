@@ -216,6 +216,7 @@ void OnTimer()
    for(int s=0; s<n; s++)
    {
       string sym = g_symbols[s];
+      trade.SetTypeFillingBySymbol(sym);     // HER sembol için doğru emir-doldurma (yoksa emir reddedilir!)
       double er, center;
       if(!GetRegime(sym, er, center)) continue;
       nData++;
@@ -284,9 +285,14 @@ void OnTimer()
          if(ask <= lvlL && !LevelHeld(sym, "G", k+1))
          {
             double lots = CalcLots(sym, ask);
-            if(lots > 0 && trade.Buy(lots, sym, ask, 0, 0, "G"+IntegerToString(k+1)))
-               if(InpVerbose){ double eq=AccountInfoDouble(ACCOUNT_EQUITY);
-                  PrintFormat("GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f", sym, k+1, ask, lots, TotalNotional()/eq*100.0); }
+            if(lots > 0)
+            {
+               if(trade.Buy(lots, sym, ask, 0, 0, "G"+IntegerToString(k+1)))
+               { double eq=AccountInfoDouble(ACCOUNT_EQUITY);
+                 PrintFormat("✅ GRID AL: %s sev%d @ %.4g · %.2f lot · kasa %%%.0f", sym, k+1, ask, lots, TotalNotional()/eq*100.0); }
+               else
+                 PrintFormat("❌ GRID AL HATA: %s · %.2f lot · ret=%d %s", sym, lots, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+            }
          }
          // SHORT grid: merkez üstü seviyeye çıkınca sat (demo/AllowShort)
          if(InpAllowShort)
