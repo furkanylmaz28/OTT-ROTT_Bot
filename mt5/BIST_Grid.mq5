@@ -133,6 +133,39 @@ bool HasTag(string sym, string prefix)
    return false;
 }
 
+// Sembolün DAYANAĞINI (underlying hisse) çıkar.
+// VIOP futures: F_ALARK0626 → ALARK · nakit: ALARK.E → ALARK · sondaki vade (MMYY) atılır.
+string Underlying(string s)
+{
+   int dot = StringFind(s, ".");
+   if(dot > 0) s = StringSubstr(s, 0, dot);            // ALARK.E → ALARK
+   if(StringFind(s, "F_") == 0) s = StringSubstr(s, 2); // F_ALARK0626 → ALARK0626
+   int len = StringLen(s);
+   while(len > 0)                                       // sondaki rakamları (vade) at
+   {
+      ushort ch = StringGetCharacter(s, len-1);
+      if(ch >= '0' && ch <= '9') len--; else break;
+   }
+   return StringSubstr(s, 0, len);
+}
+
+// Aynı dayanağı BAŞKA bir kontrat/sembol zaten tutuyor mu? (çift maruziyet kapısı)
+// F_ALARK0626 açıkken F_ALARK0726'ya yeni giriş = aynı ALARK'a iki kat → ENGELLE.
+// Aynı sembolün kendi grid kademeleri sayılmaz (LevelHeld onları yönetir).
+bool UnderlyingElsewhere(string sym)
+{
+   string u = Underlying(sym);
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk==0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
+      string ps = PositionGetString(POSITION_SYMBOL);
+      if(ps!=sym && Underlying(ps)==u) return true;
+   }
+   return false;
+}
+
 void CloseTag(string sym, string prefix, string why)
 {
    int closed=0;
@@ -274,7 +307,7 @@ void OnTimer()
             if(HasTag(sym,"S")) CloseTag(sym,"S", StringFormat("TREND (ER=%.2f)", er));  // short grid kapat
             bool up = (bid > center);                             // yön: fiyat>SMA = yukarı
             // YUKARI trend → trend-long
-            if(InpTrendLong && ask>0 && up && !HasTag(sym,"T"))
+            if(InpTrendLong && ask>0 && up && !HasTag(sym,"T") && !UnderlyingElsewhere(sym))
             {
                double lots = CalcLots(sym, ask);
                if(lots>0 && trade.Buy(lots, sym, ask, 0, 0, "T"))
@@ -282,7 +315,7 @@ void OnTimer()
             }
             if(up && HasTag(sym,"D")) CloseTag(sym,"D","yukarı döndü");   // short kapat
             // AŞAĞI trend → trend-short (sadece demo/AllowShort)
-            if(InpAllowShort && bid>0 && !up && !HasTag(sym,"D"))
+            if(InpAllowShort && bid>0 && !up && !HasTag(sym,"D") && !UnderlyingElsewhere(sym))
             {
                double lots = CalcLots(sym, bid);
                if(lots>0 && trade.Sell(lots, sym, bid, 0, 0, "D"))
@@ -305,7 +338,7 @@ void OnTimer()
       {
          // LONG grid: merkez altı seviyeye inince al
          double lvlL = center * (1.0 - g_levels[k]/100.0);
-         if(ask <= lvlL && !LevelHeld(sym, "G", k+1))
+         if(ask <= lvlL && !LevelHeld(sym, "G", k+1) && !UnderlyingElsewhere(sym))
          {
             double lots = CalcLots(sym, ask);
             if(lots > 0)
@@ -321,7 +354,7 @@ void OnTimer()
          if(InpAllowShort)
          {
             double lvlS = center * (1.0 + g_levels[k]/100.0);
-            if(bid >= lvlS && !LevelHeld(sym, "S", k+1))
+            if(bid >= lvlS && !LevelHeld(sym, "S", k+1) && !UnderlyingElsewhere(sym))
             {
                double lots = CalcLots(sym, bid);
                if(lots > 0 && trade.Sell(lots, sym, bid, 0, 0, "S"+IntegerToString(k+1)))
