@@ -19,11 +19,11 @@ input string  InpSymbols          = "GARAN,THYAO,ASELS,EREGL,SISE,KCHOL,AKBNK,SA
 input ENUM_TIMEFRAMES InpTF        = PERIOD_H1; // Zaman dilimi (sistem H1)
 input int     InpER_Win           = 20;      // Kaufman ER penceresi
 input double  InpER_Th            = 0.30;     // ER < bu = YATAY (grid açık)
-input double  InpLevel1Pct        = 1.0;      // 1. AL seviyesi: SMA20 -% (BIST sıkı)
-input double  InpLevel2Pct        = 2.0;      // 2. AL seviyesi
-input double  InpLevel3Pct        = 3.0;      // 3. AL seviyesi
-input double  InpTakePct          = 1.5;      // +%X'te TRAILING aktifleş (grid)
-input double  InpTrailPct         = 0.5;      // GRID: peak'in %X altına inince sat (sıkı, scalp)
+input double  InpLevel1Pct        = 1.5;      // 1. AL seviyesi: SMA20 -% (WF-opt: geniş daha iyi)
+input double  InpLevel2Pct        = 3.0;      // 2. AL seviyesi (WF-opt -1.5/-3/-4.5)
+input double  InpLevel3Pct        = 4.5;      // 3. AL seviyesi
+input double  InpTakePct          = 1.0;      // +%X'te TRAILING aktifleş (WF-opt: 1.0 erken kilit)
+input double  InpTrailPct         = 0.3;      // GRID: peak'in %X altına inince sat (WF-opt: 0.3 sıkı, az geri ver)
 input double  InpTrendTrailPct    = 3.0;      // TREND-LONG: peak'in %X altı (GENİŞ → kazananı koştur, sabit TP yok)
 input double  InpCommPct          = 0.10;     // Gidiş-dönüş komisyon % — trailing eşiğine eklenir (net kâr korunur)
 input double  InpUnitPct          = 10.0;     // Birim başı = kasanın %X'i ile alabileceği kadar (yetmezse hisseyi atla)
