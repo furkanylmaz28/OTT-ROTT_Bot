@@ -1267,5 +1267,41 @@
     "pnl_pct": 0.218,
     "exit_ts": "2026-06-26T23:31:21.744535+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 59636.0,
+    "exit_price": 58684.0,
+    "pnl_pct": -1.696,
+    "exit_ts": "2026-06-30T23:46:47.967969+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.605,
+    "exit_price": 0.57,
+    "pnl_pct": -5.885,
+    "exit_ts": "2026-06-30T23:46:47.967969+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.05331,
+    "exit_price": 0.04769,
+    "pnl_pct": -10.642,
+    "exit_ts": "2026-06-30T23:46:47.967969+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.05218,
+    "exit_price": 0.04769,
+    "pnl_pct": -8.705,
+    "exit_ts": "2026-06-30T23:46:47.967969+03:00",
+    "reason": "trend"
   }
 ]
