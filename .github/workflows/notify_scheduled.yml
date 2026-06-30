@@ -104,7 +104,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # notify_state (spam koruması) + forward-validation (OTT) + long-only (kanıtlanmış sistem)
-          git add notify_state_scheduled.json live_positions.json live_trades.json lo_positions.json lo_trades.json lo_breadth.json cg_positions.json cg_trades.json daily_report_state.json borsa_mudur_state.json 2>/dev/null || true
+          # ÖNEMLİ: dosyaları TEK TEK ekle. "git add a b yok.json" → tüm komut çöker,
+          # HİÇBİRİ staged olmaz (atomik). daily_report_state/borsa_mudur_state koşullu
+          # oluşur (çoğu koşuda yok) → eskiden tüm commit'i kilitliyordu (26 Haz'da durdu).
+          for f in notify_state_scheduled.json live_positions.json live_trades.json lo_positions.json lo_trades.json lo_breadth.json cg_positions.json cg_trades.json daily_report_state.json borsa_mudur_state.json; do
+            [ -f "$f" ] && git add "$f"
+          done
           if git diff --staged --quiet; then
             echo "Değişiklik yok."
           else
