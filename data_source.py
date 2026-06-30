@@ -99,6 +99,40 @@ def _get_tv():
     return _tv_client
 
 
+# ── borsapy YEDEK (BIST için): TV çökünce yfinance'in eksik/gecikmeli BIST
+#    verisine düşmek yerine yerli, eksiksiz borsapy verisini kullan.
+#    borsapy intervalleri: 5m/15m/30m/1h/4h/1d (60m KULLANMA — bozuk veri).
+_BORSAPY_INTERVAL = {"5m": "5m", "15m": "15m", "30m": "30m",
+                     "1h": "1h", "4h": "4h", "1d": "1d"}
+_BORSAPY_PERIOD   = {"5m": "3mo", "15m": "3mo", "30m": "6mo",
+                     "1h": "1y", "4h": "1y", "1d": "5y"}
+
+def _fetch_borsapy(symbol: str, interval: str, n_bars: int):
+    """BIST (.IS) sembolü için borsapy'den OHLCV çek. BIST dışı → None (yfinance'a düşsün).
+    1m/3m gibi desteklenmeyen interval → None."""
+    if not symbol.upper().endswith(".IS"):
+        return None
+    iv = _BORSAPY_INTERVAL.get(interval)
+    if iv is None:
+        return None
+    try:
+        import borsapy as bp
+        base = symbol[:-3].upper()          # GARAN.IS → GARAN
+        h = bp.Ticker(base).history(period=_BORSAPY_PERIOD.get(interval, "1y"), interval=iv)
+        if h is None or h.empty:
+            return None
+        h = h.rename(columns=str.lower)
+        keep = [c for c in ["open", "high", "low", "close", "volume"] if c in h.columns]
+        h = h[keep].dropna()
+        if h.empty:
+            return None
+        if n_bars and len(h) > n_bars:
+            h = h.iloc[-n_bars:]
+        return _to_tr_naive(h)
+    except Exception:
+        return None
+
+
 # ── tvDatafeed interval map
 _TV_INTERVAL = {
     "1m": "in_1_minute", "3m": "in_3_minute", "5m": "in_5_minute",
@@ -209,7 +243,15 @@ def fetch(symbol: str, interval: str = "5m", n_bars: int = 5000) -> pd.DataFrame
             except Exception:
                 pass  # Sessizce yfinance'a düş
 
-    # 2) yfinance fallback — TradingView başarısız oldu, YEDEK devrede.
+    # 2) borsapy YEDEK (BIST) — TV çöktü; yfinance'e düşmeden ÖNCE yerli, eksiksiz
+    #    borsapy verisini dene. yfinance BIST'te gecikmeli/boşluklu olduğundan
+    #    BIST için borsapy çok daha güvenilir bir yedek.
+    _bp = _fetch_borsapy(symbol, interval, n_bars)
+    if _bp is not None and not _bp.empty:
+        print(f"  ↪️ [data_source] borsapy YEDEK → {symbol} ({len(_bp)} bar, BIST yerli veri)")
+        return _bp
+
+    # 3) yfinance fallback — TradingView + borsapy başarısız oldu, son çare.
     #    Her kullanımı işaretle (TV ne sıklıkta çöküyor + kötü veri kontrolü).
     #    yfinance BIST'te gecikmeli/boşluklu → BIST'te bu uyarıyı ciddiye al.
     _bist = symbol.upper().endswith(".IS")

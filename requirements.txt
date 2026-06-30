@@ -37,3 +37,4 @@ APScheduler>=3.10.0
 
 # Otomatik sayfa yenileme (Canlı Performans — tıklamadan veri tazeleme)
 streamlit-autorefresh>=1.0.1
+borsapy
