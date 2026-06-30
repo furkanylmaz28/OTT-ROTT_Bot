@@ -32,7 +32,7 @@ on:
   # (free tier background thread'i öldürüyor). GitHub Actions tek güvenilir
   # otomatik tetikleyici.
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "*/30 * * * *"
   # Manuel tetikleme (test için)
   workflow_dispatch:
     inputs:
