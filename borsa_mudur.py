@@ -18,6 +18,11 @@ import sys, os, json, hashlib
 from datetime import datetime, timezone, timedelta
 try: sys.stdout.reconfigure(encoding="utf-8")
 except Exception: pass
+# Ayrı process olarak koşar → .env'i KENDİSİ yüklemeli (yoksa Telegram token'ı
+# os.getenv'de None döner, rapor sessizce gönderilemez).
+try:
+    from dotenv import load_dotenv; load_dotenv()
+except Exception: pass
 
 TR = timezone(timedelta(hours=3))
 STATE_FILE = "borsa_mudur_state.json"

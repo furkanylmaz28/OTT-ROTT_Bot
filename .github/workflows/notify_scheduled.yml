@@ -73,8 +73,8 @@ jobs:
 
       - name: Secrets'ı .env'e yaz (geçici)
         env:
-          TV_USERNAME:        ${{ secrets.TV_USERNAME }}
-          TV_PASSWORD:        ${{ secrets.TV_PASSWORD }}
+          TV_USERNAME:        ${{ secrets.DATA_TOPLAMA_USERNAME }}
+          TV_PASSWORD:        ${{ secrets.DATA_TOPLAMA_SIFRE }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
