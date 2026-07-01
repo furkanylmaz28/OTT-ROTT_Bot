@@ -227,6 +227,7 @@ void TrailSym(string sym)
 void TrailShort(string sym)
 {
    double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+   if(ask<=0) return;   // feed sıçraması/veri yok → dokunma (aksi halde SL sıfırlanıp korumasız kalır)
    int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
@@ -259,6 +260,28 @@ void TrailTrend(string sym)
       double desiredSL = bid * (1.0 - InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun)
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL > curSL)                            // sadece YUKARI çek
+         trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
+   }
+}
+
+// TREND-SHORT trailing: kâr net olunca GENİŞ trail (peak'in %3 üstü) → kazananı koştur, sabit TP yok
+// TrailTrend'in ("T") ayna simetriği — bu olmadan "D" pozisyonları hiç korumasız kalırdı.
+void TrailTrendShort(string sym)
+{
+   double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+   if(ask<=0) return;
+   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk==0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
+      if(PositionGetString(POSITION_COMMENT)!="D") continue;       // sadece trend-short
+      double entry = PositionGetDouble(POSITION_PRICE_OPEN);
+      if((entry-ask)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1 net olmadan SL koyma
+      double desiredSL = ask * (1.0 + InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun), entry'nin üstü
+      double curSL = PositionGetDouble(POSITION_SL);
+      if(curSL==0 || desiredSL < curSL)                            // sadece AŞAĞI çek (short SL sıkılaşır)
          trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
    }
 }
@@ -301,6 +324,7 @@ void OnTimer()
       if(!sideways)
       {
          TrailTrend(sym);                                          // her tarama: trend-long'u GENİŞ trailing'le koru
+         TrailTrendShort(sym);                                     // aynısı trend-short ("D") için — "D" pozisyon yoksa no-op
          if(newbar)
          {
             if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // long grid kapat
