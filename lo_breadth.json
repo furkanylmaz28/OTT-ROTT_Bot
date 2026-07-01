@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-01T10:58:28.304952+03:00",
+  "ts": "2026-07-01T11:02:30.766396+03:00",
   "bull": 22,
-  "bear": 12,
-  "total": 34,
-  "bull_pct": 65.0,
+  "bear": 11,
+  "total": 33,
+  "bull_pct": 67.0,
   "bull_syms": [
     "AKBNK",
     "ENJSA",
@@ -37,7 +37,6 @@
     "KRDMD",
     "SOKM",
     "TOASO",
-    "TKFEN",
     "ODAS",
     "ASTOR",
     "KONTR"
@@ -47,7 +46,6 @@
     "DOHOL",
     "EREGL",
     "KRDMD",
-    "SOKM",
-    "TKFEN"
+    "SOKM"
   ]
 }
