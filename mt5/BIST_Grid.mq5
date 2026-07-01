@@ -179,6 +179,19 @@ void CloseTag(string sym, string prefix, string why)
    if(InpVerbose && closed>0) PrintFormat("Kapatıldı (%s %s): %d · %s", sym, prefix, closed, why);
 }
 
+// Fiyatı sembolün GERÇEK tick adımına yuvarla (ondalık basamak≠tick adımı olabilir,
+// VIOP'ta yaygın: NormalizeDouble sadece basamak keser, adıma hizalamaz →
+// broker "invalid order" (ret=10035) ile reddeder. Bu, TRALT/ODAS/OYAKC vakasının sebebiydi.
+double NormalizeToTick(string sym, double price)
+{
+   double tick = SymbolInfoDouble(sym, SYMBOL_TRADE_TICK_SIZE);
+   if(tick <= 0) tick = SymbolInfoDouble(sym, SYMBOL_POINT);
+   if(tick <= 0) return price;
+   double rounded = MathRound(price / tick) * tick;
+   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
+   return NormalizeDouble(rounded, dg);
+}
+
 //+------------------------------------------------------------------+
 double CalcLots(string sym, double ask)
 {
@@ -219,7 +232,7 @@ void TrailSym(string sym)
       double desiredSL = bid * (1.0 - InpTrailPct/100.0);
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL > curSL)
-         if(!trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP)))
+         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
             PrintFormat("❌ TRAIL HATA (grid): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
    }
 }
@@ -241,7 +254,7 @@ void TrailShort(string sym)
       double desiredSL = ask * (1.0 + InpTrailPct/100.0);
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL < curSL)                           // short: SL'i AŞAĞI çek
-         if(!trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP)))
+         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
             PrintFormat("❌ TRAIL HATA (short): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
    }
 }
@@ -262,7 +275,7 @@ void TrailTrend(string sym)
       double desiredSL = bid * (1.0 - InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun)
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL > curSL)                            // sadece YUKARI çek
-         if(!trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP)))
+         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
             PrintFormat("❌ TRAIL HATA (trend): %s #%s giriş=%.4g bid=%.4g SL->%.4g · ret=%d %s",
                         sym, (string)tk, entry, bid, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
    }
@@ -286,7 +299,8 @@ void TrailTrendShort(string sym)
       double desiredSL = ask * (1.0 + InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun), entry'nin üstü
       double curSL = PositionGetDouble(POSITION_SL);
       if(curSL==0 || desiredSL < curSL)                            // sadece AŞAĞI çek (short SL sıkılaşır)
-         trade.PositionModify(tk, NormalizeDouble(desiredSL, dg), PositionGetDouble(POSITION_TP));
+         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
+            PrintFormat("❌ TRAIL HATA (trend-short): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
    }
 }
 
