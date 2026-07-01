@@ -1,8 +1,8 @@
 {
-  "ts": "2026-07-01T16:43:57.962258+03:00",
-  "bull": 26,
+  "ts": "2026-07-01T16:49:23.396907+03:00",
+  "bull": 25,
   "bear": 8,
-  "total": 34,
+  "total": 33,
   "bull_pct": 76.0,
   "bull_syms": [
     "AKBNK",
@@ -23,7 +23,6 @@
     "THYAO",
     "TTKOM",
     "TUPRS",
-    "VAKBN",
     "YKBNK",
     "AEFES",
     "HEKTS",
