@@ -1737,12 +1737,12 @@
     "reason": "trail"
   },
   {
-    "coin": "DOT",
+    "coin": "IMX",
     "level": "0",
-    "entry_price": 0.853,
-    "exit_price": 0.846,
-    "pnl_pct": -0.921,
-    "exit_ts": "2026-07-01T19:12:31.248909+03:00",
-    "reason": "trend"
+    "entry_price": 0.1167,
+    "exit_price": 0.1198,
+    "pnl_pct": 2.556,
+    "exit_ts": "2026-07-01T19:16:31.905526+03:00",
+    "reason": "trail"
   }
 ]
