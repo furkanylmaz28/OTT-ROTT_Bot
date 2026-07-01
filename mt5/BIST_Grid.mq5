@@ -40,6 +40,32 @@ string    g_symbols[];
 datetime  g_lastBar[];
 double    g_levels[3];
 
+// ── Peak takibi (EA hafızasında) — broker SL/TP (PositionModify) bu hesapta
+// HER ZAMAN ret=10035 "invalid order" ile reddediyor (VIOP'ta native stop
+// desteklenmiyor olabilir; tick-hizalama denendi, o da çözmedi). Bu yüzden
+// trailing artık broker'a stop koymuyor — EA kendi hafızasında tepe/dip fiyatı
+// tutup eşik aşılınca DOĞRUDAN piyasadan kapatıyor (PositionClose zaten
+// çalışıyor — CloseTag'de kanıtlı). Backtest'in "peak/active" mantığıyla birebir.
+ulong  g_pkTk[];
+double g_pkVal[];
+
+int PeakIdx(ulong tk){ for(int i=0;i<ArraySize(g_pkTk);i++) if(g_pkTk[i]==tk) return i; return -1; }
+double PeakGet(ulong tk, double def){ int i=PeakIdx(tk); return (i>=0)?g_pkVal[i]:def; }
+void PeakSet(ulong tk, double val)
+{
+   int i=PeakIdx(tk);
+   if(i>=0){ g_pkVal[i]=val; return; }
+   int n=ArraySize(g_pkTk); ArrayResize(g_pkTk,n+1); ArrayResize(g_pkVal,n+1);
+   g_pkTk[n]=tk; g_pkVal[n]=val;
+}
+void PeakClear(ulong tk)
+{
+   int i=PeakIdx(tk); if(i<0) return;
+   int n=ArraySize(g_pkTk);
+   g_pkTk[i]=g_pkTk[n-1]; g_pkVal[i]=g_pkVal[n-1];
+   ArrayResize(g_pkTk,n-1); ArrayResize(g_pkVal,n-1);
+}
+
 //+------------------------------------------------------------------+
 int OnInit()
 {
@@ -174,7 +200,7 @@ void CloseTag(string sym, string prefix, string why)
       ulong tk = PositionGetTicket(i);
       if(tk && PositionGetString(POSITION_SYMBOL)==sym && PositionGetInteger(POSITION_MAGIC)==InpMagic)
          if(StringFind(PositionGetString(POSITION_COMMENT), prefix)==0)
-            { if(trade.PositionClose(tk)) closed++; }
+            { if(trade.PositionClose(tk)) { closed++; PeakClear(tk); } }
    }
    if(InpVerbose && closed>0) PrintFormat("Kapatıldı (%s %s): %d · %s", sym, prefix, closed, why);
 }
@@ -217,10 +243,13 @@ double CalcLots(string sym, double ask)
 }
 
 //+------------------------------------------------------------------+
+// GRID trailing: broker'a SL KOYMUYOR (bu hesapta PositionModify hep reddediliyor —
+// ret=10035/10027, sembol/genişlikten bağımsız → VIOP'ta native stop desteklenmiyor
+// olabilir). EA kendi hafızasında tepe fiyatı takip edip eşik aşılınca DOĞRUDAN
+// piyasadan kapatır (PositionClose kanıtlı çalışıyor — CloseTag'de görüldü).
 void TrailSym(string sym)
 {
    double bid = SymbolInfoDouble(sym, SYMBOL_BID);
-   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -228,21 +257,27 @@ void TrailSym(string sym)
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
       if(StringFind(PositionGetString(POSITION_COMMENT),"G")!=0) continue;  // sadece GRID birimleri trail
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-      if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.5 NET (komisyon dahil)
-      double desiredSL = bid * (1.0 - InpTrailPct/100.0);
-      double curSL = PositionGetDouble(POSITION_SL);
-      if(curSL==0 || desiredSL > curSL)
-         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
-            PrintFormat("❌ TRAIL HATA (grid): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      bool active = (PeakIdx(tk) >= 0);
+      if(!active)
+      {
+         if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 NET (komisyon dahil) — henüz eşik yok
+         PeakSet(tk, bid); active = true;                                 // AKTİFLEŞTİ
+      }
+      double peak = MathMax(PeakGet(tk, bid), bid);
+      PeakSet(tk, peak);
+      if(bid <= peak*(1.0 - InpTrailPct/100.0))
+      {
+         if(trade.PositionClose(tk)) PeakClear(tk);
+         else PrintFormat("❌ TRAIL KAPAT HATA (grid): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      }
    }
 }
 
-// SHORT grid trailing: kâr +%1.5'e ulaşınca SL fiyatın üstüne, fiyat düştükçe aşağı çek
+// SHORT grid trailing: kâr +%X'e ulaşınca dip fiyatı takip et, geri toparlanınca kapat
 void TrailShort(string sym)
 {
    double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
-   if(ask<=0) return;   // feed sıçraması/veri yok → dokunma (aksi halde SL sıfırlanıp korumasız kalır)
-   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
+   if(ask<=0) return;   // feed sıçraması/veri yok → dokunma
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -250,20 +285,26 @@ void TrailShort(string sym)
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
       if(StringFind(PositionGetString(POSITION_COMMENT),"S")!=0) continue;  // sadece SHORT grid
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-      if((entry-ask)/entry < InpTakePct/100.0) continue;          // henüz +%1.5 kâr yok
-      double desiredSL = ask * (1.0 + InpTrailPct/100.0);
-      double curSL = PositionGetDouble(POSITION_SL);
-      if(curSL==0 || desiredSL < curSL)                           // short: SL'i AŞAĞI çek
-         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
-            PrintFormat("❌ TRAIL HATA (short): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      bool active = (PeakIdx(tk) >= 0);
+      if(!active)
+      {
+         if((entry-ask)/entry < InpTakePct/100.0) continue;          // henüz kâr eşiği yok
+         PeakSet(tk, ask); active = true;
+      }
+      double trough = MathMin(PeakGet(tk, ask), ask);
+      PeakSet(tk, trough);
+      if(ask >= trough*(1.0 + InpTrailPct/100.0))
+      {
+         if(trade.PositionClose(tk)) PeakClear(tk);
+         else PrintFormat("❌ TRAIL KAPAT HATA (short): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      }
    }
 }
 
-// TREND-LONG trailing: kâr +%1.5 net olunca GENİŞ trail (peak'in %3 altı) → kazananı koştur, sabit TP yok
+// TREND-LONG trailing: kâr +%1.1 net olunca GENİŞ trail (peak'in %3 altı) → kazananı koştur, sabit TP yok
 void TrailTrend(string sym)
 {
    double bid = SymbolInfoDouble(sym, SYMBOL_BID);
-   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -271,13 +312,20 @@ void TrailTrend(string sym)
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
       if(PositionGetString(POSITION_COMMENT)!="T") continue;       // sadece trend-long
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-      if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.5 net olmadan SL koyma
-      double desiredSL = bid * (1.0 - InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun)
-      double curSL = PositionGetDouble(POSITION_SL);
-      if(curSL==0 || desiredSL > curSL)                            // sadece YUKARI çek
-         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
-            PrintFormat("❌ TRAIL HATA (trend): %s #%s giriş=%.4g bid=%.4g SL->%.4g · ret=%d %s",
-                        sym, (string)tk, entry, bid, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      bool active = (PeakIdx(tk) >= 0);
+      if(!active)
+      {
+         if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 net olmadan aktifleşmez
+         PeakSet(tk, bid); active = true;
+      }
+      double peak = MathMax(PeakGet(tk, bid), bid);
+      PeakSet(tk, peak);
+      if(bid <= peak*(1.0 - InpTrendTrailPct/100.0))
+      {
+         if(trade.PositionClose(tk)) PeakClear(tk);
+         else PrintFormat("❌ TRAIL KAPAT HATA (trend): %s #%s giriş=%.4g bid=%.4g peak=%.4g · ret=%d %s",
+                           sym, (string)tk, entry, bid, peak, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      }
    }
 }
 
@@ -287,7 +335,6 @@ void TrailTrendShort(string sym)
 {
    double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
    if(ask<=0) return;
-   int dg = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -295,12 +342,19 @@ void TrailTrendShort(string sym)
       if(PositionGetString(POSITION_SYMBOL)!=sym || PositionGetInteger(POSITION_MAGIC)!=InpMagic) continue;
       if(PositionGetString(POSITION_COMMENT)!="D") continue;       // sadece trend-short
       double entry = PositionGetDouble(POSITION_PRICE_OPEN);
-      if((entry-ask)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1 net olmadan SL koyma
-      double desiredSL = ask * (1.0 + InpTrendTrailPct/100.0);     // GENİŞ trail (koşsun), entry'nin üstü
-      double curSL = PositionGetDouble(POSITION_SL);
-      if(curSL==0 || desiredSL < curSL)                            // sadece AŞAĞI çek (short SL sıkılaşır)
-         if(!trade.PositionModify(tk, NormalizeToTick(sym, desiredSL), PositionGetDouble(POSITION_TP)))
-            PrintFormat("❌ TRAIL HATA (trend-short): %s #%s SL->%.4g · ret=%d %s", sym, (string)tk, desiredSL, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      bool active = (PeakIdx(tk) >= 0);
+      if(!active)
+      {
+         if((entry-ask)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 net olmadan aktifleşmez
+         PeakSet(tk, ask); active = true;
+      }
+      double trough = MathMin(PeakGet(tk, ask), ask);
+      PeakSet(tk, trough);
+      if(ask >= trough*(1.0 + InpTrendTrailPct/100.0))
+      {
+         if(trade.PositionClose(tk)) PeakClear(tk);
+         else PrintFormat("❌ TRAIL KAPAT HATA (trend-short): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      }
    }
 }
 
