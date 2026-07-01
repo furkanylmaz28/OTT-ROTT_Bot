@@ -262,12 +262,14 @@ void TrailSym(string sym)
       {
          if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 NET (komisyon dahil) — henüz eşik yok
          PeakSet(tk, bid); active = true;                                 // AKTİFLEŞTİ
+         if(InpVerbose) PrintFormat("✅ TRAILING AKTİF (grid): %s #%s giriş=%.4g tepe=%.4g", sym, (string)tk, entry, bid);
       }
       double peak = MathMax(PeakGet(tk, bid), bid);
       PeakSet(tk, peak);
       if(bid <= peak*(1.0 - InpTrailPct/100.0))
       {
-         if(trade.PositionClose(tk)) PeakClear(tk);
+         if(trade.PositionClose(tk))
+         { PeakClear(tk); if(InpVerbose) PrintFormat("💰 TRAIL KAPANDI (grid): %s #%s tepe=%.4g @%.4g", sym, (string)tk, peak, bid); }
          else PrintFormat("❌ TRAIL KAPAT HATA (grid): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
       }
    }
@@ -290,12 +292,14 @@ void TrailShort(string sym)
       {
          if((entry-ask)/entry < InpTakePct/100.0) continue;          // henüz kâr eşiği yok
          PeakSet(tk, ask); active = true;
+         if(InpVerbose) PrintFormat("✅ TRAILING AKTİF (short): %s #%s giriş=%.4g dip=%.4g", sym, (string)tk, entry, ask);
       }
       double trough = MathMin(PeakGet(tk, ask), ask);
       PeakSet(tk, trough);
       if(ask >= trough*(1.0 + InpTrailPct/100.0))
       {
-         if(trade.PositionClose(tk)) PeakClear(tk);
+         if(trade.PositionClose(tk))
+         { PeakClear(tk); if(InpVerbose) PrintFormat("💰 TRAIL KAPANDI (short): %s #%s dip=%.4g @%.4g", sym, (string)tk, trough, ask); }
          else PrintFormat("❌ TRAIL KAPAT HATA (short): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
       }
    }
@@ -317,12 +321,14 @@ void TrailTrend(string sym)
       {
          if((bid-entry)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 net olmadan aktifleşmez
          PeakSet(tk, bid); active = true;
+         if(InpVerbose) PrintFormat("✅ TRAILING AKTİF (trend): %s #%s giriş=%.4g tepe=%.4g", sym, (string)tk, entry, bid);
       }
       double peak = MathMax(PeakGet(tk, bid), bid);
       PeakSet(tk, peak);
       if(bid <= peak*(1.0 - InpTrendTrailPct/100.0))
       {
-         if(trade.PositionClose(tk)) PeakClear(tk);
+         if(trade.PositionClose(tk))
+         { PeakClear(tk); if(InpVerbose) PrintFormat("💰 TRAIL KAPANDI (trend): %s #%s tepe=%.4g @%.4g", sym, (string)tk, peak, bid); }
          else PrintFormat("❌ TRAIL KAPAT HATA (trend): %s #%s giriş=%.4g bid=%.4g peak=%.4g · ret=%d %s",
                            sym, (string)tk, entry, bid, peak, trade.ResultRetcode(), trade.ResultRetcodeDescription());
       }
@@ -347,12 +353,14 @@ void TrailTrendShort(string sym)
       {
          if((entry-ask)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 net olmadan aktifleşmez
          PeakSet(tk, ask); active = true;
+         if(InpVerbose) PrintFormat("✅ TRAILING AKTİF (trend-short): %s #%s giriş=%.4g dip=%.4g", sym, (string)tk, entry, ask);
       }
       double trough = MathMin(PeakGet(tk, ask), ask);
       PeakSet(tk, trough);
       if(ask >= trough*(1.0 + InpTrendTrailPct/100.0))
       {
-         if(trade.PositionClose(tk)) PeakClear(tk);
+         if(trade.PositionClose(tk))
+         { PeakClear(tk); if(InpVerbose) PrintFormat("💰 TRAIL KAPANDI (trend-short): %s #%s dip=%.4g @%.4g", sym, (string)tk, trough, ask); }
          else PrintFormat("❌ TRAIL KAPAT HATA (trend-short): %s #%s · ret=%d %s", sym, (string)tk, trade.ResultRetcode(), trade.ResultRetcodeDescription());
       }
    }
