@@ -18,7 +18,7 @@ input bool    InpScanAll          = true;     // TÜM Market Watch sembollerini 
 input string  InpSymbols          = "GARAN,THYAO,ASELS,EREGL,SISE,KCHOL,AKBNK,SASA,TUPRS,FROTO"; // ScanAll=false ise
 input ENUM_TIMEFRAMES InpTF        = PERIOD_H1; // Zaman dilimi (sistem H1)
 input int     InpER_Win           = 20;      // Kaufman ER penceresi
-input double  InpER_Th            = 0.30;     // ER < bu = YATAY (grid açık)
+input double  InpER_Th            = 0.25;     // ER < bu = YATAY (WF-opt: 0.30 en iyi DEĞİLDİ — holdout/OOS'ta 0.25 daha güçlü)
 input double  InpLevel1Pct        = 1.5;      // 1. AL seviyesi: SMA20 -% (WF-opt: geniş daha iyi)
 input double  InpLevel2Pct        = 3.0;      // 2. AL seviyesi (WF-opt -1.5/-3/-4.5)
 input double  InpLevel3Pct        = 4.5;      // 3. AL seviyesi
