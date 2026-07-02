@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-02T16:47:32.760239+03:00",
+  "ts": "2026-07-02T16:53:26.108372+03:00",
   "bull": 23,
-  "bear": 9,
-  "total": 32,
-  "bull_pct": 72.0,
+  "bear": 11,
+  "total": 34,
+  "bull_pct": 68.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -31,6 +31,7 @@
   ],
   "bear_syms": [
     "DOHOL",
+    "EREGL",
     "FROTO",
     "GUBRF",
     "KRDMD",
@@ -42,6 +43,7 @@
   ],
   "fresh_bear": [
     "FROTO",
+    "MGROS",
     "TTKOM",
     "AEFES"
   ]
