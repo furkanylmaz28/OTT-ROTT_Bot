@@ -16,8 +16,9 @@ from __future__ import annotations
 ACCOUNT_RISK    = 0.01    # işlem başı hesabın %1'i risk
 MAX_POSITIONS   = 6       # aynı anda en fazla pozisyon
 MAX_LEVERAGE    = 2.0     # toplam notional ≤ hesap × bu (1:7 = iflas)
-MAX_DAILY_LOSS  = 0.02    # günlük -%2 → o gün dur
-MAX_WEEKLY_LOSS = 0.05    # haftalık -%5 → hafta sonuna kadar dur
+MAX_DAILY_LOSS  = 0.08    # günlük -%8 → o gün dur (kullanıcı isteği, 2026-07: -%2 çok sıkıydı)
+MAX_WEEKLY_LOSS = 0.10    # haftalık -%10 → hafta sonuna kadar dur (günlükten BÜYÜK olmalı,
+                          # yoksa -%5 haftalık fren -%8 günlüğe hiç ulaştırmazdı)
 
 
 def position_size(account: float, entry: float, stop: float,
