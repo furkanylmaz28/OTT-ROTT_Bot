@@ -256,7 +256,7 @@ def main():
     print("═" * 60)
     print(f"🔴 GERÇEK HESAP · Binance FUTURES grid · {len(COINS)} coin · {LEVERAGE}×")
     print(f"💼 Cüzdan: {eqty:.2f} USDT (bakiye {bal:.2f} + yüzen {unreal:+.2f})")
-    print(f"📏 Birim: {unit:.1f}$ notional · zarar freni: gün -%2 / hafta -%5")
+    print(f"📏 Birim: {unit:.1f}$ notional · zarar freni: gün -%{risk.MAX_DAILY_LOSS*100:.0f} / hafta -%{risk.MAX_WEEKLY_LOSS*100:.0f}")
     print("═" * 60)
     if "--auto" not in sys.argv:
         cevap = input("GERÇEK PARA ile başlasın mı? (EVET yaz): ").strip()
