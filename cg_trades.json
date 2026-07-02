@@ -1843,5 +1843,23 @@
     "pnl_pct": 2.605,
     "exit_ts": "2026-07-02T17:16:17.884833+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 4.571,
+    "exit_price": 4.663,
+    "pnl_pct": 1.913,
+    "exit_ts": "2026-07-02T17:31:27.321886+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04772,
+    "exit_price": 0.0487,
+    "pnl_pct": 1.954,
+    "exit_ts": "2026-07-02T17:31:27.321886+03:00",
+    "reason": "trail"
   }
 ]

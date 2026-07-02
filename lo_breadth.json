@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-02T17:17:24.045684+03:00",
-  "bull": 23,
+  "ts": "2026-07-02T17:32:45.385386+03:00",
+  "bull": 22,
   "bear": 11,
-  "total": 34,
-  "bull_pct": 68.0,
+  "total": 33,
+  "bull_pct": 67.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -13,7 +13,6 @@
     "HALKB",
     "ISCTR",
     "KCHOL",
-    "PETKM",
     "PGSUS",
     "SASA",
     "SISE",
