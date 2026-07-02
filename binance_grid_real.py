@@ -220,12 +220,18 @@ def manage(sym, state, unit_notional, risk_ctx):
             except BinanceAPIException as e: print(f"   AL hata: {e.message}")
         elif u["phase"] == "buy":
             try: od = client.futures_get_order(symbol=sym, orderId=u["order_id"])
-            except BinanceAPIException: continue
+            except BinanceAPIException as e:
+                if e.code == -2013: del sstate[ks]   # "Order does not exist" → temizle
+                continue   # diğer hatalar (ağ vb.) geçici olabilir → state'e DOKUNMA (çift emir riski)
             if od["status"] == "FILLED":
                 entry = float(od["avgPrice"]) or float(od["price"])
                 u.update({"phase": "hold", "entry": entry, "active": False, "peak": entry})
                 print(f"   ✅ ALINDI {entry:.6g} → trailing bekliyor (+%1.5'te aktif)")
                 tg(f"🔴 <b>GERÇEK</b> · {sym} ALINDI @ {entry:.6g} (seviye {int(ks)+1})")
+            elif od["status"] in ("CANCELED", "EXPIRED", "REJECTED"):
+                # dışarıdan iptal (Cancel All vb.) → state'i temizle; sonraki taramada seviye yeniden değerlendirilir
+                print(f"   🧹 seviye {int(ks)+1} emri dışarıdan iptal edilmiş → temizlendi")
+                del sstate[ks]
         elif u["phase"] == "hold":
             entry = u["entry"]
             if not u.get("active") and price >= entry * (1 + TAKE):
