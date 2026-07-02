@@ -1,10 +1,11 @@
 //+------------------------------------------------------------------+
 //|                                              BIST_Grid.mq5        |
 //|  KANITLANMIŞ BIST GRID + TREND — her rejimde aktif, long-only     |
-//|  YATAY (ER<0.30)→grid · YUKARI TREND→long · AŞAĞI TREND→nakit      |
+//|  YATAY (ER<0.25)→grid · YUKARI TREND→long · AŞAĞI TREND→nakit      |
 //|  ÇOKLU SEMBOL: tüm Market Watch'ı tarar (InpScanAll).             |
-//|  Kaufman ER<0.30 = yatay → grid; trend → kapat. Seviye -1/-2/-3%. |
-//|  Birim +%1.5'te trailing aktif, peak'in %0.5 altına inince sat.   |
+//|  WF-opt param: seviye -1.5/-3/-4.5% · +%1.0 net'te trailing aktif,|
+//|  grid peak'in %0.3 / trend %3 altına inince PİYASADAN kapat       |
+//|  (broker SL YOK — bu hesapta desteklenmiyor; EA-hafızalı peak).   |
 //|  💰 KASA KORUMA: öz sermayenin %20'si HER ZAMAN güvende (GLOBAL) —|
 //|     tüm sembollerdeki toplam notional ≤ %80. Kaldıraç YOK. DEMO.  |
 //+------------------------------------------------------------------+
@@ -225,7 +226,7 @@ double CalcLots(string sym, double ask)
    double usable = eq * (100.0 - InpSafeReservePct) / 100.0;     // %80 GLOBAL
    double budget = usable - TotalNotional();                     // kalan global bütçe
    if(budget <= 0) return 0;                                     // kasa korumalı: dur
-   double target = MathMin(eq * InpUnitPct/100.0, budget);       // birim = %5 eq, bütçeyle sınırlı
+   double target = MathMin(eq * InpUnitPct/100.0, budget);       // birim = InpUnitPct% eq (vars. %10), bütçeyle sınırlı
    double cs = SymbolInfoDouble(sym, SYMBOL_TRADE_CONTRACT_SIZE);
    if(cs<=0 || ask<=0) return 0;
    double step = SymbolInfoDouble(sym, SYMBOL_VOLUME_STEP);
@@ -250,6 +251,7 @@ double CalcLots(string sym, double ask)
 void TrailSym(string sym)
 {
    double bid = SymbolInfoDouble(sym, SYMBOL_BID);
+   if(bid<=0) return;   // feed sıçraması/veri yok → dokunma (bid=0 iken kapatma tetiklenirdi!)
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -290,7 +292,7 @@ void TrailShort(string sym)
       bool active = (PeakIdx(tk) >= 0);
       if(!active)
       {
-         if((entry-ask)/entry < InpTakePct/100.0) continue;          // henüz kâr eşiği yok
+         if((entry-ask)/entry < (InpTakePct+InpCommPct)/100.0) continue;  // +%1.1 NET (komisyon dahil) — diğer 3 fonksiyonla tutarlı
          PeakSet(tk, ask); active = true;
          if(InpVerbose) PrintFormat("✅ TRAILING AKTİF (short): %s #%s giriş=%.4g dip=%.4g", sym, (string)tk, entry, ask);
       }
@@ -309,6 +311,7 @@ void TrailShort(string sym)
 void TrailTrend(string sym)
 {
    double bid = SymbolInfoDouble(sym, SYMBOL_BID);
+   if(bid<=0) return;   // feed sıçraması/veri yok → dokunma (bid=0 iken kapatma tetiklenirdi!)
    for(int i=PositionsTotal()-1; i>=0; i--)
    {
       ulong tk = PositionGetTicket(i);
@@ -384,6 +387,11 @@ void OnTimer()
       bool newbar = (bt != g_lastBar[s]);
       double bid = SymbolInfoDouble(sym, SYMBOL_BID);
       double ask = SymbolInfoDouble(sym, SYMBOL_ASK);
+      // ── TRAILING her taramada, REJİMDEN BAĞIMSIZ çalışır. Eskiden rejim
+      //    dallarının içindeydi → ER bar ortasında yatay→trend geçince grid
+      //    pozisyonları yeni bara kadar (59 dk'ya kadar) İZLENMİYORDU; broker
+      //    SL de olmadığından tamamen korumasız pencere oluşuyordu.
+      TrailSym(sym); TrailShort(sym); TrailTrend(sym); TrailTrendShort(sym);
       // ── tanı: rejim + bütçe uygunluğu say
       {
          double eq0=AccountInfoDouble(ACCOUNT_EQUITY);
@@ -403,8 +411,6 @@ void OnTimer()
       // ════════ TREND (ER ≥ eşik) ════════
       if(!sideways)
       {
-         TrailTrend(sym);                                          // her tarama: trend-long'u GENİŞ trailing'le koru
-         TrailTrendShort(sym);                                     // aynısı trend-short ("D") için — "D" pozisyon yoksa no-op
          if(newbar)
          {
             if(HasTag(sym,"G")) CloseTag(sym,"G", StringFormat("TREND (ER=%.2f)", er));  // long grid kapat
@@ -436,7 +442,6 @@ void OnTimer()
       // ════════ YATAY (ER < eşik) → GRID ════════
       if(HasTag(sym,"T")) CloseTag(sym,"T","yataya döndü");       // trend bitti → trend pozisyonları kapat
       if(HasTag(sym,"D")) CloseTag(sym,"D","yataya döndü");
-      TrailSym(sym); TrailShort(sym);                            // grid birimlerini trailing'le yönet
       if(ask<=0){ g_lastBar[s]=bt; continue; }
       for(int k=0;k<3;k++)
       {
