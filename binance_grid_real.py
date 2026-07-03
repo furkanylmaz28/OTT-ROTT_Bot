@@ -34,8 +34,15 @@ import risk
 load_dotenv()
 
 # ─────────────────────── AYARLAR ───────────────────────
-COINS          = ["BTCUSDT", "ETHUSDT", "SOLUSDT", "BNBUSDT", "XRPUSDT",
-                  "ADAUSDT", "AVAXUSDT", "LINKUSDT", "DOGEUSDT", "DOTUSDT"]
+# Evren = kağıt tracker'ın (204 işlem, PF 2.06) 30-coin listesi — doğrulama neyle
+# yapıldıysa canlı onu tarasın. Başlangıçta Binance'te gerçekten işlem görenler
+# filtrelenir (MATIC/RNDR gibi yeniden adlandırılanlar otomatik düşer).
+COINS_CANDIDATE = ["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT","XRPUSDT","ADAUSDT",
+                   "DOGEUSDT","TRXUSDT","AVAXUSDT","DOTUSDT","LINKUSDT","MATICUSDT",
+                   "LTCUSDT","BCHUSDT","UNIUSDT","ATOMUSDT","ETCUSDT","NEARUSDT",
+                   "ALGOUSDT","FILUSDT","APTUSDT","ARBUSDT","OPUSDT","SUIUSDT",
+                   "INJUSDT","HBARUSDT","IMXUSDT","RNDRUSDT","TIAUSDT","SEIUSDT"]
+COINS          = []   # OnInit'te Binance'ten filtrelenir
 LEVERAGE       = 2
 UNIT_PCT       = 0.06          # birim notional = cüzdan × bu (bileşik)
 UNIT_FLOOR     = 6.0           # ...ama en az 6 USDT (Binance min ~5 + tampon)
@@ -262,6 +269,7 @@ def manage(sym, state, unit_notional, risk_ctx):
 
 
 def main():
+    global COINS
     if not os.getenv("BINANCE_REAL_KEY") or not os.getenv("BINANCE_REAL_SECRET"):
         print("HATA: BINANCE_REAL_KEY / BINANCE_REAL_SECRET yok (.env)"); return
     sync_time()
@@ -271,6 +279,15 @@ def main():
         print(f"❌ Bağlantı/anahtar hatası: {e.message}")
         print("   (IP kilidi? Binance'te kayıtlı IP ile şu anki IP aynı mı kontrol et.)")
         return
+    # ── evren filtresi: aday listeden Binance'te gerçekten işlem görenler
+    try:
+        info = client.futures_exchange_info()
+        tradeable = {s["symbol"] for s in info["symbols"] if s.get("status") == "TRADING"}
+        COINS = [c for c in COINS_CANDIDATE if c in tradeable]
+        dusen = [c for c in COINS_CANDIDATE if c not in tradeable]
+        if dusen: print(f"ℹ️ İşlem görmeyen pariteler atlandı: {', '.join(dusen)}")
+    except Exception:
+        COINS = COINS_CANDIDATE[:10]   # exchange info alınamazsa güvenli çekirdek
     unit = max(UNIT_FLOOR, eqty * UNIT_PCT)
     print("═" * 60)
     print(f"🔴 GERÇEK HESAP · Binance FUTURES grid · {len(COINS)} coin · {LEVERAGE}×")
