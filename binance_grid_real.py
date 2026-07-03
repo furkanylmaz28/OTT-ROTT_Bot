@@ -178,12 +178,23 @@ def realized_pnl_pct(wallet):
     return today_usdt / wallet * 100, week_usdt / wallet * 100
 
 
-def total_open_notional():
+def total_committed_notional():
+    """Açık POZİSYONLAR + bekleyen LİMİT EMİRLER toplam notional'i.
+    İzole modda bekleyen emir de teminat kilitler — sadece pozisyonu saymak
+    'Margin is insufficient' yağmuruna yol açıyordu (28 coin × 3 seviye denemesi)."""
+    tot = 0.0
     try:
-        return sum(abs(float(p["positionAmt"])) * float(p["markPrice"])
+        tot += sum(abs(float(p["positionAmt"])) * float(p["markPrice"])
                    for p in client.futures_position_information())
     except Exception:
-        return 0.0
+        pass
+    try:
+        tot += sum(float(o["price"]) * float(o["origQty"])
+                   for o in client.futures_get_open_orders()
+                   if o.get("status") == "NEW")
+    except Exception:
+        pass
+    return tot
 
 
 def manage(sym, state, unit_notional, risk_ctx):
@@ -308,7 +319,10 @@ def main():
         unit_notional = max(UNIT_FLOOR, eqty * UNIT_PCT)
         today_pct, week_pct = realized_pnl_pct(eqty)
         halted, sebep = risk.loss_brake(today_pct, week_pct)
-        budget = max(0.0, eqty * risk.MAX_LEVERAGE - total_open_notional())
+        # bütçe = 2× tavan × %80 (BIST'teki gibi %20 teminat rezervi — kasa asla
+        # tamamen kilitlenmez, komisyon/dalgalanma payı kalır) − taahhüt edilen
+        # (pozisyon + bekleyen emir) notional
+        budget = max(0.0, eqty * risk.MAX_LEVERAGE * 0.80 - total_committed_notional())
         risk_ctx = {"halted": halted, "budget": budget}
         if halted:
             print(f"  {sebep}")
