@@ -232,6 +232,19 @@ def manage(sym, state, unit_notional, risk_ctx):
                 # dışarıdan iptal (Cancel All vb.) → state'i temizle; sonraki taramada seviye yeniden değerlendirilir
                 print(f"   🧹 seviye {int(ks)+1} emri dışarıdan iptal edilmiş → temizlendi")
                 del sstate[ks]
+            elif od["status"] == "NEW":
+                # YENİDEN-FİYATLAMA: kağıt tracker (PF 2.06) seviyeleri her taramada güncel
+                # SMA20'den hesaplar — merkez kayınca seviye de kayar. Bekleyen emir güncel
+                # seviyeden %0.5+ uzaklaştıysa iptal et; sonraki taramada taze seviyeye konur.
+                # Sadece hiç dolmamış (NEW) emirde — kısmi dolmuşu iptal etmek pozisyonu sahipsiz bırakır.
+                rest = float(od["price"])
+                if rest > 0 and abs(lvl_price - rest) / rest > 0.005:
+                    try:
+                        client.futures_cancel_order(symbol=sym, orderId=u["order_id"])
+                        del sstate[ks]
+                        print(f"   🔄 seviye {int(ks)+1} yeniden fiyatlanıyor: {rest:.6g} → {lvl_price:.6g} (merkez kaydı)")
+                    except BinanceAPIException:
+                        pass   # iptal edilemedi (belki tam o an doldu) → sonraki taramada durum netleşir
         elif u["phase"] == "hold":
             entry = u["entry"]
             if not u.get("active") and price >= entry * (1 + TAKE):
