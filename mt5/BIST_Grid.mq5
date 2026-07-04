@@ -73,10 +73,28 @@ int OnInit()
    int n = 0;
    if(InpScanAll)
    {
+      // Önce sunucudaki TÜM F_ (VIOP tek-hisse futures) sembollerini Market Watch'a
+      // ekle — taze kurulumda (bulut/VPS) Market Watch varsayılanlarında VIOP yoktur;
+      // bu olmadan EA taze terminalde hiçbir BIST sembolü göremezdi.
+      int all = SymbolsTotal(false), eklenen = 0;
+      for(int i=0;i<all;i++)
+      {
+         string nm = SymbolName(i, false);
+         if(StringFind(nm, "F_") == 0)
+            if(SymbolSelect(nm, true)) eklenen++;
+      }
+      if(eklenen > 0) PrintFormat("Market Watch'a %d VIOP (F_) sembolü eklendi", eklenen);
+      // Tarama listesi = Market Watch'taki SADECE F_ semboller. Taze terminalde
+      // Market Watch varsayılanları forex/altın CFD'leri içerir — onlar bu sistemle
+      // DOĞRULANMADI, EA kesinlikle taramamalı/işlem açmamalı.
       int tot = SymbolsTotal(true);
       ArrayResize(g_symbols, tot);
-      for(int i=0;i<tot;i++) g_symbols[i] = SymbolName(i, true);
-      n = tot;
+      for(int i=0;i<tot;i++)
+      {
+         string nm = SymbolName(i, true);
+         if(StringFind(nm, "F_") == 0) g_symbols[n++] = nm;
+      }
+      ArrayResize(g_symbols, n);
    }
    else n = StringSplit(InpSymbols, ',', g_symbols);
    if(n <= 0){ Print("HATA: taranacak sembol yok."); return INIT_FAILED; }
