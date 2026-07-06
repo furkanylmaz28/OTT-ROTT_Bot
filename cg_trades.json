@@ -2077,5 +2077,23 @@
     "pnl_pct": 2.907,
     "exit_ts": "2026-07-06T21:01:49.041495+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0873,
+    "exit_price": 0.0886,
+    "pnl_pct": 1.389,
+    "exit_ts": "2026-07-06T23:01:46.080110+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0775,
+    "exit_price": 0.0797,
+    "pnl_pct": 2.739,
+    "exit_ts": "2026-07-06T23:01:46.080110+03:00",
+    "reason": "trail"
   }
 ]
