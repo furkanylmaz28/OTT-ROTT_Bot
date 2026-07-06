@@ -27,10 +27,10 @@ input double  InpTakePct          = 1.0;      // +%X'te TRAILING aktifleş (WF-o
 input double  InpTrailPct         = 0.3;      // GRID: peak'in %X altına inince sat (WF-opt: 0.3 sıkı, az geri ver)
 input double  InpTrendTrailPct    = 3.0;      // TREND-LONG: peak'in %X altı (GENİŞ → kazananı koştur, sabit TP yok)
 input double  InpCommPct          = 0.10;     // Gidiş-dönüş komisyon % — trailing eşiğine eklenir (net kâr korunur)
-input double  InpUnitPct          = 10.0;     // Birim başı = kasanın %X'i ile alabileceği kadar (yetmezse hisseyi atla)
+input double  InpUnitPct          = 15.0;     // Birim başı = kasanın %X'i ile alabileceği kadar (demo: daha çok deployment için 10→15)
 input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
 input bool    InpAllowShort       = false;    // SHORT (demo): tepeden sat grid + aşağı trend short (BIST drift'i aleyhe — PF düşer)
-input double  InpSafeReservePct   = 20.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %80
+input double  InpSafeReservePct   = 10.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %90 (demo: 20→10 daha çok deployment)
 input long    InpMagic            = 20260103;
 input int     InpTimerSec         = 10;       // Tarama aralığı (sn)
 input bool    InpVerbose          = true;
