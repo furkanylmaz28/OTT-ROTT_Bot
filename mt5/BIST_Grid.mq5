@@ -76,14 +76,17 @@ int OnInit()
       // Önce sunucudaki TÜM F_ (VIOP tek-hisse futures) sembollerini Market Watch'a
       // ekle — taze kurulumda (bulut/VPS) Market Watch varsayılanlarında VIOP yoktur;
       // bu olmadan EA taze terminalde hiçbir BIST sembolü göremezdi.
+      // SADECE hisse futures'ı: F_ ile başlayan AMA "USD" İÇERMEYEN. VIOP'ta
+      // F_XAUUSD/F_XCUUSD/F_EURUSD gibi döviz-emtia futures'ları da var; onlar bu
+      // sistemle DOĞRULANMADI + bazıları "trade disabled" (ret=10017) hatası veriyor.
       int all = SymbolsTotal(false), eklenen = 0;
       for(int i=0;i<all;i++)
       {
          string nm = SymbolName(i, false);
-         if(StringFind(nm, "F_") == 0)
+         if(StringFind(nm, "F_") == 0 && StringFind(nm, "USD") < 0)
             if(SymbolSelect(nm, true)) eklenen++;
       }
-      if(eklenen > 0) PrintFormat("Market Watch'a %d VIOP (F_) sembolü eklendi", eklenen);
+      if(eklenen > 0) PrintFormat("Market Watch'a %d VIOP hisse (F_, USD hariç) sembolü eklendi", eklenen);
       // Tarama listesi = Market Watch'taki SADECE F_ semboller. Taze terminalde
       // Market Watch varsayılanları forex/altın CFD'leri içerir — onlar bu sistemle
       // DOĞRULANMADI, EA kesinlikle taramamalı/işlem açmamalı.
@@ -92,7 +95,7 @@ int OnInit()
       for(int i=0;i<tot;i++)
       {
          string nm = SymbolName(i, true);
-         if(StringFind(nm, "F_") == 0) g_symbols[n++] = nm;
+         if(StringFind(nm, "F_") == 0 && StringFind(nm, "USD") < 0) g_symbols[n++] = nm;  // USD=döviz/emtia, hariç
       }
       ArrayResize(g_symbols, n);
    }
