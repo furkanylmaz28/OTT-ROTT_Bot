@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-06T17:03:51.986984+03:00",
+  "ts": "2026-07-06T17:17:07.566985+03:00",
   "bull": 12,
-  "bear": 20,
-  "total": 32,
-  "bull_pct": 38.0,
+  "bear": 22,
+  "total": 34,
+  "bull_pct": 35.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -21,6 +21,7 @@
   "bear_syms": [
     "AKBNK",
     "DOHOL",
+    "EKGYO",
     "ENKAI",
     "EREGL",
     "FROTO",
@@ -30,6 +31,7 @@
     "KRDMD",
     "MGROS",
     "SASA",
+    "SISE",
     "SOKM",
     "TAVHL",
     "TOASO",
@@ -42,6 +44,7 @@
   ],
   "fresh_bear": [
     "ENKAI",
+    "SISE",
     "SOKM",
     "TAVHL",
     "TKFEN"
