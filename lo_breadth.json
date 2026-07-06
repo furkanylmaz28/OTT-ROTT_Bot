@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-06T12:02:49.986509+03:00",
+  "ts": "2026-07-06T12:17:11.527585+03:00",
   "bull": 15,
-  "bear": 19,
-  "total": 34,
-  "bull_pct": 44.0,
+  "bear": 18,
+  "total": 33,
+  "bull_pct": 45.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -39,15 +39,13 @@
     "YKBNK",
     "AEFES",
     "ODAS",
-    "AKSEN",
-    "ALARK"
+    "AKSEN"
   ],
   "fresh_bear": [
     "HALKB",
     "SASA",
     "TAVHL",
     "VAKBN",
-    "ODAS",
-    "ALARK"
+    "ODAS"
   ]
 }
