@@ -2203,5 +2203,59 @@
     "pnl_pct": 0.768,
     "exit_ts": "2026-07-07T22:01:54.916513+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.1167,
+    "exit_price": 1.1228,
+    "pnl_pct": 0.446,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.182,
+    "exit_price": 0.1769,
+    "pnl_pct": -2.902,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.1778,
+    "exit_price": 0.1769,
+    "pnl_pct": -0.606,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07523,
+    "exit_price": 0.07476,
+    "pnl_pct": -0.725,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0877,
+    "exit_price": 0.0867,
+    "pnl_pct": -1.24,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7323,
+    "exit_price": 0.7376,
+    "pnl_pct": 0.624,
+    "exit_ts": "2026-07-07T23:01:52.074530+03:00",
+    "reason": "trend"
   }
 ]
