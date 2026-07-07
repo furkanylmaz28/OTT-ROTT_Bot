@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-07T13:47:09.617475+03:00",
+  "ts": "2026-07-07T14:02:35.137214+03:00",
   "bull": 11,
-  "bear": 23,
-  "total": 34,
-  "bull_pct": 32.0,
+  "bear": 22,
+  "total": 33,
+  "bull_pct": 33.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -37,7 +37,6 @@
     "TTKOM",
     "VAKBN",
     "YKBNK",
-    "AEFES",
     "HEKTS",
     "ODAS",
     "ALARK"
