@@ -68,6 +68,21 @@ void PeakClear(ulong tk)
 }
 
 //+------------------------------------------------------------------+
+// SADECE BIST tek-hisse futures'ı mı? VIOP'ta hisse dışında döviz (USDTRY,
+// EURUSD...), kıymetli maden (XAUUSD altın, F_XAUTRYM gram-altın, XAG gümüş,
+// XPT/XPD platin-paladyum) ve endeks (XU030/XU100) futures'ları da var. Bunlar
+// bu grid sistemiyle DOĞRULANMADI + bazıları "trade disabled" (ret=10017) veriyor
+// → EA taramamalı/işlem açmamalı. Blacklist token yaklaşımı (döviz+emtia+endeks).
+bool IsEquityFut(const string nm)
+{
+   if(StringFind(nm, "F_") != 0) return false;
+   string bad[] = {"USD","EUR","GBP","XAU","XAG","XPT","XPD","TRYM","XU0","XU1"};
+   for(int i=0;i<ArraySize(bad);i++)
+      if(StringFind(nm, bad[i]) >= 0) return false;
+   return true;
+}
+
+//+------------------------------------------------------------------+
 int OnInit()
 {
    int n = 0;
@@ -83,10 +98,10 @@ int OnInit()
       for(int i=0;i<all;i++)
       {
          string nm = SymbolName(i, false);
-         if(StringFind(nm, "F_") == 0 && StringFind(nm, "USD") < 0)
+         if(IsEquityFut(nm))
             if(SymbolSelect(nm, true)) eklenen++;
       }
-      if(eklenen > 0) PrintFormat("Market Watch'a %d VIOP hisse (F_, USD hariç) sembolü eklendi", eklenen);
+      if(eklenen > 0) PrintFormat("Market Watch'a %d VIOP hisse (F_, döviz/emtia/endeks hariç) sembolü eklendi", eklenen);
       // Tarama listesi = Market Watch'taki SADECE F_ semboller. Taze terminalde
       // Market Watch varsayılanları forex/altın CFD'leri içerir — onlar bu sistemle
       // DOĞRULANMADI, EA kesinlikle taramamalı/işlem açmamalı.
@@ -95,7 +110,7 @@ int OnInit()
       for(int i=0;i<tot;i++)
       {
          string nm = SymbolName(i, true);
-         if(StringFind(nm, "F_") == 0 && StringFind(nm, "USD") < 0) g_symbols[n++] = nm;  // USD=döviz/emtia, hariç
+         if(IsEquityFut(nm)) g_symbols[n++] = nm;  // döviz/emtia/endeks hariç
       }
       ArrayResize(g_symbols, n);
    }
@@ -112,6 +127,23 @@ int OnInit()
    g_levels[0]=InpLevel1Pct; g_levels[1]=InpLevel2Pct; g_levels[2]=InpLevel3Pct;
    trade.SetExpertMagicNumber(InpMagic);
    trade.SetDeviationInPoints(30);
+   // ── ÖKSÜZ TEMİZLİK: bize ait (magic) ama BIST-hisse OLMAYAN pozisyonları kapat.
+   // Eski filtre sadece "USD" eliyordu; F_XAUTRYM (gram-altın) gibi emtia pozisyonları
+   // kaçmıştı. Bunlar artık taranmadığı için EA yönetemez (öksüz) → açılışta kapat.
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(!tk || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagic) continue;
+      string psym = PositionGetString(POSITION_SYMBOL);
+      if(!IsEquityFut(psym))
+      {
+         if(trade.PositionClose(tk))
+            PrintFormat("🧹 ÖKSÜZ KAPAT: %s (BIST-hisse değil, emtia/döviz/endeks)", psym);
+         else
+            PrintFormat("⚠️ öksüz kapatılamadı: %s ret=%d %s", psym, trade.ResultRetcode(), trade.ResultRetcodeDescription());
+      }
+   }
    double eq = AccountInfoDouble(ACCOUNT_EQUITY);
    PrintFormat("BIST GRID (çoklu) başladı · %d sembol · TF=%s · ER<%.2f · AL -%.0f/-%.0f/-%.0f%% · trailing +%.1f/%.1f%% · birim %%%.0f · KASA %.0f (%%%.0f güvende → max %%%.0f)",
                n, EnumToString(InpTF), InpER_Th, InpLevel1Pct, InpLevel2Pct, InpLevel3Pct,
@@ -243,6 +275,10 @@ double NormalizeToTick(string sym, double price)
 //+------------------------------------------------------------------+
 double CalcLots(string sym, double ask)
 {
+   // Sadece TAM işlem moduna açık sembollere GİR (close-only/disabled uzak-vade
+   // kontratlar ret=10017/10031 ile her 10sn reddedilip journal'ı dolduruyordu;
+   // HEKTS0926/TTKOM0826 vakası). Kapatma/trailing etkilenmez (CalcLots kullanmaz).
+   if(SymbolInfoInteger(sym, SYMBOL_TRADE_MODE) != SYMBOL_TRADE_MODE_FULL) return 0;
    double eq = AccountInfoDouble(ACCOUNT_EQUITY);
    double usable = eq * (100.0 - InpSafeReservePct) / 100.0;     // %80 GLOBAL
    double budget = usable - TotalNotional();                     // kalan global bütçe
