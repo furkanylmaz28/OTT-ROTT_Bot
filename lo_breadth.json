@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-07T12:35:48.113428+03:00",
-  "bull": 12,
-  "bear": 22,
+  "ts": "2026-07-07T12:46:54.505906+03:00",
+  "bull": 11,
+  "bear": 23,
   "total": 34,
-  "bull_pct": 35.0,
+  "bull_pct": 32.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -12,7 +12,6 @@
     "PETKM",
     "PGSUS",
     "THYAO",
-    "TTKOM",
     "TUPRS",
     "ASTOR",
     "AKSEN",
@@ -35,6 +34,7 @@
     "TAVHL",
     "TOASO",
     "TKFEN",
+    "TTKOM",
     "VAKBN",
     "YKBNK",
     "AEFES",
@@ -47,6 +47,7 @@
     "SISE",
     "SOKM",
     "TKFEN",
+    "TTKOM",
     "HEKTS"
   ]
 }
