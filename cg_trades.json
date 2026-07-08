@@ -2644,5 +2644,23 @@
     "pnl_pct": 1.492,
     "exit_ts": "2026-07-08T20:46:15.695865+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07268,
+    "exit_price": 0.07239,
+    "pnl_pct": -0.499,
+    "exit_ts": "2026-07-08T21:31:42.248798+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.749,
+    "exit_price": 0.762,
+    "pnl_pct": 1.636,
+    "exit_ts": "2026-07-08T21:31:42.248798+03:00",
+    "reason": "trail"
   }
 ]
