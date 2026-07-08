@@ -1,8 +1,8 @@
 {
-  "ts": "2026-07-08T17:32:45.561362+03:00",
+  "ts": "2026-07-08T17:47:14.724163+03:00",
   "bull": 5,
-  "bear": 29,
-  "total": 34,
+  "bear": 28,
+  "total": 33,
   "bull_pct": 15.0,
   "bull_syms": [
     "ENJSA",
@@ -27,7 +27,6 @@
     "MGROS",
     "PGSUS",
     "SASA",
-    "SISE",
     "SOKM",
     "TAVHL",
     "THYAO",
@@ -43,7 +42,6 @@
     "ALARK"
   ],
   "fresh_bear": [
-    "ASELS",
     "EREGL",
     "GUBRF",
     "PGSUS",
