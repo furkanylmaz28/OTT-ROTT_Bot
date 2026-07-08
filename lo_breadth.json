@@ -1,17 +1,19 @@
 {
-  "ts": "2026-07-08T17:03:46.230578+03:00",
-  "bull": 4,
-  "bear": 28,
-  "total": 32,
-  "bull_pct": 12.0,
+  "ts": "2026-07-08T17:17:12.813417+03:00",
+  "bull": 5,
+  "bear": 29,
+  "total": 34,
+  "bull_pct": 15.0,
   "bull_syms": [
     "ENJSA",
     "PETKM",
+    "TUPRS",
     "AKSEN",
     "KONTR"
   ],
   "bear_syms": [
     "AKBNK",
+    "ASELS",
     "DOHOL",
     "EKGYO",
     "ENKAI",
@@ -41,6 +43,7 @@
     "ALARK"
   ],
   "fresh_bear": [
+    "ASELS",
     "EREGL",
     "GUBRF",
     "PGSUS",
