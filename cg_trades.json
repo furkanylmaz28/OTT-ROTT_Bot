@@ -2509,5 +2509,23 @@
     "pnl_pct": -0.326,
     "exit_ts": "2026-07-08T15:01:55.995100+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 79.32,
+    "exit_price": 76.88,
+    "pnl_pct": -3.176,
+    "exit_ts": "2026-07-08T16:16:18.162141+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "1",
+    "entry_price": 77.21,
+    "exit_price": 76.88,
+    "pnl_pct": -0.527,
+    "exit_ts": "2026-07-08T16:16:18.162141+03:00",
+    "reason": "trend"
   }
 ]
