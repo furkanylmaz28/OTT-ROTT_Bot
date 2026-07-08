@@ -2626,5 +2626,23 @@
     "pnl_pct": -1.785,
     "exit_ts": "2026-07-08T18:16:07.548345+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.0728,
+    "exit_price": 0.07261,
+    "pnl_pct": -0.361,
+    "exit_ts": "2026-07-08T20:46:15.695865+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.0754,
+    "exit_price": 0.0766,
+    "pnl_pct": 1.492,
+    "exit_ts": "2026-07-08T20:46:15.695865+03:00",
+    "reason": "trail"
   }
 ]
