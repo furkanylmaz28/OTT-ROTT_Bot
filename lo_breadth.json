@@ -1,5 +1,5 @@
 {
-  "ts": "2026-07-08T11:22:55.362680+03:00",
+  "ts": "2026-07-08T11:32:59.609949+03:00",
   "bull": 6,
   "bear": 27,
   "total": 33,
@@ -13,7 +13,6 @@
     "KONTR"
   ],
   "bear_syms": [
-    "AKBNK",
     "ASELS",
     "DOHOL",
     "EKGYO",
@@ -39,6 +38,7 @@
     "AEFES",
     "HEKTS",
     "ODAS",
+    "ASTOR",
     "ALARK"
   ],
   "fresh_bear": [
@@ -46,6 +46,7 @@
     "GUBRF",
     "PGSUS",
     "THYAO",
-    "TTKOM"
+    "TTKOM",
+    "ASTOR"
   ]
 }
