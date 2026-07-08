@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-08T14:32:52.936301+03:00",
+  "ts": "2026-07-08T14:47:22.638883+03:00",
   "bull": 5,
-  "bear": 29,
-  "total": 34,
-  "bull_pct": 15.0,
+  "bear": 27,
+  "total": 32,
+  "bull_pct": 16.0,
   "bull_syms": [
     "ENJSA",
     "PETKM",
@@ -12,7 +12,6 @@
     "KONTR"
   ],
   "bear_syms": [
-    "AKBNK",
     "ASELS",
     "DOHOL",
     "EKGYO",
@@ -29,7 +28,6 @@
     "SASA",
     "SISE",
     "SOKM",
-    "TAVHL",
     "THYAO",
     "TOASO",
     "TKFEN",
