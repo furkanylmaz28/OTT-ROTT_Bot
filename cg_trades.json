@@ -2428,5 +2428,32 @@
     "pnl_pct": -0.419,
     "exit_ts": "2026-07-08T09:46:18.481168+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0759,
+    "exit_price": 0.0779,
+    "pnl_pct": 2.535,
+    "exit_ts": "2026-07-08T10:46:07.099962+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.047,
+    "exit_price": 0.04694,
+    "pnl_pct": -0.228,
+    "exit_ts": "2026-07-08T10:46:07.099962+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.047,
+    "exit_price": 0.04694,
+    "pnl_pct": -0.228,
+    "exit_ts": "2026-07-08T10:46:07.099962+03:00",
+    "reason": "trend"
   }
 ]
