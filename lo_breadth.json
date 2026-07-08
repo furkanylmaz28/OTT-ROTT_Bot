@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-08T12:17:30.563983+03:00",
+  "ts": "2026-07-08T12:32:52.255679+03:00",
   "bull": 5,
-  "bear": 27,
-  "total": 32,
-  "bull_pct": 16.0,
+  "bear": 29,
+  "total": 34,
+  "bull_pct": 15.0,
   "bull_syms": [
     "ENJSA",
     "PETKM",
@@ -18,6 +18,7 @@
     "EKGYO",
     "ENKAI",
     "EREGL",
+    "FROTO",
     "GUBRF",
     "HALKB",
     "ISCTR",
@@ -38,6 +39,7 @@
     "AEFES",
     "HEKTS",
     "ODAS",
+    "ASTOR",
     "ALARK"
   ],
   "fresh_bear": [
@@ -46,6 +48,7 @@
     "GUBRF",
     "PGSUS",
     "THYAO",
-    "TTKOM"
+    "TTKOM",
+    "ASTOR"
   ]
 }
