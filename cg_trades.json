@@ -2680,5 +2680,77 @@
     "pnl_pct": 4.718,
     "exit_ts": "2026-07-08T22:46:21.012105+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 568.45,
+    "exit_price": 567.07,
+    "pnl_pct": -0.343,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 76.9,
+    "exit_price": 77.42,
+    "pnl_pct": 0.576,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "1",
+    "entry_price": 76.9,
+    "exit_price": 77.42,
+    "pnl_pct": 0.576,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.82,
+    "exit_price": 0.825,
+    "pnl_pct": 0.51,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.82,
+    "exit_price": 0.825,
+    "pnl_pct": 0.51,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 43.82,
+    "exit_price": 43.44,
+    "pnl_pct": -0.967,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.89,
+    "exit_price": 6.88,
+    "pnl_pct": -0.245,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7083,
+    "exit_price": 0.712,
+    "pnl_pct": 0.422,
+    "exit_ts": "2026-07-08T23:01:57.959473+03:00",
+    "reason": "trend"
   }
 ]
