@@ -31,6 +31,7 @@ input double  InpUnitPct          = 15.0;     // Birim başı = kasanın %X'i il
 input bool    InpTrendLong        = true;     // TREND'de boş durma: yukarı trend (fiyat>SMA) → long tut
 input bool    InpAllowShort       = false;    // SHORT (demo): tepeden sat grid + aşağı trend short (BIST drift'i aleyhe — PF düşer)
 input double  InpSafeReservePct   = 10.0;     // 💰 %X HER ZAMAN güvende (GLOBAL) → toplam ≤ %90 (demo: 20→10 daha çok deployment)
+input double  InpMaxSymbolPct     = 20.0;     // ⚠️ SEMBOL BAŞI TAVAN: tek hissede notional ≤ kasanın %X'i (ucuz hisse yoğunlaşmasını engeller — ODAS vakası: tek isimde 127K>hesap)
 input long    InpMagic            = 20260103;
 input int     InpTimerSec         = 10;       // Tarama aralığı (sn)
 input bool    InpVerbose          = true;
@@ -188,6 +189,22 @@ double TotalNotional()
    return tot;
 }
 
+// TEK SEMBOLDEKİ magic notional (yoğunlaşma tavanı için)
+double SymbolNotional(string sym)
+{
+   double tot = 0;
+   for(int i=PositionsTotal()-1; i>=0; i--)
+   {
+      ulong tk = PositionGetTicket(i);
+      if(tk==0 || !PositionSelectByTicket(tk)) continue;
+      if(PositionGetInteger(POSITION_MAGIC) != InpMagic) continue;
+      if(PositionGetString(POSITION_SYMBOL) != sym) continue;
+      tot += PositionGetDouble(POSITION_VOLUME) * PositionGetDouble(POSITION_PRICE_CURRENT)
+             * SymbolInfoDouble(sym, SYMBOL_TRADE_CONTRACT_SIZE);
+   }
+   return tot;
+}
+
 bool LevelHeld(string sym, string prefix, int k)
 {
    string tag = prefix + IntegerToString(k);
@@ -284,6 +301,12 @@ double CalcLots(string sym, double ask)
    double budget = usable - TotalNotional();                     // kalan global bütçe
    if(budget <= 0) return 0;                                     // kasa korumalı: dur
    double target = MathMin(eq * InpUnitPct/100.0, budget);       // birim = InpUnitPct% eq (vars. %10), bütçeyle sınırlı
+   // SEMBOL BAŞI YOĞUNLAŞMA TAVANI: bu isimdeki mevcut notional + yeni ≤ eq*MaxSymbolPct.
+   // ODAS vakası: ucuz hisse grid+trend ile 127K notional biriktirmişti (hesaptan büyük),
+   // düşünce −2.400₺ (tüm haftanın en büyük kaybı). Bu tavan onu ~%20 ile kısar.
+   double symRoom = eq * InpMaxSymbolPct/100.0 - SymbolNotional(sym);
+   if(symRoom <= 0) return 0;                                     // bu sembol dolmuş → yeni giriş yok
+   target = MathMin(target, symRoom);
    double cs = SymbolInfoDouble(sym, SYMBOL_TRADE_CONTRACT_SIZE);
    if(cs<=0 || ask<=0) return 0;
    double step = SymbolInfoDouble(sym, SYMBOL_VOLUME_STEP);
