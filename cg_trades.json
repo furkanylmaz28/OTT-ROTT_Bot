@@ -2302,5 +2302,32 @@
     "pnl_pct": 1.355,
     "exit_ts": "2026-07-08T04:46:11.966087+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.856,
+    "exit_price": 0.838,
+    "pnl_pct": -2.203,
+    "exit_ts": "2026-07-08T05:01:48.689322+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.784,
+    "exit_price": 7.705,
+    "pnl_pct": -1.115,
+    "exit_ts": "2026-07-08T05:01:48.689322+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04844,
+    "exit_price": 0.04685,
+    "pnl_pct": -3.382,
+    "exit_ts": "2026-07-08T05:01:48.689322+03:00",
+    "reason": "trend"
   }
 ]
