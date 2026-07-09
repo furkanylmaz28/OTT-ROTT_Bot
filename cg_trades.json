@@ -2806,5 +2806,23 @@
     "pnl_pct": 3.482,
     "exit_ts": "2026-07-09T04:16:12.697495+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 1.871,
+    "exit_price": 1.892,
+    "pnl_pct": 1.022,
+    "exit_ts": "2026-07-09T04:46:08.481865+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0767,
+    "exit_price": 0.0776,
+    "pnl_pct": 1.073,
+    "exit_ts": "2026-07-09T04:46:08.481865+03:00",
+    "reason": "trail"
   }
 ]
