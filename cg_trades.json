@@ -2770,5 +2770,32 @@
     "pnl_pct": 0.509,
     "exit_ts": "2026-07-09T00:16:11.869121+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.624,
+    "exit_price": 7.633,
+    "pnl_pct": 0.018,
+    "exit_ts": "2026-07-09T03:01:49.917000+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04685,
+    "exit_price": 0.04715,
+    "pnl_pct": 0.54,
+    "exit_ts": "2026-07-09T03:01:49.917000+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04685,
+    "exit_price": 0.04715,
+    "pnl_pct": 0.54,
+    "exit_ts": "2026-07-09T03:01:49.917000+03:00",
+    "reason": "trend"
   }
 ]
