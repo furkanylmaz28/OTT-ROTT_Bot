@@ -2914,5 +2914,14 @@
     "pnl_pct": 1.418,
     "exit_ts": "2026-07-09T14:02:01.576327+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.771,
+    "exit_price": 0.782,
+    "pnl_pct": 1.327,
+    "exit_ts": "2026-07-09T20:16:10.927457+03:00",
+    "reason": "trail"
   }
 ]
