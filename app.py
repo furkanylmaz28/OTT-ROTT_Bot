@@ -668,6 +668,14 @@ def _load_bayes_sym():
         return json.load(f)
 
 
+@st.cache_data(ttl=1800, show_spinner="Pullback forward-test hesaplanıyor…")
+def _pb_summary():
+    """Strong Pullback canlı/forward özeti — 30 dk cache (24 sembol × yfinance).
+       Deterministik + repaint-yok → her çağrıda birebir yeniden kurulur."""
+    import pullback_live
+    return pullback_live.summary()
+
+
 def _is_uyumsuz(sym):
     """Kullanıcı 'her şey gözüksün' dedi → hiçbir sembol gizlenmez.
     Rating filtresi kaldırıldı; asıl değerlendirme Canlı Performans'ta yapılır."""
@@ -3245,233 +3253,320 @@ with tab_scalp:
 
 
 with tab_live:
-    st.subheader("✅ Canlı Performans — Kanıtlanmış Sistem (SuperTrend Long-only)")
-    st.caption("Walk-forward + Monte Carlo'dan geçen **SuperTrend 10/3 long-only** sistemin "
-                "gerçek zamanlı sonucu. Bot her tarama'da BIST'i tarar, LONG açar / nakide çıkar "
-                "(short yok, max 6 pozisyon). Asıl güven göstergesi budur.")
+    sub_super, sub_pb = st.tabs(["✅ SuperTrend (Kanıtlanmış)", "🌀 Pullback (Forward-Test)"])
+    with sub_super:
+        st.subheader("✅ Canlı Performans — Kanıtlanmış Sistem (SuperTrend Long-only)")
+        st.caption("Walk-forward + Monte Carlo'dan geçen **SuperTrend 10/3 long-only** sistemin "
+                    "gerçek zamanlı sonucu. Bot her tarama'da BIST'i tarar, LONG açar / nakide çıkar "
+                    "(short yok, max 6 pozisyon). Asıl güven göstergesi budur.")
 
 
-    with st.expander("ℹ️ Bu nasıl çalışır?"):
-        st.markdown("""
-        - Bot her tarama'da (GitHub Actions, saatte birkaç kez) her sembolün **anlık durumunu** kaydeder
-        - LONG AÇ → giriş, LONG ÇIK → çıkış olarak **trade'leri yeniden kurar**
-        - Her sembolün **canlı PF / win rate**'ini biriktirir
-        - **MÜKEMMEL rating yerine** buradaki gerçek sonuca güven
+        with st.expander("ℹ️ Bu nasıl çalışır?"):
+            st.markdown("""
+            - Bot her tarama'da (GitHub Actions, saatte birkaç kez) her sembolün **anlık durumunu** kaydeder
+            - LONG AÇ → giriş, LONG ÇIK → çıkış olarak **trade'leri yeniden kurar**
+            - Her sembolün **canlı PF / win rate**'ini biriktirir
+            - **MÜKEMMEL rating yerine** buradaki gerçek sonuca güven
 
-        ⚠️ **Veri birikmesi 2-4 hafta sürer.** Sembol başına ≥5 trade olunca anlamlı olur.
-        Henüz az trade varsa rakamlar güvenilmez — sabırlı ol.
+            ⚠️ **Veri birikmesi 2-4 hafta sürer.** Sembol başına ≥5 trade olunca anlamlı olur.
+            Henüz az trade varsa rakamlar güvenilmez — sabırlı ol.
 
-        🎯 **Hedef:** Canlı PF > 1.2-1.5 kalan semboller = gerçekten çalışan sistem.
-        """)
-
-    try:
-        import longonly_live as fv   # KANITLANMIŞ sistem (SuperTrend 10/3 long-only)
-        live_all = fv.all_live_stats(last_n=30)
-        open_pos = fv.open_positions()
-    except Exception as e:
-        live_all = {}
-        open_pos = {}
-        st.error(f"Forward-validation modülü yüklenemedi: {e}")
-
-    # ── Kategori filtresi (BIST / NASDAQ / CRYPTO / EMTIA) — #61 + Crypto + Emtia
-    # Not: bu tracker BIST-only (34 doğrulanmış). Crypto canlı performansı → Crypto Grid sekmesi.
-    live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🥇 Emtia/Forex"],
-                         horizontal=True, key="live_cat")
-    _bist_set = set(BIST)
-    _emtia_set = set(EMTIA_FX)
-    def _in_cat(sym):
-        if live_cat == "🇹🇷 BIST":
-            return sym in _bist_set
-        elif live_cat == "🇺🇸 NASDAQ":
-            return sym in GCM_NASDAQ
-        else:  # Emtia/Forex
-            return sym in _emtia_set
-
-    # Sadece trade'i olan + seçili kategorideki semboller
-    live_rows = []
-    for sym, s in live_all.items():
-        if s["n"] > 0 and _in_cat(sym):
-            live_rows.append({
-                "Sembol": sym,
-                "Canlı Trade": s["n"],
-                "Canlı Win %": s["win_rate"],
-                "Canlı PF": s["pf"],
-                "Ort. Trade %": s["avg"],
-                "Toplam %": s["total"],
-            })
-    # Açık pozisyonları da kategoriye göre filtrele
-    open_pos = {k: v for k, v in open_pos.items() if _in_cat(k)}
-
-    # ── HERO KART — kategori canlı özeti
-    _an = sum(r["Canlı Trade"] for r in live_rows)
-    _atot = sum(r["Toplam %"] for r in live_rows)
-    _awin = (100 * sum(r["Canlı Trade"] * r["Canlı Win %"] / 100 for r in live_rows) / _an) if _an else 0
-    lm_hero(f"📊 Canlı Özet — {live_cat}", [
-        ("Kapanan işlem", _an),
-        ("Kazanma", f"%{_awin:.0f}" if _an else "-"),
-        ("Toplam", f"{_atot:+.1f}%" if _an else "-", "green" if _atot > 0 else ("red" if _atot < 0 else "")),
-        ("Açık pozisyon", len(open_pos)),
-    ])
-    st.write("")
-
-    # ── AÇIK POZİSYONLAR — HER ZAMAN göster (kapanmış işlem olmasa da)
-    #    Bot girdi, işlem DEVAM EDİYOR. Telegram'a "açıldı" bildirimi gelen
-    #    pozisyonlar burada görünür (önceden else bloğunda gizliydi → bug).
-    st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_pos)}) — bot girdi, devam ediyor")
-    st.caption("Bot bu pozisyonları açtı, henüz kapatmadı. 🛑 Stop = TOTT trail "
-                "(bot sabit TP koymaz — trend takipçi, ÇIK sinyaline kadar tutar).")
-    if not open_pos:
-        st.write("Şu an bu kategoride açık pozisyon yok.")
-    else:
-        # Anlık fiyat HER ZAMAN gösterilir (giriş yanında). live_price 45 sn cache'li
-        # → tekrar render'larda hızlı. "Fiyatı tazele" cache'i temizler.
-        if st.button("🔄 Fiyatı tazele (cache temizle)", key="live_price_refresh"):
-            live_price.clear()
-        op_rows = []
-        with st.spinner(f"{len(open_pos)} pozisyonun anlık fiyatı çekiliyor…"):
-            for s, v in open_pos.items():
-                cp = None
-                try:
-                    cp = live_price(s)   # hafif, 45 sn cache → anlık fiyat
-                except Exception:
-                    pass
-                row = {
-                    "Sembol": s,
-                    "Yön": "🟢 LONG" if v.get("side", "LONG") == "LONG" else "🔴 SHORT",
-                    "Giriş": v["entry_price"],
-                    "Anlık Fiyat": cp,
-                    "Yüzen P&L %": None,
-                    "Stop (TOTT)": v.get("stop"),
-                    "Stop'a %": None,
-                    "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
-                }
-                if cp:
-                    if v.get("side", "LONG") == "LONG":
-                        row["Yüzen P&L %"] = round((cp - v["entry_price"]) / v["entry_price"] * 100, 2)
-                    else:
-                        row["Yüzen P&L %"] = round((v["entry_price"] - cp) / v["entry_price"] * 100, 2)
-                    stp = v.get("stop")
-                    if stp:
-                        if v.get("side", "LONG") == "LONG":
-                            row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
-                        else:
-                            row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
-                op_rows.append(row)
-        df_op = pd.DataFrame(op_rows)
-        styler = df_op.style.format({
-            "Giriş": "{:.4f}",
-            "Anlık Fiyat": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
-            "Yüzen P&L %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
-            "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
-            "Stop'a %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
-        }).background_gradient(subset=["Yüzen P&L %"], cmap="RdYlGn", vmin=-5, vmax=5)
-        st.dataframe(styler, use_container_width=True, height=400)
-        st.caption(f"💹 Anlık fiyatlar (≤45 sn taze) — "
-                    f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S} · sayfa sessizce yenilenir.")
-
-    st.markdown("---")
-    if not live_rows:
-        st.info("📊 Henüz **kapanmış** işlem yok (açık pozisyonlar yukarıda görünür).\n\n"
-                "Kapanmış trade istatistikleri (PF/win rate) ilk pozisyonlar "
-                "kapandıkça **birkaç gün–hafta** içinde birikecek.")
-    else:
-        df_live = pd.DataFrame(live_rows).sort_values("Canlı PF", ascending=False).reset_index(drop=True)
-
-        # Min trade filtresi
-        fcol1, fcol2 = st.columns(2)
-        with fcol1:
-            min_n = st.slider("Min canlı trade sayısı", 1, 20, 5, key="live_min_n",
-                               help="Bu kadar trade'i olmayan semboller gizlenir (anlamsız)")
-        with fcol2:
-            min_pf = st.slider("Min canlı PF", 0.0, 3.0, 1.2, 0.1, key="live_min_pf",
-                                help="Bu PF'in altındaki semboller gizlenir")
-
-        df_show = df_live[(df_live["Canlı Trade"] >= min_n) & (df_live["Canlı PF"] >= min_pf)]
-
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Takip edilen sembol", len(df_live))
-        m2.metric(f"Filtreyi geçen (PF≥{min_pf})", len(df_show))
-        m3.metric("Açık pozisyon", len(open_pos))
-
-        if len(df_show) > 0:
-            st.markdown(f"### 🏆 Canlı KANITLANMIŞ semboller (PF≥{min_pf}, ≥{min_n} trade)")
-            st.dataframe(
-                df_show.style.format({
-                    "Canlı Win %": "{:.0f}%",
-                    "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
-                    "Ort. Trade %": "{:+.2f}%",
-                    "Toplam %": "{:+.1f}%",
-                }).background_gradient(subset=["Canlı PF"], cmap="Greens", vmin=0, vmax=3),
-                use_container_width=True, height=400,
-            )
-            st.success("Bu semboller **canlıda gerçekten** çalışıyor — backtest'e değil, "
-                        "gerçek sonuca dayanıyor. Trade için en güvenilir liste.")
-        else:
-            st.warning(f"Henüz PF≥{min_pf} + {min_n}+ trade kriterini geçen sembol yok. "
-                        "Veri birikmeye devam ediyor.")
-
-        with st.expander("📋 Tüm takip edilen semboller (ham)"):
-            st.dataframe(
-                df_live.style.format({
-                    "Canlı Win %": "{:.0f}%",
-                    "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
-                    "Ort. Trade %": "{:+.2f}%",
-                    "Toplam %": "{:+.1f}%",
-                }),
-                use_container_width=True, height=400,
-            )
-
-        # ── İŞLEM DETAYI — botun gerçek al/sat hareketleri
-        st.markdown("---")
-        st.markdown("### 🔍 İşlem Detayı — botun gerçek al/sat hareketleri")
-        st.caption("Bot neyi, ne zaman, hangi fiyattan açtı/kapattı. Her satır bir trade.")
+            🎯 **Hedef:** Canlı PF > 1.2-1.5 kalan semboller = gerçekten çalışan sistem.
+            """)
 
         try:
-            all_trades = fv.get_trades()
-        except Exception:
-            all_trades = []
+            import longonly_live as fv   # KANITLANMIŞ sistem (SuperTrend 10/3 long-only)
+            live_all = fv.all_live_stats(last_n=30)
+            open_pos = fv.open_positions()
+        except Exception as e:
+            live_all = {}
+            open_pos = {}
+            st.error(f"Forward-validation modülü yüklenemedi: {e}")
 
-        if not all_trades:
-            st.info("Henüz kapanmış işlem yok.")
-        else:
-            # Sembol filtresi
-            syms_with_trades = sorted(set(t["sym"] for t in all_trades))
-            sel_sym = st.selectbox(
-                "Sembol seç (hepsi için boş bırak)",
-                ["— Tümü —"] + syms_with_trades, key="live_trade_sym")
+        # ── Kategori filtresi (BIST / NASDAQ / CRYPTO / EMTIA) — #61 + Crypto + Emtia
+        # Not: bu tracker BIST-only (34 doğrulanmış). Crypto canlı performansı → Crypto Grid sekmesi.
+        live_cat = st.radio("Piyasa", ["🇹🇷 BIST", "🇺🇸 NASDAQ", "🥇 Emtia/Forex"],
+                             horizontal=True, key="live_cat")
+        _bist_set = set(BIST)
+        _emtia_set = set(EMTIA_FX)
+        def _in_cat(sym):
+            if live_cat == "🇹🇷 BIST":
+                return sym in _bist_set
+            elif live_cat == "🇺🇸 NASDAQ":
+                return sym in GCM_NASDAQ
+            else:  # Emtia/Forex
+                return sym in _emtia_set
 
-            trades_show = all_trades if sel_sym == "— Tümü —" \
-                else [t for t in all_trades if t["sym"] == sel_sym]
-
-            # Detay tablo
-            det_rows = []
-            for t in trades_show:
-                det_rows.append({
-                    "Sembol": t["sym"],
-                    "Yön": "🟢 LONG" if t["side"] == "LONG" else "🔴 SHORT",
-                    "Açılış Fiyat": t["entry_price"],
-                    "Açılış Zamanı": t.get("entry_ts", "")[:16].replace("T", " "),
-                    "Kapanış Fiyat": t["exit_price"],
-                    "Kapanış Zamanı": t.get("exit_ts", "")[:16].replace("T", " "),
-                    "Sonuç %": t["pnl_pct"],
+        # Sadece trade'i olan + seçili kategorideki semboller
+        live_rows = []
+        for sym, s in live_all.items():
+            if s["n"] > 0 and _in_cat(sym):
+                live_rows.append({
+                    "Sembol": sym,
+                    "Canlı Trade": s["n"],
+                    "Canlı Win %": s["win_rate"],
+                    "Canlı PF": s["pf"],
+                    "Ort. Trade %": s["avg"],
+                    "Toplam %": s["total"],
                 })
-            df_det = pd.DataFrame(det_rows)
+        # Açık pozisyonları da kategoriye göre filtrele
+        open_pos = {k: v for k, v in open_pos.items() if _in_cat(k)}
 
-            # Özet
-            dm1, dm2, dm3 = st.columns(3)
-            dm1.metric("İşlem sayısı", len(df_det))
-            if len(df_det) > 0:
-                dm2.metric("Kazanan", f"{(df_det['Sonuç %'] > 0).sum()}/{len(df_det)}")
-                dm3.metric("Toplam %", f"{df_det['Sonuç %'].sum():+.1f}%")
+        # ── HERO KART — kategori canlı özeti
+        _an = sum(r["Canlı Trade"] for r in live_rows)
+        _atot = sum(r["Toplam %"] for r in live_rows)
+        _awin = (100 * sum(r["Canlı Trade"] * r["Canlı Win %"] / 100 for r in live_rows) / _an) if _an else 0
+        lm_hero(f"📊 Canlı Özet — {live_cat}", [
+            ("Kapanan işlem", _an),
+            ("Kazanma", f"%{_awin:.0f}" if _an else "-"),
+            ("Toplam", f"{_atot:+.1f}%" if _an else "-", "green" if _atot > 0 else ("red" if _atot < 0 else "")),
+            ("Açık pozisyon", len(open_pos)),
+        ])
+        st.write("")
 
-            st.dataframe(
-                df_det.style.format({
-                    "Açılış Fiyat": "{:.4f}",
-                    "Kapanış Fiyat": "{:.4f}",
-                    "Sonuç %": "{:+.2f}%",
-                }).background_gradient(subset=["Sonuç %"], cmap="RdYlGn", vmin=-5, vmax=5),
-                use_container_width=True, height=500,
+        # ── AÇIK POZİSYONLAR — HER ZAMAN göster (kapanmış işlem olmasa da)
+        #    Bot girdi, işlem DEVAM EDİYOR. Telegram'a "açıldı" bildirimi gelen
+        #    pozisyonlar burada görünür (önceden else bloğunda gizliydi → bug).
+        st.markdown(f"### 📂 Açık Pozisyonlar ({len(open_pos)}) — bot girdi, devam ediyor")
+        st.caption("Bot bu pozisyonları açtı, henüz kapatmadı. 🛑 Stop = TOTT trail "
+                    "(bot sabit TP koymaz — trend takipçi, ÇIK sinyaline kadar tutar).")
+        if not open_pos:
+            st.write("Şu an bu kategoride açık pozisyon yok.")
+        else:
+            # Anlık fiyat HER ZAMAN gösterilir (giriş yanında). live_price 45 sn cache'li
+            # → tekrar render'larda hızlı. "Fiyatı tazele" cache'i temizler.
+            if st.button("🔄 Fiyatı tazele (cache temizle)", key="live_price_refresh"):
+                live_price.clear()
+            op_rows = []
+            with st.spinner(f"{len(open_pos)} pozisyonun anlık fiyatı çekiliyor…"):
+                for s, v in open_pos.items():
+                    cp = None
+                    try:
+                        cp = live_price(s)   # hafif, 45 sn cache → anlık fiyat
+                    except Exception:
+                        pass
+                    row = {
+                        "Sembol": s,
+                        "Yön": "🟢 LONG" if v.get("side", "LONG") == "LONG" else "🔴 SHORT",
+                        "Giriş": v["entry_price"],
+                        "Anlık Fiyat": cp,
+                        "Yüzen P&L %": None,
+                        "Stop (TOTT)": v.get("stop"),
+                        "Stop'a %": None,
+                        "Açılış": v.get("entry_ts", "")[:16].replace("T", " "),
+                    }
+                    if cp:
+                        if v.get("side", "LONG") == "LONG":
+                            row["Yüzen P&L %"] = round((cp - v["entry_price"]) / v["entry_price"] * 100, 2)
+                        else:
+                            row["Yüzen P&L %"] = round((v["entry_price"] - cp) / v["entry_price"] * 100, 2)
+                        stp = v.get("stop")
+                        if stp:
+                            if v.get("side", "LONG") == "LONG":
+                                row["Stop'a %"] = round((cp / stp - 1) * 100, 2)
+                            else:
+                                row["Stop'a %"] = round((stp / cp - 1) * 100, 2)
+                    op_rows.append(row)
+            df_op = pd.DataFrame(op_rows)
+            styler = df_op.style.format({
+                "Giriş": "{:.4f}",
+                "Anlık Fiyat": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
+                "Yüzen P&L %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
+                "Stop (TOTT)": lambda x: f"{x:.4f}" if pd.notna(x) else "-",
+                "Stop'a %": lambda x: f"{x:+.2f}%" if pd.notna(x) else "-",
+            }).background_gradient(subset=["Yüzen P&L %"], cmap="RdYlGn", vmin=-5, vmax=5)
+            st.dataframe(styler, use_container_width=True, height=400)
+            st.caption(f"💹 Anlık fiyatlar (≤45 sn taze) — "
+                        f"son: {pd.Timestamp.now(tz='Europe/Istanbul'):%H:%M:%S} · sayfa sessizce yenilenir.")
+
+        st.markdown("---")
+        if not live_rows:
+            st.info("📊 Henüz **kapanmış** işlem yok (açık pozisyonlar yukarıda görünür).\n\n"
+                    "Kapanmış trade istatistikleri (PF/win rate) ilk pozisyonlar "
+                    "kapandıkça **birkaç gün–hafta** içinde birikecek.")
+        else:
+            df_live = pd.DataFrame(live_rows).sort_values("Canlı PF", ascending=False).reset_index(drop=True)
+
+            # Min trade filtresi
+            fcol1, fcol2 = st.columns(2)
+            with fcol1:
+                min_n = st.slider("Min canlı trade sayısı", 1, 20, 5, key="live_min_n",
+                                   help="Bu kadar trade'i olmayan semboller gizlenir (anlamsız)")
+            with fcol2:
+                min_pf = st.slider("Min canlı PF", 0.0, 3.0, 1.2, 0.1, key="live_min_pf",
+                                    help="Bu PF'in altındaki semboller gizlenir")
+
+            df_show = df_live[(df_live["Canlı Trade"] >= min_n) & (df_live["Canlı PF"] >= min_pf)]
+
+            m1, m2, m3 = st.columns(3)
+            m1.metric("Takip edilen sembol", len(df_live))
+            m2.metric(f"Filtreyi geçen (PF≥{min_pf})", len(df_show))
+            m3.metric("Açık pozisyon", len(open_pos))
+
+            if len(df_show) > 0:
+                st.markdown(f"### 🏆 Canlı KANITLANMIŞ semboller (PF≥{min_pf}, ≥{min_n} trade)")
+                st.dataframe(
+                    df_show.style.format({
+                        "Canlı Win %": "{:.0f}%",
+                        "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
+                        "Ort. Trade %": "{:+.2f}%",
+                        "Toplam %": "{:+.1f}%",
+                    }).background_gradient(subset=["Canlı PF"], cmap="Greens", vmin=0, vmax=3),
+                    use_container_width=True, height=400,
+                )
+                st.success("Bu semboller **canlıda gerçekten** çalışıyor — backtest'e değil, "
+                            "gerçek sonuca dayanıyor. Trade için en güvenilir liste.")
+            else:
+                st.warning(f"Henüz PF≥{min_pf} + {min_n}+ trade kriterini geçen sembol yok. "
+                            "Veri birikmeye devam ediyor.")
+
+            with st.expander("📋 Tüm takip edilen semboller (ham)"):
+                st.dataframe(
+                    df_live.style.format({
+                        "Canlı Win %": "{:.0f}%",
+                        "Canlı PF": lambda v: "∞" if v >= 900 else f"{v:.2f}",
+                        "Ort. Trade %": "{:+.2f}%",
+                        "Toplam %": "{:+.1f}%",
+                    }),
+                    use_container_width=True, height=400,
+                )
+
+            # ── İŞLEM DETAYI — botun gerçek al/sat hareketleri
+            st.markdown("---")
+            st.markdown("### 🔍 İşlem Detayı — botun gerçek al/sat hareketleri")
+            st.caption("Bot neyi, ne zaman, hangi fiyattan açtı/kapattı. Her satır bir trade.")
+
+            try:
+                all_trades = fv.get_trades()
+            except Exception:
+                all_trades = []
+
+            if not all_trades:
+                st.info("Henüz kapanmış işlem yok.")
+            else:
+                # Sembol filtresi
+                syms_with_trades = sorted(set(t["sym"] for t in all_trades))
+                sel_sym = st.selectbox(
+                    "Sembol seç (hepsi için boş bırak)",
+                    ["— Tümü —"] + syms_with_trades, key="live_trade_sym")
+
+                trades_show = all_trades if sel_sym == "— Tümü —" \
+                    else [t for t in all_trades if t["sym"] == sel_sym]
+
+                # Detay tablo
+                det_rows = []
+                for t in trades_show:
+                    det_rows.append({
+                        "Sembol": t["sym"],
+                        "Yön": "🟢 LONG" if t["side"] == "LONG" else "🔴 SHORT",
+                        "Açılış Fiyat": t["entry_price"],
+                        "Açılış Zamanı": t.get("entry_ts", "")[:16].replace("T", " "),
+                        "Kapanış Fiyat": t["exit_price"],
+                        "Kapanış Zamanı": t.get("exit_ts", "")[:16].replace("T", " "),
+                        "Sonuç %": t["pnl_pct"],
+                    })
+                df_det = pd.DataFrame(det_rows)
+
+                # Özet
+                dm1, dm2, dm3 = st.columns(3)
+                dm1.metric("İşlem sayısı", len(df_det))
+                if len(df_det) > 0:
+                    dm2.metric("Kazanan", f"{(df_det['Sonuç %'] > 0).sum()}/{len(df_det)}")
+                    dm3.metric("Toplam %", f"{df_det['Sonuç %'].sum():+.1f}%")
+
+                st.dataframe(
+                    df_det.style.format({
+                        "Açılış Fiyat": "{:.4f}",
+                        "Kapanış Fiyat": "{:.4f}",
+                        "Sonuç %": "{:+.2f}%",
+                    }).background_gradient(subset=["Sonuç %"], cmap="RdYlGn", vmin=-5, vmax=5),
+                    use_container_width=True, height=500,
+                )
+
+
+
+    with sub_pb:
+        st.subheader("🌀 Pullback — Forward-Test (trend-devam, OOS t=3.00)")
+        st.caption(
+            "Strong Pullback çekirdeği: teyitli uptrend (EMA34>144, HTF EMA200 üstü) → "
+            "20-bar kırılım → pullback'e LİMİT giriş → yapısal stop → hedef 2R. Long-only, "
+            "sadece LİKİT semboller. OOS testte t=3.00 (+0.153R/işlem) geçti — ama İNCE edge: "
+            "maliyet 0.25R'yi geçerse ölür (likit + limit giriş şart). Gerçek para DEĞİL, izliyoruz."
+        )
+        try:
+            pbs = _pb_summary()
+        except Exception as e:
+            pbs = None
+            st.error(f"Pullback modülü yüklenemedi: {e}")
+        _gl = pbs["go_live"] if pbs else "2026-07-10"
+        with st.expander("ℹ️ Neden bu sekme / nasıl okunur?"):
+            st.markdown(
+                f"- **Forward satırı** = go-live'dan ({_gl}) SONRA açılan işlemler. **Asıl güven budur** — "
+                "haftalarca birikince t>2 tutuyor mu göreceğiz.\n"
+                "- **Backtest bağlamı** = son 2 yılın tamamı (yeniden-kurulum), sadece referans.\n"
+                "- Strateji deterministik + repaint-yok → geçmiş birebir yeniden kurulur, cron gerekmez.\n"
+                "- Hedef: forward beklenti **> +0.10R** ve **t > 2**. Altındaysa edge canlıda yok demektir."
             )
+        if pbs:
+            f = pbs["forward"]; a = pbs["all"]
+            lm_hero("🎯 FORWARD (canlı) — asıl kanıt", [
+                ("İşlem", f["n"]),
+                ("Kazanma", f"%{f['win']:.0f}" if f["n"] else "-"),
+                ("Ort. beklenti", f"{f['avgR']:+.3f}R" if f["n"] else "-",
+                 "green" if f["avgR"] > 0 else ("red" if f["avgR"] < 0 else "")),
+                ("Toplam", f"{f['totR']:+.1f}R" if f["n"] else "-"),
+                ("t-stat", f"{f['t']:+.2f}" if f["n"] > 1 else "-",
+                 "green" if f["t"] > 2 else ""),
+            ])
+            if f["n"] == 0:
+                st.info(f"📅 Forward-test bugün ({_gl}) başladı — henüz kapanan işlem yok. "
+                        "İlk sinyaller geldikçe burada birikecek.")
+            st.caption(
+                f"Backtest bağlamı (son 2y, referans): {a['n']} işlem · kazanma %{a['win']:.0f} · "
+                f"ort {a['avgR']:+.3f}R · toplam {a['totR']:+.1f}R · t={a['t']:+.2f}"
+            )
+            st.write("")
+            openp = pbs["open"]
+            st.markdown(f"### 📂 Açık Pozisyonlar ({len(openp)})")
+            st.caption("Bot kırılım+pullback yakaladı, hedef 2R'ye kadar tutar. Stop = yapısal (swing altı).")
+            if not openp:
+                st.write("Şu an açık pullback pozisyonu yok (kırılım+pullback bekleniyor).")
+            else:
+                _rows = []
+                for _s, _v in openp.items():
+                    _cp = None
+                    try: _cp = live_price(_s)
+                    except Exception: pass
+                    _fr = round((_cp - _v["entry_price"]) / _v["risk"], 2) if _cp else None
+                    _rows.append({
+                        "Sembol": _s.replace(".IS", ""),
+                        "Giriş": round(_v["entry_price"], 2),
+                        "Anlık": round(_cp, 2) if _cp else None,
+                        "Stop": round(_v["stop"], 2),
+                        "Hedef (2R)": round(_v["tp"], 2),
+                        "Yüzen R": _fr,
+                        "Açılış": _v["entry_ts"][:16].replace("T", " "),
+                    })
+                st.dataframe(pd.DataFrame(_rows), hide_index=True, use_container_width=True)
+            _trs = list(reversed(pbs["trades"]))[:25]
+            if _trs:
+                st.markdown(f"### 📜 Son Kapanan İşlemler (toplam {len(pbs['trades'])})")
+                _tr = [{
+                    "Sembol": t["sym"].replace(".IS", ""),
+                    "Sonuç": ("✅ TP +2R" if t["result"] == "TP" else "🛑 SL −1R"),
+                    "R": t["R"],
+                    "Giriş": t["entry"], "Çıkış": t["exit"],
+                    "Açılış": t["entry_ts"][:16].replace("T", " "),
+                    "Kapanış": t["exit_ts"][:16].replace("T", " "),
+                    "Forward": "🟢" if t["entry_ts"] >= pbs["go_live"] else "",
+                } for t in _trs]
+                st.dataframe(pd.DataFrame(_tr), hide_index=True, use_container_width=True)
+            _ps = pbs["per_sym"]
+            _good = sum(1 for _rs in _ps.values() if _rs and (np.array(_rs) - 0.15).mean() > 0)
+            _tot = sum(1 for _rs in _ps.values() if _rs)
+            if _tot:
+                st.caption(f"Sembol genişliği (2y): {_good}/{_tot} pozitif (%{100 * _good / _tot:.0f}). "
+                           "Likit + limit giriş şart — market emri edge'i öldürür.")
 
 
 with tab_info:
