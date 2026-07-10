@@ -28,12 +28,11 @@ name: Scheduled Notify
 #   23:00       20:00       NASDAQ Scan
 
 on:
-  # Her 10 dakikada bir tetiklenir. Streamlit Cloud içi scheduler güvenilmez
-  # (free tier background thread'i öldürüyor). GitHub Actions tek güvenilir
-  # otomatik tetikleyici.
-  schedule:
-    - cron: "*/30 * * * *"
-  # Manuel tetikleme (test için)
+  # DEVRE DIŞI (2026-07-10): eski BIST/NASDAQ konsensüs sinyalleri — edge'i olmadığı
+  # kanıtlandı (26yıl OOS test), BIST_TrendFilter ile değiştirildi. Otomatik cron KAPALI;
+  # Telegram karmaşasını önlemek için. Sadece elle tetiklenebilir (workflow_dispatch).
+  # schedule:
+  #   - cron: "*/30 * * * *"
   workflow_dispatch:
     inputs:
       test_mode:
