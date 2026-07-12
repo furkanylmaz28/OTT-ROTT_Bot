@@ -3085,5 +3085,23 @@
     "pnl_pct": 0.416,
     "exit_ts": "2026-07-12T15:01:45.703409+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1012,
+    "exit_price": 0.1017,
+    "pnl_pct": 0.394,
+    "exit_ts": "2026-07-12T17:01:54.997796+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.133,
+    "exit_price": 0.1323,
+    "pnl_pct": -0.626,
+    "exit_ts": "2026-07-12T17:01:54.997796+03:00",
+    "reason": "trend"
   }
 ]
