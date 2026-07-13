@@ -3166,5 +3166,41 @@
     "pnl_pct": 1.235,
     "exit_ts": "2026-07-13T03:31:35.217737+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.841,
+    "exit_price": 0.848,
+    "pnl_pct": 0.732,
+    "exit_ts": "2026-07-13T03:46:21.819719+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.77,
+    "exit_price": 0.778,
+    "pnl_pct": 0.939,
+    "exit_ts": "2026-07-13T03:46:21.819719+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 4.817,
+    "exit_price": 4.922,
+    "pnl_pct": 2.08,
+    "exit_ts": "2026-07-13T03:46:21.819719+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3987,
+    "exit_price": 0.4014,
+    "pnl_pct": 0.577,
+    "exit_ts": "2026-07-13T03:46:21.819719+03:00",
+    "reason": "trail"
   }
 ]
