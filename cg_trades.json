@@ -3526,5 +3526,23 @@
     "pnl_pct": -1.68,
     "exit_ts": "2026-07-13T21:16:13.014546+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 43.07,
+    "exit_price": 43.21,
+    "pnl_pct": 0.225,
+    "exit_ts": "2026-07-13T23:16:14.059168+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04756,
+    "exit_price": 0.04735,
+    "pnl_pct": -0.542,
+    "exit_ts": "2026-07-13T23:16:14.059168+03:00",
+    "reason": "trend"
   }
 ]
