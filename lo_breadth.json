@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-13T17:17:56.835275+03:00",
+  "ts": "2026-07-13T17:32:38.771960+03:00",
   "bull": 19,
-  "bear": 12,
-  "total": 31,
-  "bull_pct": 61.0,
+  "bear": 15,
+  "total": 34,
+  "bull_pct": 56.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
@@ -37,7 +37,10 @@
     "PGSUS",
     "THYAO",
     "TTKOM",
-    "YKBNK"
+    "VAKBN",
+    "YKBNK",
+    "HEKTS",
+    "ALARK"
   ],
   "fresh_bear": [
     "ENJSA",
