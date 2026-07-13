@@ -3220,5 +3220,14 @@
     "pnl_pct": -0.363,
     "exit_ts": "2026-07-13T06:16:09.594938+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0992,
+    "exit_price": 0.1001,
+    "pnl_pct": 0.807,
+    "exit_ts": "2026-07-13T10:01:47.957022+03:00",
+    "reason": "trail"
   }
 ]
