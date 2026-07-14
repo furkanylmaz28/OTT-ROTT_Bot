@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-14T17:32:47.536271+03:00",
-  "bull": 21,
-  "bear": 13,
+  "ts": "2026-07-14T17:47:18.172755+03:00",
+  "bull": 20,
+  "bear": 14,
   "total": 34,
-  "bull_pct": 62.0,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -13,7 +13,6 @@
     "FROTO",
     "KCHOL",
     "KRDMD",
-    "MGROS",
     "PETKM",
     "SASA",
     "SISE",
@@ -33,6 +32,7 @@
     "GUBRF",
     "HALKB",
     "ISCTR",
+    "MGROS",
     "PGSUS",
     "TAVHL",
     "THYAO",
@@ -43,6 +43,7 @@
     "ALARK"
   ],
   "fresh_bear": [
+    "MGROS",
     "TAVHL",
     "TOASO"
   ]
