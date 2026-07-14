@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-14T09:32:25.329812+03:00",
-  "bull": 20,
-  "bear": 14,
+  "ts": "2026-07-14T09:47:11.855964+03:00",
+  "bull": 19,
+  "bear": 15,
   "total": 34,
-  "bull_pct": 59.0,
+  "bull_pct": 56.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
@@ -15,7 +15,6 @@
     "SASA",
     "SISE",
     "SOKM",
-    "TAVHL",
     "TOASO",
     "TKFEN",
     "TUPRS",
@@ -36,6 +35,7 @@
     "ISCTR",
     "MGROS",
     "PGSUS",
+    "TAVHL",
     "THYAO",
     "TTKOM",
     "VAKBN",
@@ -46,6 +46,7 @@
     "ENJSA",
     "GUBRF",
     "PGSUS",
+    "TAVHL",
     "THYAO"
   ]
 }
