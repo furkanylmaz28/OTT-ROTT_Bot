@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-14T18:03:16.466255+03:00",
-  "bull": 19,
+  "ts": "2026-07-15T09:32:33.191303+03:00",
+  "bull": 20,
   "bear": 14,
-  "total": 33,
-  "bull_pct": 58.0,
+  "total": 34,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -23,7 +23,8 @@
     "HEKTS",
     "ODAS",
     "ASTOR",
-    "AKSEN"
+    "AKSEN",
+    "KONTR"
   ],
   "bear_syms": [
     "ASELS",
