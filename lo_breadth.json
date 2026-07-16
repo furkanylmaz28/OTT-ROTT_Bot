@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-16T16:32:31.849075+03:00",
-  "bull": 23,
-  "bear": 11,
+  "ts": "2026-07-16T16:47:28.983812+03:00",
+  "bull": 25,
+  "bear": 9,
   "total": 34,
-  "bull_pct": 68.0,
+  "bull_pct": 74.0,
   "bull_syms": [
     "ASELS",
     "DOHOL",
@@ -19,6 +19,8 @@
     "SASA",
     "SISE",
     "SOKM",
+    "TAVHL",
+    "TOASO",
     "TKFEN",
     "TTKOM",
     "TUPRS",
@@ -35,9 +37,7 @@
     "HALKB",
     "ISCTR",
     "MGROS",
-    "TAVHL",
     "THYAO",
-    "TOASO",
     "VAKBN",
     "YKBNK",
     "KONTR"
@@ -45,7 +45,6 @@
   "fresh_bear": [
     "AKBNK",
     "MGROS",
-    "TOASO",
     "KONTR"
   ]
 }
