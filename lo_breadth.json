@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-16T10:32:44.451590+03:00",
-  "bull": 20,
-  "bear": 14,
-  "total": 34,
-  "bull_pct": 59.0,
+  "ts": "2026-07-16T10:47:16.152116+03:00",
+  "bull": 18,
+  "bear": 15,
+  "total": 33,
+  "bull_pct": 55.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -21,10 +21,8 @@
     "TUPRS",
     "AEFES",
     "HEKTS",
-    "ODAS",
     "ASTOR",
-    "AKSEN",
-    "KONTR"
+    "AKSEN"
   ],
   "bear_syms": [
     "ASELS",
@@ -40,10 +38,12 @@
     "TTKOM",
     "VAKBN",
     "YKBNK",
-    "ALARK"
+    "ALARK",
+    "KONTR"
   ],
   "fresh_bear": [
     "MGROS",
-    "TOASO"
+    "TOASO",
+    "KONTR"
   ]
 }
