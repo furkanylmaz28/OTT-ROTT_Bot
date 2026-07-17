@@ -4057,5 +4057,32 @@
     "pnl_pct": 1.948,
     "exit_ts": "2026-07-17T22:16:08.672798+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 565.15,
+    "exit_price": 567.35,
+    "pnl_pct": 0.289,
+    "exit_ts": "2026-07-17T23:01:26.653735+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 74.91,
+    "exit_price": 75.06,
+    "pnl_pct": 0.1,
+    "exit_ts": "2026-07-17T23:01:26.653735+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.072,
+    "exit_price": 0.07254,
+    "pnl_pct": 0.65,
+    "exit_ts": "2026-07-17T23:01:26.653735+03:00",
+    "reason": "trend"
   }
 ]
