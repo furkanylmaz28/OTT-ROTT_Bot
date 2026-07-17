@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-17T14:32:17.294921+03:00",
-  "bull": 21,
-  "bear": 13,
+  "ts": "2026-07-17T14:47:10.905729+03:00",
+  "bull": 20,
+  "bear": 14,
   "total": 34,
-  "bull_pct": 62.0,
+  "bull_pct": 59.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
@@ -23,7 +23,6 @@
     "TUPRS",
     "VAKBN",
     "AEFES",
-    "HEKTS",
     "AKSEN",
     "ALARK"
   ],
@@ -38,6 +37,7 @@
     "SASA",
     "THYAO",
     "YKBNK",
+    "HEKTS",
     "ODAS",
     "ASTOR",
     "KONTR"
@@ -47,6 +47,7 @@
     "EKGYO",
     "GUBRF",
     "SASA",
+    "HEKTS",
     "ODAS",
     "ASTOR"
   ]
