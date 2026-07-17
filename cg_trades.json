@@ -4039,5 +4039,23 @@
     "pnl_pct": 0.917,
     "exit_ts": "2026-07-17T21:01:32.100470+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.468,
+    "exit_price": 6.569,
+    "pnl_pct": 1.462,
+    "exit_ts": "2026-07-17T22:16:08.672798+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 3.467,
+    "exit_price": 3.538,
+    "pnl_pct": 1.948,
+    "exit_ts": "2026-07-17T22:16:08.672798+03:00",
+    "reason": "trail"
   }
 ]
