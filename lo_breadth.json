@@ -1,10 +1,11 @@
 {
-  "ts": "2026-07-17T17:17:38.903361+03:00",
-  "bull": 18,
+  "ts": "2026-07-17T17:32:21.182907+03:00",
+  "bull": 20,
   "bear": 14,
-  "total": 32,
-  "bull_pct": 56.0,
+  "total": 34,
+  "bull_pct": 59.0,
   "bull_syms": [
+    "DOHOL",
     "ENJSA",
     "ENKAI",
     "FROTO",
@@ -16,6 +17,7 @@
     "SISE",
     "SOKM",
     "TAVHL",
+    "TOASO",
     "TKFEN",
     "TTKOM",
     "TUPRS",
