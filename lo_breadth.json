@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-20T15:46:59.550986+03:00",
+  "ts": "2026-07-20T16:02:50.163661+03:00",
   "bull": 18,
-  "bear": 16,
-  "total": 34,
-  "bull_pct": 53.0,
+  "bear": 15,
+  "total": 33,
+  "bull_pct": 55.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -39,8 +39,7 @@
     "YKBNK",
     "HEKTS",
     "ODAS",
-    "ASTOR",
-    "KONTR"
+    "ASTOR"
   ],
   "fresh_bear": [
     "ENKAI",
