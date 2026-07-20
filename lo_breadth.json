@@ -1,5 +1,5 @@
 {
-  "ts": "2026-07-20T15:31:56.372135+03:00",
+  "ts": "2026-07-20T15:46:59.550986+03:00",
   "bull": 18,
   "bear": 16,
   "total": 34,
@@ -12,6 +12,7 @@
     "KRDMD",
     "MGROS",
     "PETKM",
+    "SASA",
     "SISE",
     "SOKM",
     "TAVHL",
@@ -19,7 +20,6 @@
     "TKFEN",
     "TTKOM",
     "TUPRS",
-    "VAKBN",
     "AEFES",
     "AKSEN",
     "ALARK"
@@ -34,8 +34,8 @@
     "HALKB",
     "ISCTR",
     "PGSUS",
-    "SASA",
     "THYAO",
+    "VAKBN",
     "YKBNK",
     "HEKTS",
     "ODAS",
@@ -44,8 +44,8 @@
   ],
   "fresh_bear": [
     "ENKAI",
-    "EREGL",
     "FROTO",
-    "PGSUS"
+    "PGSUS",
+    "VAKBN"
   ]
 }
