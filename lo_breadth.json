@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-20T11:47:26.836545+03:00",
-  "bull": 16,
-  "bear": 15,
-  "total": 31,
-  "bull_pct": 52.0,
+  "ts": "2026-07-20T12:02:48.306763+03:00",
+  "bull": 18,
+  "bear": 16,
+  "total": 34,
+  "bull_pct": 53.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -17,10 +17,12 @@
     "TAVHL",
     "TOASO",
     "TKFEN",
+    "TTKOM",
     "TUPRS",
     "VAKBN",
     "AEFES",
-    "AKSEN"
+    "AKSEN",
+    "ALARK"
   ],
   "bear_syms": [
     "AKBNK",
@@ -28,6 +30,7 @@
     "EKGYO",
     "ENKAI",
     "EREGL",
+    "GUBRF",
     "HALKB",
     "ISCTR",
     "PGSUS",
