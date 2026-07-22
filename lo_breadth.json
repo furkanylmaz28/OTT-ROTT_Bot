@@ -1,11 +1,12 @@
 {
-  "ts": "2026-07-22T17:32:32.664752+03:00",
-  "bull": 14,
-  "bear": 20,
+  "ts": "2026-07-22T17:47:20.136377+03:00",
+  "bull": 15,
+  "bear": 19,
   "total": 34,
-  "bull_pct": 41.0,
+  "bull_pct": 44.0,
   "bull_syms": [
     "ASELS",
+    "DOHOL",
     "ENJSA",
     "ENKAI",
     "GUBRF",
@@ -22,7 +23,6 @@
   ],
   "bear_syms": [
     "AKBNK",
-    "DOHOL",
     "EKGYO",
     "EREGL",
     "FROTO",
@@ -43,7 +43,6 @@
     "KONTR"
   ],
   "fresh_bear": [
-    "EREGL",
     "KRDMD",
     "ASTOR",
     "KONTR"
