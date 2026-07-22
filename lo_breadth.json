@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-22T16:17:07.566968+03:00",
+  "ts": "2026-07-22T16:32:30.801641+03:00",
   "bull": 13,
-  "bear": 21,
-  "total": 34,
-  "bull_pct": 38.0,
+  "bear": 20,
+  "total": 33,
+  "bull_pct": 39.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -25,7 +25,6 @@
     "EKGYO",
     "EREGL",
     "FROTO",
-    "HALKB",
     "ISCTR",
     "KRDMD",
     "MGROS",
