@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-23T16:47:27.761074+03:00",
+  "ts": "2026-07-23T17:02:30.186789+03:00",
   "bull": 13,
-  "bear": 19,
-  "total": 32,
-  "bull_pct": 41.0,
+  "bear": 21,
+  "total": 34,
+  "bull_pct": 38.0,
   "bull_syms": [
     "ASELS",
     "DOHOL",
@@ -38,7 +38,9 @@
     "VAKBN",
     "YKBNK",
     "AEFES",
-    "ALARK"
+    "AKSEN",
+    "ALARK",
+    "KONTR"
   ],
   "fresh_bear": [
     "ENKAI",
@@ -46,6 +48,7 @@
     "TAVHL",
     "TTKOM",
     "AEFES",
+    "AKSEN",
     "ALARK"
   ]
 }
