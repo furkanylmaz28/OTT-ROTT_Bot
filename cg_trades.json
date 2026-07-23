@@ -4507,5 +4507,41 @@
     "pnl_pct": -0.471,
     "exit_ts": "2026-07-23T21:46:10.097102+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 1.909,
+    "exit_price": 1.882,
+    "pnl_pct": -1.514,
+    "exit_ts": "2026-07-23T23:01:22.552439+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0869,
+    "exit_price": 0.0867,
+    "pnl_pct": -0.33,
+    "exit_ts": "2026-07-23T23:01:22.552439+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.0858,
+    "exit_price": 0.0867,
+    "pnl_pct": 0.949,
+    "exit_ts": "2026-07-23T23:01:22.552439+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3509,
+    "exit_price": 0.351,
+    "pnl_pct": -0.072,
+    "exit_ts": "2026-07-23T23:01:22.552439+03:00",
+    "reason": "trend"
   }
 ]
