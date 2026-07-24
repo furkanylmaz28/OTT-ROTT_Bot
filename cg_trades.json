@@ -4588,5 +4588,14 @@
     "pnl_pct": -0.273,
     "exit_ts": "2026-07-24T05:31:23.883272+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.8,
+    "exit_price": 6.69,
+    "pnl_pct": -1.718,
+    "exit_ts": "2026-07-24T06:01:34.250279+03:00",
+    "reason": "trend"
   }
 ]
