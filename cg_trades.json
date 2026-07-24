@@ -4930,5 +4930,23 @@
     "pnl_pct": 1.063,
     "exit_ts": "2026-07-24T22:01:25.277720+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.09,
+    "exit_price": 1.0902,
+    "pnl_pct": -0.082,
+    "exit_ts": "2026-07-24T23:01:13.952138+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.72,
+    "exit_price": 0.727,
+    "pnl_pct": 0.872,
+    "exit_ts": "2026-07-24T23:01:13.952138+03:00",
+    "reason": "trend"
   }
 ]
