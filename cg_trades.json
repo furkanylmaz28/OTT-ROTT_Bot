@@ -4723,5 +4723,41 @@
     "pnl_pct": -1.786,
     "exit_ts": "2026-07-24T12:16:03.848857+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07002,
+    "exit_price": 0.06982,
+    "pnl_pct": -0.386,
+    "exit_ts": "2026-07-24T13:16:03.743423+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.73,
+    "exit_price": 6.74,
+    "pnl_pct": 0.049,
+    "exit_ts": "2026-07-24T13:16:03.743423+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7361,
+    "exit_price": 0.7345,
+    "pnl_pct": -0.317,
+    "exit_ts": "2026-07-24T13:16:03.743423+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.35,
+    "exit_price": 0.3484,
+    "pnl_pct": -0.557,
+    "exit_ts": "2026-07-24T13:16:03.743423+03:00",
+    "reason": "trend"
   }
 ]
