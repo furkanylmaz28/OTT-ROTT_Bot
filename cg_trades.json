@@ -4777,5 +4777,23 @@
     "pnl_pct": -0.391,
     "exit_ts": "2026-07-24T14:31:12.776489+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.169,
+    "exit_price": 0.1663,
+    "pnl_pct": -1.698,
+    "exit_ts": "2026-07-24T15:01:25.627452+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04545,
+    "exit_price": 0.0454,
+    "pnl_pct": -0.21,
+    "exit_ts": "2026-07-24T15:01:25.627452+03:00",
+    "reason": "trend"
   }
 ]
