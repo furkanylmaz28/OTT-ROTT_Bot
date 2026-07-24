@@ -4597,5 +4597,32 @@
     "pnl_pct": -1.718,
     "exit_ts": "2026-07-24T06:01:34.250279+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06938,
+    "exit_price": 0.06939,
+    "pnl_pct": -0.086,
+    "exit_ts": "2026-07-24T07:01:15.355447+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 215.7,
+    "exit_price": 211.6,
+    "pnl_pct": -2.001,
+    "exit_ts": "2026-07-24T07:01:15.355447+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 210.4,
+    "exit_price": 211.6,
+    "pnl_pct": 0.47,
+    "exit_ts": "2026-07-24T07:01:15.355447+03:00",
+    "reason": "trend"
   }
 ]
