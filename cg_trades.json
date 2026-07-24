@@ -4651,5 +4651,32 @@
     "pnl_pct": -0.749,
     "exit_ts": "2026-07-24T10:46:10.809251+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.819,
+    "exit_price": 0.811,
+    "pnl_pct": -1.077,
+    "exit_ts": "2026-07-24T11:01:27.618594+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 212.1,
+    "exit_price": 212.5,
+    "pnl_pct": 0.089,
+    "exit_ts": "2026-07-24T11:01:27.618594+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3484,
+    "exit_price": 0.3482,
+    "pnl_pct": -0.157,
+    "exit_ts": "2026-07-24T11:01:27.618594+03:00",
+    "reason": "trend"
   }
 ]
