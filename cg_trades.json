@@ -4687,5 +4687,41 @@
     "pnl_pct": -0.343,
     "exit_ts": "2026-07-24T11:31:17.251554+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 75.87,
+    "exit_price": 75.38,
+    "pnl_pct": -0.746,
+    "exit_ts": "2026-07-24T12:16:03.848857+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06999,
+    "exit_price": 0.06971,
+    "pnl_pct": -0.5,
+    "exit_ts": "2026-07-24T12:16:03.848857+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.422,
+    "exit_price": 8.496,
+    "pnl_pct": 0.779,
+    "exit_ts": "2026-07-24T12:16:03.848857+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7474,
+    "exit_price": 0.7348,
+    "pnl_pct": -1.786,
+    "exit_ts": "2026-07-24T12:16:03.848857+03:00",
+    "reason": "trend"
   }
 ]
