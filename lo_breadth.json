@@ -1,14 +1,15 @@
 {
-  "ts": "2026-07-24T17:02:52.324117+03:00",
-  "bull": 6,
+  "ts": "2026-07-24T17:17:14.176694+03:00",
+  "bull": 7,
   "bear": 27,
-  "total": 33,
-  "bull_pct": 18.0,
+  "total": 34,
+  "bull_pct": 21.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
     "EREGL",
     "PETKM",
+    "SASA",
     "TKFEN",
     "KONTR"
   ],
