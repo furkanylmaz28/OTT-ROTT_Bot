@@ -4966,5 +4966,23 @@
     "pnl_pct": -0.196,
     "exit_ts": "2026-07-24T23:31:12.581888+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1861.05,
+    "exit_price": 1859.22,
+    "pnl_pct": -0.198,
+    "exit_ts": "2026-07-25T07:01:38.256205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.335,
+    "exit_price": 8.343,
+    "pnl_pct": -0.004,
+    "exit_ts": "2026-07-25T07:01:38.256205+03:00",
+    "reason": "trend"
   }
 ]
