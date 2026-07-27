@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-27T17:46:57.246126+03:00",
-  "bull": 7,
+  "ts": "2026-07-27T18:02:15.641098+03:00",
+  "bull": 8,
   "bear": 26,
-  "total": 33,
-  "bull_pct": 21.0,
+  "total": 34,
+  "bull_pct": 24.0,
   "bull_syms": [
     "EKGYO",
     "KCHOL",
@@ -11,6 +11,7 @@
     "SASA",
     "TAVHL",
     "THYAO",
+    "TKFEN",
     "YKBNK"
   ],
   "bear_syms": [
