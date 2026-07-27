@@ -5236,5 +5236,41 @@
     "pnl_pct": -3.62,
     "exit_ts": "2026-07-28T01:46:18.104679+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.794,
+    "exit_price": 0.754,
+    "pnl_pct": -5.138,
+    "exit_ts": "2026-07-28T02:01:21.982747+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.772,
+    "exit_price": 0.754,
+    "pnl_pct": -2.432,
+    "exit_ts": "2026-07-28T02:01:21.982747+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.6853,
+    "exit_price": 0.678,
+    "pnl_pct": -1.165,
+    "exit_ts": "2026-07-28T02:01:21.982747+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.06865,
+    "exit_price": 0.06815,
+    "pnl_pct": -0.828,
+    "exit_ts": "2026-07-28T02:01:21.982747+03:00",
+    "reason": "trend"
   }
 ]
