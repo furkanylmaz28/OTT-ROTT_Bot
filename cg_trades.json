@@ -5182,5 +5182,23 @@
     "pnl_pct": -0.225,
     "exit_ts": "2026-07-27T20:46:10.633513+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1594,
+    "exit_price": 0.159,
+    "pnl_pct": -0.351,
+    "exit_ts": "2026-07-27T21:16:06.515464+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.356,
+    "exit_price": 1.347,
+    "pnl_pct": -0.764,
+    "exit_ts": "2026-07-27T21:16:06.515464+03:00",
+    "reason": "trend"
   }
 ]
