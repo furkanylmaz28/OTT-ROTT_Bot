@@ -5722,5 +5722,32 @@
     "pnl_pct": -0.33,
     "exit_ts": "2026-07-28T17:16:07.383078+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1171,
+    "exit_price": 0.1168,
+    "pnl_pct": -0.356,
+    "exit_ts": "2026-07-28T19:01:34.234142+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1171,
+    "exit_price": 0.1168,
+    "pnl_pct": -0.356,
+    "exit_ts": "2026-07-28T19:01:34.234142+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3248,
+    "exit_price": 0.3316,
+    "pnl_pct": 1.994,
+    "exit_ts": "2026-07-28T19:01:34.234142+03:00",
+    "reason": "trail"
   }
 ]
