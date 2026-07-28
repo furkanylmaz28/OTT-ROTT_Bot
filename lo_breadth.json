@@ -1,11 +1,10 @@
 {
-  "ts": "2026-07-28T13:32:14.538571+03:00",
-  "bull": 8,
-  "bear": 26,
+  "ts": "2026-07-28T13:46:54.955888+03:00",
+  "bull": 7,
+  "bear": 27,
   "total": 34,
-  "bull_pct": 24.0,
+  "bull_pct": 21.0,
   "bull_syms": [
-    "EKGYO",
     "HALKB",
     "KCHOL",
     "MGROS",
@@ -19,6 +18,7 @@
     "ASELS",
     "DOHOL",
     "ENJSA",
+    "EKGYO",
     "ENKAI",
     "EREGL",
     "FROTO",
@@ -44,6 +44,7 @@
   ],
   "fresh_bear": [
     "AKBNK",
+    "EKGYO",
     "PGSUS",
     "SASA",
     "YKBNK"
