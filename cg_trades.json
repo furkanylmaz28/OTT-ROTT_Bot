@@ -5551,5 +5551,32 @@
     "pnl_pct": -0.185,
     "exit_ts": "2026-07-28T12:31:20.071615+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.0571,
+    "exit_price": 1.056,
+    "pnl_pct": -0.204,
+    "exit_ts": "2026-07-28T13:01:27.201356+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.117,
+    "exit_price": 0.1167,
+    "pnl_pct": -0.356,
+    "exit_ts": "2026-07-28T13:01:27.201356+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.117,
+    "exit_price": 0.1167,
+    "pnl_pct": -0.356,
+    "exit_ts": "2026-07-28T13:01:27.201356+03:00",
+    "reason": "trend"
   }
 ]
