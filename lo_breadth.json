@@ -1,12 +1,13 @@
 {
-  "ts": "2026-07-28T11:32:16.840312+03:00",
-  "bull": 5,
-  "bear": 29,
+  "ts": "2026-07-28T11:47:02.571402+03:00",
+  "bull": 6,
+  "bear": 28,
   "total": 34,
-  "bull_pct": 15.0,
+  "bull_pct": 18.0,
   "bull_syms": [
     "EKGYO",
     "KCHOL",
+    "MGROS",
     "TAVHL",
     "THYAO",
     "TKFEN"
@@ -23,7 +24,6 @@
     "HALKB",
     "ISCTR",
     "KRDMD",
-    "MGROS",
     "PETKM",
     "PGSUS",
     "SASA",
