@@ -5452,5 +5452,14 @@
     "pnl_pct": 1.183,
     "exit_ts": "2026-07-28T10:16:11.679678+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.0599,
+    "exit_price": 1.0578,
+    "pnl_pct": -0.298,
+    "exit_ts": "2026-07-28T10:31:15.083403+03:00",
+    "reason": "trend"
   }
 ]
