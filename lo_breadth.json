@@ -1,13 +1,12 @@
 {
-  "ts": "2026-07-28T10:32:11.263210+03:00",
-  "bull": 6,
-  "bear": 28,
+  "ts": "2026-07-28T10:46:58.212832+03:00",
+  "bull": 5,
+  "bear": 29,
   "total": 34,
-  "bull_pct": 18.0,
+  "bull_pct": 15.0,
   "bull_syms": [
     "EKGYO",
     "KCHOL",
-    "SASA",
     "TAVHL",
     "THYAO",
     "TKFEN"
@@ -27,6 +26,7 @@
     "MGROS",
     "PETKM",
     "PGSUS",
+    "SASA",
     "SISE",
     "SOKM",
     "TOASO",
@@ -44,9 +44,8 @@
   ],
   "fresh_bear": [
     "AKBNK",
-    "ASELS",
-    "PETKM",
     "PGSUS",
+    "SASA",
     "YKBNK",
     "KONTR"
   ]
