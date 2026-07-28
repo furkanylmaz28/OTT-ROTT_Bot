@@ -5416,5 +5416,14 @@
     "pnl_pct": -0.555,
     "exit_ts": "2026-07-28T09:01:25.293905+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 3.687,
+    "exit_price": 3.712,
+    "pnl_pct": 0.578,
+    "exit_ts": "2026-07-28T09:16:01.416864+03:00",
+    "reason": "trail"
   }
 ]
