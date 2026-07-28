@@ -5758,5 +5758,23 @@
     "pnl_pct": 1.582,
     "exit_ts": "2026-07-28T19:16:18.074612+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 73.24,
+    "exit_price": 74.07,
+    "pnl_pct": 1.033,
+    "exit_ts": "2026-07-28T19:31:20.865642+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0794,
+    "exit_price": 0.0789,
+    "pnl_pct": -0.73,
+    "exit_ts": "2026-07-28T19:31:20.865642+03:00",
+    "reason": "trend"
   }
 ]
