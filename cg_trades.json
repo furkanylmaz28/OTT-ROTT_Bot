@@ -6280,5 +6280,41 @@
     "pnl_pct": -0.426,
     "exit_ts": "2026-07-29T22:31:16.858914+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.396,
+    "exit_price": 6.371,
+    "pnl_pct": -0.491,
+    "exit_ts": "2026-07-29T22:46:16.147622+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.7,
+    "exit_price": 6.66,
+    "pnl_pct": -0.697,
+    "exit_ts": "2026-07-29T22:46:16.147622+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3205,
+    "exit_price": 0.3148,
+    "pnl_pct": -1.878,
+    "exit_ts": "2026-07-29T22:46:16.147622+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3183,
+    "exit_price": 0.3148,
+    "pnl_pct": -1.2,
+    "exit_ts": "2026-07-29T22:46:16.147622+03:00",
+    "reason": "trend"
   }
 ]
