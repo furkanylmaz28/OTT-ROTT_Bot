@@ -5884,5 +5884,23 @@
     "pnl_pct": 0.903,
     "exit_ts": "2026-07-29T03:01:36.365582+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 63188.31,
+    "exit_price": 63805.99,
+    "pnl_pct": 0.878,
+    "exit_ts": "2026-07-29T04:16:10.548472+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.329,
+    "exit_price": 8.449,
+    "pnl_pct": 1.341,
+    "exit_ts": "2026-07-29T04:16:10.548472+03:00",
+    "reason": "trail"
   }
 ]
