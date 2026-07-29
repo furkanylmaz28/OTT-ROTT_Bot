@@ -1,8 +1,8 @@
 {
-  "ts": "2026-07-29T16:47:13.374679+03:00",
+  "ts": "2026-07-29T17:02:32.042700+03:00",
   "bull": 7,
-  "bear": 26,
-  "total": 33,
+  "bear": 27,
+  "total": 34,
   "bull_pct": 21.0,
   "bull_syms": [
     "ENJSA",
@@ -18,6 +18,7 @@
     "ASELS",
     "DOHOL",
     "EKGYO",
+    "ENKAI",
     "EREGL",
     "FROTO",
     "GUBRF",
