@@ -1,13 +1,12 @@
 {
-  "ts": "2026-07-29T09:31:54.152692+03:00",
-  "bull": 8,
-  "bear": 26,
+  "ts": "2026-07-29T09:46:57.490108+03:00",
+  "bull": 7,
+  "bear": 27,
   "total": 34,
-  "bull_pct": 24.0,
+  "bull_pct": 21.0,
   "bull_syms": [
     "ENJSA",
     "HALKB",
-    "KCHOL",
     "MGROS",
     "TAVHL",
     "THYAO",
@@ -24,6 +23,7 @@
     "FROTO",
     "GUBRF",
     "ISCTR",
+    "KCHOL",
     "KRDMD",
     "PETKM",
     "PGSUS",
@@ -44,8 +44,7 @@
   ],
   "fresh_bear": [
     "EKGYO",
-    "PGSUS",
-    "SASA",
-    "YKBNK"
+    "KCHOL",
+    "SASA"
   ]
 }
