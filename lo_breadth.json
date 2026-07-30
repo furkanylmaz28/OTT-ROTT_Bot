@@ -1,13 +1,14 @@
 {
-  "ts": "2026-07-30T09:32:32.598751+03:00",
-  "bull": 7,
-  "bear": 27,
+  "ts": "2026-07-30T09:47:09.380890+03:00",
+  "bull": 8,
+  "bear": 26,
   "total": 34,
-  "bull_pct": 21.0,
+  "bull_pct": 24.0,
   "bull_syms": [
     "ENJSA",
     "MGROS",
     "TAVHL",
+    "TOASO",
     "TKFEN",
     "AEFES",
     "ODAS",
@@ -32,7 +33,6 @@
     "SISE",
     "SOKM",
     "THYAO",
-    "TOASO",
     "TTKOM",
     "TUPRS",
     "VAKBN",
@@ -44,7 +44,6 @@
   ],
   "fresh_bear": [
     "HALKB",
-    "KCHOL",
     "THYAO"
   ]
 }
