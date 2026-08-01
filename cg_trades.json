@@ -6469,5 +6469,23 @@
     "pnl_pct": 0.079,
     "exit_ts": "2026-07-31T23:01:34.772480+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 206.1,
+    "exit_price": 209.2,
+    "pnl_pct": 1.404,
+    "exit_ts": "2026-08-01T03:57:32.949257+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0766,
+    "exit_price": 0.0784,
+    "pnl_pct": 2.25,
+    "exit_ts": "2026-08-01T03:57:32.949257+03:00",
+    "reason": "trail"
   }
 ]
