@@ -6694,5 +6694,14 @@
     "pnl_pct": 0.978,
     "exit_ts": "2026-08-02T07:01:32.070436+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 7.999,
+    "exit_price": 8.369,
+    "pnl_pct": 4.526,
+    "exit_ts": "2026-08-02T08:31:10.263105+03:00",
+    "reason": "trail"
   }
 ]
