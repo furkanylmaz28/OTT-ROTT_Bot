@@ -6730,5 +6730,23 @@
     "pnl_pct": 1.082,
     "exit_ts": "2026-08-02T11:01:19.855121+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1839.23,
+    "exit_price": 1872.42,
+    "pnl_pct": 1.705,
+    "exit_ts": "2026-08-02T11:31:12.278332+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06841,
+    "exit_price": 0.07011,
+    "pnl_pct": 2.385,
+    "exit_ts": "2026-08-02T11:31:12.278332+03:00",
+    "reason": "trail"
   }
 ]
