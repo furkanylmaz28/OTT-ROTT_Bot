@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-03T17:17:11.966625+03:00",
-  "bull": 24,
+  "ts": "2026-08-03T17:32:44.799714+03:00",
+  "bull": 22,
   "bear": 9,
-  "total": 33,
-  "bull_pct": 73.0,
+  "total": 31,
+  "bull_pct": 71.0,
   "bull_syms": [
     "AKBNK",
     "EKGYO",
@@ -14,8 +14,6 @@
     "ISCTR",
     "KCHOL",
     "MGROS",
-    "PGSUS",
-    "SASA",
     "SISE",
     "TAVHL",
     "THYAO",
