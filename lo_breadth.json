@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-05T11:47:35.637675+03:00",
+  "ts": "2026-08-05T12:02:43.140816+03:00",
   "bull": 26,
-  "bear": 6,
-  "total": 32,
-  "bull_pct": 81.0,
+  "bear": 7,
+  "total": 33,
+  "bull_pct": 79.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -38,7 +38,8 @@
     "SOKM",
     "THYAO",
     "AEFES",
-    "ODAS"
+    "ODAS",
+    "AKSEN"
   ],
   "fresh_bear": [
     "THYAO",
