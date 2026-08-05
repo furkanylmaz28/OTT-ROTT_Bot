@@ -1,8 +1,8 @@
 {
-  "ts": "2026-08-05T12:02:43.140816+03:00",
-  "bull": 26,
-  "bear": 7,
-  "total": 33,
+  "ts": "2026-08-05T12:18:11.865374+03:00",
+  "bull": 22,
+  "bear": 6,
+  "total": 28,
   "bull_pct": 79.0,
   "bull_syms": [
     "AKBNK",
@@ -24,16 +24,11 @@
     "TAVHL",
     "TOASO",
     "TKFEN",
-    "TTKOM",
-    "TUPRS",
-    "VAKBN",
-    "YKBNK",
     "HEKTS",
     "ASTOR",
     "ALARK"
   ],
   "bear_syms": [
-    "DOHOL",
     "EREGL",
     "SOKM",
     "THYAO",
