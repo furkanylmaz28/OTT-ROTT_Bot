@@ -7009,5 +7009,14 @@
     "pnl_pct": 1.651,
     "exit_ts": "2026-08-05T17:31:15.814761+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 1.688,
+    "exit_price": 1.711,
+    "pnl_pct": 1.263,
+    "exit_ts": "2026-08-05T21:16:03.008423+03:00",
+    "reason": "trail"
   }
 ]
