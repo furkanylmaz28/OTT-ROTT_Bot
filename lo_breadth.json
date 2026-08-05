@@ -1,31 +1,24 @@
 {
-  "ts": "2026-08-05T13:17:35.857369+03:00",
-  "bull": 24,
-  "bear": 7,
-  "total": 31,
+  "ts": "2026-08-05T13:35:04.467151+03:00",
+  "bull": 17,
+  "bear": 5,
+  "total": 22,
   "bull_pct": 77.0,
   "bull_syms": [
     "AKBNK",
+    "ASELS",
     "ENJSA",
-    "EKGYO",
     "ENKAI",
     "FROTO",
     "GUBRF",
-    "HALKB",
     "ISCTR",
     "KCHOL",
     "KRDMD",
     "MGROS",
     "PETKM",
-    "PGSUS",
-    "SASA",
     "SISE",
-    "TAVHL",
     "TOASO",
     "TKFEN",
-    "TUPRS",
-    "VAKBN",
-    "YKBNK",
     "HEKTS",
     "ASTOR",
     "ALARK"
@@ -33,14 +26,11 @@
   "bear_syms": [
     "DOHOL",
     "EREGL",
-    "SOKM",
     "THYAO",
-    "AEFES",
     "ODAS",
     "AKSEN"
   ],
   "fresh_bear": [
-    "THYAO",
-    "AEFES"
+    "THYAO"
   ]
 }
