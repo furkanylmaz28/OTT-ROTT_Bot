@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-07T16:17:10.242960+03:00",
+  "ts": "2026-08-07T16:32:29.391911+03:00",
   "bull": 14,
-  "bear": 19,
-  "total": 33,
-  "bull_pct": 42.0,
+  "bear": 18,
+  "total": 32,
+  "bull_pct": 44.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -24,7 +24,6 @@
     "DOHOL",
     "EKGYO",
     "EREGL",
-    "FROTO",
     "HALKB",
     "ISCTR",
     "KCHOL",
