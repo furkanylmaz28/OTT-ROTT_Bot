@@ -7513,5 +7513,14 @@
     "pnl_pct": -1.456,
     "exit_ts": "2026-08-11T19:01:24.135610+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.243,
+    "exit_price": 6.216,
+    "pnl_pct": -0.532,
+    "exit_ts": "2026-08-11T19:46:18.880746+03:00",
+    "reason": "trend"
   }
 ]
