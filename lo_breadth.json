@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-12T13:47:28.854012+03:00",
-  "bull": 15,
+  "ts": "2026-08-12T14:02:14.949532+03:00",
+  "bull": 16,
   "bear": 17,
-  "total": 32,
-  "bull_pct": 47.0,
+  "total": 33,
+  "bull_pct": 48.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -19,6 +19,7 @@
     "TTKOM",
     "TUPRS",
     "VAKBN",
+    "YKBNK",
     "ASTOR"
   ],
   "bear_syms": [
