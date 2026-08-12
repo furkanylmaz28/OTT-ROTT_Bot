@@ -7729,5 +7729,23 @@
     "pnl_pct": -1.011,
     "exit_ts": "2026-08-12T22:16:03.292319+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.786,
+    "exit_price": 0.773,
+    "pnl_pct": -1.754,
+    "exit_ts": "2026-08-13T00:31:19.209137+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.6882,
+    "exit_price": 0.668,
+    "pnl_pct": -3.035,
+    "exit_ts": "2026-08-13T00:31:19.209137+03:00",
+    "reason": "trend"
   }
 ]
