@@ -8089,5 +8089,23 @@
     "pnl_pct": -0.234,
     "exit_ts": "2026-08-14T19:01:19.280337+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 4.225,
+    "exit_price": 4.279,
+    "pnl_pct": 1.178,
+    "exit_ts": "2026-08-14T20:46:05.942168+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 4.225,
+    "exit_price": 4.279,
+    "pnl_pct": 1.178,
+    "exit_ts": "2026-08-14T20:46:05.942168+03:00",
+    "reason": "trail"
   }
 ]
