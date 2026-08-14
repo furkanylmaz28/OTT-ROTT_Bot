@@ -7981,5 +7981,32 @@
     "pnl_pct": -0.629,
     "exit_ts": "2026-08-14T10:16:04.067858+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 206.1,
+    "exit_price": 205.9,
+    "pnl_pct": -0.197,
+    "exit_ts": "2026-08-14T11:16:17.301008+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.6755,
+    "exit_price": 0.6687,
+    "pnl_pct": -1.107,
+    "exit_ts": "2026-08-14T11:16:17.301008+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0753,
+    "exit_price": 0.0753,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-08-14T11:16:17.301008+03:00",
+    "reason": "trend"
   }
 ]
