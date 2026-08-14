@@ -8044,5 +8044,14 @@
     "pnl_pct": -0.425,
     "exit_ts": "2026-08-14T14:01:22.354778+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.6661,
+    "exit_price": 0.6634,
+    "pnl_pct": -0.505,
+    "exit_ts": "2026-08-14T15:46:07.539008+03:00",
+    "reason": "trend"
   }
 ]
