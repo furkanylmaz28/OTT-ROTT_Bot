@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-14T10:32:12.883602+03:00",
+  "ts": "2026-08-14T10:46:59.865080+03:00",
   "bull": 24,
   "bear": 9,
   "total": 33,
@@ -15,6 +15,7 @@
     "ISCTR",
     "KCHOL",
     "KRDMD",
+    "PETKM",
     "PGSUS",
     "SASA",
     "SISE",
@@ -22,7 +23,6 @@
     "TAVHL",
     "THYAO",
     "TOASO",
-    "TTKOM",
     "TUPRS",
     "VAKBN",
     "YKBNK",
@@ -35,13 +35,13 @@
     "ENKAI",
     "GUBRF",
     "MGROS",
-    "PETKM",
     "TKFEN",
+    "TTKOM",
     "AEFES",
     "HEKTS",
     "ALARK"
   ],
   "fresh_bear": [
-    "TKFEN"
+    "TTKOM"
   ]
 }
