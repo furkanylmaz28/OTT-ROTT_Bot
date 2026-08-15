@@ -8143,5 +8143,68 @@
     "pnl_pct": 1.521,
     "exit_ts": "2026-08-15T05:01:19.527385+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1795,
+    "exit_price": 0.1807,
+    "pnl_pct": 0.569,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0747,
+    "exit_price": 0.0753,
+    "pnl_pct": 0.703,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.0732,
+    "exit_price": 0.0753,
+    "pnl_pct": 2.769,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 4.467,
+    "exit_price": 4.243,
+    "pnl_pct": -5.115,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 4.279,
+    "exit_price": 4.243,
+    "pnl_pct": -0.941,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 4.252,
+    "exit_price": 4.243,
+    "pnl_pct": -0.312,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.03969,
+    "exit_price": 0.04013,
+    "pnl_pct": 1.009,
+    "exit_ts": "2026-08-15T07:01:26.464205+03:00",
+    "reason": "trail"
   }
 ]
