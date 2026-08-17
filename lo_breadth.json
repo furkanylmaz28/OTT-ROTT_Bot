@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-17T12:16:57.015418+03:00",
-  "bull": 21,
-  "bear": 11,
+  "ts": "2026-08-17T12:32:15.061275+03:00",
+  "bull": 22,
+  "bear": 10,
   "total": 32,
-  "bull_pct": 66.0,
+  "bull_pct": 69.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -13,6 +13,7 @@
     "GUBRF",
     "HALKB",
     "ISCTR",
+    "KCHOL",
     "KRDMD",
     "PETKM",
     "PGSUS",
@@ -33,7 +34,6 @@
     "EREGL",
     "MGROS",
     "SASA",
-    "SISE",
     "TAVHL",
     "TKFEN",
     "TTKOM",
@@ -44,7 +44,6 @@
     "ENKAI",
     "EREGL",
     "SASA",
-    "SISE",
     "TAVHL"
   ]
 }
