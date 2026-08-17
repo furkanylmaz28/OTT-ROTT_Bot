@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-17T17:32:15.722214+03:00",
-  "bull": 20,
+  "ts": "2026-08-17T17:47:28.447857+03:00",
+  "bull": 19,
   "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -22,7 +22,6 @@
     "VAKBN",
     "YKBNK",
     "HEKTS",
-    "ODAS",
     "ASTOR",
     "AKSEN"
   ],
