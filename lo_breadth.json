@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-17T16:47:22.798530+03:00",
-  "bull": 19,
+  "ts": "2026-08-17T17:02:11.401183+03:00",
+  "bull": 20,
   "bear": 13,
-  "total": 32,
-  "bull_pct": 59.0,
+  "total": 33,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -11,6 +11,7 @@
     "FROTO",
     "GUBRF",
     "HALKB",
+    "ISCTR",
     "KCHOL",
     "KRDMD",
     "PETKM",
