@@ -1,11 +1,12 @@
 {
-  "ts": "2026-08-18T14:47:00.346189+03:00",
-  "bull": 19,
+  "ts": "2026-08-18T15:02:18.304832+03:00",
+  "bull": 20,
   "bear": 13,
-  "total": 32,
-  "bull_pct": 59.0,
+  "total": 33,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
+    "DOHOL",
     "ENJSA",
     "EKGYO",
     "FROTO",
