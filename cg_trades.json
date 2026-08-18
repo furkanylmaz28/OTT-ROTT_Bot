@@ -8449,5 +8449,41 @@
     "pnl_pct": -1.255,
     "exit_ts": "2026-08-18T06:01:21.981909+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.749,
+    "exit_price": 0.732,
+    "pnl_pct": -2.37,
+    "exit_ts": "2026-08-18T07:01:25.808494+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.729,
+    "exit_price": 0.732,
+    "pnl_pct": 0.312,
+    "exit_ts": "2026-08-18T07:01:25.808494+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.06,
+    "exit_price": 6.05,
+    "pnl_pct": -0.265,
+    "exit_ts": "2026-08-18T07:01:25.808494+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.522,
+    "exit_price": 0.521,
+    "pnl_pct": -0.292,
+    "exit_ts": "2026-08-18T07:01:25.808494+03:00",
+    "reason": "trend"
   }
 ]
