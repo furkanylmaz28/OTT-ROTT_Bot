@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-18T17:32:04.555578+03:00",
+  "ts": "2026-08-18T17:47:24.431990+03:00",
   "bull": 20,
-  "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "bear": 12,
+  "total": 32,
+  "bull_pct": 62.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -29,7 +29,6 @@
   "bear_syms": [
     "ASELS",
     "ENKAI",
-    "EREGL",
     "GUBRF",
     "PGSUS",
     "SASA",
