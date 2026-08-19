@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-19T16:32:33.269431+03:00",
-  "bull": 21,
+  "ts": "2026-08-19T16:47:09.447815+03:00",
+  "bull": 22,
   "bear": 11,
-  "total": 32,
-  "bull_pct": 66.0,
+  "total": 33,
+  "bull_pct": 67.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -25,6 +25,7 @@
     "YKBNK",
     "AEFES",
     "HEKTS",
+    "AKSEN",
     "ALARK"
   ],
   "bear_syms": [
