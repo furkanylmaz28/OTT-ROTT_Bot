@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-19T12:02:27.286049+03:00",
+  "ts": "2026-08-19T12:17:22.611127+03:00",
   "bull": 19,
-  "bear": 13,
-  "total": 32,
-  "bull_pct": 59.0,
+  "bear": 14,
+  "total": 33,
+  "bull_pct": 58.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -31,6 +31,7 @@
     "EREGL",
     "PGSUS",
     "SASA",
+    "SISE",
     "TAVHL",
     "THYAO",
     "TOASO",
