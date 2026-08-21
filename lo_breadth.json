@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-21T15:32:10.283193+03:00",
-  "bull": 22,
+  "ts": "2026-08-21T15:46:54.855516+03:00",
+  "bull": 21,
   "bear": 11,
-  "total": 33,
-  "bull_pct": 67.0,
+  "total": 32,
+  "bull_pct": 66.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -15,7 +15,6 @@
     "FROTO",
     "GUBRF",
     "ISCTR",
-    "KCHOL",
     "KRDMD",
     "PETKM",
     "SASA",
@@ -41,10 +40,5 @@
     "AKSEN",
     "ALARK"
   ],
-  "fresh_bear": [
-    "HALKB",
-    "MGROS",
-    "YKBNK",
-    "AKSEN"
-  ]
+  "fresh_bear": []
 }
