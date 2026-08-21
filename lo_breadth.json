@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-21T11:31:57.479187+03:00",
-  "bull": 19,
-  "bear": 14,
+  "ts": "2026-08-21T11:46:50.136102+03:00",
+  "bull": 20,
+  "bear": 13,
   "total": 33,
-  "bull_pct": 58.0,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -17,6 +17,7 @@
     "KCHOL",
     "KRDMD",
     "PETKM",
+    "SASA",
     "SISE",
     "SOKM",
     "TOASO",
@@ -30,7 +31,6 @@
     "HALKB",
     "MGROS",
     "PGSUS",
-    "SASA",
     "TAVHL",
     "THYAO",
     "TKFEN",
@@ -47,7 +47,6 @@
     "MGROS",
     "VAKBN",
     "YKBNK",
-    "AKSEN",
-    "ALARK"
+    "AKSEN"
   ]
 }
