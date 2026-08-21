@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-21T15:46:54.855516+03:00",
-  "bull": 21,
-  "bear": 11,
+  "ts": "2026-08-21T16:02:33.169498+03:00",
+  "bull": 22,
+  "bear": 10,
   "total": 32,
-  "bull_pct": 66.0,
+  "bull_pct": 69.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -15,6 +15,7 @@
     "FROTO",
     "GUBRF",
     "ISCTR",
+    "KCHOL",
     "KRDMD",
     "PETKM",
     "SASA",
@@ -36,7 +37,6 @@
     "TKFEN",
     "VAKBN",
     "YKBNK",
-    "ODAS",
     "AKSEN",
     "ALARK"
   ],
