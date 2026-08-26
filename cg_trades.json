@@ -9772,5 +9772,41 @@
     "pnl_pct": -1.04,
     "exit_ts": "2026-08-26T20:46:06.302421+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 7.251,
+    "exit_price": 7.239,
+    "pnl_pct": -0.265,
+    "exit_ts": "2026-08-26T23:01:21.120637+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 4.258,
+    "exit_price": 4.257,
+    "pnl_pct": -0.123,
+    "exit_ts": "2026-08-26T23:01:21.120637+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.545,
+    "exit_price": 1.489,
+    "pnl_pct": -3.725,
+    "exit_ts": "2026-08-26T23:01:21.120637+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0881,
+    "exit_price": 0.0877,
+    "pnl_pct": -0.554,
+    "exit_ts": "2026-08-26T23:01:21.120637+03:00",
+    "reason": "trend"
   }
 ]
