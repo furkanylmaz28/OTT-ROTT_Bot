@@ -9826,5 +9826,59 @@
     "pnl_pct": 1.841,
     "exit_ts": "2026-08-26T23:16:02.950192+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2079,
+    "exit_price": 0.2099,
+    "pnl_pct": 0.862,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 7.64,
+    "exit_price": 7.78,
+    "pnl_pct": 1.732,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7528,
+    "exit_price": 0.7502,
+    "pnl_pct": -0.445,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.7528,
+    "exit_price": 0.7502,
+    "pnl_pct": -0.445,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.126,
+    "exit_price": 0.1282,
+    "pnl_pct": 1.646,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1242,
+    "exit_price": 0.1282,
+    "pnl_pct": 3.121,
+    "exit_ts": "2026-08-27T02:01:13.023333+03:00",
+    "reason": "trail"
   }
 ]
