@@ -9736,5 +9736,41 @@
     "pnl_pct": -2.869,
     "exit_ts": "2026-08-26T19:31:09.888242+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3927,
+    "exit_price": 1.3886,
+    "pnl_pct": -0.394,
+    "exit_ts": "2026-08-26T20:46:06.302421+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "1",
+    "entry_price": 1.3927,
+    "exit_price": 1.3886,
+    "pnl_pct": -0.394,
+    "exit_ts": "2026-08-26T20:46:06.302421+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3511,
+    "exit_price": 0.3478,
+    "pnl_pct": -1.04,
+    "exit_ts": "2026-08-26T20:46:06.302421+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3511,
+    "exit_price": 0.3478,
+    "pnl_pct": -1.04,
+    "exit_ts": "2026-08-26T20:46:06.302421+03:00",
+    "reason": "trend"
   }
 ]
