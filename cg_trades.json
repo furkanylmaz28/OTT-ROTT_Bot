@@ -10096,5 +10096,50 @@
     "pnl_pct": -0.213,
     "exit_ts": "2026-08-27T10:16:01.544765+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.4103,
+    "exit_price": 1.433,
+    "pnl_pct": 1.51,
+    "exit_ts": "2026-08-27T12:01:10.057604+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2099,
+    "exit_price": 0.2145,
+    "pnl_pct": 2.092,
+    "exit_ts": "2026-08-27T12:01:10.057604+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.495,
+    "exit_price": 1.516,
+    "pnl_pct": 1.305,
+    "exit_ts": "2026-08-27T12:01:10.057604+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 5.447,
+    "exit_price": 5.531,
+    "pnl_pct": 1.442,
+    "exit_ts": "2026-08-27T12:01:10.057604+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 5.341,
+    "exit_price": 5.531,
+    "pnl_pct": 3.457,
+    "exit_ts": "2026-08-27T12:01:10.057604+03:00",
+    "reason": "trail"
   }
 ]
