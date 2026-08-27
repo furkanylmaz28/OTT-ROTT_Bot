@@ -10141,5 +10141,23 @@
     "pnl_pct": 3.457,
     "exit_ts": "2026-08-27T12:01:10.057604+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 267.1,
+    "exit_price": 271.4,
+    "pnl_pct": 1.51,
+    "exit_ts": "2026-08-27T12:16:07.964173+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3531,
+    "exit_price": 0.3572,
+    "pnl_pct": 1.061,
+    "exit_ts": "2026-08-27T12:16:07.964173+03:00",
+    "reason": "trail"
   }
 ]
