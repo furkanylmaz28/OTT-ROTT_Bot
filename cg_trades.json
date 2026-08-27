@@ -10159,5 +10159,32 @@
     "pnl_pct": 1.061,
     "exit_ts": "2026-08-27T12:16:07.964173+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 1.868,
+    "exit_price": 1.922,
+    "pnl_pct": 2.791,
+    "exit_ts": "2026-08-27T12:46:10.525584+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0891,
+    "exit_price": 0.0922,
+    "pnl_pct": 3.379,
+    "exit_ts": "2026-08-27T12:46:10.525584+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7575,
+    "exit_price": 0.775,
+    "pnl_pct": 2.21,
+    "exit_ts": "2026-08-27T12:46:10.525584+03:00",
+    "reason": "trail"
   }
 ]
