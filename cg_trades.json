@@ -9988,5 +9988,23 @@
     "pnl_pct": 2.414,
     "exit_ts": "2026-08-27T04:01:16.440426+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.505,
+    "exit_price": 1.501,
+    "pnl_pct": -0.366,
+    "exit_ts": "2026-08-27T04:45:56.779490+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7582,
+    "exit_price": 0.7538,
+    "pnl_pct": -0.68,
+    "exit_ts": "2026-08-27T04:45:56.779490+03:00",
+    "reason": "trend"
   }
 ]
