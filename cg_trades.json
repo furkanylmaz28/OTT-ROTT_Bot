@@ -10015,5 +10015,32 @@
     "pnl_pct": -0.233,
     "exit_ts": "2026-08-27T05:46:03.452026+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.4034,
+    "exit_price": 1.4075,
+    "pnl_pct": 0.192,
+    "exit_ts": "2026-08-27T07:01:11.502219+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.504,
+    "exit_price": 1.495,
+    "pnl_pct": -0.698,
+    "exit_ts": "2026-08-27T07:01:11.502219+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 1.877,
+    "exit_price": 1.864,
+    "pnl_pct": -0.793,
+    "exit_ts": "2026-08-27T07:01:11.502219+03:00",
+    "reason": "trend"
   }
 ]
