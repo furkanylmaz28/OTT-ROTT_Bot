@@ -10465,5 +10465,23 @@
     "pnl_pct": -0.205,
     "exit_ts": "2026-08-28T21:16:12.651250+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08525,
+    "exit_price": 0.08417,
+    "pnl_pct": -1.367,
+    "exit_ts": "2026-08-28T21:46:05.310279+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7458,
+    "exit_price": 0.7321,
+    "pnl_pct": -1.937,
+    "exit_ts": "2026-08-28T21:46:05.310279+03:00",
+    "reason": "trend"
   }
 ]
