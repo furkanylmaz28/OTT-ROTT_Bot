@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-28T17:32:05.586632+03:00",
-  "bull": 19,
-  "bear": 14,
+  "ts": "2026-08-28T17:47:09.210907+03:00",
+  "bull": 20,
+  "bear": 13,
   "total": 33,
-  "bull_pct": 58.0,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -19,6 +19,7 @@
     "SISE",
     "TAVHL",
     "TKFEN",
+    "TUPRS",
     "VAKBN",
     "HEKTS",
     "ODAS",
@@ -36,7 +37,6 @@
     "THYAO",
     "TOASO",
     "TTKOM",
-    "TUPRS",
     "YKBNK",
     "AEFES",
     "AKSEN"
