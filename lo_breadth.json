@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-28T13:32:11.412404+03:00",
+  "ts": "2026-08-28T13:46:59.761729+03:00",
   "bull": 19,
-  "bear": 14,
-  "total": 33,
-  "bull_pct": 58.0,
+  "bear": 13,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -32,7 +32,6 @@
     "MGROS",
     "PETKM",
     "PGSUS",
-    "SOKM",
     "THYAO",
     "TOASO",
     "TTKOM",
