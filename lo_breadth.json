@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-28T10:32:07.967401+03:00",
-  "bull": 20,
-  "bear": 13,
+  "ts": "2026-08-28T10:47:07.186074+03:00",
+  "bull": 19,
+  "bear": 14,
   "total": 33,
-  "bull_pct": 61.0,
+  "bull_pct": 58.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -14,7 +14,6 @@
     "EREGL",
     "GUBRF",
     "HALKB",
-    "ISCTR",
     "KRDMD",
     "SASA",
     "SISE",
@@ -28,6 +27,7 @@
   ],
   "bear_syms": [
     "FROTO",
+    "ISCTR",
     "KCHOL",
     "MGROS",
     "PETKM",
@@ -43,6 +43,7 @@
   ],
   "fresh_bear": [
     "FROTO",
+    "ISCTR",
     "PGSUS",
     "THYAO"
   ]
