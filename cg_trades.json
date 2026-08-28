@@ -10438,5 +10438,32 @@
     "pnl_pct": 0.639,
     "exit_ts": "2026-08-28T18:46:06.951921+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3978,
+    "exit_price": 1.3818,
+    "pnl_pct": -1.245,
+    "exit_ts": "2026-08-28T21:16:12.651250+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0884,
+    "exit_price": 0.0877,
+    "pnl_pct": -0.892,
+    "exit_ts": "2026-08-28T21:16:12.651250+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07594,
+    "exit_price": 0.07586,
+    "pnl_pct": -0.205,
+    "exit_ts": "2026-08-28T21:16:12.651250+03:00",
+    "reason": "trend"
   }
 ]
