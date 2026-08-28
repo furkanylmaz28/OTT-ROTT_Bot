@@ -10321,5 +10321,50 @@
     "pnl_pct": -0.202,
     "exit_ts": "2026-08-28T08:15:59.717237+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 49.25,
+    "exit_price": 49.22,
+    "pnl_pct": -0.161,
+    "exit_ts": "2026-08-28T11:01:13.978240+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.0904,
+    "exit_price": 0.0903,
+    "pnl_pct": -0.211,
+    "exit_ts": "2026-08-28T11:01:13.978240+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 5.442,
+    "exit_price": 5.343,
+    "pnl_pct": -1.919,
+    "exit_ts": "2026-08-28T11:01:13.978240+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 5.331,
+    "exit_price": 5.343,
+    "pnl_pct": 0.125,
+    "exit_ts": "2026-08-28T11:01:13.978240+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3509,
+    "exit_price": 0.3537,
+    "pnl_pct": 0.698,
+    "exit_ts": "2026-08-28T11:01:13.978240+03:00",
+    "reason": "trend"
   }
 ]
