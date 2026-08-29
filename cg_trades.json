@@ -10582,5 +10582,32 @@
     "pnl_pct": -0.466,
     "exit_ts": "2026-08-29T13:31:08.636063+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 7.24,
+    "exit_price": 7.308,
+    "pnl_pct": 0.839,
+    "exit_ts": "2026-08-29T19:31:08.425542+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7358,
+    "exit_price": 0.7431,
+    "pnl_pct": 0.892,
+    "exit_ts": "2026-08-29T19:31:08.425542+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1257,
+    "exit_price": 0.1276,
+    "pnl_pct": 1.412,
+    "exit_ts": "2026-08-29T19:31:08.425542+03:00",
+    "reason": "trail"
   }
 ]
