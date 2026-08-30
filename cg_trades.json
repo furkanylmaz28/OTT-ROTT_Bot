@@ -10906,5 +10906,23 @@
     "pnl_pct": -0.209,
     "exit_ts": "2026-08-30T23:01:15.104752+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 102.06,
+    "exit_price": 101.01,
+    "pnl_pct": -1.129,
+    "exit_ts": "2026-08-31T02:46:03.093819+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1234,
+    "exit_price": 0.1211,
+    "pnl_pct": -1.964,
+    "exit_ts": "2026-08-31T02:46:03.093819+03:00",
+    "reason": "trend"
   }
 ]
