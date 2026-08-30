@@ -10834,5 +10834,32 @@
     "pnl_pct": 0.85,
     "exit_ts": "2026-08-30T18:16:08.976831+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08464,
+    "exit_price": 0.08531,
+    "pnl_pct": 0.692,
+    "exit_ts": "2026-08-30T19:01:13.888307+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.54,
+    "exit_price": 0.541,
+    "pnl_pct": 0.085,
+    "exit_ts": "2026-08-30T19:01:13.888307+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07482,
+    "exit_price": 0.07496,
+    "pnl_pct": 0.087,
+    "exit_ts": "2026-08-30T19:01:13.888307+03:00",
+    "reason": "trend"
   }
 ]
