@@ -1,9 +1,9 @@
 {
-  "ts": "2026-08-31T14:17:04.250007+03:00",
-  "bull": 27,
+  "ts": "2026-08-31T14:32:05.835341+03:00",
+  "bull": 28,
   "bear": 5,
-  "total": 32,
-  "bull_pct": 84.0,
+  "total": 33,
+  "bull_pct": 85.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -12,6 +12,7 @@
     "ENKAI",
     "EREGL",
     "FROTO",
+    "ISCTR",
     "KCHOL",
     "KRDMD",
     "MGROS",
