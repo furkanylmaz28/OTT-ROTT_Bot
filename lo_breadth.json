@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-01T11:47:13.657163+03:00",
-  "bull": 16,
+  "ts": "2026-09-01T11:58:19.034187+03:00",
+  "bull": 15,
   "bear": 17,
-  "total": 33,
-  "bull_pct": 48.0,
+  "total": 32,
+  "bull_pct": 47.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -19,7 +19,6 @@
     "TOASO",
     "TUPRS",
     "YKBNK",
-    "ODAS",
     "ALARK"
   ],
   "bear_syms": [
