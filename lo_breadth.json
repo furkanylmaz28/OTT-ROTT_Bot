@@ -1,12 +1,13 @@
 {
-  "ts": "2026-09-01T12:13:35.164271+03:00",
-  "bull": 15,
+  "ts": "2026-09-01T12:17:04.256764+03:00",
+  "bull": 16,
   "bear": 17,
-  "total": 32,
-  "bull_pct": 47.0,
+  "total": 33,
+  "bull_pct": 48.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
+    "ENKAI",
     "EREGL",
     "ISCTR",
     "KCHOL",
