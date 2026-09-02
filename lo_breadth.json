@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-02T16:17:08.804450+03:00",
+  "ts": "2026-09-02T16:32:43.970101+03:00",
   "bull": 6,
-  "bear": 27,
-  "total": 33,
-  "bull_pct": 18.0,
+  "bear": 25,
+  "total": 31,
+  "bull_pct": 19.0,
   "bull_syms": [
     "ISCTR",
     "PGSUS",
@@ -29,9 +29,7 @@
     "PETKM",
     "SASA",
     "SISE",
-    "TAVHL",
     "THYAO",
-    "TOASO",
     "TKFEN",
     "TTKOM",
     "TUPRS",
@@ -50,7 +48,6 @@
     "SASA",
     "SISE",
     "THYAO",
-    "TOASO",
     "TUPRS",
     "YKBNK"
   ]
