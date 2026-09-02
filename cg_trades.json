@@ -11311,5 +11311,23 @@
     "pnl_pct": 0.193,
     "exit_ts": "2026-09-02T15:01:48.920835+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 99.57,
+    "exit_price": 99.05,
+    "pnl_pct": -0.622,
+    "exit_ts": "2026-09-02T17:31:22.414533+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1936,
+    "exit_price": 0.1957,
+    "pnl_pct": 0.985,
+    "exit_ts": "2026-09-02T17:31:22.414533+03:00",
+    "reason": "trail"
   }
 ]
