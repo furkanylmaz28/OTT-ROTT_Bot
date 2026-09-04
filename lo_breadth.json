@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-04T15:32:52.510614+03:00",
-  "bull": 10,
-  "bear": 23,
+  "ts": "2026-09-04T15:47:17.908735+03:00",
+  "bull": 11,
+  "bear": 22,
   "total": 33,
-  "bull_pct": 30.0,
+  "bull_pct": 33.0,
   "bull_syms": [
     "AKBNK",
     "GUBRF",
@@ -12,6 +12,7 @@
     "KCHOL",
     "SOKM",
     "TAVHL",
+    "TOASO",
     "VAKBN",
     "AEFES",
     "ALARK"
@@ -31,7 +32,6 @@
     "SASA",
     "SISE",
     "THYAO",
-    "TOASO",
     "TKFEN",
     "TTKOM",
     "TUPRS",
