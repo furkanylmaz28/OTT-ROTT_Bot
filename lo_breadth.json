@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-04T14:32:41.525374+03:00",
+  "ts": "2026-09-04T14:47:11.820970+03:00",
   "bull": 10,
-  "bear": 22,
-  "total": 32,
-  "bull_pct": 31.0,
+  "bear": 23,
+  "total": 33,
+  "bull_pct": 30.0,
   "bull_syms": [
     "AKBNK",
     "GUBRF",
@@ -21,6 +21,7 @@
     "DOHOL",
     "ENJSA",
     "EKGYO",
+    "ENKAI",
     "EREGL",
     "FROTO",
     "KRDMD",
