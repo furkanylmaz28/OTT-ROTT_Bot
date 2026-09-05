@@ -23,13 +23,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.31470783981026873,
-      "pf": 1.9322585927114315,
-      "sharpe": 0.2259296474990908,
+      "return": 0.3102060022214823,
+      "pf": 1.9361920806267447,
+      "sharpe": 0.22370783503377814,
       "max_dd": -0.29318925982196486,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 294.5
+      "avg_trade_bars": 294.0
     }
   },
   "ARCLK.IS": {
@@ -56,9 +56,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.32660462673836155,
+      "return": 0.3490673170367842,
       "pf": 3.039096994524188,
-      "sharpe": 0.24188690650163588,
+      "sharpe": 0.25435948611321635,
       "max_dd": -0.19651580823918835,
       "n_trades": 5,
       "win_rate": 0.8,
@@ -80,8 +80,8 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
-      "gate_length": 22,
+      "sott_percent": 0.2,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -89,20 +89,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.3015269398967937,
-      "pf": 31.425447615109675,
-      "sharpe": 0.4934691561301587,
-      "max_dd": -0.16930236639033147,
-      "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 419.0
+      "return": 1.4805854171309552,
+      "pf": 10.116086476328906,
+      "sharpe": 0.5339590385316653,
+      "max_dd": -0.19505447850545266,
+      "n_trades": 7,
+      "win_rate": 0.7142857142857143,
+      "avg_trade_bars": 305.85714285714283
     }
   },
   "BIMAS.IS": {
     "symbol": "BIMAS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -122,9 +122,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.30429966503016215,
+      "return": 0.29488800178280083,
       "pf": 3.084549453578749,
-      "sharpe": 0.23249439625285373,
+      "sharpe": 0.2272232812986297,
       "max_dd": -0.1631256287152406,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
@@ -155,9 +155,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3767206240840357,
+      "return": 0.3527227416458738,
       "pf": 8.85676653064691,
-      "sharpe": 0.27307428213750345,
+      "sharpe": 0.2603273883849067,
       "max_dd": -0.1646778042959428,
       "n_trades": 5,
       "win_rate": 0.8,
@@ -188,9 +188,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.39854032333085243,
+      "return": 0.40838053668762186,
       "pf": 3.730570198695172,
-      "sharpe": 0.2595355608669023,
+      "sharpe": 0.2643545725544682,
       "max_dd": -0.28696304288173424,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
@@ -213,7 +213,7 @@
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 28,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -221,13 +221,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.34999768244589746,
-      "pf": 2.7742595247570705,
-      "sharpe": 0.23299912407679985,
-      "max_dd": -0.2650066632352617,
-      "n_trades": 5,
-      "win_rate": 0.4,
-      "avg_trade_bars": 405.2
+      "return": 0.33009174581327283,
+      "pf": 2.4182435028138984,
+      "sharpe": 0.22067927854118186,
+      "max_dd": -0.2631036918392873,
+      "n_trades": 6,
+      "win_rate": 0.3333333333333333,
+      "avg_trade_bars": 351.6666666666667
     }
   },
   "ENKAI.IS": {
@@ -254,9 +254,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.426630775400596,
+      "return": 0.4209079012299348,
       "pf": 4.049812346762955,
-      "sharpe": 0.26137741422526545,
+      "sharpe": 0.2589935035008588,
       "max_dd": -0.16368052088815255,
       "n_trades": 9,
       "win_rate": 0.6666666666666666,
@@ -353,13 +353,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.22241616562042665,
-      "pf": 2.2741352070649303,
-      "sharpe": 0.18140583054802784,
-      "max_dd": -0.1467592842387635,
-      "n_trades": 8,
-      "win_rate": 0.5,
-      "avg_trade_bars": 229.25
+      "return": 0.15959664654739836,
+      "pf": 1.806447627603904,
+      "sharpe": 0.1425319518402912,
+      "max_dd": -0.1467592842387636,
+      "n_trades": 9,
+      "win_rate": 0.4444444444444444,
+      "avg_trade_bars": 206.33333333333334
     }
   },
   "GUBRF.IS": {
@@ -386,9 +386,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8187040431920709,
+      "return": 0.8320000518629265,
       "pf": 4.635800105514396,
-      "sharpe": 0.406352359632269,
+      "sharpe": 0.4110827614797222,
       "max_dd": -0.20743401707286102,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
@@ -410,7 +410,7 @@
       "tott_coeff": 0.0006,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -419,13 +419,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.1026147346767727,
-      "pf": 4.031515633544105,
-      "sharpe": 0.39134145800930487,
-      "max_dd": -0.252062974515036,
-      "n_trades": 7,
-      "win_rate": 0.5714285714285714,
-      "avg_trade_bars": 295.7142857142857
+      "return": 0.9317269200274516,
+      "pf": 4.468871964878292,
+      "sharpe": 0.3550586761342536,
+      "max_dd": -0.26433616152794526,
+      "n_trades": 6,
+      "win_rate": 0.6666666666666666,
+      "avg_trade_bars": 353.3333333333333
     }
   },
   "ISCTR.IS": {
@@ -452,13 +452,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.10850112022080438,
-      "pf": 1.6131589747810826,
-      "sharpe": 0.11648447306066419,
+      "return": 0.10711987224655384,
+      "pf": 1.653245770480687,
+      "sharpe": 0.11555393227643065,
       "max_dd": -0.2004282900000155,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 208.85714285714286
+      "avg_trade_bars": 210.14285714285714
     }
   },
   "KCHOL.IS": {
@@ -485,13 +485,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.07404665596372828,
-      "pf": 0.3807111344616351,
-      "sharpe": -0.018579628763229897,
+      "return": -0.0655880336016662,
+      "pf": 0.39414553380909645,
+      "sharpe": -0.012236874260041206,
       "max_dd": -0.36188947997697785,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 213.85714285714286
+      "avg_trade_bars": 212.42857142857142
     }
   },
   "KRDMD.IS": {
@@ -504,7 +504,7 @@
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
-      "minor_percent": 3.0,
+      "minor_percent": 3.5,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
       "sott_period_k": 300,
@@ -518,9 +518,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.23103457083328727,
+      "return": 0.21575978525769024,
       "pf": 1.9728746603887737,
-      "sharpe": 0.15928563503849366,
+      "sharpe": 0.1525288861773443,
       "max_dd": -0.2894852042193865,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
@@ -551,13 +551,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.197502602574106,
-      "pf": 3.322815980653731,
-      "sharpe": 0.17899167082780046,
-      "max_dd": -0.1874305370764422,
+      "return": 0.24190304970025522,
+      "pf": 5.220336741925929,
+      "sharpe": 0.20815560796504884,
+      "max_dd": -0.18743053707644208,
       "n_trades": 4,
       "win_rate": 0.25,
-      "avg_trade_bars": 480.5
+      "avg_trade_bars": 483.0
     }
   },
   "OYAKC.IS": {
@@ -584,9 +584,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.11906132795138502,
+      "return": 0.09310907080965514,
       "pf": 2.25095643208566,
-      "sharpe": 0.1157881258956948,
+      "sharpe": 0.09899593755074981,
       "max_dd": -0.23325265975382437,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
@@ -617,9 +617,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.2144267157579789,
+      "return": -0.20816092685076437,
       "pf": 0.35257935375551885,
-      "sharpe": -0.1449147593682554,
+      "sharpe": -0.13929558754963886,
       "max_dd": -0.31225356469987287,
       "n_trades": 10,
       "win_rate": 0.2,
@@ -650,13 +650,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.024840891356833428,
-      "pf": 0.6970757262436743,
-      "sharpe": 0.05301917439973215,
-      "max_dd": -0.2763340857910609,
+      "return": 0.014689079544615513,
+      "pf": 0.6604145143731441,
+      "sharpe": 0.04593078148524286,
+      "max_dd": -0.2854520100192852,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 249.85714285714286
+      "avg_trade_bars": 249.71428571428572
     }
   },
   "SAHOL.IS": {
@@ -683,9 +683,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.209550059961519,
+      "return": -0.20613558937819942,
       "pf": 0.3599250752039523,
-      "sharpe": -0.1982848898258654,
+      "sharpe": -0.1946149256261799,
       "max_dd": -0.25757540361626774,
       "n_trades": 6,
       "win_rate": 0.16666666666666666,
@@ -705,24 +705,24 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 10,
-      "gate_percent": 0.4,
+      "sott_percent": 0.3,
+      "gate_length": 16,
+      "gate_percent": 0.6,
       "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.34810303232064443,
-      "pf": 2.576044401507453,
-      "sharpe": 0.23459290627485446,
-      "max_dd": -0.23304312961475415,
-      "n_trades": 8,
-      "win_rate": 0.375,
-      "avg_trade_bars": 247.625
+      "return": 0.315026220054178,
+      "pf": 2.4201421248407438,
+      "sharpe": 0.21111919909841959,
+      "max_dd": -0.240373599054708,
+      "n_trades": 7,
+      "win_rate": 0.5714285714285714,
+      "avg_trade_bars": 259.7142857142857
     }
   },
   "SISE.IS": {
@@ -762,7 +762,7 @@
     "symbol": "SOKM.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "ORTA",
+    "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -782,13 +782,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.24268850634792005,
-      "pf": 1.366018859087446,
-      "sharpe": 0.18858018920981187,
-      "max_dd": -0.20987831817697822,
-      "n_trades": 7,
-      "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 227.85714285714286
+      "return": 0.2954260896519074,
+      "pf": 1.629082695237102,
+      "sharpe": 0.22377160721597375,
+      "max_dd": -0.1763468999635054,
+      "n_trades": 6,
+      "win_rate": 0.5,
+      "avg_trade_bars": 231.83333333333334
     }
   },
   "TAVHL.IS": {
@@ -815,13 +815,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.03827772228499837,
-      "pf": 0.9512969117061597,
-      "sharpe": 0.012088526952668209,
+      "return": -0.036113615800453025,
+      "pf": 0.9613579356196271,
+      "sharpe": 0.013437549609807895,
       "max_dd": -0.19261836956945466,
       "n_trades": 8,
       "win_rate": 0.375,
-      "avg_trade_bars": 228.75
+      "avg_trade_bars": 227.625
     }
   },
   "TCELL.IS": {
@@ -848,13 +848,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.25885817563350344,
-      "pf": 0.39866142586503966,
-      "sharpe": -0.2132946909598252,
-      "max_dd": -0.3365772179829155,
+      "return": -0.26636668988409284,
+      "pf": 0.39017532399298044,
+      "sharpe": -0.21772799753223657,
+      "max_dd": -0.337187265695022,
       "n_trades": 11,
       "win_rate": 0.09090909090909091,
-      "avg_trade_bars": 165.36363636363637
+      "avg_trade_bars": 171.45454545454547
     }
   },
   "THYAO.IS": {
@@ -881,24 +881,24 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.092897856621595,
-      "pf": 1.6969806226277362,
-      "sharpe": 0.11511250270236859,
-      "max_dd": -0.15750828474595313,
+      "return": 0.11099458672671725,
+      "pf": 1.8871645474000633,
+      "sharpe": 0.13163190586445228,
+      "max_dd": -0.1503930328461608,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 220.14285714285714
+      "avg_trade_bars": 222.0
     }
   },
   "TOASO.IS": {
     "symbol": "TOASO.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 20,
+      "trend_length": 35,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
@@ -914,13 +914,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.32145159667889467,
-      "pf": 3.2779128498097014,
-      "sharpe": 0.23039252005259192,
-      "max_dd": -0.19175108007076813,
+      "return": 0.20052359962223631,
+      "pf": 2.941647306365693,
+      "sharpe": 0.1641963620771582,
+      "max_dd": -0.2131127806709866,
       "n_trades": 8,
       "win_rate": 0.5,
-      "avg_trade_bars": 233.5
+      "avg_trade_bars": 229.875
     }
   },
   "TKFEN.IS": {
@@ -947,9 +947,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.741493693234822,
+      "return": 0.7224925760885217,
       "pf": 2.324325636971354,
-      "sharpe": 0.29087371126952444,
+      "sharpe": 0.28664420679660396,
       "max_dd": -0.5259094829111697,
       "n_trades": 5,
       "win_rate": 0.6,
@@ -980,13 +980,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.19255798568525995,
-      "pf": 0.40636043795403715,
-      "sharpe": -0.14723880741333353,
+      "return": -0.1933299675391268,
+      "pf": 0.4117667676805071,
+      "sharpe": -0.14825427947422135,
       "max_dd": -0.2825755228489496,
       "n_trades": 6,
       "win_rate": 0.16666666666666666,
-      "avg_trade_bars": 247.16666666666666
+      "avg_trade_bars": 250.5
     }
   },
   "TTKOM.IS": {
@@ -1015,18 +1015,18 @@
     "stats": {
       "return": 0.01423223321209477,
       "pf": 1.164208842740235,
-      "sharpe": 0.044634517746912045,
+      "sharpe": 0.04475765170448276,
       "max_dd": -0.25936441112847974,
       "n_trades": 8,
       "win_rate": 0.5,
-      "avg_trade_bars": 240.375
+      "avg_trade_bars": 244.375
     }
   },
   "TUPRS.IS": {
     "symbol": "TUPRS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "M\u00dcKEMMEL",
+    "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1038,7 +1038,7 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 22,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -1046,13 +1046,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8928275182859682,
-      "pf": 2.3947982951609257,
-      "sharpe": 0.4335831788907942,
-      "max_dd": -0.18003836962631758,
-      "n_trades": 6,
-      "win_rate": 0.5,
-      "avg_trade_bars": 261.8333333333333
+      "return": 0.7979469614073125,
+      "pf": 1.6191784412998165,
+      "sharpe": 0.4010206182226769,
+      "max_dd": -0.22611998578849646,
+      "n_trades": 7,
+      "win_rate": 0.42857142857142855,
+      "avg_trade_bars": 232.57142857142858
     }
   },
   "VAKBN.IS": {
@@ -1079,20 +1079,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3868880975288258,
-      "pf": 2.3185030694036697,
-      "sharpe": 0.24648523550610837,
+      "return": 0.42651044613936473,
+      "pf": 2.543734727908757,
+      "sharpe": 0.2637927610015705,
       "max_dd": -0.2549824808257328,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 378.8
+      "avg_trade_bars": 384.8
     }
   },
   "VESTL.IS": {
     "symbol": "VESTL.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "ORTA",
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1103,7 +1103,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -1112,13 +1112,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.07662038589807652,
-      "pf": 1.5198117942067986,
-      "sharpe": 0.08709904086208764,
-      "max_dd": -0.2985391374829619,
-      "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 400.5
+      "return": 0.11484667804938753,
+      "pf": 1.9156592895363325,
+      "sharpe": 0.1091345288429477,
+      "max_dd": -0.30714398535943943,
+      "n_trades": 4,
+      "win_rate": 0.5,
+      "avg_trade_bars": 525.25
     }
   },
   "YKBNK.IS": {
@@ -1137,7 +1137,7 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 10,
+      "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -1145,13 +1145,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.07939999681435461,
-      "pf": 1.2945019453466018,
-      "sharpe": 0.08849969151421663,
-      "max_dd": -0.25792116718015845,
+      "return": 0.07720373030660865,
+      "pf": 1.2684914709180501,
+      "sharpe": 0.08722443363135605,
+      "max_dd": -0.23979426059637343,
       "n_trades": 9,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 228.11111111111111
+      "avg_trade_bars": 229.22222222222223
     }
   },
   "AEFES.IS": {
@@ -1211,9 +1211,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.12101097236435776,
+      "return": -0.10871505493078659,
       "pf": 0.7421262374403288,
-      "sharpe": -0.037421499123862334,
+      "sharpe": -0.029041066632181867,
       "max_dd": -0.44668502662616805,
       "n_trades": 10,
       "win_rate": 0.2,
@@ -1231,11 +1231,11 @@
       "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
+      "sott_percent": 0.4,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -1244,13 +1244,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.3501047896221271,
-      "pf": 0.1299573232132325,
-      "sharpe": -0.26068954110948367,
-      "max_dd": -0.3657017473352965,
-      "n_trades": 9,
-      "win_rate": 0.2222222222222222,
-      "avg_trade_bars": 165.55555555555554
+      "return": -0.382851728468924,
+      "pf": 0.0,
+      "sharpe": -0.3143459281471804,
+      "max_dd": -0.39001487970282034,
+      "n_trades": 6,
+      "win_rate": 0.0,
+      "avg_trade_bars": 206.66666666666666
     }
   },
   "ASTOR.IS": {
@@ -1271,19 +1271,19 @@
       "sott_percent": 0.3,
       "gate_length": 10,
       "gate_percent": 0.4,
-      "gate_shift": 2,
+      "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.5279100387030886,
-      "pf": 9.083364776619549,
-      "sharpe": 0.506415418439402,
-      "max_dd": -0.3240923946129789,
+      "return": 1.3429777793834528,
+      "pf": 19.146847417877193,
+      "sharpe": 0.4674187680937228,
+      "max_dd": -0.32257482118798186,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 485.0
+      "avg_trade_bars": 451.25
     }
   },
   "AKSEN.IS": {
@@ -1294,11 +1294,11 @@
     "interval": "1h",
     "category": "BIST",
     "params": {
-      "trend_length": 20,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
-      "tott_coeff": 0.0008,
+      "tott_percent": 0.6,
+      "tott_coeff": 0.0004,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
@@ -1310,13 +1310,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.0622745906763664,
-      "pf": 14.054652974453129,
-      "sharpe": 0.44321778666630113,
-      "max_dd": -0.18523138259382166,
+      "return": 1.0105749871117853,
+      "pf": 10.474348509074606,
+      "sharpe": 0.4333278171036363,
+      "max_dd": -0.18523138259382133,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 475.4
+      "avg_trade_bars": 465.2
     }
   },
   "ALARK.IS": {
@@ -1343,20 +1343,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.19060028008286656,
-      "pf": 2.967871154928935,
-      "sharpe": 0.15700851847026176,
-      "max_dd": -0.20808212827481354,
+      "return": 0.18184053401455236,
+      "pf": 2.8308241512167416,
+      "sharpe": 0.15202533507724322,
+      "max_dd": -0.2117973433841237,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 229.42857142857142
+      "avg_trade_bars": 228.57142857142858
     }
   },
   "KONTR.IS": {
     "symbol": "KONTR.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "MARJINAL",
+    "rating": "ORTA",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1365,10 +1365,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 22,
+      "sott_percent": 0.3,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -1376,20 +1376,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5157572231073875,
-      "pf": 1.1527040970415887,
-      "sharpe": 0.23398878824950692,
-      "max_dd": -0.5926884959700269,
-      "n_trades": 5,
-      "win_rate": 0.6,
-      "avg_trade_bars": 374.8
+      "return": 0.3566682260805558,
+      "pf": 1.7388343846388308,
+      "sharpe": 0.18918202541462564,
+      "max_dd": -0.4745824383872801,
+      "n_trades": 8,
+      "win_rate": 0.5,
+      "avg_trade_bars": 304.25
     }
   },
   "DOAS.IS": {
     "symbol": "DOAS.IS",
     "ok": true,
     "bars": 5000,
-    "rating": "UYUMSUZ",
+    "rating": "MARJINAL",
     "interval": "1h",
     "category": "BIST",
     "params": {
@@ -1409,9 +1409,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.01204604467167425,
+      "return": 0.006478253416758228,
       "pf": 0.7062964744544481,
-      "sharpe": 0.020981137726864194,
+      "sharpe": 0.03612733359363353,
       "max_dd": -0.28485538838696955,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
@@ -1462,7 +1462,7 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 0.8,
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
@@ -1475,13 +1475,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.13332459587118628,
-      "pf": 0.635094611562094,
-      "sharpe": -0.09680927756641952,
-      "max_dd": -0.31992264491675204,
+      "return": -0.08746195931863221,
+      "pf": 0.7033251934239916,
+      "sharpe": -0.05099564455986639,
+      "max_dd": -0.3121202928285175,
       "n_trades": 10,
       "win_rate": 0.3,
-      "avg_trade_bars": 163.7
+      "avg_trade_bars": 166.6
     }
   },
   "AAL": {
@@ -1492,35 +1492,35 @@
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 30,
+      "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 16,
-      "gate_percent": 0.6,
+      "sott_percent": 0.3,
+      "gate_length": 10,
+      "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.4271455273874005,
-      "pf": 0.0,
-      "sharpe": -0.34510297576337107,
-      "max_dd": -0.4791162485942535,
-      "n_trades": 5,
-      "win_rate": 0.0,
-      "avg_trade_bars": 141.8
+      "return": -0.198624961109503,
+      "pf": 0.506526765480339,
+      "sharpe": -0.11278286451164138,
+      "max_dd": -0.3143813588081875,
+      "n_trades": 6,
+      "win_rate": 0.3333333333333333,
+      "avg_trade_bars": 170.33333333333334
     }
   },
   "AAL.L": {
     "symbol": "AAL.L",
     "ok": true,
-    "bars": 4520,
+    "bars": 4532,
     "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -1541,13 +1541,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.08649501168457929,
+      "return": 0.0872766627721222,
       "pf": 1.1927974536506984,
-      "sharpe": 0.09741190803432824,
+      "sharpe": 0.09774792747778815,
       "max_dd": -0.2389937502747137,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 294.2
+      "avg_trade_bars": 296.2
     }
   },
   "AAPL": {
@@ -1586,7 +1586,7 @@
   "ABI.BR": {
     "symbol": "ABI.BR",
     "ok": true,
-    "bars": 4567,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -1599,28 +1599,28 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 16,
-      "gate_percent": 0.5,
+      "gate_length": 10,
+      "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3526788560285894,
-      "pf": 33.989995001751915,
-      "sharpe": 0.3537535790789106,
-      "max_dd": -0.13360029302013787,
+      "return": 0.36358188047200435,
+      "pf": 86.66280272406328,
+      "sharpe": 0.3609396637254069,
+      "max_dd": -0.12833877955515727,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 695.6666666666666
+      "avg_trade_bars": 702.3333333333334
     }
   },
   "ABNB": {
     "symbol": "ABNB",
     "ok": true,
     "bars": 5000,
-    "rating": "UYUMSUZ",
+    "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -1640,9 +1640,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.01301464214390713,
+      "return": 0.005325162746437018,
       "pf": 0.9651625097129714,
-      "sharpe": 0.03367726289746442,
+      "sharpe": 0.044778047629537875,
       "max_dd": -0.26974010249861957,
       "n_trades": 10,
       "win_rate": 0.4,
@@ -1652,7 +1652,7 @@
   "ABT": {
     "symbol": "ABT",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -1673,13 +1673,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.1145143739739003,
-      "pf": 7.914248345046398,
-      "sharpe": 0.23632569580281812,
-      "max_dd": -0.07072279436527196,
+      "return": 0.12297268424407748,
+      "pf": 8.84707734169454,
+      "sharpe": 0.24242174175414405,
+      "max_dd": -0.08795488206110569,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 287.3333333333333
+      "avg_trade_bars": 294.0
     }
   },
   "ACB": {
@@ -1708,7 +1708,7 @@
     "stats": {
       "return": -0.6327704879808238,
       "pf": 0.3562536647040623,
-      "sharpe": -0.1828760015782948,
+      "sharpe": -0.18287600157829484,
       "max_dd": -0.8031256724440425,
       "n_trades": 11,
       "win_rate": 0.36363636363636365,
@@ -1718,7 +1718,7 @@
   "AD.AS": {
     "symbol": "AD.AS",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -1741,7 +1741,7 @@
     "stats": {
       "return": 0.13279096948675306,
       "pf": 112.99554629993615,
-      "sharpe": 0.2086760710404114,
+      "sharpe": 0.20844836797958663,
       "max_dd": -0.08090307125292795,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -1873,7 +1873,7 @@
     "stats": {
       "return": 0.15781438915586232,
       "pf": 3.560014563709094,
-      "sharpe": 0.19126854038129246,
+      "sharpe": 0.19126854038129248,
       "max_dd": -0.18220542353060476,
       "n_trades": 5,
       "win_rate": 0.6,
@@ -1883,7 +1883,7 @@
   "ADS.DE": {
     "symbol": "ADS.DE",
     "ok": true,
-    "bars": 4532,
+    "bars": 4544,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -1904,13 +1904,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5232911153418944,
-      "pf": 6.852658311273107,
-      "sharpe": 0.3438627719944522,
+      "return": 0.5453342425529111,
+      "pf": 7.114594670819454,
+      "sharpe": 0.35419179069956597,
       "max_dd": -0.11646801724746181,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 224.5
+      "avg_trade_bars": 224.66666666666666
     }
   },
   "ADSK": {
@@ -1937,9 +1937,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.08779959185419584,
+      "return": 0.08448521169954981,
       "pf": 1.492388726499336,
-      "sharpe": 0.09392583625229513,
+      "sharpe": 0.09192906299575278,
       "max_dd": -0.27847411636036545,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
@@ -2005,7 +2005,7 @@
     "stats": {
       "return": -0.25350873878395697,
       "pf": 0.0,
-      "sharpe": -0.3965939804204524,
+      "sharpe": -0.39659398042045235,
       "max_dd": -0.2926395257031956,
       "n_trades": 6,
       "win_rate": 0.0,
@@ -2025,10 +2025,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 10,
+      "sott_percent": 0.4,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -2036,13 +2036,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2682194644437943,
-      "pf": 3.8854771208442327,
-      "sharpe": 0.23694365881458843,
-      "max_dd": -0.1425845178734999,
+      "return": 0.2820244234848812,
+      "pf": 4.270355857820046,
+      "sharpe": 0.2488664135550352,
+      "max_dd": -0.13548853596620858,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 432.2
+      "avg_trade_bars": 407.8
     }
   },
   "AJG": {
@@ -2104,7 +2104,7 @@
     "stats": {
       "return": -0.4914034037797519,
       "pf": 0.15034265392921867,
-      "sharpe": -0.27447495366856706,
+      "sharpe": -0.274474953668567,
       "max_dd": -0.6123913940782632,
       "n_trades": 10,
       "win_rate": 0.1,
@@ -2114,15 +2114,15 @@
   "ALV.DE": {
     "symbol": "ALV.DE",
     "ok": true,
-    "bars": 4534,
+    "bars": 4544,
     "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
@@ -2135,13 +2135,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.09720579158058373,
-      "pf": 0.4935821806424018,
-      "sharpe": 0.14150703888501118,
-      "max_dd": -0.21010686459624328,
+      "return": 0.09506008802377885,
+      "pf": 0.3732027412869479,
+      "sharpe": 0.1358745616017619,
+      "max_dd": -0.20467821210066994,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 230.83333333333334
+      "avg_trade_bars": 241.5
     }
   },
   "AMAT": {
@@ -2168,13 +2168,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.7412501635410478,
-      "pf": 3.866113863241488,
-      "sharpe": 0.29624045069007227,
-      "max_dd": -0.3555313128640456,
+      "return": 0.7036466950187179,
+      "pf": 3.7830531484512995,
+      "sharpe": 0.2862209487011151,
+      "max_dd": -0.36944904766044073,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 299.6666666666667
+      "avg_trade_bars": 298.5
     }
   },
   "AMD": {
@@ -2185,11 +2185,11 @@
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 20,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
-      "tott_coeff": 0.0006,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0008,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
@@ -2201,13 +2201,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.1849943813294623,
-      "pf": 3.865248570798319,
-      "sharpe": 0.33572381785306177,
-      "max_dd": -0.36652953579961933,
+      "return": 1.0927171622212932,
+      "pf": 3.553678153357204,
+      "sharpe": 0.3202192139825444,
+      "max_dd": -0.3706569393942465,
       "n_trades": 10,
       "win_rate": 0.4,
-      "avg_trade_bars": 157.5
+      "avg_trade_bars": 165.3
     }
   },
   "AMZN": {
@@ -2234,9 +2234,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.02277818334106252,
+      "return": 0.024578291933899488,
       "pf": 1.4253358194406907,
-      "sharpe": 0.05065981814243239,
+      "sharpe": 0.05195807081009269,
       "max_dd": -0.28325495347776797,
       "n_trades": 6,
       "win_rate": 0.5,
@@ -2267,9 +2267,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.13881951092159583,
+      "return": -0.1482511318167733,
       "pf": 0.0,
-      "sharpe": -0.19549548916450127,
+      "sharpe": -0.21206461117444722,
       "max_dd": -0.23780975389272085,
       "n_trades": 4,
       "win_rate": 0.0,
@@ -2300,28 +2300,28 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 3.0834583536946143,
-      "pf": 11.932469301795585,
-      "sharpe": 0.4944908434024814,
+      "return": 2.9002002247292284,
+      "pf": 11.621788654673376,
+      "sharpe": 0.48071253484688,
       "max_dd": -0.3272029896992831,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
-      "avg_trade_bars": 308.7142857142857
+      "avg_trade_bars": 311.42857142857144
     }
   },
   "ASML.AS": {
     "symbol": "ASML.AS",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
-      "tott_coeff": 0.0004,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0008,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
@@ -2333,13 +2333,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5807030234540687,
-      "pf": 9.46426267084646,
-      "sharpe": 0.34199074565163606,
-      "max_dd": -0.17627824418257332,
+      "return": 0.6319550045192344,
+      "pf": 10.361225627759952,
+      "sharpe": 0.3642093857794434,
+      "max_dd": -0.15235911912678346,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 394.0
+      "avg_trade_bars": 393.2
     }
   },
   "ATD.TO": {
@@ -2411,7 +2411,7 @@
   "AZN.L": {
     "symbol": "AZN.L",
     "ok": true,
-    "bars": 4521,
+    "bars": 4532,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2432,13 +2432,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.11120661423528477,
-      "pf": 0.5664525269868877,
-      "sharpe": -0.09992493495614153,
-      "max_dd": -0.2569526380065119,
+      "return": -0.07857283578480767,
+      "pf": 0.696087622485249,
+      "sharpe": -0.06015679437073645,
+      "max_dd": -0.2569486738283955,
       "n_trades": 8,
-      "win_rate": 0.375,
-      "avg_trade_bars": 204.5
+      "win_rate": 0.5,
+      "avg_trade_bars": 209.625
     }
   },
   "BA": {
@@ -2477,7 +2477,7 @@
   "BABA": {
     "symbol": "BABA",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2498,31 +2498,31 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2280114783850109,
-      "pf": 2.4844622783990316,
-      "sharpe": 0.20486841601773897,
-      "max_dd": -0.24554166243009634,
+      "return": 0.2631032892288536,
+      "pf": 2.727327549803615,
+      "sharpe": 0.2268618213700393,
+      "max_dd": -0.23320153515509656,
       "n_trades": 4,
       "win_rate": 0.25,
-      "avg_trade_bars": 237.5
+      "avg_trade_bars": 236.5
     }
   },
   "BAM": {
     "symbol": "BAM",
     "ok": true,
-    "bars": 3484,
-    "rating": "UYUMSUZ",
+    "bars": 3494,
+    "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -2531,24 +2531,24 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.006164532843704884,
-      "pf": 1.0411690928247521,
-      "sharpe": 0.02261210522555024,
-      "max_dd": -0.2192887198824549,
+      "return": 0.010790712684875414,
+      "pf": 1.1531733115343905,
+      "sharpe": 0.042906050938569945,
+      "max_dd": -0.1982195977402692,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 191.2
+      "avg_trade_bars": 188.6
     }
   },
   "BARC.L": {
     "symbol": "BARC.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 20,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
@@ -2556,7 +2556,7 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 22,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -2564,25 +2564,25 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4023977031857293,
-      "pf": 36.643844963799644,
-      "sharpe": 0.36012546873079243,
+      "return": 0.4125782440901833,
+      "pf": 27.10776770668558,
+      "sharpe": 0.37163499871331657,
       "max_dd": -0.09735220860476412,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 422.4
+      "avg_trade_bars": 420.0
     }
   },
   "BATS.L": {
     "symbol": "BATS.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
       "trend_length": 30,
-      "trend_percent": 5.0,
+      "trend_percent": 7.0,
       "minor_percent": 3.5,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
@@ -2599,7 +2599,7 @@
     "stats": {
       "return": 0.08332393951319861,
       "pf": 1.573952308657021,
-      "sharpe": 0.11359140168209327,
+      "sharpe": 0.11343043541919456,
       "max_dd": -0.19641543867900113,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
@@ -2609,7 +2609,7 @@
   "BAYN.DE": {
     "symbol": "BAYN.DE",
     "ok": true,
-    "bars": 4533,
+    "bars": 4544,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2630,19 +2630,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.083092128498715,
+      "return": 1.110849674541237,
       "pf": 57.66626414834176,
-      "sharpe": 0.443554960891692,
+      "sharpe": 0.4507235703390952,
       "max_dd": -0.18646777506781387,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 502.0
+      "avg_trade_bars": 505.3333333333333
     }
   },
   "BBVA.MC": {
     "symbol": "BBVA.MC",
     "ok": true,
-    "bars": 4556,
+    "bars": 4567,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2663,13 +2663,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.6398212886835009,
-      "pf": 6.601339797091635,
-      "sharpe": 0.4642655655391139,
-      "max_dd": -0.15848074107837495,
+      "return": 0.6862417471860831,
+      "pf": 7.178376338400256,
+      "sharpe": 0.4883842365515498,
+      "max_dd": -0.15848074107837506,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 269.3333333333333
+      "avg_trade_bars": 276.0
     }
   },
   "BBY": {
@@ -2696,9 +2696,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.31909877312404733,
+      "return": 0.27847966558482806,
       "pf": 5.649767384726714,
-      "sharpe": 0.2581024893010078,
+      "sharpe": 0.23463884536019153,
       "max_dd": -0.21210279679926491,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -2731,7 +2731,7 @@
     "stats": {
       "return": 0.07220958052176574,
       "pf": 5.509765022104223,
-      "sharpe": 0.11391654962024594,
+      "sharpe": 0.11391654962024596,
       "max_dd": -0.15978110343699248,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -2762,20 +2762,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.2998682953686209,
+      "return": -0.297919849960525,
       "pf": 0.0,
-      "sharpe": -0.1552739792442986,
-      "max_dd": -0.3391877286388988,
+      "sharpe": -0.15358741700917886,
+      "max_dd": -0.33848345413593994,
       "n_trades": 3,
       "win_rate": 0.0,
-      "avg_trade_bars": 473.6666666666667
+      "avg_trade_bars": 475.0
     }
   },
   "BHP": {
     "symbol": "BHP",
     "ok": true,
-    "bars": 3484,
-    "rating": "M\u00dcKEMMEL",
+    "bars": 3494,
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -2784,7 +2784,7 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 200,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
       "gate_length": 16,
@@ -2795,13 +2795,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4208118282810256,
-      "pf": 10.974349736602825,
-      "sharpe": 0.3613711670454969,
-      "max_dd": -0.17942377439828838,
-      "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 299.4
+      "return": 0.3126496335219604,
+      "pf": 16.501699311261536,
+      "sharpe": 0.27867345577236713,
+      "max_dd": -0.1776079611987812,
+      "n_trades": 4,
+      "win_rate": 0.75,
+      "avg_trade_bars": 436.75
     }
   },
   "BIDU": {
@@ -2813,14 +2813,14 @@
     "category": "NASDAQ",
     "params": {
       "trend_length": 20,
-      "trend_percent": 7.0,
+      "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.8,
-      "tott_coeff": 0.0004,
+      "tott_coeff": 0.0008,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 28,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -2828,13 +2828,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.3253937164903866,
-      "pf": 0.2961663017315678,
-      "sharpe": -0.15980784753991564,
-      "max_dd": -0.37588147116634496,
-      "n_trades": 9,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 188.88888888888889
+      "return": -0.3605746798594831,
+      "pf": 0.2359448834090742,
+      "sharpe": -0.18384979081495076,
+      "max_dd": -0.4215853690120023,
+      "n_trades": 10,
+      "win_rate": 0.3,
+      "avg_trade_bars": 165.7
     }
   },
   "BKNG": {
@@ -2861,13 +2861,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2133128858026696,
-      "pf": 2.0521977148591954,
-      "sharpe": 0.1931465863530845,
-      "max_dd": -0.2160126602815271,
+      "return": 0.1887950081439953,
+      "pf": 1.9628873443462753,
+      "sharpe": 0.17650679565356672,
+      "max_dd": -0.2248909691789316,
       "n_trades": 8,
       "win_rate": 0.375,
-      "avg_trade_bars": 231.25
+      "avg_trade_bars": 230.25
     }
   },
   "BLK": {
@@ -2894,9 +2894,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3213382167070684,
+      "return": 0.32667411204879193,
       "pf": 24.334348296869095,
-      "sharpe": 0.37986586776012954,
+      "sharpe": 0.38530925886285483,
       "max_dd": -0.11119884651831646,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -2906,7 +2906,7 @@
   "BMW.DE": {
     "symbol": "BMW.DE",
     "ok": true,
-    "bars": 4534,
+    "bars": 4544,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2927,19 +2927,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.06924951177667427,
-      "pf": 0.5965787233530143,
-      "sharpe": -0.03430282409000946,
-      "max_dd": -0.183092982421039,
+      "return": -0.07234830848236073,
+      "pf": 0.5847502875175472,
+      "sharpe": -0.03669966698198424,
+      "max_dd": -0.18309298242103889,
       "n_trades": 6,
       "win_rate": 0.5,
-      "avg_trade_bars": 280.6666666666667
+      "avg_trade_bars": 285.3333333333333
     }
   },
   "BN.PA": {
     "symbol": "BN.PA",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2960,19 +2960,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.05243734173583947,
-      "pf": 1.9949386413707761,
-      "sharpe": 0.08859075917833001,
-      "max_dd": -0.11619712703289753,
+      "return": 0.059280772008263316,
+      "pf": 2.118028982307778,
+      "sharpe": 0.09697139183338149,
+      "max_dd": -0.11619712703289764,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 486.5
+      "avg_trade_bars": 493.0
     }
   },
   "BNP.PA": {
     "symbol": "BNP.PA",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -2993,13 +2993,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3849294841322388,
-      "pf": 23.632652547760138,
-      "sharpe": 0.30509137878685166,
-      "max_dd": -0.18036405260002564,
+      "return": 0.3865010148591339,
+      "pf": 25.451552735774293,
+      "sharpe": 0.30645553994969416,
+      "max_dd": -0.18036386558303685,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 613.0
+      "avg_trade_bars": 618.5
     }
   },
   "BNTX": {
@@ -3038,7 +3038,7 @@
   "BP.L": {
     "symbol": "BP.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3046,7 +3046,7 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
@@ -3059,19 +3059,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.33055040453637274,
-      "pf": 15.147936305056948,
-      "sharpe": 0.26876296715168907,
-      "max_dd": -0.13245718592401956,
+      "return": 0.3225824075608976,
+      "pf": 14.597966030153502,
+      "sharpe": 0.26268750513419425,
+      "max_dd": -0.13245718592401967,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 537.6666666666666
+      "avg_trade_bars": 541.0
     }
   },
   "BRBY.L": {
     "symbol": "BRBY.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3092,10 +3092,10 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.15438123183919394,
-      "pf": 1.974291438826362,
-      "sharpe": 0.1458368711616928,
-      "max_dd": -0.35017967209417566,
+      "return": 0.15553452118591893,
+      "pf": 1.9798868153151217,
+      "sharpe": 0.14647832605594777,
+      "max_dd": -0.3493618610896777,
       "n_trades": 4,
       "win_rate": 0.25,
       "avg_trade_bars": 287.5
@@ -3104,7 +3104,7 @@
   "BRK-B": {
     "symbol": "BRK-B",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3112,7 +3112,7 @@
       "trend_length": 35,
       "trend_percent": 5.0,
       "minor_percent": 4.0,
-      "tott_percent": 0.8,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
@@ -3125,19 +3125,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.04509189211810405,
-      "pf": 0.48805645741863374,
-      "sharpe": -0.07074746221133724,
-      "max_dd": -0.1134729950735458,
+      "return": -0.05085269796633585,
+      "pf": 0.4574329879156862,
+      "sharpe": -0.08241523867739907,
+      "max_dd": -0.1188212688105067,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 213.6
+      "avg_trade_bars": 214.2
     }
   },
   "BX": {
     "symbol": "BX",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3158,13 +3158,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3246329688277001,
-      "pf": 6.021719295992997,
-      "sharpe": 0.31643126372034847,
-      "max_dd": -0.15528942359952835,
+      "return": 0.322207589951339,
+      "pf": 5.988388397185415,
+      "sharpe": 0.31296919904408876,
+      "max_dd": -0.15825980625794356,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 418.3333333333333
+      "avg_trade_bars": 421.6666666666667
     }
   },
   "BYND": {
@@ -3191,9 +3191,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.44776853347950585,
+      "return": 0.5293200905812929,
       "pf": 2.5461050120897704,
-      "sharpe": 0.19236870980355245,
+      "sharpe": 0.20689191834471743,
       "max_dd": -0.5675184912841547,
       "n_trades": 6,
       "win_rate": 0.5,
@@ -3226,7 +3226,7 @@
     "stats": {
       "return": 0.5627995466938376,
       "pf": 119.17312290020121,
-      "sharpe": 0.5653668457064585,
+      "sharpe": 0.5653668457064583,
       "max_dd": -0.103292411325834,
       "n_trades": 5,
       "win_rate": 0.8,
@@ -3236,7 +3236,7 @@
   "CAG": {
     "symbol": "CAG",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3257,13 +3257,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3203230177127492,
-      "pf": 13.224614574570342,
-      "sharpe": 0.4111982950146788,
-      "max_dd": -0.09615569650432854,
+      "return": 0.32099044055509274,
+      "pf": 13.245875878982513,
+      "sharpe": 0.4114607655367353,
+      "max_dd": -0.09561145189960796,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 300.25
+      "avg_trade_bars": 300.5
     }
   },
   "CAT": {
@@ -3302,16 +3302,16 @@
   "CBK.DE": {
     "symbol": "CBK.DE",
     "ok": true,
-    "bars": 4533,
+    "bars": 4544,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 30,
+      "trend_length": 35,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.8,
-      "tott_coeff": 0.0006,
+      "tott_coeff": 0.0008,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
@@ -3323,19 +3323,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5705627519926528,
-      "pf": 172.2307102352405,
-      "sharpe": 0.3578973244236494,
+      "return": 0.5369417227403408,
+      "pf": 167.0902207763904,
+      "sharpe": 0.34293655715835863,
       "max_dd": -0.18837450539650136,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 411.8
+      "avg_trade_bars": 419.0
     }
   },
   "CDI.PA": {
     "symbol": "CDI.PA",
     "ok": true,
-    "bars": 4565,
+    "bars": 4575,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3347,7 +3347,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -3356,13 +3356,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.06649575668499796,
-      "pf": 0.9595962890127882,
-      "sharpe": 0.09641620868219922,
-      "max_dd": -0.13685688810207142,
+      "return": 0.06680189987490626,
+      "pf": 0.9460722571157658,
+      "sharpe": 0.09662524113420669,
+      "max_dd": -0.13775038736799083,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 305.0
+      "avg_trade_bars": 309.0
     }
   },
   "CDNS": {
@@ -3391,11 +3391,11 @@
     "stats": {
       "return": 0.017888490103041388,
       "pf": 1.1865887679197131,
-      "sharpe": 0.05250888177056798,
+      "sharpe": 0.05250887531497726,
       "max_dd": -0.21743725231175703,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 278.85714285714283
+      "avg_trade_bars": 278.7142857142857
     }
   },
   "CGC": {
@@ -3434,7 +3434,7 @@
   "CHPT": {
     "symbol": "CHPT",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3455,19 +3455,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.11256012213073119,
-      "pf": 0.9183118666283658,
-      "sharpe": 0.07262635372377275,
-      "max_dd": -0.45619221910599184,
+      "return": -0.0946062936787192,
+      "pf": 0.9728385624002102,
+      "sharpe": 0.07955496429406327,
+      "max_dd": -0.44519042410836074,
       "n_trades": 6,
       "win_rate": 0.5,
-      "avg_trade_bars": 253.5
+      "avg_trade_bars": 254.83333333333334
     }
   },
   "CL": {
     "symbol": "CL",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3488,13 +3488,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.11994631581514692,
+      "return": -0.12988758796167366,
       "pf": 0.0,
-      "sharpe": -0.21837384144396887,
+      "sharpe": -0.23949257987040812,
       "max_dd": -0.1568706451433689,
       "n_trades": 3,
       "win_rate": 0.0,
-      "avg_trade_bars": 247.0
+      "avg_trade_bars": 245.0
     }
   },
   "CMCSA": {
@@ -3523,7 +3523,7 @@
     "stats": {
       "return": 0.23034945633841875,
       "pf": null,
-      "sharpe": 0.1827824636095109,
+      "sharpe": 0.18278246360951092,
       "max_dd": -0.1868098343581831,
       "n_trades": 4,
       "win_rate": 1.0,
@@ -3533,7 +3533,7 @@
   "CMG": {
     "symbol": "CMG",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3554,20 +3554,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.0722421011839609,
-      "pf": 1.8010351513152736,
-      "sharpe": 0.10110005634032676,
-      "max_dd": -0.25109062388372894,
+      "return": 0.06964528258798008,
+      "pf": 1.7699071631034962,
+      "sharpe": 0.09895225250582342,
+      "max_dd": -0.2510910374942382,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 502.0
+      "avg_trade_bars": 501.6666666666667
     }
   },
   "CNA": {
     "symbol": "CNA",
     "ok": true,
-    "bars": 3484,
-    "rating": "UYUMSUZ",
+    "bars": 3494,
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -3576,10 +3576,10 @@
       "minor_percent": 4.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 200,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 10,
+      "sott_percent": 0.3,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -3587,19 +3587,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.17353645062538747,
-      "pf": 0.07506438141659959,
-      "sharpe": -0.2595358652950825,
-      "max_dd": -0.22156398515207665,
-      "n_trades": 5,
-      "win_rate": 0.2,
-      "avg_trade_bars": 198.8
+      "return": -0.20499707816283297,
+      "pf": 0.0,
+      "sharpe": -0.338171897762131,
+      "max_dd": -0.24523973772373586,
+      "n_trades": 4,
+      "win_rate": 0.0,
+      "avg_trade_bars": 259.75
     }
   },
   "CNC": {
     "symbol": "CNC",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3612,7 +3612,7 @@
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 22,
+      "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -3620,13 +3620,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.022061153540678502,
-      "pf": 1.36319212550636,
-      "sharpe": 0.05937433598449304,
-      "max_dd": -0.19718073412893355,
+      "return": 0.048372301975635024,
+      "pf": 1.718911620554685,
+      "sharpe": 0.08234468063867266,
+      "max_dd": -0.18546440126001418,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 232.75
+      "avg_trade_bars": 233.5
     }
   },
   "CNI": {
@@ -3653,13 +3653,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.03164534451967849,
-      "pf": 0.7533581754156469,
-      "sharpe": -0.03204662856341197,
-      "max_dd": -0.17394595194679896,
+      "return": -0.03658097093535018,
+      "pf": 0.7068883521734958,
+      "sharpe": -0.041506143192506985,
+      "max_dd": -0.16549899392435663,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 223.0
+      "avg_trade_bars": 217.0
     }
   },
   "CNQ": {
@@ -3686,19 +3686,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4235248808972667,
-      "pf": 7.891388416510716,
-      "sharpe": 0.3914810806522167,
+      "return": 0.4700378654630737,
+      "pf": 8.309243565818177,
+      "sharpe": 0.42498321453913457,
       "max_dd": -0.1661753522634034,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 287.75
+      "avg_trade_bars": 286.5
     }
   },
   "COF": {
     "symbol": "COF",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3719,9 +3719,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.12920191960572347,
+      "return": 0.13398511022341575,
       "pf": 1.1921522902235424,
-      "sharpe": 0.16515526799632352,
+      "sharpe": 0.16945449927214248,
       "max_dd": -0.17718279786829205,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -3752,19 +3752,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.042034942851076895,
-      "pf": 1.4028880324581696,
-      "sharpe": 0.09460742325265144,
-      "max_dd": -0.5682196240112429,
+      "return": 0.04644738773560886,
+      "pf": 1.4117985903212456,
+      "sharpe": 0.09589215412751491,
+      "max_dd": -0.5682196240112432,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 237.42857142857142
+      "avg_trade_bars": 237.28571428571428
     }
   },
   "COP": {
     "symbol": "COP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3785,13 +3785,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.06252792233066584,
-      "pf": 0.028565494042450238,
-      "sharpe": 0.10037775238146977,
+      "return": 0.09847951292890866,
+      "pf": 0.038663957768163316,
+      "sharpe": 0.13741631535868834,
       "max_dd": -0.17206637204368191,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 312.0
+      "avg_trade_bars": 316.6666666666667
     }
   },
   "COST": {
@@ -3820,7 +3820,7 @@
     "stats": {
       "return": -0.009655543464917149,
       "pf": 0.9623408378965815,
-      "sharpe": 0.011933410748751087,
+      "sharpe": 0.011933410748751086,
       "max_dd": -0.17069057012414968,
       "n_trades": 6,
       "win_rate": 0.5,
@@ -3830,7 +3830,7 @@
   "CP": {
     "symbol": "CP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3853,11 +3853,11 @@
     "stats": {
       "return": 0.10072780262050296,
       "pf": null,
-      "sharpe": 0.15145286420423004,
+      "sharpe": 0.15103078643359305,
       "max_dd": -0.17084739442774377,
       "n_trades": 3,
       "win_rate": 1.0,
-      "avg_trade_bars": 515.3333333333334
+      "avg_trade_bars": 518.6666666666666
     }
   },
   "CPRT": {
@@ -3896,7 +3896,7 @@
   "CRM": {
     "symbol": "CRM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3917,13 +3917,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.10938447827275555,
-      "pf": 0.7612406824734318,
-      "sharpe": -0.06468060330048792,
-      "max_dd": -0.26310956052552903,
+      "return": -0.11047229798664826,
+      "pf": 0.7573864693688999,
+      "sharpe": -0.06525991914501975,
+      "max_dd": -0.2631095605255289,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 231.83333333333334
+      "avg_trade_bars": 235.83333333333334
     }
   },
   "CRON": {
@@ -3950,9 +3950,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.14324003586225575,
+      "return": -0.1445561033954933,
       "pf": 0.04678588006880434,
-      "sharpe": -0.05525322223930558,
+      "sharpe": -0.05622377728232557,
       "max_dd": -0.4164892398191018,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -3962,7 +3962,7 @@
   "CS.PA": {
     "symbol": "CS.PA",
     "ok": true,
-    "bars": 4565,
+    "bars": 4576,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -3970,9 +3970,9 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 200,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
       "gate_length": 22,
@@ -3983,13 +3983,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1103224800630358,
-      "pf": 0.5935672034930564,
-      "sharpe": -0.11885355899913505,
-      "max_dd": -0.24245483136023693,
-      "n_trades": 9,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 207.77777777777777
+      "return": -0.09586802630831404,
+      "pf": 0.5526677237704695,
+      "sharpe": -0.10668148875566877,
+      "max_dd": -0.22827470039118147,
+      "n_trades": 8,
+      "win_rate": 0.5,
+      "avg_trade_bars": 215.625
     }
   },
   "CSX": {
@@ -4016,13 +4016,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.07199680338127545,
-      "pf": 0.8283211687125075,
-      "sharpe": -0.0355007926484704,
-      "max_dd": -0.3344467367969597,
-      "n_trades": 7,
-      "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 285.85714285714283
+      "return": -0.13207450067352056,
+      "pf": 0.6734464100508871,
+      "sharpe": -0.09017235146457843,
+      "max_dd": -0.3775337731609154,
+      "n_trades": 8,
+      "win_rate": 0.25,
+      "avg_trade_bars": 269.625
     }
   },
   "CTAS": {
@@ -4181,13 +4181,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.6975963869275599,
-      "pf": 4.433894642094017,
-      "sharpe": 0.4107755630532599,
-      "max_dd": -0.22076580343004282,
+      "return": 0.6668887527937954,
+      "pf": 4.24103300936017,
+      "sharpe": 0.39743246265545734,
+      "max_dd": -0.2207658034300427,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 355.25
+      "avg_trade_bars": 362.25
     }
   },
   "DBX": {
@@ -4214,13 +4214,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2677572753354789,
-      "pf": 2.1485415128764704,
-      "sharpe": 0.20803154007958824,
-      "max_dd": -0.2727591689826172,
+      "return": 0.28617075426570127,
+      "pf": 2.020396762881918,
+      "sharpe": 0.21909191664738303,
+      "max_dd": -0.27276043751499646,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 516.0
+      "avg_trade_bars": 515.6666666666666
     }
   },
   "DD": {
@@ -4249,7 +4249,7 @@
     "stats": {
       "return": 0.4767032056702427,
       "pf": 4.854310059645746,
-      "sharpe": 0.41981453387099454,
+      "sharpe": 0.4198145338709946,
       "max_dd": -0.21484670275891682,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -4259,7 +4259,7 @@
   "DGE.L": {
     "symbol": "DGE.L",
     "ok": true,
-    "bars": 4520,
+    "bars": 4532,
     "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4280,19 +4280,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.08021549046748566,
-      "pf": 3.2046686887945124,
-      "sharpe": 0.10474530646660646,
-      "max_dd": -0.12561868075271065,
+      "return": 0.06796601684149106,
+      "pf": 2.883856697779439,
+      "sharpe": 0.09323049828005482,
+      "max_dd": -0.13553402727727004,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 386.8
+      "avg_trade_bars": 388.0
     }
   },
   "DHI": {
     "symbol": "DHI",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4313,19 +4313,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.07330923368785114,
-      "pf": 1.6707635548411428,
-      "sharpe": 0.10237210318826684,
-      "max_dd": -0.2662036890878967,
+      "return": 0.06019612458013479,
+      "pf": 1.5771629646735814,
+      "sharpe": 0.09158986181636604,
+      "max_dd": -0.27516881375636526,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 395.0
+      "avg_trade_bars": 399.0
     }
   },
   "DHL.DE": {
     "symbol": "DHL.DE",
     "ok": true,
-    "bars": 4534,
+    "bars": 4544,
     "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4346,19 +4346,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2323960746990552,
-      "pf": 2.9504109030000434,
-      "sharpe": 0.22684545325293762,
-      "max_dd": -0.1667232138957453,
+      "return": 0.2303468747407562,
+      "pf": 2.9352910466483655,
+      "sharpe": 0.22398647311247183,
+      "max_dd": -0.17146853542788776,
       "n_trades": 9,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 227.33333333333334
+      "avg_trade_bars": 230.66666666666666
     }
   },
   "DIS": {
     "symbol": "DIS",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4379,9 +4379,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3344930374666635,
+      "return": 0.3584477435581337,
       "pf": 16.17387381190814,
-      "sharpe": 0.4162129218337573,
+      "sharpe": 0.44211721605501964,
       "max_dd": -0.07362410625783977,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -4391,7 +4391,7 @@
   "DOW": {
     "symbol": "DOW",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4403,7 +4403,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -4412,13 +4412,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.25004723357722447,
-      "pf": 0.0612327838261173,
-      "sharpe": -0.3686897092158198,
-      "max_dd": -0.37706894153386705,
+      "return": -0.2503279232690162,
+      "pf": 0.06116778875587976,
+      "sharpe": -0.3728749567518903,
+      "max_dd": -0.37730208998619197,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 103.66666666666667
+      "avg_trade_bars": 102.66666666666667
     }
   },
   "DPZ": {
@@ -4457,7 +4457,7 @@
   "DTE.DE": {
     "symbol": "DTE.DE",
     "ok": true,
-    "bars": 4533,
+    "bars": 4544,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4478,24 +4478,24 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.09133869498380831,
-      "pf": 0.6009626851608333,
-      "sharpe": -0.09356804190439907,
-      "max_dd": -0.2720243622720222,
+      "return": -0.08605312647437002,
+      "pf": 0.6176670063456606,
+      "sharpe": -0.08608503601433132,
+      "max_dd": -0.2720234880795336,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 267.0
+      "avg_trade_bars": 274.6
     }
   },
   "DUK": {
     "symbol": "DUK",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
@@ -4511,13 +4511,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.03801544570876203,
-      "pf": 2.2787388083321782,
-      "sharpe": 0.09503119791377379,
-      "max_dd": -0.06299760661594078,
+      "return": 0.11903009869027281,
+      "pf": 10.515907955977788,
+      "sharpe": 0.23981008114003513,
+      "max_dd": -0.07437696081766354,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 225.5
+      "avg_trade_bars": 257.0
     }
   },
   "EBAY": {
@@ -4544,13 +4544,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.23758427556961514,
-      "pf": 1.8800089533789537,
-      "sharpe": 0.16724644573681177,
+      "return": 0.23517737436040664,
+      "pf": 1.8734338930476913,
+      "sharpe": 0.1661655752036582,
       "max_dd": -0.28181647697720436,
       "n_trades": 9,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 240.55555555555554
+      "avg_trade_bars": 240.22222222222223
     }
   },
   "EL": {
@@ -4577,9 +4577,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5855127301332128,
+      "return": 0.5399397254465812,
       "pf": 8.81347210931573,
-      "sharpe": 0.3469682074360978,
+      "sharpe": 0.32895622683077197,
       "max_dd": -0.23989776888345893,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -4589,7 +4589,7 @@
   "ENB": {
     "symbol": "ENB",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4612,17 +4612,17 @@
     "stats": {
       "return": 0.1344173614611197,
       "pf": 9.401974436447517,
-      "sharpe": 0.24284610395177336,
+      "sharpe": 0.24225395148762582,
       "max_dd": -0.07236035364360704,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 415.0
+      "avg_trade_bars": 418.3333333333333
     }
   },
   "ENG.MC": {
     "symbol": "ENG.MC",
     "ok": true,
-    "bars": 4557,
+    "bars": 4568,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4634,7 +4634,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -4643,19 +4643,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.25659178592685716,
-      "pf": 1269.7861963858052,
-      "sharpe": 0.25976976863200807,
-      "max_dd": -0.12476197324742111,
+      "return": 0.28461494095084094,
+      "pf": 51.764006291128304,
+      "sharpe": 0.2800277324050681,
+      "max_dd": -0.1337280588112577,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 523.5
+      "avg_trade_bars": 537.0
     }
   },
   "EOG": {
     "symbol": "EOG",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4676,13 +4676,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.05964759336914904,
+      "return": -0.04893388832890466,
       "pf": 0.0,
-      "sharpe": -0.05260454156590686,
-      "max_dd": -0.13025147540345083,
+      "sharpe": -0.03782518248926726,
+      "max_dd": -0.12534401388552296,
       "n_trades": 3,
       "win_rate": 0.0,
-      "avg_trade_bars": 345.3333333333333
+      "avg_trade_bars": 350.6666666666667
     }
   },
   "EQIX": {
@@ -4766,7 +4766,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -4775,19 +4775,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8539819328659741,
-      "pf": 5.876619407281726,
-      "sharpe": 0.36081915348428556,
-      "max_dd": -0.22721507111454153,
-      "n_trades": 8,
-      "win_rate": 0.875,
-      "avg_trade_bars": 322.25
+      "return": 1.0315064964602563,
+      "pf": 4.188356766108771,
+      "sharpe": 0.39840791531545916,
+      "max_dd": -0.18980853029472178,
+      "n_trades": 6,
+      "win_rate": 0.6666666666666666,
+      "avg_trade_bars": 380.5
     }
   },
   "F": {
     "symbol": "F",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4810,7 +4810,7 @@
     "stats": {
       "return": 0.1868263968761077,
       "pf": 4.145585001127181,
-      "sharpe": 0.20028192777556772,
+      "sharpe": 0.20002067913449223,
       "max_dd": -0.22153151420740314,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -4820,7 +4820,7 @@
   "FCX": {
     "symbol": "FCX",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4830,7 +4830,7 @@
       "minor_percent": 3.0,
       "tott_percent": 1.0,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
       "gate_length": 16,
@@ -4841,20 +4841,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.19232655803341747,
-      "pf": 1.700888861111408,
-      "sharpe": 0.16560197443051541,
-      "max_dd": -0.3407543204655442,
-      "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 237.5
+      "return": 0.19395407113005136,
+      "pf": 1.3386456739098205,
+      "sharpe": 0.168126093399442,
+      "max_dd": -0.35401311710548267,
+      "n_trades": 7,
+      "win_rate": 0.2857142857142857,
+      "avg_trade_bars": 186.28571428571428
     }
   },
   "FICO": {
     "symbol": "FICO",
     "ok": true,
-    "bars": 3483,
-    "rating": "MARJINAL",
+    "bars": 3493,
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -4866,21 +4866,21 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 22,
-      "gate_percent": 0.4,
+      "gate_length": 10,
+      "gate_percent": 0.5,
       "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.0014657803095849964,
-      "pf": 0.7093152718537107,
-      "sharpe": 0.06097945767081807,
+      "return": -0.12846250146856797,
+      "pf": 0.739211897767164,
+      "sharpe": -0.03194047418682076,
       "max_dd": -0.38699785694324873,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 176.66666666666666
+      "avg_trade_bars": 174.33333333333334
     }
   },
   "FSLR": {
@@ -4907,19 +4907,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1562988820357979,
-      "pf": 0.5927115874496229,
-      "sharpe": -0.030900689109933616,
-      "max_dd": -0.38337581965319867,
+      "return": -0.14666603825633917,
+      "pf": 0.6103548034618063,
+      "sharpe": -0.025293731162927633,
+      "max_dd": -0.3833742051540818,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 217.8
+      "avg_trade_bars": 219.4
     }
   },
   "GAP": {
     "symbol": "GAP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -4940,13 +4940,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2606266931582846,
+      "return": 0.25556618493551353,
       "pf": 1055.523994348554,
-      "sharpe": 0.2053068583231623,
+      "sharpe": 0.20259334987735203,
       "max_dd": -0.2987222933358529,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 337.6666666666667
+      "avg_trade_bars": 341.0
     }
   },
   "GD": {
@@ -5018,7 +5018,7 @@
   "GEV": {
     "symbol": "GEV",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5039,13 +5039,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.6779186486295976,
-      "pf": 17.345456587941875,
-      "sharpe": 0.6280984323954769,
-      "max_dd": -0.19596720752921437,
+      "return": 1.5203595253449702,
+      "pf": 16.145211060730233,
+      "sharpe": 0.5856380914779413,
+      "max_dd": -0.24327361167954842,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 472.6666666666667
+      "avg_trade_bars": 487.6666666666667
     }
   },
   "GILD": {
@@ -5072,9 +5072,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8185269909668853,
+      "return": 0.821176675965976,
       "pf": 145.52415757523394,
-      "sharpe": 0.4442027094235352,
+      "sharpe": 0.4453395770625765,
       "max_dd": -0.1582604678246704,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -5084,7 +5084,7 @@
   "GIS": {
     "symbol": "GIS",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5092,12 +5092,12 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 22,
+      "sott_percent": 0.3,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -5105,19 +5105,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.1270973177974608,
-      "pf": 3.492159013862417,
-      "sharpe": 0.2336484044669172,
-      "max_dd": -0.09472467976282428,
-      "n_trades": 3,
-      "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 344.3333333333333
+      "return": 0.12401961295658381,
+      "pf": 2.3755767422167673,
+      "sharpe": 0.1995447766909086,
+      "max_dd": -0.14733397230944167,
+      "n_trades": 4,
+      "win_rate": 0.5,
+      "avg_trade_bars": 328.75
     }
   },
   "GLEN.L": {
     "symbol": "GLEN.L",
     "ok": true,
-    "bars": 4520,
+    "bars": 4532,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5138,19 +5138,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.33939954786124193,
-      "pf": 3.831578251814362,
-      "sharpe": 0.2620114996269317,
-      "max_dd": -0.2485245237087701,
+      "return": 0.3692632145231445,
+      "pf": 3.973160287146277,
+      "sharpe": 0.2778423057053155,
+      "max_dd": -0.24488116527046655,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 458.3333333333333
+      "avg_trade_bars": 462.6666666666667
     }
   },
   "GM": {
     "symbol": "GM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5171,13 +5171,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3469697102676357,
+      "return": 0.33913935117281935,
       "pf": 6.656828125793783,
-      "sharpe": 0.3173972485270846,
+      "sharpe": 0.3112357234685982,
       "max_dd": -0.1363584166807409,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 467.6666666666667
+      "avg_trade_bars": 471.0
     }
   },
   "GOOGL": {
@@ -5237,13 +5237,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.5560273340740363,
-      "pf": 0.4432388467815766,
-      "sharpe": -0.1128975769229482,
+      "return": -0.5490652270911855,
+      "pf": 0.4487504976714938,
+      "sharpe": -0.10901014428779411,
       "max_dd": -0.6667765107983438,
       "n_trades": 9,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 212.33333333333334
+      "avg_trade_bars": 212.66666666666666
     }
   },
   "GRPN": {
@@ -5282,7 +5282,7 @@
   "GS": {
     "symbol": "GS",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5296,16 +5296,16 @@
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
       "gate_length": 16,
-      "gate_percent": 0.4,
-      "gate_shift": 0,
+      "gate_percent": 0.5,
+      "gate_shift": 2,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.640847762906213,
-      "pf": 9.631687766271662,
-      "sharpe": 0.5954115612951125,
+      "return": 0.6701680555351954,
+      "pf": 9.925368003050986,
+      "sharpe": 0.6145817203634492,
       "max_dd": -0.11365476366042171,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -5315,8 +5315,8 @@
   "GSK.L": {
     "symbol": "GSK.L",
     "ok": true,
-    "bars": 4520,
-    "rating": "\u0130Y\u0130",
+    "bars": 4532,
+    "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5336,19 +5336,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.28783055666642743,
-      "pf": 4.256640588221606,
-      "sharpe": 0.29221326365696054,
-      "max_dd": -0.17843741548353764,
+      "return": 0.33315614080364275,
+      "pf": 4.8057696015784,
+      "sharpe": 0.3278207179548839,
+      "max_dd": -0.17556044201417753,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 335.3333333333333
+      "avg_trade_bars": 337.6666666666667
     }
   },
   "HCA": {
     "symbol": "HCA",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5369,20 +5369,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2570196587902238,
+      "return": 0.2700535252377083,
       "pf": 7.325943586142263,
-      "sharpe": 0.26613807758435143,
+      "sharpe": 0.2763375654466231,
       "max_dd": -0.163859148438681,
       "n_trades": 4,
       "win_rate": 0.75,
       "avg_trade_bars": 274.75
     }
   },
-  "HD": {
-    "symbol": "HD",
+  "HEIA.AS": {
+    "symbol": "HEIA.AS",
     "ok": true,
-    "bars": 3484,
-    "rating": "\u0130Y\u0130",
+    "bars": 4576,
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5391,43 +5391,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 200,
-      "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 10,
-      "gate_percent": 0.4,
-      "gate_shift": 0,
-      "rott_x1": 30,
-      "rott_x2": 1000,
-      "rott_percent": 7.0
-    },
-    "stats": {
-      "return": 0.18372866322948034,
-      "pf": 2.6302797114976864,
-      "sharpe": 0.24292579987883178,
-      "max_dd": -0.15557206957936498,
-      "n_trades": 6,
-      "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 215.0
-    }
-  },
-  "HEIA.AS": {
-    "symbol": "HEIA.AS",
-    "ok": true,
-    "bars": 4565,
-    "rating": "UYUMSUZ",
-    "interval": "1h",
-    "category": "NASDAQ",
-    "params": {
-      "trend_length": 20,
-      "trend_percent": 5.0,
-      "minor_percent": 3.0,
-      "tott_percent": 0.8,
-      "tott_coeff": 0.0004,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 22,
+      "sott_percent": 0.3,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -5435,13 +5402,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.01939244403409246,
-      "pf": 0.5267956233509039,
-      "sharpe": -0.007103677120151394,
-      "max_dd": -0.14177098112519504,
+      "return": -0.011209535556913619,
+      "pf": 0.5804792487975574,
+      "sharpe": 0.004406209104201951,
+      "max_dd": -0.14303758274408906,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 341.6
+      "avg_trade_bars": 339.6
     }
   },
   "HEPS": {
@@ -5503,7 +5470,7 @@
     "stats": {
       "return": 0.14720264531516558,
       "pf": 3.0753169162599603,
-      "sharpe": 0.20548780018258514,
+      "sharpe": 0.2054878001825851,
       "max_dd": -0.14125184590656303,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -5513,7 +5480,7 @@
   "HMC": {
     "symbol": "HMC",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5534,20 +5501,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.012672612738728661,
-      "pf": 1.2423152511971485,
-      "sharpe": 0.04372470369864342,
+      "return": 0.025523834195916084,
+      "pf": 1.4876652177798906,
+      "sharpe": 0.05984329199398145,
       "max_dd": -0.12877663207129464,
       "n_trades": 4,
       "win_rate": 0.25,
-      "avg_trade_bars": 221.25
+      "avg_trade_bars": 223.25
     }
   },
   "HOOD": {
     "symbol": "HOOD",
     "ok": true,
     "bars": 5000,
-    "rating": "\u0130Y\u0130",
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -5556,10 +5523,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 16,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -5567,19 +5534,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 3.826962291307149,
-      "pf": 316.9519541132071,
-      "sharpe": 0.5544451571249963,
-      "max_dd": -0.29283609350496465,
-      "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 463.4
+      "return": 3.9202199312492976,
+      "pf": 354.9340887969776,
+      "sharpe": 0.5700035315237791,
+      "max_dd": -0.3262305199322221,
+      "n_trades": 4,
+      "win_rate": 0.75,
+      "avg_trade_bars": 542.75
     }
   },
   "HP": {
     "symbol": "HP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5600,13 +5567,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.15618276265649644,
-      "pf": 5.2918050613987075,
-      "sharpe": 0.1574118973173381,
-      "max_dd": -0.21487436556962836,
+      "return": 0.24430530804809258,
+      "pf": 29.772118445277794,
+      "sharpe": 0.21155024600699743,
+      "max_dd": -0.19774230223082379,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 295.6666666666667
+      "avg_trade_bars": 311.6666666666667
     }
   },
   "HSBA.L": {
@@ -5633,19 +5600,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.41702395598070474,
-      "pf": 6.99815168659189,
-      "sharpe": 0.34984411864131915,
-      "max_dd": -0.14959882337994324,
+      "return": 0.4310838298175521,
+      "pf": 13.673526616266878,
+      "sharpe": 0.3585831330775829,
+      "max_dd": -0.14959882337994335,
       "n_trades": 4,
-      "win_rate": 0.5,
-      "avg_trade_bars": 420.0
+      "win_rate": 0.75,
+      "avg_trade_bars": 422.5
     }
   },
   "HUM": {
     "symbol": "HUM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5666,19 +5633,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.3703999395916159,
-      "pf": 0.0973377247368798,
-      "sharpe": -0.26351654434091876,
-      "max_dd": -0.4780003022700974,
+      "return": -0.41273538525967124,
+      "pf": 0.0876469367604085,
+      "sharpe": -0.31778823819648105,
+      "max_dd": -0.5130911358070457,
       "n_trades": 6,
       "win_rate": 0.5,
-      "avg_trade_bars": 214.66666666666666
+      "avg_trade_bars": 195.83333333333334
     }
   },
   "IBE.MC": {
     "symbol": "IBE.MC",
     "ok": true,
-    "bars": 4552,
+    "bars": 4562,
     "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5699,19 +5666,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.25720563184707856,
-      "pf": 4.701147707348219,
-      "sharpe": 0.3234800689433971,
-      "max_dd": -0.11650478797962693,
+      "return": 0.2588429274105748,
+      "pf": 4.79264687617261,
+      "sharpe": 0.32457376126107673,
+      "max_dd": -0.11650455349273392,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
-      "avg_trade_bars": 312.2857142857143
+      "avg_trade_bars": 312.42857142857144
     }
   },
   "IBM": {
     "symbol": "IBM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5732,10 +5699,10 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.04293299904946046,
-      "pf": 1.3640868390375223,
-      "sharpe": 0.08515317053153927,
-      "max_dd": -0.36984988088685034,
+      "return": 0.046530887989340464,
+      "pf": 1.387672022117765,
+      "sharpe": 0.08745802807144143,
+      "max_dd": -0.36984988088685045,
       "n_trades": 4,
       "win_rate": 0.5,
       "avg_trade_bars": 260.25
@@ -5777,19 +5744,19 @@
   "IHG.L": {
     "symbol": "IHG.L",
     "ok": true,
-    "bars": 4514,
-    "rating": "UYUMSUZ",
+    "bars": 4524,
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 1.0,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 200,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
+      "sott_percent": 0.3,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -5798,13 +5765,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.9871917813655527,
-      "pf": 0.08379983592543434,
-      "sharpe": -0.23160743910855033,
-      "max_dd": -0.9905130054427195,
-      "n_trades": 8,
-      "win_rate": 0.25,
-      "avg_trade_bars": 199.875
+      "return": -0.9879682984752147,
+      "pf": 0.0,
+      "sharpe": -0.24271540423294552,
+      "max_dd": -0.9896055466845158,
+      "n_trades": 4,
+      "win_rate": 0.0,
+      "avg_trade_bars": 414.75
     }
   },
   "ILMN": {
@@ -5831,9 +5798,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8686321051468866,
+      "return": 0.898050952827431,
       "pf": 4.716989314485285,
-      "sharpe": 0.360360946837298,
+      "sharpe": 0.3686194964716969,
       "max_dd": -0.25869725938252985,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
@@ -5843,7 +5810,7 @@
   "IMB.L": {
     "symbol": "IMB.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5864,9 +5831,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.005753103015921246,
+      "return": -0.016504905089956057,
       "pf": 0.847282615328401,
-      "sharpe": 0.007681403361106355,
+      "sharpe": -0.010107023330393683,
       "max_dd": -0.13855267611473643,
       "n_trades": 6,
       "win_rate": 0.5,
@@ -5876,7 +5843,7 @@
   "IMBBY": {
     "symbol": "IMBBY",
     "ok": true,
-    "bars": 3322,
+    "bars": 3337,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5897,13 +5864,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1437630691324957,
-      "pf": 0.2525157370885843,
-      "sharpe": -0.23639472723049318,
-      "max_dd": -0.18123369349107454,
+      "return": -0.11908347667207964,
+      "pf": 0.2933917588012836,
+      "sharpe": -0.18620013387998635,
+      "max_dd": -0.1622042475086365,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 138.66666666666666
+      "avg_trade_bars": 143.66666666666666
     }
   },
   "INTU": {
@@ -5942,7 +5909,7 @@
   "ITX.MC": {
     "symbol": "ITX.MC",
     "ok": true,
-    "bars": 4558,
+    "bars": 4568,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -5950,8 +5917,8 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
-      "tott_coeff": 0.0008,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
@@ -5963,13 +5930,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.07386312808770945,
-      "pf": 0.031913308507960696,
-      "sharpe": -0.06940997147565754,
-      "max_dd": -0.16908461170626998,
-      "n_trades": 3,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 328.0
+      "return": -0.17056906576517794,
+      "pf": 0.019962147200422078,
+      "sharpe": -0.1920593875280269,
+      "max_dd": -0.23800198266997163,
+      "n_trades": 4,
+      "win_rate": 0.25,
+      "avg_trade_bars": 280.25
     }
   },
   "JD": {
@@ -5996,9 +5963,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.22310939875161862,
+      "return": 0.24540464562321018,
       "pf": 7.145365110580197,
-      "sharpe": 0.15212693094425833,
+      "sharpe": 0.16142188789318046,
       "max_dd": -0.2985342603714628,
       "n_trades": 5,
       "win_rate": 0.4,
@@ -6031,7 +5998,7 @@
     "stats": {
       "return": -0.0712267266144192,
       "pf": 0.6038622247285821,
-      "sharpe": -0.04319308131289009,
+      "sharpe": -0.04319308131289008,
       "max_dd": -0.2153121690112908,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
@@ -6042,7 +6009,7 @@
     "symbol": "KHC",
     "ok": true,
     "bars": 5000,
-    "rating": "MARJINAL",
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6062,9 +6029,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.0031014319950999347,
+      "return": -0.02118367061627091,
       "pf": 1.1529524451568838,
-      "sharpe": 0.032125610006910416,
+      "sharpe": 0.01115294012037048,
       "max_dd": -0.24808250129047826,
       "n_trades": 8,
       "win_rate": 0.625,
@@ -6074,16 +6041,16 @@
   "KKR": {
     "symbol": "KKR",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 30,
+      "trend_length": 35,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 1.0,
-      "tott_coeff": 0.0006,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
@@ -6095,13 +6062,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4105959212841288,
-      "pf": 4.615798330736261,
-      "sharpe": 0.3598592798528083,
-      "max_dd": -0.1328269329140096,
+      "return": 0.3911350261450437,
+      "pf": 4.460003915363438,
+      "sharpe": 0.34612959839746027,
+      "max_dd": -0.1328269329140097,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 287.75
+      "avg_trade_bars": 289.75
     }
   },
   "KMB": {
@@ -6128,9 +6095,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.08834128422214071,
+      "return": -0.11330952057996979,
       "pf": 0.4263724024660283,
-      "sharpe": -0.09906574811692298,
+      "sharpe": -0.1353967508054842,
       "max_dd": -0.22755025152382957,
       "n_trades": 8,
       "win_rate": 0.375,
@@ -6140,7 +6107,7 @@
   "KMI": {
     "symbol": "KMI",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6161,19 +6128,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.06579769447345929,
-      "pf": 1.797704072826982,
-      "sharpe": 0.12632628154778391,
-      "max_dd": -0.1353678709674605,
+      "return": 0.06483109880307136,
+      "pf": 1.7871392238284631,
+      "sharpe": 0.12318124085999696,
+      "max_dd": -0.13615189249934645,
       "n_trades": 4,
       "win_rate": 0.25,
-      "avg_trade_bars": 267.5
+      "avg_trade_bars": 269.75
     }
   },
   "KO": {
     "symbol": "KO",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6181,12 +6148,12 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 16,
+      "sott_percent": 0.4,
+      "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -6194,20 +6161,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.07650436772334301,
-      "pf": 1.6260406634329214,
-      "sharpe": 0.13314706069559626,
-      "max_dd": -0.13991616569126752,
+      "return": 0.14039516448904665,
+      "pf": 1.331770424366231,
+      "sharpe": 0.21420755760127033,
+      "max_dd": -0.10207963587496671,
       "n_trades": 4,
-      "win_rate": 0.25,
-      "avg_trade_bars": 263.75
+      "win_rate": 0.5,
+      "avg_trade_bars": 237.0
     }
   },
   "LCID": {
     "symbol": "LCID",
     "ok": true,
     "bars": 5000,
-    "rating": "MARJINAL",
+    "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -6227,19 +6194,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.035207692408216085,
-      "pf": 1.226971606685388,
-      "sharpe": 0.09395091633056897,
-      "max_dd": -0.6244504444677328,
+      "return": 0.1568477950654874,
+      "pf": 1.3371569912217354,
+      "sharpe": 0.1267834329107992,
+      "max_dd": -0.5854057271419305,
       "n_trades": 11,
       "win_rate": 0.45454545454545453,
-      "avg_trade_bars": 199.9090909090909
+      "avg_trade_bars": 200.27272727272728
     }
   },
   "LEN": {
     "symbol": "LEN",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6262,7 +6229,7 @@
     "stats": {
       "return": 0.23169170064423472,
       "pf": 4.588612786715513,
-      "sharpe": 0.2154862045274275,
+      "sharpe": 0.21517087033399815,
       "max_dd": -0.185766660715878,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -6305,7 +6272,7 @@
   "LLY": {
     "symbol": "LLY",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6328,7 +6295,7 @@
     "stats": {
       "return": 0.0016998883653032149,
       "pf": 1.1731997649600423,
-      "sharpe": 0.03891616908642254,
+      "sharpe": 0.03886817881385154,
       "max_dd": -0.27411488102453085,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -6338,7 +6305,7 @@
   "LMND": {
     "symbol": "LMND",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6346,12 +6313,12 @@
       "trend_length": 20,
       "trend_percent": 7.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
-      "tott_coeff": 0.0008,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
-      "gate_length": 10,
+      "sott_percent": 0.2,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -6359,19 +6326,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.6096410714598479,
-      "pf": 6.371129820348181,
-      "sharpe": 0.26835016272856405,
-      "max_dd": -0.41767118863705543,
+      "return": 0.5919816124584683,
+      "pf": 5.614941060353351,
+      "sharpe": 0.2648936448954312,
+      "max_dd": -0.42479566718264117,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 460.6666666666667
+      "avg_trade_bars": 448.6666666666667
     }
   },
   "LMT": {
     "symbol": "LMT",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6392,13 +6359,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.051627830744982006,
-      "pf": 5.234749601779043,
-      "sharpe": 0.0871559681362423,
-      "max_dd": -0.13152762716558697,
+      "return": -0.016776782662690337,
+      "pf": 0.4012088119216437,
+      "sharpe": 0.013084998389605714,
+      "max_dd": -0.15468925551981616,
       "n_trades": 4,
-      "win_rate": 0.75,
-      "avg_trade_bars": 291.25
+      "win_rate": 0.5,
+      "avg_trade_bars": 287.25
     }
   },
   "LRCX": {
@@ -6425,13 +6392,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.2111484881785248,
-      "pf": 6.992087920349542,
-      "sharpe": 0.36827549614132515,
-      "max_dd": -0.28874621766805275,
+      "return": 1.3346952280178113,
+      "pf": 9.258395898050917,
+      "sharpe": 0.39028666100671044,
+      "max_dd": -0.27445277292375614,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 388.0
+      "avg_trade_bars": 382.4
     }
   },
   "LULU": {
@@ -6458,13 +6425,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.1808239622550767,
-      "pf": 26.900193323509534,
-      "sharpe": 0.5295800978913817,
+      "return": 1.1910282371542937,
+      "pf": 28.759136982565753,
+      "sharpe": 0.5328235912416193,
       "max_dd": -0.13535911485288976,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 323.3333333333333
+      "avg_trade_bars": 322.5
     }
   },
   "LVS": {
@@ -6503,7 +6470,7 @@
   "MA": {
     "symbol": "MA",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6524,10 +6491,10 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.1593408972592003,
-      "pf": 1.103228633013552,
-      "sharpe": 0.24139502295582876,
-      "max_dd": -0.1446912809794072,
+      "return": 0.16803899285358348,
+      "pf": 1.056761484757235,
+      "sharpe": 0.2518525432389194,
+      "max_dd": -0.1446912809794071,
       "n_trades": 4,
       "win_rate": 0.5,
       "avg_trade_bars": 199.25
@@ -6559,7 +6526,7 @@
     "stats": {
       "return": 0.6014393807800473,
       "pf": 9.459927004788836,
-      "sharpe": 0.4114460729825134,
+      "sharpe": 0.41144607298251346,
       "max_dd": -0.11547885891673493,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
@@ -6569,7 +6536,7 @@
   "MBG.DE": {
     "symbol": "MBG.DE",
     "ok": true,
-    "bars": 4534,
+    "bars": 4544,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6577,7 +6544,7 @@
       "trend_length": 35,
       "trend_percent": 5.0,
       "minor_percent": 4.0,
-      "tott_percent": 1.0,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
@@ -6590,19 +6557,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.249965617372372,
-      "pf": 0.0937308000425913,
-      "sharpe": -0.31305031994284066,
-      "max_dd": -0.32428801451266664,
+      "return": -0.2685903617163007,
+      "pf": 0.08693670969142145,
+      "sharpe": -0.34261852150868227,
+      "max_dd": -0.32903337182637815,
       "n_trades": 7,
       "win_rate": 0.14285714285714285,
-      "avg_trade_bars": 153.57142857142858
+      "avg_trade_bars": 157.14285714285714
     }
   },
   "MC.PA": {
     "symbol": "MC.PA",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6623,19 +6590,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.11642538934070745,
-      "pf": 4.011254957159979,
-      "sharpe": 0.15017633414653261,
-      "max_dd": -0.1429531010272067,
+      "return": 0.11989518658541831,
+      "pf": 4.214536642316124,
+      "sharpe": 0.1521020323343041,
+      "max_dd": -0.1414765046709443,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 297.3333333333333
+      "avg_trade_bars": 308.6666666666667
     }
   },
   "MCD": {
     "symbol": "MCD",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6656,19 +6623,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.023605525704804675,
-      "pf": 1.308345729580121,
-      "sharpe": 0.0676459919680813,
-      "max_dd": -0.07896215592877998,
+      "return": 0.017829081675220237,
+      "pf": 1.8048187957371318,
+      "sharpe": 0.05608916935330137,
+      "max_dd": -0.07896069099765923,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 213.75
+      "avg_trade_bars": 207.25
     }
   },
   "MCK": {
     "symbol": "MCK",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6689,13 +6656,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.40812241621706535,
-      "pf": 18.166095007478976,
-      "sharpe": 0.36013119487581957,
-      "max_dd": -0.14276874946839058,
+      "return": 0.43795163457982156,
+      "pf": 18.657393289168112,
+      "sharpe": 0.37949928702821867,
+      "max_dd": -0.1420788576700902,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 310.0
+      "avg_trade_bars": 312.3333333333333
     }
   },
   "MDLZ": {
@@ -6722,9 +6689,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.01921142460265335,
+      "return": 0.016039882002224948,
       "pf": 2.1268868899287465,
-      "sharpe": 0.0439123416986609,
+      "sharpe": 0.04053652784414509,
       "max_dd": -0.17354646813821661,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -6734,7 +6701,7 @@
   "MET": {
     "symbol": "MET",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6755,13 +6722,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.019272651744402847,
-      "pf": 1.3060044570004168,
-      "sharpe": 0.05287990866959101,
-      "max_dd": -0.131691969361447,
+      "return": 0.026963852375565756,
+      "pf": 1.4256764934733246,
+      "sharpe": 0.06442120158255407,
+      "max_dd": -0.1251399135774901,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 231.8
+      "avg_trade_bars": 232.2
     }
   },
   "META": {
@@ -6788,9 +6755,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.020865953332518394,
+      "return": 0.011000914935310746,
       "pf": 1.0474050897216973,
-      "sharpe": 0.051222213496428234,
+      "sharpe": 0.04455511347113302,
       "max_dd": -0.2527090870970182,
       "n_trades": 11,
       "win_rate": 0.36363636363636365,
@@ -6909,10 +6876,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 16,
+      "sott_percent": 0.3,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -6920,19 +6887,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.2103134258870215,
-      "pf": 0.2087905986885056,
-      "sharpe": -0.17504094666217096,
-      "max_dd": -0.34274324540637535,
-      "n_trades": 5,
-      "win_rate": 0.2,
-      "avg_trade_bars": 275.4
+      "return": -0.21463048077871616,
+      "pf": 0.41417581744248994,
+      "sharpe": -0.17390295362549632,
+      "max_dd": -0.3163692342436448,
+      "n_trades": 6,
+      "win_rate": 0.16666666666666666,
+      "avg_trade_bars": 247.83333333333334
     }
   },
   "MQG.AX": {
     "symbol": "MQG.AX",
     "ok": true,
-    "bars": 3531,
+    "bars": 3532,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -6955,7 +6922,7 @@
     "stats": {
       "return": -0.04354984709575327,
       "pf": 0.816694357037484,
-      "sharpe": -0.03617351198535098,
+      "sharpe": -0.036168392221107314,
       "max_dd": -0.2179605950339084,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -6986,9 +6953,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.06317916168415927,
+      "return": 0.07739444970876264,
       "pf": 0.12115069777749968,
-      "sharpe": 0.10224307577734304,
+      "sharpe": 0.11788391779710405,
       "max_dd": -0.18533418468503826,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -7019,9 +6986,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.08349508337415634,
+      "return": 0.1081402780275953,
       "pf": 1.5972599432054204,
-      "sharpe": 0.09815936827470466,
+      "sharpe": 0.1061971039704842,
       "max_dd": -0.3939522346490678,
       "n_trades": 6,
       "win_rate": 0.5,
@@ -7044,7 +7011,7 @@
       "sott_period_k": 300,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 10,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -7052,19 +7019,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.6843041148676199,
-      "pf": 5.41000933804705,
-      "sharpe": 0.35936250789175156,
-      "max_dd": -0.46833137628179267,
+      "return": 1.5107452857175145,
+      "pf": 4.704365226404931,
+      "sharpe": 0.33896208423617147,
+      "max_dd": -0.46549941922951776,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 443.8
+      "avg_trade_bars": 466.0
     }
   },
   "MS": {
     "symbol": "MS",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7087,7 +7054,7 @@
     "stats": {
       "return": 0.3040544273295558,
       "pf": 484.3937966775204,
-      "sharpe": 0.32097060824281154,
+      "sharpe": 0.32062433271747276,
       "max_dd": -0.1147404616515818,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -7151,20 +7118,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8083132490968847,
-      "pf": 2.3983652422483446,
-      "sharpe": 0.2659587188303354,
-      "max_dd": -0.6776219569067403,
+      "return": 0.7546627152980472,
+      "pf": 2.368241265995218,
+      "sharpe": 0.2567327416247409,
+      "max_dd": -0.6823728931215706,
       "n_trades": 10,
       "win_rate": 0.4,
-      "avg_trade_bars": 189.7
+      "avg_trade_bars": 188.8
     }
   },
   "MVIS": {
     "symbol": "MVIS",
     "ok": true,
     "bars": 5000,
-    "rating": "MARJINAL",
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7184,19 +7151,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.28260651915948154,
-      "pf": 0.4876999967491053,
-      "sharpe": 0.16578734960402614,
-      "max_dd": -0.5391661381084552,
-      "n_trades": 9,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 185.44444444444446
+      "return": -0.05499832891183576,
+      "pf": 0.3261370276949208,
+      "sharpe": 0.09807226644427368,
+      "max_dd": -0.590066394386049,
+      "n_trades": 10,
+      "win_rate": 0.3,
+      "avg_trade_bars": 173.1
     }
   },
   "NEE": {
     "symbol": "NEE",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7219,11 +7186,11 @@
     "stats": {
       "return": 0.12520911769888543,
       "pf": 15.524155050136264,
-      "sharpe": 0.16177662371963206,
+      "sharpe": 0.1614123891220075,
       "max_dd": -0.14050417698647888,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 493.0
+      "avg_trade_bars": 496.3333333333333
     }
   },
   "NFLX": {
@@ -7250,13 +7217,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.8193153310989436,
-      "pf": 5.093448942389093,
-      "sharpe": 0.4231341985237111,
-      "max_dd": -0.1790003174016127,
+      "return": 0.8206356995994826,
+      "pf": 5.11481350813828,
+      "sharpe": 0.423575029285276,
+      "max_dd": -0.1790003174016126,
       "n_trades": 8,
       "win_rate": 0.5,
-      "avg_trade_bars": 269.375
+      "avg_trade_bars": 269.75
     }
   },
   "NG.L": {
@@ -7295,7 +7262,7 @@
   "NIO": {
     "symbol": "NIO",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7316,13 +7283,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.0006338845746409749,
-      "pf": 1.1995356775246195,
-      "sharpe": 0.05420814301694638,
-      "max_dd": -0.28638037651081827,
+      "return": -0.010355911415642183,
+      "pf": 1.2131936604439237,
+      "sharpe": 0.04745274909429079,
+      "max_dd": -0.2837450840229815,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 226.25
+      "avg_trade_bars": 227.25
     }
   },
   "NKE": {
@@ -7349,9 +7316,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.6122123119678566,
+      "return": 0.5988399173799972,
       "pf": null,
-      "sharpe": 0.4409081211957066,
+      "sharpe": 0.434510236981667,
       "max_dd": -0.1573971759607775,
       "n_trades": 3,
       "win_rate": 1.0,
@@ -7361,7 +7328,7 @@
   "NOW": {
     "symbol": "NOW",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7382,19 +7349,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2781897328128202,
-      "pf": 7.435817274180199,
-      "sharpe": 0.24865998556688743,
+      "return": 0.2820703316336244,
+      "pf": 7.48779755992784,
+      "sharpe": 0.25039552893471834,
       "max_dd": -0.17930335936767572,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 344.6666666666667
+      "avg_trade_bars": 344.3333333333333
     }
   },
   "NTDOY": {
     "symbol": "NTDOY",
     "ok": true,
-    "bars": 3483,
+    "bars": 3493,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7415,13 +7382,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.06969830246844044,
-      "pf": 0.8297044579256785,
-      "sharpe": -0.030874721817045682,
-      "max_dd": -0.31448298011481124,
+      "return": -0.06853715917030934,
+      "pf": 0.833126825512732,
+      "sharpe": -0.029726113020835155,
+      "max_dd": -0.31362736145313763,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 167.66666666666666
+      "avg_trade_bars": 168.0
     }
   },
   "NVAX": {
@@ -7448,9 +7415,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.6983982532689705,
+      "return": -0.6945561928010593,
       "pf": 0.14693083146205538,
-      "sharpe": -0.2636942906144668,
+      "sharpe": -0.2602095129481835,
       "max_dd": -0.8176380059628592,
       "n_trades": 9,
       "win_rate": 0.2222222222222222,
@@ -7481,9 +7448,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.48921898234054684,
+      "return": 0.4765480793826222,
       "pf": 5.983024904279505,
-      "sharpe": 0.26664755058330336,
+      "sharpe": 0.2623961592957904,
       "max_dd": -0.22591107342291195,
       "n_trades": 5,
       "win_rate": 0.8,
@@ -7493,7 +7460,7 @@
   "NVO": {
     "symbol": "NVO",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7514,9 +7481,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3629468253492667,
+      "return": 0.3359984952193218,
       "pf": null,
-      "sharpe": 0.2779828890497475,
+      "sharpe": 0.26301623279692804,
       "max_dd": -0.15805112320995118,
       "n_trades": 3,
       "win_rate": 1.0,
@@ -7526,7 +7493,7 @@
   "NXP": {
     "symbol": "NXP",
     "ok": true,
-    "bars": 3474,
+    "bars": 3484,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7547,19 +7514,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.020914059981742672,
-      "pf": 0.2989171651305189,
-      "sharpe": -0.08892609935168765,
-      "max_dd": -0.04957635247055747,
+      "return": -0.017147985747386185,
+      "pf": 0.36839777895685555,
+      "sharpe": -0.07135163341872906,
+      "max_dd": -0.0459205283346118,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 257.6666666666667
+      "avg_trade_bars": 257.3333333333333
     }
   },
   "NXT.L": {
     "symbol": "NXT.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7572,7 +7539,7 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 28,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -7580,19 +7547,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4843806956459602,
-      "pf": 10.972793350685862,
-      "sharpe": 0.44036455006396497,
-      "max_dd": -0.17646630819020293,
+      "return": 0.500181749813519,
+      "pf": 10.986892095348205,
+      "sharpe": 0.4455295809538335,
+      "max_dd": -0.16716434630982113,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 443.0
+      "avg_trade_bars": 471.6666666666667
     }
   },
   "O": {
     "symbol": "O",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7615,11 +7582,11 @@
     "stats": {
       "return": 0.033833388043357004,
       "pf": 2.2277590429311402,
-      "sharpe": 0.08129365287418856,
+      "sharpe": 0.08098638883965706,
       "max_dd": -0.09764112049406726,
       "n_trades": 4,
       "win_rate": 0.25,
-      "avg_trade_bars": 338.75
+      "avg_trade_bars": 341.25
     }
   },
   "OKTA": {
@@ -7646,9 +7613,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.2638861321598831,
+      "return": -0.2649215754155484,
       "pf": 0.530422613349024,
-      "sharpe": -0.05223767909608449,
+      "sharpe": -0.05282702724741684,
       "max_dd": -0.4734050230324707,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
@@ -7679,13 +7646,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1184141772120334,
-      "pf": 0.3699404742460373,
-      "sharpe": -0.11860654453464031,
-      "max_dd": -0.23974295324936246,
+      "return": -0.11735150422783558,
+      "pf": 0.372025314714952,
+      "sharpe": -0.11747436517114097,
+      "max_dd": -0.23882653127007858,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 246.5
+      "avg_trade_bars": 246.16666666666666
     }
   },
   "PANW": {
@@ -7724,8 +7691,8 @@
   "PCG": {
     "symbol": "PCG",
     "ok": true,
-    "bars": 3484,
-    "rating": "UYUMSUZ",
+    "bars": 3494,
+    "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7734,10 +7701,10 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
-      "gate_length": 16,
+      "sott_percent": 0.2,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -7745,13 +7712,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.28350470539156425,
-      "pf": 0.08190714624411942,
-      "sharpe": -0.3489459721092321,
-      "max_dd": -0.3188116092690718,
-      "n_trades": 5,
-      "win_rate": 0.2,
-      "avg_trade_bars": 223.8
+      "return": -0.26072290179600455,
+      "pf": 0.0,
+      "sharpe": -0.3203394793621832,
+      "max_dd": -0.310633768200945,
+      "n_trades": 4,
+      "win_rate": 0.0,
+      "avg_trade_bars": 282.25
     }
   },
   "PDD": {
@@ -7778,13 +7745,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.42798222412867104,
-      "pf": 0.3322398296457576,
-      "sharpe": -0.24888013260183273,
-      "max_dd": -0.5674739197076284,
+      "return": -0.4406083147922565,
+      "pf": 0.3233086798130005,
+      "sharpe": -0.25949006012269316,
+      "max_dd": -0.5770210242461511,
       "n_trades": 6,
       "win_rate": 0.16666666666666666,
-      "avg_trade_bars": 300.0
+      "avg_trade_bars": 299.6666666666667
     }
   },
   "PEP": {
@@ -7823,19 +7790,19 @@
   "PFE": {
     "symbol": "PFE",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 20,
       "trend_percent": 5.0,
-      "minor_percent": 4.0,
-      "tott_percent": 0.6,
+      "minor_percent": 3.0,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -7844,13 +7811,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.2923717365137086,
-      "pf": 0.049275582878440326,
-      "sharpe": -0.43980484002113807,
-      "max_dd": -0.35958035247333364,
+      "return": -0.14896070304888165,
+      "pf": 0.20708337177169914,
+      "sharpe": -0.1614897345575576,
+      "max_dd": -0.2762662798088712,
       "n_trades": 4,
-      "win_rate": 0.25,
-      "avg_trade_bars": 276.25
+      "win_rate": 0.5,
+      "avg_trade_bars": 401.75
     }
   },
   "PG": {
@@ -7877,9 +7844,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.047672244337685354,
+      "return": -0.05056290175885858,
       "pf": 0.5498353579930985,
-      "sharpe": -0.07339330938279115,
+      "sharpe": -0.07925872920047816,
       "max_dd": -0.10584552695521865,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -7922,7 +7889,7 @@
   "PHIA.AS": {
     "symbol": "PHIA.AS",
     "ok": true,
-    "bars": 4565,
+    "bars": 4576,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -7943,20 +7910,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.07580375325171118,
-      "pf": 0.32692280782590194,
-      "sharpe": -0.07792418596222,
-      "max_dd": -0.15911639887465723,
+      "return": -0.07624601130108477,
+      "pf": 0.32560548671671324,
+      "sharpe": -0.07833484950034221,
+      "max_dd": -0.15951878910562,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 364.0
+      "avg_trade_bars": 361.6666666666667
     }
   },
   "PLD": {
     "symbol": "PLD",
     "ok": true,
-    "bars": 3484,
-    "rating": "VER\u0130_AZ",
+    "bars": 3494,
+    "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -7965,7 +7932,7 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
       "gate_length": 10,
@@ -7976,13 +7943,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.08919821684411522,
-      "pf": 2.2703598282951885,
-      "sharpe": 0.13526965576384778,
-      "max_dd": -0.1052433616496794,
-      "n_trades": 3,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 542.6666666666666
+      "return": 0.0804867659527162,
+      "pf": 2.058973775620879,
+      "sharpe": 0.12959627290812126,
+      "max_dd": -0.12053311819070844,
+      "n_trades": 5,
+      "win_rate": 0.6,
+      "avg_trade_bars": 272.4
     }
   },
   "PLTR": {
@@ -8009,9 +7976,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 2.063952015122797,
+      "return": 2.2084399134895536,
       "pf": 3.5376845177730196,
-      "sharpe": 0.41570839543858984,
+      "sharpe": 0.4296708485855047,
       "max_dd": -0.5458464224075907,
       "n_trades": 9,
       "win_rate": 0.3333333333333333,
@@ -8054,7 +8021,7 @@
   "PM": {
     "symbol": "PM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8077,17 +8044,17 @@
     "stats": {
       "return": 0.2377190173340762,
       "pf": 6.878867212167083,
-      "sharpe": 0.2969396566476549,
+      "sharpe": 0.2967672357559837,
       "max_dd": -0.11029548853299953,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 299.0
+      "avg_trade_bars": 301.5
     }
   },
   "PRX.AS": {
     "symbol": "PRX.AS",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8108,19 +8075,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1762913687608174,
-      "pf": 0.6543156262154087,
-      "sharpe": -0.11242622995314808,
-      "max_dd": -0.40640429032418035,
+      "return": -0.14522524877037268,
+      "pf": 0.6963449420360192,
+      "sharpe": -0.084388639160074,
+      "max_dd": -0.40640429032418013,
       "n_trades": 8,
       "win_rate": 0.25,
-      "avg_trade_bars": 212.375
+      "avg_trade_bars": 210.5
     }
   },
   "PSA": {
     "symbol": "PSA",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8141,9 +8108,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.0609927820146795,
+      "return": -0.07184587278139565,
       "pf": 0.259790280562928,
-      "sharpe": -0.08333348816898932,
+      "sharpe": -0.10276972535134093,
       "max_dd": -0.14820358727917538,
       "n_trades": 4,
       "win_rate": 0.25,
@@ -8186,7 +8153,7 @@
   "QAN.AX": {
     "symbol": "QAN.AX",
     "ok": true,
-    "bars": 3526,
+    "bars": 3522,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8209,11 +8176,11 @@
     "stats": {
       "return": 0.20434879725929922,
       "pf": 3.469191349814731,
-      "sharpe": 0.2182865522892809,
+      "sharpe": 0.21829429608961,
       "max_dd": -0.1866352222147427,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 460.6666666666667
+      "avg_trade_bars": 461.3333333333333
     }
   },
   "QCOM": {
@@ -8240,13 +8207,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.16671296617139375,
-      "pf": 0.15432647656906487,
-      "sharpe": -0.06400005718096012,
-      "max_dd": -0.2685434504598725,
+      "return": -0.1741109186622367,
+      "pf": 0.14897457731540176,
+      "sharpe": -0.06944355547547484,
+      "max_dd": -0.2740048830146308,
       "n_trades": 8,
       "win_rate": 0.25,
-      "avg_trade_bars": 189.0
+      "avg_trade_bars": 188.5
     }
   },
   "RACE": {
@@ -8285,8 +8252,8 @@
   "RCL": {
     "symbol": "RCL",
     "ok": true,
-    "bars": 3488,
-    "rating": "\u0130Y\u0130",
+    "bars": 3498,
+    "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8306,19 +8273,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.38924630959648954,
-      "pf": 4.14489703415168,
-      "sharpe": 0.28417354329816624,
-      "max_dd": -0.2910875812371183,
+      "return": 0.4828622140079981,
+      "pf": 4.676211214648984,
+      "sharpe": 0.3319744423752051,
+      "max_dd": -0.2433167311203286,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 264.6
+      "avg_trade_bars": 266.0
     }
   },
   "RDDT": {
     "symbol": "RDDT",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8339,9 +8306,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.0252817843333442,
+      "return": 1.0055232799562743,
       "pf": 31.261082997564802,
-      "sharpe": 0.3809514536550465,
+      "sharpe": 0.37635028807239057,
       "max_dd": -0.3286631380102383,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -8405,9 +8372,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2518630089631084,
+      "return": 0.23963769752899156,
       "pf": 3.4842469537459473,
-      "sharpe": 0.2975019211510367,
+      "sharpe": 0.2856333243044215,
       "max_dd": -0.10986625669387096,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -8438,9 +8405,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2583318137942492,
+      "return": 0.2566849981761439,
       "pf": 2.185580379006539,
-      "sharpe": 0.264334225001214,
+      "sharpe": 0.2635044218012478,
       "max_dd": -0.14534549300108257,
       "n_trades": 5,
       "win_rate": 0.4,
@@ -8471,13 +8438,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.25153301806205797,
-      "pf": 0.7731671046741081,
-      "sharpe": 0.0032803591051389406,
-      "max_dd": -0.5660593157765778,
+      "return": -0.2761881116689976,
+      "pf": 0.7426978580809109,
+      "sharpe": -0.0044569199245311514,
+      "max_dd": -0.580353664689186,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 279.8333333333333
+      "avg_trade_bars": 279.6666666666667
     }
   },
   "RIVN": {
@@ -8496,7 +8463,7 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 10,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -8504,13 +8471,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.27753692179718215,
-      "pf": 0.6874967945804007,
-      "sharpe": -0.018213498724431416,
-      "max_dd": -0.6063615335403514,
-      "n_trades": 9,
-      "win_rate": 0.4444444444444444,
-      "avg_trade_bars": 204.55555555555554
+      "return": -0.3123098274481648,
+      "pf": 0.47094919447626804,
+      "sharpe": -0.033384171698965175,
+      "max_dd": -0.6285403953709074,
+      "n_trades": 8,
+      "win_rate": 0.375,
+      "avg_trade_bars": 237.75
     }
   },
   "RL": {
@@ -8570,13 +8537,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1442053764603881,
-      "pf": 0.5806258778734161,
-      "sharpe": -0.10192572824907861,
-      "max_dd": -0.342160175363036,
-      "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 290.8333333333333
+      "return": -0.20642249900853127,
+      "pf": 0.47201310163049315,
+      "sharpe": -0.1651972447045943,
+      "max_dd": -0.36467474420905255,
+      "n_trades": 7,
+      "win_rate": 0.2857142857142857,
+      "avg_trade_bars": 254.0
     }
   },
   "ROKU": {
@@ -8603,9 +8570,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.23684610579708942,
+      "return": 0.2583931162542128,
       "pf": 0.6334739864926807,
-      "sharpe": 0.14906944633689515,
+      "sharpe": 0.1558519672398307,
       "max_dd": -0.451689669782651,
       "n_trades": 5,
       "win_rate": 0.4,
@@ -8648,7 +8615,7 @@
   "RTX": {
     "symbol": "RTX",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8669,13 +8636,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.28643257785662835,
-      "pf": 12.232673072180893,
-      "sharpe": 0.3428308562544371,
-      "max_dd": -0.11550704951734014,
+      "return": 0.30422187370671305,
+      "pf": 11.932249006792802,
+      "sharpe": 0.35804040298512085,
+      "max_dd": -0.11332379214968968,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 393.3333333333333
+      "avg_trade_bars": 396.0
     }
   },
   "RUN": {
@@ -8702,9 +8669,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1081423684340147,
+      "return": -0.11128924913659377,
       "pf": 0.6240548224009579,
-      "sharpe": 0.07100677590379986,
+      "sharpe": 0.07007141209850398,
       "max_dd": -0.6062562759182775,
       "n_trades": 5,
       "win_rate": 0.6,
@@ -8726,7 +8693,40 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 500,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.2,
+      "gate_length": 16,
+      "gate_percent": 0.4,
+      "gate_shift": 0,
+      "rott_x1": 30,
+      "rott_x2": 1000,
+      "rott_percent": 7.0
+    },
+    "stats": {
+      "return": 0.04598529514999439,
+      "pf": 1.327847289062139,
+      "sharpe": 0.07097280808450326,
+      "max_dd": -0.22814228430539907,
+      "n_trades": 7,
+      "win_rate": 0.2857142857142857,
+      "avg_trade_bars": 312.2857142857143
+    }
+  },
+  "SAN.MC": {
+    "symbol": "SAN.MC",
+    "ok": true,
+    "bars": 4568,
+    "rating": "M\u00dcKEMMEL",
+    "interval": "1h",
+    "category": "NASDAQ",
+    "params": {
+      "trend_length": 30,
+      "trend_percent": 5.0,
+      "minor_percent": 3.0,
+      "tott_percent": 0.8,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 200,
+      "sott_smooth_k": 200,
+      "sott_percent": 0.4,
       "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -8735,20 +8735,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.04933100374898203,
-      "pf": 1.363006554094621,
-      "sharpe": 0.0739192186362636,
-      "max_dd": -0.21163773500227645,
-      "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 376.0
+      "return": 0.5131001105917845,
+      "pf": 16.86934970445063,
+      "sharpe": 0.37920691729056805,
+      "max_dd": -0.1297657789321507,
+      "n_trades": 7,
+      "win_rate": 0.7142857142857143,
+      "avg_trade_bars": 338.0
     }
   },
-  "SAN.MC": {
-    "symbol": "SAN.MC",
+  "SAN.PA": {
+    "symbol": "SAN.PA",
     "ok": true,
-    "bars": 4557,
-    "rating": "M\u00dcKEMMEL",
+    "bars": 4576,
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8759,7 +8759,7 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
+      "sott_percent": 0.3,
       "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -8768,53 +8768,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5567713487465222,
-      "pf": 23.529949829968427,
-      "sharpe": 0.3998699802935721,
-      "max_dd": -0.1404084794647894,
-      "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 305.0
-    }
-  },
-  "SAN.PA": {
-    "symbol": "SAN.PA",
-    "ok": true,
-    "bars": 4565,
-    "rating": "UYUMSUZ",
-    "interval": "1h",
-    "category": "NASDAQ",
-    "params": {
-      "trend_length": 20,
-      "trend_percent": 5.0,
-      "minor_percent": 3.0,
-      "tott_percent": 0.6,
-      "tott_coeff": 0.0004,
-      "sott_period_k": 500,
-      "sott_smooth_k": 200,
-      "sott_percent": 0.4,
-      "gate_length": 16,
-      "gate_percent": 0.4,
-      "gate_shift": 0,
-      "rott_x1": 30,
-      "rott_x2": 1000,
-      "rott_percent": 7.0
-    },
-    "stats": {
-      "return": -0.14808857739227554,
-      "pf": 0.0,
-      "sharpe": -0.16830691853012528,
-      "max_dd": -0.21702609118887917,
-      "n_trades": 5,
-      "win_rate": 0.0,
-      "avg_trade_bars": 329.0
+      "return": -0.16264278093435225,
+      "pf": 0.4059523273291474,
+      "sharpe": -0.21833550630049664,
+      "max_dd": -0.20725691811056335,
+      "n_trades": 8,
+      "win_rate": 0.375,
+      "avg_trade_bars": 191.5
     }
   },
   "SAP.DE": {
     "symbol": "SAP.DE",
     "ok": true,
     "bars": 4534,
-    "rating": "\u0130Y\u0130",
+    "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8834,13 +8801,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.1581040090517989,
-      "pf": 2.6389843370186794,
-      "sharpe": 0.16214812674089563,
-      "max_dd": -0.13819721759467796,
-      "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 253.0
+      "return": 0.11624133608747744,
+      "pf": 1.9696743475236898,
+      "sharpe": 0.12873506180734595,
+      "max_dd": -0.13819721759467773,
+      "n_trades": 7,
+      "win_rate": 0.2857142857142857,
+      "avg_trade_bars": 224.57142857142858
     }
   },
   "SBUX": {
@@ -8867,13 +8834,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.12672352956500677,
-      "pf": 0.5131993159195393,
-      "sharpe": -0.08075678845133966,
-      "max_dd": -0.2795936993539039,
+      "return": -0.1485810605063803,
+      "pf": 0.4366141743947435,
+      "sharpe": -0.10390391670980416,
+      "max_dd": -0.28862124141246115,
       "n_trades": 9,
-      "win_rate": 0.4444444444444444,
-      "avg_trade_bars": 206.0
+      "win_rate": 0.3333333333333333,
+      "avg_trade_bars": 199.33333333333334
     }
   },
   "SHOP": {
@@ -8900,9 +8867,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.7811002169761454,
+      "return": 0.7909195276617003,
       "pf": 2.6729881475096784,
-      "sharpe": 0.27773633257102165,
+      "sharpe": 0.27980936963383096,
       "max_dd": -0.394243150430444,
       "n_trades": 5,
       "win_rate": 0.4,
@@ -8913,7 +8880,7 @@
     "symbol": "SIE.DE",
     "ok": true,
     "bars": 4532,
-    "rating": "MARJINAL",
+    "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -8933,19 +8900,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.007160232268060174,
-      "pf": 1.1094956369248967,
-      "sharpe": 0.03885977512663383,
-      "max_dd": -0.16010484155383276,
+      "return": -0.02248085595234639,
+      "pf": 0.956457691386248,
+      "sharpe": 0.01371954304058592,
+      "max_dd": -0.16010484155383287,
       "n_trades": 10,
       "win_rate": 0.4,
-      "avg_trade_bars": 203.1
+      "avg_trade_bars": 205.8
     }
   },
   "SLB": {
     "symbol": "SLB",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8953,11 +8920,11 @@
       "trend_length": 35,
       "trend_percent": 7.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 1.0,
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
+      "sott_percent": 0.3,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -8966,19 +8933,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.15648225075512023,
-      "pf": 0.17184614032567325,
-      "sharpe": -0.1642565701172433,
-      "max_dd": -0.35450304357747586,
+      "return": -0.100062978375147,
+      "pf": 0.14287218523240125,
+      "sharpe": -0.08690735871264016,
+      "max_dd": -0.33230111447593436,
       "n_trades": 6,
       "win_rate": 0.16666666666666666,
-      "avg_trade_bars": 132.83333333333334
+      "avg_trade_bars": 138.16666666666666
     }
   },
   "SLF": {
     "symbol": "SLF",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -8999,13 +8966,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.43729686417383573,
-      "pf": 23.621638186833692,
-      "sharpe": 0.5719869096825317,
-      "max_dd": -0.0695457611654704,
+      "return": 0.43902176682957883,
+      "pf": 25.334034551400766,
+      "sharpe": 0.5709759642165424,
+      "max_dd": -0.06859322185717465,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 384.25
+      "avg_trade_bars": 386.75
     }
   },
   "SMCI": {
@@ -9044,7 +9011,7 @@
   "SNAP": {
     "symbol": "SNAP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9067,17 +9034,17 @@
     "stats": {
       "return": -0.033676277212980166,
       "pf": 1.1200650453213448,
-      "sharpe": 0.040828146672755264,
+      "sharpe": 0.04049988622777237,
       "max_dd": -0.4423827474525345,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 187.0
+      "avg_trade_bars": 188.42857142857142
     }
   },
   "SNOW": {
     "symbol": "SNOW",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9087,9 +9054,9 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.2,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -9098,13 +9065,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4141086136611496,
-      "pf": 1.739089318649124,
-      "sharpe": 0.2800138304854183,
-      "max_dd": -0.23416902509453796,
+      "return": 0.6554308336597348,
+      "pf": 2.35232380704103,
+      "sharpe": 0.391079443090532,
+      "max_dd": -0.2481287353692483,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 261.0
+      "avg_trade_bars": 281.0
     }
   },
   "SNPS": {
@@ -9143,7 +9110,7 @@
   "SO": {
     "symbol": "SO",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9166,17 +9133,17 @@
     "stats": {
       "return": 0.07208396023467567,
       "pf": 2.4975400332204307,
-      "sharpe": 0.14168417914317685,
+      "sharpe": 0.1413687444617761,
       "max_dd": -0.08099337275108986,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 256.4
+      "avg_trade_bars": 258.4
     }
   },
   "SPCE": {
     "symbol": "SPCE",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9199,17 +9166,17 @@
     "stats": {
       "return": 0.22365335747606996,
       "pf": 1.8252967464876049,
-      "sharpe": 0.17773239386336598,
+      "sharpe": 0.17746477901893062,
       "max_dd": -0.7218050315269524,
       "n_trades": 7,
       "win_rate": 0.7142857142857143,
-      "avg_trade_bars": 217.85714285714286
+      "avg_trade_bars": 219.28571428571428
     }
   },
   "SPGI": {
     "symbol": "SPGI",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9232,29 +9199,29 @@
     "stats": {
       "return": -0.03842656670598121,
       "pf": 0.7226629182303203,
-      "sharpe": -0.03559006121801904,
+      "sharpe": -0.03518940529400023,
       "max_dd": -0.19716212107127484,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 301.0
+      "avg_trade_bars": 304.3333333333333
     }
   },
   "SPOT": {
     "symbol": "SPOT",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 0.8,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
+      "sott_percent": 0.3,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -9263,13 +9230,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.26266881092176086,
-      "pf": 0.058035910235667496,
-      "sharpe": -0.19642113156034688,
-      "max_dd": -0.43900211584340376,
-      "n_trades": 3,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 276.6666666666667
+      "return": -0.20707883801776894,
+      "pf": 0.45980280746312696,
+      "sharpe": -0.1268021757768782,
+      "max_dd": -0.39010265872602035,
+      "n_trades": 4,
+      "win_rate": 0.25,
+      "avg_trade_bars": 236.0
     }
   },
   "STX": {
@@ -9288,7 +9255,7 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 10,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -9296,13 +9263,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 6.408485502963477,
-      "pf": 21.416687001180176,
-      "sharpe": 0.7523816741372411,
-      "max_dd": -0.262150628386705,
+      "return": 6.391596049775121,
+      "pf": 21.398727514029297,
+      "sharpe": 0.7484509432765011,
+      "max_dd": -0.2621506283867051,
       "n_trades": 9,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 270.22222222222223
+      "avg_trade_bars": 274.55555555555554
     }
   },
   "SU.PA": {
@@ -9329,13 +9296,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.14284063806945668,
-      "pf": 0.38412986133514526,
-      "sharpe": -0.0748594842868387,
-      "max_dd": -0.32838733018338184,
+      "return": -0.1432732672146252,
+      "pf": 0.4051943486255466,
+      "sharpe": -0.07538408898604963,
+      "max_dd": -0.32428000447673555,
       "n_trades": 6,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 350.3333333333333
+      "win_rate": 0.5,
+      "avg_trade_bars": 351.6666666666667
     }
   },
   "SWKS": {
@@ -9395,9 +9362,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.21623406287986202,
+      "return": 0.24063927533687068,
       "pf": 2.0149909555601404,
-      "sharpe": 0.3177237366890335,
+      "sharpe": 0.3479765602508519,
       "max_dd": -0.10322969631775525,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -9440,7 +9407,7 @@
   "TEF.MC": {
     "symbol": "TEF.MC",
     "ok": true,
-    "bars": 4558,
+    "bars": 4568,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9461,9 +9428,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.03116582880151908,
+      "return": -0.03499896359081189,
       "pf": 0.5283407046586525,
-      "sharpe": -0.02249984694110156,
+      "sharpe": -0.028029807611054943,
       "max_dd": -0.14086791912837882,
       "n_trades": 4,
       "win_rate": 0.5,
@@ -9473,8 +9440,8 @@
   "TJX": {
     "symbol": "TJX",
     "ok": true,
-    "bars": 3484,
-    "rating": "MARJINAL",
+    "bars": 3494,
+    "rating": "ORTA",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9494,13 +9461,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.04969881853630387,
-      "pf": 1.7609610131482252,
-      "sharpe": 0.10063113184485858,
-      "max_dd": -0.12070268416955787,
+      "return": 0.06112309833057705,
+      "pf": 2.065729112546349,
+      "sharpe": 0.11690416733491645,
+      "max_dd": -0.11113295008868374,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 275.4
+      "avg_trade_bars": 279.2
     }
   },
   "TLRY": {
@@ -9539,7 +9506,7 @@
   "TM": {
     "symbol": "TM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9560,13 +9527,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.11653548379041134,
+      "return": 0.1319375427805538,
       "pf": 1.8022126593318721,
-      "sharpe": 0.16267959340233865,
+      "sharpe": 0.17917482768905926,
       "max_dd": -0.14067444815309915,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 263.75
+      "avg_trade_bars": 266.25
     }
   },
   "TOU.TO": {
@@ -9593,10 +9560,10 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.14971916284715203,
+      "return": -0.14280853655584047,
       "pf": 0.1487164208018834,
-      "sharpe": -0.16098833327786874,
-      "max_dd": -0.21289038875461497,
+      "sharpe": -0.1515175015852498,
+      "max_dd": -0.2078713380957652,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
       "avg_trade_bars": 188.66666666666666
@@ -9659,9 +9626,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.2953679346784583,
+      "return": 1.4408775477512075,
       "pf": 5.38531047602693,
-      "sharpe": 0.3874034737184481,
+      "sharpe": 0.4128861280085322,
       "max_dd": -0.2803907616122381,
       "n_trades": 8,
       "win_rate": 0.5,
@@ -9671,7 +9638,7 @@
   "TSM": {
     "symbol": "TSM",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9694,11 +9661,11 @@
     "stats": {
       "return": 0.8529210073686853,
       "pf": 15.773555020393319,
-      "sharpe": 0.4947973807920823,
+      "sharpe": 0.49325777196566184,
       "max_dd": -0.14809389541861007,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 322.8
+      "avg_trade_bars": 324.8
     }
   },
   "TTD": {
@@ -9709,14 +9676,14 @@
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 30,
-      "trend_percent": 5.0,
+      "trend_length": 20,
+      "trend_percent": 8.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
-      "tott_coeff": 0.0004,
-      "sott_period_k": 200,
+      "tott_coeff": 0.0008,
+      "sott_period_k": 300,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.4,
       "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -9725,20 +9692,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4353452853818307,
-      "pf": 2.842877618224367,
-      "sharpe": 0.22367611020827208,
-      "max_dd": -0.23543068089103192,
-      "n_trades": 10,
-      "win_rate": 0.6,
-      "avg_trade_bars": 210.0
+      "return": 0.48533451928334803,
+      "pf": 10.542338050664934,
+      "sharpe": 0.24482334243547985,
+      "max_dd": -0.21496322847107507,
+      "n_trades": 6,
+      "win_rate": 0.6666666666666666,
+      "avg_trade_bars": 369.5
     }
   },
   "TTE.PA": {
     "symbol": "TTE.PA",
     "ok": true,
-    "bars": 4566,
-    "rating": "UYUMSUZ",
+    "bars": 4576,
+    "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
@@ -9758,9 +9725,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.02456219669003401,
+      "return": 0.0010532906105598094,
       "pf": 0.9319834464245235,
-      "sharpe": -0.007571996463821577,
+      "sharpe": 0.023952399659183343,
       "max_dd": -0.17203310871495225,
       "n_trades": 7,
       "win_rate": 0.2857142857142857,
@@ -9791,9 +9758,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.6930448824308335,
+      "return": 0.7469722921417261,
       "pf": 15.022648763422055,
-      "sharpe": 0.36421639742323,
+      "sharpe": 0.3826157870224702,
       "max_dd": -0.30758932414248674,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -9836,7 +9803,7 @@
   "UBER": {
     "symbol": "UBER",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9859,7 +9826,7 @@
     "stats": {
       "return": 0.02288099648446762,
       "pf": 1.2939123377146466,
-      "sharpe": 0.05862074857438532,
+      "sharpe": 0.0585116500604604,
       "max_dd": -0.24109716600560394,
       "n_trades": 4,
       "win_rate": 0.25,
@@ -9869,20 +9836,20 @@
   "ULVR.L": {
     "symbol": "ULVR.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 20,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.6,
+      "tott_percent": 0.8,
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.2,
-      "gate_length": 10,
+      "sott_percent": 0.4,
+      "gate_length": 16,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -9890,19 +9857,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.06989415011630917,
-      "pf": 0.6302899949061378,
-      "sharpe": -0.09786350454417045,
-      "max_dd": -0.14639167725864588,
-      "n_trades": 7,
-      "win_rate": 0.2857142857142857,
-      "avg_trade_bars": 174.57142857142858
+      "return": -0.06118995838125174,
+      "pf": 0.738059221280507,
+      "sharpe": -0.08325025183769745,
+      "max_dd": -0.13884375675216365,
+      "n_trades": 6,
+      "win_rate": 0.3333333333333333,
+      "avg_trade_bars": 203.0
     }
   },
   "UNA.AS": {
     "symbol": "UNA.AS",
     "ok": true,
-    "bars": 4566,
+    "bars": 4576,
     "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9923,19 +9890,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.008718372529913365,
-      "pf": 1.13342958046336,
-      "sharpe": 0.03192594542921281,
-      "max_dd": -0.1291016828631063,
-      "n_trades": 9,
-      "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 220.22222222222223
+      "return": 0.03228865590931718,
+      "pf": 1.3528955902840762,
+      "sharpe": 0.06416744265934737,
+      "max_dd": -0.12898956600838096,
+      "n_trades": 8,
+      "win_rate": 0.375,
+      "avg_trade_bars": 227.125
     }
   },
   "UNH": {
     "symbol": "UNH",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9956,19 +9923,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1753245267116481,
+      "return": -0.18281942813308794,
       "pf": 0.34397124242344274,
-      "sharpe": -0.1311690630433732,
+      "sharpe": -0.13895895801193706,
       "max_dd": -0.309779815941988,
       "n_trades": 5,
       "win_rate": 0.4,
-      "avg_trade_bars": 167.4
+      "avg_trade_bars": 169.4
     }
   },
   "UNP": {
     "symbol": "UNP",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -9989,13 +9956,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.012272632542551398,
-      "pf": 0.899052424642219,
-      "sharpe": 0.005435189599231851,
-      "max_dd": -0.14302299634100024,
+      "return": -0.010494290302961229,
+      "pf": 0.9170281303647213,
+      "sharpe": 0.008104505514636921,
+      "max_dd": -0.1414800620717116,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 210.66666666666666
+      "avg_trade_bars": 210.33333333333334
     }
   },
   "UPST": {
@@ -10022,32 +9989,32 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 2.6683985285605223,
-      "pf": 7.243084283141098,
-      "sharpe": 0.3944716443017663,
-      "max_dd": -0.35408646672373245,
+      "return": 2.6818959017976383,
+      "pf": 7.761226122736007,
+      "sharpe": 0.39534599680143456,
+      "max_dd": -0.35408646672373234,
       "n_trades": 8,
       "win_rate": 0.75,
-      "avg_trade_bars": 276.0
+      "avg_trade_bars": 275.875
     }
   },
   "V": {
     "symbol": "V",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 20,
       "trend_percent": 5.0,
-      "minor_percent": 3.5,
+      "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 10,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -10055,13 +10022,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.0639688265310534,
-      "pf": 0.33051638886581525,
-      "sharpe": 0.10959800760799665,
-      "max_dd": -0.1636593070472826,
-      "n_trades": 4,
-      "win_rate": 0.5,
-      "avg_trade_bars": 179.25
+      "return": 0.0590305625020866,
+      "pf": 0.0,
+      "sharpe": 0.10168472548571907,
+      "max_dd": -0.20660481596287383,
+      "n_trades": 3,
+      "win_rate": 0.0,
+      "avg_trade_bars": 177.0
     }
   },
   "VALE": {
@@ -10088,9 +10055,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.39393844819674406,
+      "return": 0.4012509052135753,
       "pf": 4.772763529008707,
-      "sharpe": 0.34652852573379156,
+      "sharpe": 0.3515545547865667,
       "max_dd": -0.19665504540193968,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -10121,9 +10088,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.01715582325014753,
+      "return": -0.024664657835102854,
       "pf": 0.1364913975088947,
-      "sharpe": -0.00451084942164688,
+      "sharpe": -0.016736181678299114,
       "max_dd": -0.15369020055484683,
       "n_trades": 5,
       "win_rate": 0.2,
@@ -10133,7 +10100,7 @@
   "VOD.L": {
     "symbol": "VOD.L",
     "ok": true,
-    "bars": 4522,
+    "bars": 4532,
     "rating": "M\u00dcKEMMEL",
     "interval": "1h",
     "category": "NASDAQ",
@@ -10154,24 +10121,24 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.33755069794080583,
+      "return": 0.3087173023115892,
       "pf": 8.999196672894739,
-      "sharpe": 0.29649000439804624,
+      "sharpe": 0.2778378741884682,
       "max_dd": -0.13411579513167526,
       "n_trades": 7,
       "win_rate": 0.7142857142857143,
-      "avg_trade_bars": 311.42857142857144
+      "avg_trade_bars": 312.85714285714283
     }
   },
   "VOW3.DE": {
     "symbol": "VOW3.DE",
     "ok": true,
-    "bars": 4534,
-    "rating": "UYUMSUZ",
+    "bars": 4544,
+    "rating": "MARJINAL",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 35,
+      "trend_length": 30,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
@@ -10187,13 +10154,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.017082452962772776,
-      "pf": 0.9339168521134378,
-      "sharpe": 0.011372962373471898,
-      "max_dd": -0.2079251996666206,
+      "return": 0.03339569426958855,
+      "pf": 1.3217081818507561,
+      "sharpe": 0.06041077629696234,
+      "max_dd": -0.18966291590152662,
       "n_trades": 9,
-      "win_rate": 0.5555555555555556,
-      "avg_trade_bars": 191.22222222222223
+      "win_rate": 0.6666666666666666,
+      "avg_trade_bars": 197.0
     }
   },
   "VRTX": {
@@ -10220,9 +10187,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.10582577580715968,
+      "return": 0.13011851596219115,
       "pf": 0.728803997482756,
-      "sharpe": 0.10528597548983172,
+      "sharpe": 0.11930441469682791,
       "max_dd": -0.2776348259091568,
       "n_trades": 5,
       "win_rate": 0.6,
@@ -10253,9 +10220,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.03340560539741211,
+      "return": 0.042784312057825735,
       "pf": 0.5200829600361283,
-      "sharpe": 0.07579431397368187,
+      "sharpe": 0.09056272430209299,
       "max_dd": -0.1571319139642967,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -10265,12 +10232,12 @@
   "W": {
     "symbol": "W",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
     "params": {
-      "trend_length": 30,
+      "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
       "tott_percent": 0.6,
@@ -10286,13 +10253,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.7790172223208303,
-      "pf": 11.009527656695742,
-      "sharpe": 0.5124493584922685,
-      "max_dd": -0.32890006759907753,
+      "return": 1.752619242635018,
+      "pf": 10.48351161870209,
+      "sharpe": 0.5078372327109105,
+      "max_dd": -0.33527486882030755,
       "n_trades": 4,
       "win_rate": 0.5,
-      "avg_trade_bars": 365.5
+      "avg_trade_bars": 364.75
     }
   },
   "WB": {
@@ -10311,7 +10278,7 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
-      "gate_length": 16,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -10319,13 +10286,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.09635864549567053,
-      "pf": 0.717756353374545,
-      "sharpe": -0.022277164567638095,
-      "max_dd": -0.32358909721088647,
+      "return": -0.15293052763707438,
+      "pf": 0.478928022224914,
+      "sharpe": -0.06708932861513275,
+      "max_dd": -0.34051070428503394,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
-      "avg_trade_bars": 215.85714285714286
+      "avg_trade_bars": 200.28571428571428
     }
   },
   "WDAY": {
@@ -10385,19 +10352,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 4.090612882154483,
-      "pf": 8.459323639452343,
-      "sharpe": 0.608487014812378,
-      "max_dd": -0.3332647828286618,
+      "return": 4.093931204024915,
+      "pf": 8.473954873821096,
+      "sharpe": 0.6087010562045089,
+      "max_dd": -0.3332647828286617,
       "n_trades": 9,
       "win_rate": 0.4444444444444444,
-      "avg_trade_bars": 253.11111111111111
+      "avg_trade_bars": 253.22222222222223
     }
   },
   "WELL": {
     "symbol": "WELL",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "\u0130Y\u0130",
     "interval": "1h",
     "category": "NASDAQ",
@@ -10405,8 +10372,8 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
-      "tott_coeff": 0.0006,
+      "tott_percent": 0.6,
+      "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.2,
@@ -10418,19 +10385,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.22687662168848965,
-      "pf": 17.92349234539566,
-      "sharpe": 0.28459058792262937,
-      "max_dd": -0.13290630728475383,
+      "return": 0.19673464300647248,
+      "pf": 15.809394239563735,
+      "sharpe": 0.25703606702143666,
+      "max_dd": -0.13290630728475372,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 266.1666666666667
+      "avg_trade_bars": 240.5
     }
   },
   "WFC": {
     "symbol": "WFC",
     "ok": true,
-    "bars": 3484,
+    "bars": 3494,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -10451,9 +10418,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.12459244292105365,
+      "return": 0.11484274056711974,
       "pf": 1.5897591342515451,
-      "sharpe": 0.18718179638916718,
+      "sharpe": 0.1752280669263777,
       "max_dd": -0.16472120302053672,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
@@ -10517,9 +10484,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.34118955275477836,
+      "return": 0.36487049134122795,
       "pf": 11.512879312535526,
-      "sharpe": 0.37624237466947197,
+      "sharpe": 0.3974129025902029,
       "max_dd": -0.127974560352223,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
@@ -10550,13 +10517,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.0780426125731406,
-      "pf": 0.1459661220010748,
-      "sharpe": 0.008784335708629293,
-      "max_dd": -0.449671351509628,
+      "return": -0.04519886767555725,
+      "pf": 0.28960608789981407,
+      "sharpe": 0.030688355462366854,
+      "max_dd": -0.44966675345597085,
       "n_trades": 3,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 262.3333333333333
+      "avg_trade_bars": 263.0
     }
   },
   "Z": {
@@ -10583,19 +10550,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.9571536400885794,
-      "pf": 8.427770254929749,
-      "sharpe": 0.35183469417265567,
-      "max_dd": -0.24785439124621933,
+      "return": 0.9744175951212284,
+      "pf": 8.551484617451893,
+      "sharpe": 0.35574353400496284,
+      "max_dd": -0.24785355119859198,
       "n_trades": 4,
       "win_rate": 0.75,
-      "avg_trade_bars": 544.75
+      "avg_trade_bars": 544.5
     }
   },
   "ZIM": {
     "symbol": "ZIM",
     "ok": true,
-    "bars": 3488,
+    "bars": 3498,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -10616,13 +10583,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2856821568953367,
+      "return": 0.2757001498718712,
       "pf": null,
-      "sharpe": 0.1938704196627342,
-      "max_dd": -0.3606276341236294,
+      "sharpe": 0.1896426739490322,
+      "max_dd": -0.36062437871660746,
       "n_trades": 3,
       "win_rate": 1.0,
-      "avg_trade_bars": 397.0
+      "avg_trade_bars": 400.0
     }
   },
   "ZM": {
@@ -10638,9 +10605,9 @@
       "minor_percent": 3.0,
       "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 500,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
+      "sott_percent": 0.2,
       "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
@@ -10649,13 +10616,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.10905941993476476,
-      "pf": 2.0010802470963966,
-      "sharpe": 0.10191325900366299,
-      "max_dd": -0.29406958394933236,
-      "n_trades": 6,
+      "return": 0.12705557807503776,
+      "pf": 1.3828104216974577,
+      "sharpe": 0.1103486195665348,
+      "max_dd": -0.3843581200177092,
+      "n_trades": 12,
       "win_rate": 0.5,
-      "avg_trade_bars": 348.3333333333333
+      "avg_trade_bars": 172.25
     }
   },
   "ZS": {
@@ -10682,19 +10649,19 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.1743018478214473,
-      "pf": 0.9673791342861912,
-      "sharpe": -0.02480163285759671,
-      "max_dd": -0.51014707290161,
+      "return": -0.20958845816115157,
+      "pf": 0.9194641884999654,
+      "sharpe": -0.04322116545065337,
+      "max_dd": -0.5310811749299097,
       "n_trades": 9,
       "win_rate": 0.4444444444444444,
-      "avg_trade_bars": 192.22222222222223
+      "avg_trade_bars": 191.66666666666666
     }
   },
   "ZTS": {
     "symbol": "ZTS",
     "ok": true,
-    "bars": 3486,
+    "bars": 3496,
     "rating": "VER\u0130_AZ",
     "interval": "1h",
     "category": "NASDAQ",
@@ -10715,20 +10682,20 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.35953045162494557,
-      "pf": 5.508561331653764,
-      "sharpe": 0.3047657551516208,
+      "return": 0.3643285941647447,
+      "pf": 5.566924607948476,
+      "sharpe": 0.3089958069262522,
       "max_dd": -0.1992900660669472,
       "n_trades": 3,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 620.6666666666666
+      "avg_trade_bars": 621.0
     }
   },
   "BTC-USD": {
     "symbol": "BTC-USD",
     "ok": true,
     "bars": 5000,
-    "rating": "ORTA",
+    "rating": "\u0130Y\u0130",
     "interval": "4h",
     "category": "CRYPTO",
     "params": {
@@ -10748,13 +10715,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.11629916832134635,
-      "pf": 1.5500308304015407,
-      "sharpe": 0.10992270364558848,
-      "max_dd": -0.2700134153821443,
+      "return": 0.22894102651219317,
+      "pf": 1.9079048230416884,
+      "sharpe": 0.1694743872049612,
+      "max_dd": -0.27001341538214463,
       "n_trades": 8,
       "win_rate": 0.5,
-      "avg_trade_bars": 209.25
+      "avg_trade_bars": 210.75
     }
   },
   "ETH-USD": {
@@ -10781,13 +10748,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.2278064139510998,
-      "pf": 2.4446869512499916,
-      "sharpe": 0.14882605575716754,
-      "max_dd": -0.3082258783297971,
+      "return": 0.21201283086623124,
+      "pf": 2.3633925799929556,
+      "sharpe": 0.14216777218471813,
+      "max_dd": -0.3082258783297972,
       "n_trades": 6,
       "win_rate": 0.6666666666666666,
-      "avg_trade_bars": 236.0
+      "avg_trade_bars": 240.83333333333334
     }
   },
   "BNB-USD": {
@@ -10814,13 +10781,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.5422239145296008,
-      "pf": 9.504069361006964,
-      "sharpe": 0.27285042743586535,
+      "return": 0.49327989295847074,
+      "pf": 8.938382301926493,
+      "sharpe": 0.25088692868226675,
       "max_dd": -0.2213485168455962,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 358.0
+      "avg_trade_bars": 364.4
     }
   },
   "SOL-USD": {
@@ -10847,13 +10814,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.4858744340068232,
-      "pf": 0.4908280067447846,
-      "sharpe": -0.18376740633900956,
-      "max_dd": -0.6978024201930231,
+      "return": -0.49889017187749585,
+      "pf": 0.47013984994093794,
+      "sharpe": -0.18990574735182966,
+      "max_dd": -0.7042643514423083,
       "n_trades": 11,
-      "win_rate": 0.2727272727272727,
-      "avg_trade_bars": 136.8181818181818
+      "win_rate": 0.18181818181818182,
+      "avg_trade_bars": 138.0909090909091
     }
   },
   "XRP-USD": {
@@ -10882,7 +10849,7 @@
     "stats": {
       "return": 2.3150454037962787,
       "pf": 63.940723477569996,
-      "sharpe": 0.4120676156650491,
+      "sharpe": 0.412067615665049,
       "max_dd": -0.46991918630336715,
       "n_trades": 4,
       "win_rate": 0.75,
@@ -10913,13 +10880,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.0098589757033634,
-      "pf": 4.621075307226838,
-      "sharpe": 0.28800007704569947,
-      "max_dd": -0.4921154189974638,
+      "return": 1.025659704231893,
+      "pf": 4.669534781540737,
+      "sharpe": 0.288147322355137,
+      "max_dd": -0.4921148898483908,
       "n_trades": 8,
       "win_rate": 0.5,
-      "avg_trade_bars": 244.5
+      "avg_trade_bars": 246.625
     }
   },
   "DOGE-USD": {
@@ -10946,13 +10913,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.3399786950345527,
-      "pf": 2.36805894997476,
-      "sharpe": 0.17249106398670316,
-      "max_dd": -0.3660002222939528,
+      "return": 0.6796897379665978,
+      "pf": 3.3196754361617575,
+      "sharpe": 0.23934333272483294,
+      "max_dd": -0.3659749437230613,
       "n_trades": 8,
       "win_rate": 0.625,
-      "avg_trade_bars": 258.25
+      "avg_trade_bars": 264.0
     }
   },
   "TRX-USD": {
@@ -10979,13 +10946,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.1099180459245637,
-      "pf": 23.272796547807598,
-      "sharpe": 0.3253540743697142,
-      "max_dd": -0.4729319602218558,
+      "return": 1.3628417696243975,
+      "pf": 27.613007646010185,
+      "sharpe": 0.36339669554200105,
+      "max_dd": -0.4729240381032793,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 459.0
+      "avg_trade_bars": 460.0
     }
   },
   "AVAX-USD": {
@@ -10999,12 +10966,12 @@
       "trend_length": 20,
       "trend_percent": 5.0,
       "minor_percent": 3.0,
-      "tott_percent": 0.8,
+      "tott_percent": 0.6,
       "tott_coeff": 0.0004,
-      "sott_period_k": 300,
+      "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.3,
-      "gate_length": 22,
+      "sott_percent": 0.4,
+      "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -11012,13 +10979,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.1076316274814695,
-      "pf": 15.2475410251108,
-      "sharpe": 0.3365679723192478,
-      "max_dd": -0.4228653689727384,
+      "return": 1.1388032775568622,
+      "pf": 20.699069167596424,
+      "sharpe": 0.34935642911693093,
+      "max_dd": -0.46520848733244247,
       "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 363.0
+      "win_rate": 0.6,
+      "avg_trade_bars": 324.4
     }
   },
   "DOT-USD": {
@@ -11037,7 +11004,7 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 10,
+      "gate_length": 28,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -11045,13 +11012,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.0304240347098927,
-      "pf": 8.02867059948813,
-      "sharpe": 0.2858144966004667,
-      "max_dd": -0.5497187595576758,
+      "return": 0.8791824759341262,
+      "pf": 7.506307262684854,
+      "sharpe": 0.2645903085091016,
+      "max_dd": -0.46694234116127287,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 390.3333333333333
+      "avg_trade_bars": 391.1666666666667
     }
   },
   "LINK-USD": {
@@ -11078,13 +11045,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.664637180314688,
-      "pf": 10.613379136415015,
-      "sharpe": 0.38195446812058764,
-      "max_dd": -0.3399209486166007,
+      "return": 1.4733872563719879,
+      "pf": 9.730476999622507,
+      "sharpe": 0.3562010895378922,
+      "max_dd": -0.3399209486166008,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 279.0
+      "avg_trade_bars": 283.0
     }
   },
   "LTC-USD": {
@@ -11111,13 +11078,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.36279671386354573,
-      "pf": 2.9606812528458413,
-      "sharpe": 0.1768292813602381,
-      "max_dd": -0.537578074225588,
+      "return": 0.4470301301641224,
+      "pf": 3.3614199458709044,
+      "sharpe": 0.19414662089440107,
+      "max_dd": -0.5375736990873757,
       "n_trades": 5,
       "win_rate": 0.8,
-      "avg_trade_bars": 445.2
+      "avg_trade_bars": 448.2
     }
   },
   "BCH-USD": {
@@ -11144,13 +11111,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.523673291362083,
-      "pf": 6.227141488654116,
-      "sharpe": 0.22588500021086574,
+      "return": 0.4018072147160219,
+      "pf": 3.6809775662204314,
+      "sharpe": 0.19296693092571848,
       "max_dd": -0.38532830662896633,
       "n_trades": 5,
-      "win_rate": 0.8,
-      "avg_trade_bars": 302.2
+      "win_rate": 0.6,
+      "avg_trade_bars": 307.4
     }
   },
   "UNI-USD": {
@@ -11177,13 +11144,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.218622455905223,
-      "pf": 1.844259354316729,
-      "sharpe": 0.14392440126358638,
-      "max_dd": -0.5345697871696572,
+      "return": 0.10446146084316288,
+      "pf": 1.5013340921028864,
+      "sharpe": 0.11677427083829167,
+      "max_dd": -0.5345763694480048,
       "n_trades": 6,
       "win_rate": 0.3333333333333333,
-      "avg_trade_bars": 252.66666666666666
+      "avg_trade_bars": 257.1666666666667
     }
   },
   "ATOM-USD": {
@@ -11210,13 +11177,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.4600699445003653,
-      "pf": 3.0759624522078544,
-      "sharpe": 0.19863681377782497,
-      "max_dd": -0.5643324110105405,
+      "return": 0.44485820073798865,
+      "pf": 3.0279361421777975,
+      "sharpe": 0.19467658489958656,
+      "max_dd": -0.5643332196634689,
       "n_trades": 5,
       "win_rate": 0.6,
-      "avg_trade_bars": 482.6
+      "avg_trade_bars": 488.0
     }
   },
   "ETC-USD": {
@@ -11235,7 +11202,7 @@
       "sott_period_k": 200,
       "sott_smooth_k": 200,
       "sott_percent": 0.4,
-      "gate_length": 16,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -11243,13 +11210,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.7738953740670205,
-      "pf": 65.79436620737646,
-      "sharpe": 0.2734549115523862,
-      "max_dd": -0.4618123630006751,
+      "return": 0.6613250432650897,
+      "pf": 17.92632131057789,
+      "sharpe": 0.24877208660343733,
+      "max_dd": -0.4532665287393335,
       "n_trades": 7,
-      "win_rate": 0.7142857142857143,
-      "avg_trade_bars": 313.2857142857143
+      "win_rate": 0.8571428571428571,
+      "avg_trade_bars": 314.57142857142856
     }
   },
   "NEAR-USD": {
@@ -11276,13 +11243,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.008161114449768303,
-      "pf": 1.814748821300528,
-      "sharpe": 0.10367730971335505,
-      "max_dd": -0.6745409821808921,
+      "return": 0.07260221357995178,
+      "pf": 1.5133261317063107,
+      "sharpe": 0.12277159826992828,
+      "max_dd": -0.6745447247806542,
       "n_trades": 4,
-      "win_rate": 0.75,
-      "avg_trade_bars": 388.75
+      "win_rate": 0.5,
+      "avg_trade_bars": 393.0
     }
   },
   "ALGO-USD": {
@@ -11309,13 +11276,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 2.102716472078143,
-      "pf": 27.259663235096216,
-      "sharpe": 0.3780061239549239,
-      "max_dd": -0.5144667009073787,
+      "return": 2.1371940638887117,
+      "pf": 27.673288175495315,
+      "sharpe": 0.37761891087457283,
+      "max_dd": -0.5144667009073789,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 310.6666666666667
+      "avg_trade_bars": 314.1666666666667
     }
   },
   "FIL-USD": {
@@ -11342,13 +11309,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.40364195255788005,
-      "pf": 2.5202176463459023,
-      "sharpe": 0.18407842866467886,
-      "max_dd": -0.5455077624563132,
+      "return": 0.40114280886747955,
+      "pf": 2.5134035520603923,
+      "sharpe": 0.18355215082643564,
+      "max_dd": -0.5455079079781415,
       "n_trades": 6,
       "win_rate": 0.5,
-      "avg_trade_bars": 369.0
+      "avg_trade_bars": 373.3333333333333
     }
   },
   "APT-USD": {
@@ -11408,13 +11375,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.686744673575571,
-      "pf": 14.561584189692775,
-      "sharpe": 0.38670149816757027,
-      "max_dd": -0.4472925080359351,
+      "return": 1.69995779404419,
+      "pf": 14.62576102151758,
+      "sharpe": 0.3829676095247825,
+      "max_dd": -0.447292508035935,
       "n_trades": 6,
       "win_rate": 0.8333333333333334,
-      "avg_trade_bars": 387.3333333333333
+      "avg_trade_bars": 392.0
     }
   },
   "OP-USD": {
@@ -11432,22 +11399,22 @@
       "tott_coeff": 0.0004,
       "sott_period_k": 200,
       "sott_smooth_k": 200,
-      "sott_percent": 0.4,
+      "sott_percent": 0.3,
       "gate_length": 10,
-      "gate_percent": 0.5,
+      "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
       "rott_x2": 1000,
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 2.0913702295915426,
-      "pf": 8.21218209862742,
-      "sharpe": 0.40126675736693473,
-      "max_dd": -0.45926430207074886,
+      "return": 1.9389451742839965,
+      "pf": 6.584200139958625,
+      "sharpe": 0.3823345967346848,
+      "max_dd": -0.5181621802700497,
       "n_trades": 7,
-      "win_rate": 0.7142857142857143,
-      "avg_trade_bars": 352.57142857142856
+      "win_rate": 0.5714285714285714,
+      "avg_trade_bars": 358.42857142857144
     }
   },
   "SUI-USD": {
@@ -11474,13 +11441,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.9189317338543943,
-      "pf": 4.406958875669471,
-      "sharpe": 0.26301394732956573,
+      "return": 0.9074195224360344,
+      "pf": 4.371972102304874,
+      "sharpe": 0.26123685236074895,
       "max_dd": -0.3708596300406579,
       "n_trades": 7,
       "win_rate": 0.5714285714285714,
-      "avg_trade_bars": 290.85714285714283
+      "avg_trade_bars": 292.0
     }
   },
   "INJ-USD": {
@@ -11507,13 +11474,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 1.4056745580322256,
-      "pf": 5.2116158743946945,
-      "sharpe": 0.35146090373673416,
-      "max_dd": -0.30138570615198645,
+      "return": 1.4130952132007937,
+      "pf": 5.223879227469784,
+      "sharpe": 0.34579485679473454,
+      "max_dd": -0.30138570615198657,
       "n_trades": 8,
       "win_rate": 0.625,
-      "avg_trade_bars": 267.125
+      "avg_trade_bars": 271.5
     }
   },
   "HBAR-USD": {
@@ -11540,13 +11507,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 2.9041981170620614,
-      "pf": 6.145615920602373,
-      "sharpe": 0.3996590552061776,
-      "max_dd": -0.5641691591066379,
+      "return": 3.5656416489533536,
+      "pf": 7.242813856197389,
+      "sharpe": 0.425326811145656,
+      "max_dd": -0.564169159106638,
       "n_trades": 9,
       "win_rate": 0.5555555555555556,
-      "avg_trade_bars": 222.66666666666666
+      "avg_trade_bars": 223.22222222222223
     }
   },
   "IMX-USD": {
@@ -11575,7 +11542,7 @@
     "stats": {
       "return": 0.21825396810186892,
       "pf": 1.9621367439315691,
-      "sharpe": 0.14211315778412506,
+      "sharpe": 0.14211315778412503,
       "max_dd": -0.4850106222362599,
       "n_trades": 5,
       "win_rate": 0.6,
@@ -11631,7 +11598,7 @@
       "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 16,
+      "gate_length": 22,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -11639,13 +11606,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.7352173656827814,
-      "pf": 6.296884552517843,
-      "sharpe": 0.2576476013694973,
-      "max_dd": -0.4941551094231037,
+      "return": 0.788736345873988,
+      "pf": 7.101094704037373,
+      "sharpe": 0.2622761489886965,
+      "max_dd": -0.4941539536877132,
       "n_trades": 4,
-      "win_rate": 0.5,
-      "avg_trade_bars": 578.75
+      "win_rate": 0.75,
+      "avg_trade_bars": 591.5
     }
   },
   "GC=F": {
@@ -11672,13 +11639,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": 0.010076443194055429,
-      "pf": 1.089970823207847,
-      "sharpe": 0.031927463285747186,
-      "max_dd": -0.17846916726514495,
+      "return": 0.009851637222662246,
+      "pf": 1.192293720435569,
+      "sharpe": 0.03158255055111844,
+      "max_dd": -0.17846756815071874,
       "n_trades": 6,
       "win_rate": 0.5,
-      "avg_trade_bars": 203.33333333333334
+      "avg_trade_bars": 203.5
     }
   },
   "SI=F": {
@@ -11705,9 +11672,9 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.03362004163537935,
+      "return": -0.0437249477185373,
       "pf": 1.0394088078956223,
-      "sharpe": 0.014344333020066734,
+      "sharpe": 0.007015286205819784,
       "max_dd": -0.32503982750804417,
       "n_trades": 7,
       "win_rate": 0.42857142857142855,
@@ -11717,20 +11684,20 @@
   "PA=F": {
     "symbol": "PA=F",
     "ok": true,
-    "bars": 11456,
+    "bars": 11460,
     "rating": "UYUMSUZ",
     "interval": "1h",
     "category": "COMMODITY",
     "params": {
-      "trend_length": 20,
-      "trend_percent": 8.0,
+      "trend_length": 30,
+      "trend_percent": 7.0,
       "minor_percent": 3.0,
       "tott_percent": 0.8,
-      "tott_coeff": 0.0008,
-      "sott_period_k": 300,
+      "tott_coeff": 0.0004,
+      "sott_period_k": 500,
       "sott_smooth_k": 200,
       "sott_percent": 0.3,
-      "gate_length": 16,
+      "gate_length": 10,
       "gate_percent": 0.4,
       "gate_shift": 0,
       "rott_x1": 30,
@@ -11738,13 +11705,13 @@
       "rott_percent": 7.0
     },
     "stats": {
-      "return": -0.20361100536897014,
-      "pf": 0.8700100165592107,
-      "sharpe": -0.04113222531200922,
-      "max_dd": -0.4618990333622939,
-      "n_trades": 19,
-      "win_rate": 0.2631578947368421,
-      "avg_trade_bars": 238.0
+      "return": -0.17250759294770945,
+      "pf": 0.8995043425649915,
+      "sharpe": -0.03149721675895658,
+      "max_dd": -0.46470412585356247,
+      "n_trades": 13,
+      "win_rate": 0.3076923076923077,
+      "avg_trade_bars": 304.84615384615387
     }
   },
   "EURUSD=X": {
