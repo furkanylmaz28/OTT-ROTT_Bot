@@ -1,12 +1,11 @@
 {
-  "ts": "2026-09-07T15:02:23.578040+03:00",
-  "bull": 20,
+  "ts": "2026-09-07T15:17:26.387752+03:00",
+  "bull": 19,
   "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
-    "ASELS",
     "FROTO",
     "GUBRF",
     "ISCTR",
