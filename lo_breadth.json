@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-07T12:47:20.972143+03:00",
-  "bull": 18,
+  "ts": "2026-09-07T13:03:24.719662+03:00",
+  "bull": 17,
   "bear": 15,
-  "total": 33,
-  "bull_pct": 55.0,
+  "total": 32,
+  "bull_pct": 53.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -13,7 +13,6 @@
     "KCHOL",
     "SASA",
     "SISE",
-    "SOKM",
     "TAVHL",
     "THYAO",
     "TOASO",
