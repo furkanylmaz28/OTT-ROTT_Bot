@@ -1,12 +1,13 @@
 {
-  "ts": "2026-09-08T17:32:21.122211+03:00",
-  "bull": 26,
-  "bear": 7,
+  "ts": "2026-09-08T17:47:14.078188+03:00",
+  "bull": 28,
+  "bear": 5,
   "total": 33,
-  "bull_pct": 79.0,
+  "bull_pct": 85.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
+    "ENJSA",
     "EKGYO",
     "ENKAI",
     "EREGL",
@@ -28,15 +29,14 @@
     "TTKOM",
     "TUPRS",
     "VAKBN",
+    "YKBNK",
     "AEFES",
     "HEKTS",
     "ALARK"
   ],
   "bear_syms": [
     "DOHOL",
-    "ENJSA",
     "HALKB",
-    "YKBNK",
     "ODAS",
     "ASTOR",
     "AKSEN"
