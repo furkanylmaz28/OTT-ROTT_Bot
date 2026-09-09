@@ -11743,5 +11743,32 @@
     "pnl_pct": -4.098,
     "exit_ts": "2026-09-10T01:16:05.887738+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 101.14,
+    "exit_price": 100.93,
+    "pnl_pct": -0.308,
+    "exit_ts": "2026-09-10T02:01:27.437815+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07639,
+    "exit_price": 0.07603,
+    "pnl_pct": -0.571,
+    "exit_ts": "2026-09-10T02:01:27.437815+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.07639,
+    "exit_price": 0.07603,
+    "pnl_pct": -0.571,
+    "exit_ts": "2026-09-10T02:01:27.437815+03:00",
+    "reason": "trend"
   }
 ]
