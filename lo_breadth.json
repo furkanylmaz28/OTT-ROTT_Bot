@@ -1,8 +1,8 @@
 {
-  "ts": "2026-09-09T13:17:17.423672+03:00",
-  "bull": 29,
+  "ts": "2026-09-09T13:32:13.103080+03:00",
+  "bull": 30,
   "bear": 3,
-  "total": 32,
+  "total": 33,
   "bull_pct": 91.0,
   "bull_syms": [
     "AKBNK",
@@ -20,6 +20,7 @@
     "PETKM",
     "PGSUS",
     "SASA",
+    "SISE",
     "SOKM",
     "TAVHL",
     "THYAO",
