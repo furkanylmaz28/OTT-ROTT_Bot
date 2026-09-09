@@ -11707,5 +11707,41 @@
     "pnl_pct": -0.488,
     "exit_ts": "2026-09-09T22:16:10.456296+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 6.839,
+    "exit_price": 6.221,
+    "pnl_pct": -9.136,
+    "exit_ts": "2026-09-10T01:16:05.887738+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 6.612,
+    "exit_price": 6.221,
+    "pnl_pct": -6.013,
+    "exit_ts": "2026-09-10T01:16:05.887738+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "2",
+    "entry_price": 6.429,
+    "exit_price": 6.221,
+    "pnl_pct": -3.335,
+    "exit_ts": "2026-09-10T01:16:05.887738+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07929,
+    "exit_price": 0.07612,
+    "pnl_pct": -4.098,
+    "exit_ts": "2026-09-10T01:16:05.887738+03:00",
+    "reason": "trend"
   }
 ]
