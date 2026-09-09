@@ -11563,5 +11563,32 @@
     "pnl_pct": 0.379,
     "exit_ts": "2026-09-08T22:01:33.834758+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 6.714,
+    "exit_price": 6.858,
+    "pnl_pct": 2.045,
+    "exit_ts": "2026-09-09T08:46:12.746712+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 2.279,
+    "exit_price": 2.333,
+    "pnl_pct": 2.269,
+    "exit_ts": "2026-09-09T08:46:12.746712+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1642,
+    "exit_price": 0.1659,
+    "pnl_pct": 0.935,
+    "exit_ts": "2026-09-09T08:46:12.746712+03:00",
+    "reason": "trail"
   }
 ]
