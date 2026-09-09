@@ -1,8 +1,8 @@
 {
-  "ts": "2026-09-09T16:32:37.170723+03:00",
-  "bull": 31,
+  "ts": "2026-09-09T16:47:16.720693+03:00",
+  "bull": 30,
   "bear": 2,
-  "total": 33,
+  "total": 32,
   "bull_pct": 94.0,
   "bull_syms": [
     "AKBNK",
@@ -14,7 +14,6 @@
     "EREGL",
     "FROTO",
     "GUBRF",
-    "ISCTR",
     "KCHOL",
     "KRDMD",
     "MGROS",
