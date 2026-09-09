@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-09T10:47:15.093674+03:00",
+  "ts": "2026-09-09T11:02:33.395480+03:00",
   "bull": 29,
   "bear": 3,
   "total": 32,
@@ -17,6 +17,7 @@
     "KCHOL",
     "KRDMD",
     "MGROS",
+    "PETKM",
     "PGSUS",
     "SASA",
     "SISE",
@@ -31,7 +32,6 @@
     "YKBNK",
     "AEFES",
     "HEKTS",
-    "ODAS",
     "AKSEN",
     "ALARK"
   ],
