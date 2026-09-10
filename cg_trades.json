@@ -11896,5 +11896,32 @@
     "pnl_pct": 0.999,
     "exit_ts": "2026-09-10T09:46:10.129211+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 53.52,
+    "exit_price": 52.33,
+    "pnl_pct": -2.323,
+    "exit_ts": "2026-09-10T10:31:12.179200+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 249.8,
+    "exit_price": 247.8,
+    "pnl_pct": -0.901,
+    "exit_ts": "2026-09-10T10:31:12.179200+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.624,
+    "exit_price": 0.628,
+    "pnl_pct": 0.541,
+    "exit_ts": "2026-09-10T10:31:12.179200+03:00",
+    "reason": "trail"
   }
 ]
