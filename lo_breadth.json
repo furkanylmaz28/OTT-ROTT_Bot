@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-10T15:02:15.780441+03:00",
-  "bull": 20,
+  "ts": "2026-09-10T15:17:31.007844+03:00",
+  "bull": 19,
   "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "ASELS",
     "DOHOL",
@@ -19,7 +19,6 @@
     "TAVHL",
     "TOASO",
     "TKFEN",
-    "TTKOM",
     "TUPRS",
     "VAKBN",
     "AEFES",
