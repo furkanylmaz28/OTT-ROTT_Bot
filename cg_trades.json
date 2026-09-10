@@ -12031,5 +12031,32 @@
     "pnl_pct": -1.487,
     "exit_ts": "2026-09-10T15:46:24.500189+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2422.25,
+    "exit_price": 2413.47,
+    "pnl_pct": -0.462,
+    "exit_ts": "2026-09-10T16:16:08.040781+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1245,
+    "exit_price": 0.1222,
+    "pnl_pct": -1.947,
+    "exit_ts": "2026-09-10T16:16:08.040781+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1245,
+    "exit_price": 0.1222,
+    "pnl_pct": -1.947,
+    "exit_ts": "2026-09-10T16:16:08.040781+03:00",
+    "reason": "trend"
   }
 ]
