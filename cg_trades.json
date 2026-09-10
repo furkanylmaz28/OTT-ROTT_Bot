@@ -12085,5 +12085,41 @@
     "pnl_pct": -0.913,
     "exit_ts": "2026-09-10T17:16:07.410269+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 52.41,
+    "exit_price": 52.24,
+    "pnl_pct": -0.424,
+    "exit_ts": "2026-09-10T18:01:58.026500+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1496,
+    "exit_price": 0.1511,
+    "pnl_pct": 0.903,
+    "exit_ts": "2026-09-10T18:01:58.026500+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1496,
+    "exit_price": 0.1511,
+    "pnl_pct": 0.903,
+    "exit_ts": "2026-09-10T18:01:58.026500+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1496,
+    "exit_price": 0.1511,
+    "pnl_pct": 0.903,
+    "exit_ts": "2026-09-10T18:01:58.026500+03:00",
+    "reason": "trail"
   }
 ]
