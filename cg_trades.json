@@ -12202,5 +12202,41 @@
     "pnl_pct": -1.007,
     "exit_ts": "2026-09-10T19:31:18.516058+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 712.26,
+    "exit_price": 710.98,
+    "pnl_pct": -0.28,
+    "exit_ts": "2026-09-10T21:16:14.646751+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2067,
+    "exit_price": 0.2084,
+    "pnl_pct": 0.722,
+    "exit_ts": "2026-09-10T21:16:14.646751+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.076,
+    "exit_price": 1.099,
+    "pnl_pct": 2.038,
+    "exit_ts": "2026-09-10T21:16:14.646751+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 5.78,
+    "exit_price": 5.938,
+    "pnl_pct": 2.634,
+    "exit_ts": "2026-09-10T21:16:14.646751+03:00",
+    "reason": "trail"
   }
 ]
