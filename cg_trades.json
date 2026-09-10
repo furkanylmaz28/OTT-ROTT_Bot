@@ -11968,5 +11968,68 @@
     "pnl_pct": -0.405,
     "exit_ts": "2026-09-10T15:01:24.916075+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 719.09,
+    "exit_price": 711.66,
+    "pnl_pct": -1.133,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 101.1,
+    "exit_price": 99.79,
+    "pnl_pct": -1.396,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08514,
+    "exit_price": 0.08453,
+    "pnl_pct": -0.816,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.08514,
+    "exit_price": 0.08453,
+    "pnl_pct": -0.816,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 52.38,
+    "exit_price": 52.1,
+    "pnl_pct": -0.635,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 247.8,
+    "exit_price": 241.7,
+    "pnl_pct": -2.562,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 245.1,
+    "exit_price": 241.7,
+    "pnl_pct": -1.487,
+    "exit_ts": "2026-09-10T15:46:24.500189+03:00",
+    "reason": "trend"
   }
 ]
