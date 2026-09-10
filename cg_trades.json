@@ -12058,5 +12058,32 @@
     "pnl_pct": -1.947,
     "exit_ts": "2026-09-10T16:16:08.040781+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 52.36,
+    "exit_price": 52.2,
+    "pnl_pct": -0.406,
+    "exit_ts": "2026-09-10T17:16:07.410269+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.123,
+    "exit_price": 0.122,
+    "pnl_pct": -0.913,
+    "exit_ts": "2026-09-10T17:16:07.410269+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.123,
+    "exit_price": 0.122,
+    "pnl_pct": -0.913,
+    "exit_ts": "2026-09-10T17:16:07.410269+03:00",
+    "reason": "trend"
   }
 ]
