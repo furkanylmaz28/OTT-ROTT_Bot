@@ -11869,5 +11869,23 @@
     "pnl_pct": -2.381,
     "exit_ts": "2026-09-10T07:01:37.396754+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 729.5,
+    "exit_price": 720.04,
+    "pnl_pct": -1.397,
+    "exit_ts": "2026-09-10T09:16:07.214440+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2102,
+    "exit_price": 0.2132,
+    "pnl_pct": 1.327,
+    "exit_ts": "2026-09-10T09:16:07.214440+03:00",
+    "reason": "trail"
   }
 ]
