@@ -12877,5 +12877,50 @@
     "pnl_pct": -0.425,
     "exit_ts": "2026-09-11T19:16:07.143529+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 5.95,
+    "exit_price": 5.83,
+    "pnl_pct": -2.117,
+    "exit_ts": "2026-09-11T20:16:11.697186+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 5.847,
+    "exit_price": 5.83,
+    "pnl_pct": -0.391,
+    "exit_ts": "2026-09-11T20:16:11.697186+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1232,
+    "exit_price": 0.1227,
+    "pnl_pct": -0.506,
+    "exit_ts": "2026-09-11T20:16:11.697186+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.0457,
+    "exit_price": 0.04483,
+    "pnl_pct": -2.004,
+    "exit_ts": "2026-09-11T20:16:11.697186+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04548,
+    "exit_price": 0.04483,
+    "pnl_pct": -1.529,
+    "exit_ts": "2026-09-11T20:16:11.697186+03:00",
+    "reason": "trend"
   }
 ]
