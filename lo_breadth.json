@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-11T11:32:12.884702+03:00",
+  "ts": "2026-09-11T11:47:00.263163+03:00",
   "bull": 13,
   "bear": 20,
   "total": 33,
@@ -49,13 +49,11 @@
     "KCHOL",
     "KRDMD",
     "PETKM",
-    "SASA",
     "SISE",
     "TAVHL",
     "THYAO",
     "TKFEN",
     "VAKBN",
-    "ODAS",
     "AKSEN"
   ]
 }
