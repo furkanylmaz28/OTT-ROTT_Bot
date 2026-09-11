@@ -12418,5 +12418,50 @@
     "pnl_pct": -1.572,
     "exit_ts": "2026-09-11T02:46:27.049552+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 712.33,
+    "exit_price": 709.07,
+    "pnl_pct": -0.558,
+    "exit_ts": "2026-09-11T03:01:32.194694+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3754,
+    "exit_price": 1.3348,
+    "pnl_pct": -3.052,
+    "exit_ts": "2026-09-11T03:01:32.194694+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "1",
+    "entry_price": 1.3309,
+    "exit_price": 1.3348,
+    "pnl_pct": 0.193,
+    "exit_ts": "2026-09-11T03:01:32.194694+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2147,
+    "exit_price": 0.2046,
+    "pnl_pct": -4.804,
+    "exit_ts": "2026-09-11T03:01:32.194694+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2074,
+    "exit_price": 0.2046,
+    "pnl_pct": -1.45,
+    "exit_ts": "2026-09-11T03:01:32.194694+03:00",
+    "reason": "trend"
   }
 ]
