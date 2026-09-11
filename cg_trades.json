@@ -12616,5 +12616,14 @@
     "pnl_pct": -1.046,
     "exit_ts": "2026-09-11T11:01:33.485595+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 712.51,
+    "exit_price": 710.78,
+    "pnl_pct": -0.343,
+    "exit_ts": "2026-09-11T14:16:11.687833+03:00",
+    "reason": "trend"
   }
 ]
