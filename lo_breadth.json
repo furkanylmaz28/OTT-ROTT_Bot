@@ -1,16 +1,15 @@
 {
-  "ts": "2026-09-14T16:32:34.112054+03:00",
-  "bull": 12,
+  "ts": "2026-09-14T16:47:24.809252+03:00",
+  "bull": 11,
   "bear": 21,
-  "total": 33,
-  "bull_pct": 36.0,
+  "total": 32,
+  "bull_pct": 34.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
     "MGROS",
     "PGSUS",
     "SASA",
-    "SISE",
     "SOKM",
     "TOASO",
     "TTKOM",
@@ -44,7 +43,6 @@
   "fresh_bear": [
     "ENJSA",
     "GUBRF",
-    "HEKTS",
     "ASTOR",
     "ALARK"
   ]
