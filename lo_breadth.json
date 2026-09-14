@@ -1,13 +1,15 @@
 {
-  "ts": "2026-09-14T14:32:14.172084+03:00",
-  "bull": 10,
-  "bear": 23,
+  "ts": "2026-09-14T14:47:10.488616+03:00",
+  "bull": 12,
+  "bear": 21,
   "total": 33,
-  "bull_pct": 30.0,
+  "bull_pct": 36.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
     "MGROS",
+    "PGSUS",
+    "SASA",
     "SISE",
     "SOKM",
     "TOASO",
@@ -29,8 +31,6 @@
     "KCHOL",
     "KRDMD",
     "PETKM",
-    "PGSUS",
-    "SASA",
     "TAVHL",
     "THYAO",
     "TKFEN",
@@ -44,7 +44,6 @@
   "fresh_bear": [
     "ENJSA",
     "GUBRF",
-    "PGSUS",
     "HEKTS",
     "ASTOR",
     "ALARK"
