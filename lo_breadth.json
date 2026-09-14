@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-14T09:47:20.125364+03:00",
+  "ts": "2026-09-14T10:02:44.631455+03:00",
   "bull": 15,
-  "bear": 16,
-  "total": 31,
-  "bull_pct": 48.0,
+  "bear": 18,
+  "total": 33,
+  "bull_pct": 45.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -23,11 +23,13 @@
   ],
   "bear_syms": [
     "AKBNK",
+    "ASELS",
     "EKGYO",
     "EREGL",
     "FROTO",
     "HALKB",
     "ISCTR",
+    "KCHOL",
     "KRDMD",
     "PETKM",
     "SASA",
