@@ -13300,5 +13300,68 @@
     "pnl_pct": -0.384,
     "exit_ts": "2026-09-14T04:46:08.283285+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2026,
+    "exit_price": 0.207,
+    "pnl_pct": 2.072,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08249,
+    "exit_price": 0.08383,
+    "pnl_pct": 1.524,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 11.21,
+    "exit_price": 11.36,
+    "pnl_pct": 1.238,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 220.8,
+    "exit_price": 223.4,
+    "pnl_pct": 1.078,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 7.43,
+    "exit_price": 7.62,
+    "pnl_pct": 2.457,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1334,
+    "exit_price": 0.1392,
+    "pnl_pct": 4.248,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1334,
+    "exit_price": 0.1392,
+    "pnl_pct": 4.248,
+    "exit_ts": "2026-09-14T06:46:07.761124+03:00",
+    "reason": "trail"
   }
 ]
