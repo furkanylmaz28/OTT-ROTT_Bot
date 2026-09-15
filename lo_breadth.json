@@ -1,8 +1,8 @@
 {
-  "ts": "2026-09-15T15:02:36.978139+03:00",
+  "ts": "2026-09-15T15:17:06.415129+03:00",
   "bull": 2,
-  "bear": 30,
-  "total": 32,
+  "bear": 31,
+  "total": 33,
   "bull_pct": 6.0,
   "bull_syms": [
     "SASA",
@@ -21,6 +21,7 @@
     "HALKB",
     "ISCTR",
     "KCHOL",
+    "KRDMD",
     "MGROS",
     "PETKM",
     "PGSUS",
