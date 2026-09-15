@@ -13552,5 +13552,32 @@
     "pnl_pct": -0.623,
     "exit_ts": "2026-09-15T18:46:14.023221+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2428.26,
+    "exit_price": 2423.7,
+    "pnl_pct": -0.288,
+    "exit_ts": "2026-09-15T19:01:36.243605+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08164,
+    "exit_price": 0.08166,
+    "pnl_pct": -0.076,
+    "exit_ts": "2026-09-15T19:01:36.243605+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04313,
+    "exit_price": 0.04323,
+    "pnl_pct": 0.132,
+    "exit_ts": "2026-09-15T19:01:36.243605+03:00",
+    "reason": "trend"
   }
 ]
