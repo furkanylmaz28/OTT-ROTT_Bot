@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-15T13:32:34.163265+03:00",
+  "ts": "2026-09-15T13:47:20.065457+03:00",
   "bull": 2,
   "bear": 30,
   "total": 32,
@@ -27,11 +27,11 @@
     "PGSUS",
     "SISE",
     "SOKM",
-    "TAVHL",
     "THYAO",
     "TOASO",
     "TTKOM",
     "TUPRS",
+    "VAKBN",
     "YKBNK",
     "AEFES",
     "HEKTS",
@@ -50,6 +50,7 @@
     "TOASO",
     "TTKOM",
     "TUPRS",
+    "VAKBN",
     "AEFES"
   ]
 }
