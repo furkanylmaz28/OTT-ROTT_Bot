@@ -13705,5 +13705,23 @@
     "pnl_pct": 0.656,
     "exit_ts": "2026-09-16T00:01:33.811305+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1976,
+    "exit_price": 0.1953,
+    "pnl_pct": -1.264,
+    "exit_ts": "2026-09-16T00:31:36.708381+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.1976,
+    "exit_price": 0.1953,
+    "pnl_pct": -1.264,
+    "exit_ts": "2026-09-16T00:31:36.708381+03:00",
+    "reason": "trend"
   }
 ]
