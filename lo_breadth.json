@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-15T17:32:10.998782+03:00",
+  "ts": "2026-09-15T17:47:15.441689+03:00",
   "bull": 2,
   "bear": 31,
   "total": 33,
@@ -43,15 +43,11 @@
   ],
   "fresh_bear": [
     "DOHOL",
-    "ENKAI",
     "MGROS",
     "PGSUS",
     "SISE",
     "SOKM",
-    "TOASO",
-    "TTKOM",
     "TUPRS",
-    "VAKBN",
     "AEFES"
   ]
 }

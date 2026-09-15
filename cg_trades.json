@@ -13498,5 +13498,50 @@
     "pnl_pct": 2.611,
     "exit_ts": "2026-09-15T16:46:11.353712+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2448.25,
+    "exit_price": 2412.58,
+    "pnl_pct": -1.557,
+    "exit_ts": "2026-09-15T17:46:15.425612+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 52.69,
+    "exit_price": 51.95,
+    "pnl_pct": -1.504,
+    "exit_ts": "2026-09-15T17:46:15.425612+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.576,
+    "exit_price": 0.567,
+    "pnl_pct": -1.663,
+    "exit_ts": "2026-09-15T17:46:15.425612+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3474,
+    "exit_price": 0.336,
+    "pnl_pct": -3.382,
+    "exit_ts": "2026-09-15T17:46:15.425612+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.0437,
+    "exit_price": 0.04302,
+    "pnl_pct": -1.656,
+    "exit_ts": "2026-09-15T17:46:15.425612+03:00",
+    "reason": "trend"
   }
 ]
