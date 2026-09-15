@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-15T10:02:36.900146+03:00",
+  "ts": "2026-09-15T10:17:07.656715+03:00",
   "bull": 8,
-  "bear": 24,
-  "total": 32,
-  "bull_pct": 25.0,
+  "bear": 25,
+  "total": 33,
+  "bull_pct": 24.0,
   "bull_syms": [
     "DOHOL",
     "MGROS",
@@ -27,6 +27,7 @@
     "ISCTR",
     "KCHOL",
     "KRDMD",
+    "PETKM",
     "TAVHL",
     "THYAO",
     "TOASO",
