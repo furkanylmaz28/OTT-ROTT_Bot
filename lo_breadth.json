@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-15T17:02:39.103437+03:00",
+  "ts": "2026-09-15T17:17:32.209239+03:00",
   "bull": 2,
   "bear": 30,
   "total": 32,
@@ -17,6 +17,7 @@
     "ENKAI",
     "EREGL",
     "FROTO",
+    "GUBRF",
     "HALKB",
     "ISCTR",
     "KCHOL",
@@ -33,7 +34,6 @@
     "TUPRS",
     "VAKBN",
     "YKBNK",
-    "AEFES",
     "HEKTS",
     "ODAS",
     "ASTOR",
@@ -50,7 +50,6 @@
     "TOASO",
     "TTKOM",
     "TUPRS",
-    "VAKBN",
-    "AEFES"
+    "VAKBN"
   ]
 }
