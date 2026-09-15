@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-15T10:32:04.599378+03:00",
-  "bull": 8,
-  "bear": 25,
+  "ts": "2026-09-15T10:47:17.710251+03:00",
+  "bull": 9,
+  "bear": 24,
   "total": 33,
-  "bull_pct": 24.0,
+  "bull_pct": 27.0,
   "bull_syms": [
     "DOHOL",
     "MGROS",
@@ -11,6 +11,7 @@
     "SASA",
     "SISE",
     "SOKM",
+    "TKFEN",
     "TUPRS",
     "AEFES"
   ],
@@ -31,7 +32,6 @@
     "TAVHL",
     "THYAO",
     "TOASO",
-    "TKFEN",
     "TTKOM",
     "VAKBN",
     "YKBNK",
@@ -44,7 +44,6 @@
   "fresh_bear": [
     "ENJSA",
     "ENKAI",
-    "GUBRF",
     "TOASO",
     "TTKOM",
     "VAKBN",
