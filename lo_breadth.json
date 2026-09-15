@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-15T09:32:12.703881+03:00",
+  "ts": "2026-09-15T09:47:24.335089+03:00",
   "bull": 8,
-  "bear": 25,
-  "total": 33,
-  "bull_pct": 24.0,
+  "bear": 24,
+  "total": 32,
+  "bull_pct": 25.0,
   "bull_syms": [
     "DOHOL",
     "MGROS",
@@ -21,7 +21,6 @@
     "EKGYO",
     "ENKAI",
     "EREGL",
-    "FROTO",
     "GUBRF",
     "HALKB",
     "ISCTR",
