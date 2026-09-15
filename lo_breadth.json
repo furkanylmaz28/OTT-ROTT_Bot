@@ -1,12 +1,11 @@
 {
-  "ts": "2026-09-15T12:32:27.930292+03:00",
-  "bull": 3,
-  "bear": 30,
+  "ts": "2026-09-15T12:47:10.755114+03:00",
+  "bull": 2,
+  "bear": 31,
   "total": 33,
-  "bull_pct": 9.0,
+  "bull_pct": 6.0,
   "bull_syms": [
     "SASA",
-    "SISE",
     "TKFEN"
   ],
   "bear_syms": [
@@ -26,6 +25,7 @@
     "MGROS",
     "PETKM",
     "PGSUS",
+    "SISE",
     "SOKM",
     "TAVHL",
     "THYAO",
@@ -46,12 +46,12 @@
     "ENKAI",
     "MGROS",
     "PGSUS",
+    "SISE",
     "SOKM",
     "TOASO",
     "TTKOM",
     "TUPRS",
     "VAKBN",
-    "AEFES",
-    "ALARK"
+    "AEFES"
   ]
 }
