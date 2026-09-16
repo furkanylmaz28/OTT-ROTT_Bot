@@ -1,8 +1,8 @@
 {
-  "ts": "2026-09-16T10:46:55.779100+03:00",
+  "ts": "2026-09-16T11:02:32.381310+03:00",
   "bull": 0,
-  "bear": 33,
-  "total": 33,
+  "bear": 32,
+  "total": 32,
   "bull_pct": 0.0,
   "bull_syms": [],
   "bear_syms": [
@@ -16,7 +16,6 @@
     "FROTO",
     "GUBRF",
     "HALKB",
-    "ISCTR",
     "KCHOL",
     "KRDMD",
     "MGROS",
