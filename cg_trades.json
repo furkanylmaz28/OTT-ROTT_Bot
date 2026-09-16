@@ -14110,5 +14110,32 @@
     "pnl_pct": -0.331,
     "exit_ts": "2026-09-16T16:16:15.407502+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2423.8,
+    "exit_price": 2399.84,
+    "pnl_pct": -1.089,
+    "exit_ts": "2026-09-16T16:31:22.925818+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.959,
+    "exit_price": 0.977,
+    "pnl_pct": 1.777,
+    "exit_ts": "2026-09-16T16:31:22.925818+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0934,
+    "exit_price": 0.0946,
+    "pnl_pct": 1.185,
+    "exit_ts": "2026-09-16T16:31:22.925818+03:00",
+    "reason": "trail"
   }
 ]
