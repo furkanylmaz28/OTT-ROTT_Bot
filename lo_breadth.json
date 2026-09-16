@@ -1,11 +1,10 @@
 {
-  "ts": "2026-09-16T09:32:10.712870+03:00",
-  "bull": 2,
-  "bear": 31,
+  "ts": "2026-09-16T09:47:12.731404+03:00",
+  "bull": 1,
+  "bear": 32,
   "total": 33,
-  "bull_pct": 6.0,
+  "bull_pct": 3.0,
   "bull_syms": [
-    "SASA",
     "TKFEN"
   ],
   "bear_syms": [
@@ -25,6 +24,7 @@
     "MGROS",
     "PETKM",
     "PGSUS",
+    "SASA",
     "SISE",
     "SOKM",
     "TAVHL",
@@ -45,6 +45,7 @@
     "DOHOL",
     "MGROS",
     "PGSUS",
+    "SASA",
     "SISE",
     "SOKM",
     "TUPRS",
