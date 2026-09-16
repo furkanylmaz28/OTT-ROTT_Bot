@@ -14488,5 +14488,50 @@
     "pnl_pct": 0.042,
     "exit_ts": "2026-09-16T23:01:30.442391+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1919,
+    "exit_price": 0.1944,
+    "pnl_pct": 1.203,
+    "exit_ts": "2026-09-17T00:46:09.959086+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.1919,
+    "exit_price": 0.1944,
+    "pnl_pct": 1.203,
+    "exit_ts": "2026-09-17T00:46:09.959086+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 10.807,
+    "exit_price": 10.906,
+    "pnl_pct": 0.816,
+    "exit_ts": "2026-09-17T00:46:09.959086+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3288,
+    "exit_price": 0.3342,
+    "pnl_pct": 1.542,
+    "exit_ts": "2026-09-17T00:46:09.959086+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3288,
+    "exit_price": 0.3342,
+    "pnl_pct": 1.542,
+    "exit_ts": "2026-09-17T00:46:09.959086+03:00",
+    "reason": "trail"
   }
 ]
