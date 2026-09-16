@@ -1,12 +1,10 @@
 {
-  "ts": "2026-09-16T10:32:11.450926+03:00",
-  "bull": 1,
-  "bear": 32,
+  "ts": "2026-09-16T10:46:55.779100+03:00",
+  "bull": 0,
+  "bear": 33,
   "total": 33,
-  "bull_pct": 3.0,
-  "bull_syms": [
-    "TKFEN"
-  ],
+  "bull_pct": 0.0,
+  "bull_syms": [],
   "bear_syms": [
     "AKBNK",
     "ASELS",
@@ -30,6 +28,7 @@
     "TAVHL",
     "THYAO",
     "TOASO",
+    "TKFEN",
     "TTKOM",
     "TUPRS",
     "VAKBN",
@@ -48,6 +47,7 @@
     "SASA",
     "SISE",
     "SOKM",
+    "TKFEN",
     "TUPRS",
     "AEFES"
   ]
