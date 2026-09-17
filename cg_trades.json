@@ -14578,5 +14578,32 @@
     "pnl_pct": 0.476,
     "exit_ts": "2026-09-17T01:31:20.709494+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0873,
+    "exit_price": 0.089,
+    "pnl_pct": 1.847,
+    "exit_ts": "2026-09-17T03:01:33.833875+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "1",
+    "entry_price": 0.0873,
+    "exit_price": 0.089,
+    "pnl_pct": 1.847,
+    "exit_ts": "2026-09-17T03:01:33.833875+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.555,
+    "exit_price": 0.556,
+    "pnl_pct": 0.08,
+    "exit_ts": "2026-09-17T03:01:33.833875+03:00",
+    "reason": "trend"
   }
 ]
