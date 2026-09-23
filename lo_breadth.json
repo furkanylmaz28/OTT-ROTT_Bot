@@ -1,13 +1,14 @@
 {
-  "ts": "2026-09-23T13:32:12.184448+03:00",
-  "bull": 27,
-  "bear": 6,
+  "ts": "2026-09-23T13:47:06.364505+03:00",
+  "bull": 28,
+  "bear": 5,
   "total": 33,
-  "bull_pct": 82.0,
+  "bull_pct": 85.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
     "DOHOL",
+    "ENJSA",
     "EKGYO",
     "ENKAI",
     "EREGL",
@@ -34,14 +35,11 @@
     "ALARK"
   ],
   "bear_syms": [
-    "ENJSA",
     "SASA",
     "SISE",
     "TUPRS",
     "HEKTS",
     "ODAS"
   ],
-  "fresh_bear": [
-    "TUPRS"
-  ]
+  "fresh_bear": []
 }
