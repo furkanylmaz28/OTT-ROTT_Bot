@@ -1,11 +1,10 @@
 {
-  "ts": "2026-09-24T14:32:20.650496+03:00",
-  "bull": 25,
-  "bear": 8,
+  "ts": "2026-09-24T14:46:59.569610+03:00",
+  "bull": 24,
+  "bear": 9,
   "total": 33,
-  "bull_pct": 76.0,
+  "bull_pct": 73.0,
   "bull_syms": [
-    "AKBNK",
     "DOHOL",
     "ENJSA",
     "EKGYO",
@@ -32,6 +31,7 @@
     "ALARK"
   ],
   "bear_syms": [
+    "AKBNK",
     "ASELS",
     "GUBRF",
     "HALKB",
@@ -42,6 +42,7 @@
     "HEKTS"
   ],
   "fresh_bear": [
+    "AKBNK",
     "ASELS",
     "GUBRF",
     "HALKB",
