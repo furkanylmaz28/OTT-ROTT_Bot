@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-24T17:47:03.950013+03:00",
-  "bull": 18,
+  "ts": "2026-09-24T18:02:33.757120+03:00",
+  "bull": 17,
   "bear": 15,
-  "total": 33,
-  "bull_pct": 55.0,
+  "total": 32,
+  "bull_pct": 53.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -18,7 +18,6 @@
     "TOASO",
     "TKFEN",
     "TTKOM",
-    "VAKBN",
     "AEFES",
     "ODAS",
     "ASTOR",

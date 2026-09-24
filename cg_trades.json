@@ -15505,5 +15505,68 @@
     "pnl_pct": 5.855,
     "exit_ts": "2026-09-24T17:46:08.692794+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 766.41,
+    "exit_price": 778.34,
+    "pnl_pct": 1.457,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 114.06,
+    "exit_price": 114.84,
+    "pnl_pct": 0.584,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.491,
+    "exit_price": 1.5014,
+    "pnl_pct": 0.598,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "1",
+    "entry_price": 1.4615,
+    "exit_price": 1.5014,
+    "pnl_pct": 2.63,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.09358,
+    "exit_price": 0.09451,
+    "pnl_pct": 0.894,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.0927,
+    "exit_price": 0.09451,
+    "pnl_pct": 1.853,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.7644,
+    "exit_price": 0.8172,
+    "pnl_pct": 6.807,
+    "exit_ts": "2026-09-24T18:01:27.951464+03:00",
+    "reason": "trail"
   }
 ]
