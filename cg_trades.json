@@ -15118,5 +15118,41 @@
     "pnl_pct": 0.933,
     "exit_ts": "2026-09-24T07:46:17.008319+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.9564,
+    "exit_price": 0.9782,
+    "pnl_pct": 2.179,
+    "exit_ts": "2026-09-24T08:31:20.069009+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.9411,
+    "exit_price": 0.9782,
+    "pnl_pct": 3.842,
+    "exit_ts": "2026-09-24T08:31:20.069009+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.2154,
+    "exit_price": 0.2179,
+    "pnl_pct": 1.061,
+    "exit_ts": "2026-09-24T08:31:20.069009+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1251,
+    "exit_price": 0.1268,
+    "pnl_pct": 1.259,
+    "exit_ts": "2026-09-24T08:31:20.069009+03:00",
+    "reason": "trail"
   }
 ]
