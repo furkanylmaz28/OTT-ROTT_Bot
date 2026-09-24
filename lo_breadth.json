@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-24T16:17:13.639468+03:00",
-  "bull": 20,
+  "ts": "2026-09-24T16:32:51.154836+03:00",
+  "bull": 19,
   "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -15,7 +15,6 @@
     "KRDMD",
     "MGROS",
     "SOKM",
-    "TAVHL",
     "TOASO",
     "TKFEN",
     "TTKOM",
