@@ -15019,5 +15019,68 @@
     "pnl_pct": 1.687,
     "exit_ts": "2026-09-24T06:16:29.001850+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 759.99,
+    "exit_price": 769.89,
+    "pnl_pct": 1.203,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.09196,
+    "exit_price": 0.09333,
+    "pnl_pct": 1.39,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.72,
+    "exit_price": 9.02,
+    "pnl_pct": 3.34,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "2",
+    "entry_price": 0.1032,
+    "exit_price": 0.1042,
+    "pnl_pct": 0.869,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.76,
+    "exit_price": 0.7652,
+    "pnl_pct": 0.584,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.9562,
+    "exit_price": 0.9641,
+    "pnl_pct": 0.726,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1454,
+    "exit_price": 0.1499,
+    "pnl_pct": 2.995,
+    "exit_ts": "2026-09-24T06:31:21.510396+03:00",
+    "reason": "trail"
   }
 ]
