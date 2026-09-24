@@ -1,11 +1,12 @@
 {
-  "ts": "2026-09-24T12:47:39.191673+03:00",
+  "ts": "2026-09-24T13:02:32.636812+03:00",
   "bull": 25,
   "bear": 7,
   "total": 32,
   "bull_pct": 78.0,
   "bull_syms": [
     "AKBNK",
+    "DOHOL",
     "ENJSA",
     "EKGYO",
     "ENKAI",
@@ -23,7 +24,6 @@
     "TOASO",
     "TKFEN",
     "TTKOM",
-    "VAKBN",
     "YKBNK",
     "AEFES",
     "ODAS",
