@@ -15190,5 +15190,14 @@
     "pnl_pct": 0.885,
     "exit_ts": "2026-09-24T10:01:26.958435+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2654.13,
+    "exit_price": 2675.92,
+    "pnl_pct": 0.721,
+    "exit_ts": "2026-09-24T11:31:25.489437+03:00",
+    "reason": "trail"
   }
 ]
