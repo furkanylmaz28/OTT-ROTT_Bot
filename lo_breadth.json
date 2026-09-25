@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-25T16:17:05.012303+03:00",
-  "bull": 14,
+  "ts": "2026-09-25T16:32:35.572262+03:00",
+  "bull": 15,
   "bear": 18,
-  "total": 32,
-  "bull_pct": 44.0,
+  "total": 33,
+  "bull_pct": 45.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
@@ -17,6 +17,7 @@
     "TTKOM",
     "VAKBN",
     "AEFES",
+    "ODAS",
     "ASTOR",
     "AKSEN"
   ],
