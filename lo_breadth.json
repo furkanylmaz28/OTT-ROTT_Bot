@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-25T15:32:28.692152+03:00",
+  "ts": "2026-09-25T15:47:19.197690+03:00",
   "bull": 15,
   "bear": 18,
   "total": 33,
@@ -45,12 +45,8 @@
     "ENJSA",
     "EKGYO",
     "FROTO",
-    "ISCTR",
     "MGROS",
-    "PGSUS",
     "TAVHL",
-    "THYAO",
-    "YKBNK",
     "ALARK"
   ]
 }
