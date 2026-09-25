@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-25T14:02:39.673957+03:00",
-  "bull": 14,
+  "ts": "2026-09-25T14:17:02.772726+03:00",
+  "bull": 15,
   "bear": 18,
-  "total": 32,
-  "bull_pct": 44.0,
+  "total": 33,
+  "bull_pct": 45.0,
   "bull_syms": [
     "DOHOL",
     "ENKAI",
@@ -11,6 +11,7 @@
     "GUBRF",
     "KCHOL",
     "KRDMD",
+    "SOKM",
     "TOASO",
     "TKFEN",
     "TTKOM",
