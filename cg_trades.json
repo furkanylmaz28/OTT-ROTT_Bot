@@ -15703,5 +15703,41 @@
     "pnl_pct": 0.855,
     "exit_ts": "2026-09-25T13:01:22.222268+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2659.99,
+    "exit_price": 2698.82,
+    "pnl_pct": 1.36,
+    "exit_ts": "2026-09-25T13:16:14.221818+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.09532,
+    "exit_price": 0.09626,
+    "pnl_pct": 0.886,
+    "exit_ts": "2026-09-25T13:16:14.221818+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 10.208,
+    "exit_price": 10.349,
+    "pnl_pct": 1.281,
+    "exit_ts": "2026-09-25T13:16:14.221818+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 9.144,
+    "exit_price": 9.273,
+    "pnl_pct": 1.311,
+    "exit_ts": "2026-09-25T13:16:14.221818+03:00",
+    "reason": "trail"
   }
 ]
