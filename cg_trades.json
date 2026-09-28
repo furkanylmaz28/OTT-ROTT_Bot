@@ -15991,5 +15991,41 @@
     "pnl_pct": 0.868,
     "exit_ts": "2026-09-28T16:31:23.987329+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "1",
+    "entry_price": 1.474,
+    "exit_price": 1.5155,
+    "pnl_pct": 2.715,
+    "exit_ts": "2026-09-28T17:01:46.481005+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 7.397,
+    "exit_price": 7.471,
+    "pnl_pct": 0.9,
+    "exit_ts": "2026-09-28T17:01:46.481005+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 7.397,
+    "exit_price": 7.471,
+    "pnl_pct": 0.9,
+    "exit_ts": "2026-09-28T17:01:46.481005+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 7.345,
+    "exit_price": 7.471,
+    "pnl_pct": 1.615,
+    "exit_ts": "2026-09-28T17:01:46.481005+03:00",
+    "reason": "trail"
   }
 ]
