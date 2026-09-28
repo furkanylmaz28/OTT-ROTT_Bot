@@ -15883,5 +15883,68 @@
     "pnl_pct": 7.072,
     "exit_ts": "2026-09-28T15:31:25.564140+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2435,
+    "exit_price": 0.2508,
+    "pnl_pct": 2.898,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 10.453,
+    "exit_price": 10.524,
+    "pnl_pct": 0.579,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.196,
+    "exit_price": 1.188,
+    "pnl_pct": -0.769,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 9.07,
+    "exit_price": 9.25,
+    "pnl_pct": 1.885,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 1.0424,
+    "exit_price": 1.0632,
+    "pnl_pct": 1.895,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.828,
+    "exit_price": 0.838,
+    "pnl_pct": 1.108,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4622,
+    "exit_price": 0.4664,
+    "pnl_pct": 0.809,
+    "exit_ts": "2026-09-28T16:01:41.250350+03:00",
+    "reason": "trail"
   }
 ]
