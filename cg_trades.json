@@ -16441,5 +16441,41 @@
     "pnl_pct": 1.37,
     "exit_ts": "2026-09-29T00:16:11.965168+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 8.782,
+    "exit_price": 8.697,
+    "pnl_pct": -1.068,
+    "exit_ts": "2026-09-29T00:32:30.170888+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 8.782,
+    "exit_price": 8.697,
+    "pnl_pct": -1.068,
+    "exit_ts": "2026-09-29T00:32:30.170888+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "2",
+    "entry_price": 8.782,
+    "exit_price": 8.697,
+    "pnl_pct": -1.068,
+    "exit_ts": "2026-09-29T00:32:30.170888+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.8074,
+    "exit_price": 0.8178,
+    "pnl_pct": 1.188,
+    "exit_ts": "2026-09-29T00:32:30.170888+03:00",
+    "reason": "trail"
   }
 ]
