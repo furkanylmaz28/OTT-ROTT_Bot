@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-28T12:02:24.734025+03:00",
+  "ts": "2026-09-28T12:17:18.731173+03:00",
   "bull": 6,
-  "bear": 26,
-  "total": 32,
-  "bull_pct": 19.0,
+  "bear": 27,
+  "total": 33,
+  "bull_pct": 18.0,
   "bull_syms": [
     "KRDMD",
     "TOASO",
@@ -37,6 +37,7 @@
     "YKBNK",
     "AEFES",
     "HEKTS",
+    "ASTOR",
     "AKSEN",
     "ALARK"
   ],
@@ -48,6 +49,7 @@
     "KCHOL",
     "SOKM",
     "AEFES",
+    "ASTOR",
     "AKSEN"
   ]
 }
