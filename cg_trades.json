@@ -17170,5 +17170,32 @@
     "pnl_pct": 1.758,
     "exit_ts": "2026-09-29T18:01:33.668669+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 311.3,
+    "exit_price": 309.4,
+    "pnl_pct": -0.71,
+    "exit_ts": "2026-09-29T18:16:13.302144+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 311.3,
+    "exit_price": 309.4,
+    "pnl_pct": -0.71,
+    "exit_ts": "2026-09-29T18:16:13.302144+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 1.0744,
+    "exit_price": 1.0978,
+    "pnl_pct": 2.078,
+    "exit_ts": "2026-09-29T18:16:13.302144+03:00",
+    "reason": "trail"
   }
 ]
