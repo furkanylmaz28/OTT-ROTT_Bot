@@ -1,10 +1,11 @@
 {
-  "ts": "2026-09-29T12:47:30.016080+03:00",
-  "bull": 3,
+  "ts": "2026-09-29T13:02:27.823730+03:00",
+  "bull": 4,
   "bear": 29,
-  "total": 32,
-  "bull_pct": 9.0,
+  "total": 33,
+  "bull_pct": 12.0,
   "bull_syms": [
+    "HALKB",
     "KRDMD",
     "TOASO",
     "AKSEN"
