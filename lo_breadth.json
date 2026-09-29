@@ -1,12 +1,11 @@
 {
-  "ts": "2026-09-29T16:32:23.902840+03:00",
-  "bull": 3,
-  "bear": 30,
+  "ts": "2026-09-29T16:47:06.363710+03:00",
+  "bull": 2,
+  "bear": 31,
   "total": 33,
-  "bull_pct": 9.0,
+  "bull_pct": 6.0,
   "bull_syms": [
     "HALKB",
-    "KRDMD",
     "AKSEN"
   ],
   "bear_syms": [
@@ -21,6 +20,7 @@
     "GUBRF",
     "ISCTR",
     "KCHOL",
+    "KRDMD",
     "MGROS",
     "PETKM",
     "PGSUS",
@@ -42,6 +42,7 @@
     "ALARK"
   ],
   "fresh_bear": [
+    "KRDMD",
     "TOASO",
     "TKFEN"
   ]
