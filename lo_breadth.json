@@ -1,8 +1,8 @@
 {
-  "ts": "2026-09-29T14:32:11.285871+03:00",
+  "ts": "2026-09-29T14:47:11.937444+03:00",
   "bull": 4,
-  "bear": 29,
-  "total": 33,
+  "bear": 28,
+  "total": 32,
   "bull_pct": 12.0,
   "bull_syms": [
     "HALKB",
@@ -28,7 +28,6 @@
     "SASA",
     "SISE",
     "SOKM",
-    "TAVHL",
     "THYAO",
     "TKFEN",
     "TTKOM",
@@ -43,7 +42,6 @@
   ],
   "fresh_bear": [
     "TKFEN",
-    "TTKOM",
-    "VAKBN"
+    "TTKOM"
   ]
 }
