@@ -1,14 +1,15 @@
 {
-  "ts": "2026-09-29T09:32:31.532407+03:00",
-  "bull": 4,
-  "bear": 29,
+  "ts": "2026-09-29T09:47:04.112651+03:00",
+  "bull": 5,
+  "bear": 28,
   "total": 33,
-  "bull_pct": 12.0,
+  "bull_pct": 15.0,
   "bull_syms": [
     "HALKB",
     "KRDMD",
     "TOASO",
-    "TKFEN"
+    "TKFEN",
+    "AKSEN"
   ],
   "bear_syms": [
     "AKBNK",
@@ -38,7 +39,6 @@
     "HEKTS",
     "ODAS",
     "ASTOR",
-    "AKSEN",
     "ALARK"
   ],
   "fresh_bear": [
@@ -51,7 +51,6 @@
     "VAKBN",
     "AEFES",
     "ODAS",
-    "ASTOR",
-    "AKSEN"
+    "ASTOR"
   ]
 }
