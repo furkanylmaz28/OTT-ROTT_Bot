@@ -17206,5 +17206,23 @@
     "pnl_pct": 1.932,
     "exit_ts": "2026-09-29T22:31:23.450583+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 308.7,
+    "exit_price": 307.4,
+    "pnl_pct": -0.521,
+    "exit_ts": "2026-09-29T22:46:49.492089+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.0725,
+    "exit_price": 0.07359,
+    "pnl_pct": 1.403,
+    "exit_ts": "2026-09-29T22:46:49.492089+03:00",
+    "reason": "trail"
   }
 ]
