@@ -17359,5 +17359,41 @@
     "pnl_pct": 1.428,
     "exit_ts": "2026-09-30T04:46:01.544484+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.191,
+    "exit_price": 1.205,
+    "pnl_pct": 1.075,
+    "exit_ts": "2026-09-30T05:16:10.791246+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 308.0,
+    "exit_price": 307.5,
+    "pnl_pct": -0.262,
+    "exit_ts": "2026-09-30T05:16:10.791246+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1648,
+    "exit_price": 0.1667,
+    "pnl_pct": 1.053,
+    "exit_ts": "2026-09-30T05:16:10.791246+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4384,
+    "exit_price": 0.4438,
+    "pnl_pct": 1.132,
+    "exit_ts": "2026-09-30T05:16:10.791246+03:00",
+    "reason": "trail"
   }
 ]
