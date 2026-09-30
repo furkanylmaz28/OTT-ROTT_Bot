@@ -1,14 +1,13 @@
 {
-  "ts": "2026-09-30T15:32:43.214531+03:00",
-  "bull": 11,
-  "bear": 22,
+  "ts": "2026-09-30T15:47:24.914488+03:00",
+  "bull": 10,
+  "bear": 23,
   "total": 33,
-  "bull_pct": 33.0,
+  "bull_pct": 30.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
     "FROTO",
-    "HALKB",
     "KCHOL",
     "TAVHL",
     "THYAO",
@@ -24,6 +23,7 @@
     "ENKAI",
     "EREGL",
     "GUBRF",
+    "HALKB",
     "ISCTR",
     "KRDMD",
     "MGROS",
@@ -42,7 +42,7 @@
     "ALARK"
   ],
   "fresh_bear": [
-    "KRDMD",
-    "TOASO"
+    "HALKB",
+    "KRDMD"
   ]
 }
