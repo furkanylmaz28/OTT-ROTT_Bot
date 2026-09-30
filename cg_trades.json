@@ -17665,5 +17665,32 @@
     "pnl_pct": 2.44,
     "exit_ts": "2026-09-30T15:16:13.436609+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.8016,
+    "exit_price": 0.801,
+    "pnl_pct": -0.175,
+    "exit_ts": "2026-09-30T16:46:15.183189+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 1.1657,
+    "exit_price": 1.1822,
+    "pnl_pct": 1.315,
+    "exit_ts": "2026-09-30T16:46:15.183189+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.4504,
+    "exit_price": 0.4523,
+    "pnl_pct": 0.322,
+    "exit_ts": "2026-09-30T16:46:15.183189+03:00",
+    "reason": "trail"
   }
 ]
