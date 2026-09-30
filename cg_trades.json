@@ -17332,5 +17332,32 @@
     "pnl_pct": -0.295,
     "exit_ts": "2026-09-30T02:46:14.444259+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 308.1,
+    "exit_price": 307.9,
+    "pnl_pct": -0.165,
+    "exit_ts": "2026-09-30T04:46:01.544484+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 4.895,
+    "exit_price": 5.028,
+    "pnl_pct": 2.617,
+    "exit_ts": "2026-09-30T04:46:01.544484+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.10145,
+    "exit_price": 0.103,
+    "pnl_pct": 1.428,
+    "exit_ts": "2026-09-30T04:46:01.544484+03:00",
+    "reason": "trail"
   }
 ]
