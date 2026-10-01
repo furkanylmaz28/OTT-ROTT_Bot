@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-01T13:58:27.503582+03:00",
+  "ts": "2026-10-01T14:02:34.309551+03:00",
   "bull": 10,
-  "bear": 23,
-  "total": 33,
-  "bull_pct": 30.0,
+  "bear": 22,
+  "total": 32,
+  "bull_pct": 31.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -37,7 +37,6 @@
     "TKFEN",
     "VAKBN",
     "YKBNK",
-    "AEFES",
     "ODAS",
     "ALARK"
   ],
