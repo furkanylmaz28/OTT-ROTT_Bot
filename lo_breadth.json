@@ -1,15 +1,14 @@
 {
-  "ts": "2026-10-02T11:32:09.480519+03:00",
-  "bull": 16,
-  "bear": 17,
+  "ts": "2026-10-02T11:46:59.706299+03:00",
+  "bull": 15,
+  "bear": 18,
   "total": 33,
-  "bull_pct": 48.0,
+  "bull_pct": 45.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
     "EKGYO",
     "EREGL",
-    "FROTO",
     "PGSUS",
     "SASA",
     "THYAO",
@@ -26,6 +25,7 @@
     "AKBNK",
     "DOHOL",
     "ENKAI",
+    "FROTO",
     "GUBRF",
     "HALKB",
     "ISCTR",
@@ -42,7 +42,6 @@
     "ODAS"
   ],
   "fresh_bear": [
-    "KCHOL",
-    "TAVHL"
+    "FROTO"
   ]
 }
