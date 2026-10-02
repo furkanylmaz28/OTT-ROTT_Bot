@@ -18286,5 +18286,14 @@
     "pnl_pct": 2.449,
     "exit_ts": "2026-10-02T08:46:15.961604+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1258,
+    "exit_price": 0.1306,
+    "pnl_pct": 3.716,
+    "exit_ts": "2026-10-02T10:31:24.833206+03:00",
+    "reason": "trail"
   }
 ]
