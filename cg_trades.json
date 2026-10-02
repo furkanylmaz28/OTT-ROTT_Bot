@@ -18205,5 +18205,32 @@
     "pnl_pct": 2.951,
     "exit_ts": "2026-10-02T05:46:08.790120+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 4.915,
+    "exit_price": 4.964,
+    "pnl_pct": 0.897,
+    "exit_ts": "2026-10-02T06:16:06.433613+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 4.808,
+    "exit_price": 4.964,
+    "pnl_pct": 3.145,
+    "exit_ts": "2026-10-02T06:16:06.433613+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.0715,
+    "exit_price": 0.07084,
+    "pnl_pct": -1.023,
+    "exit_ts": "2026-10-02T06:16:06.433613+03:00",
+    "reason": "trend"
   }
 ]
