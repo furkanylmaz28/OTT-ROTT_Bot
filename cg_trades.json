@@ -18556,5 +18556,23 @@
     "pnl_pct": 1.335,
     "exit_ts": "2026-10-03T07:16:06.637563+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2383,
+    "exit_price": 0.2457,
+    "pnl_pct": 3.005,
+    "exit_ts": "2026-10-03T07:31:30.553612+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.09086,
+    "exit_price": 0.09295,
+    "pnl_pct": 2.2,
+    "exit_ts": "2026-10-03T07:31:30.553612+03:00",
+    "reason": "trail"
   }
 ]
