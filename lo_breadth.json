@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-06T10:32:17.111569+03:00",
-  "bull": 24,
-  "bear": 9,
+  "ts": "2026-10-06T10:47:20.976176+03:00",
+  "bull": 25,
+  "bear": 8,
   "total": 33,
-  "bull_pct": 73.0,
+  "bull_pct": 76.0,
   "bull_syms": [
     "ASELS",
     "DOHOL",
@@ -26,6 +26,7 @@
     "TUPRS",
     "VAKBN",
     "YKBNK",
+    "AEFES",
     "HEKTS",
     "AKSEN",
     "ALARK"
@@ -37,7 +38,6 @@
     "GUBRF",
     "HALKB",
     "SISE",
-    "AEFES",
     "ODAS",
     "ASTOR"
   ],
