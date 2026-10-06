@@ -1,14 +1,14 @@
 {
-  "ts": "2026-10-06T11:32:11.191231+03:00",
+  "ts": "2026-10-06T11:47:23.240187+03:00",
   "bull": 24,
   "bear": 8,
   "total": 32,
   "bull_pct": 75.0,
   "bull_syms": [
     "ASELS",
-    "DOHOL",
     "ENJSA",
     "EKGYO",
+    "EREGL",
     "ISCTR",
     "KCHOL",
     "KRDMD",
@@ -40,7 +40,5 @@
     "ODAS",
     "ASTOR"
   ],
-  "fresh_bear": [
-    "ASTOR"
-  ]
+  "fresh_bear": []
 }
