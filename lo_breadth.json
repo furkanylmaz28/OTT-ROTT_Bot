@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-06T16:47:51.768917+03:00",
-  "bull": 25,
-  "bear": 8,
-  "total": 33,
-  "bull_pct": 76.0,
+  "ts": "2026-10-06T17:02:41.479153+03:00",
+  "bull": 24,
+  "bear": 7,
+  "total": 31,
+  "bull_pct": 77.0,
   "bull_syms": [
     "ASELS",
     "DOHOL",
@@ -17,7 +17,6 @@
     "PETKM",
     "PGSUS",
     "SASA",
-    "SOKM",
     "TAVHL",
     "THYAO",
     "TOASO",
@@ -37,7 +36,6 @@
     "FROTO",
     "GUBRF",
     "HALKB",
-    "SISE",
     "ODAS",
     "ASTOR"
   ],
