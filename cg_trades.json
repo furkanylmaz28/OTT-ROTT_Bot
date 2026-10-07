@@ -19546,5 +19546,14 @@
     "pnl_pct": 0.104,
     "exit_ts": "2026-10-07T19:46:10.942957+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2528,
+    "exit_price": 0.2566,
+    "pnl_pct": 1.403,
+    "exit_ts": "2026-10-07T20:16:14.830477+03:00",
+    "reason": "trail"
   }
 ]
