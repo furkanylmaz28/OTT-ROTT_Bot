@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-07T12:17:14.527456+03:00",
-  "bull": 19,
+  "ts": "2026-10-07T12:32:22.378761+03:00",
+  "bull": 20,
   "bear": 13,
-  "total": 32,
-  "bull_pct": 59.0,
+  "total": 33,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
     "ENJSA",
@@ -16,6 +16,7 @@
     "PETKM",
     "SOKM",
     "TAVHL",
+    "TOASO",
     "TKFEN",
     "TUPRS",
     "VAKBN",
