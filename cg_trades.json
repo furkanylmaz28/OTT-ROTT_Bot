@@ -18844,5 +18844,23 @@
     "pnl_pct": -3.677,
     "exit_ts": "2026-10-07T05:01:31.634798+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 4.917,
+    "exit_price": 4.973,
+    "pnl_pct": 1.039,
+    "exit_ts": "2026-10-07T05:46:08.647824+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "2",
+    "entry_price": 0.1222,
+    "exit_price": 0.1228,
+    "pnl_pct": 0.391,
+    "exit_ts": "2026-10-07T05:46:08.647824+03:00",
+    "reason": "trail"
   }
 ]
