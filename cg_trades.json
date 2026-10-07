@@ -19123,5 +19123,32 @@
     "pnl_pct": 1.029,
     "exit_ts": "2026-10-07T10:31:12.325361+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2610.83,
+    "exit_price": 2615.18,
+    "pnl_pct": 0.067,
+    "exit_ts": "2026-10-07T11:01:28.405974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 68.77,
+    "exit_price": 67.64,
+    "pnl_pct": -1.743,
+    "exit_ts": "2026-10-07T11:01:28.405974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "1",
+    "entry_price": 67.21,
+    "exit_price": 67.64,
+    "pnl_pct": 0.54,
+    "exit_ts": "2026-10-07T11:01:28.405974+03:00",
+    "reason": "trend"
   }
 ]
