@@ -19573,5 +19573,50 @@
     "pnl_pct": -0.459,
     "exit_ts": "2026-10-07T20:31:23.912584+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08843,
+    "exit_price": 0.08812,
+    "pnl_pct": -0.451,
+    "exit_ts": "2026-10-07T20:46:45.697546+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.08843,
+    "exit_price": 0.08812,
+    "pnl_pct": -0.451,
+    "exit_ts": "2026-10-07T20:46:45.697546+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1844,
+    "exit_price": 0.1827,
+    "pnl_pct": -1.022,
+    "exit_ts": "2026-10-07T20:46:45.697546+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1844,
+    "exit_price": 0.1827,
+    "pnl_pct": -1.022,
+    "exit_ts": "2026-10-07T20:46:45.697546+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1844,
+    "exit_price": 0.1827,
+    "pnl_pct": -1.022,
+    "exit_ts": "2026-10-07T20:46:45.697546+03:00",
+    "reason": "trend"
   }
 ]
