@@ -19240,5 +19240,23 @@
     "pnl_pct": 1.455,
     "exit_ts": "2026-10-07T14:31:31.181968+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.4,
+    "exit_price": 8.35,
+    "pnl_pct": -0.695,
+    "exit_ts": "2026-10-07T14:45:59.885900+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 8.4,
+    "exit_price": 8.35,
+    "pnl_pct": -0.695,
+    "exit_ts": "2026-10-07T14:45:59.885900+03:00",
+    "reason": "trend"
   }
 ]
