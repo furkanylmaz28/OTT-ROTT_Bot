@@ -19501,5 +19501,50 @@
     "pnl_pct": -0.253,
     "exit_ts": "2026-10-07T19:31:25.803864+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 117.07,
+    "exit_price": 116.88,
+    "pnl_pct": -0.262,
+    "exit_ts": "2026-10-07T19:46:10.942957+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.35,
+    "exit_price": 8.34,
+    "pnl_pct": -0.22,
+    "exit_ts": "2026-10-07T19:46:10.942957+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 8.35,
+    "exit_price": 8.34,
+    "pnl_pct": -0.22,
+    "exit_ts": "2026-10-07T19:46:10.942957+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "2",
+    "entry_price": 0.1717,
+    "exit_price": 0.175,
+    "pnl_pct": 1.822,
+    "exit_ts": "2026-10-07T19:46:10.942957+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4413,
+    "exit_price": 0.4422,
+    "pnl_pct": 0.104,
+    "exit_ts": "2026-10-07T19:46:10.942957+03:00",
+    "reason": "trail"
   }
 ]
