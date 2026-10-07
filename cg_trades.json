@@ -19303,5 +19303,50 @@
     "pnl_pct": 0.95,
     "exit_ts": "2026-10-07T15:31:22.161896+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.38,
+    "exit_price": 8.36,
+    "pnl_pct": -0.339,
+    "exit_ts": "2026-10-07T15:46:09.829063+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 8.38,
+    "exit_price": 8.36,
+    "pnl_pct": -0.339,
+    "exit_ts": "2026-10-07T15:46:09.829063+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1868,
+    "exit_price": 0.1849,
+    "pnl_pct": -1.117,
+    "exit_ts": "2026-10-07T15:46:09.829063+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1868,
+    "exit_price": 0.1849,
+    "pnl_pct": -1.117,
+    "exit_ts": "2026-10-07T15:46:09.829063+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1868,
+    "exit_price": 0.1849,
+    "pnl_pct": -1.117,
+    "exit_ts": "2026-10-07T15:46:09.829063+03:00",
+    "reason": "trend"
   }
 ]
