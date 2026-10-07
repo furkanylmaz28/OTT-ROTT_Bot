@@ -18817,5 +18817,32 @@
     "pnl_pct": -0.181,
     "exit_ts": "2026-10-07T00:01:32.802656+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1238,
+    "exit_price": 0.1195,
+    "pnl_pct": -3.573,
+    "exit_ts": "2026-10-07T05:01:31.634798+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1969,
+    "exit_price": 0.1833,
+    "pnl_pct": -7.007,
+    "exit_ts": "2026-10-07T05:01:31.634798+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.0998,
+    "exit_price": 0.09623,
+    "pnl_pct": -3.677,
+    "exit_ts": "2026-10-07T05:01:31.634798+03:00",
+    "reason": "trend"
   }
 ]
