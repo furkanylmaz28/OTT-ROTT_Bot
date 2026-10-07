@@ -18979,5 +18979,41 @@
     "pnl_pct": 1.335,
     "exit_ts": "2026-10-07T07:16:11.766243+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2614.11,
+    "exit_price": 2606.65,
+    "pnl_pct": -0.385,
+    "exit_ts": "2026-10-07T07:31:16.543812+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 13.31,
+    "exit_price": 13.563,
+    "pnl_pct": 1.801,
+    "exit_ts": "2026-10-07T07:31:16.543812+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 13.31,
+    "exit_price": 13.563,
+    "pnl_pct": 1.801,
+    "exit_ts": "2026-10-07T07:31:16.543812+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 7.404,
+    "exit_price": 7.479,
+    "pnl_pct": 0.913,
+    "exit_ts": "2026-10-07T07:31:16.543812+03:00",
+    "reason": "trail"
   }
 ]
