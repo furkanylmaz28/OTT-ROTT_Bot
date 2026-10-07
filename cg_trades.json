@@ -18961,5 +18961,23 @@
     "pnl_pct": -0.833,
     "exit_ts": "2026-10-07T07:01:21.809236+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 1.1219,
+    "exit_price": 1.138,
+    "pnl_pct": 1.335,
+    "exit_ts": "2026-10-07T07:16:11.766243+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "2",
+    "entry_price": 1.1219,
+    "exit_price": 1.138,
+    "pnl_pct": 1.335,
+    "exit_ts": "2026-10-07T07:16:11.766243+03:00",
+    "reason": "trail"
   }
 ]
