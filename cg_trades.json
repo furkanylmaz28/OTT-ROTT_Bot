@@ -19267,5 +19267,41 @@
     "pnl_pct": -0.228,
     "exit_ts": "2026-10-07T15:01:35.546859+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 117.44,
+    "exit_price": 116.71,
+    "pnl_pct": -0.722,
+    "exit_ts": "2026-10-07T15:31:22.161896+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 13.681,
+    "exit_price": 13.335,
+    "pnl_pct": -2.629,
+    "exit_ts": "2026-10-07T15:31:22.161896+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 13.381,
+    "exit_price": 13.335,
+    "pnl_pct": -0.444,
+    "exit_ts": "2026-10-07T15:31:22.161896+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "2",
+    "entry_price": 0.1714,
+    "exit_price": 0.1732,
+    "pnl_pct": 0.95,
+    "exit_ts": "2026-10-07T15:31:22.161896+03:00",
+    "reason": "trail"
   }
 ]
