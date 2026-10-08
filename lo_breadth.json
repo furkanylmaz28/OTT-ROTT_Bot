@@ -1,13 +1,14 @@
 {
-  "ts": "2026-10-08T16:17:18.451200+03:00",
-  "bull": 6,
+  "ts": "2026-10-08T16:32:24.656509+03:00",
+  "bull": 7,
   "bear": 26,
-  "total": 32,
-  "bull_pct": 19.0,
+  "total": 33,
+  "bull_pct": 21.0,
   "bull_syms": [
     "ENJSA",
     "HALKB",
     "PETKM",
+    "TOASO",
     "TKFEN",
     "TUPRS",
     "ALARK"
