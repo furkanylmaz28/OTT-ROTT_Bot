@@ -20401,5 +20401,50 @@
     "pnl_pct": -0.636,
     "exit_ts": "2026-10-08T14:01:30.128773+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2558,
+    "exit_price": 0.2498,
+    "pnl_pct": -2.446,
+    "exit_ts": "2026-10-08T15:01:27.217876+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2512,
+    "exit_price": 0.2498,
+    "pnl_pct": -0.657,
+    "exit_ts": "2026-10-08T15:01:27.217876+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1236,
+    "exit_price": 0.123,
+    "pnl_pct": -0.585,
+    "exit_ts": "2026-10-08T15:01:27.217876+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1232,
+    "exit_price": 0.123,
+    "pnl_pct": -0.262,
+    "exit_ts": "2026-10-08T15:01:27.217876+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.06983,
+    "exit_price": 0.06942,
+    "pnl_pct": -0.687,
+    "exit_ts": "2026-10-08T15:01:27.217876+03:00",
+    "reason": "trend"
   }
 ]
