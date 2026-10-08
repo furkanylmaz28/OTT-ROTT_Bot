@@ -20851,5 +20851,41 @@
     "pnl_pct": 1.34,
     "exit_ts": "2026-10-09T00:31:19.255699+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 1.0669,
+    "exit_price": 1.0798,
+    "pnl_pct": 1.109,
+    "exit_ts": "2026-10-09T02:31:15.809709+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "2",
+    "entry_price": 0.7357,
+    "exit_price": 0.7435,
+    "pnl_pct": 0.96,
+    "exit_ts": "2026-10-09T02:31:15.809709+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.06704,
+    "exit_price": 0.06689,
+    "pnl_pct": -0.324,
+    "exit_ts": "2026-10-09T02:31:15.809709+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.06704,
+    "exit_price": 0.06689,
+    "pnl_pct": -0.324,
+    "exit_ts": "2026-10-09T02:31:15.809709+03:00",
+    "reason": "trend"
   }
 ]
