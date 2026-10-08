@@ -19897,5 +19897,95 @@
     "pnl_pct": 2.997,
     "exit_ts": "2026-10-08T02:31:18.769401+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 83683.36,
+    "exit_price": 83290.75,
+    "pnl_pct": -0.569,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.131,
+    "exit_price": 1.116,
+    "pnl_pct": -1.426,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.131,
+    "exit_price": 1.116,
+    "pnl_pct": -1.426,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "2",
+    "entry_price": 1.131,
+    "exit_price": 1.116,
+    "pnl_pct": -1.426,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.185,
+    "exit_price": 0.1858,
+    "pnl_pct": 0.332,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.185,
+    "exit_price": 0.1858,
+    "pnl_pct": 0.332,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.185,
+    "exit_price": 0.1858,
+    "pnl_pct": 0.332,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1219,
+    "exit_price": 0.1231,
+    "pnl_pct": 0.884,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1219,
+    "exit_price": 0.1231,
+    "pnl_pct": 0.884,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "2",
+    "entry_price": 0.1219,
+    "exit_price": 0.1231,
+    "pnl_pct": 0.884,
+    "exit_ts": "2026-10-08T03:01:30.084641+03:00",
+    "reason": "trend"
   }
 ]
