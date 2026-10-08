@@ -20113,5 +20113,32 @@
     "pnl_pct": -0.668,
     "exit_ts": "2026-10-08T04:31:22.513217+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.36,
+    "exit_price": 8.49,
+    "pnl_pct": 1.455,
+    "exit_ts": "2026-10-08T04:46:11.305370+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 8.36,
+    "exit_price": 8.49,
+    "pnl_pct": 1.455,
+    "exit_ts": "2026-10-08T04:46:11.305370+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 1.1383,
+    "exit_price": 1.1315,
+    "pnl_pct": -0.697,
+    "exit_ts": "2026-10-08T04:46:11.305370+03:00",
+    "reason": "trend"
   }
 ]
