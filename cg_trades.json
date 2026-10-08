@@ -20014,5 +20014,104 @@
     "pnl_pct": -0.989,
     "exit_ts": "2026-10-08T03:46:13.302376+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 83381.14,
+    "exit_price": 83261.01,
+    "pnl_pct": -0.244,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 116.69,
+    "exit_price": 116.41,
+    "pnl_pct": -0.34,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.126,
+    "exit_price": 1.122,
+    "pnl_pct": -0.455,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.126,
+    "exit_price": 1.122,
+    "pnl_pct": -0.455,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.701,
+    "exit_price": 1.729,
+    "pnl_pct": 1.546,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ATOM",
+    "level": "1",
+    "entry_price": 1.696,
+    "exit_price": 1.729,
+    "pnl_pct": 1.846,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "2",
+    "entry_price": 0.759,
+    "exit_price": 0.7697,
+    "pnl_pct": 1.31,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.187,
+    "exit_price": 0.1867,
+    "pnl_pct": -0.26,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.187,
+    "exit_price": 0.1867,
+    "pnl_pct": -0.26,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1233,
+    "exit_price": 0.1226,
+    "pnl_pct": -0.668,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1233,
+    "exit_price": 0.1226,
+    "pnl_pct": -0.668,
+    "exit_ts": "2026-10-08T04:31:22.513217+03:00",
+    "reason": "trend"
   }
 ]
