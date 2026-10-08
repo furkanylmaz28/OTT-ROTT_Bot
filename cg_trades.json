@@ -19987,5 +19987,14 @@
     "pnl_pct": 0.884,
     "exit_ts": "2026-10-08T03:01:30.084641+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 83310.0,
+    "exit_price": 83270.07,
+    "pnl_pct": -0.148,
+    "exit_ts": "2026-10-08T03:31:22.313392+03:00",
+    "reason": "trend"
   }
 ]
