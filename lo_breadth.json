@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-08T16:32:24.656509+03:00",
+  "ts": "2026-10-08T16:47:09.033355+03:00",
   "bull": 7,
-  "bear": 26,
-  "total": 33,
-  "bull_pct": 21.0,
+  "bear": 25,
+  "total": 32,
+  "bull_pct": 22.0,
   "bull_syms": [
     "ENJSA",
     "HALKB",
@@ -32,7 +32,6 @@
     "SOKM",
     "TAVHL",
     "THYAO",
-    "TTKOM",
     "VAKBN",
     "YKBNK",
     "AEFES",
