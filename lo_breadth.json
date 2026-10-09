@@ -1,14 +1,15 @@
 {
-  "ts": "2026-10-09T12:32:30.366603+03:00",
-  "bull": 16,
-  "bear": 17,
+  "ts": "2026-10-09T12:47:22.543975+03:00",
+  "bull": 17,
+  "bear": 16,
   "total": 33,
-  "bull_pct": 48.0,
+  "bull_pct": 52.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
     "EKGYO",
     "ENKAI",
+    "EREGL",
     "GUBRF",
     "HALKB",
     "PETKM",
@@ -25,7 +26,6 @@
   "bear_syms": [
     "AKBNK",
     "ASELS",
-    "EREGL",
     "FROTO",
     "ISCTR",
     "KCHOL",
