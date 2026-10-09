@@ -20914,5 +20914,95 @@
     "pnl_pct": 1.961,
     "exit_ts": "2026-10-09T02:46:21.680024+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.094,
+    "exit_price": 1.089,
+    "pnl_pct": -0.557,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.094,
+    "exit_price": 1.089,
+    "pnl_pct": -0.557,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 5.039,
+    "exit_price": 4.478,
+    "pnl_pct": -11.233,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 4.855,
+    "exit_price": 4.478,
+    "pnl_pct": -7.865,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 4.756,
+    "exit_price": 4.478,
+    "pnl_pct": -5.945,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1198,
+    "exit_price": 0.1192,
+    "pnl_pct": -0.601,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1198,
+    "exit_price": 0.1192,
+    "pnl_pct": -0.601,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 6.764,
+    "exit_price": 6.764,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 6.764,
+    "exit_price": 6.764,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 6.764,
+    "exit_price": 6.764,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-09T03:01:40.148321+03:00",
+    "reason": "trend"
   }
 ]
