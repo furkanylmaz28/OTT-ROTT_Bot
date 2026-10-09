@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-09T11:32:20.125727+03:00",
-  "bull": 15,
-  "bear": 18,
+  "ts": "2026-10-09T11:47:07.788840+03:00",
+  "bull": 16,
+  "bear": 17,
   "total": 33,
-  "bull_pct": 45.0,
+  "bull_pct": 48.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -18,6 +18,7 @@
     "TOASO",
     "TUPRS",
     "AEFES",
+    "ODAS",
     "ASTOR",
     "ALARK"
   ],
@@ -38,7 +39,6 @@
     "VAKBN",
     "YKBNK",
     "HEKTS",
-    "ODAS",
     "AKSEN"
   ],
   "fresh_bear": [
