@@ -21166,5 +21166,23 @@
     "pnl_pct": 0.917,
     "exit_ts": "2026-10-09T07:46:07.938192+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.75,
+    "exit_price": 0.774,
+    "pnl_pct": 3.1,
+    "exit_ts": "2026-10-09T08:01:19.814168+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.75,
+    "exit_price": 0.774,
+    "pnl_pct": 3.1,
+    "exit_ts": "2026-10-09T08:01:19.814168+03:00",
+    "reason": "trail"
   }
 ]
