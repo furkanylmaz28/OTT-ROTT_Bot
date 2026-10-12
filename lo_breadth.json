@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-12T11:47:22.694879+03:00",
+  "ts": "2026-10-12T12:02:28.444840+03:00",
   "bull": 18,
-  "bear": 14,
-  "total": 32,
-  "bull_pct": 56.0,
+  "bear": 15,
+  "total": 33,
+  "bull_pct": 55.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -32,6 +32,7 @@
     "KCHOL",
     "MGROS",
     "PGSUS",
+    "SISE",
     "TAVHL",
     "THYAO",
     "TKFEN",
