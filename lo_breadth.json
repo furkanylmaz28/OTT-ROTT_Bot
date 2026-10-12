@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-12T14:02:27.752857+03:00",
-  "bull": 17,
+  "ts": "2026-10-12T14:17:04.311897+03:00",
+  "bull": 16,
   "bear": 16,
-  "total": 33,
-  "bull_pct": 52.0,
+  "total": 32,
+  "bull_pct": 50.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -20,7 +20,6 @@
     "AEFES",
     "ODAS",
     "ASTOR",
-    "AKSEN",
     "ALARK"
   ],
   "bear_syms": [
