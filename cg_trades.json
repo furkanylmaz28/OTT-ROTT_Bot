@@ -21508,5 +21508,14 @@
     "pnl_pct": 1.012,
     "exit_ts": "2026-10-12T23:01:28.540294+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1853,
+    "exit_price": 0.1871,
+    "pnl_pct": 0.871,
+    "exit_ts": "2026-10-13T00:16:09.523009+03:00",
+    "reason": "trail"
   }
 ]
