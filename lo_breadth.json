@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-12T10:32:18.038144+03:00",
-  "bull": 18,
-  "bear": 15,
+  "ts": "2026-10-12T10:47:10.363805+03:00",
+  "bull": 16,
+  "bear": 17,
   "total": 33,
-  "bull_pct": 55.0,
+  "bull_pct": 48.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -15,9 +15,7 @@
     "PETKM",
     "SASA",
     "SOKM",
-    "TAVHL",
     "TOASO",
-    "TUPRS",
     "AEFES",
     "ODAS",
     "ASTOR",
@@ -34,12 +32,17 @@
     "MGROS",
     "PGSUS",
     "SISE",
+    "TAVHL",
     "THYAO",
     "TKFEN",
     "TTKOM",
+    "TUPRS",
     "VAKBN",
     "YKBNK",
     "HEKTS"
   ],
-  "fresh_bear": []
+  "fresh_bear": [
+    "TAVHL",
+    "TUPRS"
+  ]
 }
