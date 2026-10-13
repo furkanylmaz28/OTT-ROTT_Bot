@@ -1,8 +1,8 @@
 {
-  "ts": "2026-10-13T11:47:02.852197+03:00",
-  "bull": 13,
-  "bear": 20,
-  "total": 33,
+  "ts": "2026-10-13T12:03:16.289046+03:00",
+  "bull": 12,
+  "bear": 19,
+  "total": 31,
   "bull_pct": 39.0,
   "bull_syms": [
     "DOHOL",
@@ -16,7 +16,6 @@
     "VAKBN",
     "YKBNK",
     "AEFES",
-    "ASTOR",
     "ALARK"
   ],
   "bear_syms": [
@@ -38,15 +37,13 @@
     "TTKOM",
     "TUPRS",
     "HEKTS",
-    "ODAS",
-    "AKSEN"
+    "ODAS"
   ],
   "fresh_bear": [
     "ENKAI",
     "GUBRF",
     "SASA",
     "TOASO",
-    "ODAS",
-    "AKSEN"
+    "ODAS"
   ]
 }
