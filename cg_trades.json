@@ -22408,5 +22408,32 @@
     "pnl_pct": 1.243,
     "exit_ts": "2026-10-13T22:46:21.701222+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LTC",
+    "level": "1",
+    "entry_price": 60.92,
+    "exit_price": 61.56,
+    "pnl_pct": 0.951,
+    "exit_ts": "2026-10-14T00:16:09.606132+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1187,
+    "exit_price": 0.1206,
+    "pnl_pct": 1.501,
+    "exit_ts": "2026-10-14T00:16:09.606132+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "2",
+    "entry_price": 0.06346,
+    "exit_price": 0.06414,
+    "pnl_pct": 0.972,
+    "exit_ts": "2026-10-14T00:16:09.606132+03:00",
+    "reason": "trail"
   }
 ]
