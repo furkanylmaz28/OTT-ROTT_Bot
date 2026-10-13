@@ -21814,5 +21814,50 @@
     "pnl_pct": 3.593,
     "exit_ts": "2026-10-13T09:01:34.242789+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 12.786,
+    "exit_price": 13.095,
+    "pnl_pct": 2.317,
+    "exit_ts": "2026-10-13T09:16:07.432198+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 12.436,
+    "exit_price": 13.095,
+    "pnl_pct": 5.199,
+    "exit_ts": "2026-10-13T09:16:07.432198+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 8.14,
+    "exit_price": 8.22,
+    "pnl_pct": 0.883,
+    "exit_ts": "2026-10-13T09:16:07.432198+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 8.02,
+    "exit_price": 8.22,
+    "pnl_pct": 2.394,
+    "exit_ts": "2026-10-13T09:16:07.432198+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1179,
+    "exit_price": 0.1207,
+    "pnl_pct": 2.275,
+    "exit_ts": "2026-10-13T09:16:07.432198+03:00",
+    "reason": "trail"
   }
 ]
