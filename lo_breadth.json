@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-13T12:17:53.970019+03:00",
+  "ts": "2026-10-13T12:32:24.293285+03:00",
   "bull": 13,
-  "bear": 20,
-  "total": 33,
-  "bull_pct": 39.0,
+  "bear": 19,
+  "total": 32,
+  "bull_pct": 41.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
@@ -25,7 +25,6 @@
     "ENKAI",
     "FROTO",
     "GUBRF",
-    "ISCTR",
     "KCHOL",
     "MGROS",
     "PGSUS",
