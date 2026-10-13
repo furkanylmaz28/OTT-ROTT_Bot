@@ -1,15 +1,16 @@
 {
-  "ts": "2026-10-13T13:32:27.711092+03:00",
-  "bull": 13,
-  "bear": 20,
+  "ts": "2026-10-13T13:47:11.675786+03:00",
+  "bull": 14,
+  "bear": 19,
   "total": 33,
-  "bull_pct": 39.0,
+  "bull_pct": 42.0,
   "bull_syms": [
     "DOHOL",
     "ENJSA",
     "EKGYO",
     "EREGL",
     "HALKB",
+    "KCHOL",
     "KRDMD",
     "PETKM",
     "SOKM",
@@ -26,7 +27,6 @@
     "FROTO",
     "GUBRF",
     "ISCTR",
-    "KCHOL",
     "MGROS",
     "PGSUS",
     "SASA",
@@ -45,7 +45,6 @@
     "ENKAI",
     "GUBRF",
     "SASA",
-    "TOASO",
     "ODAS",
     "AKSEN"
   ]
