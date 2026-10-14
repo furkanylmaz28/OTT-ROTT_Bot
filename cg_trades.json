@@ -22489,5 +22489,32 @@
     "pnl_pct": 0.782,
     "exit_ts": "2026-10-14T08:46:12.184435+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1196,
+    "exit_price": 0.1213,
+    "pnl_pct": 1.321,
+    "exit_ts": "2026-10-14T09:31:22.900163+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.08708,
+    "exit_price": 0.08639,
+    "pnl_pct": -0.892,
+    "exit_ts": "2026-10-14T09:31:22.900163+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.08708,
+    "exit_price": 0.08639,
+    "pnl_pct": -0.892,
+    "exit_ts": "2026-10-14T09:31:22.900163+03:00",
+    "reason": "trend"
   }
 ]
