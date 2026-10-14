@@ -22543,5 +22543,23 @@
     "pnl_pct": -0.273,
     "exit_ts": "2026-10-14T10:01:34.890821+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.154,
+    "exit_price": 1.151,
+    "pnl_pct": -0.36,
+    "exit_ts": "2026-10-14T10:46:13.572136+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.154,
+    "exit_price": 1.151,
+    "pnl_pct": -0.36,
+    "exit_ts": "2026-10-14T10:46:13.572136+03:00",
+    "reason": "trend"
   }
 ]
