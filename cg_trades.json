@@ -23398,5 +23398,23 @@
     "pnl_pct": -0.778,
     "exit_ts": "2026-10-15T12:01:31.881999+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 723.04,
+    "exit_price": 720.81,
+    "pnl_pct": -0.408,
+    "exit_ts": "2026-10-15T13:16:10.621635+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.531,
+    "exit_price": 0.5325,
+    "pnl_pct": 0.182,
+    "exit_ts": "2026-10-15T13:16:10.621635+03:00",
+    "reason": "trail"
   }
 ]
