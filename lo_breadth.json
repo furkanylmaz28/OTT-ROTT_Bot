@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-15T16:17:00.453407+03:00",
+  "ts": "2026-10-15T16:32:37.798326+03:00",
   "bull": 9,
-  "bear": 24,
-  "total": 33,
-  "bull_pct": 27.0,
+  "bear": 23,
+  "total": 32,
+  "bull_pct": 28.0,
   "bull_syms": [
     "ENJSA",
     "EKGYO",
@@ -28,7 +28,6 @@
     "PETKM",
     "PGSUS",
     "SASA",
-    "SISE",
     "TAVHL",
     "THYAO",
     "TOASO",
