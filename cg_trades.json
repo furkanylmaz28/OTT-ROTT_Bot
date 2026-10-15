@@ -23299,5 +23299,41 @@
     "pnl_pct": -1.397,
     "exit_ts": "2026-10-15T06:31:13.673659+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 81536.96,
+    "exit_price": 80914.01,
+    "pnl_pct": -0.864,
+    "exit_ts": "2026-10-15T07:01:32.587259+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 1.1363,
+    "exit_price": 1.0424,
+    "pnl_pct": -8.364,
+    "exit_ts": "2026-10-15T07:01:32.587259+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 1.1167,
+    "exit_price": 1.0424,
+    "pnl_pct": -6.754,
+    "exit_ts": "2026-10-15T07:01:32.587259+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "2",
+    "entry_price": 1.0938,
+    "exit_price": 1.0424,
+    "pnl_pct": -4.799,
+    "exit_ts": "2026-10-15T07:01:32.587259+03:00",
+    "reason": "trend"
   }
 ]
