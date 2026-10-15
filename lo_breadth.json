@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-15T09:47:04.691783+03:00",
+  "ts": "2026-10-15T10:02:11.813166+03:00",
   "bull": 12,
-  "bear": 20,
-  "total": 32,
-  "bull_pct": 38.0,
+  "bear": 21,
+  "total": 33,
+  "bull_pct": 36.0,
   "bull_syms": [
     "ENJSA",
     "EKGYO",
@@ -38,6 +38,7 @@
     "AEFES",
     "HEKTS",
     "ODAS",
+    "ASTOR",
     "AKSEN"
   ],
   "fresh_bear": [
