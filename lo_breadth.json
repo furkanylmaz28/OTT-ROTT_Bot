@@ -1,8 +1,8 @@
 {
-  "ts": "2026-10-16T14:02:27.879247+03:00",
+  "ts": "2026-10-16T14:17:16.559245+03:00",
   "bull": 0,
-  "bear": 33,
-  "total": 33,
+  "bear": 32,
+  "total": 32,
   "bull_pct": 0.0,
   "bull_syms": [],
   "bear_syms": [
@@ -29,7 +29,6 @@
     "THYAO",
     "TOASO",
     "TKFEN",
-    "TTKOM",
     "TUPRS",
     "VAKBN",
     "YKBNK",
