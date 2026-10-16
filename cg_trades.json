@@ -23722,5 +23722,23 @@
     "pnl_pct": 1.741,
     "exit_ts": "2026-10-16T22:46:11.033190+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3152,
+    "exit_price": 1.299,
+    "pnl_pct": -1.332,
+    "exit_ts": "2026-10-16T23:01:43.606680+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.08033,
+    "exit_price": 0.08017,
+    "pnl_pct": -0.299,
+    "exit_ts": "2026-10-16T23:01:43.606680+03:00",
+    "reason": "trend"
   }
 ]
