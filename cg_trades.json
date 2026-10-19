@@ -24658,5 +24658,50 @@
     "pnl_pct": -0.577,
     "exit_ts": "2026-10-19T06:46:04.092170+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 58.22,
+    "exit_price": 59.28,
+    "pnl_pct": 1.721,
+    "exit_ts": "2026-10-19T07:01:31.294613+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1136,
+    "exit_price": 0.1107,
+    "pnl_pct": -2.653,
+    "exit_ts": "2026-10-19T07:01:31.294613+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 1.09,
+    "exit_price": 1.0364,
+    "pnl_pct": -5.017,
+    "exit_ts": "2026-10-19T07:01:31.294613+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 1.0636,
+    "exit_price": 1.0364,
+    "pnl_pct": -2.657,
+    "exit_ts": "2026-10-19T07:01:31.294613+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "2",
+    "entry_price": 1.0417,
+    "exit_price": 1.0364,
+    "pnl_pct": -0.609,
+    "exit_ts": "2026-10-19T07:01:31.294613+03:00",
+    "reason": "trend"
   }
 ]
