@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-19T13:17:47.396922+03:00",
+  "ts": "2026-10-19T13:32:08.757544+03:00",
   "bull": 2,
-  "bear": 27,
-  "total": 29,
-  "bull_pct": 7.0,
+  "bear": 31,
+  "total": 33,
+  "bull_pct": 6.0,
   "bull_syms": [
     "ENJSA",
     "TAVHL"
@@ -14,7 +14,11 @@
     "DOHOL",
     "EKGYO",
     "ENKAI",
+    "EREGL",
+    "FROTO",
     "GUBRF",
+    "HALKB",
+    "ISCTR",
     "KCHOL",
     "KRDMD",
     "MGROS",

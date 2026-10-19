@@ -24766,5 +24766,32 @@
     "pnl_pct": -0.557,
     "exit_ts": "2026-10-19T13:01:26.936231+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2352.57,
+    "exit_price": 2419.36,
+    "pnl_pct": 2.739,
+    "exit_ts": "2026-10-19T13:31:19.099086+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 1.0531,
+    "exit_price": 1.0318,
+    "pnl_pct": -2.123,
+    "exit_ts": "2026-10-19T13:31:19.099086+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 1.0531,
+    "exit_price": 1.0318,
+    "pnl_pct": -2.123,
+    "exit_ts": "2026-10-19T13:31:19.099086+03:00",
+    "reason": "trend"
   }
 ]
