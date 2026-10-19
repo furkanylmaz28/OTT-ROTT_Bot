@@ -1,17 +1,17 @@
 {
-  "ts": "2026-10-19T12:32:18.821501+03:00",
-  "bull": 1,
-  "bear": 32,
+  "ts": "2026-10-19T12:46:55.736550+03:00",
+  "bull": 2,
+  "bear": 31,
   "total": 33,
-  "bull_pct": 3.0,
+  "bull_pct": 6.0,
   "bull_syms": [
+    "ENJSA",
     "TAVHL"
   ],
   "bear_syms": [
     "AKBNK",
     "ASELS",
     "DOHOL",
-    "ENJSA",
     "EKGYO",
     "ENKAI",
     "EREGL",
