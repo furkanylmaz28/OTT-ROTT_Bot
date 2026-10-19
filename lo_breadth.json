@@ -1,10 +1,12 @@
 {
-  "ts": "2026-10-19T10:02:33.660807+03:00",
-  "bull": 0,
+  "ts": "2026-10-19T10:17:18.521393+03:00",
+  "bull": 1,
   "bear": 32,
-  "total": 32,
-  "bull_pct": 0.0,
-  "bull_syms": [],
+  "total": 33,
+  "bull_pct": 3.0,
+  "bull_syms": [
+    "TAVHL"
+  ],
   "bear_syms": [
     "AKBNK",
     "ASELS",
