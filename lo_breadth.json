@@ -1,11 +1,12 @@
 {
-  "ts": "2026-10-20T15:32:15.372903+03:00",
-  "bull": 4,
-  "bear": 29,
+  "ts": "2026-10-20T15:46:54.426426+03:00",
+  "bull": 5,
+  "bear": 28,
   "total": 33,
-  "bull_pct": 12.0,
+  "bull_pct": 15.0,
   "bull_syms": [
     "ENJSA",
+    "EREGL",
     "TAVHL",
     "TKFEN",
     "ASTOR"
@@ -16,7 +17,6 @@
     "DOHOL",
     "EKGYO",
     "ENKAI",
-    "EREGL",
     "FROTO",
     "GUBRF",
     "HALKB",
