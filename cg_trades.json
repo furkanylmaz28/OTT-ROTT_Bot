@@ -25090,5 +25090,14 @@
     "pnl_pct": 1.134,
     "exit_ts": "2026-10-20T07:16:00.818689+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.06005,
+    "exit_price": 0.06084,
+    "pnl_pct": 1.216,
+    "exit_ts": "2026-10-20T07:31:26.688166+03:00",
+    "reason": "trail"
   }
 ]
