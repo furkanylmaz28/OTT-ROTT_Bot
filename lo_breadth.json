@@ -1,8 +1,8 @@
 {
-  "ts": "2026-10-20T10:32:03.607016+03:00",
+  "ts": "2026-10-20T10:47:08.103586+03:00",
   "bull": 2,
-  "bear": 30,
-  "total": 32,
+  "bear": 31,
+  "total": 33,
   "bull_pct": 6.0,
   "bull_syms": [
     "ENJSA",
@@ -22,6 +22,7 @@
     "KCHOL",
     "KRDMD",
     "MGROS",
+    "PETKM",
     "PGSUS",
     "SASA",
     "SISE",
