@@ -1,13 +1,12 @@
 {
-  "ts": "2026-10-22T15:32:14.642677+03:00",
-  "bull": 5,
-  "bear": 28,
+  "ts": "2026-10-22T15:47:14.209884+03:00",
+  "bull": 4,
+  "bear": 29,
   "total": 33,
-  "bull_pct": 15.0,
+  "bull_pct": 12.0,
   "bull_syms": [
     "ENJSA",
     "HALKB",
-    "KRDMD",
     "PGSUS",
     "YKBNK"
   ],
@@ -22,6 +21,7 @@
     "GUBRF",
     "ISCTR",
     "KCHOL",
+    "KRDMD",
     "MGROS",
     "PETKM",
     "SASA",
@@ -47,6 +47,7 @@
     "EKGYO",
     "EREGL",
     "KCHOL",
+    "KRDMD",
     "MGROS",
     "TAVHL",
     "THYAO",
