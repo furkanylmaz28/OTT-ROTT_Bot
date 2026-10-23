@@ -25468,5 +25468,59 @@
     "pnl_pct": 1.765,
     "exit_ts": "2026-10-23T09:01:28.838546+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3033,
+    "exit_price": 1.323,
+    "pnl_pct": 1.412,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 9.175,
+    "exit_price": 9.278,
+    "pnl_pct": 1.023,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 9.175,
+    "exit_price": 9.278,
+    "pnl_pct": 1.023,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1884,
+    "exit_price": 0.1819,
+    "pnl_pct": -3.55,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1846,
+    "exit_price": 0.1819,
+    "pnl_pct": -1.563,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "2",
+    "entry_price": 0.05702,
+    "exit_price": 0.05874,
+    "pnl_pct": 2.916,
+    "exit_ts": "2026-10-23T11:01:31.317873+03:00",
+    "reason": "trail"
   }
 ]
