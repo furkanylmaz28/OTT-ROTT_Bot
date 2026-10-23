@@ -25405,5 +25405,32 @@
     "pnl_pct": 1.033,
     "exit_ts": "2026-10-23T06:15:55.702893+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.2113,
+    "exit_price": 0.2154,
+    "pnl_pct": 1.84,
+    "exit_ts": "2026-10-23T07:15:57.231177+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 6.987,
+    "exit_price": 7.152,
+    "pnl_pct": 2.262,
+    "exit_ts": "2026-10-23T07:15:57.231177+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.7614,
+    "exit_price": 0.7714,
+    "pnl_pct": 1.213,
+    "exit_ts": "2026-10-23T07:15:57.231177+03:00",
+    "reason": "trail"
   }
 ]
