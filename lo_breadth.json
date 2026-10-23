@@ -1,10 +1,12 @@
 {
-  "ts": "2026-10-23T16:32:25.354804+03:00",
-  "bull": 0,
-  "bear": 33,
+  "ts": "2026-10-23T16:46:55.742968+03:00",
+  "bull": 1,
+  "bear": 32,
   "total": 33,
-  "bull_pct": 0.0,
-  "bull_syms": [],
+  "bull_pct": 3.0,
+  "bull_syms": [
+    "HALKB"
+  ],
   "bear_syms": [
     "AKBNK",
     "ASELS",
@@ -15,7 +17,6 @@
     "EREGL",
     "FROTO",
     "GUBRF",
-    "HALKB",
     "ISCTR",
     "KCHOL",
     "KRDMD",
@@ -42,7 +43,6 @@
   ],
   "fresh_bear": [
     "ENJSA",
-    "HALKB",
     "PGSUS",
     "YKBNK"
   ]
