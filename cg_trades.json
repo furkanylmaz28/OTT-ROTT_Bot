@@ -25603,5 +25603,113 @@
     "pnl_pct": 1.13,
     "exit_ts": "2026-10-23T21:31:25.530838+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 9.278,
+    "exit_price": 9.054,
+    "pnl_pct": -2.514,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 9.082,
+    "exit_price": 9.054,
+    "pnl_pct": -0.408,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1091,
+    "exit_price": 0.1065,
+    "pnl_pct": -2.483,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.125,
+    "exit_price": 0.1163,
+    "pnl_pct": -7.06,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1225,
+    "exit_price": 0.1163,
+    "pnl_pct": -5.161,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "2",
+    "entry_price": 0.1193,
+    "exit_price": 0.1163,
+    "pnl_pct": -2.615,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.08181,
+    "exit_price": 0.07808,
+    "pnl_pct": -4.659,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.07881,
+    "exit_price": 0.07808,
+    "pnl_pct": -1.026,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1505,
+    "exit_price": 0.145,
+    "pnl_pct": -3.754,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1471,
+    "exit_price": 0.145,
+    "pnl_pct": -1.528,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.0599,
+    "exit_price": 0.05726,
+    "pnl_pct": -4.507,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.05858,
+    "exit_price": 0.05726,
+    "pnl_pct": -2.353,
+    "exit_ts": "2026-10-23T23:01:30.697067+03:00",
+    "reason": "trend"
   }
 ]
