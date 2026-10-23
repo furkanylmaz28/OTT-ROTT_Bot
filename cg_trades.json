@@ -25729,5 +25729,32 @@
     "pnl_pct": -0.343,
     "exit_ts": "2026-10-24T01:01:21.070662+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 9.125,
+    "exit_price": 9.046,
+    "pnl_pct": -0.966,
+    "exit_ts": "2026-10-24T01:31:06.836392+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.1067,
+    "exit_price": 0.1059,
+    "pnl_pct": -0.85,
+    "exit_ts": "2026-10-24T01:31:06.836392+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1455,
+    "exit_price": 0.1445,
+    "pnl_pct": -0.787,
+    "exit_ts": "2026-10-24T01:31:06.836392+03:00",
+    "reason": "trend"
   }
 ]
