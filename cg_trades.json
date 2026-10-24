@@ -25900,5 +25900,68 @@
     "pnl_pct": -3.397,
     "exit_ts": "2026-10-24T02:16:08.978037+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 57.11,
+    "exit_price": 57.24,
+    "pnl_pct": 0.128,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "1",
+    "entry_price": 57.11,
+    "exit_price": 57.24,
+    "pnl_pct": 0.128,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.7301,
+    "exit_price": 0.7362,
+    "pnl_pct": 0.736,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.7301,
+    "exit_price": 0.7362,
+    "pnl_pct": 0.736,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "2",
+    "entry_price": 0.7301,
+    "exit_price": 0.7362,
+    "pnl_pct": 0.736,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.9569,
+    "exit_price": 0.9617,
+    "pnl_pct": 0.402,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.9569,
+    "exit_price": 0.9617,
+    "pnl_pct": 0.402,
+    "exit_ts": "2026-10-24T03:01:33.370064+03:00",
+    "reason": "trend"
   }
 ]
