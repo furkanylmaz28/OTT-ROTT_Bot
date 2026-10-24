@@ -26152,5 +26152,23 @@
     "pnl_pct": 0.926,
     "exit_ts": "2026-10-24T08:01:25.515274+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07852,
+    "exit_price": 0.07836,
+    "pnl_pct": -0.304,
+    "exit_ts": "2026-10-24T08:31:19.177770+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 11.706,
+    "exit_price": 11.804,
+    "pnl_pct": 0.737,
+    "exit_ts": "2026-10-24T08:31:19.177770+03:00",
+    "reason": "trail"
   }
 ]
