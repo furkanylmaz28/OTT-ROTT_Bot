@@ -26080,5 +26080,59 @@
     "pnl_pct": 1.178,
     "exit_ts": "2026-10-24T07:01:31.322611+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 80711.02,
+    "exit_price": 80908.0,
+    "pnl_pct": 0.144,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1721,
+    "exit_price": 0.1713,
+    "pnl_pct": -0.565,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1721,
+    "exit_price": 0.1713,
+    "pnl_pct": -0.565,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1721,
+    "exit_price": 0.1713,
+    "pnl_pct": -0.565,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1449,
+    "exit_price": 0.1447,
+    "pnl_pct": -0.238,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1439,
+    "exit_price": 0.1447,
+    "pnl_pct": 0.456,
+    "exit_ts": "2026-10-24T07:16:19.144974+03:00",
+    "reason": "trend"
   }
 ]
