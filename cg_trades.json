@@ -26296,5 +26296,59 @@
     "pnl_pct": -0.289,
     "exit_ts": "2026-10-24T12:31:17.259129+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2381.96,
+    "exit_price": 2364.87,
+    "pnl_pct": -0.817,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.3042,
+    "exit_price": 1.2812,
+    "pnl_pct": -1.864,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 1.062,
+    "exit_price": 1.062,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 1.062,
+    "exit_price": 1.062,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "2",
+    "entry_price": 1.062,
+    "exit_price": 1.062,
+    "pnl_pct": -0.1,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 7.75,
+    "exit_price": 7.63,
+    "pnl_pct": -1.648,
+    "exit_ts": "2026-10-24T15:01:26.853402+03:00",
+    "reason": "trend"
   }
 ]
