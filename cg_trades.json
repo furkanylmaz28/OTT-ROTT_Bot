@@ -26764,5 +26764,32 @@
     "pnl_pct": -0.152,
     "exit_ts": "2026-10-26T02:01:31.763383+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.2048,
+    "exit_price": 0.2025,
+    "pnl_pct": -1.223,
+    "exit_ts": "2026-10-26T02:31:30.063725+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 11.487,
+    "exit_price": 11.368,
+    "pnl_pct": -1.136,
+    "exit_ts": "2026-10-26T02:31:30.063725+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1398,
+    "exit_price": 0.1381,
+    "pnl_pct": -1.316,
+    "exit_ts": "2026-10-26T02:31:30.063725+03:00",
+    "reason": "trend"
   }
 ]
