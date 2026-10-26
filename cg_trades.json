@@ -26926,5 +26926,41 @@
     "pnl_pct": -0.667,
     "exit_ts": "2026-10-26T08:46:19.629745+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "1",
+    "entry_price": 1.615,
+    "exit_price": 1.636,
+    "pnl_pct": 1.2,
+    "exit_ts": "2026-10-26T09:16:05.931506+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1115,
+    "exit_price": 0.1105,
+    "pnl_pct": -0.997,
+    "exit_ts": "2026-10-26T09:16:05.931506+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.9184,
+    "exit_price": 0.9129,
+    "pnl_pct": -0.699,
+    "exit_ts": "2026-10-26T09:16:05.931506+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.5284,
+    "exit_price": 0.5226,
+    "pnl_pct": -1.198,
+    "exit_ts": "2026-10-26T09:16:05.931506+03:00",
+    "reason": "trend"
   }
 ]
