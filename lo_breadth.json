@@ -1,11 +1,12 @@
 {
-  "ts": "2026-10-26T10:32:17.244772+03:00",
-  "bull": 1,
-  "bear": 32,
+  "ts": "2026-10-26T10:47:10.798834+03:00",
+  "bull": 2,
+  "bear": 31,
   "total": 33,
-  "bull_pct": 3.0,
+  "bull_pct": 6.0,
   "bull_syms": [
-    "HALKB"
+    "HALKB",
+    "TUPRS"
   ],
   "bear_syms": [
     "AKBNK",
@@ -31,7 +32,6 @@
     "TOASO",
     "TKFEN",
     "TTKOM",
-    "TUPRS",
     "VAKBN",
     "YKBNK",
     "AEFES",
