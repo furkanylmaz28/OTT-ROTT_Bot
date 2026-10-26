@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-26T13:02:31.676518+03:00",
+  "ts": "2026-10-26T13:17:16.951630+03:00",
   "bull": 3,
-  "bear": 29,
-  "total": 32,
-  "bull_pct": 9.0,
+  "bear": 28,
+  "total": 31,
+  "bull_pct": 10.0,
   "bull_syms": [
     "HALKB",
     "TUPRS",
@@ -34,7 +34,6 @@
     "TKFEN",
     "TTKOM",
     "VAKBN",
-    "AEFES",
     "HEKTS",
     "ODAS",
     "AKSEN",
