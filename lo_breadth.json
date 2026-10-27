@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-27T13:02:26.400740+03:00",
-  "bull": 12,
+  "ts": "2026-10-27T13:17:11.411694+03:00",
+  "bull": 11,
   "bear": 21,
-  "total": 33,
-  "bull_pct": 36.0,
+  "total": 32,
+  "bull_pct": 34.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -14,7 +14,6 @@
     "SISE",
     "TKFEN",
     "TUPRS",
-    "YKBNK",
     "ASTOR",
     "AKSEN"
   ],
