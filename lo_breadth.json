@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-27T12:32:17.237594+03:00",
+  "ts": "2026-10-27T12:46:55.993267+03:00",
   "bull": 12,
-  "bear": 21,
-  "total": 33,
-  "bull_pct": 36.0,
+  "bear": 20,
+  "total": 32,
+  "bull_pct": 38.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -32,7 +32,6 @@
     "SASA",
     "SOKM",
     "TAVHL",
-    "THYAO",
     "TOASO",
     "TTKOM",
     "VAKBN",
