@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-27T16:32:48.579949+03:00",
-  "bull": 12,
-  "bear": 19,
-  "total": 31,
-  "bull_pct": 39.0,
+  "ts": "2026-10-27T16:47:00.901830+03:00",
+  "bull": 14,
+  "bear": 18,
+  "total": 32,
+  "bull_pct": 44.0,
   "bull_syms": [
     "AKBNK",
     "DOHOL",
@@ -14,6 +14,8 @@
     "SISE",
     "TOASO",
     "TKFEN",
+    "TTKOM",
+    "TUPRS",
     "YKBNK",
     "ASTOR",
     "AKSEN"
@@ -36,7 +38,6 @@
     "VAKBN",
     "AEFES",
     "HEKTS",
-    "ODAS",
     "ALARK"
   ],
   "fresh_bear": []
