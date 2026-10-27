@@ -27169,5 +27169,32 @@
     "pnl_pct": 0.875,
     "exit_ts": "2026-10-27T18:16:10.323117+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.6801,
+    "exit_price": 0.688,
+    "pnl_pct": 1.062,
+    "exit_ts": "2026-10-27T19:01:39.711046+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1363,
+    "exit_price": 0.1387,
+    "pnl_pct": 1.661,
+    "exit_ts": "2026-10-27T19:01:39.711046+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.522,
+    "exit_price": 0.5358,
+    "pnl_pct": 2.544,
+    "exit_ts": "2026-10-27T19:01:39.711046+03:00",
+    "reason": "trail"
   }
 ]
