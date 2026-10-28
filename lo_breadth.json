@@ -1,5 +1,5 @@
 {
-  "ts": "2026-10-28T12:47:33.157306+03:00",
+  "ts": "2026-10-28T13:03:19.959260+03:00",
   "bull": 13,
   "bear": 16,
   "total": 29,
@@ -10,19 +10,19 @@
     "DOHOL",
     "ENKAI",
     "FROTO",
-    "KCHOL",
+    "HALKB",
+    "SISE",
     "TOASO",
     "TKFEN",
     "TTKOM",
     "TUPRS",
     "YKBNK",
-    "ASTOR",
-    "AKSEN"
+    "ASTOR"
   ],
   "bear_syms": [
     "ENJSA",
     "EKGYO",
-    "EREGL",
+    "GUBRF",
     "ISCTR",
     "KRDMD",
     "MGROS",
@@ -30,12 +30,12 @@
     "PGSUS",
     "SASA",
     "SOKM",
+    "TAVHL",
     "THYAO",
     "VAKBN",
     "AEFES",
     "HEKTS",
-    "ODAS",
-    "ALARK"
+    "ODAS"
   ],
   "fresh_bear": []
 }
