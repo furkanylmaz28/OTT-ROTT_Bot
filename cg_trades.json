@@ -27322,5 +27322,23 @@
     "pnl_pct": -1.005,
     "exit_ts": "2026-10-29T06:31:05.445934+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1645,
+    "exit_price": 0.1675,
+    "pnl_pct": 1.724,
+    "exit_ts": "2026-10-29T08:45:59.399356+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.5255,
+    "exit_price": 0.5328,
+    "pnl_pct": 1.289,
+    "exit_ts": "2026-10-29T08:45:59.399356+03:00",
+    "reason": "trail"
   }
 ]
