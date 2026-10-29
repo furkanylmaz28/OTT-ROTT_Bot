@@ -27502,5 +27502,50 @@
     "pnl_pct": 1.944,
     "exit_ts": "2026-10-29T14:31:18.138537+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.6624,
+    "exit_price": 0.6695,
+    "pnl_pct": 0.972,
+    "exit_ts": "2026-10-29T15:01:30.432587+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.9036,
+    "exit_price": 0.9198,
+    "pnl_pct": 1.693,
+    "exit_ts": "2026-10-29T15:01:30.432587+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07381,
+    "exit_price": 0.07345,
+    "pnl_pct": -0.588,
+    "exit_ts": "2026-10-29T15:01:30.432587+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.5244,
+    "exit_price": 0.5321,
+    "pnl_pct": 1.368,
+    "exit_ts": "2026-10-29T15:01:30.432587+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.05119,
+    "exit_price": 0.05163,
+    "pnl_pct": 0.76,
+    "exit_ts": "2026-10-29T15:01:30.432587+03:00",
+    "reason": "trail"
   }
 ]
