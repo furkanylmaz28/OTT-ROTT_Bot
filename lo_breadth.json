@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-29T11:47:11.431207+03:00",
+  "ts": "2026-10-29T12:02:16.414393+03:00",
   "bull": 15,
-  "bear": 17,
-  "total": 32,
-  "bull_pct": 47.0,
+  "bear": 18,
+  "total": 33,
+  "bull_pct": 45.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -28,6 +28,7 @@
     "GUBRF",
     "ISCTR",
     "KRDMD",
+    "MGROS",
     "PETKM",
     "PGSUS",
     "SASA",
