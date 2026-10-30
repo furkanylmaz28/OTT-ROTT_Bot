@@ -28636,5 +28636,302 @@
     "pnl_pct": 2.375,
     "exit_ts": "2026-10-30T08:45:59.743411+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2200.63,
+    "exit_price": 2237.04,
+    "pnl_pct": 1.555,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "1",
+    "entry_price": 2200.63,
+    "exit_price": 2237.04,
+    "pnl_pct": 1.555,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 93.84,
+    "exit_price": 97.83,
+    "pnl_pct": 4.152,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "1",
+    "entry_price": 93.84,
+    "exit_price": 97.83,
+    "pnl_pct": 4.152,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "2",
+    "entry_price": 93.84,
+    "exit_price": 97.83,
+    "pnl_pct": 4.152,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1895,
+    "exit_price": 0.193,
+    "pnl_pct": 1.747,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.1895,
+    "exit_price": 0.193,
+    "pnl_pct": 1.747,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "2",
+    "entry_price": 0.1895,
+    "exit_price": 0.193,
+    "pnl_pct": 1.747,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 8.185,
+    "exit_price": 8.548,
+    "pnl_pct": 4.335,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 8.185,
+    "exit_price": 8.548,
+    "pnl_pct": 4.335,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "2",
+    "entry_price": 8.185,
+    "exit_price": 8.548,
+    "pnl_pct": 4.335,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.916,
+    "exit_price": 0.95,
+    "pnl_pct": 3.612,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.916,
+    "exit_price": 0.95,
+    "pnl_pct": 3.612,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "2",
+    "entry_price": 0.916,
+    "exit_price": 0.95,
+    "pnl_pct": 3.612,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "2",
+    "entry_price": 10.832,
+    "exit_price": 11.039,
+    "pnl_pct": 1.811,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 7.03,
+    "exit_price": 7.16,
+    "pnl_pct": 1.749,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 7.03,
+    "exit_price": 7.16,
+    "pnl_pct": 1.749,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "2",
+    "entry_price": 7.03,
+    "exit_price": 7.16,
+    "pnl_pct": 1.749,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 4.177,
+    "exit_price": 4.181,
+    "pnl_pct": -0.004,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.8138,
+    "exit_price": 0.8378,
+    "pnl_pct": 2.849,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.8138,
+    "exit_price": 0.8378,
+    "pnl_pct": 2.849,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "2",
+    "entry_price": 0.8138,
+    "exit_price": 0.8378,
+    "pnl_pct": 2.849,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1561,
+    "exit_price": 0.1639,
+    "pnl_pct": 4.897,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1561,
+    "exit_price": 0.1639,
+    "pnl_pct": 4.897,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "2",
+    "entry_price": 0.1561,
+    "exit_price": 0.1639,
+    "pnl_pct": 4.897,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.0999,
+    "exit_price": 0.1019,
+    "pnl_pct": 1.902,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0999,
+    "exit_price": 0.1019,
+    "pnl_pct": 1.902,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "2",
+    "entry_price": 0.0999,
+    "exit_price": 0.1019,
+    "pnl_pct": 1.902,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.8823,
+    "exit_price": 0.8893,
+    "pnl_pct": 0.693,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "2",
+    "entry_price": 0.8659,
+    "exit_price": 0.8893,
+    "pnl_pct": 2.602,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04725,
+    "exit_price": 0.04813,
+    "pnl_pct": 1.762,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04725,
+    "exit_price": 0.04813,
+    "pnl_pct": 1.762,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "2",
+    "entry_price": 0.04725,
+    "exit_price": 0.04813,
+    "pnl_pct": 1.762,
+    "exit_ts": "2026-10-30T09:01:34.733420+03:00",
+    "reason": "trail"
   }
 ]
