@@ -29905,5 +29905,41 @@
     "pnl_pct": 0.753,
     "exit_ts": "2026-10-30T23:41:37.440582+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 78854.1,
+    "exit_price": 76780.0,
+    "pnl_pct": -2.73,
+    "exit_ts": "2026-10-31T00:16:11.537279+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "1",
+    "entry_price": 76806.0,
+    "exit_price": 76780.0,
+    "pnl_pct": -0.134,
+    "exit_ts": "2026-10-31T00:16:11.537279+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04821,
+    "exit_price": 0.0481,
+    "pnl_pct": -0.328,
+    "exit_ts": "2026-10-31T00:16:11.537279+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04821,
+    "exit_price": 0.0481,
+    "pnl_pct": -0.328,
+    "exit_ts": "2026-10-31T00:16:11.537279+03:00",
+    "reason": "trend"
   }
 ]
