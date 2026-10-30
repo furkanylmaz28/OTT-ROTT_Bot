@@ -29527,5 +29527,77 @@
     "pnl_pct": -0.507,
     "exit_ts": "2026-10-30T17:16:34.006652+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.075,
+    "exit_price": 0.07592,
+    "pnl_pct": 1.127,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "2",
+    "entry_price": 8.158,
+    "exit_price": 8.339,
+    "pnl_pct": 2.119,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 11.055,
+    "exit_price": 11.109,
+    "pnl_pct": 0.388,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 11.055,
+    "exit_price": 11.109,
+    "pnl_pct": 0.388,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 6.898,
+    "exit_price": 6.987,
+    "pnl_pct": 1.19,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.8513,
+    "exit_price": 0.8662,
+    "pnl_pct": 1.65,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.8468,
+    "exit_price": 0.8662,
+    "pnl_pct": 2.191,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.8825,
+    "exit_price": 0.8944,
+    "pnl_pct": 1.248,
+    "exit_ts": "2026-10-30T18:31:24.275411+03:00",
+    "reason": "trail"
   }
 ]
