@@ -29122,5 +29122,86 @@
     "pnl_pct": 4.158,
     "exit_ts": "2026-10-30T10:45:56.044872+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0951,
+    "exit_price": 0.0945,
+    "pnl_pct": -0.731,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "1",
+    "entry_price": 0.0951,
+    "exit_price": 0.0945,
+    "pnl_pct": -0.731,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "2",
+    "entry_price": 0.0948,
+    "exit_price": 0.0945,
+    "pnl_pct": -0.416,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1186,
+    "exit_price": 0.1181,
+    "pnl_pct": -0.522,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1186,
+    "exit_price": 0.1181,
+    "pnl_pct": -0.522,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "2",
+    "entry_price": 0.1186,
+    "exit_price": 0.1181,
+    "pnl_pct": -0.522,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.4644,
+    "exit_price": 0.4633,
+    "pnl_pct": -0.337,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.4644,
+    "exit_price": 0.4633,
+    "pnl_pct": -0.337,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4644,
+    "exit_price": 0.4633,
+    "pnl_pct": -0.337,
+    "exit_ts": "2026-10-30T11:46:06.167059+03:00",
+    "reason": "trend"
   }
 ]
