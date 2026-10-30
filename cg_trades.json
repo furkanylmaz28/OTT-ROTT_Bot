@@ -29599,5 +29599,59 @@
     "pnl_pct": 1.248,
     "exit_ts": "2026-10-30T18:31:24.275411+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.624,
+    "exit_price": 0.6298,
+    "pnl_pct": 0.829,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.624,
+    "exit_price": 0.6298,
+    "pnl_pct": 0.829,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "2",
+    "entry_price": 0.624,
+    "exit_price": 0.6298,
+    "pnl_pct": 0.829,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1203,
+    "exit_price": 0.1201,
+    "pnl_pct": -0.266,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1203,
+    "exit_price": 0.1201,
+    "pnl_pct": -0.266,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "2",
+    "entry_price": 0.1203,
+    "exit_price": 0.1201,
+    "pnl_pct": -0.266,
+    "exit_ts": "2026-10-30T18:46:08.857939+03:00",
+    "reason": "trail"
   }
 ]
