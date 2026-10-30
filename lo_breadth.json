@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-30T12:47:09.729259+03:00",
+  "ts": "2026-10-30T13:02:35.622433+03:00",
   "bull": 13,
-  "bear": 19,
-  "total": 32,
-  "bull_pct": 41.0,
+  "bear": 20,
+  "total": 33,
+  "bull_pct": 39.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -26,6 +26,7 @@
     "FROTO",
     "GUBRF",
     "HALKB",
+    "ISCTR",
     "KRDMD",
     "MGROS",
     "PETKM",
