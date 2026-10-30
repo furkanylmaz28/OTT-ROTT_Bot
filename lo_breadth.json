@@ -1,9 +1,9 @@
 {
-  "ts": "2026-10-30T17:02:21.901981+03:00",
+  "ts": "2026-10-30T17:17:48.451483+03:00",
   "bull": 12,
-  "bear": 21,
-  "total": 33,
-  "bull_pct": 36.0,
+  "bear": 20,
+  "total": 32,
+  "bull_pct": 38.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -38,8 +38,7 @@
     "AEFES",
     "ODAS",
     "ASTOR",
-    "AKSEN",
-    "ALARK"
+    "AKSEN"
   ],
   "fresh_bear": [
     "FROTO",
