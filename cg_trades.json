@@ -29230,5 +29230,50 @@
     "pnl_pct": -0.509,
     "exit_ts": "2026-10-30T12:15:59.057368+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.07139,
+    "exit_price": 0.07121,
+    "pnl_pct": -0.352,
+    "exit_ts": "2026-10-30T12:31:19.189105+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.07139,
+    "exit_price": 0.07121,
+    "pnl_pct": -0.352,
+    "exit_ts": "2026-10-30T12:31:19.189105+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1186,
+    "exit_price": 0.1183,
+    "pnl_pct": -0.353,
+    "exit_ts": "2026-10-30T12:31:19.189105+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1186,
+    "exit_price": 0.1183,
+    "pnl_pct": -0.353,
+    "exit_ts": "2026-10-30T12:31:19.189105+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "2",
+    "entry_price": 0.1186,
+    "exit_price": 0.1183,
+    "pnl_pct": -0.353,
+    "exit_ts": "2026-10-30T12:31:19.189105+03:00",
+    "reason": "trend"
   }
 ]
