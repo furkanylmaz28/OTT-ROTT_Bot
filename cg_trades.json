@@ -29743,5 +29743,59 @@
     "pnl_pct": 0.733,
     "exit_ts": "2026-10-30T21:16:08.736460+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 7.556,
+    "exit_price": 7.134,
+    "pnl_pct": -5.685,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 7.556,
+    "exit_price": 7.134,
+    "pnl_pct": -5.685,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 7.399,
+    "exit_price": 7.134,
+    "pnl_pct": -3.682,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.4605,
+    "exit_price": 0.4696,
+    "pnl_pct": 1.876,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.4605,
+    "exit_price": 0.4696,
+    "pnl_pct": 1.876,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4605,
+    "exit_price": 0.4696,
+    "pnl_pct": 1.876,
+    "exit_ts": "2026-10-30T23:01:28.508035+03:00",
+    "reason": "trend"
   }
 ]
