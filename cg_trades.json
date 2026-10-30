@@ -29437,5 +29437,32 @@
     "pnl_pct": 1.056,
     "exit_ts": "2026-10-30T16:16:21.226567+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.8378,
+    "exit_price": 0.8513,
+    "pnl_pct": 1.511,
+    "exit_ts": "2026-10-30T16:31:23.201549+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.8378,
+    "exit_price": 0.8513,
+    "pnl_pct": 1.511,
+    "exit_ts": "2026-10-30T16:31:23.201549+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "2",
+    "entry_price": 0.8378,
+    "exit_price": 0.8513,
+    "pnl_pct": 1.511,
+    "exit_ts": "2026-10-30T16:31:23.201549+03:00",
+    "reason": "trail"
   }
 ]
