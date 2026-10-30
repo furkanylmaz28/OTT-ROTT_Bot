@@ -29959,5 +29959,23 @@
     "pnl_pct": -1.837,
     "exit_ts": "2026-10-31T01:01:35.548473+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2237.04,
+    "exit_price": 2237.47,
+    "pnl_pct": -0.081,
+    "exit_ts": "2026-10-31T01:31:08.595538+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "1",
+    "entry_price": 2226.96,
+    "exit_price": 2237.47,
+    "pnl_pct": 0.372,
+    "exit_ts": "2026-10-31T01:31:08.595538+03:00",
+    "reason": "trend"
   }
 ]
