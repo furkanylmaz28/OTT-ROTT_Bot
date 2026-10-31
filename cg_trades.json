@@ -30382,5 +30382,41 @@
     "pnl_pct": -0.205,
     "exit_ts": "2026-10-31T10:46:05.244490+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 77236.33,
+    "exit_price": 77384.14,
+    "pnl_pct": 0.091,
+    "exit_ts": "2026-10-31T11:01:24.167722+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 2243.52,
+    "exit_price": 2244.99,
+    "pnl_pct": -0.034,
+    "exit_ts": "2026-10-31T11:01:24.167722+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04937,
+    "exit_price": 0.04849,
+    "pnl_pct": -1.882,
+    "exit_ts": "2026-10-31T11:01:24.167722+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04899,
+    "exit_price": 0.04849,
+    "pnl_pct": -1.121,
+    "exit_ts": "2026-10-31T11:01:24.167722+03:00",
+    "reason": "trend"
   }
 ]
