@@ -30517,5 +30517,32 @@
     "pnl_pct": -0.43,
     "exit_ts": "2026-10-31T17:01:28.287357+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 77415.48,
+    "exit_price": 77596.49,
+    "pnl_pct": 0.134,
+    "exit_ts": "2026-10-31T19:01:31.074750+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 699.38,
+    "exit_price": 705.6,
+    "pnl_pct": 0.789,
+    "exit_ts": "2026-10-31T19:01:31.074750+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "1",
+    "entry_price": 699.38,
+    "exit_price": 705.6,
+    "pnl_pct": 0.789,
+    "exit_ts": "2026-10-31T19:01:31.074750+03:00",
+    "reason": "trend"
   }
 ]
