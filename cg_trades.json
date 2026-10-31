@@ -30022,5 +30022,50 @@
     "pnl_pct": 2.292,
     "exit_ts": "2026-10-31T02:01:41.292706+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0946,
+    "exit_price": 0.0954,
+    "pnl_pct": 0.746,
+    "exit_ts": "2026-10-31T03:01:24.369227+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "1",
+    "entry_price": 0.0946,
+    "exit_price": 0.0954,
+    "pnl_pct": 0.746,
+    "exit_ts": "2026-10-31T03:01:24.369227+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.4729,
+    "exit_price": 0.4748,
+    "pnl_pct": 0.302,
+    "exit_ts": "2026-10-31T03:01:24.369227+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.4729,
+    "exit_price": 0.4748,
+    "pnl_pct": 0.302,
+    "exit_ts": "2026-10-31T03:01:24.369227+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4729,
+    "exit_price": 0.4748,
+    "pnl_pct": 0.302,
+    "exit_ts": "2026-10-31T03:01:24.369227+03:00",
+    "reason": "trend"
   }
 ]
