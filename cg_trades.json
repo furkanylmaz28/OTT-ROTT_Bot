@@ -30643,5 +30643,23 @@
     "pnl_pct": 0.024,
     "exit_ts": "2026-10-31T20:01:30.723637+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "TRX",
+    "level": "0",
+    "entry_price": 0.3111,
+    "exit_price": 0.3099,
+    "pnl_pct": -0.486,
+    "exit_ts": "2026-10-31T20:16:01.512364+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TRX",
+    "level": "1",
+    "entry_price": 0.3111,
+    "exit_price": 0.3099,
+    "pnl_pct": -0.486,
+    "exit_ts": "2026-10-31T20:16:01.512364+03:00",
+    "reason": "trend"
   }
 ]
