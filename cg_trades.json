@@ -30418,5 +30418,50 @@
     "pnl_pct": -1.121,
     "exit_ts": "2026-10-31T11:01:24.167722+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.537,
+    "exit_price": 1.511,
+    "pnl_pct": -1.792,
+    "exit_ts": "2026-10-31T11:16:05.320461+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "1",
+    "entry_price": 1.513,
+    "exit_price": 1.511,
+    "pnl_pct": -0.232,
+    "exit_ts": "2026-10-31T11:16:05.320461+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "0",
+    "entry_price": 7.089,
+    "exit_price": 7.1,
+    "pnl_pct": 0.055,
+    "exit_ts": "2026-10-31T11:16:05.320461+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 7.089,
+    "exit_price": 7.1,
+    "pnl_pct": 0.055,
+    "exit_ts": "2026-10-31T11:16:05.320461+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "INJ",
+    "level": "2",
+    "entry_price": 7.089,
+    "exit_price": 7.1,
+    "pnl_pct": 0.055,
+    "exit_ts": "2026-10-31T11:16:05.320461+03:00",
+    "reason": "trend"
   }
 ]
