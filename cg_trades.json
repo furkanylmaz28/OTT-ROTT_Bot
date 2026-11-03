@@ -31246,5 +31246,14 @@
     "pnl_pct": -0.388,
     "exit_ts": "2026-11-03T05:01:26.641367+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0914,
+    "exit_price": 0.091,
+    "pnl_pct": -0.538,
+    "exit_ts": "2026-11-03T06:01:56.451064+03:00",
+    "reason": "trend"
   }
 ]
