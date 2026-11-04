@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-04T15:02:26.262317+03:00",
-  "bull": 33,
+  "ts": "2026-11-04T15:17:29.519154+03:00",
+  "bull": 32,
   "bear": 0,
-  "total": 33,
+  "total": 32,
   "bull_pct": 100.0,
   "bull_syms": [
     "AKBNK",
@@ -25,7 +25,6 @@
     "SISE",
     "SOKM",
     "TAVHL",
-    "THYAO",
     "TOASO",
     "TKFEN",
     "TTKOM",

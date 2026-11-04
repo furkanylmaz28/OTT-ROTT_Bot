@@ -31786,5 +31786,41 @@
     "pnl_pct": 3.404,
     "exit_ts": "2026-11-04T12:31:33.839714+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 75988.59,
+    "exit_price": 78087.14,
+    "pnl_pct": 2.662,
+    "exit_ts": "2026-11-04T15:16:17.531037+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 685.61,
+    "exit_price": 699.34,
+    "pnl_pct": 1.903,
+    "exit_ts": "2026-11-04T15:16:17.531037+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.07283,
+    "exit_price": 0.07461,
+    "pnl_pct": 2.344,
+    "exit_ts": "2026-11-04T15:16:17.531037+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.87,
+    "exit_price": 7.11,
+    "pnl_pct": 3.393,
+    "exit_ts": "2026-11-04T15:16:17.531037+03:00",
+    "reason": "trail"
   }
 ]
