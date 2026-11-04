@@ -1,10 +1,11 @@
 {
-  "ts": "2026-11-04T11:32:21.327317+03:00",
-  "bull": 27,
-  "bear": 6,
+  "ts": "2026-11-04T11:47:00.700652+03:00",
+  "bull": 28,
+  "bear": 5,
   "total": 33,
-  "bull_pct": 82.0,
+  "bull_pct": 85.0,
   "bull_syms": [
+    "AKBNK",
     "ASELS",
     "DOHOL",
     "ENJSA",
@@ -34,7 +35,6 @@
     "ALARK"
   ],
   "bear_syms": [
-    "AKBNK",
     "FROTO",
     "HALKB",
     "SOKM",
@@ -42,7 +42,6 @@
     "YKBNK"
   ],
   "fresh_bear": [
-    "AKBNK",
     "YKBNK"
   ]
 }
