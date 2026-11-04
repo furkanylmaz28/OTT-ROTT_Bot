@@ -31723,5 +31723,41 @@
     "pnl_pct": 3.016,
     "exit_ts": "2026-11-04T10:16:14.088249+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 53.52,
+    "exit_price": 54.55,
+    "pnl_pct": 1.825,
+    "exit_ts": "2026-11-04T12:01:42.401580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.8539,
+    "exit_price": 0.8631,
+    "pnl_pct": 0.977,
+    "exit_ts": "2026-11-04T12:01:42.401580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.8328,
+    "exit_price": 0.8631,
+    "pnl_pct": 3.538,
+    "exit_ts": "2026-11-04T12:01:42.401580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.8632,
+    "exit_price": 0.9117,
+    "pnl_pct": 5.519,
+    "exit_ts": "2026-11-04T12:01:42.401580+03:00",
+    "reason": "trail"
   }
 ]
