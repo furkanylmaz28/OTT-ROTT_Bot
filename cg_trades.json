@@ -31768,5 +31768,23 @@
     "pnl_pct": 3.865,
     "exit_ts": "2026-11-04T12:16:06.800012+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1862,
+    "exit_price": 0.1911,
+    "pnl_pct": 2.532,
+    "exit_ts": "2026-11-04T12:31:33.839714+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.117,
+    "exit_price": 0.1211,
+    "pnl_pct": 3.404,
+    "exit_ts": "2026-11-04T12:31:33.839714+03:00",
+    "reason": "trail"
   }
 ]
