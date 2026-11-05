@@ -31876,5 +31876,32 @@
     "pnl_pct": -0.683,
     "exit_ts": "2026-11-05T19:46:17.961554+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 8.17,
+    "exit_price": 8.258,
+    "pnl_pct": 0.977,
+    "exit_ts": "2026-11-05T20:01:28.615398+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 10.686,
+    "exit_price": 10.708,
+    "pnl_pct": 0.106,
+    "exit_ts": "2026-11-05T20:01:28.615398+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1525,
+    "exit_price": 0.154,
+    "pnl_pct": 0.884,
+    "exit_ts": "2026-11-05T20:01:28.615398+03:00",
+    "reason": "trail"
   }
 ]
