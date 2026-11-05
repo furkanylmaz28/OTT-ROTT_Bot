@@ -31966,5 +31966,41 @@
     "pnl_pct": 2.137,
     "exit_ts": "2026-11-05T23:01:34.931004+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "1",
+    "entry_price": 0.1823,
+    "exit_price": 0.1842,
+    "pnl_pct": 0.942,
+    "exit_ts": "2026-11-05T23:16:14.752811+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.155,
+    "exit_price": 0.1581,
+    "pnl_pct": 1.9,
+    "exit_ts": "2026-11-05T23:16:14.752811+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1157,
+    "exit_price": 0.1173,
+    "pnl_pct": 1.283,
+    "exit_ts": "2026-11-05T23:16:14.752811+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "2",
+    "entry_price": 0.4167,
+    "exit_price": 0.4208,
+    "pnl_pct": 0.884,
+    "exit_ts": "2026-11-05T23:16:14.752811+03:00",
+    "reason": "trail"
   }
 ]
