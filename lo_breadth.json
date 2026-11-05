@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-05T11:02:39.740596+03:00",
-  "bull": 31,
+  "ts": "2026-11-05T11:17:17.846330+03:00",
+  "bull": 30,
   "bear": 2,
-  "total": 33,
+  "total": 32,
   "bull_pct": 94.0,
   "bull_syms": [
     "AKBNK",
@@ -13,7 +13,6 @@
     "ENKAI",
     "EREGL",
     "FROTO",
-    "GUBRF",
     "HALKB",
     "ISCTR",
     "KCHOL",
