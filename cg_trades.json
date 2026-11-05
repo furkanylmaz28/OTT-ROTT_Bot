@@ -32011,5 +32011,41 @@
     "pnl_pct": 1.96,
     "exit_ts": "2026-11-05T23:31:32.044780+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.902,
+    "exit_price": 0.928,
+    "pnl_pct": 2.782,
+    "exit_ts": "2026-11-06T00:01:39.291254+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.1033,
+    "exit_price": 0.1034,
+    "pnl_pct": -0.003,
+    "exit_ts": "2026-11-06T00:01:39.291254+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.1033,
+    "exit_price": 0.1034,
+    "pnl_pct": -0.003,
+    "exit_ts": "2026-11-06T00:01:39.291254+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.06759,
+    "exit_price": 0.06798,
+    "pnl_pct": 0.477,
+    "exit_ts": "2026-11-06T00:01:39.291254+03:00",
+    "reason": "trail"
   }
 ]
