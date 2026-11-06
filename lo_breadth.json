@@ -1,11 +1,12 @@
 {
-  "ts": "2026-11-06T15:18:02.473502+03:00",
+  "ts": "2026-11-06T15:33:29.713991+03:00",
   "bull": 17,
   "bear": 15,
   "total": 32,
   "bull_pct": 53.0,
   "bull_syms": [
     "AKBNK",
+    "DOHOL",
     "EKGYO",
     "ENKAI",
     "FROTO",
@@ -20,7 +21,6 @@
     "TKFEN",
     "VAKBN",
     "YKBNK",
-    "ODAS",
     "ALARK"
   ],
   "bear_syms": [
