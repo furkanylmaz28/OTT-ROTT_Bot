@@ -32074,5 +32074,68 @@
     "pnl_pct": 1.034,
     "exit_ts": "2026-11-06T04:01:25.469154+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 271.6,
+    "exit_price": 276.1,
+    "pnl_pct": 1.557,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 6.837,
+    "exit_price": 6.952,
+    "pnl_pct": 1.582,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "2",
+    "entry_price": 6.837,
+    "exit_price": 6.952,
+    "pnl_pct": 1.582,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 3.684,
+    "exit_price": 3.733,
+    "pnl_pct": 1.23,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 3.684,
+    "exit_price": 3.733,
+    "pnl_pct": 1.23,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 3.673,
+    "exit_price": 3.733,
+    "pnl_pct": 1.534,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "2",
+    "entry_price": 0.04457,
+    "exit_price": 0.04569,
+    "pnl_pct": 2.413,
+    "exit_ts": "2026-11-06T04:16:10.018164+03:00",
+    "reason": "trail"
   }
 ]
