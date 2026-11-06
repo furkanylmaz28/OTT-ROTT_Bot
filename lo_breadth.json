@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-06T10:03:21.344974+03:00",
-  "bull": 21,
-  "bear": 5,
-  "total": 26,
+  "ts": "2026-11-06T10:19:11.657410+03:00",
+  "bull": 26,
+  "bear": 6,
+  "total": 32,
   "bull_pct": 81.0,
   "bull_syms": [
     "AKBNK",
@@ -13,13 +13,18 @@
     "FROTO",
     "GUBRF",
     "HALKB",
-    "ISCTR",
     "KCHOL",
     "MGROS",
     "PGSUS",
     "SASA",
     "SISE",
     "SOKM",
+    "TAVHL",
+    "THYAO",
+    "TOASO",
+    "TKFEN",
+    "TTKOM",
+    "VAKBN",
     "YKBNK",
     "AEFES",
     "HEKTS",
@@ -32,6 +37,7 @@
     "EREGL",
     "KRDMD",
     "PETKM",
+    "TUPRS",
     "ASTOR"
   ],
   "fresh_bear": [
@@ -39,6 +45,7 @@
     "EREGL",
     "KRDMD",
     "PETKM",
+    "TUPRS",
     "ASTOR"
   ]
 }
