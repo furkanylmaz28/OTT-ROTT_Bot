@@ -32416,5 +32416,95 @@
     "pnl_pct": 1.064,
     "exit_ts": "2026-11-06T17:16:14.920029+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 8.338,
+    "exit_price": 8.411,
+    "pnl_pct": 0.776,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LTC",
+    "level": "1",
+    "entry_price": 52.43,
+    "exit_price": 53.05,
+    "pnl_pct": 1.083,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "UNI",
+    "level": "1",
+    "entry_price": 6.946,
+    "exit_price": 7.018,
+    "pnl_pct": 0.937,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 3.733,
+    "exit_price": 3.749,
+    "pnl_pct": 0.329,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 3.711,
+    "exit_price": 3.749,
+    "pnl_pct": 0.924,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.8211,
+    "exit_price": 0.8298,
+    "pnl_pct": 0.96,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.106,
+    "exit_price": 0.1078,
+    "pnl_pct": 1.598,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.4368000030517578,
+    "exit_price": 0.4414,
+    "pnl_pct": 0.953,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.0466,
+    "exit_price": 0.04695,
+    "pnl_pct": 0.651,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04585,
+    "exit_price": 0.04695,
+    "pnl_pct": 2.299,
+    "exit_ts": "2026-11-06T18:01:29.428136+03:00",
+    "reason": "trail"
   }
 ]
