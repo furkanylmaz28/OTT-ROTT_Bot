@@ -32263,5 +32263,14 @@
     "pnl_pct": 0.95,
     "exit_ts": "2026-11-06T11:31:29.624215+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1176,
+    "exit_price": 0.1193,
+    "pnl_pct": 1.346,
+    "exit_ts": "2026-11-06T12:46:11.508983+03:00",
+    "reason": "trail"
   }
 ]
