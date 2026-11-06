@@ -32146,5 +32146,41 @@
     "pnl_pct": 1.946,
     "exit_ts": "2026-11-06T04:31:24.736106+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.9,
+    "exit_price": 0.923,
+    "pnl_pct": 2.456,
+    "exit_ts": "2026-11-06T05:16:12.773832+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "2",
+    "entry_price": 0.5802,
+    "exit_price": 0.5978,
+    "pnl_pct": 2.933,
+    "exit_ts": "2026-11-06T05:16:12.773832+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "2",
+    "entry_price": 0.8395,
+    "exit_price": 0.8581,
+    "pnl_pct": 2.116,
+    "exit_ts": "2026-11-06T05:16:12.773832+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "1",
+    "entry_price": 0.1153,
+    "exit_price": 0.1166,
+    "pnl_pct": 1.027,
+    "exit_ts": "2026-11-06T05:16:12.773832+03:00",
+    "reason": "trail"
   }
 ]
