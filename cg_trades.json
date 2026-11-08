@@ -32893,5 +32893,23 @@
     "pnl_pct": -1.036,
     "exit_ts": "2026-11-08T04:46:02.281192+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1802,
+    "exit_price": 0.1796,
+    "pnl_pct": -0.433,
+    "exit_ts": "2026-11-08T05:16:10.682587+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 8.196,
+    "exit_price": 8.176,
+    "pnl_pct": -0.344,
+    "exit_ts": "2026-11-08T05:16:10.682587+03:00",
+    "reason": "trend"
   }
 ]
