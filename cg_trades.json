@@ -32983,5 +32983,41 @@
     "pnl_pct": -0.245,
     "exit_ts": "2026-11-08T10:31:21.681936+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 7.134,
+    "exit_price": 7.099,
+    "pnl_pct": -0.591,
+    "exit_ts": "2026-11-08T11:01:29.118441+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.402,
+    "exit_price": 1.36,
+    "pnl_pct": -3.096,
+    "exit_ts": "2026-11-08T11:01:29.118441+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "1",
+    "entry_price": 1.371,
+    "exit_price": 1.36,
+    "pnl_pct": -0.902,
+    "exit_ts": "2026-11-08T11:01:29.118441+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.6056,
+    "exit_price": 0.5922,
+    "pnl_pct": -2.313,
+    "exit_ts": "2026-11-08T11:01:29.118441+03:00",
+    "reason": "trend"
   }
 ]
