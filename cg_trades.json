@@ -34027,5 +34027,23 @@
     "pnl_pct": -1.039,
     "exit_ts": "2026-11-09T14:01:31.608335+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 86.6,
+    "exit_price": 86.26,
+    "pnl_pct": -0.493,
+    "exit_ts": "2026-11-09T14:46:10.695907+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06914,
+    "exit_price": 0.06896,
+    "pnl_pct": -0.36,
+    "exit_ts": "2026-11-09T14:46:10.695907+03:00",
+    "reason": "trend"
   }
 ]
