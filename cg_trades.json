@@ -33937,5 +33937,41 @@
     "pnl_pct": -0.33,
     "exit_ts": "2026-11-09T12:46:41.562186+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 87.07,
+    "exit_price": 86.34,
+    "pnl_pct": -0.938,
+    "exit_ts": "2026-11-09T13:01:40.836047+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.0691,
+    "exit_price": 0.069,
+    "pnl_pct": -0.245,
+    "exit_ts": "2026-11-09T13:01:40.836047+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.7573,
+    "exit_price": 0.7547,
+    "pnl_pct": -0.443,
+    "exit_ts": "2026-11-09T13:01:40.836047+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.4106,
+    "exit_price": 0.4194,
+    "pnl_pct": 2.043,
+    "exit_ts": "2026-11-09T13:01:40.836047+03:00",
+    "reason": "trail"
   }
 ]
