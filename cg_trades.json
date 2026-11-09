@@ -34270,5 +34270,14 @@
     "pnl_pct": 1.371,
     "exit_ts": "2026-11-09T19:16:11.534780+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 678.81,
+    "exit_price": 687.35,
+    "pnl_pct": 1.158,
+    "exit_ts": "2026-11-09T19:31:22.366324+03:00",
+    "reason": "trail"
   }
 ]
