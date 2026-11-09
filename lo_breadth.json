@@ -1,26 +1,24 @@
 {
-  "ts": "2026-11-09T17:48:35.995904+03:00",
-  "bull": 10,
-  "bear": 4,
-  "total": 14,
-  "bull_pct": 71.0,
+  "ts": "2026-11-09T18:04:04.257858+03:00",
+  "bull": 8,
+  "bear": 2,
+  "total": 10,
+  "bull_pct": 80.0,
   "bull_syms": [
+    "EKGYO",
+    "GUBRF",
     "HALKB",
-    "ISCTR",
-    "KCHOL",
-    "PGSUS",
-    "VAKBN",
+    "MGROS",
+    "TAVHL",
     "YKBNK",
-    "AEFES",
-    "ODAS",
     "ASTOR",
     "AKSEN"
   ],
   "bear_syms": [
-    "ENJSA",
-    "KRDMD",
-    "SASA",
-    "HEKTS"
+    "ENKAI",
+    "TKFEN"
   ],
-  "fresh_bear": []
+  "fresh_bear": [
+    "ENKAI"
+  ]
 }
