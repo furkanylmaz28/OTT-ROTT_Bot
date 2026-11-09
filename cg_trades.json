@@ -33532,5 +33532,104 @@
     "pnl_pct": -0.329,
     "exit_ts": "2026-11-09T05:01:35.619353+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1778,
+    "exit_price": 0.1757,
+    "pnl_pct": -1.281,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06988,
+    "exit_price": 0.06932,
+    "pnl_pct": -0.901,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 8.046,
+    "exit_price": 7.991,
+    "pnl_pct": -0.784,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "UNI",
+    "level": "0",
+    "entry_price": 6.864,
+    "exit_price": 6.89,
+    "pnl_pct": 0.279,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.75,
+    "exit_price": 6.7,
+    "pnl_pct": -0.841,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.761,
+    "exit_price": 0.7557,
+    "pnl_pct": -0.796,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "APT",
+    "level": "1",
+    "entry_price": 0.5736,
+    "exit_price": 0.5803,
+    "pnl_pct": 1.068,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.0989,
+    "exit_price": 0.0992,
+    "pnl_pct": 0.203,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0988,
+    "exit_price": 0.0992,
+    "pnl_pct": 0.305,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.06608,
+    "exit_price": 0.06654,
+    "pnl_pct": 0.596,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04388,
+    "exit_price": 0.04355,
+    "pnl_pct": -0.852,
+    "exit_ts": "2026-11-09T06:16:17.581676+03:00",
+    "reason": "trend"
   }
 ]
