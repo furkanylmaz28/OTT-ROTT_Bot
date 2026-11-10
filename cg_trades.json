@@ -34342,5 +34342,14 @@
     "pnl_pct": -0.354,
     "exit_ts": "2026-11-10T03:31:21.061729+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 86.5,
+    "exit_price": 86.42,
+    "pnl_pct": -0.192,
+    "exit_ts": "2026-11-10T04:31:11.514391+03:00",
+    "reason": "trend"
   }
 ]
