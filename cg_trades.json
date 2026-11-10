@@ -34612,5 +34612,32 @@
     "pnl_pct": 0.857,
     "exit_ts": "2026-11-10T22:01:33.125467+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 73506.01,
+    "exit_price": 73386.0,
+    "pnl_pct": -0.263,
+    "exit_ts": "2026-11-10T22:16:00.283871+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0964,
+    "exit_price": 0.0974,
+    "pnl_pct": 0.937,
+    "exit_ts": "2026-11-10T22:16:00.283871+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "INJ",
+    "level": "1",
+    "entry_price": 7.742,
+    "exit_price": 7.94,
+    "pnl_pct": 2.457,
+    "exit_ts": "2026-11-10T22:16:00.283871+03:00",
+    "reason": "trail"
   }
 ]
