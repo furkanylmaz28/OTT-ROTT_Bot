@@ -34567,5 +34567,32 @@
     "pnl_pct": -1.954,
     "exit_ts": "2026-11-10T18:46:13.453371+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 73434.56,
+    "exit_price": 73188.16,
+    "pnl_pct": -0.436,
+    "exit_ts": "2026-11-10T19:31:33.749451+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06809,
+    "exit_price": 0.06759,
+    "pnl_pct": -0.834,
+    "exit_ts": "2026-11-10T19:31:33.749451+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.848,
+    "exit_price": 0.84,
+    "pnl_pct": -1.043,
+    "exit_ts": "2026-11-10T19:31:33.749451+03:00",
+    "reason": "trend"
   }
 ]
