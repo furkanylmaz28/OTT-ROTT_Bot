@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-10T14:47:23.165215+03:00",
-  "bull": 22,
-  "bear": 10,
+  "ts": "2026-11-10T15:03:56.714668+03:00",
+  "bull": 23,
+  "bear": 9,
   "total": 32,
-  "bull_pct": 69.0,
+  "bull_pct": 72.0,
   "bull_syms": [
     "AKBNK",
     "EKGYO",
@@ -14,6 +14,7 @@
     "HALKB",
     "ISCTR",
     "KCHOL",
+    "KRDMD",
     "MGROS",
     "PGSUS",
     "SISE",
@@ -37,11 +38,9 @@
     "SOKM",
     "TKFEN",
     "TUPRS",
-    "HEKTS",
-    "ODAS"
+    "HEKTS"
   ],
   "fresh_bear": [
-    "DOHOL",
-    "ODAS"
+    "DOHOL"
   ]
 }
