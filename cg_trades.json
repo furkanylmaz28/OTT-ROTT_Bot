@@ -34531,5 +34531,41 @@
     "pnl_pct": 0.512,
     "exit_ts": "2026-11-10T18:16:10.419041+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1752,
+    "exit_price": 0.1721,
+    "pnl_pct": -1.869,
+    "exit_ts": "2026-11-10T18:46:13.453371+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.06859,
+    "exit_price": 0.06741,
+    "pnl_pct": -1.82,
+    "exit_ts": "2026-11-10T18:46:13.453371+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.858,
+    "exit_price": 0.84,
+    "pnl_pct": -2.198,
+    "exit_ts": "2026-11-10T18:46:13.453371+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.7549999952316284,
+    "exit_price": 0.741,
+    "pnl_pct": -1.954,
+    "exit_ts": "2026-11-10T18:46:13.453371+03:00",
+    "reason": "trend"
   }
 ]
