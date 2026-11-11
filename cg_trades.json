@@ -35008,5 +35008,14 @@
     "pnl_pct": 1.006,
     "exit_ts": "2026-11-11T21:01:28.663267+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.5727,
+    "exit_price": 0.5792,
+    "pnl_pct": 1.035,
+    "exit_ts": "2026-11-11T21:16:23.364123+03:00",
+    "reason": "trail"
   }
 ]
