@@ -1,5 +1,5 @@
 {
-  "ts": "2026-11-11T13:18:37.554994+03:00",
+  "ts": "2026-11-11T13:33:47.235884+03:00",
   "bull": 13,
   "bear": 8,
   "total": 21,
@@ -12,11 +12,11 @@
     "FROTO",
     "HALKB",
     "ISCTR",
-    "KRDMD",
-    "MGROS",
-    "TOASO",
     "TUPRS",
+    "VAKBN",
+    "YKBNK",
     "ASTOR",
+    "AKSEN",
     "ALARK"
   ],
   "bear_syms": [
@@ -25,7 +25,7 @@
     "EREGL",
     "GUBRF",
     "KCHOL",
-    "PETKM",
+    "AEFES",
     "HEKTS",
     "ODAS"
   ],
@@ -33,6 +33,7 @@
     "DOHOL",
     "EREGL",
     "GUBRF",
-    "KCHOL"
+    "KCHOL",
+    "AEFES"
   ]
 }
