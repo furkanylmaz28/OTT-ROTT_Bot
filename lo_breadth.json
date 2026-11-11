@@ -1,13 +1,12 @@
 {
-  "ts": "2026-11-11T10:47:24.733155+03:00",
-  "bull": 20,
+  "ts": "2026-11-11T11:03:53.811500+03:00",
+  "bull": 19,
   "bear": 13,
-  "total": 33,
-  "bull_pct": 61.0,
+  "total": 32,
+  "bull_pct": 59.0,
   "bull_syms": [
     "AKBNK",
     "EKGYO",
-    "ENKAI",
     "FROTO",
     "HALKB",
     "ISCTR",
