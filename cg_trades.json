@@ -35854,5 +35854,23 @@
     "pnl_pct": -0.419,
     "exit_ts": "2026-11-13T09:01:32.923135+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7892,
+    "exit_price": 0.7881,
+    "pnl_pct": -0.239,
+    "exit_ts": "2026-11-13T09:46:08.863896+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.1125,
+    "exit_price": 0.112,
+    "pnl_pct": -0.544,
+    "exit_ts": "2026-11-13T09:46:08.863896+03:00",
+    "reason": "trend"
   }
 ]
