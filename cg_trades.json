@@ -36205,5 +36205,23 @@
     "pnl_pct": -1.329,
     "exit_ts": "2026-11-13T18:31:25.640025+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 1.0178,
+    "exit_price": 1.0137,
+    "pnl_pct": -0.503,
+    "exit_ts": "2026-11-13T19:16:11.700778+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.06292,
+    "exit_price": 0.06265,
+    "pnl_pct": -0.529,
+    "exit_ts": "2026-11-13T19:16:11.700778+03:00",
+    "reason": "trend"
   }
 ]
