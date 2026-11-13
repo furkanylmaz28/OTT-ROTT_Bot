@@ -35953,5 +35953,50 @@
     "pnl_pct": -0.275,
     "exit_ts": "2026-11-13T10:46:13.303869+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1681,
+    "exit_price": 0.1703,
+    "pnl_pct": 1.209,
+    "exit_ts": "2026-11-13T11:01:24.340433+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 6.53,
+    "exit_price": 6.5,
+    "pnl_pct": -0.559,
+    "exit_ts": "2026-11-13T11:01:24.340433+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0874,
+    "exit_price": 0.087,
+    "pnl_pct": -0.558,
+    "exit_ts": "2026-11-13T11:01:24.340433+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.7242,
+    "exit_price": 0.732,
+    "pnl_pct": 0.977,
+    "exit_ts": "2026-11-13T11:01:24.340433+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "APT",
+    "level": "0",
+    "entry_price": 0.5449,
+    "exit_price": 0.5414,
+    "pnl_pct": -0.742,
+    "exit_ts": "2026-11-13T11:01:24.340433+03:00",
+    "reason": "trend"
   }
 ]
