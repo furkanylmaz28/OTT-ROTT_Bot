@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-13T14:18:04.377091+03:00",
+  "ts": "2026-11-13T14:32:05.627263+03:00",
   "bull": 20,
-  "bear": 12,
-  "total": 32,
-  "bull_pct": 62.0,
+  "bear": 13,
+  "total": 33,
+  "bull_pct": 61.0,
   "bull_syms": [
     "AKBNK",
     "ASELS",
@@ -37,10 +37,12 @@
     "SASA",
     "SOKM",
     "TOASO",
+    "YKBNK",
     "AEFES",
     "HEKTS"
   ],
   "fresh_bear": [
-    "FROTO"
+    "FROTO",
+    "YKBNK"
   ]
 }
