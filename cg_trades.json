@@ -37096,5 +37096,50 @@
     "pnl_pct": -1.65,
     "exit_ts": "2026-11-14T16:16:13.223190+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.788,
+    "exit_price": 0.775,
+    "pnl_pct": -1.75,
+    "exit_ts": "2026-11-14T17:01:32.651419+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.788,
+    "exit_price": 0.775,
+    "pnl_pct": -1.75,
+    "exit_ts": "2026-11-14T17:01:32.651419+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 217.3,
+    "exit_price": 215.2,
+    "pnl_pct": -1.066,
+    "exit_ts": "2026-11-14T17:01:32.651419+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04102,
+    "exit_price": 0.04029,
+    "pnl_pct": -1.88,
+    "exit_ts": "2026-11-14T17:01:32.651419+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04102,
+    "exit_price": 0.04029,
+    "pnl_pct": -1.88,
+    "exit_ts": "2026-11-14T17:01:32.651419+03:00",
+    "reason": "trend"
   }
 ]
