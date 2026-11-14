@@ -36925,5 +36925,32 @@
     "pnl_pct": -0.997,
     "exit_ts": "2026-11-14T11:31:18.707745+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 216.4,
+    "exit_price": 216.3,
+    "pnl_pct": -0.146,
+    "exit_ts": "2026-11-14T13:31:18.277700+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "0",
+    "entry_price": 0.04093,
+    "exit_price": 0.0409,
+    "pnl_pct": -0.173,
+    "exit_ts": "2026-11-14T13:31:18.277700+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SEI",
+    "level": "1",
+    "entry_price": 0.04093,
+    "exit_price": 0.0409,
+    "pnl_pct": -0.173,
+    "exit_ts": "2026-11-14T13:31:18.277700+03:00",
+    "reason": "trend"
   }
 ]
