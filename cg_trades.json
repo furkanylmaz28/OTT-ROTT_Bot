@@ -36853,5 +36853,32 @@
     "pnl_pct": -0.642,
     "exit_ts": "2026-11-14T10:46:06.968628+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 48.71,
+    "exit_price": 48.23,
+    "pnl_pct": -1.085,
+    "exit_ts": "2026-11-14T11:01:25.501515+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7966,
+    "exit_price": 0.7695,
+    "pnl_pct": -3.502,
+    "exit_ts": "2026-11-14T11:01:25.501515+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.7785,
+    "exit_price": 0.7695,
+    "pnl_pct": -1.256,
+    "exit_ts": "2026-11-14T11:01:25.501515+03:00",
+    "reason": "trend"
   }
 ]
