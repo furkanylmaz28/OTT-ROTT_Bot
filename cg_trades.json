@@ -37483,5 +37483,23 @@
     "pnl_pct": -0.567,
     "exit_ts": "2026-11-15T10:01:32.633527+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.284,
+    "exit_price": 1.274,
+    "pnl_pct": -0.879,
+    "exit_ts": "2026-11-15T10:46:07.048950+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "1",
+    "entry_price": 1.284,
+    "exit_price": 1.274,
+    "pnl_pct": -0.879,
+    "exit_ts": "2026-11-15T10:46:07.048950+03:00",
+    "reason": "trend"
   }
 ]
