@@ -37717,5 +37717,59 @@
     "pnl_pct": -0.733,
     "exit_ts": "2026-11-15T17:16:04.375670+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 9.261,
+    "exit_price": 9.194,
+    "pnl_pct": -0.823,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 9.261,
+    "exit_price": 9.194,
+    "pnl_pct": -0.823,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 209.7,
+    "exit_price": 207.7,
+    "pnl_pct": -1.054,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 207.9,
+    "exit_price": 207.7,
+    "pnl_pct": -0.196,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1357,
+    "exit_price": 0.1351,
+    "pnl_pct": -0.542,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ARB",
+    "level": "1",
+    "entry_price": 0.1357,
+    "exit_price": 0.1351,
+    "pnl_pct": -0.542,
+    "exit_ts": "2026-11-15T17:46:00.559559+03:00",
+    "reason": "trend"
   }
 ]
