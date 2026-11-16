@@ -38149,5 +38149,41 @@
     "pnl_pct": -0.352,
     "exit_ts": "2026-11-16T03:15:58.308212+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 9.25,
+    "exit_price": 9.16,
+    "pnl_pct": -1.073,
+    "exit_ts": "2026-11-16T04:16:11.529444+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.314,
+    "exit_price": 1.297,
+    "pnl_pct": -1.394,
+    "exit_ts": "2026-11-16T04:16:11.529444+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7339,
+    "exit_price": 0.7237,
+    "pnl_pct": -1.49,
+    "exit_ts": "2026-11-16T04:16:11.529444+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SUI",
+    "level": "1",
+    "entry_price": 0.7266,
+    "exit_price": 0.7237,
+    "pnl_pct": -0.499,
+    "exit_ts": "2026-11-16T04:16:11.529444+03:00",
+    "reason": "trend"
   }
 ]
