@@ -38194,5 +38194,23 @@
     "pnl_pct": 1.552,
     "exit_ts": "2026-11-16T06:46:03.330166+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 9.221,
+    "exit_price": 9.227,
+    "pnl_pct": -0.035,
+    "exit_ts": "2026-11-16T07:01:27.578138+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.302,
+    "exit_price": 1.306,
+    "pnl_pct": 0.207,
+    "exit_ts": "2026-11-16T07:01:27.578138+03:00",
+    "reason": "trend"
   }
 ]
