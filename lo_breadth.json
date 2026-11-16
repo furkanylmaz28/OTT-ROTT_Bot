@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-16T16:17:27.583374+03:00",
-  "bull": 15,
+  "ts": "2026-11-16T16:33:15.369778+03:00",
+  "bull": 16,
   "bear": 17,
-  "total": 32,
-  "bull_pct": 47.0,
+  "total": 33,
+  "bull_pct": 48.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -17,6 +17,7 @@
     "THYAO",
     "TOASO",
     "TTKOM",
+    "TUPRS",
     "ODAS",
     "AKSEN",
     "ALARK"
