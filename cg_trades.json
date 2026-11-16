@@ -38365,5 +38365,23 @@
     "pnl_pct": -0.416,
     "exit_ts": "2026-11-16T17:31:29.124119+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1817.7,
+    "exit_price": 1833.95,
+    "pnl_pct": 0.794,
+    "exit_ts": "2026-11-16T18:01:42.065930+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.7304,
+    "exit_price": 0.7227,
+    "pnl_pct": -1.154,
+    "exit_ts": "2026-11-16T18:01:42.065930+03:00",
+    "reason": "trend"
   }
 ]
