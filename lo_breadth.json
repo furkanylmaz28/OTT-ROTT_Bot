@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-17T11:32:59.141940+03:00",
-  "bull": 15,
-  "bear": 18,
+  "ts": "2026-11-17T11:47:17.093085+03:00",
+  "bull": 14,
+  "bear": 19,
   "total": 33,
-  "bull_pct": 45.0,
+  "bull_pct": 42.0,
   "bull_syms": [
     "ASELS",
     "ENJSA",
@@ -16,7 +16,6 @@
     "THYAO",
     "TOASO",
     "TTKOM",
-    "TUPRS",
     "ODAS",
     "AKSEN",
     "ALARK"
@@ -35,6 +34,7 @@
     "SISE",
     "SOKM",
     "TKFEN",
+    "TUPRS",
     "VAKBN",
     "YKBNK",
     "AEFES",
@@ -43,6 +43,7 @@
   ],
   "fresh_bear": [
     "MGROS",
-    "SISE"
+    "SISE",
+    "TUPRS"
   ]
 }
