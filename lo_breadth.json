@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-18T10:32:43.675049+03:00",
-  "bull": 9,
-  "bear": 24,
+  "ts": "2026-11-18T10:47:19.136665+03:00",
+  "bull": 10,
+  "bear": 23,
   "total": 33,
-  "bull_pct": 27.0,
+  "bull_pct": 30.0,
   "bull_syms": [
     "ENKAI",
     "GUBRF",
@@ -12,6 +12,7 @@
     "TAVHL",
     "THYAO",
     "TOASO",
+    "TKFEN",
     "TTKOM",
     "ODAS"
   ],
@@ -31,7 +32,6 @@
     "SASA",
     "SISE",
     "SOKM",
-    "TKFEN",
     "TUPRS",
     "VAKBN",
     "YKBNK",
