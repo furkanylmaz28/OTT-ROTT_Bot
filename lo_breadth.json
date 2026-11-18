@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-18T12:02:57.461425+03:00",
+  "ts": "2026-11-18T12:18:16.047411+03:00",
   "bull": 10,
-  "bear": 22,
-  "total": 32,
-  "bull_pct": 31.0,
+  "bear": 23,
+  "total": 33,
+  "bull_pct": 30.0,
   "bull_syms": [
     "ENKAI",
     "GUBRF",
@@ -21,6 +21,7 @@
     "ASELS",
     "DOHOL",
     "ENJSA",
+    "EKGYO",
     "EREGL",
     "FROTO",
     "HALKB",
@@ -43,6 +44,7 @@
   "fresh_bear": [
     "ASELS",
     "ENJSA",
+    "EKGYO",
     "AKSEN",
     "ALARK"
   ]
