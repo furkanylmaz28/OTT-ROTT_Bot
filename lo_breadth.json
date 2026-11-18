@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-18T14:48:24.947131+03:00",
-  "bull": 8,
+  "ts": "2026-11-18T15:02:32.912973+03:00",
+  "bull": 9,
   "bear": 24,
-  "total": 32,
-  "bull_pct": 25.0,
+  "total": 33,
+  "bull_pct": 27.0,
   "bull_syms": [
     "ENKAI",
     "FROTO",
@@ -11,6 +11,7 @@
     "KRDMD",
     "THYAO",
     "TOASO",
+    "TKFEN",
     "TTKOM",
     "ODAS"
   ],
