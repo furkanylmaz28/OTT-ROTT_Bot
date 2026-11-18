@@ -38680,5 +38680,23 @@
     "pnl_pct": 1.044,
     "exit_ts": "2026-11-18T20:46:07.691382+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1502,
+    "exit_price": 0.1517,
+    "pnl_pct": 0.899,
+    "exit_ts": "2026-11-18T21:01:39.816659+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ARB",
+    "level": "0",
+    "entry_price": 0.1287,
+    "exit_price": 0.1279,
+    "pnl_pct": -0.722,
+    "exit_ts": "2026-11-18T21:01:39.816659+03:00",
+    "reason": "trend"
   }
 ]
