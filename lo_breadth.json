@@ -1,16 +1,14 @@
 {
-  "ts": "2026-11-18T13:32:33.341906+03:00",
-  "bull": 11,
-  "bear": 22,
+  "ts": "2026-11-18T13:48:12.251906+03:00",
+  "bull": 9,
+  "bear": 24,
   "total": 33,
-  "bull_pct": 33.0,
+  "bull_pct": 27.0,
   "bull_syms": [
     "ENKAI",
     "FROTO",
     "GUBRF",
     "KRDMD",
-    "PGSUS",
-    "TAVHL",
     "THYAO",
     "TOASO",
     "TKFEN",
@@ -29,9 +27,11 @@
     "KCHOL",
     "MGROS",
     "PETKM",
+    "PGSUS",
     "SASA",
     "SISE",
     "SOKM",
+    "TAVHL",
     "TUPRS",
     "VAKBN",
     "YKBNK",
@@ -45,6 +45,8 @@
     "ASELS",
     "ENJSA",
     "EKGYO",
+    "PGSUS",
+    "TAVHL",
     "AKSEN"
   ]
 }
