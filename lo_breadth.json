@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-18T15:32:33.745304+03:00",
-  "bull": 9,
-  "bear": 24,
+  "ts": "2026-11-18T15:47:40.662370+03:00",
+  "bull": 8,
+  "bear": 25,
   "total": 33,
-  "bull_pct": 27.0,
+  "bull_pct": 24.0,
   "bull_syms": [
     "ENKAI",
     "FROTO",
@@ -12,8 +12,7 @@
     "THYAO",
     "TOASO",
     "TKFEN",
-    "TTKOM",
-    "ODAS"
+    "TTKOM"
   ],
   "bear_syms": [
     "AKBNK",
@@ -37,6 +36,7 @@
     "YKBNK",
     "AEFES",
     "HEKTS",
+    "ODAS",
     "ASTOR",
     "AKSEN",
     "ALARK"
@@ -47,6 +47,6 @@
     "EKGYO",
     "PGSUS",
     "TAVHL",
-    "AKSEN"
+    "ODAS"
   ]
 }
