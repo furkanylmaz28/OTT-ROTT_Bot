@@ -38617,5 +38617,14 @@
     "pnl_pct": -0.1,
     "exit_ts": "2026-11-18T19:01:35.788150+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.0781,
+    "exit_price": 0.0757,
+    "pnl_pct": -3.173,
+    "exit_ts": "2026-11-18T19:16:18.684822+03:00",
+    "reason": "trend"
   }
 ]
