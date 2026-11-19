@@ -39085,5 +39085,23 @@
     "pnl_pct": 0.865,
     "exit_ts": "2026-11-19T23:01:29.294391+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.05531,
+    "exit_price": 0.05402,
+    "pnl_pct": -2.432,
+    "exit_ts": "2026-11-19T23:31:27.027254+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3375,
+    "exit_price": 0.3428,
+    "pnl_pct": 1.47,
+    "exit_ts": "2026-11-19T23:31:27.027254+03:00",
+    "reason": "trail"
   }
 ]
