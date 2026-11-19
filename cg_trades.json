@@ -39013,5 +39013,68 @@
     "pnl_pct": -0.862,
     "exit_ts": "2026-11-19T20:16:05.355389+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1753.0,
+    "exit_price": 1774.91,
+    "pnl_pct": 1.15,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.934,
+    "exit_price": 7.029,
+    "pnl_pct": 1.27,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.936,
+    "exit_price": 9.044,
+    "pnl_pct": 1.109,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.5625,
+    "exit_price": 0.57,
+    "pnl_pct": 1.233,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0743,
+    "exit_price": 0.0754,
+    "pnl_pct": 1.38,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SUI",
+    "level": "0",
+    "entry_price": 0.707,
+    "exit_price": 0.7161,
+    "pnl_pct": 1.187,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "IMX",
+    "level": "0",
+    "entry_price": 0.0951,
+    "exit_price": 0.0964,
+    "pnl_pct": 1.267,
+    "exit_ts": "2026-11-19T22:01:42.976718+03:00",
+    "reason": "trail"
   }
 ]
