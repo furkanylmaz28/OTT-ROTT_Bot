@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-19T09:33:06.915186+03:00",
+  "ts": "2026-11-19T09:48:09.661753+03:00",
   "bull": 4,
-  "bear": 29,
-  "total": 33,
-  "bull_pct": 12.0,
+  "bear": 27,
+  "total": 31,
+  "bull_pct": 13.0,
   "bull_syms": [
     "FROTO",
     "THYAO",
@@ -16,7 +16,6 @@
     "DOHOL",
     "ENJSA",
     "EKGYO",
-    "ENKAI",
     "EREGL",
     "GUBRF",
     "HALKB",
@@ -34,7 +33,6 @@
     "TUPRS",
     "VAKBN",
     "YKBNK",
-    "AEFES",
     "HEKTS",
     "ODAS",
     "ASTOR",
@@ -43,8 +41,6 @@
   ],
   "fresh_bear": [
     "ENJSA",
-    "EKGYO",
-    "ENKAI",
     "GUBRF",
     "KRDMD",
     "PGSUS",
