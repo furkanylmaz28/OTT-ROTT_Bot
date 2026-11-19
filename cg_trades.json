@@ -38950,5 +38950,23 @@
     "pnl_pct": 0.201,
     "exit_ts": "2026-11-19T15:01:26.665608+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 578.01,
+    "exit_price": 590.06,
+    "pnl_pct": 1.985,
+    "exit_ts": "2026-11-19T15:31:35.129003+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 7.017,
+    "exit_price": 7.09,
+    "pnl_pct": 0.94,
+    "exit_ts": "2026-11-19T15:31:35.129003+03:00",
+    "reason": "trail"
   }
 ]
