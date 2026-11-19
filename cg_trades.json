@@ -38977,5 +38977,23 @@
     "pnl_pct": -0.572,
     "exit_ts": "2026-11-19T17:31:23.201063+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 62813.88,
+    "exit_price": 63692.03,
+    "pnl_pct": 1.298,
+    "exit_ts": "2026-11-19T18:01:41.745689+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.05562,
+    "exit_price": 0.05614,
+    "pnl_pct": 0.835,
+    "exit_ts": "2026-11-19T18:01:41.745689+03:00",
+    "reason": "trail"
   }
 ]
