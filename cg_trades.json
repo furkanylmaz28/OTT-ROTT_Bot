@@ -39922,5 +39922,59 @@
     "pnl_pct": -3.878,
     "exit_ts": "2026-11-20T18:16:11.697093+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 72.07,
+    "exit_price": 68.12,
+    "pnl_pct": -5.581,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "1",
+    "entry_price": 69.62,
+    "exit_price": 68.12,
+    "pnl_pct": -2.255,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "2",
+    "entry_price": 68.86,
+    "exit_price": 68.12,
+    "pnl_pct": -1.175,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 3.215,
+    "exit_price": 2.822,
+    "pnl_pct": -12.324,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 3.145,
+    "exit_price": 2.822,
+    "pnl_pct": -10.37,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 3.053,
+    "exit_price": 2.822,
+    "pnl_pct": -7.666,
+    "exit_ts": "2026-11-20T18:46:18.375817+03:00",
+    "reason": "trend"
   }
 ]
