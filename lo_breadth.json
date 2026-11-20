@@ -1,11 +1,10 @@
 {
-  "ts": "2026-11-20T10:33:03.438545+03:00",
-  "bull": 3,
-  "bear": 30,
+  "ts": "2026-11-20T10:47:28.166693+03:00",
+  "bull": 2,
+  "bear": 31,
   "total": 33,
-  "bull_pct": 9.0,
+  "bull_pct": 6.0,
   "bull_syms": [
-    "HALKB",
     "THYAO",
     "TOASO"
   ],
@@ -19,6 +18,7 @@
     "EREGL",
     "FROTO",
     "GUBRF",
+    "HALKB",
     "ISCTR",
     "KCHOL",
     "KRDMD",
@@ -43,6 +43,7 @@
   ],
   "fresh_bear": [
     "FROTO",
+    "HALKB",
     "TKFEN"
   ]
 }
