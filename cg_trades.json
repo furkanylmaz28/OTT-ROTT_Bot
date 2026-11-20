@@ -40165,5 +40165,95 @@
     "pnl_pct": -2.218,
     "exit_ts": "2026-11-21T00:01:38.695763+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.606,
+    "exit_price": 6.541,
+    "pnl_pct": -1.084,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 6.606,
+    "exit_price": 6.541,
+    "pnl_pct": -1.084,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.56,
+    "exit_price": 8.517,
+    "pnl_pct": -0.602,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LINK",
+    "level": "1",
+    "entry_price": 8.56,
+    "exit_price": 8.517,
+    "pnl_pct": -0.602,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 194.4,
+    "exit_price": 192.7,
+    "pnl_pct": -0.974,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 194.4,
+    "exit_price": 192.7,
+    "pnl_pct": -0.974,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 5.5,
+    "exit_price": 5.46,
+    "pnl_pct": -0.827,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 5.5,
+    "exit_price": 5.46,
+    "pnl_pct": -0.827,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0737,
+    "exit_price": 0.0731,
+    "pnl_pct": -0.914,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "1",
+    "entry_price": 0.0737,
+    "exit_price": 0.0731,
+    "pnl_pct": -0.914,
+    "exit_ts": "2026-11-21T01:31:37.363414+03:00",
+    "reason": "trend"
   }
 ]
