@@ -39292,5 +39292,50 @@
     "pnl_pct": -0.923,
     "exit_ts": "2026-11-20T07:31:41.957033+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 0.9512,
+    "exit_price": 0.9656,
+    "pnl_pct": 1.414,
+    "exit_ts": "2026-11-20T09:31:20.365089+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.265,
+    "exit_price": 1.262,
+    "pnl_pct": -0.337,
+    "exit_ts": "2026-11-20T09:31:20.365089+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.5577,
+    "exit_price": 0.555,
+    "pnl_pct": -0.584,
+    "exit_ts": "2026-11-20T09:31:20.365089+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.5577,
+    "exit_price": 0.555,
+    "pnl_pct": -0.584,
+    "exit_ts": "2026-11-20T09:31:20.365089+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3348,
+    "exit_price": 0.3392,
+    "pnl_pct": 1.214,
+    "exit_ts": "2026-11-20T09:31:20.365089+03:00",
+    "reason": "trail"
   }
 ]
