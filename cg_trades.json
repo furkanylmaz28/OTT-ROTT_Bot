@@ -39346,5 +39346,41 @@
     "pnl_pct": -0.74,
     "exit_ts": "2026-11-20T10:31:22.787674+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 572.89,
+    "exit_price": 571.59,
+    "pnl_pct": -0.327,
+    "exit_ts": "2026-11-20T11:02:08.701549+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.717,
+    "exit_price": 0.704,
+    "pnl_pct": -1.913,
+    "exit_ts": "2026-11-20T11:02:08.701549+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.266,
+    "exit_price": 1.268,
+    "pnl_pct": 0.058,
+    "exit_ts": "2026-11-20T11:02:08.701549+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0763,
+    "exit_price": 0.0766,
+    "pnl_pct": 0.293,
+    "exit_ts": "2026-11-20T11:02:08.701549+03:00",
+    "reason": "trend"
   }
 ]
