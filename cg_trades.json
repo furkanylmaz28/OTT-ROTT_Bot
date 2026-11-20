@@ -39661,5 +39661,77 @@
     "pnl_pct": -0.221,
     "exit_ts": "2026-11-20T17:16:04.267603+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1739.13,
+    "exit_price": 1733.73,
+    "pnl_pct": -0.411,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 571.21,
+    "exit_price": 567.11,
+    "pnl_pct": -0.818,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 6.758,
+    "exit_price": 6.78,
+    "pnl_pct": 0.226,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "1",
+    "entry_price": 197.6,
+    "exit_price": 199.1,
+    "pnl_pct": 0.659,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "HBAR",
+    "level": "0",
+    "entry_price": 0.05307,
+    "exit_price": 0.05302,
+    "pnl_pct": -0.194,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "HBAR",
+    "level": "1",
+    "entry_price": 0.05307,
+    "exit_price": 0.05302,
+    "pnl_pct": -0.194,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.3318,
+    "exit_price": 0.3297,
+    "pnl_pct": -0.733,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3318,
+    "exit_price": 0.3297,
+    "pnl_pct": -0.733,
+    "exit_ts": "2026-11-20T17:46:13.823293+03:00",
+    "reason": "trend"
   }
 ]
