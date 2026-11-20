@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-20T16:32:34.311591+03:00",
+  "ts": "2026-11-20T16:48:01.012972+03:00",
   "bull": 2,
-  "bear": 31,
-  "total": 33,
+  "bear": 30,
+  "total": 32,
   "bull_pct": 6.0,
   "bull_syms": [
     "THYAO",
@@ -22,7 +22,6 @@
     "ISCTR",
     "KCHOL",
     "KRDMD",
-    "MGROS",
     "PETKM",
     "PGSUS",
     "SASA",
