@@ -39121,5 +39121,41 @@
     "pnl_pct": -0.431,
     "exit_ts": "2026-11-20T02:15:57.072693+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 62687.66,
+    "exit_price": 62044.2,
+    "pnl_pct": -1.126,
+    "exit_ts": "2026-11-20T03:01:30.994176+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "0",
+    "entry_price": 43.34,
+    "exit_price": 42.35,
+    "pnl_pct": -2.384,
+    "exit_ts": "2026-11-20T03:01:30.994176+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "LTC",
+    "level": "1",
+    "entry_price": 42.5,
+    "exit_price": 42.35,
+    "pnl_pct": -0.453,
+    "exit_ts": "2026-11-20T03:01:30.994176+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.285,
+    "exit_price": 1.264,
+    "pnl_pct": -1.734,
+    "exit_ts": "2026-11-20T03:01:30.994176+03:00",
+    "reason": "trend"
   }
 ]
