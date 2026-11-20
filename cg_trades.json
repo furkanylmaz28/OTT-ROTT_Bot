@@ -40255,5 +40255,104 @@
     "pnl_pct": -0.914,
     "exit_ts": "2026-11-21T01:31:37.363414+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 0.8974,
+    "exit_price": 0.9126,
+    "pnl_pct": 1.594,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "1",
+    "entry_price": 0.8974,
+    "exit_price": 0.9126,
+    "pnl_pct": 1.594,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "2",
+    "entry_price": 0.8974,
+    "exit_price": 0.9126,
+    "pnl_pct": 1.594,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.618,
+    "exit_price": 6.572,
+    "pnl_pct": -0.795,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 6.618,
+    "exit_price": 6.572,
+    "pnl_pct": -0.795,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ATOM",
+    "level": "0",
+    "entry_price": 1.241,
+    "exit_price": 1.234,
+    "pnl_pct": -0.664,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "0",
+    "entry_price": 5.5,
+    "exit_price": 5.48,
+    "pnl_pct": -0.464,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "ETC",
+    "level": "1",
+    "entry_price": 5.5,
+    "exit_price": 5.48,
+    "pnl_pct": -0.464,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "NEAR",
+    "level": "0",
+    "entry_price": 2.794,
+    "exit_price": 2.869,
+    "pnl_pct": 2.584,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "1",
+    "entry_price": 2.794,
+    "exit_price": 2.869,
+    "pnl_pct": 2.584,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "NEAR",
+    "level": "2",
+    "entry_price": 2.794,
+    "exit_price": 2.869,
+    "pnl_pct": 2.584,
+    "exit_ts": "2026-11-21T02:16:22.041583+03:00",
+    "reason": "trail"
   }
 ]
