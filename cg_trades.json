@@ -39202,5 +39202,32 @@
     "pnl_pct": -0.894,
     "exit_ts": "2026-11-20T04:46:02.013054+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0778,
+    "exit_price": 0.0756,
+    "pnl_pct": -2.928,
+    "exit_ts": "2026-11-20T05:01:31.045369+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.5782,
+    "exit_price": 0.559,
+    "pnl_pct": -3.421,
+    "exit_ts": "2026-11-20T05:01:31.045369+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.5633,
+    "exit_price": 0.559,
+    "pnl_pct": -0.863,
+    "exit_ts": "2026-11-20T05:01:31.045369+03:00",
+    "reason": "trend"
   }
 ]
