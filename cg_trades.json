@@ -40921,5 +40921,23 @@
     "pnl_pct": -0.382,
     "exit_ts": "2026-11-21T18:16:14.118125+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "TRX",
+    "level": "0",
+    "entry_price": 0.3014,
+    "exit_price": 0.305,
+    "pnl_pct": 1.094,
+    "exit_ts": "2026-11-21T18:31:33.710794+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.627,
+    "exit_price": 8.592,
+    "pnl_pct": -0.506,
+    "exit_ts": "2026-11-21T18:31:33.710794+03:00",
+    "reason": "trend"
   }
 ]
