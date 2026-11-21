@@ -40903,5 +40903,23 @@
     "pnl_pct": 1.101,
     "exit_ts": "2026-11-21T17:16:08.769508+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 0.9271,
+    "exit_price": 0.9258,
+    "pnl_pct": -0.24,
+    "exit_ts": "2026-11-21T18:16:14.118125+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.0708,
+    "exit_price": 0.0706,
+    "pnl_pct": -0.382,
+    "exit_ts": "2026-11-21T18:16:14.118125+03:00",
+    "reason": "trend"
   }
 ]
