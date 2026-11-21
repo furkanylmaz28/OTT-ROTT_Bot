@@ -40867,5 +40867,14 @@
     "pnl_pct": -4.679,
     "exit_ts": "2026-11-21T06:31:20.478764+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "TRX",
+    "level": "0",
+    "entry_price": 0.3017,
+    "exit_price": 0.3006,
+    "pnl_pct": -0.465,
+    "exit_ts": "2026-11-21T06:46:15.212835+03:00",
+    "reason": "trend"
   }
 ]
