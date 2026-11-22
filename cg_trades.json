@@ -41272,5 +41272,86 @@
     "pnl_pct": 0.578,
     "exit_ts": "2026-11-22T15:01:39.793912+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "BTC",
+    "level": "0",
+    "entry_price": 59595.57,
+    "exit_price": 60853.18,
+    "pnl_pct": 2.01,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "0",
+    "entry_price": 1689.06,
+    "exit_price": 1709.04,
+    "pnl_pct": 1.083,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ADA",
+    "level": "0",
+    "entry_price": 0.1438,
+    "exit_price": 0.1455,
+    "pnl_pct": 1.082,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.05444,
+    "exit_price": 0.0552,
+    "pnl_pct": 1.296,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.55,
+    "exit_price": 6.688,
+    "pnl_pct": 2.007,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.615,
+    "exit_price": 8.796,
+    "pnl_pct": 2.001,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "BCH",
+    "level": "0",
+    "entry_price": 194.8,
+    "exit_price": 197.8,
+    "pnl_pct": 1.44,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "ALGO",
+    "level": "0",
+    "entry_price": 0.0735,
+    "exit_price": 0.075,
+    "pnl_pct": 1.941,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.5264,
+    "exit_price": 0.5339,
+    "pnl_pct": 1.325,
+    "exit_ts": "2026-11-22T15:31:15.815799+03:00",
+    "reason": "trail"
   }
 ]
