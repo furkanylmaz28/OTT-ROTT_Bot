@@ -41191,5 +41191,68 @@
     "pnl_pct": -0.236,
     "exit_ts": "2026-11-22T10:46:18.583284+03:00",
     "reason": "trend"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 70.28,
+    "exit_price": 69.2,
+    "pnl_pct": -1.637,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.05412,
+    "exit_price": 0.05427,
+    "pnl_pct": 0.177,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.511,
+    "exit_price": 6.525,
+    "pnl_pct": 0.115,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "0",
+    "entry_price": 0.0701,
+    "exit_price": 0.0699,
+    "pnl_pct": -0.385,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "OP",
+    "level": "1",
+    "entry_price": 0.0692,
+    "exit_price": 0.0699,
+    "pnl_pct": 0.912,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "0",
+    "entry_price": 0.326,
+    "exit_price": 0.3208,
+    "pnl_pct": -1.695,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
+  },
+  {
+    "coin": "TIA",
+    "level": "1",
+    "entry_price": 0.3183,
+    "exit_price": 0.3208,
+    "pnl_pct": 0.685,
+    "exit_ts": "2026-11-22T11:01:37.569638+03:00",
+    "reason": "trend"
   }
 ]
