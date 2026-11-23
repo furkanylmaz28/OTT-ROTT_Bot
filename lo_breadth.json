@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-23T17:18:07.320714+03:00",
+  "ts": "2026-11-23T17:33:48.486943+03:00",
   "bull": 4,
-  "bear": 26,
-  "total": 30,
-  "bull_pct": 13.0,
+  "bear": 25,
+  "total": 29,
+  "bull_pct": 14.0,
   "bull_syms": [
     "GUBRF",
     "KCHOL",
@@ -27,18 +27,15 @@
     "PGSUS",
     "SASA",
     "SISE",
-    "SOKM",
     "TAVHL",
-    "THYAO",
-    "TTKOM",
     "TUPRS",
     "VAKBN",
     "YKBNK",
     "AEFES",
     "HEKTS",
-    "ASTOR"
+    "ODAS",
+    "ASTOR",
+    "AKSEN"
   ],
-  "fresh_bear": [
-    "THYAO"
-  ]
+  "fresh_bear": []
 }
