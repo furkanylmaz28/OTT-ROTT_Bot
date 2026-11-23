@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-23T15:18:00.105151+03:00",
+  "ts": "2026-11-23T15:32:46.132253+03:00",
   "bull": 4,
-  "bear": 29,
-  "total": 33,
+  "bear": 28,
+  "total": 32,
   "bull_pct": 12.0,
   "bull_syms": [
     "GUBRF",
@@ -38,8 +38,7 @@
     "AEFES",
     "HEKTS",
     "ODAS",
-    "ASTOR",
-    "AKSEN"
+    "ASTOR"
   ],
   "fresh_bear": [
     "THYAO"
