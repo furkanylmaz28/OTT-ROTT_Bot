@@ -1,8 +1,8 @@
 {
-  "ts": "2026-11-25T17:02:46.800581+03:00",
+  "ts": "2026-11-25T17:17:54.369801+03:00",
   "bull": 3,
-  "bear": 29,
-  "total": 32,
+  "bear": 30,
+  "total": 33,
   "bull_pct": 9.0,
   "bull_syms": [
     "ASELS",
@@ -19,6 +19,7 @@
     "FROTO",
     "HALKB",
     "ISCTR",
+    "KCHOL",
     "KRDMD",
     "MGROS",
     "PETKM",
@@ -41,6 +42,7 @@
     "ALARK"
   ],
   "fresh_bear": [
+    "KCHOL",
     "TOASO"
   ]
 }
