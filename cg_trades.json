@@ -42235,5 +42235,50 @@
     "pnl_pct": 4.959,
     "exit_ts": "2026-11-26T01:01:36.135658+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "0",
+    "entry_price": 6.524,
+    "exit_price": 6.599,
+    "pnl_pct": 1.05,
+    "exit_ts": "2026-11-26T01:31:26.062580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "AVAX",
+    "level": "1",
+    "entry_price": 6.396,
+    "exit_price": 6.599,
+    "pnl_pct": 3.074,
+    "exit_ts": "2026-11-26T01:31:26.062580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "0",
+    "entry_price": 0.5289,
+    "exit_price": 0.5487,
+    "pnl_pct": 3.644,
+    "exit_ts": "2026-11-26T01:31:26.062580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "1",
+    "entry_price": 0.5191,
+    "exit_price": 0.5487,
+    "pnl_pct": 5.602,
+    "exit_ts": "2026-11-26T01:31:26.062580+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "FIL",
+    "level": "2",
+    "entry_price": 0.5076,
+    "exit_price": 0.5487,
+    "pnl_pct": 7.997,
+    "exit_ts": "2026-11-26T01:31:26.062580+03:00",
+    "reason": "trail"
   }
 ]
