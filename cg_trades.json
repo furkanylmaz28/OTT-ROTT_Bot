@@ -42280,5 +42280,23 @@
     "pnl_pct": 7.997,
     "exit_ts": "2026-11-26T01:31:26.062580+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "BNB",
+    "level": "0",
+    "entry_price": 540.78,
+    "exit_price": 550.61,
+    "pnl_pct": 1.718,
+    "exit_ts": "2026-11-26T02:01:33.839946+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "SOL",
+    "level": "0",
+    "entry_price": 69.05999755859375,
+    "exit_price": 70.33,
+    "pnl_pct": 1.739,
+    "exit_ts": "2026-11-26T02:01:33.839946+03:00",
+    "reason": "trail"
   }
 ]
