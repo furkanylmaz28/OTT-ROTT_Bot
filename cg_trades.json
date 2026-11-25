@@ -42199,5 +42199,14 @@
     "pnl_pct": 0.809,
     "exit_ts": "2026-11-26T00:16:06.814021+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "LINK",
+    "level": "0",
+    "entry_price": 8.689,
+    "exit_price": 9.061,
+    "pnl_pct": 4.181,
+    "exit_ts": "2026-11-26T00:46:19.046094+03:00",
+    "reason": "trail"
   }
 ]
