@@ -42136,5 +42136,59 @@
     "pnl_pct": 1.496,
     "exit_ts": "2026-11-25T23:01:36.814818+03:00",
     "reason": "trail"
+  },
+  {
+    "coin": "ETH",
+    "level": "1",
+    "entry_price": 1627.49,
+    "exit_price": 1681.52,
+    "pnl_pct": 3.22,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "XRP",
+    "level": "0",
+    "entry_price": 0.9147,
+    "exit_price": 0.9365,
+    "pnl_pct": 2.283,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "0",
+    "entry_price": 0.0545,
+    "exit_price": 0.05565,
+    "pnl_pct": 2.01,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOGE",
+    "level": "1",
+    "entry_price": 0.05293,
+    "exit_price": 0.05565,
+    "pnl_pct": 5.039,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "0",
+    "entry_price": 0.652,
+    "exit_price": 0.661,
+    "pnl_pct": 1.28,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
+  },
+  {
+    "coin": "DOT",
+    "level": "1",
+    "entry_price": 0.635,
+    "exit_price": 0.661,
+    "pnl_pct": 3.994,
+    "exit_ts": "2026-11-25T23:31:26.496970+03:00",
+    "reason": "trail"
   }
 ]
