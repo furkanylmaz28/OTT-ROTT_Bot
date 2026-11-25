@@ -1,12 +1,12 @@
 {
-  "ts": "2026-11-25T10:03:05.406937+03:00",
+  "ts": "2026-11-25T10:17:52.327783+03:00",
   "bull": 4,
-  "bear": 27,
-  "total": 31,
-  "bull_pct": 13.0,
+  "bear": 28,
+  "total": 32,
+  "bull_pct": 12.0,
   "bull_syms": [
-    "ASELS",
     "GUBRF",
+    "KCHOL",
     "TOASO",
     "ASTOR"
   ],
@@ -20,6 +20,7 @@
     "FROTO",
     "HALKB",
     "ISCTR",
+    "KRDMD",
     "MGROS",
     "PETKM",
     "PGSUS",
