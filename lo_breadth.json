@@ -1,13 +1,14 @@
 {
-  "ts": "2026-11-26T11:32:32.926544+03:00",
-  "bull": 5,
-  "bear": 28,
+  "ts": "2026-11-26T11:47:38.115569+03:00",
+  "bull": 6,
+  "bear": 27,
   "total": 33,
-  "bull_pct": 15.0,
+  "bull_pct": 18.0,
   "bull_syms": [
     "ASELS",
     "GUBRF",
     "PETKM",
+    "TOASO",
     "TUPRS",
     "ASTOR"
   ],
@@ -30,7 +31,6 @@
     "SOKM",
     "TAVHL",
     "THYAO",
-    "TOASO",
     "TKFEN",
     "TTKOM",
     "VAKBN",
