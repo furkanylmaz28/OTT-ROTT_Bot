@@ -1,9 +1,9 @@
 {
-  "ts": "2026-11-27T10:03:19.499748+03:00",
+  "ts": "2026-11-27T10:17:51.717824+03:00",
   "bull": 11,
-  "bear": 22,
-  "total": 33,
-  "bull_pct": 33.0,
+  "bear": 21,
+  "total": 32,
+  "bull_pct": 34.0,
   "bull_syms": [
     "ASELS",
     "GUBRF",
@@ -38,7 +38,6 @@
     "VAKBN",
     "YKBNK",
     "AEFES",
-    "ODAS",
     "AKSEN"
   ],
   "fresh_bear": []
